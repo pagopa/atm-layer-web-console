@@ -1,87 +1,53 @@
-import { AppBar } from "@mui/material";
-import { HeaderAccount } from "@pagopa/mui-italia";
-import React from "react";
+import { AppBar, useTheme } from "@mui/material";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import { HeaderAccount } from "@pagopa/mui-italia";
+// import { Header } from "../Header";
 
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-export default function HomePage() {
-	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-	
-	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorElUser(event.currentTarget);
-	};
+function HomePage() {
+	const frontend_url = process.env.REACT_APP_URL_FE;
+	const theme=useTheme();
+
+	console.log("themeMerged:",theme);
 
 	
 	return (
-		<AppBar position="static">
-			{/* <Container maxWidth="xs"> */}
+		<AppBar position="static" sx={{backgroundColor: theme.palette.background.paper}}>
 			<Toolbar disableGutters>
-				<Box sx={{ flexGrow: 0 }} ml={2}>
-					<Tooltip title="Open settings">
-						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-							<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-						</IconButton>
-					</Tooltip>
+				<Box  ml={2} mr={1}>
+					<Avatar alt="B" src={frontend_url + "/static/media/icons/icon-48x48.png"} sx={{border: theme.customBox?.border, padding: theme.spacing(1) }}>
 						
+					</Avatar>
 				</Box>
+				{/* <Box display="flex" > */}
 				<Typography
 					variant="h6"
 					noWrap
-					component="a"
-					href="#app-bar"
 					sx={{
 						ml: 2,
-						display: { xs: "none", md: "flex" },
-						fontFamily: "monospace",
-						fontWeight: 700,
-						letterSpacing: ".3rem",
-						color: "inherit",
+						color: theme.colorVariant?.main,
 						textDecoration: "none",
 					}}
 				>
                 LOGO
 				</Typography>
-    
-				
-					
-				<Typography
-					variant="h5"
-					noWrap
-					component="a"
-					href="#app-bar-mobile"
-					sx={{
-						ml: 2,
-						display: { xs: "flex", md: "none" },
-						flexGrow: 1,
-						fontFamily: "monospace",
-						fontWeight: 700,
-						letterSpacing: ".3rem",
-						color: "inherit",
-						textDecoration: "none",
-					}}
-				>
-                LOGO
-				</Typography>
-			
-    
+				{/* </Box> */}
 					
 			</Toolbar>
-			{/* </Container> */}
+			{/* <Header enableLogin={false} rootLink={{
+				label: "Test",
+				href: "",
+				ariaLabel: "",
+				title: ""
+			}} 
+			onAssistanceClick={ () => void console.log("test")} 
+			/> */}
 		</AppBar>
       
 	);
@@ -90,3 +56,4 @@ export default function HomePage() {
 		
 	
 }
+export default HomePage;

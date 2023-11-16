@@ -1,25 +1,47 @@
+import { useContext, useEffect } from "react";
 import "./App.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { deepmerge } from "@mui/utils";
+import { theme } from "@pagopa/mui-italia";
+import { Ctx } from "./DataContext";
 import HomePage from "./components/Layout/HomePage";
+import { themeApp } from "./assets/jss/themeApp";
+
+
+// const themeMerged = createTheme(deepmerge(theme, themeLocal));
 
 function App() {
+	const context = useContext(Ctx);
+	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
+	
+	useEffect(() => {
+		console.log("ATM-LAYER-WEB-CONSOLE RELEASE VERSION:",RELEASE_VERSION);
+	   }, []);
+	   
 	return (
-		<div className="App">
-			<HomePage />
-			<header className="App-header">
-				{/* <img src={logo} className="App-logo" alt="logo" /> */}
-				<h1>
+		<ThemeProvider theme={themeApp}>
+			<Ctx.Consumer>
+				{() =>
+					<div className="App">
+						<HomePage />
+						<header className="App-header">
+							{/* <img src={logo} className="App-logo" alt="logo" /> */}
+							<h1>
          ATM Layer Console
-				</h1>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
+							</h1>
+							<a
+								className="App-link"
+								href="https://reactjs.org"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
           Learn React
-				</a>
-			</header>
-		</div>
+							</a>
+						</header>
+					</div> 
+				}
+			</Ctx.Consumer>
+		</ThemeProvider>
 	);
 }
 
