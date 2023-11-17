@@ -1,0 +1,43 @@
+import { useContext, useEffect } from "react";
+import "./App.css";
+import { ThemeProvider } from "@mui/material/styles";
+import { Ctx } from "./DataContext";
+import HomePage from "./components/Layout/HomePage";
+import { themeApp } from "./assets/jss/themeApp";
+
+// const themeMerged = createTheme(deepmerge(theme, themeLocal));
+
+function App() {
+	const context = useContext(Ctx);
+	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
+
+	useEffect(() => {
+		console.log("ATM-LAYER-WEB-CONSOLE RELEASE VERSION:", RELEASE_VERSION);
+	}, []);
+
+	return (
+		<ThemeProvider theme={themeApp}>
+			<Ctx.Consumer>
+				{() => (
+					<div className="App">
+						<HomePage />
+						<header className="App-header">
+							{/* <img src={logo} className="App-logo" alt="logo" /> */}
+							<h1>ATM Layer Console</h1>
+							<a
+								className="App-link"
+								href="https://reactjs.org"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+                Learn React
+							</a>
+						</header>
+					</div>
+				)}
+			</Ctx.Consumer>
+		</ThemeProvider>
+	);
+}
+
+export default App;
