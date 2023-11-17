@@ -6,10 +6,9 @@ export const Header = () => {
 	const frontend_url = process.env.REACT_APP_URL_FE;
 	const theme = useTheme();
 	return (
-		<Box
-			display="flex"
-			alignItems="center"
-			
+		<Box display="flex" 
+			alignItems="center" 
+			justifyContent="space-between"	
 			px={2}
 			sx={{
 				borderBottom: 1,
@@ -18,33 +17,25 @@ export const Header = () => {
 				minHeight: "72px",
 			}}
 		>
-			<Box
-				display="flex"
-				alignItems="center"
-				mr={2}
-			>
-				 <img
-					src={frontend_url + "/static/media/icons/icon-48x48.png"}
-					alt="Logo"
-				/>
-			</Box>
-			<Box display="flex">
-				<Typography
-					color={theme.colorVariant?.main}
-					variant="body2"
-					noWrap
-				>
-      Test
-				</Typography>
-			</Box>
+			<Box display="flex" alignItems="center">
 
-			<Box
-				display="flex"
-				justifyContent="flex-end"
-				ml={"auto"}
-			>
+				<Box display="flex" alignItems="center" mr={2}>
+				 <img
+						src={frontend_url + "/static/media/icons/icon-48x48.png"}
+						alt="Logo"
+					/>
+				</Box>
+				<Box display="flex" alignItems="center">
+					<Typography
+						variant="body2"
+						noWrap
+					>
+                    Test
+					</Typography>
+				</Box>
+			</Box>
+			<Box display="flex" alignItems="center">
 				<Typography
-					color={theme.colorVariant?.main}
 					variant="body2"
 					noWrap
 				>
