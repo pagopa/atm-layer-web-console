@@ -38,5 +38,5 @@ declare module "@mui/material/styles" {
     };
   }
 }
-
+console.log("Theme", theme);
 export const themeApp = createTheme(deepmerge(theme, themeLocal));
