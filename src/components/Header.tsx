@@ -23,23 +23,21 @@ export const Header = () => {
 				 <img
 						src={frontend_url + "/static/media/icons/icon-48x48.png"}
 						alt="Logo"
+						style={{maxHeight:"45px"}}
 					/>
 				</Box>
 				<Box display="flex" alignItems="center">
-					<Typography
-						variant="body2"
-						noWrap
-					>
-                    Test
+					<Typography variant="body1" noWrap fontWeight={theme.typography.h6.fontWeight}>
+                      Test
 					</Typography>
 				</Box>
 			</Box>
 			<Box display="flex" alignItems="center">
 				<Typography
-					variant="body2"
+					variant="body1"
 					noWrap
 				>
-      Servizi di pubblica utilità
+                     Servizi di pubblica utilità
 				</Typography>
 			</Box>
 		</Box>

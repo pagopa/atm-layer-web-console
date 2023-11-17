@@ -14,32 +14,10 @@ function HomePage() {
 	
 	const theme=useTheme();
 
-	console.log("themeMerged:",theme);
-
 	
 	return (
 		<AppBar position="static" sx={{backgroundColor: theme.palette.background.paper}}>
-			{/* <Toolbar disableGutters>
-				<Box  ml={2} mr={1}>
-					<Avatar alt="B" src={frontend_url + "/static/media/icons/icon-48x48.png"} sx={{border: theme.customBox?.border, padding: theme.spacing(1) }}>
-						
-					</Avatar>
-				</Box>
-				{/* <Box display="flex" > */}
-			{/* <Typography
-					variant="h6"
-					noWrap
-					sx={{
-						ml: 2,
-						color: theme.colorVariant?.main,
-						textDecoration: "none",
-					}}
-				>
-                LOGO
-				</Typography>
-				{/* </Box> */}
-					
-			{/* </Toolbar> */}
+			
 			<Header />
 		</AppBar>
       
