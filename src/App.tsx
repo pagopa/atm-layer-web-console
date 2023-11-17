@@ -4,6 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Ctx } from "./DataContext";
 import HomePage from "./components/Layout/HomePage";
 import { themeApp } from "./assets/jss/themeApp";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 // const themeMerged = createTheme(deepmerge(theme, themeLocal));
 
@@ -20,19 +22,9 @@ function App() {
 			<Ctx.Consumer>
 				{() => (
 					<div className="App">
+						<Header />
 						<HomePage />
-						<header className="App-header">
-							{/* <img src={logo} className="App-logo" alt="logo" /> */}
-							<h1>ATM Layer Console</h1>
-							<a
-								className="App-link"
-								href="https://reactjs.org"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-                Learn React
-							</a>
-						</header>
+						<Footer />
 					</div>
 				)}
 			</Ctx.Consumer>

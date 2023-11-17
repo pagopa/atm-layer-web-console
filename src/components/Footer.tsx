@@ -1,55 +1,67 @@
-"use client";
+import { Box, Button, Container, Grid, Typography, useTheme } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import { Stack, Box, Container, Link, useTheme } from "@mui/material";
-import { LangSwitch } from "@pagopa/mui-italia";
-
-
-
-
-export const Footer= () => {
+export const Footer = () => {
 	const theme = useTheme();
-	return  (
-		<Box component="footer">
-			<Box
-				sx={{
-					borderTop: 1,
-					borderColor: "divider",
-					backgroundColor: "background.paper",
-				}}
+	const borderBottons = { borderRadius: theme.shape.borderRadius, margin: theme.spacing(1)};
+	const footerTouch: boolean = false;
+
+	const touchFooter = (
+		<><Box mx={3}>
+			<Button
+				color="primary"
+				size="large"
+				startIcon={<ArrowBackIcon />}
+				variant="outlined"
+				sx={borderBottons}
+				onClick={() => console.log("Bottone premuto")}
 			>
-				<Container maxWidth={false} sx={{ py: { xs: 3, md: 2 } }}>
-					<Stack
-						spacing={{ xs: 4, md: 3 }}
-						direction={{ xs: "column", md: "row" }}
-						justifyContent="space-between"
-						sx={{ alignItems: "center" }}
-					>
-						
+				Indietro
+			</Button>
+		</Box><Box>
+			<Button
+				color="error"
+				size="large"
+				startIcon={<LogoutIcon />}
+				variant="outlined"
+				sx={borderBottons}
+				onClick={() => console.log("Bottone premuto")}
+			>
+					Esci
+			</Button>
+		</Box></>
+	);
 
-						<Stack
-							spacing={{ xs: 1, md: 3 }}
-							direction={{ xs: "column", md: "row" }}
-							sx={{ alignItems: "center" }}
-						>
-							{/* {links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
-								<Link
-									aria-label={ariaLabel}
-									href={href}
-									onClick={wrapHandleExitAction(href, onClick, onExit)}
-									key={i}
-									underline="none"
-									color="text.primary"
-									sx={{ display: "inline-block" }}
-									variant="subtitle2"
-								>
-									{label}
-								</Link>
-							))}
+	const manualFooter = (
+		<Grid container ml={2} >
+		  <Grid item xs={5} width="100%" >
+				<Button
+					size="large"
+					startIcon={<ChevronLeftIcon color="primary" />}
+					variant="outlined"
+					onClick={() => console.log("Bottone premuto")}
+					style={{ color: "black", width: "100%", borderColor: theme.colorVariant?.customBorderColor, justifyContent: "flex-start" }}
+				>
+			  		Indietro
+				</Button>
+		  </Grid>
+		</Grid>
+	  );
 
-							<LangSwitch {...langProps} /> */}
-						</Stack>
-					</Stack>
-				</Container>
+	return (
+		<Box component="footer" borderTop={1} borderColor={footerTouch ? "divider" : "transparent" } style={{backgroundColor: footerTouch ? "background.paper" : "#fafafa"}}>
+			<Box
+				display="flex"
+				flexDirection="row"
+				alignItems="center"
+				maxWidth={"false"}
+				py={{ xs: 3, md: 2 }}
+				mr={{ xs: 0, md: 3 }} 
+
+			>
+				{ footerTouch ? touchFooter : manualFooter }
 			</Box>
 		</Box>
 	);

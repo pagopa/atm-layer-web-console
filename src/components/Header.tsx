@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { AppBar, useTheme } from "@mui/material";
 import { Typography, Box } from "@mui/material";
 
 type HeaderProps = {
@@ -13,7 +13,8 @@ export const Header = ({
 	const frontend_url = process.env.REACT_APP_URL_FE;
 	const theme = useTheme();
 	return (
-		<Box display="flex" 
+		<AppBar position="static" elevation={0} sx={{backgroundColor: theme.palette.background.paper}}>
+			<Box display="flex" 
 			alignItems="center" 
 			justifyContent="space-between"	
 			px={2}
@@ -25,9 +26,9 @@ export const Header = ({
 		>
 			<Box display="flex" alignItems="center">
 
-				<Box display="flex" alignItems="center" mr={2}>
+					<Box display="flex" alignItems="center" mr={2}>
 				 <img
-						src={bankLogo}
+            src={bankLogo}
 						alt="Logo"
 						style={{maxHeight:"45px"}}
 					/>
@@ -47,5 +48,5 @@ export const Header = ({
 				</Typography>
 			</Box>
 		</Box>
-
+		</AppBar>
 	);};
