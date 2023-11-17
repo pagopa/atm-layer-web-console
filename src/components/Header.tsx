@@ -1,174 +1,56 @@
-"use client";
+import { useTheme } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
-import React from "react";
-import { Container, Button, Stack, IconButton } from "@mui/material";
 
-/* Icons */
-import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import { AccountDropdown, ButtonNaked } from "@pagopa/mui-italia";
-import { theme } from "@pagopa/mui-italia";
-
-export type JwtUser = {
-  id: string;
-  name?: string;
-  surname?: string;
-  email?: string;
-};
-
-export type UserAction = {
-  id: string;
-  icon: React.ReactNode;
-  label: string;
-  onClick: () => void;
-};
-
-export type RootLinkType = {
-  label: string;
-  href: string;
-  ariaLabel: string;
-  title: string;
-};
-
-type HeaderProps = {
-  rootLink: RootLinkType;
-  loggedUser?: JwtUser | false;
-  onAssistanceClick: () => void;
-  onLogin?: () => void;
-  onLogout?: () => void;
-  userActions?: Array<UserAction>;
-  enableDropdown?: boolean;
-  enableLogin?: boolean;
-  enableAssistanceButton?: boolean;
-  onDocumentationClick?: () => void;
-};
-
-export const Header = ({
-	rootLink,
-	loggedUser,
-	userActions,
-	onAssistanceClick,
-	onDocumentationClick,
-	onLogout,
-	onLogin,
-	enableDropdown = false,
-	enableLogin = true,
-	enableAssistanceButton = true,
-}: HeaderProps) => (
-	<Stack
-		component="div"
-		justifyContent="center"
-		sx={{
-			borderBottom: 1,
-			borderColor: "divider",
-			backgroundColor: theme.palette.background.paper,
-			minHeight: "48px",
-		}}
-	>
-		<Container maxWidth={false}>
-			<Stack
-				spacing={2}
-				direction="row"
-				justifyContent="space-between"
+export const Header = () => {
+	const frontend_url = process.env.REACT_APP_URL_FE;
+	const theme = useTheme();
+	return (
+		<Box
+			display="flex"
+			alignItems="center"
+			
+			px={2}
+			sx={{
+				borderBottom: 1,
+				borderColor: "divider",
+				backgroundColor: theme.palette.background.paper,
+				minHeight: "72px",
+			}}
+		>
+			<Box
+				display="flex"
 				alignItems="center"
+				mr={2}
 			>
-				{rootLink && (
-					<ButtonNaked
-						component="a"
-						size="small"
-						aria-label={rootLink?.ariaLabel}
-						href={rootLink?.href}
-						target="_blank"
-						rel="noreferrer"
-						title={rootLink?.title}
-						sx={{ fontWeight: "bold" }}
-					>
-						{rootLink?.label}
-					</ButtonNaked>
-				)}
-
-				<Stack
-					direction="row"
-					alignItems="center"
-					spacing={{ xs: 1, sm: 3, md: 4 }}
+				 <img
+					src={frontend_url + "/static/media/icons/icon-48x48.png"}
+					alt="Logo"
+				/>
+			</Box>
+			<Box display="flex">
+				<Typography
+					color={theme.colorVariant?.main}
+					variant="body2"
+					noWrap
 				>
-					{/* START Documentation MOBILE/DESKTOP */}
-					{onDocumentationClick && (
-						<>
-							<ButtonNaked
-								size="small"
-								component="button"
-								onClick={onDocumentationClick}
-								startIcon={<MenuBookIcon />}
-								sx={{ display: ["none", "flex"] }}
-								weight="default"
-							>
-                Manuale operativo
-							</ButtonNaked>
-							<IconButton
-								size="small"
-								aria-label="Documentazione"
-								sx={{ display: ["flex", "none"] }}
-								onClick={onDocumentationClick}
-							>
-								<MenuBookIcon fontSize="inherit" />
-							</IconButton>
-						</>
-					)}
-					{/* END Documentation MOBILE/DESKTOP */}
+      Test
+				</Typography>
+			</Box>
 
-					{/* START Assistance MOBILE/DESKTOP */}
-					{enableAssistanceButton && (
-						<>
-							<ButtonNaked
-								size="small"
-								component="button"
-								onClick={onAssistanceClick}
-								startIcon={<HelpOutlineRoundedIcon />}
-								sx={{ display: ["none", "flex"] }}
-								weight="default"
-							>
-                Assistenza
-							</ButtonNaked>
-							<IconButton
-								size="small"
-								aria-label="Assistenza"
-								sx={{ display: ["flex", "none"] }}
-								onClick={onAssistanceClick}
-							>
-								<HelpOutlineRoundedIcon fontSize="inherit" />
-							</IconButton>
-						</>
-					)}
-					{/* END Assistance MOBILE/DESKTOP */}
+			<Box
+				display="flex"
+				justifyContent="flex-end"
+				ml={"auto"}
+			>
+				<Typography
+					color={theme.colorVariant?.main}
+					variant="body2"
+					noWrap
+				>
+      Servizi di pubblica utilità
+				</Typography>
+			</Box>
+		</Box>
 
-					{/* DIFFERENT COMBINATIONS */}
-
-					{/* 1. Logged User with Dropdown */}
-					{enableLogin && loggedUser && enableDropdown && (
-						<AccountDropdown user={loggedUser} userActions={userActions} />
-					)}
-
-					{/* 2. Logged User with Logout CTA */}
-					{enableLogin && loggedUser && !enableDropdown && (
-						<Button variant="text" size="small" onClick={onLogout} title="Esci">
-              Esci
-						</Button>
-					)}
-
-					{/* 3. User not logged with Login CTA */}
-					{enableLogin && !loggedUser && (
-						<Button
-							variant="contained"
-							size="small"
-							onClick={onLogin}
-							title="Accedi"
-						>
-              Accedi
-						</Button>
-					)}
-				</Stack>
-			</Stack>
-		</Container>
-	</Stack>
-);
+	);};
