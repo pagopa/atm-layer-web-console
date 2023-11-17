@@ -18,31 +18,16 @@ function HomePage() {
 
 	
 	return (
-		<AppBar position="static" sx={{backgroundColor: theme.palette.background.paper}}>
-			{/* <Toolbar disableGutters>
-				<Box  ml={2} mr={1}>
-					<Avatar alt="B" src={frontend_url + "/static/media/icons/icon-48x48.png"} sx={{border: theme.customBox?.border, padding: theme.spacing(1) }}>
-						
-					</Avatar>
-				</Box>
-				{/* <Box display="flex" > */}
-			{/* <Typography
-					variant="h6"
-					noWrap
-					sx={{
-						ml: 2,
-						color: theme.colorVariant?.main,
-						textDecoration: "none",
-					}}
-				>
-                LOGO
-				</Typography>
-				{/* </Box> */}
-					
-			{/* </Toolbar> */}
-			<Header />
-		</AppBar>
-      
+		<Box className="App-header">
+			<h1>ATM Layer Console</h1>
+			<a
+				className="App-link"
+				href="https://reactjs.org"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+		Learn React
+			</a></Box>
 	);
 		
 	

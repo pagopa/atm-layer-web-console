@@ -10,6 +10,7 @@ const themeLocal: Theme = createTheme(theme, {
 	},
 	colorVariant: {
 		main: "#2B2E38",
+		customBorderColor: "#E8EBF1"
 	},
 });
 
@@ -22,6 +23,7 @@ declare module "@mui/material/styles" {
     };
     colorVariant?: {
       main?: string;
+      customBorderColor?: string;
     };
   }
   // fix the type error when calling `createTheme()` with a custom theme option
@@ -32,6 +34,7 @@ declare module "@mui/material/styles" {
     };
     colorVariant?: {
       main?: string;
+      customBorderColor?: string;
     };
   }
 }
