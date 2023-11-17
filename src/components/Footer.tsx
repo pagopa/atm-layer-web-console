@@ -1,18 +1,13 @@
 "use client";
 
-import { Stack, Box, Container, Link } from "@mui/material";
-import { CompanyLinkType, FooterLinksType } from "@components/Footer";
-import { LangSwitch, LangSwitchProps } from "@components/LangSwitch";
+import { Stack, Box, Container, Link, useTheme } from "@mui/material";
+import { LangSwitch } from "@pagopa/mui-italia";
 
-import { hrefNoOp, wrapHandleExitAction } from "utils/ts-utils";
 
-type FooterPostLoginProps = LangSwitchProps & {
-  companyLink: CompanyLinkType;
-  links: Array<FooterLinksType>;
-  onExit?: (exitAction: () => void) => void;
-};
 
-const FooterPostLogin = ({}: FooterPostLoginProps)=> {
+
+export const Footer= () => {
+	const theme = useTheme();
 	return  (
 		<Box component="footer">
 			<Box
@@ -36,7 +31,7 @@ const FooterPostLogin = ({}: FooterPostLoginProps)=> {
 							direction={{ xs: "column", md: "row" }}
 							sx={{ alignItems: "center" }}
 						>
-							{links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
+							{/* {links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
 								<Link
 									aria-label={ariaLabel}
 									href={href}
@@ -51,11 +46,11 @@ const FooterPostLogin = ({}: FooterPostLoginProps)=> {
 								</Link>
 							))}
 
-							<LangSwitch {...langProps} />
+							<LangSwitch {...langProps} /> */}
 						</Stack>
 					</Stack>
 				</Container>
 			</Box>
 		</Box>
 	);
-}
+};
