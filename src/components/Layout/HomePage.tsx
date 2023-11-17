@@ -1,11 +1,8 @@
 import { AppBar, useTheme } from "@mui/material";
-import React, { useEffect } from "react";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import { HeaderAccount } from "@pagopa/mui-italia";
+import React from "react";
+
 import { Header } from "../Header";
+import { getCompletePathImage } from "../../utils/Commons";
 
 
 
@@ -18,7 +15,7 @@ function HomePage() {
 	return (
 		<AppBar position="static" elevation={0} sx={{backgroundColor: theme.palette.background.paper}}>
 			
-			<Header />
+			<Header bankTitle="Test"  bankLogo={getCompletePathImage("icon-48x48.png")}/>
 		</AppBar>
       
 	);

@@ -1,8 +1,15 @@
 import { useTheme } from "@mui/material";
 import { Typography, Box } from "@mui/material";
 
+type HeaderProps = {
+    bankTitle?: string;
+    bankLogo: string;
+};
 
-export const Header = () => {
+export const Header = ({
+	bankTitle,
+	bankLogo
+}: HeaderProps) => {
 	const frontend_url = process.env.REACT_APP_URL_FE;
 	const theme = useTheme();
 	return (
@@ -20,14 +27,14 @@ export const Header = () => {
 
 				<Box display="flex" alignItems="center" mr={2}>
 				 <img
-						src={frontend_url + "/static/media/icons/icon-48x48.png"}
+						src={bankLogo}
 						alt="Logo"
 						style={{maxHeight:"45px"}}
 					/>
 				</Box>
 				<Box display="flex" alignItems="center">
 					<Typography variant="body1" noWrap fontWeight={theme.typography.h6.fontWeight}>
-                      Test
+						{bankTitle}
 					</Typography>
 				</Box>
 			</Box>
