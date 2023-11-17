@@ -4,8 +4,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Ctx } from "./DataContext";
 import HomePage from "./components/Layout/HomePage";
 import { themeApp } from "./assets/jss/themeApp";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 
 // const themeMerged = createTheme(deepmerge(theme, themeLocal));
 
@@ -21,11 +19,7 @@ function App() {
 		<ThemeProvider theme={themeApp}>
 			<Ctx.Consumer>
 				{() => (
-					<div className="App">
-						<Header />
-						<HomePage />
-						<Footer />
-					</div>
+					<HomePage />
 				)}
 			</Ctx.Consumer>
 		</ThemeProvider>

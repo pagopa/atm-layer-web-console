@@ -42,6 +42,7 @@ export const Footer = () => {
 					startIcon={<ChevronLeftIcon color="primary" />}
 					variant="outlined"
 					onClick={() => console.log("Bottone premuto")}
+					// fix: doesn't take the theme color for borderColor
 					style={{ color: "black", width: "100%", borderColor: theme.colorVariant?.customBorderColor, justifyContent: "flex-start" }}
 				>
 			  		Indietro
