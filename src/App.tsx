@@ -1,8 +1,6 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { deepmerge } from "@mui/utils";
-import { theme } from "@pagopa/mui-italia";
+import { ThemeProvider } from "@mui/material/styles";
 import { Ctx } from "./DataContext";
 import HomePage from "./components/Layout/HomePage";
 import { themeApp } from "./assets/jss/themeApp";
