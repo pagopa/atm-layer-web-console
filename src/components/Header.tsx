@@ -13,7 +13,6 @@ export const Header = () => {
 			sx={{
 				borderBottom: 1,
 				borderColor: "divider",
-				backgroundColor: theme.palette.background.paper,
 				minHeight: "72px",
 			}}
 		>

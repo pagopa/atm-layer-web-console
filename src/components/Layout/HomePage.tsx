@@ -16,7 +16,7 @@ function HomePage() {
 
 	
 	return (
-		<AppBar position="static" sx={{backgroundColor: theme.palette.background.paper}}>
+		<AppBar position="static" elevation={0} sx={{backgroundColor: theme.palette.background.paper}}>
 			
 			<Header />
 		</AppBar>
