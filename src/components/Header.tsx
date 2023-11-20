@@ -4,13 +4,14 @@ import { Typography, Box } from "@mui/material";
 type HeaderProps = {
     bankTitle?: string;
     bankLogo: string;
+	serviceDescription: string;
 };
 
 export const Header = ({
 	bankTitle,
-	bankLogo
+	bankLogo,
+	serviceDescription
 }: HeaderProps) => {
-	const frontend_url = process.env.REACT_APP_URL_FE;
 	const theme = useTheme();
 	return (
 		<AppBar position="static" elevation={0} sx={{backgroundColor: theme.palette.background.paper}}>
@@ -44,7 +45,7 @@ export const Header = ({
 						variant="body1"
 						noWrap
 					>
-                     Servizi di pubblica utilità
+						{serviceDescription}
 					</Typography>
 				</Box>
 			</Box>
