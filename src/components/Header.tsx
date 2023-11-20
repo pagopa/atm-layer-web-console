@@ -1,5 +1,6 @@
 import { AppBar, useTheme } from "@mui/material";
 import { Typography, Box } from "@mui/material";
+import Logo from "./HeaderComponents/Logo";
 
 type HeaderProps = {
     bankTitle?: string;
@@ -15,25 +16,21 @@ export const Header = ({
 	const theme = useTheme();
 	return (
 		<AppBar position="static" elevation={0} sx={{backgroundColor: theme.palette.background.paper}}>
-			<Box display="flex" 
+			<Box 
+				display="flex" 
+				flexDirection="row"
 				alignItems="center" 
 				justifyContent="space-between"	
 				px={2}
 				sx={{
 					borderBottom: 1,
 					borderColor: "divider",
-					minHeight: "72px",
+					minHeight: "3.5em",
 				}}
 			>
-				<Box display="flex" alignItems="center">
+				<Box display="flex" flexDirection="row" alignItems="center">
 
-					<Box display="flex" alignItems="center" mr={2}>
-				 <img
-							src={bankLogo}
-							alt="Logo"
-							style={{maxHeight:"45px"}}
-						/>
-					</Box>
+					<Logo bankLogo={bankLogo} />
 					<Box display="flex" alignItems="center">
 						<Typography variant="body1" noWrap fontWeight={theme.typography.h6.fontWeight}>
 							{bankTitle}
