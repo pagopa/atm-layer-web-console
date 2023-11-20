@@ -4,7 +4,7 @@ import { ManualFooter } from "./FooterComponents/ManualFooter";
 
 export const Footer = () => {
 	const theme = useTheme();
-	const footerTouch: boolean = true;
+	const footerTouch: boolean = false;
 
 	const backButton = () => console.log("Bottone indietro");	
 
@@ -13,7 +13,7 @@ export const Footer = () => {
 			component="footer" 
 			borderTop={1} 
 			borderColor={footerTouch ? "divider" : "transparent" } 
-			style={{backgroundColor: theme.palette.background.paper}}
+			style={{backgroundColor: theme.palette.background.paper, position: "absolute", bottom: 0, width: "100%"}}
 		>
 			<Box
 				display="flex"
