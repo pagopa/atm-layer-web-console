@@ -5,12 +5,21 @@ import { Header } from "../Header";
 import { getCompletePathImage } from "../../utils/Commons";
 import { Footer } from "../Footer";
 
-function HomePage() {
+export const HomePage = () => {
 	
-	const theme=useTheme();
+	const theme = useTheme();
 
 	return (
-		<><Header bankTitle="Test" bankLogo={getCompletePathImage("icon-48x48.png")} /><div className="App">HOME PAGE</div><Footer /></>
+		<>
+			<Header 
+				bankTitle="Test" 
+				bankLogo={getCompletePathImage("icon-48x48.png")} 
+				serviceDescription="Servizi di pubblica utilità" 
+			/>
+			<div className="App">
+					HOME PAGE
+			</div>
+			<Footer />
+		</>
 	);	
-}
-export default HomePage;
+};
