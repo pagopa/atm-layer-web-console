@@ -12,7 +12,11 @@ export const Footer = () => {
 		<Box 
 			component="footer" 
 			borderTop={1} 
-			borderColor={footerTouch ? "divider" : "transparent" } 
+			borderColor={footerTouch ? "divider" : "transparent" }
+			width="100%"
+			marginTop="auto"
+			position="absolute"
+			bottom={0}
 		>
 			<FooterBox>
 				{ footerTouch ? 
