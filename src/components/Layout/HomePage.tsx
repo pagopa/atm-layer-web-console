@@ -1,12 +1,17 @@
 import {Box, Typography, useTheme } from "@mui/material";
+import { useEffect } from "react";
 import { Header } from "../Header";
 import { getCompletePathImage } from "../../utils/Commons";
 import { Footer } from "../Footer";
 import { CardLayout } from "../CardComponents/CardLayout";
+import { ManualLayout } from "../ManualComponents/ManualLayout";
+import { useCtx } from "../../DataContext";
 
 export const HomePage = () => {
 	
 	const theme = useTheme();
+	const { interfaceType, setInterfaceType } = useCtx(); 
+	useEffect(() => setInterfaceType(false), []);
 
 	return (
 		<>
@@ -35,7 +40,7 @@ export const HomePage = () => {
 				 </Typography>
 				</Box>
 				<Box marginTop={9}>
-					<CardLayout />
+					{interfaceType ?  <CardLayout /> : <ManualLayout />}
 				</Box>
 			</Box>
 			<Footer />

@@ -20,11 +20,12 @@ export const CardComponent = ({ title, logo, handleClick }: Prop) => {
 					width: "100%", 
 					border: theme.cardStyle?.border,
 					borderColor: "lightgrey",
+					maxHeight: "148px"
 					// borderRadius: "8px",
 				}}>
 				<CardContent sx={{ pt: "12px", pb: "8px", px: "12px"}}>
 					<Typography 
-						fontSize={"1.5rem"} 
+						fontSize={"1.25rem"} 
 						fontWeight={theme.typography.sidenav.fontWeight}  
 						gutterBottom
 					>
