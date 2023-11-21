@@ -12,6 +12,10 @@ const themeLocal: Theme = createTheme(theme, {
 		main: "#2B2E38",
 		customBorderColor: "#E8EBF1"
 	},
+	cardStyle: {
+		border: "2px solid",
+		borderColor: "lightgrey"
+	}
 });
 
 declare module "@mui/material/styles" {
@@ -25,6 +29,10 @@ declare module "@mui/material/styles" {
       main?: string;
       customBorderColor?: string;
     };
+    cardStyle?: {
+      border?: string;
+      borderColor?: string;
+    };
   }
   // fix the type error when calling `createTheme()` with a custom theme option
   interface ThemeOptions {
@@ -35,6 +43,10 @@ declare module "@mui/material/styles" {
     colorVariant?: {
       main?: string;
       customBorderColor?: string;
+    };
+    cardStyle?: {
+      border?: string;
+      borderColor?: string;
     };
   }
 }

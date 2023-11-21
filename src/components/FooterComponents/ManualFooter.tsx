@@ -13,8 +13,8 @@ export const ManualFooter = ({ backButton }: Props) =>  {
 	const theme = useTheme();
 
 	return (
-		<Grid container ml={2} >
-			<Grid item xs={5} width="100%" minHeight={"80px"}>
+		<Grid container ml={3} >
+			<Grid item xs={5} width="100%" minHeight={"70px"}>
 				<Button
 					size="large"
 					startIcon={<ChevronLeftIcon color="primary" style={{ marginInline: "12px", fontSize: "28px" }} />}

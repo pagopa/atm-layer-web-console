@@ -8,8 +8,8 @@ type Props = {
 export default function FooterBox({ children }: Props) {
 	return (
 		<Box
-			// display="flex"
-			// flexDirection="row"
+			display="flex"
+			flexDirection="row"
 			alignItems="center"
 			maxWidth={"false"}
 			py={3}
