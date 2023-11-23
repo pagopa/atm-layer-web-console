@@ -39,7 +39,7 @@ export const HomePage = () => {
 				 	Puoi effettuare pagamenti verso la PA e gestire le tue iniziative di welfare. 
 				 </Typography>
 				</Box>
-				<Box marginTop={9}>
+				<Box marginTop={13}>
 					{interfaceType ?  <CardLayout /> : <ManualLayout />}
 				</Box>
 			</Box>

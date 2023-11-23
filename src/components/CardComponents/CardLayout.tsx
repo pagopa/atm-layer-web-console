@@ -36,7 +36,7 @@ export const CardLayout = () => {
 	];
     
 	return (
-		<Grid container my={2} gap={3}>
+		<Grid container gap={3}>
 			{
 				cardComponents.map((e, i) => (
 					<Grid item xs={3} key={i}>

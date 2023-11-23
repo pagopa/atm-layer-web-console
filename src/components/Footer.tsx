@@ -1,8 +1,6 @@
 import { Box, useTheme } from "@mui/material";
-import { useEffect } from "react";
 import { useCtx } from "../DataContext";
 import { TouchFooter } from "./FooterComponents/TouchFooter";
-import { ManualButton } from "./ManualComponents/ManualButton";
 import FooterBox from "./FooterComponents/FooterBox";
 import { ManualFooter } from "./FooterComponents/ManualFooter";
 
@@ -13,7 +11,7 @@ export const Footer = () => {
 
 	const backButton = () => console.log("Bottone indietro");
 	const style = {
-		fontSize: "1.3rem",
+		fontSize: theme.typography.pxToRem(12),
 		height: "100%",
 		width: "100%",
 		color: "black",
@@ -35,7 +33,11 @@ export const Footer = () => {
 			<FooterBox>
 				{ interfaceType ? 
 					<TouchFooter backButton={backButton}/> : 
-					<ManualFooter handleClick={backButton} label="Indietro" style={style}/>
+					<ManualFooter 
+						handleClick={backButton} 
+						label="Indietro" 
+						style={style}
+					/>
 				}
 			</FooterBox>
 		</Box>
