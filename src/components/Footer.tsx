@@ -1,24 +1,21 @@
-import { Box, useTheme } from "@mui/material";
-import { useCtx } from "../DataContext";
+import { Box } from "@mui/material";
+import { useContext } from "react";
+import { Ctx } from "../DataContext";
 import { TouchFooter } from "./FooterComponents/TouchFooter";
 import FooterBox from "./FooterComponents/FooterBox";
 import { ManualFooter } from "./FooterComponents/ManualFooter";
 
-export const Footer = () => {
-	const theme = useTheme();
+type Props = {
+	backButton: () => void;
+	continueButton?: string;
+	startIcon?: any;
+	endIcon?: any;
+};
+export const Footer = ({ backButton, continueButton, startIcon, endIcon }: Props) => {
 	
-	const { interfaceType, setInterfaceType } = useCtx();
+	const context = useContext(Ctx);
+	const {interfaceType}=context;
 
-	const backButton = () => console.log("Bottone indietro");
-	const style = {
-		fontSize: theme.typography.pxToRem(12),
-		height: "100%",
-		width: "100%",
-		color: "black",
-		borderColor: theme.colorVariant?.customBorderColor,
-		borderRadius: theme.shape.borderRadius,
-		justifyContent: "flex-start",
-	};
 
 	return (
 		<Box 
@@ -32,11 +29,12 @@ export const Footer = () => {
 		>
 			<FooterBox>
 				{ interfaceType ? 
-					<TouchFooter backButton={backButton}/> : 
+					<TouchFooter backButton={backButton} continueButton={continueButton}/> : 
 					<ManualFooter 
-						handleClick={backButton} 
-						label="Indietro" 
-						style={style}
+						handleClick={backButton}
+						continueButton={continueButton}
+						startIcon={startIcon}
+						endIcon={endIcon}
 					/>
 				}
 			</FooterBox>

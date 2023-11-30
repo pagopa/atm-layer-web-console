@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import { LogoPagoPAProduct } from "@pagopa/mui-italia";
+import { themeApp } from "../../assets/jss/themeApp";
 import { CardComponent } from "./CardComponent";
 
 
@@ -36,19 +37,21 @@ export const CardLayout = () => {
 	];
     
 	return (
-		<Grid container gap={3}>
-			{
-				cardComponents.map((e, i) => (
-					<Grid item xs={3} key={i}>
-						<CardComponent
-							key={i}
-							title={e.title} 
-							logo={e.logo}
-							handleClick={() => handleClickFunction(i)} 
-						/>
-					</Grid>	)
-				)
-			}
-		</Grid>
+
+		<>
+			<Grid container item xs={12} spacing={3} >
+				{
+					cardComponents.map((e, i) => (
+						<Grid item xs={3} key={i}>
+							<CardComponent
+								key={i}
+								title={e.title} 
+								logo={e.logo}
+								handleClick={() => handleClickFunction(i)} 
+							/>
+						</Grid>	)
+					)
+				}
+			</Grid></>
 	);
 };
