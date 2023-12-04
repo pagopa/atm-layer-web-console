@@ -1,5 +1,4 @@
 import { Box } from "@mui/system";
-import { theme } from "@pagopa/mui-italia";
 import KeyboardHideOutlinedIcon from "@mui/icons-material/KeyboardHideOutlined";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Button } from "@mui/material";
@@ -21,24 +20,24 @@ export const ScannerPage = () => {
 	return (
 		<>
 			<Header 
-				bankTitle="Test" 
-				bankLogo={getCompletePathImage("icon-48x48.png")} 
+				bankTitle="Test"
+				bankLogo={getCompletePathImage("icon-52x52.png")} 
 				serviceDescription="Servizi di pubblica utilità" 
 			/>
-			<Box marginTop={theme.spacing(3)} textAlign={"center"}>
+			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent 
 					title={"Scansiona il codice QR"} 
 					subTitle={"Avvicinalo al lettore luminoso posizionato sopra allo schermo."}
 				/>
 			</Box>
-			<Box textAlign={"center"}  marginTop={theme.spacing(3)}>
-				<img src={getCompletePathImage("img-200x200.png")} />
+			<Box textAlign={"center"}  marginTop={7}>
+				<img src={getCompletePathImage("img-200x200.png")} width={"300px"} height={"300px"}/>
 			</Box>
 			
 			{
 				interfaceType ? 
 					<>
-						<Box textAlign={"center"} marginTop={theme.spacing(3)}>
+						<Box textAlign={"center"} marginTop={3}>
 							<Button
 								color="primary"
 								size="medium"
@@ -55,7 +54,7 @@ export const ScannerPage = () => {
 						backButton={backButton} 
 						continueButton={"Inserisci tu i dati"} 
 						startIcon={<KeyboardHideOutlinedIcon color="disabled" fontSize="medium"/>}
-						endIcon={<ChevronRightIcon color="primary" fontSize="medium" />}
+						endIcon={<ChevronRightIcon color="primary" fontSize="medium" sx={{ ml: "16px" }}/>}
 					/>
 			}
 			

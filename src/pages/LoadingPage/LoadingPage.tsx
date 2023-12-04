@@ -7,7 +7,7 @@ export const LoadingPage = () => (
 	<>
 		<Header 
 			bankTitle="Test" 
-			bankLogo={getCompletePathImage("icon-48x48.png")} 
+			bankLogo={getCompletePathImage("icon-52x52.png")} 
 			serviceDescription="Servizi di pubblica utilità" 
 		/>
 		<Box 

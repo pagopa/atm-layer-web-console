@@ -52,7 +52,7 @@ const CustomButton = React.forwardRef<HTMLDivElement, CustomButtonProps>(
 						<Box>
 							{startIcon}
 						</Box>
-						<Box display="flex" justifyContent="flex-end" alignItems="center">
+						<Box display="flex" justifyContent="flex-end" alignItems="center" py={0}>
 							<Box>
 								{continueButton}
 							</Box>
