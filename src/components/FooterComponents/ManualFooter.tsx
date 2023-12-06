@@ -7,21 +7,24 @@ import CustomButton from "../ManualComponents/CustomManualBottom";
 
 type Props = {
     handleClick: () => void;
+	disabled: boolean;
+	handleSubmit?: () => void;
 	continueButton?: string;
 	startIcon?: any;
 	endIcon?: any;
 };
 
-export const ManualFooter = ({ handleClick, continueButton, startIcon, endIcon }: Props) => {
+export const ManualFooter = ({ handleClick, disabled, handleSubmit, continueButton, startIcon, endIcon }: Props) => {
 
 	const secondButton = (
 		<CustomButton
 			size="large"
-			onClick={handleClick}
+			onClick={handleSubmit}
 			startIcon={startIcon}
 			continueButton={continueButton}
 			endIcon={endIcon}
 			direction="right"
+			disabled={disabled}
 		/>
 	);
 

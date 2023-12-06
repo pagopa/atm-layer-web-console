@@ -36,7 +36,7 @@ export const HomePage = () => {
 			>
 				{interfaceType ?  <CardLayout /> : <ManualLayout />}
 			</Box>
-			<Footer backButton={backButton} />
+			<Footer disabled={false} backButton={backButton} />
 		</>
 	);	
 };

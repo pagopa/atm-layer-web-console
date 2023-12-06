@@ -48,10 +48,11 @@ export const ScannerPage = () => {
                     Inserisci tu i dati
 							</Button>
 						</Box>
-						<Footer backButton={backButton} /> 
+						<Footer disabled={false} backButton={backButton} /> 
 					</>
 					: <Footer 
 						backButton={backButton} 
+						disabled={false}
 						continueButton={"Inserisci tu i dati"} 
 						startIcon={<KeyboardHideOutlinedIcon color="disabled" fontSize="medium"/>}
 						endIcon={<ChevronRightIcon color="primary" fontSize="medium" sx={{ ml: "16px" }}/>}
