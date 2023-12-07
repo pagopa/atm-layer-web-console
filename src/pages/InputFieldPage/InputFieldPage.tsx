@@ -10,6 +10,7 @@ import { getCompletePathImage } from "../../utils/Commons";
 import { CustomTextField } from "../../components/CustomTextField/CustomtextField";
 import { Footer } from "../../components/Footer";
 
+
 type InputFieldDto = {
 	code: string;
 };
@@ -18,7 +19,7 @@ export const InputFieldPage = () => {
 	const backButton = () => console.log("Bottone");
 
 	const [charCounter, setCharCounter] = useState(0);
-	const [endIconVisible, setEndIconVisible] = useState(false);
+	const [endIconVisible, setEndIconVisible] = useState(true);
 
 	useEffect(() => {
 		console.log("counter", charCounter);
@@ -59,15 +60,30 @@ export const InputFieldPage = () => {
 				/>
 			</Box>
 			<Box display={"flex"} minHeight="70vmin" justifyContent={"center"} alignItems={"center"}>
-				<CustomTextField
-					id={"code"}
-					name={"code"}
-					label={"Codice Avviso"}
-					value={formik.values.code}
-					error={formik.touched.code && Boolean(formik.errors.code)}
-					endIcon={endIconVisible ? <ReportIcon /> : undefined}
-					handleChange={(e) => formik.handleChange(e)}
-				/>
+				{/* <Box justifyContent={"center"} minWidth={"25%"}>
+					<CustomTextField
+						id={"code"}
+						name={"code con formik"}
+						label={"Codice Avviso"}
+						value={formik.values.code}
+						error={formik.touched.code && Boolean(formik.errors.code)}
+						endIcon={endIconVisible ? <ReportIcon /> : undefined}
+						handleChange={(e) => formik.handleChange(e)}
+						variant={"outlined"}
+					/>
+				</Box> */}
+				<Box justifyContent={"center"} minWidth={"25%"}>
+					<CustomTextField
+						id={"code"}
+						name={"code con formik"}
+						label={"Codice Avviso"}
+						value={formik.values.code}
+						error={formik.touched.code && Boolean(formik.errors.code)}
+						icons={endIconVisible ? "Report" : undefined}
+						onChange={(e) => formik.handleChange(e)}
+						variant={"outlined"}
+					/>
+				</Box>
 			</Box>
 			<Footer
 				backButton={backButton}
