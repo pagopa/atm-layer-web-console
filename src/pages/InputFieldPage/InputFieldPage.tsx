@@ -1,7 +1,7 @@
-import { Box } from "@mui/system";
+import { Box, useTheme } from "@mui/system";
 import { theme } from "@pagopa/mui-italia";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReportIcon from "@mui/icons-material/Report";
 import { useFormik } from "formik";
 import { Header } from "../../components/Header";
@@ -9,43 +9,42 @@ import { TitleComponent } from "../../components/TitleComponents/TitleComponent"
 import { getCompletePathImage } from "../../utils/Commons";
 import { CustomTextField } from "../../components/CustomTextField/CustomtextField";
 import { Footer } from "../../components/Footer";
-
-
-type InputFieldDto = {
-	code: string;
-};
+import checks from "../../commons/checks";
 
 export const InputFieldPage = () => {
 	const backButton = () => console.log("Bottone");
 
 	const [charCounter, setCharCounter] = useState(0);
 	const [endIconVisible, setEndIconVisible] = useState(true);
+	const [error, setError] = useState(false);
+	const theme = useTheme();
+	const [text, setText] = useState("");
+
+	const handleChange = (e: React.ChangeEvent<any>) => {
+		setText(e.target.value);
+	};
 
 	useEffect(() => {
 		console.log("counter", charCounter);
 	}, [charCounter]);
 
-	const validate = (values: InputFieldDto) =>
-		Object.fromEntries(
-			Object.entries({
-				code: values.code.length < 18
-					? setEndIconVisible(true)
-					: undefined,
-			}).filter(([_key, value]) => (typeof value !== "undefined" ? value : ""))
-		);
+	const enebledSubmit = (value: string) => !!(value.length !== 0);
 
-	const formik = useFormik({
-		initialValues: {
-			code: "",
-		},
-		validate,
-		onSubmit: (values) => {
-			console.log("values:", values);
-		},
-	});
+	const handleError = (value: string) => {
+		if(value.length < 18) {
+			setError(true);
+			setEndIconVisible(true);
+		} else {
+			setError(false);
+			setEndIconVisible(false);
+		}
+	};
 
-	const enebledSubmit = (values: InputFieldDto) => !!(values.code !== "");
-
+	const submit = (value: string) => {
+		handleError(value);
+		console.log("value:", error ? "Error!" : value);
+	};
+ 
 	return (
 		<>
 			<Header
@@ -60,35 +59,23 @@ export const InputFieldPage = () => {
 				/>
 			</Box>
 			<Box display={"flex"} minHeight="70vmin" justifyContent={"center"} alignItems={"center"}>
-				{/* <Box justifyContent={"center"} minWidth={"25%"}>
-					<CustomTextField
-						id={"code"}
-						name={"code con formik"}
-						label={"Codice Avviso"}
-						value={formik.values.code}
-						error={formik.touched.code && Boolean(formik.errors.code)}
-						endIcon={endIconVisible ? <ReportIcon /> : undefined}
-						handleChange={(e) => formik.handleChange(e)}
-						variant={"outlined"}
-					/>
-				</Box> */}
 				<Box justifyContent={"center"} minWidth={"25%"}>
 					<CustomTextField
 						id={"code"}
-						name={"code con formik"}
+						name={"code"}
 						label={"Codice Avviso"}
-						value={formik.values.code}
-						error={formik.touched.code && Boolean(formik.errors.code)}
+						value={text}
+						error={error}
 						icons={endIconVisible ? "Report" : undefined}
-						onChange={(e) => formik.handleChange(e)}
+						onChange={(e) => handleChange(e)}
 						variant={"outlined"}
 					/>
 				</Box>
 			</Box>
 			<Footer
 				backButton={backButton}
-				disabled={!enebledSubmit(formik.values)}
-				handleClick={formik.handleSubmit}
+				disabled={!enebledSubmit(text)}
+				handleClick={() => submit(text)}
 				continueButton={"Continua"}
 				endIcon={<ChevronRightIcon color="primary" fontSize="medium" sx={{ ml: "16px" }} />}
 			/>

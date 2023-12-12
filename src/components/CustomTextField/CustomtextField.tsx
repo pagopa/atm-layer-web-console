@@ -23,7 +23,8 @@ type Props = {
 	disableAction?: boolean;
 	idActionIcon?: string;
 	inputProps?: string;
-	onKeyDown?: (e: React.KeyboardEventHandler<Element>) => void; 
+	onKeyDown?: (e: React.KeyboardEventHandler<Element>) => void;
+	theme?: Theme;
 };
 
 type CustomTextFieldProps = TextFieldProps & {
@@ -92,114 +93,52 @@ export const CustomTextField: React.FC<Props> = ({
 	idActionIcon,
 	inputProps,
 	onKeyDown,
-}) => {
-	const { isInvalidField } = checks();
-	const theme = useTheme();
-	const [text, setText] = useState(
-		!isInvalidField(defaultVal) ? defaultVal : ""
-	);
-
-	const handleChangeBase = (event: { target: { value: React.SetStateAction<string | undefined> } }) => {
-		setText(event.target.value);
-	};
-
-
-	return (
-		// 	<StyledTextField
-		// 		onChange={handleChangeBase}
-		// 		variant={variant?variant:"outlined"}
-		// 		label={label}
-		// 		value={value}
-		// 		id={id}
-		// 		name={name}
-		// 		error={error}
-		// 		InputProps={{
-		// 			endAdornment: endIcon,
-		// 		}}
-		// 		inputProps={{
-		//   maxLength: 18,
-		// 		}}
-		// 	/>
-		<React.Fragment>
-			<Tooltip title={label} placement="bottom-start">
-				<CustomInput
-					fullWidth
-					disabled={disabled}
-					onChange={handleChangeBase}
-					style={icons ? { width: "calc(100% - 54px)" } : {}}
-					id={id}
-					name={id}
-					label={label}
-					defaultValue={defaultVal}
-					value={text}
-					variant="outlined"
-					error={error}
-					helperText={helperText}
-					// InputProps={{ ...inputProps }}
-					type={"text"}
-					required={type === "baseRequire" ? true : false}
-					// onKeyDown={onKeyDown}
-					InputProps={{
-						endAdornment: (
-							icons && (  
-								<InputAdornment position="end">
-									<ActionIcon
-										id={idActionIcon}
-										disableAction={disableAction}
-										// action={action}
-										bgcolor={
-											disableAction === true
-												? "rgba(0, 0, 0, 0.12)"
-												: theme.palette.primary.main
-										}
-										icon={icons}
-										color={
-											disableAction === true
-												? "red"
-												: error? "red" : theme.palette.primary.main
-										}
-										pad={12.5}
-										borderRadius={borderRadius}
-										border={false}
-									/>
-								</InputAdornment>
-							)
-						),
+	theme
+}) => (
+	<>
+		<CustomInput
+			fullWidth
+			disabled={disabled}
+			onChange={onChange}
+			style={icons ? { /* width: "calc(100% - 54px)", */ color: error ? "red" : theme?.palette.primary.main, fontWeight: theme?.typography.fontWeightBold  } : {fontWeight: theme?.typography.fontWeightBold }}
+			id={id}
+			name={name}
+			label={label}
+			defaultValue={defaultVal}
+			value={value}
+			variant="outlined"
+			error={error}
+			helperText={helperText}
+			type={"text"}
+			required={type === "baseRequire" ? true : false}
+			inputProps={{ maxLength: 18 }}
+			InputProps={{
+				endAdornment: (
+					icons && (  
+						<InputAdornment position="end">
+							<ActionIcon
+								id={idActionIcon}
+								disableAction={disableAction}
+								// action={action}
+								bgcolor={
+									disableAction === true
+										? "rgba(0, 0, 0, 0.12)"
+										: theme?.palette.primary.main
+								}
+								icon={icons}
+								color={
+									disableAction === true
+										? "red"
+										: error? "red" : theme?.palette.primary.main
+								}
+								pad={12.5}
+								borderRadius={borderRadius}
+								border={false}
+							/>
+						</InputAdornment>
+					)
+				),
 					  }} 
-				/>
-			</Tooltip>
-			{/* {icons && (
-				<Box
-					mx={0.5}
-					style={{
-						display: "inline-block",
-						width: "max-content",
-						float: "right",
-						marginRight: "0px",
-					}}
-				>
-					<ActionIcon
-						id={idActionIcon}
-						disableAction={disableAction}
-						// action={action}
-						bgcolor={
-							disableAction === true
-								? "rgba(0, 0, 0, 0.12)"
-								: theme.palette.primary.main
-						}
-						icon={icons}
-						color={
-							disableAction === true
-								? "red"
-								: theme.palette.common.white
-						}
-						pad={12.5}
-						borderRadius={borderRadius}
-						border={false}
-					/>
-				</Box>
-			)} */}
-
-		</React.Fragment>
-	);
-};
+		/>
+	</>
+);
