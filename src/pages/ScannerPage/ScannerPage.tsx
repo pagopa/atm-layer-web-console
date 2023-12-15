@@ -3,19 +3,19 @@ import KeyboardHideOutlinedIcon from "@mui/icons-material/KeyboardHideOutlined";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Button } from "@mui/material";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
 import { getCompletePathImage } from "../../utils/Commons";
 import { Footer } from "../../components/Footer";
 import { Ctx } from "../../DataContext";
+import routes from "../../routes";
 
 
 export const ScannerPage = () => {
 
-	const backButton = () => console.log("Bottone");
-
-	const context = useContext(Ctx);
-	const {interfaceType}=context;
+	const navigate = useNavigate();
+	const { interfaceType } = useContext(Ctx);;
             
 	return (
 		<>
@@ -43,15 +43,16 @@ export const ScannerPage = () => {
 								size="medium"
 								startIcon={<KeyboardHideOutlinedIcon color="primary"/>}
 								variant="outlined"
-								onClick={backButton}
+								onClick={() => navigate(routes.WARNING_CODE)}
 							>
                     Inserisci tu i dati
 							</Button>
 						</Box>
-						<Footer disabled={false} backButton={backButton} /> 
+						<Footer disabled={false} backButton={() => navigate("/")} /> 
 					</>
 					: <Footer 
-						backButton={backButton} 
+						backButton={() => navigate("/")}
+						handleClick={() => navigate(routes.WARNING_CODE)}
 						disabled={false}
 						continueButton={"Inserisci tu i dati"} 
 						startIcon={<KeyboardHideOutlinedIcon color="disabled" fontSize="medium"/>}

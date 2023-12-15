@@ -39,6 +39,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import CachedIcon from "@mui/icons-material/Cached";
 import CloseIcon from "@mui/icons-material/Close";
 import ReportIcon from "@mui/icons-material/Report";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 // import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 // import PauseCircleOutlineOutlinedIcon from "@mui/icons-material/PauseCircleOutlineOutlined";
 // import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -86,7 +87,8 @@ const Icons : { [key: string]: any } ={
 	"SearchOutlined": 	SearchOutlinedIcon, 
 	"SettingsOutlined":  SettingsOutlinedIcon,
 	"Cached": CachedIcon,
-	"Report": ReportIcon
+	"Report": ReportIcon,
+	"Success" : CheckCircleIcon
 };
 
 
