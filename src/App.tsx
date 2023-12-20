@@ -11,6 +11,7 @@ import { ScannerPage } from "./pages/ScannerPage/ScannerPage";
 import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
+import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
 
 
 const LocalRoutes = () => (
@@ -52,9 +53,10 @@ function App() {
 	return (
 	  <ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>
-				<BrowserRouter>
+				{/* <BrowserRouter>
 					{LocalRoutes()}
-		  	</BrowserRouter>
+		  		</BrowserRouter> */}
+				<DecodeRenderHtml />
 			</Ctx.Provider>
 	  </ThemeProvider>
 	);
