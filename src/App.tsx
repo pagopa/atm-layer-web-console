@@ -12,11 +12,12 @@ import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
 import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
+import { HomePage2 } from "./pages/Layout/HomePage2";
 
 
 const LocalRoutes = () => (
 	<Routes>
-	  <Route path="/" element={<PageLayout page={<HomePage />} />} />
+	  <Route path="/" element={<PageLayout page={<HomePage2 />} />} />
 	  <Route path={routes.SCANNER_PAGE} element={<PageLayout page={<ScannerPage />} />} />
 	  <Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 	  <Route path={routes.EC_FISCAL_CODE} element={<PageLayout page={<EcFiscalCodeInput />} />} />
@@ -53,10 +54,9 @@ function App() {
 	return (
 	  <ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>
-				{/* <BrowserRouter>
+				<BrowserRouter>
 					{LocalRoutes()}
-		  		</BrowserRouter> */}
-				<DecodeRenderHtml />
+		  		</BrowserRouter>
 			</Ctx.Provider>
 	  </ThemeProvider>
 	);

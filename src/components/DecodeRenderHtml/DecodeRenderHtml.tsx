@@ -7,9 +7,14 @@ import resp from "./resp.json";
 const template= resp?.task?.template?.content;
 
 
-
-
-const getTemplate=(element:string)=>parse(element);
+const getTemplate=(element:string)=>{
+	
+	const parser = new DOMParser();
+	const parsedHtml = parser.parseFromString(element, "text/html");
+	const body = parsedHtml.getElementsByTagName("body");
+	const bodyText = body[0].innerHTML;
+	return bodyText? parse(bodyText): "<div />";
+};
 
 
 export function DecodeRenderHtml() : JSX.Element {
