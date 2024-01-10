@@ -14,11 +14,11 @@ import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
 import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
 import { HomePage2 } from "./pages/Layout/HomePage2";
 import UploadFile from "./pages/UploadFile/UploadFile";
-
+import UploadFileWithButton from "./pages/UploadFile/UploadFileWithButton";
 
 const LocalRoutes = () => (
 	<Routes>
-	  <Route path="/" element={<PageLayout page={<UploadFile />} />} />
+	  <Route path="/" element={<PageLayout page={<UploadFileWithButton />} />} />
 	  <Route path={routes.SCANNER_PAGE} element={<PageLayout page={<ScannerPage />} />} />
 	  <Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 	  <Route path={routes.EC_FISCAL_CODE} element={<PageLayout page={<EcFiscalCodeInput />} />} />

@@ -66,7 +66,7 @@ const UploadFile = () => {
 					<Box
 						height="100%"
 						display="flex"
-						alignItems={"center" }
+						alignItems={"center"}
 						flexDirection={files.length > 0 ? "row" : "column"}
 
 					>
