@@ -72,7 +72,7 @@ const UploadFileWithButton = ({ allowedType }: Props) => {
                 >
                     {file ?
                         <><Box>
-                            <Typography variant="body1" noWrap fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
+                            <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
                                 {file.substring(file.lastIndexOf("\\") + 1)}
                             </Typography>
                         </Box><Box ml={2}>
