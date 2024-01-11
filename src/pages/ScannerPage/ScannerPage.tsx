@@ -19,11 +19,7 @@ export const ScannerPage = () => {
             
 	return (
 		<>
-			<Header 
-				bankTitle="Test"
-				bankLogo={getCompletePathImage("icon-52x52.png")} 
-				serviceDescription="Servizi di pubblica utilità" 
-			/>
+			<Header />
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent 
 					title={"Scansiona il codice QR"} 

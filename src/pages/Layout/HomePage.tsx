@@ -17,11 +17,7 @@ export const HomePage = () => {
             
 	return (
 		<>
-			<Header 
-				bankTitle="Test" 
-				bankLogo={getCompletePathImage("icon-52x52.png")} 
-				serviceDescription="Servizi di pubblica utilità" 
-			/>
+			<Header />
 			<Box marginTop={theme.spacing(3)} marginLeft={theme.spacing(3)} textAlign={"start"}>
 				<TitleComponent 
 					title={"A quale servizio vuoi accedere?"} 

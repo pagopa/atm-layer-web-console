@@ -6,6 +6,7 @@ import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
 import ClearIcon from "@mui/icons-material/Clear";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import { LogoPagoPACompany } from "@pagopa/mui-italia";
 import { Header } from "../../components/Header";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
 import { getCompletePathImage } from "../../utils/Commons";
@@ -40,11 +41,7 @@ const UploadFileWithButton = ({ allowedType }: Props) => {
 
     return (
         <>
-            <Header
-                bankTitle="Test"
-                bankLogo={getCompletePathImage("icon-52x52.png")}
-                serviceDescription="Servizi di pubblica utilità"
-            />
+            <Header />
             <Box marginTop={3} textAlign={"center"}>
                 <TitleComponent
                     title={"Scansiona il codice QR"}

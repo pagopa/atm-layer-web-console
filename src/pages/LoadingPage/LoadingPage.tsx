@@ -1,16 +1,12 @@
-import {Box, CircularProgress, Grid, Typography } from "@mui/material";
-import { theme } from "@pagopa/mui-italia";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import { LogoPagoPACompany, theme } from "@pagopa/mui-italia";
 import { Header } from "../../components/Header";
 import { getCompletePathImage } from "../../utils/Commons";
 
 export const LoadingPage = () => (
 	<>
-		<Header 
-			bankTitle="Test" 
-			bankLogo={getCompletePathImage("icon-52x52.png")} 
-			serviceDescription="Servizi di pubblica utilità" 
-		/>
-		<Box 
+		<Header />
+		<Box
 			height="90vh"
 			display="flex"
 			justifyContent="center"
@@ -31,11 +27,11 @@ export const LoadingPage = () => (
 				</Grid>
 				<Grid item xs={12}>
 					<Typography fontSize={theme.typography.pxToRem(17.5)}>
-                Stiamo verificando i dati dell’avviso
+						Stiamo verificando i dati dell’avviso
 					</Typography>
 				</Grid>
 			</Grid>
 		</Box>
-		
+
 	</>
 );
