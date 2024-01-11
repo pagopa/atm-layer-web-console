@@ -9,9 +9,13 @@ import routes from "./routes";
 import { HomePage } from "./pages/Layout/HomePage";
 import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
-import UploadFile from "./pages/UploadFile/UploadFile";
-import UploadFileWithButton from "./pages/UploadFile/UploadFileWithButton";
+// import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
+// import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
+// import { HomePage2 } from "./pages/Layout/HomePage2";
+// import HomeCardComponent from "./components/CardComponents/HomeCardComponent";
 import NewBpmn from "./pages/UploadFile/NewBpmn";
+
+
 
 const LocalRoutes = () => (
 	<Routes>
