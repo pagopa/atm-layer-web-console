@@ -7,21 +7,17 @@ import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
 import { HomePage } from "./pages/Layout/HomePage";
-import { ScannerPage } from "./pages/ScannerPage/ScannerPage";
 import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
-import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
-import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
-import { HomePage2 } from "./pages/Layout/HomePage2";
 import UploadFile from "./pages/UploadFile/UploadFile";
 import UploadFileWithButton from "./pages/UploadFile/UploadFileWithButton";
 
 const LocalRoutes = () => (
 	<Routes>
-	  <Route path="/" element={<PageLayout page={<UploadFileWithButton />} />} />
-	  <Route path={routes.SCANNER_PAGE} element={<PageLayout page={<ScannerPage />} />} />
+	  <Route path="/" element={<PageLayout page={<HomePage />} />} />
+	  <Route path="/home" element={<PageLayout page={<HomePage />} />} />
+	  <Route path="/upload" element={<PageLayout page={<UploadFileWithButton />} />} />
 	  <Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
-	  <Route path={routes.EC_FISCAL_CODE} element={<PageLayout page={<EcFiscalCodeInput />} />} />
 	  <Route
 			path={routes.ERROR_PAGE}
 			element={<PageLayout page={<CommonErrorPage title={""} icon={undefined} />} /> }
@@ -32,18 +28,12 @@ const LocalRoutes = () => (
 function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
   
-	const [interfaceType, setInterfaceType] = useState(false);
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	const [ecFiscalCodeValue, setEcFiscalCodeValue] = useState("");
 	const [loading, setLoading] = useState(false);
   
 	const values = {
-	  interfaceType,
-	  setInterfaceType,
 	  warningCodeValue,
 	  setWarningCodeValue,
-	  ecFiscalCodeValue,
-	  setEcFiscalCodeValue,
 	  loading,
 	  setLoading,
 	};
