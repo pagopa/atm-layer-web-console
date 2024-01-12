@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, Grid, CardActionArea } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 type Prop = {
 	title: string;
@@ -8,30 +9,23 @@ type Prop = {
 };
 
 function HomeCardComponent({ title, description, pageLink }: Prop) {
+	const theme = useTheme();
 	return (
-		<Grid item xs={6}>
+		<Grid item xs={10} md={4}>
 			<Card
-				variant="outlined"
 				sx={{
-					height: "100%",
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "space-between",
-					border: "2px solid blue",
-					transition: "background-color 0.3s",
+					border: "none",
+					boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add this line for box shadow
+					"&:hover": {
+						backgroundColor: "#06c",
+						"& .MuiTypography-root": {
+							color: "white",
+						},
+					},
 				}}
 			>
 				<CardActionArea href={pageLink}>
-					<CardContent
-						sx={{
-							"&:hover": {
-								backgroundColor: "blue",
-								"& .MuiTypography-root": {
-									color: "white",
-								},
-							},
-						}}
-					>
+					<CardContent>
 						<Typography
 							variant="h5"
 							component="div"
