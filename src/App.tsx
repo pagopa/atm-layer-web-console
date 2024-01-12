@@ -20,7 +20,7 @@ import HomePage3 from "./pages/Layout/HomePage3";
 
 const LocalRoutes = () => (
 	<Routes>
-	  <Route path="/" element={<PageLayout page={<HomePage2 />} />} />
+	  <Route path="/" element={<PageLayout page={<HomePage3 />} />} />
 	  <Route path={routes.SCANNER_PAGE} element={<PageLayout page={<ScannerPage />} />} />
 	  <Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 	  <Route path={routes.EC_FISCAL_CODE} element={<PageLayout page={<EcFiscalCodeInput />} />} />
