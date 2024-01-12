@@ -1,17 +1,17 @@
 import React from "react";
-import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from "@mui/material";
-import { Description } from "@mui/icons-material";
+import { Card, CardContent, Typography, Grid, CardActionArea } from "@mui/material";
 
 type Prop = {
 	title: string;
 	description: string;
+	pageLink: string;
 };
 
-function HomeCardComponent({ title, description }: Prop) {
+function HomeCardComponent({ title, description, pageLink }: Prop) {
 	return (
-		<Grid item xs={2}>
+		<Grid item xs={2} >
 			<Card variant="outlined">
-				<React.Fragment>
+				<CardActionArea href={pageLink}>
 					<CardContent>
 						<Typography variant="h5" component="div">
 							{title}
@@ -20,10 +20,7 @@ function HomeCardComponent({ title, description }: Prop) {
 							{description}
 						</Typography>
 					</CardContent>
-					<CardActions>
-						<Button size="small">Learn More</Button>
-					</CardActions>
-				</React.Fragment>
+				</CardActionArea>
 			</Card>
 		</Grid>
 	);
