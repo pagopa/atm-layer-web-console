@@ -21,7 +21,7 @@ function HomePage3(){
 					subTitle={"Console per la gestione delle risorse"}
 				/>
 			</Box>
-			<Box marginTop={10}>
+			<Box >
 				<Grid container item xs={12} spacing={12} p={12} alignItems={"center"} justifyContent={"center"}>
 					{
 						homePageCardItems.map((e, i) => (
@@ -29,6 +29,7 @@ function HomePage3(){
 								key={i}
 								title={e.title}
 								description={e.description}
+								icon={e.icon}
 								pageLink={e.pageLink}
 							/>
 						)
