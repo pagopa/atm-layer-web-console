@@ -9,14 +9,45 @@ type Prop = {
 
 function HomeCardComponent({ title, description, pageLink }: Prop) {
 	return (
-		<Grid item xs={2} >
-			<Card variant="outlined">
+		<Grid item xs={6}>
+			<Card
+				variant="outlined"
+				sx={{
+					height: "100%",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
+					border: "2px solid blue",
+					transition: "background-color 0.3s",
+				}}
+			>
 				<CardActionArea href={pageLink}>
-					<CardContent>
-						<Typography variant="h5" component="div">
+					<CardContent
+						sx={{
+							"&:hover": {
+								backgroundColor: "blue",
+								"& .MuiTypography-root": {
+									color: "white",
+								},
+							},
+						}}
+					>
+						<Typography
+							variant="h5"
+							component="div"
+							sx={{
+								marginBottom: 1,
+								color: "inherit",
+							}}
+						>
 							{title}
 						</Typography>
-						<Typography sx={{ mb: 1.5 }} color="text.secondary">
+						<Typography
+							sx={{
+								color: "inherit",
+							}}
+							color="text.secondary"
+						>
 							{description}
 						</Typography>
 					</CardContent>
