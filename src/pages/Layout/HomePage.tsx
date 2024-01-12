@@ -4,24 +4,18 @@ import { Header } from "../../components/Header";
 import { getCompletePathImage } from "../../utils/Commons";
 import { Footer } from "../../components/Footer";
 import { CardLayout } from "../../components/CardComponents/CardLayout";
-import { ManualLayout } from "../../components/ManualComponents/ManualLayout";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
 import { Ctx } from "../../DataContext";
 import { theme } from "../../assets/jss/themePagoPa";
 
 export const HomePage = () => {
 
-	const context = useContext(Ctx);
-	const {interfaceType,}=context;
+	
 	const backButton = () => console.log("Bottone");
             
 	return (
 		<>
-			<Header 
-				bankTitle="Test" 
-				bankLogo={getCompletePathImage("icon-52x52.png")} 
-				serviceDescription="Servizi di pubblica utilità" 
-			/>
+			<Header />
 			<Box marginTop={theme.spacing(3)} marginLeft={theme.spacing(3)} textAlign={"start"}>
 				<TitleComponent 
 					title={"A quale servizio vuoi accedere?"} 
@@ -34,7 +28,7 @@ export const HomePage = () => {
 				justifyContent={"center"}
 				ml={3} 
 			>
-				{interfaceType ?  <CardLayout /> : <ManualLayout />}
+				 <CardLayout /> 
 			</Box>
 			<Footer disabled={false} backButton={backButton} />
 		</>

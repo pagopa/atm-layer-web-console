@@ -95,11 +95,7 @@ export const InputFieldPage = ({
 
 	return (
 		<>
-			<Header
-				bankTitle="Test"
-				bankLogo={getCompletePathImage("icon-52x52.png")}
-				serviceDescription="Servizi di pubblica utilità"
-			/>
+			<Header />
 			<Box marginTop={theme.spacing(3)} textAlign={"center"}>
 				<TitleComponent
 					title={title}

@@ -16,7 +16,7 @@ const WarningCodeInput = () => {
 	const [text, setText] = useState("");
 	const { warningCodeValue, setWarningCodeValue} = useContext(Ctx);
 	const navigate = useNavigate();
-	const route = routes.EC_FISCAL_CODE;
+	const route = routes.HOME;
 
 	return (
 		<InputFieldPage 
@@ -36,7 +36,7 @@ const WarningCodeInput = () => {
 			maxLength={18}
 			route={route}
 			navigate={() => navigate(route)}
-			backButton={() => navigate(routes.SCANNER_PAGE)}
+			backButton={() => navigate(routes.HOME)}
 		/>
 	);
 

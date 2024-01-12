@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { Ctx } from "../DataContext";
 import { TouchFooter } from "./FooterComponents/TouchFooter";
 import FooterBox from "./FooterComponents/FooterBox";
-import { ManualFooter } from "./FooterComponents/ManualFooter";
 
 type Props = {
 	backButton: () => void;
@@ -30,17 +29,8 @@ export const Footer = ({ backButton, disabled, handleClick, continueButton, star
 			bottom={0}
 		>
 			<FooterBox>
-				{ interfaceType ? 
-					<TouchFooter backButton={backButton} handleClick={handleClick} continueButton={continueButton}/> : 
-					<ManualFooter
-						disabled={disabled}
-						handleClick={backButton} 
-						handleSubmit={handleClick}
-						continueButton={continueButton}
-						startIcon={startIcon}
-						endIcon={endIcon}
-					/>
-				}
+				
+				<TouchFooter backButton={backButton} handleClick={handleClick} continueButton={continueButton}/>
 			</FooterBox>
 		</Box>
 	);
