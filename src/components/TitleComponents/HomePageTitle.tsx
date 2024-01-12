@@ -12,13 +12,14 @@ export const HomePageTitle = ({ title, subTitle }: Props) => {
 	return (
 		<>
 			<Typography 
-				variant="h1"
+				variant="headline"
 				color={"black"}> 
 				{title} 
 			</Typography>
 			<Typography
 				mt={1}
-				variant="body2"
+				variant="body1"
+				fontWeight={600}
 				noWrap
 			>
 				{subTitle}

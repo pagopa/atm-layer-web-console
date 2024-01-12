@@ -72,12 +72,12 @@ const NewBpmn = () => {
 
     return (
         <>
-            <Header />
             <Box
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
+                width={"100%"}
             >
                 <Box marginTop={3} textAlign={"center"}>
                     <TitleComponent

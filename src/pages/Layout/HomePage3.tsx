@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Container, Grid, styled } from "@mui/material";
 import HomeCardComponent from "../../components/CardComponents/HomeCardComponent";
 import { homePageCardItems } from "../../utils/HomePageCardItems";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
@@ -7,36 +7,50 @@ import { Header } from "../../components/Header";
 import { HomePageTitle } from "../../components/TitleComponents/HomePageTitle";
 
 
-function HomePage3(){
-	return (
- 
-		<>
-			<Box>
-				<Header bankLogo={""} bankTitle={"titolo"} serviceDescription={"descrizione"} />
-			</Box>
-
+export const HomePage3 = () => (
+	<>
+		<Box
+			display="flex"
+			flexDirection="column"
+			width={"100%"}
+		>
 			<Box marginTop={10} textAlign={"center"}>
-				<HomePageTitle 
-					title={"Console management"} 
+				<HomePageTitle
+					title={"Console management"}
 					subTitle={"Console per la gestione delle risorse"}
 				/>
 			</Box>
-			<Box >
-				<Grid container item xs={12} spacing={12} p={12} alignItems={"center"} justifyContent={"center"}>
+			<Box
+				sx={{ height: "50vh" }}
+				display={"flex"}
+				flexDirection="row"
+				justifyContent={"center"}
+				alignItems="center"
+			>
+				<Grid container width={"60%"} justifyContent={"center"}>
 					{
 						homePageCardItems.map((e, i) => (
-							<HomeCardComponent
+							<Grid
+								item
+								xs={4}
 								key={i}
-								title={e.title}
-								description={e.description}
-								icon={e.icon}
-								pageLink={e.pageLink}
-							/>
-						)
-						)
+								justifyContent="center"
+								paddingX={2}
+							>
+								<HomeCardComponent
+									key={i}
+									title={e.title}
+									description={e.description}
+									icon={e.icon}
+									pageLink={e.pageLink}
+								/>
+							</Grid>
+						))
 					}
 				</Grid>
-			</Box></>
-	);};
+			</Box>
+		</Box>
+	</>
+);
 
-export default HomePage3;    
+export default HomePage3;
