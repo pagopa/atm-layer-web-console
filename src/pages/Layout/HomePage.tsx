@@ -30,7 +30,7 @@ export const HomePage = () => {
 			>
 				 <CardLayout /> 
 			</Box>
-			<Footer disabled={false} backButton={backButton} />
+			{/* <Footer disabled={false} backButton={backButton} /> */}
 		</>
 	);	
 };
