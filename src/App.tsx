@@ -11,12 +11,13 @@ import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 import UploadFile from "./pages/UploadFile/UploadFile";
 import UploadFileWithButton from "./pages/UploadFile/UploadFileWithButton";
+import NewBpmn from "./pages/UploadFile/NewBpmn";
 
 const LocalRoutes = () => (
 	<Routes>
 	  <Route path="/" element={<PageLayout page={<HomePage />} />} />
 	  <Route path="/home" element={<PageLayout page={<HomePage />} />} />
-	  <Route path="/upload" element={<PageLayout page={<UploadFileWithButton />} />} />
+	  <Route path="/upload" element={<PageLayout page={<NewBpmn />} />} />
 	  <Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 	  <Route
 			path={routes.ERROR_PAGE}
