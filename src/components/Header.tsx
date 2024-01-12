@@ -22,7 +22,7 @@ export const Header = (/* {
 			ariaLabel: "Link: vai al sito di PagoPA S.p.A.",
 			title: "Sito di PagoPA S.p.A."
 		}}
-		enableAssistanceButton
+		// enableAssistanceButton
 		onAssistanceClick={() => console.log("clicked!")} 
 	/>
 	// <AppBar position="static" elevation={0} sx={{ backgroundColor: theme.palette.background.paper }}>

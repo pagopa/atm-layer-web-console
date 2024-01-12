@@ -61,7 +61,7 @@ export const HeaderAccountCustom = ({
 			borderBottom: 1,
 			borderColor: "divider",
 			backgroundColor: "background.paper",
-			minHeight: "48px",
+			minHeight: "60px",
 		}}
 	>
 		<Container maxWidth={false}>
@@ -90,56 +90,6 @@ export const HeaderAccountCustom = ({
 					alignItems="center"
 					spacing={{ xs: 1, sm: 3, md: 4 }}
 				>
-					{/* START Documentation MOBILE/DESKTOP */}
-					{onDocumentationClick && (
-						<>
-							<ButtonNaked
-								size="small"
-								component="button"
-								onClick={onDocumentationClick}
-								startIcon={<MenuBookIcon />}
-								sx={{ display: ["none", "flex"] }}
-								weight="default"
-							>
-                                Manuale operativo
-							</ButtonNaked>
-							<IconButton
-								size="small"
-								aria-label="Documentazione"
-								sx={{ display: ["flex", "none"], color: "text.primary" }}
-								onClick={onDocumentationClick}
-							>
-								<MenuBookIcon fontSize="inherit" />
-							</IconButton>
-						</>
-					)}
-					{/* END Documentation MOBILE/DESKTOP */}
-
-					{/* START Assistance MOBILE/DESKTOP */}
-					{enableAssistanceButton && (
-						<>
-							<ButtonNaked
-								size="small"
-								component="button"
-								onClick={onAssistanceClick}
-								startIcon={<HelpOutlineRoundedIcon />}
-								sx={{ display: ["none", "flex"] }}
-								weight="default"
-							>
-                                Assistenza
-							</ButtonNaked>
-							<IconButton
-								size="small"
-								aria-label="Assistenza"
-								sx={{ display: ["flex", "none"], color: "text.primary" }}
-								onClick={onAssistanceClick}
-							>
-								<HelpOutlineRoundedIcon fontSize="inherit" />
-							</IconButton>
-						</>
-					)}
-					{/* END Assistance MOBILE/DESKTOP */}
-
 					{/* DIFFERENT COMBINATIONS */}
 
 					{/* 1. Logged User with Dropdown */}
