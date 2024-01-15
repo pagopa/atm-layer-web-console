@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, CardContent, Typography, Grid, CardActionArea, Box, styled, Button, CardActions } from "@mui/material";
+import { Card, CardContent, Typography, Grid, CardActionArea, Box, styled, Button, CardActions, ListItemIcon } from "@mui/material";
 import { useTheme } from "@mui/material";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { useNavigate } from "react-router-dom";
+import ActionIcon from "../CustomTextField/ActionIcon";
 
 
 type Prop = {
@@ -70,8 +71,15 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 						variant="naked"
 						size="large"
 						onClick={() => navigate(pageLink)}
+						sx={{"&:hover": {
+							color:theme.palette.primary.main ,
+							backgroundColor: "transparent",
+						},}}
 					>
-							Click
+							VAI 
+						<ListItemIcon>
+							<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main}/>
+						</ListItemIcon>
 					</Button>
 				</Box>
 			</Grid>
