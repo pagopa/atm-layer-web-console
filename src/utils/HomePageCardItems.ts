@@ -4,19 +4,19 @@ export const homePageCardItems=[
 	{
 		title: "Processi",
 		description:"accedi alla sezione dedicata ai processi BPMN",
-		icon:"AccountTreeIcon",
+		icon:"AccountTree",
 		pageLink: routes.UPLOAD
 	},
 	{
 		title: "Risorse statiche",
 		description:"accedi alla sezione dedicata alle risorse statiche (file html, immagini, ...)",
-		icon:"DescriptionIcon",
+		icon:"Description",
 		pageLink: routes.UPLOAD
 	},
 	{
 		title: "Risorse per processi",
-		description:"accedi alla sezione dedicata ai file di supporto si processi (BPMN, DMN, FORM)",
-		icon:"WidgetsIcon",
+		description:"accedi alla sezione dedicata ai file di supporto dei processi (BPMN, DMN, FORM)",
+		icon:"Widgets",
 		pageLink: routes.UPLOAD
 	}
 ];
