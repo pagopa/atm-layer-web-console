@@ -102,6 +102,12 @@ declare module "@mui/material/Button" {
 	}
 }
 
+// declare module "@mui/material/Card" {
+// 	interface CardPropsVariantOverrides {
+// 		homepage: true;
+// 	}
+// }
+
 const foundation: Theme = createTheme({
 	breakpoints: {
 		values: {
@@ -280,7 +286,7 @@ export const themeApp: Theme = createTheme(foundation, {
 		h6: {
 			fontSize: pxToRem(22),
 			lineHeight: 1.18 /* ~26px */,
-			fontWeight: foundation.typography.fontWeightMedium,
+			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(24),
 				lineHeight: 1.15 /* ~28px */,
@@ -509,6 +515,17 @@ export const themeApp: Theme = createTheme(foundation, {
 					maxHeight: foundation.spacing(18)
 				},
 			},
+			// variants: [
+			// 	{
+			// 		props: { variant: "homepage" },
+			// 		style: {
+			// 			border: "none",
+			// 			boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+			// 			color: foundation.palette.text.primary,
+			// 			height: "20rem"
+			// 		},
+			// 	}
+			// ]
 		},
 		MuiCardContent: {
 			styleOverrides: {
