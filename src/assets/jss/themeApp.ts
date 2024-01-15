@@ -17,7 +17,8 @@ export function pxToRem(value: number): string {
 /* Basic Configuration */
 const mainTypeface = ["\"Titillium Web\"", "sans-serif"].join(", ");
 const monospacedTypeface = ["\"DM Mono\"", "monospace"].join(", ");
-const colorTextPrimary = "#17324D";
+const colorTextPrimary = "#171717";
+const colorPrimary = "#00A1B0";
 const responsiveBreakpoint = "sm";
 const colorPrimaryContainedHover = "#0055AA"; // Not exposed by the theme object
 export const ringWidth = "4px";
@@ -71,14 +72,14 @@ declare module "@mui/material/Typography" {
 declare module "@mui/material/styles" {
   interface Palette {
     pagoPA: Palette["primary"];
-    europeanUnion: Palette["primary"];
+    // europeanUnion?: Palette["primary"];
     checkIban: Palette["primary"];
     extraLight: Palette["warning"];
     primaryAction: Palette["action"];
   }
   interface PaletteOptions {
     pagoPA?: PaletteOptions["primary"];
-    europeanUnion: PaletteOptions["primary"];
+    // europeanUnion?: PaletteOptions["primary"];
     checkIban?: PaletteOptions["primary"];
     extraLight?: PaletteOptions["warning"];
     primaryAction: PaletteOptions["action"];
@@ -101,6 +102,12 @@ declare module "@mui/material/Button" {
 	}
 }
 
+// declare module "@mui/material/Card" {
+// 	interface CardPropsVariantOverrides {
+// 		homepage: true;
+// 	}
+// }
+
 const foundation: Theme = createTheme({
 	breakpoints: {
 		values: {
@@ -118,16 +125,16 @@ const foundation: Theme = createTheme({
 			default: "#F2F2F2",
 		},
 		primary: {
+			main: colorPrimary,
+			light: "#EBFDFF",
+			dark: "#00707B",
+			contrastText: "#FFF",
+		},
+		secondary: {
 			main: "#0073E6",
 			light: "#2185E9",
 			dark: "#0062C3",
-			contrastText: "#FFFFFF",
-		},
-		secondary: {
-			main: "#00C5CA",
-			light: "#21CDD1",
-			dark: "#00A7AC",
-			contrastText: "#FFFFFF",
+			contrastText: "#FFFFFF"
 		},
 		pagoPA: {
 			main: "#0066CC",
@@ -147,51 +154,51 @@ const foundation: Theme = createTheme({
 		},
 		negative: {
 			main: "#FFFFFF",
-			contrastText: "#0066CC",
+			contrastText: colorPrimary,
 		},
 		text: {
 			primary: colorTextPrimary,
-			secondary: "#5C6F82",
-			disabled: "#A2ADB8",
+			secondary: colorPrimary,
+			disabled: "#97a1b5",
 		},
-		action: {
-			active: "#5C6F82" /* Text/Secondary */,
-			hover: "rgba(23, 50, 77, 0.08)" /* Text/Primary 8% */,
+		action: { 
+			active: "#0073E6" /* Text/Secondary */,
+			hover: "rgba(0, 161, 176, 0.08)" /* Text/Primary 8% */,
 			hoverOpacity: 0.08,
-			selected: "rgba(23, 50, 77, 0.12)" /* Text/Primary 12% */,
-			disabled: "rgba(23, 50, 77, 0.26)" /* Text/Primary 26% */,
-			disabledBackground: "rgba(23, 50, 77, 0.12)" /* Text/Primary 12% */,
-			focus: "rgba(23, 50, 77, 0.12)" /* Text/Primary 12% */,
+			selected: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
+			disabled: "rgba(0, 161, 176, 0.26)" /* Text/Primary 26% */,
+			disabledBackground: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
+			focus: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
 		},
 		primaryAction: {
-			hover: "rgba(0, 115, 230, 0.12)" /* Primary 12% */,
-			selected: "rgba(0, 115, 230, 0.08)" /* Primary 8% */,
+			hover: "rgba(0, 161, 176, 0.12)" /* Primary 12% */,
+			selected: "rgba(0, 161, 176, 0.08)" /* Primary 8% */,
 		},
 		/* Other */
-		divider: "#E3E7EB",
+		divider: "#DFE3EB",
 		/* Indicator/Validation */
-		error: {
+		error: { // TODO: lasciato quello del tema originale
 			main: "#FE6666",
 			dark: "#D85757",
 			light: "#FE7A7A",
 			extraLight: "#FB9EAC",
 			contrastText: colorTextPrimary,
 		},
-		info: {
+		info: {  // TODO: lasciato quello del tema originale
 			main: "#6BCFFB",
 			dark: "#5BB0D5",
-			light: "#7ED5FC",
+			light: "#7ED5FC", // TODO: qui andrebbe "#caf2f5"
 			extraLight: "#86E1FD",
 			contrastText: colorTextPrimary,
 		},
-		success: {
+		success: {  // TODO: lasciato quello del tema originale
 			main: "#6CC66A",
 			dark: "#5CA85A",
 			light: "#7FCD7D",
 			extraLight: "#B5E2B4",
 			contrastText: colorTextPrimary,
 		},
-		warning: {
+		warning: { // TODO: lasciato quello del tema originale
 			main: "#FFCB46",
 			dark: "#D9AD3C",
 			light: "#FFD25E",
@@ -216,7 +223,7 @@ const foundation: Theme = createTheme({
 	},
 	shadows: { ...shadowsArray, ...shadowValues },
 	shape: {
-		borderRadius: 4,
+		borderRadius: 3,
 	},
 	spacing: 8,
 });
@@ -279,7 +286,7 @@ export const themeApp: Theme = createTheme(foundation, {
 		h6: {
 			fontSize: pxToRem(22),
 			lineHeight: 1.18 /* ~26px */,
-			fontWeight: foundation.typography.fontWeightMedium,
+			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(24),
 				lineHeight: 1.15 /* ~28px */,
@@ -508,6 +515,17 @@ export const themeApp: Theme = createTheme(foundation, {
 					maxHeight: foundation.spacing(18)
 				},
 			},
+			// variants: [
+			// 	{
+			// 		props: { variant: "homepage" },
+			// 		style: {
+			// 			border: "none",
+			// 			boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+			// 			color: foundation.palette.text.primary,
+			// 			height: "20rem"
+			// 		},
+			// 	}
+			// ]
 		},
 		MuiCardContent: {
 			styleOverrides: {
