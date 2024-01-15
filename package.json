@@ -12,7 +12,7 @@
     "@mui/material": "^5.14.17",
     "@mui/system": "^5.14.17",
     "@mui/utils": "^5.14.18",
-    "@pagopa/mui-italia": "^1.0.2",
+    "@pagopa/mui-italia": "^1.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

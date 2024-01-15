@@ -34,49 +34,47 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 		<Box
 			padding={2}
 			sx={{
-				border: "none",
-				borderRadius: 2,
-				boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+				// boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+				boxShadow: "0 2px 20px 0 rgba(0,0,0,.1)",
 			}}
-			height={"100%"}
+			minHeight={"85%"}
 			display={"flex"}
 			flexDirection={"column"}
-			alignItems={"start"}
-			justifyContent={"space-around"}
+			alignItems={"flex-end"}
+			justifyContent={"space-between"}
 		>
-			<Box
-				display={"flex"}
-				flexDirection={"row"}
-				alignItems={"center"}
-			>
-				{getMuiIcon(icon)}
-				<Typography
-					variant="h4"
-					component="div"
-					sx={{
-						color: "inherit",
-						marginLeft: 1
-					}}
-				>
-					{title}
-				</Typography>
-			</Box>
-			<Typography
-				sx={{
-					color: "inherit",
-				}}
-				color="text.secondary"
-			>
-				{description}
-			</Typography>
-			<Button
-				variant="naked"
-				size="large"
-				sx={{ paddingX: 0 }}
-				onClick={() => navigate(pageLink)} 
-			>
-				Click
-			</Button>
+			<Grid container>
+				<Grid item xs={12}>
+					<Box>
+						{getMuiIcon(icon)}
+					</Box>
+				</Grid>
+				<Grid item xs={12}>
+					<Box my={1}>
+						<Typography variant="h5">
+							{title}
+						</Typography>
+					</Box>
+				</Grid>
+				<Grid item xs={12}>
+					<Box mt={1}>
+						<Typography variant="body1">
+							{description}
+						</Typography>
+					</Box>
+				</Grid>
+			</Grid>
+			<Grid item xs={12}>
+				<Box my={1} justifyContent={"flex-end"} display={"flex"}>
+					<Button
+						variant="naked"
+						size="large"
+						onClick={() => navigate(pageLink)}
+					>
+							Click
+					</Button>
+				</Box>
+			</Grid>
 		</Box>
 	);
 };

@@ -72,14 +72,14 @@ declare module "@mui/material/Typography" {
 declare module "@mui/material/styles" {
   interface Palette {
     pagoPA: Palette["primary"];
-    // europeanUnion?: Palette["primary"];
+    europeanUnion: Palette["primary"];
     checkIban: Palette["primary"];
     extraLight: Palette["warning"];
     primaryAction: Palette["action"];
   }
   interface PaletteOptions {
     pagoPA?: PaletteOptions["primary"];
-    // europeanUnion?: PaletteOptions["primary"];
+    europeanUnion: PaletteOptions["primary"];
     checkIban?: PaletteOptions["primary"];
     extraLight?: PaletteOptions["warning"];
     primaryAction: PaletteOptions["action"];
@@ -235,73 +235,73 @@ export const themeApp: Theme = createTheme(foundation, {
 			fontSize: pxToRem(58),
 			fontFamily: mainTypeface,
 			color: colorTextPrimary,
-			lineHeight: 1.1 /* ~64px */,
+			// lineHeight: 1.1 /* ~64px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 		},
 		h1: {
 			fontSize: pxToRem(42),
-			lineHeight: 1.1 /* 46px */,
+			// lineHeight: 1.1 /* 46px */,// TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(50),
-				lineHeight: 1.08 /* 54px */,
+				// lineHeight: 1.08 /* 54px */,// TODO: tolto da quello del tema originale
 			},
 		},
 		h2: {
 			fontSize: pxToRem(36),
-			lineHeight: 1.1 /* ~40px */,
+			// lineHeight: 1.1 /* ~40px */,// TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(44),
-				lineHeight: 1.09 /* ~48px */,
+				// lineHeight: 1.09 /* ~48px */,// TODO: tolto da quello del tema originale
 			},
 		},
 		h3: {
 			fontSize: pxToRem(32),
-			lineHeight: 1.125 /* 36px */,
+			// lineHeight: 1.125 /* 36px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(38),
-				lineHeight: 1.1 /* ~42px */,
+				// lineHeight: 1.1 /* ~42px */, // TODO: tolto da quello del tema originale
 			},
 		},
 		h4: {
 			fontSize: pxToRem(28),
-			lineHeight: 1.15 /* ~32px */,
+			// lineHeight: 1.15 /* ~32px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography?.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(32),
-				lineHeight: 1.125 /* 36px */,
+				// lineHeight: 1.125 /* 36px */, // TODO: tolto da quello del tema originale
 			},
 		},
 		h5: {
 			fontSize: pxToRem(24),
-			lineHeight: 1.15 /* ~28px */,
+			// lineHeight: 1.15 /* ~28px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightMedium,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(28),
-				lineHeight: 1.5 /* 42px */,
+				// lineHeight: 1.5 /* 42px */, // TODO: tolto da quello del tema originale
 			},
 		},
 		h6: {
 			fontSize: pxToRem(22),
-			lineHeight: 1.18 /* ~26px */,
+			// lineHeight: 1.18 /* ~26px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(24),
-				lineHeight: 1.15 /* ~28px */,
+				// lineHeight: 1.15 /* ~28px */, // TODO: tolto da quello del tema originale
 			},
 		},
 		sidenav: {
 			fontFamily: mainTypeface,
 			fontSize: pxToRem(22),
-			lineHeight: 1.35 /* ~24px */,
+			// lineHeight: 1.35 /* ~24px */, // TODO: tolto da quello del tema originale
 			color: colorTextPrimary,
 			fontWeight: foundation.typography.fontWeightMedium,
 		},
 		body1: {
 			fontSize: pxToRem(18),
-			lineHeight: 1.5 /* ~28px */,
+			// lineHeight: 1.5 /* ~28px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightRegular,
 			letterSpacing: 0,
 			/* a: {
@@ -311,7 +311,7 @@ export const themeApp: Theme = createTheme(foundation, {
 		},
 		body2: {
 			fontSize: pxToRem(16),
-			lineHeight: 1.4 /* ~20px */,
+			// lineHeight: 1.4 /* ~20px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightRegular,
 			letterSpacing: 0.15,
 			/* a: {
@@ -320,33 +320,33 @@ export const themeApp: Theme = createTheme(foundation, {
   }, */
 		},
 		button: {
-			lineHeight: 1.2,
+			// lineHeight: 1.2, // TODO: tolto da quello del tema originale
 			textTransform: "none",
 			letterSpacing: 0,
 		},
 		caption: {
 			fontSize: pxToRem(14),
-			lineHeight: 1.4 /* ~20px */,
+			// lineHeight: 1.4 /* ~20px */ // TODO: tolto da quello del tema originale,
 			fontWeight: foundation.typography.fontWeightRegular,
 		},
 		"caption-semibold": {
 			fontFamily: mainTypeface,
 			fontSize: pxToRem(14),
-			lineHeight: 1.4 /* ~20px */,
+			// lineHeight: 1.4 /* ~20px */, // TODO: tolto da quello del tema originale
 			color: colorTextPrimary,
 			fontWeight: foundation.typography.fontWeightMedium,
 		},
 		monospaced: {
 			fontFamily: monospacedTypeface,
 			fontSize: pxToRem(16),
-			lineHeight: 1.4 /* ~22px */,
+			// lineHeight: 1.4 /* ~22px */, // TODO: tolto da quello del tema originale
 			color: colorTextPrimary,
 			letterSpacing: "0.15px",
 			fontWeight: foundation.typography.fontWeightRegular,
 		},
 		overline: {
 			fontSize: pxToRem(14),
-			lineHeight: 1.15 /* ~16px */,
+			// lineHeight: 1.15 /* ~16px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightBold,
 			letterSpacing: 1,
 		},

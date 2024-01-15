@@ -1,29 +1,25 @@
-import { Typography, useTheme } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React from "react";
 
 type Props = {
     title: string;
     subTitle: string;
 };
 
-export const HomePageTitle = ({ title, subTitle }: Props) => {
-
-	const theme = useTheme();
-
-	return (
-		<>
-			<Typography 
-				variant="headline"
-				color={"black"}> 
-				{title} 
-			</Typography>
-			<Typography
-				mt={1}
-				variant="body1"
-				fontWeight={600}
-				noWrap
-			>
+export const HomePageTitle = ({ title, subTitle }: Props) => (
+	<React.Fragment>
+		<Grid item xs={12}>
+			<Box p={1}>
+				<Typography variant="h2" textAlign="center" noWrap>
+					{title}
+				</Typography>
+			</Box>
+		</Grid>
+		<Grid item xs={12}>
+			<Typography variant="body1"	textAlign="center" noWrap>
 				{subTitle}
 			</Typography>
-		</>
-	);
-};
+		</Grid>
+	</React.Fragment>
+);
