@@ -1,10 +1,8 @@
 import React from "react";
 import { Card, CardContent, Typography, Grid, CardActionArea, Box, styled, Button, CardActions } from "@mui/material";
 import { useTheme } from "@mui/material";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import WidgetsIcon from "@mui/icons-material/Widgets";
-import DescriptionIcon from "@mui/icons-material/Description";
 import { useNavigate } from "react-router-dom";
+import ActionIcon from "../CustomTextField/ActionIcon";
 
 
 type Prop = {
@@ -17,18 +15,6 @@ type Prop = {
 const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 	const theme = useTheme();
 	const navigate = useNavigate();
-	function getMuiIcon(iconName: string) {
-		switch (iconName) {
-		case "AccountTreeIcon":
-			return <AccountTreeIcon />;
-		case "WidgetsIcon":
-			return <WidgetsIcon />;
-		case "DescriptionIcon":
-			return <DescriptionIcon />;
-		default:
-			return <></>;
-		}
-	}
 
 	return (
 		<Box
@@ -37,7 +23,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 				// boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
 				boxShadow: "0 2px 20px 0 rgba(0,0,0,.1)",
 			}}
-			minHeight={"85%"}
+			minHeight={"90%"}
 			display={"flex"}
 			flexDirection={"column"}
 			alignItems={"flex-end"}
@@ -46,7 +32,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 			<Grid container>
 				<Grid item xs={12}>
 					<Box>
-						{getMuiIcon(icon)}
+						<ActionIcon icon={icon} color={theme.palette.primary.main} size={"2em"} pad={0} />
 					</Box>
 				</Grid>
 				<Grid item xs={12}>
