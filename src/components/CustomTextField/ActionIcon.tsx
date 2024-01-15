@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, useTheme } from "@mui/material";
+import { IconButton, useTheme } from "@mui/material";
 import getIconBySetType from "../../hook/getIconBySetType";
 
 type Props = {

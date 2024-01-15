@@ -9,6 +9,7 @@ import "@fontsource/titillium-web/600.css";
 import "@fontsource/titillium-web/700.css";
 /* -- DM Mono */
 import "@fontsource/dm-mono/400.css";
+import { lineHeight } from "@mui/system";
 
 export function pxToRem(value: number): string {
 	return `${value / 16}rem`;
@@ -19,6 +20,7 @@ const mainTypeface = ["\"Titillium Web\"", "sans-serif"].join(", ");
 const monospacedTypeface = ["\"DM Mono\"", "monospace"].join(", ");
 const colorTextPrimary = "#171717";
 const colorPrimary = "#00A1B0";
+const lightGrey = "#DFDFDF";
 const responsiveBreakpoint = "sm";
 const colorPrimaryContainedHover = "#0055AA"; // Not exposed by the theme object
 export const ringWidth = "4px";
@@ -314,10 +316,6 @@ export const themeApp: Theme = createTheme(foundation, {
 			// lineHeight: 1.4 /* ~20px */, // TODO: tolto da quello del tema originale
 			fontWeight: foundation.typography.fontWeightRegular,
 			letterSpacing: 0.15,
-			/* a: {
-    color: italia[500],
-    textDecoration: "underline",
-  }, */
 		},
 		button: {
 			// lineHeight: 1.2, // TODO: tolto da quello del tema originale
@@ -488,7 +486,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						alignItems: "center",
 						minHeight: foundation.spacing(8.5),
 						borderWidth: "2px",
-						border: "2px solid lightgrey",
+						border: "2px solid"+ lightGrey,
 						"&:hover": {
 							borderWidth: "2px",
 						},
@@ -506,43 +504,6 @@ export const themeApp: Theme = createTheme(foundation, {
 			],
 		},
 		/* END Button */
-		/* START Card */
-		MuiCard: {
-			styleOverrides: {
-				root: {
-					border: "1px solid lightgrey",
-					borderRadius: foundation.spacing(1),
-					maxHeight: foundation.spacing(18)
-				},
-			},
-			// variants: [
-			// 	{
-			// 		props: { variant: "homepage" },
-			// 		style: {
-			// 			border: "none",
-			// 			boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-			// 			color: foundation.palette.text.primary,
-			// 			height: "20rem"
-			// 		},
-			// 	}
-			// ]
-		},
-		MuiCardContent: {
-			styleOverrides: {
-				root: {
-					padding: foundation.spacing(3),
-				},
-			},
-		},
-		MuiCardActions: {
-			styleOverrides: {
-				root: {
-					padding: foundation.spacing(3),
-					paddingTop: 0,
-				},
-			},
-		},
-		/* END Card */
 	}
 });
 
@@ -559,7 +520,7 @@ export const themeButton = createTheme({
 					alignItems: "center",
 					minHeight: foundation.spacing(8.5),
 					borderWidth: "2px",
-					border: "2px solid lightgrey",
+					border: "2px solid "+ lightGrey,
 					"&:hover": {
 						borderWidth: "2px",
 					},

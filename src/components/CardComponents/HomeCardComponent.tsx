@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent, Typography, Grid, CardActionArea, Box, styled, Button, CardActions } from "@mui/material";
 import { useTheme } from "@mui/material";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
@@ -35,6 +34,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 			padding={2}
 			sx={{
 				// boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+				border: "1px solid" + theme?.palette?.divider,
 				boxShadow: "0 2px 20px 0 rgba(0,0,0,.1)",
 			}}
 			minHeight={"85%"}
