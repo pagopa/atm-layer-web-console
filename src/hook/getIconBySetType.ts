@@ -1,4 +1,3 @@
-
 import PublishOutlinedIcon from "@mui/icons-material/PublishOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
@@ -40,6 +39,8 @@ import CachedIcon from "@mui/icons-material/Cached";
 import CloseIcon from "@mui/icons-material/Close";
 import ReportIcon from "@mui/icons-material/Report";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 // import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 // import PauseCircleOutlineOutlinedIcon from "@mui/icons-material/PauseCircleOutlineOutlined";
 // import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -88,7 +89,10 @@ const Icons : { [key: string]: any } ={
 	"SettingsOutlined":  SettingsOutlinedIcon,
 	"Cached": CachedIcon,
 	"Report": ReportIcon,
-	"Success" : CheckCircleIcon
+	"Success" : CheckCircleIcon,
+	"AccountTree": AccountTreeOutlinedIcon,
+	"Description": DescriptionOutlinedIcon,
+	"Widgets": WidgetsOutlinedIcon
 };
 
 

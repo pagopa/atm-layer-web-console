@@ -10,15 +10,15 @@ export const HomePage3 = () => (
 		display="flex"
 		flexDirection="column"
 		width={"100%"}
-		mx={8}
+		mx={20}
 		my={3}
 	>
-		<Grid container spacing={2}>
+		<Grid container spacing={0.5}>
 			<HomePageTitle
 				title={"Console management"}
 				subTitle={"Console per la gestione delle risorse"}
 			/>
-			<Grid item xs={12}>
+			<Grid item xs={12} marginTop={8}>
 				<Box
 					// sx={{ height: "50vh" }}
 					// display={"flex"}
