@@ -30,7 +30,7 @@ export const HomePage3 = () => (
 					<Grid container spacing={2}>
 						{
 							homePageCardItems.map((e, i) => (
-								<Grid item xs={4} key={e.title}>
+								<Grid item xs={4} mx={"auto"} key={e.title}>
 									<HomeCardComponent
 										title={e.title}
 										description={e.description}

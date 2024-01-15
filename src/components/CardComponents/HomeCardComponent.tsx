@@ -62,9 +62,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 						},}}
 					>
 							VAI 
-						<ListItemIcon>
-							<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main}/>
-						</ListItemIcon>
+						<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main} pad={1} />
 					</Button>
 				</Box>
 			</Grid>
