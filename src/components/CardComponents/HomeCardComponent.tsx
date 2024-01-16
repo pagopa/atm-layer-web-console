@@ -17,7 +17,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 
 	return (
 		<Box
-			padding={2}
+			padding={1.8}
 			sx={{
 				// boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
 				border: "1px solid" + theme?.palette?.divider,

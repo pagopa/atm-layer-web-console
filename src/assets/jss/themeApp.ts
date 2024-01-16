@@ -288,7 +288,7 @@ export const themeApp: Theme = createTheme(foundation, {
 		h6: {
 			fontSize: pxToRem(22),
 			// lineHeight: 1.18 /* ~26px */, // TODO: tolto da quello del tema originale
-			fontWeight: foundation.typography.fontWeightBold,
+			fontWeight: foundation.typography.fontWeightRegular,
 			[foundation.breakpoints.up(responsiveBreakpoint)]: {
 				fontSize: pxToRem(24),
 				// lineHeight: 1.15 /* ~28px */, // TODO: tolto da quello del tema originale
