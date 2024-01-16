@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 import { Header } from "../../components/Header";
 import CustomAppBar from "../../components/Menu/CustomAppBar";
+import SideBar from "../../components/Menu/SideBar";
 
 
 type Props = {

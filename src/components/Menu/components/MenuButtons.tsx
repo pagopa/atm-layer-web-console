@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Options, menuOptionsButton } from "../../../utils/MenuOptions";
+import { Options, filterOptionsByLabel, menuOptionsButton } from "../../../utils/MenuOptions";
 
 type Props = {
 	name: string;
@@ -26,12 +26,7 @@ const MenuButtons = ({ name, route }: Props) => {
 		setAnchorEl(null);
 	};
 
-	const filterOptionsByLabel = (inputLabel: string): Array<Options> =>
-		// filter option for label
-		menuOptionsButton.filter((optionsGroup, i) => {
-			const firstOptionLabel = optionsGroup.options[i].label || "";
-			return firstOptionLabel.includes(inputLabel);
-		});
+
 
 	const handleOptionClick = (onClick: () => void) => {
 		onClick();
