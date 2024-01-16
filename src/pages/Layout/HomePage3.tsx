@@ -27,7 +27,7 @@ export const HomePage3 = () => (
 					// alignItems="center"
 				>
 
-					<Grid container spacing={2}>
+					<Grid container spacing={4}>
 						{
 							homePageCardItems.map((e, i) => (
 								<Grid item xs={4} mx={"auto"} key={e.title}>
