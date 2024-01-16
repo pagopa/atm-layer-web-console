@@ -4,7 +4,7 @@ const ROUTES = {
 	HOME: `${BASE_ROUTE}`,
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
-	UPLOAD: "/upload",
+	BPMN: "/bpmn",
 };
 
 export default ROUTES;

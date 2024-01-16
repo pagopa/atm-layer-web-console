@@ -10,6 +10,7 @@ export const HomePage3 = () => (
 		flexDirection="column"
 		width={"100%"}
 		my={5}
+		paddingInline={15}
 	>
 		<Grid container spacing={0.5}>
 			<HomePageTitle

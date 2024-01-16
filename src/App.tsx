@@ -14,10 +14,8 @@ import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 // import { HomePage2 } from "./pages/Layout/HomePage2";
 // import HomeCardComponent from "./components/CardComponents/HomeCardComponent";
 import HomePage3 from "./pages/Layout/HomePage3";
-import NewBpmn from "./pages/UploadFile/NewBpmn";
 import Layout from "./pages/Layout/Layout";
-
-
+import BpmnPage from "./pages/BpmnPage/BpmnPage";
 
 const LocalRoutes = () => (
 	<Layout>
@@ -25,7 +23,7 @@ const LocalRoutes = () => (
 			<Route path="/" element={<PageLayout page={<HomePage3 />} />} />
 			{/* <Route path="/home" element={<PageLayout page={<HomePage3 />} />} /> */}
 			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
-			<Route path="/upload" element={<PageLayout page={<NewBpmn />} />} />
+			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
 			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 			<Route
 				path={routes.ERROR_PAGE}
@@ -40,12 +38,15 @@ function App() {
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [headerHeight, setHeaderHeight] = useState(null);
 
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
 		loading,
 		setLoading,
+		headerHeight,
+		setHeaderHeight
 	};
 
 	useEffect(() => {

@@ -62,15 +62,10 @@ const MenuButtons = ({ name, route }: Props) => {
 						TransitionComponent={Fade}
 					>
 
-						{getMenuOptions(name).map((options:any, i: React.Key | null | undefined) => (
-							<React.Fragment key={i}>
-								{/* {optionsGroup.options.map((option, j) => ( */}
-								<MenuItem key={options.lable} onClick={() => handleOptionClick(options.onClick)}>
-									{options.label}
-								</MenuItem>
-								{/* )) */}
-								
-							</React.Fragment>
+						{getMenuOptions(name).map((options: any, i: React.Key | null | undefined) => (
+							<MenuItem key={i} onClick={() => handleOptionClick(options.onClick)}>
+								{options.label}
+							</MenuItem>
 						))}
 					</Menu>
 				)
