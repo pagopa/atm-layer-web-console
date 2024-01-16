@@ -2,8 +2,7 @@
 import React, { useContext } from "react";
 import { Ctx } from "../../DataContext";
 import { LoadingPage } from "../LoadingPage/LoadingPage";
-import { InputFieldPage } from "../../components/InputFieldPage/InputFieldPage";
-import { HomePage } from "./HomePage";
+
 
 type Prop= {
 	page: any;
