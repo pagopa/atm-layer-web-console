@@ -61,7 +61,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 							backgroundColor: "transparent",
 						},}}
 					>
-							VAI 
+							VAI ALLA SEZIONE
 						<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main} pad={1} />
 					</Button>
 				</Box>
