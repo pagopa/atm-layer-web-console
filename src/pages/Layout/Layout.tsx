@@ -22,7 +22,7 @@ const Layout = ({ children }: Props) => (
 			<Header />
 			<CustomAppBar />
 		</Box>
-		<Grid container direction="row" flexGrow={1} paddingInline={15}>
+		<Grid container /* direction="row" flexGrow={1}  paddingInline={15} */>
 			{children}
 		</Grid>
 	</Box>

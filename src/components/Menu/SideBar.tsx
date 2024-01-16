@@ -15,7 +15,7 @@ type Props = {
 
 
 export const SideBar = ({ name }: Props) => (
-	<Box position={"fixed"} borderRight={1} height={"100%"}>
+	<Box /* position={"fixed"} */ borderRight={1} height={"100%"} width={"15vw"}>
 		<List sx={{ width: "100%", maxWidth: 360 }}>
 			{filterOptionsByLabel(name).map((optionsGroup, i) => (
 				<div key={i}>

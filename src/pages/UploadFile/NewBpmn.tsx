@@ -8,7 +8,9 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import { Header } from "../../components/Header";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
 import { Ctx } from "../../DataContext";
+import SideBar from "../../components/Menu/SideBar";
 import UploadFileWithButton from "./UploadFileWithButton";
+
 
 export type BpmnDto = {
     file: string;
@@ -37,18 +39,18 @@ const NewBpmn = () => {
     };
 
     const validate = (values: BpmnDto) => Object.fromEntries(
-            Object.entries({
-                file: !values.file
-                    ? "Campo obbligatorio"
-                    : undefined,
-                fileName: !values.fileName
-                    ? "Campo obbligatorio"
-                    : undefined,
-                functionType: !values.functionType
-                    ? "Campo obbligatorio"
-                    : undefined,
-            }).filter(([_key, value]) => value)
-        );
+        Object.entries({
+            file: !values.file
+                ? "Campo obbligatorio"
+                : undefined,
+            fileName: !values.fileName
+                ? "Campo obbligatorio"
+                : undefined,
+            functionType: !values.functionType
+                ? "Campo obbligatorio"
+                : undefined,
+        }).filter(([_key, value]) => value)
+    );
 
     const formik = useFormik<BpmnDto>({
         initialValues,
@@ -74,78 +76,83 @@ const NewBpmn = () => {
         <>
             <Box
                 display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                width={"100%"}
-            >
-                <Box marginTop={3} textAlign={"center"}>
-                    <TitleComponent
-                        title={"Creazione BPMN"}
-                        subTitle={""}
-                    />
-                </Box>
-                <Box sx={inputGroupStyle} mt={4}>
-                    <form onSubmit={formik.handleSubmit}>
-                    <Grid
-                        container
-                        spacing={2}
-                    >
-                        <Grid container item>
-                            <EditNoteIcon sx={{ mr: 1 }} />
-                            <Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per creare un nuovo BPMN
-                            </Typography>
-                        </Grid>
-                        <Grid container item>
-                            <Typography variant="body1">
-                                File BPMN
-                            </Typography>
-                            <UploadFileWithButton
-                                name={"file"}
-                                file={formik.values.file}
-                                onChange={(e) => changeFile(e)}
-                                onClick={clearFile}
-                                error={formik.touched.file && Boolean(formik.errors.file)}
-                            />
-                        </Grid>
-                        <Grid container item my={1}>
-                            <TextField
-                                fullWidth
-                                id="fileName"
-                                name="fileName"
-                                label={"Nome del file"}
-                                placeholder={"Nome del file"}
-                                size="small"
-                                value={formik.values.fileName}
-                                onChange={(e) => formik.handleChange(e)}
-                                error={formik.touched.fileName && Boolean(formik.errors.fileName)}
-                                helperText={formik.touched.fileName && formik.errors.fileName}
-                            />
-                        </Grid>
-                        <Grid container item my={1}>
-                            <TextField
-                                fullWidth
-                                id="functionType"
-                                name="functionType"
-                                label={"Tipo di funzione"}
-                                placeholder={"Tipo di funzione"}
-                                size="small"
-                                value={formik.values.functionType}
-                                onChange={(e) => formik.handleChange(e)}
-                                error={formik.touched.functionType && Boolean(formik.errors.functionType)}
-                                helperText={formik.touched.functionType && formik.errors.functionType}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Box display="flex" justifyContent="flex-end" mt={2} >
-                        <Button variant="contained" onClick={() => formik.handleSubmit()}>
-                            Submit
-                        </Button>
+                flexDirection="row">
+                <SideBar name={"BPMN"} />
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    width={"85vw"}
+                >
+                    <Box marginTop={3} textAlign={"center"}>
+                        <TitleComponent
+                            title={"Creazione BPMN"}
+                            subTitle={""}
+                        />
                     </Box>
-                    </form>
-                </Box>
+                    <Box sx={inputGroupStyle} mt={4}>
+                        <form onSubmit={formik.handleSubmit}>
+                            <Grid
+                                container
+                                spacing={2}
+                            >
+                                <Grid container item>
+                                    <EditNoteIcon sx={{ mr: 1 }} />
+                                    <Typography variant="body1" fontWeight="600">
+                                        Compila tutti i campi per creare un nuovo BPMN
+                                    </Typography>
+                                </Grid>
+                                <Grid container item>
+                                    <Typography variant="body1">
+                                        File BPMN
+                                    </Typography>
+                                    <UploadFileWithButton
+                                        name={"file"}
+                                        file={formik.values.file}
+                                        onChange={(e) => changeFile(e)}
+                                        onClick={clearFile}
+                                        error={formik.touched.file && Boolean(formik.errors.file)}
+                                    />
+                                </Grid>
+                                <Grid container item my={1}>
+                                    <TextField
+                                        fullWidth
+                                        id="fileName"
+                                        name="fileName"
+                                        label={"Nome del file"}
+                                        placeholder={"Nome del file"}
+                                        size="small"
+                                        value={formik.values.fileName}
+                                        onChange={(e) => formik.handleChange(e)}
+                                        error={formik.touched.fileName && Boolean(formik.errors.fileName)}
+                                        helperText={formik.touched.fileName && formik.errors.fileName}
+                                    />
+                                </Grid>
+                                <Grid container item my={1}>
+                                    <TextField
+                                        fullWidth
+                                        id="functionType"
+                                        name="functionType"
+                                        label={"Tipo di funzione"}
+                                        placeholder={"Tipo di funzione"}
+                                        size="small"
+                                        value={formik.values.functionType}
+                                        onChange={(e) => formik.handleChange(e)}
+                                        error={formik.touched.functionType && Boolean(formik.errors.functionType)}
+                                        helperText={formik.touched.functionType && formik.errors.functionType}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Box display="flex" justifyContent="flex-end" mt={2} >
+                                <Button variant="contained" onClick={() => formik.handleSubmit()}>
+                                    Submit
+                                </Button>
+                            </Box>
+                        </form>
+                    </Box>
 
+                </Box>
             </Box>
         </>);
 };
