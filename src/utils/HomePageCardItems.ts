@@ -1,6 +1,6 @@
 import routes from "../routes";
 
-export const homePageCardItems=[
+export const homePageCardItems = [
 	{
 		title: "Processi",
 		description:"accedi alla sezione dedicata ai processi BPMN",

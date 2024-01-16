@@ -10,7 +10,6 @@ export const HomePage3 = () => (
 		display="flex"
 		flexDirection="column"
 		width={"100%"}
-		mx={8}
 		my={3}
 	>
 		<Grid container spacing={2}>
