@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
-import { Header } from "./Header";
-import CustomAppBar from "./Menu/CustomAppBar";
+import { Header } from "../../components/Header";
+import CustomAppBar from "../../components/Menu/CustomAppBar";
 
 
 type Props = {

@@ -18,7 +18,8 @@ const MenuButtons = ({ name, route }: Props) => {
 	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		navigate(route ?? "");
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+		route ? navigate(route) : null;
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
@@ -50,26 +51,30 @@ const MenuButtons = ({ name, route }: Props) => {
 			>
 				{name}
 			</Button>
-			<Menu
-				id="fade-menu"
-				MenuListProps={{
-					"aria-labelledby": "fade-button",
-				}}
-				anchorEl={anchorEl}
-				open={open}
-				onClose={handleClose}
-				TransitionComponent={Fade}
-			>
-				{filterOptionsByLabel(name).map((optionsGroup, i) => (
-					<div key={i}>
-						{optionsGroup.options.map((option, j) => (
-							<MenuItem key={j} onClick={() => handleOptionClick(option.onClick)}>
-								{option.label}
-							</MenuItem>
+			{
+				name !== "Home" ? (
+					<Menu
+						id="fade-menu"
+						MenuListProps={{
+							"aria-labelledby": "fade-button",
+						}}
+						anchorEl={anchorEl}
+						open={open}
+						onClose={handleClose}
+						TransitionComponent={Fade}
+					>
+						{filterOptionsByLabel(name).map((optionsGroup, i) => (
+							<div key={i}>
+								{optionsGroup.options.map((option, j) => (
+									<MenuItem key={j} onClick={() => handleOptionClick(option.onClick)}>
+										{option.label}
+									</MenuItem>
+								))}
+							</div>
 						))}
-					</div>
-				))}
-			</Menu>
+					</Menu>
+				) : null
+			}
 		</div>
 	);
 };

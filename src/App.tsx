@@ -15,7 +15,7 @@ import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 // import HomeCardComponent from "./components/CardComponents/HomeCardComponent";
 import HomePage3 from "./pages/Layout/HomePage3";
 import NewBpmn from "./pages/UploadFile/NewBpmn";
-import Layout from "./components/Layout";
+import Layout from "./pages/Layout/Layout";
 
 
 
