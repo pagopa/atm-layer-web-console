@@ -15,7 +15,7 @@ import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 // import HomeCardComponent from "./components/CardComponents/HomeCardComponent";
 import HomePage3 from "./pages/Layout/HomePage3";
 import NewBpmn from "./pages/UploadFile/NewBpmn";
-import Layout from "./components/Layout";
+import Layout from "./pages/Layout/Layout";
 
 
 
@@ -24,6 +24,7 @@ const LocalRoutes = () => (
 		<Routes>
 			<Route path="/" element={<PageLayout page={<HomePage3 />} />} />
 			{/* <Route path="/home" element={<PageLayout page={<HomePage3 />} />} /> */}
+			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
 			<Route path="/upload" element={<PageLayout page={<NewBpmn />} />} />
 			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 			<Route

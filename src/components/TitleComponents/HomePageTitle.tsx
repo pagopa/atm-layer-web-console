@@ -1,4 +1,10 @@
-import { Typography, useTheme } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { Grid, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React from "react";
+import { useContext } from "react";
+import { themeApp } from "../../assets/jss/themeApp";
+import { Ctx } from "../../DataContext";
 
 type Props = {
     title: string;
@@ -6,24 +12,22 @@ type Props = {
 };
 
 export const HomePageTitle = ({ title, subTitle }: Props) => {
-
-	const theme = useTheme();
-
-	return (
-		<>
-			<Typography 
-				variant="headline"
-				color={"black"}> 
-				{title} 
-			</Typography>
-			<Typography
-				mt={1}
-				variant="body1"
-				fontWeight={600}
-				noWrap
-			>
-				{subTitle}
-			</Typography>
-		</>
+	const {theme} = useContext(Ctx);
+	
+	return(
+		<React.Fragment>
+			<Grid item xs={12}>
+				<Box p={1}>
+					<Typography variant="h2" textAlign="center" noWrap>
+						{title}
+					</Typography>
+				</Box>
+			</Grid>
+			<Grid item xs={12}>
+				<Typography variant="h6" textAlign="center" noWrap>
+					{subTitle}
+				</Typography>
+			</Grid>
+		</React.Fragment>
 	);
 };

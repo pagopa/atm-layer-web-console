@@ -71,7 +71,6 @@ export const HeaderAccountCustom = ({
 				justifyContent="space-between"
 				alignItems="center"
 			>
-
 				<ButtonNaked
 					component="a"
 					size="small"
@@ -80,7 +79,7 @@ export const HeaderAccountCustom = ({
 					target="_blank"
 					rel="noreferrer"
 					title={rootLink?.title}
-					sx={{ fontWeight: "bold" }}
+					sx={{ fontWeight: "bold", pl: 3 }}
 				>
 					{rootLink?.element}
 				</ButtonNaked>
