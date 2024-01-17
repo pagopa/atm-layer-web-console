@@ -5,7 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Options, menuOptionsButton } from "../../../utils/MenuOptions";
+import { Options, filterOptionsByLabel, menuOptionsButton } from "../../../utils/MenuOptions";
+import menuOption from "../../../utils/menuOption";
 
 type Props = {
 	name: string;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const MenuButtons = ({ name, route }: Props) => {
+	const { getMenuOptions } = menuOption();
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -26,12 +28,7 @@ const MenuButtons = ({ name, route }: Props) => {
 		setAnchorEl(null);
 	};
 
-	const filterOptionsByLabel = (inputLabel: string): Array<Options> =>
-		// filter option for label
-		menuOptionsButton.filter((optionsGroup, i) => {
-			const firstOptionLabel = optionsGroup.options[i].label || "";
-			return firstOptionLabel.includes(inputLabel);
-		});
+
 
 	const handleOptionClick = (onClick: () => void) => {
 		onClick();
@@ -39,7 +36,7 @@ const MenuButtons = ({ name, route }: Props) => {
 	};
 
 	return (
-		<div>
+		<>
 			<Button
 				id="fade-button"
 				aria-controls={open ? "fade-menu" : undefined}
@@ -48,11 +45,12 @@ const MenuButtons = ({ name, route }: Props) => {
 				onClick={handleClick}
 				color="inherit"
 				size="large"
+				disableRipple
 			>
 				{name}
 			</Button>
 			{
-				name !== "Home" ? (
+				name !== "Home" && (
 					<Menu
 						id="fade-menu"
 						MenuListProps={{
@@ -63,19 +61,16 @@ const MenuButtons = ({ name, route }: Props) => {
 						onClose={handleClose}
 						TransitionComponent={Fade}
 					>
-						{filterOptionsByLabel(name).map((optionsGroup, i) => (
-							<div key={i}>
-								{optionsGroup.options.map((option, j) => (
-									<MenuItem key={j} onClick={() => handleOptionClick(option.onClick)}>
-										{option.label}
-									</MenuItem>
-								))}
-							</div>
+
+						{getMenuOptions(name).map((options: any, i: React.Key | null | undefined) => (
+							<MenuItem key={i} onClick={() => handleOptionClick(options.onClick)}>
+								{options.label}
+							</MenuItem>
 						))}
 					</Menu>
-				) : null
+				)
 			}
-		</div>
+		</>
 	);
 };
 

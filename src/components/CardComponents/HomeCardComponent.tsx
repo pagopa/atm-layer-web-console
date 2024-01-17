@@ -55,13 +55,13 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 					<Button
 						variant="naked"
 						size="large"
-						onClick={() => ""/* navigate(pageLink) */}
+						onClick={() => navigate(pageLink)}
 						sx={{"&:hover": {
 							color:theme.palette.primary.main ,
 							backgroundColor: "transparent",
 						},}}
 					>
-							VAI 
+							VAI ALLA SEZIONE
 						<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main} pad={1} />
 					</Button>
 				</Box>

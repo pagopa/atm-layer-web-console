@@ -3,20 +3,20 @@ import routes from "../routes";
 export const homePageCardItems = [
 	{
 		title: "Processi",
-		description:"accedi alla sezione dedicata ai processi BPMN",
+		description:"I processi sono file BPMN che, una volta deployati, istruiscono gli step seguiti dal terminale ATM.",
 		icon:"AccountTree",
-		pageLink: routes.UPLOAD
+		pageLink: routes.BPMN
 	},
 	{
 		title: "Risorse statiche",
-		description:"accedi alla sezione dedicata alle risorse statiche (file html, immagini, ...)",
+		description:"Le risorse statiche sono file che possono essere visualizzati nel terminale ATM (HTML, immagini,...)  o più in generale file che possono essere [completare]",
 		icon:"Description",
-		pageLink: routes.UPLOAD
+		pageLink: "/"
 	},
 	{
 		title: "Risorse per processi",
-		description:"accedi alla sezione dedicata ai file di supporto dei processi (BPMN, DMN, FORM)",
+		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
-		pageLink: routes.UPLOAD
+		pageLink: "/"
 	}
 ];
