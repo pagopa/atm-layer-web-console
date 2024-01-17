@@ -7,9 +7,10 @@ import IconBox from "../Commons/IconBox";
 type Props = {
 	name: string;
 	route?: string;
+	iconButton?:string;
 };
 
-const MenuButtons = ({ name, route }: Props) => {
+const MenuButtons = ({ name, route, iconButton }: Props) => {
 	const { getMenuOptions } = menuOption();
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -32,6 +33,7 @@ const MenuButtons = ({ name, route }: Props) => {
 	return (
 		<>
 			<Button
+				startIcon={iconButton&& <IconBox id={"iconMenu_"+name} icon={iconButton} color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
 				id="toolbar-button"
 				aria-controls={open ? "toolbar-menu" : undefined}
 				aria-haspopup="true"

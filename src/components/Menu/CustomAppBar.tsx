@@ -11,17 +11,17 @@ const CustomAppBar = () => {
 	const location = useLocation();
 
 	useEffect(() => {
-		console.log("location",location, routes);
+		console.log("location",Object.values(location), routes);
 	},[location]);
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static" >
 				<Toolbar variant="dense">
-					{location.pathname !== "/" && <MenuButtons name={"Home"} route={"/"} />}
-					{location.pathname !== routes.BPMN && <MenuButtons name={"BPMN"} />}
-					{location.pathname !== routes.RESOURCES && <MenuButtons name={"Resources"} />}
-					{location.pathname !== routes.WORKFLOW_RESOURCES && <MenuButtons name={"WorkFlow Resource"} />}
+					{location.pathname !== "/" && <MenuButtons name={"Home"} route={routes.HOME} iconButton={"HomeOutlined"}/>}
+					{location.pathname !== routes.BPMN && <MenuButtons name={"Processi"} route={routes.BPMN} iconButton={"AccountTree"}/>}
+					{location.pathname !== routes.RESOURCES && <MenuButtons name={"Risorse statiche"} route={routes.RESOURCES} iconButton={"Description"}/>}
+					{location.pathname !== routes.WORKFLOW_RESOURCES && <MenuButtons name={"Risorse per processi"} route={routes.WORKFLOW_RESOURCES} iconButton="Widgets"/>}
 				</Toolbar>
 			</AppBar>
 		</Box>
