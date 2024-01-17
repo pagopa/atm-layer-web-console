@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import getIconBySetType from "../../hook/getIconBySetType";
 
 type Props = {
@@ -22,16 +22,8 @@ export default function ActionIcon({ icon, color, size, action, pad, border, bor
 	const { getIcon } = getIconBySetType();
 
 	return (
-		
-		<IconButton 
-			id={id} 
-			color="primary" 
-			aria-label={id} 
-			style={{ padding: pad, borderRadius: 0, pointerEvents: "none" }} 
-			 	disabled={disableAction ? disableAction : false}
-			onClick={()=>action}
-			disableRipple
-				 >
+
+		<Box>
 			{
 				React.createElement(getIcon(icon), {
 					style: {
@@ -41,7 +33,6 @@ export default function ActionIcon({ icon, color, size, action, pad, border, bor
 					},
 				})
 			}
-		</IconButton>
-		
+		</Box>
 	);
 }

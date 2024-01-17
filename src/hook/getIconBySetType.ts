@@ -7,6 +7,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SaveIcon from "@mui/icons-material/Save";
@@ -59,6 +60,7 @@ const Icons : { [key: string]: any } ={
 	"AssessmentOutlined": 	AssessmentOutlinedIcon, 
 	"AssignmentOutlined": 	AssignmentOutlinedIcon, 
 	"ExpandMore": 	ExpandMoreIcon, 
+	"ExpandLessOutlined": ExpandLessOutlinedIcon,
 	"MenuBook": 	MenuBookIcon, 
 	"ArrowForward": 	ArrowForwardIcon, 
 	"Save": 	SaveIcon, 
@@ -92,7 +94,8 @@ const Icons : { [key: string]: any } ={
 	"Success" : CheckCircleIcon,
 	"AccountTree": AccountTreeOutlinedIcon,
 	"Description": DescriptionOutlinedIcon,
-	"Widgets": WidgetsOutlinedIcon
+	"Widgets": WidgetsOutlinedIcon,
+	// "KeyboardArrowDownIcon": 
 };
 
 
