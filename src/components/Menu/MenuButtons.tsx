@@ -1,12 +1,9 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { Options, filterOptionsByLabel, menuOptionsButton } from "../../../utils/MenuOptions";
-import menuOption from "../../../utils/menuOption";
+import { Button, Fade, Menu, MenuItem, useTheme } from "@mui/material";
+import menuOption from "../../utils/menuOption";
+import IconBox from "../Commons/IconBox";
+import ActionIcon from "../Commons/ActionIcon";
 
 type Props = {
 	name: string;
@@ -15,20 +12,18 @@ type Props = {
 
 const MenuButtons = ({ name, route }: Props) => {
 	const { getMenuOptions } = menuOption();
-
+	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
+
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		route ? navigate(route) : null;
 		setAnchorEl(event.currentTarget);
+		return	route ? navigate(route):null;
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-
-
 
 	const handleOptionClick = (onClick: () => void) => {
 		onClick();
@@ -38,14 +33,17 @@ const MenuButtons = ({ name, route }: Props) => {
 	return (
 		<>
 			<Button
-				id="fade-button"
-				aria-controls={open ? "fade-menu" : undefined}
+				id="toolbar-button"
+				aria-controls={open ? "toolbar-menu" : undefined}
 				aria-haspopup="true"
 				aria-expanded={open ? "true" : undefined}
 				onClick={handleClick}
-				color="inherit"
+				color="negative"
 				size="large"
-				disableRipple
+				disableElevation
+				variant="text"
+				// endIcon={<KeyboardArrowDownIcon />}
+				endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
 			>
 				{name}
 			</Button>
