@@ -10,8 +10,6 @@ export const Header = () => (
 			ariaLabel: "Link: vai al sito di PagoPA S.p.A.",
 			title: "Sito di PagoPA S.p.A."
 		}}
-		// enableAssistanceButton
-		onAssistanceClick={() => console.log("clicked!")} 
 	/>
 	
 );
