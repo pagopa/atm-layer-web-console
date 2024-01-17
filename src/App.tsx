@@ -6,21 +6,20 @@ import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
-import { HomePage } from "./pages/Layout/HomePage";
 import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
 import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 // import EcFiscalCodeInput from "./pages/EcFiscalCodePage/EcFiscalCodeInput";
 // import { DecodeRenderHtml } from "./components/DecodeRenderHtml/DecodeRenderHtml";
 // import { HomePage2 } from "./pages/Layout/HomePage2";
 // import HomeCardComponent from "./components/CardComponents/HomeCardComponent";
-import HomePage3 from "./pages/Layout/HomePage3";
 import Layout from "./pages/Layout/Layout";
 import BpmnPage from "./pages/BpmnPage/BpmnPage";
+import HomePage from "./pages/Layout/HomePage";
 
 const LocalRoutes = () => (
 	<Layout>
 		<Routes>
-			<Route path="/" element={<PageLayout page={<HomePage3 />} />} />
+			<Route path="/" element={<PageLayout page={<HomePage />} />} />
 			{/* <Route path="/home" element={<PageLayout page={<HomePage3 />} />} /> */}
 			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
 			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />

@@ -1,36 +1,41 @@
-import {Box } from "@mui/material";
-import { useContext } from "react";
-import { Header } from "../../components/Header";
-import { getCompletePathImage } from "../../utils/Commons";
-import { Footer } from "../../components/Footer";
-import { CardLayout } from "../../components/CardComponents/CardLayout";
-import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
-import { Ctx } from "../../DataContext";
-import { theme } from "../../assets/jss/themePagoPa";
+import { Box, Grid } from "@mui/material";
+import HomeCardComponent from "../../components/CardComponents/HomeCardComponent";
+import { homePageCardItems } from "../../utils/HomePageCardItems";
+import { HomePageTitle } from "../../components/TitleComponents/HomePageTitle";
 
-export const HomePage = () => {
 
-	
-	const backButton = () => console.log("Bottone");
-            
-	return (
-		<>
-			<Header />
-			<Box marginTop={theme.spacing(3)} marginLeft={theme.spacing(3)} textAlign={"start"}>
-				<TitleComponent 
-					title={"A quale servizio vuoi accedere?"} 
-					subTitle={"Puoi effettuare pagamenti verso la PA e gestire le tue iniziative di welfare."}
+
+export default function HomePage () {
+	return(
+		<Box
+			display="flex"
+			flexDirection="column"
+			width={"100%"}
+			my={5}
+			paddingInline={15}
+		>
+			<Grid container spacing={0.5}>
+				<HomePageTitle
+					title={"Console management"}
+					subTitle={"Console per la gestione delle risorse"}
 				/>
+			</Grid>
+			<Box  my="auto">
+				<Grid container spacing={8} >
+					{
+						homePageCardItems.map((e, i) => (
+							<Grid item xs={4} mx={"auto"} key={e.title}>
+								<HomeCardComponent
+									title={e.title}
+									description={e.description}
+									icon={e.icon}
+									pageLink={e.pageLink}
+								/>
+							</Grid>
+						))
+					}
+				</Grid>
 			</Box>
-			<Box 
-				className="App" 
-				minHeight="70vmin"
-				justifyContent={"center"}
-				ml={3} 
-			>
-				 <CardLayout /> 
-			</Box>
-			{/* <Footer disabled={false} backButton={backButton} /> */}
-		</>
-	);	
+		</Box>
+	);
 };
