@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, Fade, Menu, MenuItem, useTheme } from "@mui/material";
 import menuOption from "../../utils/menuOption";
 import IconBox from "../Commons/IconBox";
-import ActionIcon from "../Commons/ActionIcon";
 
 type Props = {
 	name: string;
