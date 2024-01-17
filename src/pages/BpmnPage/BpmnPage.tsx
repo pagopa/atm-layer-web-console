@@ -31,8 +31,6 @@ const BpmnPage = () => {
                     }}>
                     <NewBpmn />
                     <UpgradeBpmn />
-                    <UpgradeBpmn />
-                    <UpgradeBpmn />
                 </Box>
 
             </Box>

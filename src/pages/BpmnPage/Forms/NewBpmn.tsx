@@ -4,17 +4,18 @@ import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import UploadFileWithButton from "../UploadFileWithButton";
+import { BpmnDto } from "../../../model/BpmnModel";
 
 export const NewBpmn = () => {
 	const theme = useTheme();
 
-	const initialValues = {
+	const initialValues: BpmnDto = {
 		file: "",
 		fileName: "",
 		functionType: "",
 	};
 
-	const [formData, setFormData] = useState(initialValues);
+	const [formData, setFormData] = useState<BpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 
 	const inputGroupStyle = {
@@ -35,6 +36,7 @@ export const NewBpmn = () => {
 
 		setErrors(newErrors);
 
+		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
 	};
 

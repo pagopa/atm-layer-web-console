@@ -4,17 +4,19 @@ import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import UploadFileWithButton from "../UploadFileWithButton";
+import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 
 export const NewBpmn = () => {
 	const theme = useTheme();
 
-	const initialValues = {
+	const initialValues: UpgradeBpmnDto = {
+		uuid: "",
 		file: "",
 		fileName: "",
 		functionType: "",
 	};
 
-	const [formData, setFormData] = useState(initialValues);
+	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 
 	const inputGroupStyle = {
@@ -28,6 +30,7 @@ export const NewBpmn = () => {
 
 	const validateForm = () => {
 		const newErrors = {
+			uuid: formData.uuid ? "" : "Campo obbligatorio",
 			file: formData.file ? "" : "Campo obbligatorio",
 			fileName: formData.fileName ? "" : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
@@ -63,7 +66,7 @@ export const NewBpmn = () => {
 			width={"85vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Creazione BPMN"} subTitle={""} />
+				<TitleComponent title={"Aggiornamento BPMN"} subTitle={""} />
 			</Box>
 			<Box sx={inputGroupStyle} mt={4}>
 				<form onSubmit={handleSubmit}>
@@ -71,10 +74,24 @@ export const NewBpmn = () => {
 						<Grid container item>
 							<EditNoteIcon sx={{ mr: 1 }} />
 							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per creare un nuovo BPMN
+                                Compila tutti i campi per modificare un BPMN
 							</Typography>
 						</Grid>
-						<Grid container item>
+						<Grid container item my={1}>
+							<TextField
+								fullWidth
+								id="uuid"
+								name="uuid"
+								label={"Identificatore Univoco"}
+								placeholder={"Identificatore Univoco"}
+								size="small"
+								value={formData.uuid}
+								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+								error={Boolean(errors.uuid)}
+								helperText={errors.uuid}
+							/>
+						</Grid>
+						<Grid container item my={1}>
 							<Typography variant="body1">File BPMN</Typography>
 							<UploadFileWithButton
 								name={"file"}
