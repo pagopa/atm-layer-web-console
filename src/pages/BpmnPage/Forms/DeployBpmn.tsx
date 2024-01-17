@@ -1,24 +1,21 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import UploadFileWithButton from "../components/UploadFileWithButton";
-import { UpgradeBpmnDto } from "../../../model/BpmnModel";
+import { DeployBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 
 export const NewBpmn = () => {
 	const theme = useTheme();
 
-	const initialValues: UpgradeBpmnDto = {
+	const initialValues: DeployBpmnDto = {
 		uuid: undefined,
-		file: undefined,
-		fileName: undefined,
-		functionType: undefined,
+		version: undefined,
 	};
 
-	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [formData, setFormData] = useState<DeployBpmnDto>(initialValues);
+	const [errors, setErrors] = useState({ uuid: "", version: "" });
 
 	const inputGroupStyle = {
 		borderRadius: 1,
@@ -32,22 +29,12 @@ export const NewBpmn = () => {
 	const validateForm = () => {
 		const newErrors = {
 			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
-			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
-			functionType: formData.functionType ? "" : "Campo obbligatorio",
+			version: formData.version ? "" : "Campo obbligatorio",
 		};
 
 		setErrors(newErrors);
 
 		return Object.values(newErrors).every((error) => !error);
-	};
-
-	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, file: e.target.value });
-	};
-
-	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -67,7 +54,7 @@ export const NewBpmn = () => {
 			width={"85vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Aggiornamento BPMN"} subTitle={""} />
+				<TitleComponent title={"Rilascio BPMN"} subTitle={""} />
 			</Box>
 			<Box sx={inputGroupStyle} mt={4}>
 				<form onSubmit={handleSubmit}>
@@ -75,7 +62,7 @@ export const NewBpmn = () => {
 						<Grid container item>
 							<EditNoteIcon sx={{ mr: 1 }} />
 							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per modificare un BPMN
+                                Compila tutti i campi per rilasciare un BPMN
 							</Typography>
 						</Grid>
 						<Grid container item my={1}>
@@ -93,41 +80,17 @@ export const NewBpmn = () => {
 							/>
 						</Grid>
 						<Grid container item my={1}>
-							<Typography variant="body1">File BPMN</Typography>
-							<UploadFileWithButton
-								name={"file"}
-								file={formData.file}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-								onClick={clearFile}
-								error={errors.file}
-							/>
-						</Grid>
-						<Grid container item my={1}>
 							<TextField
 								fullWidth
-								id="fileName"
-								name="fileName"
-								label={"Nome del file"}
-								placeholder={"Nome del file"}
+								id="version"
+								name="version"
+								label={"Versione"}
+								placeholder={"Versione"}
 								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="functionType"
-								name="functionType"
-								label={"Tipo di funzione"}
-								placeholder={"Tipo di funzione"}
-								size="small"
-								value={formData.functionType}
-								onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-								error={Boolean(errors.functionType)}
-								helperText={errors.functionType}
+								value={formData.version}
+								onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
+								error={Boolean(errors.version)}
+								helperText={errors.version}
 							/>
 						</Grid>
 					</Grid>

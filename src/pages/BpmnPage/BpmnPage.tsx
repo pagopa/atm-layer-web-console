@@ -5,6 +5,7 @@ import SideBar from "../../components/Menu/SideBar";
 import { Ctx } from "../../DataContext";
 import NewBpmn from "./Forms/NewBpmn";
 import UpgradeBpmn from "./Forms/UpgradeBpmn";
+import DeployBpmn from "./Forms/DeployBpmn";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
@@ -31,6 +32,7 @@ const BpmnPage = () => {
                     }}>
                     <NewBpmn />
                     <UpgradeBpmn />
+                    <DeployBpmn />
                 </Box>
 
             </Box>
@@ -52,7 +54,5 @@ const handleToggle = (value: number) => () => {
         newChecked.splice(currentIndex, 1);
     }
 }; */
-
-
 
 export default BpmnPage;

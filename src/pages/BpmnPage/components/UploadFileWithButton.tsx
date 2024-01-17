@@ -9,7 +9,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 type Props = {
     name: string;
     allowedType?: string;
-    file: string;
+    file?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
     error?: string;

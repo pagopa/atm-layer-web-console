@@ -10,9 +10,9 @@ export const NewBpmn = () => {
 	const theme = useTheme();
 
 	const initialValues: BpmnDto = {
-		file: "",
-		fileName: "",
-		functionType: "",
+		file: undefined,
+		fileName: undefined,
+		functionType: undefined,
 	};
 
 	const [formData, setFormData] = useState<BpmnDto>(initialValues);
