@@ -42,12 +42,6 @@ import ReportIcon from "@mui/icons-material/Report";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
-// import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
-// import PauseCircleOutlineOutlinedIcon from "@mui/icons-material/PauseCircleOutlineOutlined";
-// import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-// import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
-// import AltRouteIcon from "@mui/icons-material/AltRoute";
-// import CallSplitIcon from "@mui/icons-material/CallSplit";
 
 
 const Icons : { [key: string]: any } ={
