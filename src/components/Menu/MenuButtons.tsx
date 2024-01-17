@@ -41,12 +41,11 @@ const MenuButtons = ({ name, route }: Props) => {
 				size="large"
 				disableElevation
 				variant="text"
-				// endIcon={<KeyboardArrowDownIcon />}
-				endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
+				// endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
 			>
 				{name}
 			</Button>
-			{
+			{/* {
 				name !== "Home" && (
 					<Menu
 						id="fade-menu"
@@ -66,7 +65,7 @@ const MenuButtons = ({ name, route }: Props) => {
 						))}
 					</Menu>
 				)
-			}
+			} */}
 		</>
 	);
 };
