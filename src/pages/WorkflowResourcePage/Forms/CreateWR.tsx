@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { Box, Button, Grid, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
@@ -31,7 +31,7 @@ export const CreateWR = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName==="" ? "Campo obbligatorio" : isValidDeployableFilename(formData.fileName) ? "" : "nome del file non valido",
+			fileName: formData.fileName === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.fileName) ? "" : "nome del file non valido",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
 
@@ -48,9 +48,9 @@ export const CreateWR = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	const changeResourceType = (e: SelectChangeEvent) => {
+	const changeResourceType = (e: React.ChangeEvent<HTMLInputElement>) => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		setFormData({...formData, resourceType: e.target.value});
+		setFormData({ ...formData, resourceType: e.target.value });
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -78,7 +78,7 @@ export const CreateWR = () => {
 						<Grid container item>
 							<EditNoteIcon sx={{ mr: 1 }} />
 							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per creare una nuova Workflow Resource
+								Compila tutti i campi per creare una nuova Workflow Resource
 							</Typography>
 						</Grid>
 						<Grid container item>
@@ -106,26 +106,28 @@ export const CreateWR = () => {
 							/>
 						</Grid>
 						<Grid container item my={1}>
-                            	<Select
-                            		fullWidth
-                            		id="resourceType"
-								    name="resourceType"
-                            		label="Estensione del file"
-                            		size="small"
-                            		value={formData.resourceType}
-                            		onChange={changeResourceType}
-								    error={Boolean(errors.resourceType)}
-                            	>
-                            		<MenuItem value={"BPMN"}>BPMN</MenuItem>
-                            		<MenuItem value={"DMN"}>DMN</MenuItem>
-                            		<MenuItem value={"FORM"}>FORM</MenuItem>
-                            	</Select>
-
+							<TextField
+								fullWidth
+								id="resourceType"
+								name="resourceType"
+								select
+								label={"Estensione del file"}
+								placeholder={"Estensione del file"}
+								size="small"
+								value={formData.resourceType}
+								onChange={changeResourceType}
+								error={Boolean(errors.fileName)}
+								helperText={errors.fileName}
+							>
+								<MenuItem value={"BPMN"}>BPMN</MenuItem>
+								<MenuItem value={"DMN"}>DMN</MenuItem>
+								<MenuItem value={"FORM"}>FORM</MenuItem>
+							</TextField>
 						</Grid>
 					</Grid>
 					<Box display="flex" justifyContent="flex-end" mt={2}>
 						<Button variant="contained" type="submit">
-                            Submit
+							Submit
 						</Button>
 					</Box>
 				</form>
