@@ -29,7 +29,7 @@ export const UpdateWR = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
+			uuid: formData.uuid==="" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido", 
 			file: formData.file ? "" : "Campo obbligatorio"
 		};
 
