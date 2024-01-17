@@ -16,6 +16,7 @@ import Layout from "./pages/Layout/Layout";
 import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import HomePage from "./pages/Layout/HomePage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage/WorkflowResourcePage";
+import ResourcesPage from "./pages/ResourcesPage/ResourcesPage";
 
 const LocalRoutes = () => (
 	<Layout>
@@ -24,6 +25,7 @@ const LocalRoutes = () => (
 			{/* <Route path="/home" element={<PageLayout page={<HomePage3 />} />} /> */}
 			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
 			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
+			<Route path={routes.RESOURCES} element={<PageLayout page={<ResourcesPage />} />} />
 			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout page={<WorkflowResourcePage />} />} />
 			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 			<Route
