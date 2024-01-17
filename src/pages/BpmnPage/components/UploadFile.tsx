@@ -2,19 +2,16 @@ import { Box } from "@mui/system";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Header } from "../../components/Header";
-import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
-import { getCompletePathImage } from "../../utils/Commons";
-import { Footer } from "../../components/Footer";
-import { Ctx } from "../../DataContext";
+import { Header } from "../../../components/Header";
+import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
+import { Footer } from "../../../components/Footer";
 
 const UploadFile = () => {
 	const navigate = useNavigate();
-	const { interfaceType } = useContext(Ctx);
 	const theme = useTheme();
 	const [files, setFiles] = useState<Array<File>>([]);
 
@@ -71,11 +68,9 @@ const UploadFile = () => {
 								<ClearIcon />
 							</IconButton></>
 						) : (
-							<>
-								<Button variant="contained" color="primary" onClick={open}>
+							<Button variant="contained" color="primary" onClick={open}>
 									Seleziona un File
-								</Button>
-							</>
+							</Button>
 						)}
 					</Box>
 

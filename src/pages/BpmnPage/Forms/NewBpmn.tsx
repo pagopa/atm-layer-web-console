@@ -3,7 +3,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import UploadFileWithButton from "../UploadFileWithButton";
+import UploadFileWithButton from "../components/UploadFileWithButton";
 import { BpmnDto } from "../../../model/BpmnModel";
 
 export const NewBpmn = () => {

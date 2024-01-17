@@ -1,17 +1,10 @@
 /* eslint-disable indent */
 import { Box } from "@mui/system";
 import { useEffect } from "react";
-/* import { useContext, useState } from "react"; 
-import { useNavigate } from "react-router-dom"; */
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
 import ClearIcon from "@mui/icons-material/Clear";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-/* import { LogoPagoPACompany } from "@pagopa/mui-italia";
-import { Header } from "../../components/Header";
-import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
-import { getCompletePathImage } from "../../utils/Commons"; 
-import { Ctx } from "../../DataContext"; */
 
 type Props = {
     name: string;
@@ -23,9 +16,6 @@ type Props = {
 };
 
 const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error }: Props) => {
-    /* const navigate = useNavigate();
-    const { interfaceType } = useContext(Ctx); */
-    // const [file, setFile] = useState("");
     const theme = useTheme();
 
     const VisuallyHiddenInput = styled("input")({
