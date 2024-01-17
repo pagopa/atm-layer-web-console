@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -39,15 +39,14 @@ function App() {
 	const [loading, setLoading] = useState(false);
 	const [headerHeight, setHeaderHeight] = useState(null);
 
-	// To avoid additional render and impact performance we wrap the value in a useMemo
-	const values = useMemo(() => ({
+	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
 		loading,
 		setLoading,
 		headerHeight,
 		setHeaderHeight
-	}), []);
+	};
 
 	useEffect(() => {
 		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);

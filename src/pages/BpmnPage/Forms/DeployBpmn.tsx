@@ -86,6 +86,7 @@ export const NewBpmn = () => {
 								name="version"
 								label={"Versione"}
 								placeholder={"Versione"}
+								type="number"
 								size="small"
 								value={formData.version}
 								onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
