@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import UploadFileWithButton from "../../BpmnPage/components/UploadFileWithButton";
+import { isValidDeployableFilename } from "../../../utils/Commons";
 
 export const CreateWR = () => {
 	const theme = useTheme();
@@ -30,7 +31,7 @@ export const CreateWR = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
+			fileName: formData.fileName==="" ? "Campo obbligatorio" : isValidDeployableFilename(formData.fileName) ? "" : "nome del file non valido",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
 
@@ -95,8 +96,8 @@ export const CreateWR = () => {
 								fullWidth
 								id="fileName"
 								name="fileName"
-								label={"Nome del file"}
-								placeholder={"Nome del file"}
+								label={"Nome del file senza estensione"}
+								placeholder={"Nome del file senza estensione"}
 								size="small"
 								value={formData.fileName}
 								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
