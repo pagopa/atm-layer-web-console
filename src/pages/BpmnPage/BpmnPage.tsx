@@ -40,20 +40,20 @@ const BpmnPage = () => {
     );
 };
 
-// const [checked, setChecked] = useState([0]);
+/* const [checked, setChecked] = useState([0]);
 
-// const handleToggle = (value: number) => () => {
-//     const currentIndex = checked?.indexOf(value);
-//     const newChecked = [...checked];
+const handleToggle = (value: number) => () => {
+    const currentIndex = checked?.indexOf(value);
+    const newChecked = [...checked];
 
-//     if (currentIndex === -1) {
-//         // eslint-disable-next-line functional/immutable-data
-//         newChecked.push(value);
-//     } else {
-//         // eslint-disable-next-line functional/immutable-data
-//         newChecked.splice(currentIndex, 1);
-//     }
-// };
+    if (currentIndex === -1) {
+        // eslint-disable-next-line functional/immutable-data
+        newChecked.push(value);
+    } else {
+        // eslint-disable-next-line functional/immutable-data
+        newChecked.splice(currentIndex, 1);
+    }
+}; */
 
 
 

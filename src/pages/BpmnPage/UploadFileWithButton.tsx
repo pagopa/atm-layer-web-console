@@ -1,16 +1,17 @@
 /* eslint-disable indent */
 import { Box } from "@mui/system";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+/* import { useContext, useState } from "react"; 
+import { useNavigate } from "react-router-dom"; */
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
 import ClearIcon from "@mui/icons-material/Clear";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-// import { LogoPagoPACompany } from "@pagopa/mui-italia";
-// import { Header } from "../../components/Header";
-// import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
-// import { getCompletePathImage } from "../../utils/Commons";
-import { Ctx } from "../../DataContext";
+/* import { LogoPagoPACompany } from "@pagopa/mui-italia";
+import { Header } from "../../components/Header";
+import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
+import { getCompletePathImage } from "../../utils/Commons"; 
+import { Ctx } from "../../DataContext"; */
 
 type Props = {
     name: string;
@@ -18,12 +19,12 @@ type Props = {
     file: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
-    error?: boolean;
+    error?: string;
 };
 
 const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error }: Props) => {
-    const navigate = useNavigate();
-    const { interfaceType } = useContext(Ctx);
+    /* const navigate = useNavigate();
+    const { interfaceType } = useContext(Ctx); */
     // const [file, setFile] = useState("");
     const theme = useTheme();
 
@@ -45,8 +46,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
     }, [file]);;
 
     return (
-        <>
-            <Box
+        <Box
                 mt={2}
                 p={2}
                 display="flex"
@@ -83,8 +83,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                         <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} />
                     </Button>
                 }
-            </Box>
-        </>);
+            </Box>);
 };
 
 export default UploadFileWithButton;

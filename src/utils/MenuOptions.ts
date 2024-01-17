@@ -5,11 +5,13 @@ export type Option = {
 };
 
 export type Options = {
+    id: string;
     options: Array<Option>;
 };
 
 export const menuOptionsButton: Array<Options> = [
     {
+        id: "bpmn",
         options: [
             {
                 label: "BPMN GetAll",
@@ -42,6 +44,7 @@ export const menuOptionsButton: Array<Options> = [
         ]
     },
     {
+        id: "resources",
         options: [
             {
                 label: "Resources GetAll",
@@ -58,6 +61,7 @@ export const menuOptionsButton: Array<Options> = [
         ]
     },
     {
+        id: "workflow",
         options: [
             {
                 label: "WorkFlow Resource GetAll",
