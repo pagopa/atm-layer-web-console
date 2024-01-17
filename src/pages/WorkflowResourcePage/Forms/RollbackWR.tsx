@@ -4,6 +4,7 @@ import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { WRRollbackDto } from "../../../model/WorkflowResourceModel";
+import { isValidUUID } from "../../../utils/Commons";
 
 export const RollbackWR = () => {
 	const theme = useTheme();
@@ -26,7 +27,7 @@ export const RollbackWR = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid ? "" : "Campo obbligatorio"
+			uuid: formData.uuid==="" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido",
 		};
 
 		setErrors(newErrors);

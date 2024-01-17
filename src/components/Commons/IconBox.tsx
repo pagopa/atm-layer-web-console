@@ -1,13 +1,13 @@
 import React from "react";
-import { IconButton, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import getIconBySetType from "../../hook/getIconBySetType";
 
 type Props = {
 	icon: string;
 	color?: string; 
 	size?: string; 
-	action?: React.MouseEvent;
-	pad?: number; 
+	pad?: number|string; 
+	marg?: number|string; 
 	border?: boolean; 
 	borderRadius?: string;
 	bgcolor?: string; 
@@ -17,21 +17,13 @@ type Props = {
 	id?: string;
   };
 
-export default function ActionIcon({ icon, color, size, action, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
+export default function IconBox({ icon, color, size, marg, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
 	const theme = useTheme();
 	const { getIcon } = getIconBySetType();
 
 	return (
-		
-		<IconButton 
-			id={id} 
-			color="primary" 
-			aria-label={id} 
-			style={{ padding: pad, borderRadius: 0, pointerEvents: "none" }} 
-			 	disabled={disableAction ? disableAction : false}
-			onClick={()=>action}
-			disableRipple
-				 >
+
+		<Box m={marg} p={pad}>
 			{
 				React.createElement(getIcon(icon), {
 					style: {
@@ -41,7 +33,6 @@ export default function ActionIcon({ icon, color, size, action, pad, border, bor
 					},
 				})
 			}
-		</IconButton>
-		
+		</Box>
 	);
 }
