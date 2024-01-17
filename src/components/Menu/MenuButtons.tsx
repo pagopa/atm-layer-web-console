@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Fade, Menu, MenuItem, useTheme } from "@mui/material";
 import menuOption from "../../utils/menuOption";
 import IconBox from "../Commons/IconBox";
+import ActionIcon from "../Commons/ActionIcon";
 
 type Props = {
 	name: string;
@@ -42,7 +43,7 @@ const MenuButtons = ({ name, route }: Props) => {
 				disableElevation
 				variant="text"
 				// endIcon={<KeyboardArrowDownIcon />}
-				endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} pad={1}/>}
+				endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
 			>
 				{name}
 			</Button>

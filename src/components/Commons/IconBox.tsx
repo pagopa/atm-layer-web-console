@@ -6,8 +6,8 @@ type Props = {
 	icon: string;
 	color?: string; 
 	size?: string; 
-	action?: React.MouseEvent;
-	pad?: number; 
+	pad?: number|string; 
+	marg?: number|string; 
 	border?: boolean; 
 	borderRadius?: string;
 	bgcolor?: string; 
@@ -17,13 +17,13 @@ type Props = {
 	id?: string;
   };
 
-export default function ActionIcon({ icon, color, size, action, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
+export default function IconBox({ icon, color, size, marg, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
 	const theme = useTheme();
 	const { getIcon } = getIconBySetType();
 
 	return (
 
-		<Box>
+		<Box m={marg} p={pad}>
 			{
 				React.createElement(getIcon(icon), {
 					style: {
