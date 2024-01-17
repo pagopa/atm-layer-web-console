@@ -15,6 +15,7 @@ import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 import Layout from "./pages/Layout/Layout";
 import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import HomePage from "./pages/Layout/HomePage";
+import WorkflowResourcePage from "./pages/WorkflowResourcePage/WorkflowResourcePage";
 
 const LocalRoutes = () => (
 	<Layout>
@@ -23,6 +24,7 @@ const LocalRoutes = () => (
 			{/* <Route path="/home" element={<PageLayout page={<HomePage3 />} />} /> */}
 			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
 			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout page={<WorkflowResourcePage />} />} />
 			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
 			<Route
 				path={routes.ERROR_PAGE}
