@@ -69,7 +69,7 @@ ingress:
   hosts:
     - host:
       paths:
-        - path: /
+        - path: /atm-layer-console
           pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
