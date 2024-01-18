@@ -6,9 +6,11 @@ import { TitleComponent } from "../../../components/TitleComponents/TitleCompone
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import UploadFileWithButton from "../../BpmnPage/components/UploadFileWithButton";
 import { isValidDeployableFilename } from "../../../utils/Commons";
+import fetchCreate from "../../../hook/WorkflowResource/fetchCreate";
 
 export const CreateWR = () => {
 	const theme = useTheme();
+	const abortController = useRef(new AbortController());
 
 	const initialValues: WorkflowResourceDto = {
 		file: "",
@@ -28,7 +30,7 @@ export const CreateWR = () => {
 		width: "50%",
 	};
 
-	const validateForm = () => {
+	function validateForm() {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
 			filename: formData.filename === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.filename) ? "" : "nome del file non valido",
@@ -36,6 +38,8 @@ export const CreateWR = () => {
 		};
 
 		setErrors(newErrors);
+
+		console.log("validate ouput: ", Object.values(newErrors).every((error)=> !error), Object.values(newErrors));
 
 		return Object.values(newErrors).every((error) => !error);
 	};
@@ -58,7 +62,25 @@ export const CreateWR = () => {
 
 		if (validateForm()) {
 			console.log("VALUES:", formData);
-		}
+
+			const created = new Promise((resolve) =>{
+				void fetchCreate({ abortController, body:formData })().then((dataObj:any) => {
+					if (dataObj) {
+						resolve({
+							data: dataObj,
+							type: "SUCCES",
+						});
+					} else {resolve({ type: "error" });} // procedo comunque, altrimenti avrei lanciato reject
+					console.log("Auth res",dataObj);
+				});
+			});
+
+			created.then(({ data}:any) => {
+				console.log("Auth res",data);
+				return data;
+			})	.catch((e) => e);
+
+		};
 	};
 
 	return (
