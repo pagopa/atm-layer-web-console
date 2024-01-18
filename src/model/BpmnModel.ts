@@ -17,11 +17,6 @@ export type DeployBpmnDto = {
     version?: number;
 };
 
-export type AssiciatonBodyDto = {
-    defaultTemplateId: string;
-
-};
-
 export type TerminalDto = {
   templateId?: string;
   templateVersion?: number;

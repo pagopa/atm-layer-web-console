@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { Box } from "@mui/material";
 import { useContext } from "react";
-import SideBar from "../../components/Menu/SideBar";
+// import SideBar from "../../components/Menu/SideBar";
 import { Ctx } from "../../DataContext";
 import NewBpmn from "./Forms/NewBpmn";
 import UpgradeBpmn from "./Forms/UpgradeBpmn";
