@@ -9,7 +9,7 @@ import "@fontsource/titillium-web/600.css";
 import "@fontsource/titillium-web/700.css";
 /* -- DM Mono */
 import "@fontsource/dm-mono/400.css";
-import { lineHeight } from "@mui/system";
+// import { lineHeight } from "@mui/system";
 
 export function pxToRem(value: number): string {
 	return `${value / 16}rem`;
@@ -22,7 +22,7 @@ const colorTextPrimary = "#171717";
 const colorPrimary = "#00A1B0";
 const lightGrey = "#DFDFDF";
 const responsiveBreakpoint = "sm";
-const colorPrimaryContainedHover = "#0055AA"; // Not exposed by the theme object
+const colorPrimaryContainedHover = "#EBFDFF"; // Not exposed by the theme object
 export const ringWidth = "4px";
 const shadowColor = "#002B55";
 
@@ -31,10 +31,10 @@ const shadowValues = {
 	4: `0px 2px 4px -1px ${alpha(shadowColor, 0.1)},
       0px 4px 5px ${alpha(shadowColor, 0.05)},
       0px 1px 10px ${alpha(shadowColor, 0.1)}`,
-	/* Elevation 8 = Elevation 16 */
-	8: `0px 8px 10px -5px ${alpha(shadowColor, 0.1)},
-      0px 16px 24px 2px ${alpha(shadowColor, 0.05)},
-      0px 6px 30px 5px ${alpha(shadowColor, 0.1)}`,
+	/* Elevation 8 */
+	8: `0 2px 10px -5px  ${alpha(shadowColor, 0.1)},
+	0px 4px 3px ${alpha(shadowColor, 0.05)},
+	0px 1px 10px  ${alpha(shadowColor, 0.1)}`,
 	/* Elevation 16 */
 	16: `0px 8px 10px -5px ${alpha(shadowColor, 0.1)},
        0px 16px 24px 2px ${alpha(shadowColor, 0.05)},
@@ -58,6 +58,35 @@ declare module "@mui/material/styles" {
     sidenav?: React.CSSProperties;
     monospaced?: React.CSSProperties;
     "caption-semibold"?: React.CSSProperties;
+  }
+
+  interface ThemeBox {
+    customBox?: {
+      border?: string;
+      borderLite?: string;
+    };
+    // colorVariant?: {
+    //   main?: string;
+    //   customBorderColor?: string;
+    // };
+    // cardStyle?: {
+    //   border?: string;
+    //   borderColor?: string;
+    // };
+  }
+  interface ThemeBoxOptions {
+    customBox?: {
+      border?: string;
+      borderLite?: string;
+    };
+    // colorVariant?: {
+    //   main?: string;
+    //   customBorderColor?: string;
+    // };
+    // cardStyle?: {
+    //   border?: string;
+    //   borderColor?: string;
+    // };
   }
 }
 
@@ -236,9 +265,13 @@ const foundation: Theme = createTheme({
 	},
 	shadows: { ...shadowsArray, ...shadowValues },
 	shape: {
-		borderRadius: 3,
+		borderRadius: 0,
 	},
 	spacing: 8,
+	customBox: {
+		border: "1px solid #DFE3EB",
+		borderLite: "0.5px solid #DFE3EB"
+	},
 });
 
 export const themeApp: Theme = createTheme(foundation, {
@@ -482,6 +515,41 @@ export const themeApp: Theme = createTheme(foundation, {
 							boxShadow: `0 0 0 3px ${alpha(
 								foundation.palette.error.main,
 								0.35
+							)}`,
+						},
+					},
+				},
+				{
+					props: { variant: "text", color: "normal" },
+					style: {
+						color: foundation.palette.text.primary,
+						"&:hover": {
+							color: alpha(foundation.palette.text.primary, 0.8),
+							backgroundColor: "transparent",
+						},
+						"&.Mui-focusVisible": {
+							boxShadow: `0 0 0 3px ${alpha(
+								foundation.palette.text.primary,
+								0.2
+							)}`,
+						},
+					},
+				},
+				{
+					props: { variant: "text", color: "negative" },
+					style: {
+						
+						color: foundation.palette.primary.contrastText,
+						"&:hover": {
+							padding: "0 20px 0 24px",
+							// color: alpha(foundation.palette.text.primary, 0.8),
+							backgroundColor: alpha(foundation.palette.primary.light, 0.3),
+						},
+
+						"&.Mui-focusVisible": {
+							boxShadow: `0 0 0 3px ${alpha(
+								foundation.palette.text.primary,
+								0.2
 							)}`,
 						},
 					},
