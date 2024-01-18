@@ -123,6 +123,18 @@ export const CreateResources = () => {
                             	<MenuItem value={"OTHER"}>OTHER</MenuItem>
 							</TextField>
 						</Grid>
+						<Grid container item my={1}>
+							<TextField   fullWidth
+								id="path"
+								name="path"
+								label={"Percorso (Opzionale)"}
+								placeholder={"Percorso (Opzionale)"}
+								size="small"
+								value={formData.path}
+								error={Boolean(errors.path)}
+								helperText={errors.path}>
+							</TextField>
+						</Grid>
 					</Grid>
 					<Box display="flex" justifyContent="flex-end" mt={2}>
 						<Button variant="contained" type="submit">
