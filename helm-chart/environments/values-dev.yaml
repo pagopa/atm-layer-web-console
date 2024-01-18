@@ -69,7 +69,7 @@ ingress:
   hosts:
     - host:
       paths:
-        - path: /web-console
+        - path: /
           pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
