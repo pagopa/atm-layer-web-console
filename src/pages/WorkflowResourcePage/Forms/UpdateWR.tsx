@@ -60,7 +60,7 @@ export const UpdateWR = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Aggiornamento Workflow Resource"} subTitle={""} />

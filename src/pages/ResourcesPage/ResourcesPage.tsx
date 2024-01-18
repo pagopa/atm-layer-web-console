@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { Box } from "@mui/system";
 import { Ctx } from "../../DataContext";
 import SideBar from "../../components/Menu/SideBar";
-import NewResources from "./Forms/CreateResources";
+import CreateResources from "./Forms/CreateResources";
+import UpdateResources from "./Forms/UpdateResources";
 
 const ResourcesPage = () => {
 	const { headerHeight } = useContext(Ctx);
@@ -12,13 +13,13 @@ const ResourcesPage = () => {
 			display="flex"
 			flexDirection="row"
 		>
-			<SideBar name={"Resources"} />
+			{/* <SideBar name={"Resources"} /> */}
 			<Box
 				display="flex"
 				flexDirection="column"
 				justifyContent="center"
 				alignItems="center"
-				width={"85vw"}
+				width={"100vw"}
 			>
 				<Box
 					alignItems="center"
@@ -27,7 +28,8 @@ const ResourcesPage = () => {
 						overflowY: "auto",
 						mr: "14px"
 					}} >
-					<NewResources />
+					<CreateResources />
+					<UpdateResources />
 				</Box>
 			</Box>
 		</Box>

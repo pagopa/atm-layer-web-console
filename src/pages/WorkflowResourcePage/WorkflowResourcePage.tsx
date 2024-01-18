@@ -16,13 +16,13 @@ const WorkflowResourcePage = () => {
 			display="flex"
 			flexDirection="row"
 		>
-			<SideBar name={"Workflow Resource"} />
+			{/* <SideBar name={"Workflow Resource"} /> */}
 			<Box
 				display="flex"
 				flexDirection="column"
 				justifyContent="center"
 				alignItems="center"
-				width={"85vw"}
+				width={"100vw"}
 			>
 				<Box
 					alignItems="center"

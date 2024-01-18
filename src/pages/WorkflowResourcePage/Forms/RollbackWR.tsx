@@ -49,7 +49,7 @@ export const RollbackWR = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Rollback Workflow Resource"} subTitle={""} />

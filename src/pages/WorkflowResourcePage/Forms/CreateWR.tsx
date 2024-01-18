@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
@@ -6,13 +6,15 @@ import { TitleComponent } from "../../../components/TitleComponents/TitleCompone
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import UploadFileWithButton from "../../BpmnPage/components/UploadFileWithButton";
 import { isValidDeployableFilename } from "../../../utils/Commons";
+import fetchCreate from "../../../hook/WorkflowResource/fetchCreate";
 
 export const CreateWR = () => {
 	const theme = useTheme();
+	const abortController = useRef(new AbortController());
 
 	const initialValues: WorkflowResourceDto = {
 		file: "",
-		fileName: "",
+		filename: "",
 		resourceType: "",
 	};
 
@@ -28,14 +30,16 @@ export const CreateWR = () => {
 		width: "50%",
 	};
 
-	const validateForm = () => {
+	function validateForm() {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.fileName) ? "" : "nome del file non valido",
+			filename: formData.filename === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.filename) ? "" : "nome del file non valido",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
 
 		setErrors(newErrors);
+
+		console.log("validate ouput: ", Object.values(newErrors).every((error)=> !error), Object.values(newErrors));
 
 		return Object.values(newErrors).every((error) => !error);
 	};
@@ -58,7 +62,25 @@ export const CreateWR = () => {
 
 		if (validateForm()) {
 			console.log("VALUES:", formData);
-		}
+
+			const created = new Promise((resolve) =>{
+				void fetchCreate({ abortController, body:formData })().then((dataObj:any) => {
+					if (dataObj) {
+						resolve({
+							data: dataObj,
+							type: "SUCCES",
+						});
+					} else {resolve({ type: "error" });} // procedo comunque, altrimenti avrei lanciato reject
+					console.log("Auth res",dataObj);
+				});
+			});
+
+			created.then(({ data}:any) => {
+				console.log("Auth res",data);
+				return data;
+			})	.catch((e) => e);
+
+		};
 	};
 
 	return (
@@ -67,7 +89,7 @@ export const CreateWR = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Creazione Workflow Resource"} subTitle={""} />
@@ -94,15 +116,15 @@ export const CreateWR = () => {
 						<Grid container item my={1}>
 							<TextField
 								fullWidth
-								id="fileName"
-								name="fileName"
+								id="filename"
+								name="filename"
 								label={"Nome del file senza estensione"}
 								placeholder={"Nome del file senza estensione"}
 								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
+								value={formData.filename}
+								onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							/>
 						</Grid>
 						<Grid container item my={1}>
@@ -116,8 +138,8 @@ export const CreateWR = () => {
 								size="small"
 								value={formData.resourceType}
 								onChange={changeResourceType}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							>
 								<MenuItem value={"BPMN"}>BPMN</MenuItem>
 								<MenuItem value={"DMN"}>DMN</MenuItem>

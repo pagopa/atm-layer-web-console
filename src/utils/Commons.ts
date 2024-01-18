@@ -17,7 +17,7 @@ export const isValidDeployableFilename = (filename: string) => {
 	return deployableFileNameRegex.test(filename);
 };
 
-export const isValidResourcesFileName = (filename: string) => {
+export const isValidResourcesFilename = (filename: string) => {
 	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
 	return resourcesFileNameRegex.test(filename);
 };

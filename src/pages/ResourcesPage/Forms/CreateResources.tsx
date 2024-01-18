@@ -6,13 +6,13 @@ import { TitleComponent } from "../../../components/TitleComponents/TitleCompone
 import UploadFileWithButton from "../../BpmnPage/components/UploadFileWithButton";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 
-export const NewResources = () => {
+export const CreateResources = () => {
 	const theme = useTheme();
 
 	const initialValues: ResourcesDto = {
 		file: "",
-		fileName: "",
-		functionType: "",
+		filename: "",
+		resourceType: "",
 		path:"",
 	};
 
@@ -31,8 +31,8 @@ export const NewResources = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
-			functionType: formData.functionType ? "" : "Campo obbligatorio",
+			filename: formData.filename ? "" : "Campo obbligatorio",
+			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 			path: formData.path ? "" : "",
 		};
 
@@ -49,8 +49,8 @@ export const NewResources = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	const changeFunctionType = (e: SelectChangeEvent) => {
-		setFormData({...formData, functionType: e.target.value});
+	const changeResourceType = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFormData({...formData, resourceType: e.target.value});
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -67,7 +67,7 @@ export const NewResources = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Creazione Resources"} subTitle={""} />
@@ -96,30 +96,32 @@ export const NewResources = () => {
 								fullWidth
 								id="fileName"
 								name="fileName"
-								label={"Nome del file"}
-								placeholder={"Nome del file"}
+								label={"Nome del file senza estensione"}
+								placeholder={"Nome del file senza estensione"}
 								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
+								value={formData.filename}
+								onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							/>
 						</Grid>
 						<Grid container item my={1}>
-							<Select
+							<TextField
 								fullWidth
-								id="functionType"
-								name="functionType"
+								id="resourceType"
+								name="resourceType"
+								select
 								label={"Estensione del file"}
-								placeholder={"Tipo di funzione"}
+								placeholder={"Estensione del file"}
 								size="small"
-								value={formData.functionType}
-								onChange={changeFunctionType}
-								error={Boolean(errors.functionType)}
+								value={formData.resourceType}
+								onChange={changeResourceType}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							>
 								<MenuItem value={"HTML"}>HTML</MenuItem>
                             	<MenuItem value={"OTHER"}>OTHER</MenuItem>
-							</Select>
+							</TextField>
 						</Grid>
 					</Grid>
 					<Box display="flex" justifyContent="flex-end" mt={2}>
@@ -133,4 +135,4 @@ export const NewResources = () => {
 	);
 };
 
-export default NewResources;
+export default CreateResources;
