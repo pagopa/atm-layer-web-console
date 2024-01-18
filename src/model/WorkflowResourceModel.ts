@@ -1,6 +1,6 @@
 export type WorkflowResourceDto = {
     file: string;
-    fileName: string;
+    filename: string;
     resourceType: string;
 };
 

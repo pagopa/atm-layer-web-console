@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
@@ -12,7 +12,7 @@ export const CreateWR = () => {
 
 	const initialValues: WorkflowResourceDto = {
 		file: "",
-		fileName: "",
+		filename: "",
 		resourceType: "",
 	};
 
@@ -31,7 +31,7 @@ export const CreateWR = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.fileName) ? "" : "nome del file non valido",
+			filename: formData.filename === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.filename) ? "" : "nome del file non valido",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
 
@@ -67,7 +67,7 @@ export const CreateWR = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Creazione Workflow Resource"} subTitle={""} />
@@ -94,15 +94,15 @@ export const CreateWR = () => {
 						<Grid container item my={1}>
 							<TextField
 								fullWidth
-								id="fileName"
-								name="fileName"
+								id="filename"
+								name="filename"
 								label={"Nome del file senza estensione"}
 								placeholder={"Nome del file senza estensione"}
 								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
+								value={formData.filename}
+								onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							/>
 						</Grid>
 						<Grid container item my={1}>
@@ -116,8 +116,8 @@ export const CreateWR = () => {
 								size="small"
 								value={formData.resourceType}
 								onChange={changeResourceType}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
+								error={Boolean(errors.filename)}
+								helperText={errors.filename}
 							>
 								<MenuItem value={"BPMN"}>BPMN</MenuItem>
 								<MenuItem value={"DMN"}>DMN</MenuItem>
