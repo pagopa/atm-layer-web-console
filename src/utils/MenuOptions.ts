@@ -86,3 +86,10 @@ export const menuOptionsButton: Array<Options> = [
         ]
     },
 ];
+
+export 	const filterOptionsByLabel = (inputLabel: string): Array<Options> =>
+// filter option for label
+menuOptionsButton.filter((optionsGroup, i) => {
+    const firstOptionLabel = optionsGroup.options[i].label || "";
+    return firstOptionLabel.includes(inputLabel);
+});

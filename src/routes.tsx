@@ -1,10 +1,12 @@
-export const BASE_ROUTE = "http://localhost:3005/";
+export const BASE_ROUTE = "http://localhost:3005";
 
 const ROUTES = {
-	HOME: `${BASE_ROUTE}`,
+	HOME: "/home",
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
-	UPLOAD: "/upload",
+	BPMN: "/bpmn",
+	RESOURCES: "/resources",
+	WORKFLOW_RESOURCES: "/workflow_resources",
 };
 
 export default ROUTES;
