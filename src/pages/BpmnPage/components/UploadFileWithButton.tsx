@@ -57,7 +57,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                         </Typography>
                     </Box><Box ml={2}>
                             <IconButton onClick={onClick} disableRipple>
-                                <ClearIcon />
+                                <ClearIcon sx={{color:theme.palette.primary.main}}/>
                             </IconButton>
                         </Box></> :
                     <Button
