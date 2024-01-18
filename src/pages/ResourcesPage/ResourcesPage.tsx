@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Box } from "@mui/system";
 import { Ctx } from "../../DataContext";
 import SideBar from "../../components/Menu/SideBar";
-import NewResources from "./Forms/NewResources";
+import NewResources from "./Forms/CreateResources";
 
 const ResourcesPage = () => {
 	const { headerHeight } = useContext(Ctx);

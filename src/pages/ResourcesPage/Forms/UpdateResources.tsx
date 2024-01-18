@@ -1,22 +1,21 @@
-import { useTheme } from "@mui/material/styles";
+import React, { ChangeEvent, useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
-import { useState, ChangeEvent } from "react";
+import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
+import { ResourcesUpdateDto } from "../../../model/ResourcesModel"; 
 import UploadFileWithButton from "../../BpmnPage/components/UploadFileWithButton";
-import { ResourcesDto } from "../../../model/ResourcesModel";
+import { isValidUUID } from "../../../utils/Commons";
 
-export const NewResources = () => {
+export const UpdateResources = () => {
 	const theme = useTheme();
 
-	const initialValues: ResourcesDto = {
-		file: "",
-		fileName: "",
-		functionType: "",
-		path:"",
+	const initialValues: ResourcesUpdateDto = {
+		uuid: "",
+		file: ""
 	};
 
-	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
+	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 
 	const inputGroupStyle = {
@@ -27,18 +26,15 @@ export const NewResources = () => {
 		mb: 3,
 		width: "50%",
 	};
-    
+
 	const validateForm = () => {
 		const newErrors = {
-			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
-			functionType: formData.functionType ? "" : "Campo obbligatorio",
-			path: formData.functionType ? "" : "",
+			uuid: formData.uuid==="" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido", 
+			file: formData.file ? "" : "Campo obbligatorio"
 		};
 
 		setErrors(newErrors);
 
-		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
 	};
 
@@ -67,7 +63,7 @@ export const NewResources = () => {
 			width={"85vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Creazione Resources"} subTitle={""} />
+				<TitleComponent title={"Aggiornamento Resources"} subTitle={""} />
 			</Box>
 			<Box sx={inputGroupStyle} mt={4}>
 				<form onSubmit={handleSubmit}>
@@ -75,11 +71,11 @@ export const NewResources = () => {
 						<Grid container item>
 							<EditNoteIcon sx={{ mr: 1 }} />
 							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per creare un nuovo Resource
+                                Compila tutti i campi per aggiornare una risorsa esistente
 							</Typography>
 						</Grid>
 						<Grid container item>
-							<Typography variant="body1">Resource File</Typography>
+							<Typography variant="body1">File della risorsa</Typography>
 							<UploadFileWithButton
 								name={"file"}
 								file={formData.file}
@@ -91,29 +87,15 @@ export const NewResources = () => {
 						<Grid container item my={1}>
 							<TextField
 								fullWidth
-								id="fileName"
-								name="fileName"
-								label={"Nome del file"}
-								placeholder={"Nome del file"}
+								id="uuid"
+								name="uuid"
+								label={"Identificativo unico del file"}
+								placeholder={"Identificativo unico"}
 								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="functionType"
-								name="functionType"
-								label={"Tipo di funzione"}
-								placeholder={"Tipo di funzione"}
-								size="small"
-								value={formData.functionType}
-								onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-								error={Boolean(errors.functionType)}
-								helperText={errors.functionType}
+								value={formData.uuid}
+								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+								error={Boolean(errors.uuid)}
+								helperText={errors.uuid}
 							/>
 						</Grid>
 					</Grid>
@@ -128,4 +110,4 @@ export const NewResources = () => {
 	);
 };
 
-export default NewResources;
+export default UpdateResources;

@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Button, Fade, Menu, MenuItem, useTheme } from "@mui/material";
 import menuOption from "../../utils/menuOption";
 import IconBox from "../Commons/IconBox";
-import ActionIcon from "../Commons/ActionIcon";
 
 type Props = {
 	name: string;
 	route?: string;
 };
 
-const MenuButtons = ({ name, route }: Props) => {
+const MenuButtons = ({ name, route}: Props) => {
 	const { getMenuOptions } = menuOption();
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

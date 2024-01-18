@@ -4,3 +4,8 @@ export type ResourcesDto = {
     functionType: string;
     path: string;
 };
+
+export type ResourcesUpdateDto = {
+    uuid: string;
+    file: string;
+};
