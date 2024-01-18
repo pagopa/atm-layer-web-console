@@ -3,19 +3,19 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { EditNote as EditNoteIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import { DeployBpmnDto } from "../../../model/BpmnModel";
+import { DeleteBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 
-export const DeployBpmn = () => {
+export const DeleteBpmn = () => {
 	const theme = useTheme();
 
-	const initialValues: DeployBpmnDto = {
-		uuid: undefined,
+	const initialValues: DeleteBpmnDto = {
+		bpmnid: undefined,
 		version: undefined,
 	};
 
-	const [formData, setFormData] = useState<DeployBpmnDto>(initialValues);
-	const [errors, setErrors] = useState({ uuid: "", version: "" });
+	const [formData, setFormData] = useState<DeleteBpmnDto>(initialValues);
+	const [errors, setErrors] = useState({ bpmnid: "", version: "" });
 
 	const inputGroupStyle = {
 		borderRadius: 1,
@@ -28,7 +28,7 @@ export const DeployBpmn = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
+			bpmnid: formData.bpmnid ? isValidUUID(formData.bpmnid) ? "" : "uuid non valido" : "Campo obbligatorio",
 			version: formData.version ? "" : "Campo obbligatorio",
 		};
 
@@ -54,7 +54,7 @@ export const DeployBpmn = () => {
 			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Rilascio BPMN"} subTitle={""} />
+				<TitleComponent title={"Eliminazione BPMN"} subTitle={""} />
 			</Box>
 			<Box sx={inputGroupStyle} mt={4}>
 				<form onSubmit={handleSubmit}>
@@ -62,21 +62,21 @@ export const DeployBpmn = () => {
 						<Grid container item>
 							<EditNoteIcon sx={{ mr: 1 }} />
 							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per rilasciare un BPMN
+                                Compila tutti i campi per Eliminare un BPMN
 							</Typography>
 						</Grid>
 						<Grid container item my={1}>
 							<TextField
 								fullWidth
-								id="uuid"
-								name="uuid"
-								label={"Identificatore Univoco"}
+								id="bpmnid"
+								name="bpmnid"
+								label={"Identificatore Univoco Bpmn"}
 								placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 								size="small"
-								value={formData.uuid}
-								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-								error={Boolean(errors.uuid)}
-								helperText={errors.uuid}
+								value={formData.bpmnid}
+								onChange={(e) => setFormData({ ...formData, bpmnid: e.target.value })}
+								error={Boolean(errors.bpmnid)}
+								helperText={errors.bpmnid}
 							/>
 						</Grid>
 						<Grid container item my={1}>
@@ -106,4 +106,4 @@ export const DeployBpmn = () => {
 	);
 };
 
-export default DeployBpmn;
+export default DeleteBpmn;
