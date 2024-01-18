@@ -18,9 +18,10 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 		<Box
 			padding={1.8}
 			sx={{
-				// boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+				// boxShadow: "0 2px 20px 0 rgba(0,0,0,.1)",
 				border: "1px solid" + theme?.palette?.divider,
-				boxShadow: "0 2px 20px 0 rgba(0,0,0,.1)",
+				boxShadow: theme.shadows[8],
+				backgroundColor: theme?.palette?.background?.paper
 			}}
 			minHeight={"90%"}
 			display={"flex"}

@@ -31,10 +31,10 @@ const shadowValues = {
 	4: `0px 2px 4px -1px ${alpha(shadowColor, 0.1)},
       0px 4px 5px ${alpha(shadowColor, 0.05)},
       0px 1px 10px ${alpha(shadowColor, 0.1)}`,
-	/* Elevation 8 = Elevation 16 */
-	8: `0px 8px 10px -5px ${alpha(shadowColor, 0.1)},
-      0px 16px 24px 2px ${alpha(shadowColor, 0.05)},
-      0px 6px 30px 5px ${alpha(shadowColor, 0.1)}`,
+	/* Elevation 8 */
+	8: `0 2px 10px -5px  ${alpha(shadowColor, 0.1)},
+	0px 4px 3px ${alpha(shadowColor, 0.05)},
+	0px 1px 10px  ${alpha(shadowColor, 0.1)}`,
 	/* Elevation 16 */
 	16: `0px 8px 10px -5px ${alpha(shadowColor, 0.1)},
        0px 16px 24px 2px ${alpha(shadowColor, 0.05)},
