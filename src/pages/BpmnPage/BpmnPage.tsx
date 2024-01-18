@@ -6,6 +6,8 @@ import { Ctx } from "../../DataContext";
 import NewBpmn from "./Forms/NewBpmn";
 import UpgradeBpmn from "./Forms/UpgradeBpmn";
 import DeployBpmn from "./Forms/DeployBpmn";
+import AssociateBpmn from "./Forms/AssociateBpmn";
+import DeleteBpmn from "./Forms/DeleteBpmn";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
@@ -13,15 +15,15 @@ const BpmnPage = () => {
     return (
         <Box
             display="flex"
-            flexDirection="row"
+            flexDirection="column"
         >
-            <SideBar name={"BPMN"} />
+            {/* <SideBar name={"BPMN"} /> */}
             <Box
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
-                width={"85vw"}
+                width={"100vm"}
             >
                 <Box
                     alignItems="center"
@@ -33,26 +35,13 @@ const BpmnPage = () => {
                     <NewBpmn />
                     <UpgradeBpmn />
                     <DeployBpmn />
+                    <AssociateBpmn />
+                    <DeleteBpmn />
                 </Box>
 
             </Box>
         </Box>
     );
 };
-
-/* const [checked, setChecked] = useState([0]);
-
-const handleToggle = (value: number) => () => {
-    const currentIndex = checked?.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-        // eslint-disable-next-line functional/immutable-data
-        newChecked.push(value);
-    } else {
-        // eslint-disable-next-line functional/immutable-data
-        newChecked.splice(currentIndex, 1);
-    }
-}; */
 
 export default BpmnPage;

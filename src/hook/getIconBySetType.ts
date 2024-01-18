@@ -42,9 +42,10 @@ import ReportIcon from "@mui/icons-material/Report";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
-
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 const Icons : { [key: string]: any } ={
+	"HomeOutlined": HomeOutlinedIcon, 
 	"PublishOutlined": 	PublishOutlinedIcon, 
 	"VisibilityOutlined": 	VisibilityOutlinedIcon, 
 	"CreateOutlined": 	CreateOutlinedIcon, 

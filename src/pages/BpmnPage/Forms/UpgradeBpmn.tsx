@@ -7,7 +7,7 @@ import UploadFileWithButton from "../components/UploadFileWithButton";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 
-export const NewBpmn = () => {
+export const UpgradeBpmn = () => {
 	const theme = useTheme();
 
 	const initialValues: UpgradeBpmnDto = {
@@ -64,7 +64,7 @@ export const NewBpmn = () => {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
-			width={"85vw"}
+			width={"100vw"}
 		>
 			<Box marginTop={3} textAlign={"center"}>
 				<TitleComponent title={"Aggiornamento BPMN"} subTitle={""} />
@@ -142,4 +142,4 @@ export const NewBpmn = () => {
 	);
 };
 
-export default NewBpmn;
+export default UpgradeBpmn;
