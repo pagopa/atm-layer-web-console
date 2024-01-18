@@ -27,7 +27,7 @@ export default function IconBox({ icon, color, size, marg, pad, border, borderRa
 			{
 				React.createElement(getIcon(icon), {
 					style: {
-						fontSize: size ? size : "0.8em",
+						fontSize: size ? size : "1em",
 						color: color ? color : theme.palette.common.black,
 						transform: transform? transform : ""
 					},
