@@ -10,7 +10,7 @@ import UpgradeBpmn from "./Forms/UpgradeBpmn";
 import DeployBpmn from "./Forms/DeployBpmn";
 import AssociateBpmn from "./Forms/AssociateBpmn";
 import DeleteBpmn from "./Forms/DeleteBpmn";
-import Form from "./Forms/Form";
+import FormTemplate from "./Forms/FormTemplate";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
@@ -66,9 +66,9 @@ const { getFormOptions } = formOption();
                         mr: "14px"
                     }}>
                     
-                    <Form handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create")} >
+                    <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create")} >
                         <NewBpmn formData={formData} setFormData={setFormData} errors={errors}/>
-                    </Form>
+                    </FormTemplate>
                      
                     <UpgradeBpmn />
                     <DeployBpmn />
