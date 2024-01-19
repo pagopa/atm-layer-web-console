@@ -13,22 +13,28 @@ import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import HomePage from "./pages/Layout/HomePage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage/WorkflowResourcePage";
 import ResourcesPage from "./pages/ResourcesPage/ResourcesPage";
+import NoPage from "./pages/NoPage";
 
 const LocalRoutes = () => (
-	<Layout>
-		<Routes>
-			<Route path="/" element={<PageLayout page={<HomePage />} />} />
-			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
-			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
-			<Route path={routes.RESOURCES} element={<PageLayout page={<ResourcesPage />} />} />
-			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout page={<WorkflowResourcePage />} />} />
-			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
-			<Route
-				path={routes.ERROR_PAGE}
-				element={<PageLayout page={<CommonErrorPage title={""} icon={undefined} />} />}
-			/>
-		</Routes>
-	</Layout>
+	
+	<BrowserRouter basename="/web-console">
+		<PageLayout>
+			<Routes>
+				<Route path="/" element={<Layout />} />
+				<Route index path={routes.HOME} element={<Layout children={<HomePage />} />} />
+				<Route path={routes.BPMN} element={<Layout children={<BpmnPage />} />} />
+				<Route path={routes.RESOURCES} element={<Layout children={<ResourcesPage />} />} />
+						
+				<Route path={routes.WORKFLOW_RESOURCES} element={<Layout children={<WorkflowResourcePage />} />} />
+				<Route path={routes.WARNING_CODE} element={<Layout children={<WarningCodeInput />} />} />
+				<Route
+					path={routes.ERROR_PAGE}
+					element={<Layout children={<CommonErrorPage title={""} icon={undefined} />} />}
+				/>
+				<Route path="*" element={<NoPage />} />
+			</Routes>
+		</PageLayout>
+	</BrowserRouter>
 );
 
 function App() {
@@ -54,9 +60,9 @@ function App() {
 	return (
 		<ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>
-				<BrowserRouter>
-					{LocalRoutes()}
-				</BrowserRouter>
+				
+				{LocalRoutes()}
+				
 			</Ctx.Provider>
 		</ThemeProvider>
 	);

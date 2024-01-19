@@ -1,8 +1,8 @@
 {
-  "name": "atm-layer-console",
+  "name": "web-console",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/home",
+  "homepage": "/web-console/home",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -25,7 +25,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-router-dom": "^6.20.1",
     "react-scripts": "^5.0.1",
     "source-map-explorer": "^2.5.3",
     "typescript": "^4.9.5",
@@ -71,6 +70,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "^0.23.0",
     "prettier": "^3.0.3",
-    "prettier-eslint": "^16.1.2"
+    "prettier-eslint": "^16.1.2",
+    "react-router-dom": "^6.20.1"
   }
 }
