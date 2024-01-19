@@ -33,6 +33,9 @@ spec:
           ports:
             - containerPort: {{ .Values.service.targetPort }}
           imagePullPolicy: Always
+          env:
+            - name: REACT_APP_VERSION
+              value: "{{ .Values.image.version }}"
           # volumeMounts:
           # - name: secrets-store-inline
           #   mountPath: "/mnt/secrets-store"

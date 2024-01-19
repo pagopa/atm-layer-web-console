@@ -9,6 +9,7 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
+  version: latest
  
 secretProviderClass: 
   name: atm-layer-web-console-secrets
@@ -69,7 +70,7 @@ ingress:
   hosts:
     - host:
       paths:
-        - path: /home
+        - path: /web-console
           pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls

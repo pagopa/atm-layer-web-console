@@ -13,6 +13,7 @@ image:
 secretProviderClass: 
   name: atm-layer-web-console-secrets
   env: uat
+  version: latest
 
 imagePullSecrets: []
 nameOverride: ""
