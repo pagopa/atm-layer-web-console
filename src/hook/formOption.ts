@@ -7,6 +7,11 @@ const formOption:any = () => {
 				{title:"Creazione BPMN", description: " Compila tutti i campi per creare un nuovo BPMN"}
 			];
 
+	    case "Deploy":
+			return [
+				{title:"Rilascio BPMN", description: "Compila tutti i campi per rilasciare un BPMN"}
+			];
+
 		case "Resources":
 			return [
 				// {

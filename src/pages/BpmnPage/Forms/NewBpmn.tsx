@@ -5,6 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import UploadFileWithButton from "../components/UploadFileWithButton";
 import { BpmnDto } from "../../../model/BpmnModel";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "./FormTemplate";
 
 type Props = {
 	errors:any ;
@@ -12,14 +14,40 @@ type Props = {
 	setFormData: any; 
 	
   };
-export const NewBpmn = ({formData, setFormData, errors }:Props) => {
+export const NewBpmn = () => {
 	const theme = useTheme();
 
-	
+	const { getFormOptions } = formOption();
 
-	
-
-	
+	const initialValues: BpmnDto = {
+		file: undefined,
+		fileName: undefined,
+		functionType: undefined,
+	};
+ 
+	const [formData, setFormData] = useState<BpmnDto>(initialValues);
+	const [errors, setErrors] = useState(initialValues);
+ 
+	const validateForm = () => {
+		const newErrors = {
+			file: formData.file ? "" : "Campo obbligatorio",
+			fileName: formData.fileName ? "" : "Campo obbligatorio",
+			functionType: formData.functionType ? "" : "Campo obbligatorio",
+		};
+ 
+		setErrors(newErrors);
+ 
+		// Determines whether all the members of the array satisfy the conditions "!error".
+		return Object.values(newErrors).every((error) => !error);
+	};
+ 
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+ 
+		if (validateForm()) {
+			console.log("VALUES:", formData);
+		}
+	};
 
 	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData({ ...formData, file: e.target.value });
@@ -29,13 +57,11 @@ export const NewBpmn = ({formData, setFormData, errors }:Props) => {
 		setFormData({ ...formData, file: "" });
 	};
 
-
-
 	return (
 		
 	// <Box sx={inputGroupStyle} mt={4}>
 				
-		<React.Fragment>	
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create")} >	
 						
 			<Grid container item>
 				<Typography variant="body1">File BPMN</Typography>
@@ -76,9 +102,7 @@ export const NewBpmn = ({formData, setFormData, errors }:Props) => {
 				/>
 			</Grid>
 			
-				
-		
-		</React.Fragment>
+		</FormTemplate>
 		// </Box>
 		
 	);

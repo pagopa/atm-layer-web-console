@@ -16,35 +16,38 @@ const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
 const { getFormOptions } = formOption();
 
-    const initialValues: BpmnDto = {
-		file: undefined,
-		fileName: undefined,
-		functionType: undefined,
-	};
+    // const initialValues: BpmnDto = {
+	// 	file: undefined,
+	// 	fileName: undefined,
+	// 	functionType: undefined,
+	// };
 
-	const [formData, setFormData] = useState<BpmnDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	// const [formData, setFormData] = useState();
+	// const [errors, setErrors] = useState();
 
-    const validateForm = () => {
-		const newErrors = {
-			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
-			functionType: formData.functionType ? "" : "Campo obbligatorio",
-		};
+    // const validateForm = () => {
+	// 	const newErrors = {
+	// 		file: formData.file ? "" : "Campo obbligatorio",
+	// 		fileName: formData.fileName ? "" : "Campo obbligatorio",
+	// 		functionType: formData.functionType ? "" : "Campo obbligatorio",
+	// 	};
 
-		setErrors(newErrors);
+	// 	setErrors(newErrors);
 
-		// Determines whether all the members of the array satisfy the conditions "!error".
-		return Object.values(newErrors).every((error) => !error);
-	};
+	// 	// Determines whether all the members of the array satisfy the conditions "!error".
+	// 	return Object.values(newErrors).every((error) => !error);
+	// };
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+	// const handleSubmit = (e: React.FormEvent) => {
+	// 	e.preventDefault();
 
-		if (validateForm()) {
-			console.log("VALUES:", formData);
-		}
-	};
+	// 	if (validateForm()) {
+	// 		console.log("VALUES:", formData);
+	// 	}
+	// };
+
+
+
     return (
         <Box
             display="flex"
@@ -66,12 +69,14 @@ const { getFormOptions } = formOption();
                         mr: "14px"
                     }}>
                     
-                    <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create")} >
-                        <NewBpmn formData={formData} setFormData={setFormData} errors={errors}/>
-                    </FormTemplate>
-                     
+                    
+                    <NewBpmn />
+
+                    {/* <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy")} >
+                        <DeployBpmn formData={formData} setFormData={setFormData} errors={errors}/>
+                    </FormTemplate> */}
+
                     <UpgradeBpmn />
-                    <DeployBpmn />
                     <AssociateBpmn />
                     <DeleteBpmn />
                 </Box>
