@@ -1,8 +1,8 @@
 {
-  "name": "atm-layer-console",
+  "name": "web-console",
   "version": "v1.0.0-dev.1",
   "private": true,
-  "homepage": "/",
+  "homepage": "/home",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
