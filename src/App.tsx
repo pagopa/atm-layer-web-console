@@ -18,7 +18,7 @@ const LocalRoutes = () => (
 	<BrowserRouter basename="/web-console">
 		<PageLayout>
 			<Routes>
-				<Route path="/" element={<Layout />} />
+				<Route path="/" element={<Layout children={<HomePage />} />} />
 				<Route index path={routes.HOME} element={<Layout children={<HomePage />} />} />
 				<Route path={routes.BPMN} element={<Layout children={<BpmnPage />} />} />
 				<Route path={routes.WARNING_CODE} element={<Layout children={<WarningCodeInput />} />} />
