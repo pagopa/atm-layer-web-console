@@ -13,12 +13,13 @@ import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import HomePage from "./pages/Layout/HomePage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage/WorkflowResourcePage";
 import ResourcesPage from "./pages/ResourcesPage/ResourcesPage";
+import NoPage from "./pages/NoPage";
 
 const LocalRoutes = () => (
 	<Layout>
 		<Routes>
 			<Route path="/" element={<PageLayout page={<HomePage />} />} />
-			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
+			<Route index element={<PageLayout page={<HomePage />} />} />
 			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
 			<Route path={routes.RESOURCES} element={<PageLayout page={<ResourcesPage />} />} />
 			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout page={<WorkflowResourcePage />} />} />
@@ -27,6 +28,7 @@ const LocalRoutes = () => (
 				path={routes.ERROR_PAGE}
 				element={<PageLayout page={<CommonErrorPage title={""} icon={undefined} />} />}
 			/>
+			<Route path="*" element={<NoPage />} />
 		</Routes>
 	</Layout>
 );
