@@ -2,7 +2,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import routes from "../../routes";
 import { homePageCardItems } from "../../utils/HomePageCardItems";
 import MenuButtons from "./MenuButtons";

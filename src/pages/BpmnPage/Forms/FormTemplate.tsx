@@ -1,20 +1,19 @@
-import { Grid, Typography, TextField, Button, Box, useTheme } from "@mui/material";
-import React, { ChangeEvent } from "react";
+import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
+import React from "react";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import UploadFileWithButton from "../components/UploadFileWithButton";
 import IconBox from "../../../components/Commons/IconBox";
 
 
 type Props = {
-	handleSubmit:React.FormEventHandler<HTMLFormElement> ;
-	children?: any; 
-	getFormOptions: any; 
-	
-  };
+	handleSubmit: React.FormEventHandler<HTMLFormElement>;
+	children?: any;
+	getFormOptions: any;
 
-export default function FormTemplate({handleSubmit, children, getFormOptions}:Props) {
+};
+
+export default function FormTemplate({ handleSubmit, children, getFormOptions }: Readonly<Props>) {
 	const theme = useTheme();
-	
+
 	const inputGroupStyle = {
 		borderRadius: 1,
 		border: 1,
@@ -32,7 +31,7 @@ export default function FormTemplate({handleSubmit, children, getFormOptions}:Pr
 			alignItems="center"
 			width={"100vw"}
 		>
-			{getFormOptions.map((el: any,ind: any)=> (
+			{getFormOptions.map((el: any, ind: any) => (
 				<React.Fragment key={el.title}>
 					<Box marginTop={3} textAlign={"center"}>
 						<TitleComponent title={el.title} subTitle={""} />
@@ -52,7 +51,7 @@ export default function FormTemplate({handleSubmit, children, getFormOptions}:Pr
 							</Grid>
 							<Box display="flex" justifyContent="flex-end" mt={2}>
 								<Button variant="contained" type="submit">
-                        Submit
+									Submit
 								</Button>
 							</Box>
 						</form>

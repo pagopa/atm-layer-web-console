@@ -1,11 +1,10 @@
 /* eslint-disable indent */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { EditNote as EditNoteIcon } from "@mui/icons-material";
+import { EditNote as EditNoteIcon, RemoveCircleOutline } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
-import { RemoveCircleOutline } from "@mui/icons-material";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import { AssociateBpmnBodyDto, AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
+import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 
 export const AssociateBpmn = () => {
@@ -71,26 +70,41 @@ export const AssociateBpmn = () => {
 
     const validateForm = () => {
         const newErrors = {
-            acquirerId: formData.acquirerId ? (isValidUUID(formData.acquirerId) ? "" : "uuid non valido") : "Campo obbligatorio",
+            acquirerId: formData.acquirerId ?
+                isValidUUID(formData.acquirerId) ?
+                    ""
+                    : "uuid non valido"
+                : "Campo obbligatorio",
             functionType: formData.functionType ? "" : "Campo obbligatorio",
             body: {
-                defaultTemplateId: formData.body?.defaultTemplateId ? (isValidUUID(formData.body?.defaultTemplateId) ? "" : "uuid non valido") : "Campo obbligatorio",
+                defaultTemplateId:
+                    formData.body?.defaultTemplateId ?
+                        (isValidUUID(formData.body?.defaultTemplateId) ?
+                            ""
+                            : "uuid non valido")
+                        : "Campo obbligatorio",
                 defaultTemplateVersion: formData.body?.defaultTemplateVersion ? "" : "Campo obbligatorio",
-                branchesConfigs: formData.body?.branchesConfigs ?
-                    formData.body?.branchesConfigs.map((branch) => ({
-                        branchId: branch && typeof branch.branchId !== "undefined" ? "" : "Campo obbligatorio",
-                        branchDefaultTemplateId: branch?.branchDefaultTemplateId ?
-                            (isValidUUID(branch.branchDefaultTemplateId) ? "" : "uuid non valido")
-                            : "Campo obbligatorio",
-                        branchDefaultTemplateVersion: branch?.branchDefaultTemplateVersion ? "" : "Campo obbligatorio",
-                        terminals: branch?.terminals ? branch.terminals.map((terminal) => ({
-                            templateId: terminal?.templateId ? (isValidUUID(terminal.templateId) ? "" : "uuid non valido") : "CampoObbligatorio",
-                            templateVersion: terminal?.templateVersion ? "" : "Campo obbligatorio",
-                            terminalIds: terminal?.terminalIds ? terminal.terminalIds.map((id) => (id ? "" : "Campo obbligatorio")) : [""]
-                        })) : [{ ...initialTerminalErrors }]
-                    })
-
-                    ) : [{ ...initialBranchesConfigErrors }],
+                branchesConfigs:
+                    formData.body?.branchesConfigs ?
+                        formData.body?.branchesConfigs.map((branch) => ({
+                            branchId: branch.branchId ? "" : "Campo obbligatorio",
+                            branchDefaultTemplateId: branch?.branchDefaultTemplateId ?
+                                (isValidUUID(branch.branchDefaultTemplateId) ? "" : "uuid non valido")
+                                : "Campo obbligatorio",
+                            branchDefaultTemplateVersion: branch?.branchDefaultTemplateVersion ? "" : "Campo obbligatorio",
+                            terminals: branch?.terminals ?
+                                branch.terminals.map((terminal) => ({
+                                    templateId: terminal?.templateId ?
+                                        (isValidUUID(terminal.templateId) ? "" : "uuid non valido")
+                                        : "CampoObbligatorio",
+                                    templateVersion: terminal?.templateVersion ? "" : "Campo obbligatorio",
+                                    terminalIds: terminal?.terminalIds ?
+                                        terminal.terminalIds.map((id) => (id ? "" : "Campo obbligatorio"))
+                                        : [""]
+                                }))
+                                : [{ ...initialTerminalErrors }]
+                        }))
+                        : [{ ...initialBranchesConfigErrors }],
             }
         };
 
@@ -117,7 +131,7 @@ export const AssociateBpmn = () => {
 
     const handleBranchChange = (index: number, field: string, value: string | number) => {
         setFormData((prevData) => {
-            const updatedBranches = [...prevData.body?.branchesConfigs || []];
+            const updatedBranches = [...prevData.body?.branchesConfigs ?? []];
             // eslint-disable-next-line functional/immutable-data
             updatedBranches[index] = {
                 ...updatedBranches[index],
@@ -135,27 +149,27 @@ export const AssociateBpmn = () => {
     };
 
     const addBranches = () => {
-        setFormData({
-            ...formData,
-            body: {
-                ...formData.body,
-                branchesConfigs: [
-                    ...(formData.body?.branchesConfigs || []),
-                    {
-                        ...branchesInitialValues,
-                        branchId: undefined
-                    }
-                ],
-            },
-        });
-    };
-
-    const removeBranches = (index: number) => {
         setFormData((prevData) => {
-            const updatedBranches = [...prevData.body?.branchesConfigs || []];
-            // eslint-disable-next-line functional/immutable-data
-            updatedBranches.splice(index, 1);
-
+            const updatedBranches = [
+                ...(prevData.body?.branchesConfigs ?? []),
+                {
+                    ...branchesInitialValues,
+                    branchId: undefined
+                }
+            ];
+            
+            const updatedErrors = {
+                ...errors,
+                body: {
+                    ...errors.body,
+                    branchesConfigs: [
+                        ...(errors.body?.branchesConfigs ?? []),
+                        { ...initialBranchesConfigErrors }
+                    ]
+                }
+            };
+    
+            setErrors(updatedErrors);
             return {
                 ...prevData,
                 body: {
@@ -165,19 +179,66 @@ export const AssociateBpmn = () => {
             };
         });
     };
-
+    
+    const removeBranches = (index: number) => {
+        setFormData((prevData) => {
+            const updatedBranches = [...prevData.body?.branchesConfigs ?? []];
+            // eslint-disable-next-line functional/immutable-data
+            updatedBranches.splice(index, 1);
+    
+            const updatedErrors = {
+                ...errors,
+                body: {
+                    ...errors.body,
+                    branchesConfigs: [...errors.body?.branchesConfigs ?? []]
+                }
+            };
+            // eslint-disable-next-line functional/immutable-data
+            updatedErrors.body.branchesConfigs.splice(index, 1);
+    
+            setErrors(updatedErrors);
+            return {
+                ...prevData,
+                body: {
+                    ...prevData.body,
+                    branchesConfigs: updatedBranches,
+                },
+            };
+        });
+    };
+    
     const addTerminal = (branchIndex: number, newTerminal: TerminalDto) => {
         setFormData((prevData) => {
-            const updatedBranches = (prevData.body?.branchesConfigs || []).map((branch, index) => {
+            const updatedBranches = (prevData.body?.branchesConfigs ?? []).map((branch, index) => {
                 if (index === branchIndex) {
                     return {
                         ...branch,
-                        terminals: [...(branch.terminals || []), newTerminal]
+                        terminals: [...(branch.terminals ?? []), newTerminal]
                     };
                 }
                 return branch;
             });
-
+    
+            const updatedErrors = {
+                ...errors,
+                body: {
+                    ...errors.body,
+                    branchesConfigs: (errors.body?.branchesConfigs ?? []).map((branch, i) => {
+                        if (i === branchIndex) {
+                            return {
+                                ...branch,
+                                terminals: [
+                                    ...(branch.terminals ?? []),
+                                    { ...initialTerminalErrors }
+                                ]
+                            };
+                        }
+                        return branch;
+                    })
+                }
+            };
+    
+            setErrors(updatedErrors);
             return {
                 ...prevData,
                 body: {
@@ -187,16 +248,13 @@ export const AssociateBpmn = () => {
             };
         });
     };
-
-
-
-
+    
     const removeTerminal = (branchIndex: number, terminalIndex: number) => {
         setFormData((prevData) => ({
             ...prevData,
             body: {
                 ...prevData.body,
-                branchesConfigs: (prevData.body?.branchesConfigs || []).map((branch, i) =>
+                branchesConfigs: (prevData.body?.branchesConfigs ?? []).map((branch, i) =>
                     i === branchIndex
                         ? {
                             ...branch,
@@ -206,6 +264,25 @@ export const AssociateBpmn = () => {
                 )
             }
         }));
+    
+        setErrors((prevErrors) => {
+            const updatedErrors = {
+                ...prevErrors,
+                body: {
+                    ...prevErrors.body,
+                    branchesConfigs: (prevErrors.body?.branchesConfigs ?? []).map((branch, i) =>
+                        i === branchIndex
+                            ? {
+                                ...branch,
+                                terminals: branch.terminals?.filter((_terminal, termIndex) => termIndex !== terminalIndex)
+                            }
+                            : branch
+                    )
+                }
+            };
+    
+            return updatedErrors;
+        });
     };
 
     return (
@@ -292,16 +369,16 @@ export const AssociateBpmn = () => {
                         </Grid>
                         <Grid container item my={1}>
                             {
-                                formData.body && formData.body.branchesConfigs ?
+                                formData.body?.branchesConfigs ?
                                     formData.body.branchesConfigs.map((branch, branchIndex) => (
-                                        <Box key={branchIndex} display={"flex"} flexDirection={"row"} width={"100%"}>
+                                        <Box key={branch.branchId} display={"flex"} flexDirection={"row"} width={"100%"}>
                                             <RemoveCircleOutline
                                                 color="error"
                                                 sx={{
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => removeBranches(branchIndex)}
-                                                key={`icon${branchIndex}`} />
+                                            />
                                             <Box display="flex"
                                                 flexDirection="column"
                                                 justifyContent="center"
@@ -315,11 +392,12 @@ export const AssociateBpmn = () => {
                                                     width: "-webkit-fill-available"
                                                 }}
                                                 ml={2}
-                                                key={`box${branchIndex}`}
+                                                
                                             >
+                                                {/* Aggiungere onBlur al posto  */}
                                                 {branch && (
                                                     <>
-                                                        <Grid container item my={1} key={`branchId${branchIndex}`}>
+                                                        <Grid container item my={1} >
                                                             <TextField
                                                                 fullWidth
                                                                 id="branchId"
@@ -328,9 +406,12 @@ export const AssociateBpmn = () => {
                                                                 placeholder={"Branch Id"}
                                                                 size="small"
                                                                 value={branch.branchId}
-                                                                onChange={(e) => handleBranchChange(branchIndex, "branchId", e.target.value)} />
+                                                                onChange={(e) => handleBranchChange(branchIndex, "branchId", e.target.value)}
+                                                                error={Boolean(errors.body.branchesConfigs[branchIndex]?.branchId)}
+                                                                helperText={errors.body.branchesConfigs[branchIndex]?.branchId}
+                                                            />
                                                         </Grid>
-                                                        <Grid container item my={1} key={`branchDefaultTemplateId${branchIndex}`}>
+                                                        <Grid container item my={1} >
                                                             <TextField
                                                                 fullWidth
                                                                 id="branchDefaultTemplateId"
@@ -340,9 +421,11 @@ export const AssociateBpmn = () => {
                                                                 size="small"
                                                                 value={branch.branchDefaultTemplateId}
                                                                 onChange={(e) => handleBranchChange(branchIndex, "branchDefaultTemplateId", e.target.value)}
+                                                                error={Boolean(errors.body.branchesConfigs[branchIndex]?.branchDefaultTemplateId)}
+                                                                helperText={errors.body.branchesConfigs[branchIndex]?.branchDefaultTemplateId}
                                                             />
                                                         </Grid>
-                                                        <Grid container item my={1} key={`branchDefaultTemplateVersion${branchIndex}`}>
+                                                        <Grid container item my={1} >
                                                             <TextField
                                                                 fullWidth
                                                                 id="branchDefaultTemplateVersion"
@@ -353,6 +436,8 @@ export const AssociateBpmn = () => {
                                                                 type="number"
                                                                 value={branch.branchDefaultTemplateVersion}
                                                                 onChange={(e) => handleBranchChange(branchIndex, "branchDefaultTemplateVersion", parseInt(e.target.value, 10))}
+                                                                error={Boolean(errors.body.branchesConfigs[branchIndex]?.branchDefaultTemplateVersion)}
+                                                                helperText={errors.body.branchesConfigs[branchIndex]?.branchDefaultTemplateVersion}
                                                             />
                                                         </Grid>
                                                         <Grid container item mb={1}>
@@ -361,18 +446,15 @@ export const AssociateBpmn = () => {
                                                             </Button>
                                                         </Grid>
                                                         {
-                                                            formData.body &&
-                                                            formData.body.branchesConfigs &&
-                                                            formData.body.branchesConfigs[branchIndex] &&
-                                                            formData.body.branchesConfigs[branchIndex]?.terminals?.map((terminal, terminalIndex) => (
-                                                                <Box key={branchIndex} display={"flex"} flexDirection={"row"} width={"100%"}>
+                                                            formData.body?.branchesConfigs && formData.body?.branchesConfigs[branchIndex].terminals?.map((terminal, terminalIndex) => (
+                                                                <Box key={terminal.templateId} display={"flex"} flexDirection={"row"} width={"100%"}>
                                                                     <RemoveCircleOutline
                                                                         color="error"
                                                                         sx={{
                                                                             cursor: "pointer",
                                                                         }}
                                                                         onClick={() => removeTerminal(branchIndex, terminalIndex)}
-                                                                        key={`iconT${terminalIndex}`} />
+                                                                     />
                                                                     <Box display="flex"
                                                                         flexDirection="column"
                                                                         justifyContent="center"
@@ -386,9 +468,9 @@ export const AssociateBpmn = () => {
                                                                             width: "-webkit-fill-available"
                                                                         }}
                                                                         ml={2}
-                                                                        key={`boxT${terminalIndex}`}
+                                                                
                                                                     >
-                                                                        <Grid container item my={1} key={`templateId${terminalIndex}`}>
+                                                                        <Grid container item my={1}>
                                                                             <TextField
                                                                                 fullWidth
                                                                                 id="templateId"
@@ -398,9 +480,11 @@ export const AssociateBpmn = () => {
                                                                                 size="small"
                                                                                 value={terminal.templateId}
                                                                                 onChange={(e) => e.target.value}
+                                                                                error={Boolean(errors.body.branchesConfigs[branchIndex]?.terminals[terminalIndex]?.templateId)}
+                                                                                helperText={errors.body.branchesConfigs[branchIndex]?.terminals[terminalIndex]?.templateId}
                                                                             />
                                                                         </Grid>
-                                                                        <Grid container item my={1} key={`templateVersion${terminalIndex}`}>
+                                                                        <Grid container item my={1} >
                                                                             <TextField
                                                                                 fullWidth
                                                                                 id="templateVersion"
@@ -411,6 +495,8 @@ export const AssociateBpmn = () => {
                                                                                 type="number"
                                                                                 value={terminal.templateVersion}
                                                                                 onChange={(e) => e.target.value}
+                                                                                error={Boolean(errors.body.branchesConfigs[branchIndex]?.terminals[terminalIndex]?.templateVersion)}
+                                                                                helperText={errors.body.branchesConfigs[branchIndex]?.terminals[terminalIndex]?.templateVersion}
                                                                             />
                                                                         </Grid>
                                                                     </Box>

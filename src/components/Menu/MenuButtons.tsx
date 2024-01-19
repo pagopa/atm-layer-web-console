@@ -25,10 +25,10 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 		setAnchorEl(null);
 	};
 
-	const handleOptionClick = (onClick: () => void) => {
-		onClick();
-		handleClose();
-	};
+	// const handleOptionClick = (onClick: () => void) => {
+	// 	onClick();
+	// 	handleClose();
+	// };
 
 	return (
 		<>
