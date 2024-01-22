@@ -30,7 +30,7 @@ import NoPage from "./pages/NoPage";
 
 const LocalRoutes = () => (
 	
-	<BrowserRouter basename="/web-console">
+	<BrowserRouter basename="/webconsole">
 		<PageLayout>
 			<Routes>
 				<Route path="/" element={<Layout children={<HomePage />} />} />
