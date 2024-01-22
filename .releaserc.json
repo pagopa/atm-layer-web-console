@@ -1,6 +1,6 @@
 {
-    "branches": ["+([0-9])?(.{+([0-9]),x}).x", "uat", "main",{
-      "name": "newPipe",
+    "branches": ["+([0-9])?(.{+([0-9]),x}).x", "uat", "main","newPipe",{
+      "name": "dev",
       "prerelease": true
     }],
     "ci": false,
