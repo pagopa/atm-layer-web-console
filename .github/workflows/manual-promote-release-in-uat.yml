@@ -100,8 +100,8 @@ jobs:
 
       - name: Pull pre-release = ${{ inputs.release }} from dev S3
         run: |
-          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key ${{ inputs.release }}.zip
-          unzip ${{ inputs.release }}.zip -d ./static
+          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key ${{ inputs.release }}.zip ./${{ inputs.release }}.zip
+          unzip ${{ inputs.release }}.zip
 
       - name: Configure uat AWS Credentials
         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
@@ -118,4 +118,4 @@ jobs:
       - name: Push release on uat S3
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
-          aws s3 cp v${{ steps.semantic-release.outputs.new_release_version }}.zip ${{ vars.UAT_BUCKET_NAME_ARTIFACTS }}
+          aws s3 cp v${{ steps.semantic-release.outputs.new_release_version }}.zip s3://${{ vars.UAT_BUCKET_NAME_ARTIFACTS }}/

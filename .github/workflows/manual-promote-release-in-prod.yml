@@ -39,7 +39,7 @@ jobs:
 
       - name: Pull pre-release = ${{ inputs.release }} from uat S3
         run: |
-          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key ${{ inputs.release }}.zip
+          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key ${{ inputs.release }}.zip ./${{ inputs.release }}.zip
 
       - name: Configure prod AWS Credentials
         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
@@ -49,4 +49,4 @@ jobs:
 
       - name: Push release on prod S3
         run: |
-          aws s3 cp ${{ inputs.release }}.zip ${{ vars.PROD_BUCKET_NAME_ARTIFACTS }}
+          aws s3 cp ${{ inputs.release }}.zip s3://${{ vars.PROD_BUCKET_NAME_ARTIFACTS }}/
