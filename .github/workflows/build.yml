@@ -38,4 +38,4 @@ jobs:
         id: zip-pre-release
         uses: montudor/action-zip@v1
         with:
-          args: '-r ciao.zip ./static'
+          args: '-r ciao.zip build'
