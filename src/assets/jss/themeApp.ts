@@ -541,7 +541,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						
 						color: foundation.palette.primary.contrastText,
 						"&:hover": {
-							padding: "0 20px 0 24px",
+							// padding: "0 20px 0 24px",
 							// color: alpha(foundation.palette.text.primary, 0.8),
 							backgroundColor: alpha(foundation.palette.primary.light, 0.3),
 						},
