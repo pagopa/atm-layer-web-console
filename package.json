@@ -2,7 +2,7 @@
   "name": "web-console",
   "version": "v1.0.0-dev.3",
   "private": true,
-  "homepage": "/web-console/home",
+  "homepage": "/webconsole",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -20,6 +20,7 @@
     "@types/node": "^16.18.60",
     "@types/react": "^18.2.36",
     "@types/react-dom": "^18.2.14",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.53.0",
     "formik": "^2.4.5",
     "react": "^18.2.0",
@@ -52,6 +53,7 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [
