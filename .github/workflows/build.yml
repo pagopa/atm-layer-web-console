@@ -46,3 +46,4 @@ jobs:
           unzip v1.0.0.zip
           aws s3 cp build s3://${{ vars.BUCKET_NAME_FRONTEND }}/ --recursive
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+ 
