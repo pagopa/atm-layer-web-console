@@ -1,17 +1,18 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { Grid, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
+import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 
 type Props = {
-	errors:any ;
-	formData: any; 
-	setFormData: any; 
-	
-  };
+	errors: any;
+	formData: any;
+	setFormData: any;
+
+};
 
 export const NewBpmn = () => {
 	// const theme = useTheme();
@@ -23,28 +24,48 @@ export const NewBpmn = () => {
 		fileName: undefined,
 		functionType: undefined,
 	};
- 
+
 	const [formData, setFormData] = useState<BpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
- 
+	const abortController = useRef(new AbortController());
+
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
 			fileName: formData.fileName ? "" : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
 		};
- 
+
 		setErrors(newErrors);
- 
+
 		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
 	};
- 
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
- 
+
 		if (validateForm()) {
 			console.log("VALUES:", formData);
+
+			const createBpmn = new Promise((resolve) => {
+				void fetchCreateBpmn({ abortController, formData })
+				().then((response: any) => {
+					if (response) {
+						resolve({
+							data: response,
+							type: "SUCCESS"
+						});
+					} else {
+						resolve({ type: "ERROR" });
+					}
+				});
+			});
+
+			createBpmn.then((res) => {
+				console.log("PROMISE RESPONSE", res);
+				return res;
+			}).catch((err) => console.log("ERROR", err));
 		}
 	};
 
@@ -56,8 +77,8 @@ export const NewBpmn = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	return (		
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")} >	
+	return (
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")} >
 			<Grid container item>
 				<Grid container item my={1}>
 					<Typography variant="body1">File BPMN</Typography>
