@@ -34,69 +34,9 @@ jobs:
           npm install
           npm run build
 ##
-      - name: Commit with "feat:" prefix
+      - name: Deploy app version = v1.0.0-newPipe.1
         run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git pull
-          git add .
-          git commit --allow-empty -m "feat: ${{ github.sha }}"
-          git push
-
-      - name: Semantic Release
-        id: semantic-release-dryrun
-        uses: cycjimmy/semantic-release-action@bdd914ff2423e2792c73475f11e8da603182f32d
-        with:
-          dry_run: true
-          semantic_version: 19
-          extra_plugins: |
-            @semantic-release/release-notes-generator@10.0.3
-            @semantic-release/git@10.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit with "feat:" prefix
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git pull
-          git add .
-          git commit --allow-empty -m "feat: image: v${{ steps.semantic-release-dryrun.outputs.new_release_version }}"
-          git push
-
-      - name: Semantic Release
-        id: semantic-release
-        uses: cycjimmy/semantic-release-action@bdd914ff2423e2792c73475f11e8da603182f32d
-        with:
-          semantic_version: 19
-          extra_plugins: |
-            @semantic-release/release-notes-generator@10.0.3
-            @semantic-release/git@10.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update file package.json with the new version
-        if: steps.semantic-release.outputs.new_release_published == 'true'
-        run: |
-          echo "`jq '.version = "v${{ steps.semantic-release.outputs.new_release_version }}"' package.json`" > package.json
-          git pull
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add package.json
-          git commit -m "package.json updated with new version ${{ steps.semantic-release.outputs.new_release_version }}"
-          git push
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
-        with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Zip app
-        run: |
-          zip -r v${{ steps.semantic-release.outputs.new_release_version }}.zip build
-
-      - name: Push pre-release on S3
-        if: steps.semantic-release.outputs.new_release_published == 'true'
-        run: |
-          aws s3 cp v${{ steps.semantic-release.outputs.new_release_version }}.zip s3://${{ vars.BUCKET_NAME_ARTIFACTS }}/
+          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key v1.0.0-newPipe.1.zip ./v1.0.0-newPipe.1.zip
+          unzip v1.0.0-newPipe.1.zip
+          aws s3 cp build s3://${{ vars.BUCKET_NAME_FRONTEND }}/ --recursive
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
