@@ -15,7 +15,7 @@ jobs:
   build:
     strategy:
       matrix:
-        environment: [uat]
+        environment: [prod]
     name: "build"
     runs-on: ubuntu-latest
     environment: ${{ matrix.environment }}
@@ -34,22 +34,15 @@ jobs:
       #     npm install
       #     npm run build
 ##
-      - name: Configure uat AWS Credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Pull pre-release = v1.0.0 from uat S3
+      - name: Deploy app version = v1.0.0
         run: |
           aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key v1.0.0.zip ./v1.0.0.zip
-
-      - name: Configure prod AWS Credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
-        with:
-          role-to-assume: ${{ secrets.PROD_IAM_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Push release on prod S3
-        run: |
-          aws s3 cp v1.0.0.zip s3://${{ vars.PROD_BUCKET_NAME_ARTIFACTS }}/
+          unzip v1.0.0.zip
+          aws s3 cp build s3://${{ vars.BUCKET_NAME_FRONTEND }}/ --recursive
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
