@@ -5,10 +5,10 @@ import { LoadingPage } from "../LoadingPage/LoadingPage";
 
 
 type Prop= {
-	page: any;
+	children: any;
 };
 
-export default function PageLayout({page}: Prop) {
+export default function PageLayout({children}: Prop) {
 
 	const { loading } = useContext(Ctx);
 
@@ -16,7 +16,7 @@ export default function PageLayout({page}: Prop) {
 		<Ctx.Consumer>
 			{() => (
 				<React.Fragment>
-					{loading ? <LoadingPage /> : page}
+					{loading ? <LoadingPage /> : children}
 				</React.Fragment>
 			)}
 		</Ctx.Consumer>

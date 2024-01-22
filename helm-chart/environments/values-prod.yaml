@@ -9,7 +9,8 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
- 
+  version: latest
+
 secretProviderClass: 
   name: atm-layer-web-console-secrets
   env: prod
@@ -62,8 +63,8 @@ ingress:
   annotations: 
     kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/scheme: "internet-facing"
-    alb.ingress.kubernetes.io/group.name: "alb-controller-external"
-    alb.ingress.kubernetes.io/load-balancer-name: "pagopa-prod-atm-layer-alb-front"
+    alb.ingress.kubernetes.io/group.name: "alb-controller-external-front"
+    alb.ingress.kubernetes.io/load-balancer-name: "pagopa-prod-atm-layer-frontend"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/target-type: 'ip'
   hosts:
