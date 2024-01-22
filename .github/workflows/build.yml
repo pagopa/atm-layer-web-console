@@ -15,7 +15,7 @@ jobs:
   build:
     strategy:
       matrix:
-        environment: [prod]
+        environment: [dev]
     name: "build"
     runs-on: ubuntu-latest
     environment: ${{ matrix.environment }}
@@ -24,25 +24,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Use Node.js 20.9.0
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: 20.9.0
-
-      # - name: Build app
-      #   run: |
-      #     npm install
-      #     npm run build
-##
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v2
         with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
+          node-version: 20.9.0
 
-      - name: Deploy app version = v1.0.0
+      - name: Build app
         run: |
-          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key v1.0.0.zip ./v1.0.0.zip
-          unzip v1.0.0.zip
-          aws s3 cp build s3://${{ vars.BUCKET_NAME_FRONTEND }}/ --recursive
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+          npm install
+          npm run build
