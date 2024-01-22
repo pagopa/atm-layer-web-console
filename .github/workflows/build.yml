@@ -34,3 +34,7 @@ jobs:
           npm install
           npm run build
           zip -r prova.zip build
+
+      - name: Zip app
+        run: |
+          zip -r prova.zip build
