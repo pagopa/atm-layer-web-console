@@ -5,6 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { DeployBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "../../../hook/FormTemplate";
 
 type Props = {
   errors: any;
@@ -14,6 +16,8 @@ type Props = {
 
 export const DeployBpmn = () => {
 	const theme = useTheme();
+
+	const { getFormOptions } = formOption();
 
 	const initialValues: DeployBpmnDto = {
 		uuid: undefined,
@@ -75,7 +79,7 @@ export const DeployBpmn = () => {
 	//                         Compila tutti i campi per rilasciare un BPMN
 	// 					</Typography>
 	// 				</Grid>
-		<>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy BPMN")}>
 			<Grid container item>
 				<Grid container item my={1}>
 					<TextField
@@ -107,7 +111,7 @@ export const DeployBpmn = () => {
 					/>
 				</Grid>
 			</Grid>
-		</>
+		</FormTemplate>
 
 	// 			</Grid>
 	// 			<Box display="flex" justifyContent="flex-end" mt={2}>

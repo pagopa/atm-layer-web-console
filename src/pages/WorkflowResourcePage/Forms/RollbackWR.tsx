@@ -5,9 +5,19 @@ import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { WRRollbackDto } from "../../../model/WorkflowResourceModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "../../../hook/FormTemplate";
+
+type Props = {
+	errors: any;
+	formData: any;
+	setFormData: any;
+  };
 
 export const RollbackWR = () => {
 	const theme = useTheme();
+
+	const { getFormOptions } = formOption();
 
 	const initialValues: WRRollbackDto = {
 		uuid: ""
@@ -44,48 +54,24 @@ export const RollbackWR = () => {
 	};
 
 	return (
-		<Box
-			display="flex"
-			flexDirection="column"
-			justifyContent="center"
-			alignItems="center"
-			width={"100vw"}
-		>
-			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Rollback Workflow Resource"} subTitle={""} />
-			</Box>
-			<Box sx={inputGroupStyle} mt={4}>
-				<form onSubmit={handleSubmit}>
-					<Grid container spacing={2}>
-						<Grid container item>
-							<EditNoteIcon sx={{ mr: 1 }} />
-							<Typography variant="body1" fontWeight="600">
-                                Compila il campo di identificativo unico per ripristinare l&apos;ultima versione rilasciata
-							</Typography>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="uuid"
-								name="uuid"
-								label={"Identificativo unico del file"}
-								placeholder={"Identificativo unico"}
-								size="small"
-								value={formData.uuid}
-								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-								error={Boolean(errors.uuid)}
-								helperText={errors.uuid}
-							/>
-						</Grid>
-					</Grid>
-					<Box display="flex" justifyContent="flex-end" mt={2}>
-						<Button variant="contained" type="submit">
-                            Submit
-						</Button>
-					</Box>
-				</form>
-			</Box>
-		</Box>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Rollback WR")}>
+			<Grid container item>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="uuid"
+						name="uuid"
+						label={"Identificativo unico del file"}
+						placeholder={"Identificativo unico"}
+						size="small"
+						value={formData.uuid}
+						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+						error={Boolean(errors.uuid)}
+						helperText={errors.uuid}
+					/>
+				</Grid>
+			</Grid>
+		</FormTemplate>
 	);
 };
 

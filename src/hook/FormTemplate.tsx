@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
 import React from "react";
-import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
-import IconBox from "../../../components/Commons/IconBox";
+import { TitleComponent } from "../components/TitleComponents/TitleComponent";
+import IconBox from "../components/Commons/IconBox";
 
 
 type Props = {
@@ -46,7 +46,6 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 										{el.description}
 									</Typography>
 								</Grid>
-
 								{children}
 							</Grid>
 							<Box display="flex" justifyContent="flex-end" mt={2}>

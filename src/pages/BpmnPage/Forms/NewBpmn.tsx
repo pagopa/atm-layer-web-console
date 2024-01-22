@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import UploadFileWithButton from "../components/UploadFileWithButton";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
-import FormTemplate from "./FormTemplate";
+import FormTemplate from "../../../hook/FormTemplate";
 
 type Props = {
 	errors:any ;
@@ -12,6 +12,7 @@ type Props = {
 	setFormData: any; 
 	
   };
+
 export const NewBpmn = () => {
 	const theme = useTheme();
 
@@ -55,54 +56,49 @@ export const NewBpmn = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	return (
-		
-	// <Box sx={inputGroupStyle} mt={4}>
-				
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create")} >	
-						
+	return (		
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")} >	
 			<Grid container item>
-				<Typography variant="body1">File BPMN</Typography>
-				<UploadFileWithButton
-					name={"file"}
-					file={formData.file}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-					onClick={clearFile}
-					error={errors.file}
-				/>
+				<Grid container item my={1}>
+					<Typography variant="body1">File BPMN</Typography>
+					<UploadFileWithButton
+						name={"file"}
+						file={formData.file}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
+						onClick={clearFile}
+						error={errors.file}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="fileName"
+						name="fileName"
+						label={"Nome del file"}
+						placeholder={"Nome del file"}
+						size="small"
+						value={formData.fileName}
+						onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+						error={Boolean(errors.fileName)}
+						helperText={errors.fileName}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="functionType"
+						name="functionType"
+						label={"Tipo di funzione"}
+						placeholder={"Tipo di funzione"}
+						size="small"
+						value={formData.functionType}
+						onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+						error={Boolean(errors.functionType)}
+						helperText={errors.functionType}
+					/>
+				</Grid>
 			</Grid>
-			<Grid container item my={1}>
-				<TextField
-					fullWidth
-					id="fileName"
-					name="fileName"
-					label={"Nome del file"}
-					placeholder={"Nome del file"}
-					size="small"
-					value={formData.fileName}
-					onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-					error={Boolean(errors.fileName)}
-					helperText={errors.fileName}
-				/>
-			</Grid>
-			<Grid container item my={1}>
-				<TextField
-					fullWidth
-					id="functionType"
-					name="functionType"
-					label={"Tipo di funzione"}
-					placeholder={"Tipo di funzione"}
-					size="small"
-					value={formData.functionType}
-					onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-					error={Boolean(errors.functionType)}
-					helperText={errors.functionType}
-				/>
-			</Grid>
-			
 		</FormTemplate>
-		// </Box>
-		
 	);
 };
 

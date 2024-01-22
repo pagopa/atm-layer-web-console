@@ -6,6 +6,14 @@ import { useTheme } from "@mui/material/styles";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "../../../hook/FormTemplate";
+
+type Props = {
+    errors: any;
+    formData: any;
+    setFormData: any;
+  };
 
 export const AssociateBpmn = () => {
     const theme = useTheme();
@@ -19,6 +27,8 @@ export const AssociateBpmn = () => {
             branchesConfigs: undefined
         }
     };
+
+    const { getFormOptions } = formOption();
 
     const branchesInitialValues: BranchConfigDto = {
         branchId: undefined,
@@ -286,25 +296,8 @@ export const AssociateBpmn = () => {
     };
 
     return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            width={"100vw"}
-        >
-            <Box marginTop={3} textAlign={"center"}>
-                <TitleComponent title={"Associa BPMN"} subTitle={""} />
-            </Box>
-            <Box sx={inputGroupStyle} mt={4}>
-                <form onSubmit={handleSubmit}>branchIndex
-                    <Grid container spacing={2}>
-                        <Grid container item>
-                            <EditNoteIcon sx={{ mr: 1 }} />
-                            <Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per Associare un BPMN
-                            </Typography>
-                        </Grid>
+        <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Associate BPMN")}>
+			<Grid container item>
                         <Grid container item my={1}>
                             <TextField
                                 fullWidth
@@ -509,16 +502,9 @@ export const AssociateBpmn = () => {
                                         </Box>
                                     )) : null
                             }
-                        </Grid>
-                    </Grid>
-                    <Box display="flex" justifyContent="flex-end" mt={2}>
-                        <Button variant="contained" type="submit">
-                            Submit
-                        </Button>
-                    </Box>
-                </form>
-            </Box>
-        </Box>
+                       </Grid>
+            </Grid>
+      </FormTemplate>
     );
 };
 

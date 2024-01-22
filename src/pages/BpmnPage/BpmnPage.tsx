@@ -5,12 +5,12 @@ import SideBar from "../../components/Menu/SideBar";
 import { Ctx } from "../../DataContext";
 import { BpmnDto } from "../../model/BpmnModel";
 import formOption from "../../hook/formOption";
+import FormTemplate from "../../hook/FormTemplate";
 import NewBpmn from "./Forms/NewBpmn";
 import UpgradeBpmn from "./Forms/UpgradeBpmn";
 import DeployBpmn from "./Forms/DeployBpmn";
 import AssociateBpmn from "./Forms/AssociateBpmn";
 import DeleteBpmn from "./Forms/DeleteBpmn";
-import FormTemplate from "./Forms/FormTemplate";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
@@ -67,20 +67,13 @@ const { getFormOptions } = formOption();
                         maxHeight: `calc(100vh - ${headerHeight}px)`, // Sottrai l'altezza dell'header dall'altezza massima
                         overflowY: "auto",
                         mr: "14px"
-                    }}>
-                    
-                    
+                    }}> 
                     <NewBpmn />
-
-                    {/* <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy")} >
-                        <DeployBpmn formData={formData} setFormData={setFormData} errors={errors}/>
-                    </FormTemplate> */}
-
+                    <DeployBpmn />
                     <UpgradeBpmn />
                     <AssociateBpmn />
                     <DeleteBpmn />
                 </Box>
-
             </Box>
         </Box>
     );

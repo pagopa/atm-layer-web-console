@@ -6,9 +6,19 @@ import { TitleComponent } from "../../../components/TitleComponents/TitleCompone
 import UploadFileWithButton from "../components/UploadFileWithButton";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "../../../hook/FormTemplate";
+
+type Props = {
+	errors: any;
+	formData: any;
+	setFormData: any;
+  };
 
 export const UpgradeBpmn = () => {
 	const theme = useTheme();
+
+	const { getFormOptions } = formOption();
 
 	const initialValues: UpgradeBpmnDto = {
 		uuid: undefined,
@@ -59,86 +69,89 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<Box
-			display="flex"
-			flexDirection="column"
-			justifyContent="center"
-			alignItems="center"
-			width={"100vw"}
-		>
-			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Aggiornamento BPMN"} subTitle={""} />
-			</Box>
-			<Box sx={inputGroupStyle} mt={4}>
-				<form onSubmit={handleSubmit}>
-					<Grid container spacing={2}>
-						<Grid container item>
-							<EditNoteIcon sx={{ mr: 1 }} />
-							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per modificare un BPMN
-							</Typography>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="uuid"
-								name="uuid"
-								label={"Identificatore Univoco"}
-								placeholder={"Identificatore Univoco"}
-								size="small"
-								value={formData.uuid}
-								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-								error={Boolean(errors.uuid)}
-								helperText={errors.uuid}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<Typography variant="body1">File BPMN</Typography>
-							<UploadFileWithButton
-								name={"file"}
-								file={formData.file}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-								onClick={clearFile}
-								error={errors.file}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="fileName"
-								name="fileName"
-								label={"Nome del file"}
-								placeholder={"Nome del file"}
-								size="small"
-								value={formData.fileName}
-								onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-								error={Boolean(errors.fileName)}
-								helperText={errors.fileName}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="functionType"
-								name="functionType"
-								label={"Tipo di funzione"}
-								placeholder={"Tipo di funzione"}
-								size="small"
-								value={formData.functionType}
-								onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-								error={Boolean(errors.functionType)}
-								helperText={errors.functionType}
-							/>
-						</Grid>
-					</Grid>
-					<Box display="flex" justifyContent="flex-end" mt={2}>
-						<Button variant="contained" type="submit">
-                            Submit
-						</Button>
-					</Box>
-				</form>
-			</Box>
-		</Box>
+		// <Box
+		// 	display="flex"
+		// 	flexDirection="column"
+		// 	justifyContent="center"
+		// 	alignItems="center"
+		// 	width={"100vw"}
+		// >
+		// 	<Box marginTop={3} textAlign={"center"}>
+		// 		<TitleComponent title={"Aggiornamento BPMN"} subTitle={""} />
+		// 	</Box>
+		// 	<Box sx={inputGroupStyle} mt={4}>
+		// 		<form onSubmit={handleSubmit}>
+		// 			<Grid container spacing={2}>
+		// 				<Grid container item>
+		// 					<EditNoteIcon sx={{ mr: 1 }} />
+		// 					<Typography variant="body1" fontWeight="600">
+	//                         Compila tutti i campi per modificare un BPMN
+		// 					</Typography>
+	// </Grid>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Upgrade BPMN")}>
+			<Grid container item>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="uuid"
+						name="uuid"
+						label={"Identificatore Univoco"}
+						placeholder={"Identificatore Univoco"}
+						size="small"
+						value={formData.uuid}
+						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+						error={Boolean(errors.uuid)}
+						helperText={errors.uuid}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<Typography variant="body1">File BPMN</Typography>
+					<UploadFileWithButton
+						name={"file"}
+						file={formData.file}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
+						onClick={clearFile}
+						error={errors.file}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="fileName"
+						name="fileName"
+						label={"Nome del file"}
+						placeholder={"Nome del file"}
+						size="small"
+						value={formData.fileName}
+						onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+						error={Boolean(errors.fileName)}
+						helperText={errors.fileName}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="functionType"
+						name="functionType"
+						label={"Tipo di funzione"}
+						placeholder={"Tipo di funzione"}
+						size="small"
+						value={formData.functionType}
+						onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+						error={Boolean(errors.functionType)}
+						helperText={errors.functionType}
+					/>
+				</Grid>
+			</Grid>
+		</FormTemplate>
+		// 			<Box display="flex" justifyContent="flex-end" mt={2}>
+		// 				<Button variant="contained" type="submit">
+	//                     Submit
+		// 				</Button>
+		// 			</Box>
+		// 		</form>
+		// 	</Box>
+		// </Box>
 	);
 };
 
