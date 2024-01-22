@@ -23,7 +23,7 @@ export default function HomePage () {
 			<Box  my="auto">
 				<Grid container spacing={8} >
 					{
-						homePageCardItems.map((e, i) => (
+						homePageCardItems.filter(el=>el.id!== "home").map((e, i) => (
 							<Grid item xs={4} mx={"auto"} key={e.title}>
 								<HomeCardComponent
 									title={e.title}

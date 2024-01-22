@@ -37,17 +37,9 @@ jobs:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Login to uat Amazon ECR
-        id: login-ecr-uat
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Copy docker image from uat ECR
-        env:
-          REGISTRY: ${{ steps.login-ecr-uat.outputs.registry }}
-          REPOSITORY: ${{ vars.DOCKER_IMAGE_NAME}}
-          UAT_IMAGE_TAG: ${{ inputs.release }}
+      - name: Pull pre-release = ${{ inputs.release }} from uat S3
         run: |
-          docker pull $REGISTRY/$REPOSITORY:$UAT_IMAGE_TAG
+          aws s3api get-object --bucket ${{ vars.BUCKET_NAME_ARTIFACTS }} --key ${{ inputs.release }}.zip ./${{ inputs.release }}.zip
 
       - name: Configure prod AWS Credentials
         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
@@ -55,19 +47,6 @@ jobs:
           role-to-assume: ${{ secrets.PROD_IAM_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Login to prod Amazon ECR
-        id: login-ecr-prod
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Push docker image in prod ECR
-        env:
-          PROD_REGISTRY: ${{ steps.login-ecr-prod.outputs.registry }}
-          UAT_REGISTRY: ${{ steps.login-ecr-uat.outputs.registry }}
-          PROD_REPOSITORY: ${{ vars.PROD_DOCKER_IMAGE_NAME}}
-          UAT_REPOSITORY: ${{ vars.DOCKER_IMAGE_NAME}}
-          PROD_IMAGE_TAG: ${{ inputs.release }}
-          UAT_IMAGE_TAG: ${{ inputs.release }}
+      - name: Push release on prod S3
         run: |
-          docker tag $UAT_REGISTRY/$UAT_REPOSITORY:$UAT_IMAGE_TAG $PROD_REGISTRY/$PROD_REPOSITORY:$PROD_IMAGE_TAG
-          docker push $PROD_REGISTRY/$PROD_REPOSITORY:$PROD_IMAGE_TAG
-
+          aws s3 cp ${{ inputs.release }}.zip s3://${{ vars.PROD_BUCKET_NAME_ARTIFACTS }}/
