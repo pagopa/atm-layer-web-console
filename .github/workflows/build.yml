@@ -33,17 +33,3 @@ jobs:
         run: |
           npm install
           npm run build
-          zip -r prova.zip build
-
-      - name: Zip app
-        run: |
-          zip -r prova.zip build
-
-      - name: View zip file
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git pull
-          git add .
-          git commit -m "view zip file"
-          git push
