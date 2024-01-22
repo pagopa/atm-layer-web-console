@@ -13,6 +13,21 @@ import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import HomePage from "./pages/Layout/HomePage";
 import NoPage from "./pages/NoPage";
 
+// const LocalRoutes = () => (
+// 	<Layout>
+// 		<Routes>
+// 			<Route path="/" element={<PageLayout page={<HomePage />} />} />
+// 			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
+// 			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
+// 			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
+// 			<Route
+// 				path={routes.ERROR_PAGE}
+// 				element={<PageLayout page={<CommonErrorPage title={""} icon={undefined} />} />}
+// 			/>
+// 		</Routes>
+// 	</Layout>
+// import NoPage from "./pages/NoPage";
+
 const LocalRoutes = () => (
 	
 	<BrowserRouter basename="/web-console">
