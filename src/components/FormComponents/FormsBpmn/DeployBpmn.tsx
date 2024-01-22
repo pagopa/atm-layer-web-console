@@ -4,7 +4,7 @@ import { Grid, TextField } from "@mui/material";
 import { DeployBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
-import FormTemplate from "./FormTemplate";
+import FormTemplate from "../template/FormTemplate";
 
 type Props = {
 	errors: any;

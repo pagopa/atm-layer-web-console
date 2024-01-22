@@ -1,11 +1,18 @@
 /* eslint-disable indent */
 import React, { useState } from "react";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { EditNote as EditNoteIcon, RemoveCircleOutline } from "@mui/icons-material";
+import { Box, Button, Grid, TextField } from "@mui/material";
+import { RemoveCircleOutline } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
-import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import FormTemplate from "../template/FormTemplate";
+
+type Props = {
+    errors: any;
+    formData: any;
+    setFormData: any;
+  };
 
 export const AssociateBpmn = () => {
     const theme = useTheme();
@@ -19,6 +26,8 @@ export const AssociateBpmn = () => {
             branchesConfigs: undefined
         }
     };
+
+    const { getFormOptions } = formOption();
 
     const branchesInitialValues: BranchConfigDto = {
         branchId: undefined,
@@ -58,15 +67,6 @@ export const AssociateBpmn = () => {
 
     const [formData, setFormData] = useState<AssociateBpmnDto>(initialValues);
     const [errors, setErrors] = useState({ ...initialErrors });
-
-    const inputGroupStyle = {
-        borderRadius: 1,
-        border: 1,
-        borderColor: theme.palette.divider,
-        p: 3,
-        mb: 3,
-        width: "50%",
-    };
 
     const validateForm = () => {
         const newErrors = {
@@ -286,25 +286,8 @@ export const AssociateBpmn = () => {
     };
 
     return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            width={"100vw"}
-        >
-            <Box marginTop={3} textAlign={"center"}>
-                <TitleComponent title={"Associa BPMN"} subTitle={""} />
-            </Box>
-            <Box sx={inputGroupStyle} mt={4}>
-                <form onSubmit={handleSubmit}>branchIndex
-                    <Grid container spacing={2}>
-                        <Grid container item>
-                            <EditNoteIcon sx={{ mr: 1 }} />
-                            <Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per Associare un BPMN
-                            </Typography>
-                        </Grid>
+        <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Associate BPMN")}>
+			<Grid container item>
                         <Grid container item my={1}>
                             <TextField
                                 fullWidth
@@ -509,16 +492,9 @@ export const AssociateBpmn = () => {
                                         </Box>
                                     )) : null
                             }
-                        </Grid>
-                    </Grid>
-                    <Box display="flex" justifyContent="flex-end" mt={2}>
-                        <Button variant="contained" type="submit">
-                            Submit
-                        </Button>
-                    </Box>
-                </form>
-            </Box>
-        </Box>
+                       </Grid>
+            </Grid>
+      </FormTemplate>
     );
 };
 

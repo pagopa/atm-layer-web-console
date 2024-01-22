@@ -1,13 +1,22 @@
-import { useTheme } from "@mui/material/styles";
-import { Box, Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
-import { EditNote as EditNoteIcon } from "@mui/icons-material";
+// import { useTheme } from "@mui/material/styles";
+import { Grid, MenuItem, TextField, Typography } from "@mui/material";
 import { useState, ChangeEvent } from "react";
-import { TitleComponent } from "../../TitleComponents/TitleComponent";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
 import { ResourcesDto } from "../../../model/ResourcesModel";
+import formOption from "../../../hook/formOption";
+import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import FormTemplate from "../template/FormTemplate";
+
+type Props = {
+	errors:any ;
+	formData: any; 
+	setFormData: any; 
+	
+  };
 
 export const CreateResources = () => {
-	const theme = useTheme();
+	// const theme = useTheme();
+
+	const { getFormOptions } = formOption();
 
 	const initialValues: ResourcesDto = {
 		file: "",
@@ -18,15 +27,6 @@ export const CreateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-
-	const inputGroupStyle = {
-		borderRadius: 1,
-		border: 1,
-		borderColor: theme.palette.divider,
-		p: 3,
-		mb: 3,
-		width: "50%",
-	};
     
 	const validateForm = () => {
 		const newErrors = {
@@ -62,88 +62,64 @@ export const CreateResources = () => {
 	};
 
 	return (
-		<Box
-			display="flex"
-			flexDirection="column"
-			justifyContent="center"
-			alignItems="center"
-			width={"100vw"}
-		>
-			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Creazione Resources"} subTitle={""} />
-			</Box>
-			<Box sx={inputGroupStyle} mt={4}>
-				<form onSubmit={handleSubmit}>
-					<Grid container spacing={2}>
-						<Grid container item>
-							<EditNoteIcon sx={{ mr: 1 }} />
-							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per creare un nuovo Resource
-							</Typography>
-						</Grid>
-						<Grid container item>
-							<Typography variant="body1">Resource File</Typography>
-							<UploadFileWithButton
-								name={"file"}
-								file={formData.file}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-								onClick={clearFile}
-								error={errors.file}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="fileName"
-								name="fileName"
-								label={"Nome del file senza estensione"}
-								placeholder={"Nome del file senza estensione"}
-								size="small"
-								value={formData.filename}
-								onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
-								error={Boolean(errors.filename)}
-								helperText={errors.filename}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="resourceType"
-								name="resourceType"
-								select
-								label={"Estensione del file"}
-								placeholder={"Estensione del file"}
-								size="small"
-								value={formData.resourceType}
-								onChange={changeResourceType}
-								error={Boolean(errors.filename)}
-								helperText={errors.filename}
-							>
-								<MenuItem value={"HTML"}>HTML</MenuItem>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create Resources")} >
+			<Grid container item>
+				<Grid container item my={1}>
+					<Typography variant="body1">Resource File</Typography>
+					<UploadFileWithButton
+						name={"file"}
+						file={formData.file}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
+						onClick={clearFile}
+						error={errors.file}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="fileName"
+						name="fileName"
+						label={"Nome del file senza estensione"}
+						placeholder={"Nome del file senza estensione"}
+						size="small"
+						value={formData.filename}
+						onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+						error={Boolean(errors.filename)}
+						helperText={errors.filename}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="resourceType"
+						name="resourceType"
+						select
+						label={"Estensione del file"}
+						placeholder={"Estensione del file"}
+						size="small"
+						value={formData.resourceType}
+						onChange={changeResourceType}
+						error={Boolean(errors.filename)}
+						helperText={errors.filename}
+					>
+						<MenuItem value={"HTML"}>HTML</MenuItem>
                             	<MenuItem value={"OTHER"}>OTHER</MenuItem>
-							</TextField>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField   fullWidth
-								id="path"
-								name="path"
-								label={"Percorso (Opzionale)"}
-								placeholder={"Percorso (Opzionale)"}
-								size="small"
-								value={formData.path}
-								error={Boolean(errors.path)}
-								helperText={errors.path}>
-							</TextField>
-						</Grid>
-					</Grid>
-					<Box display="flex" justifyContent="flex-end" mt={2}>
-						<Button variant="contained" type="submit">
-                            Submit
-						</Button>
-					</Box>
-				</form>
-			</Box>
-		</Box>
+					</TextField>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField   fullWidth
+						id="path"
+						name="path"
+						label={"Percorso (Opzionale)"}
+						placeholder={"Percorso (Opzionale)"}
+						size="small"
+						value={formData.path}
+						error={Boolean(errors.path)}
+						helperText={errors.path}>
+					</TextField>
+				</Grid>
+			</Grid>
+		</FormTemplate>
 	);
 };
 

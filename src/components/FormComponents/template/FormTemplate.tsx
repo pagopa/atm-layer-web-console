@@ -46,7 +46,6 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 										{el.description}
 									</Typography>
 								</Grid>
-
 								{children}
 							</Grid>
 							<Box display="flex" justifyContent="flex-end" mt={2}>

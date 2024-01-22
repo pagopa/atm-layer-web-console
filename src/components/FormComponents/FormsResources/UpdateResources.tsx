@@ -1,14 +1,22 @@
 import React, { ChangeEvent, useState } from "react";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { EditNote as EditNoteIcon } from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
-import { TitleComponent } from "../../TitleComponents/TitleComponent";
-import { ResourcesUpdateDto } from "../../../model/ResourcesModel"; 
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import { Grid, TextField, Typography } from "@mui/material";
+// import { useTheme } from "@mui/material/styles";
+import { ResourcesUpdateDto } from "../../../model/ResourcesModel";
 import { isValidUUID } from "../../../utils/Commons";
+import formOption from "../../../hook/formOption";
+import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import FormTemplate from "../template/FormTemplate";
+
+type Props = {
+	errors: any;
+	formData: any;
+	setFormData: any;
+  };
 
 export const UpdateResources = () => {
-	const theme = useTheme();
+	// const theme = useTheme();
+
+	const { getFormOptions } = formOption();
 
 	const initialValues: ResourcesUpdateDto = {
 		uuid: "",
@@ -17,16 +25,7 @@ export const UpdateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-
-	const inputGroupStyle = {
-		borderRadius: 1,
-		border: 1,
-		borderColor: theme.palette.divider,
-		p: 3,
-		mb: 3,
-		width: "50%",
-	};
-
+	
 	const validateForm = () => {
 		const newErrors = {
 			uuid: formData.uuid==="" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido", 
@@ -55,58 +54,34 @@ export const UpdateResources = () => {
 	};
 
 	return (
-		<Box
-			display="flex"
-			flexDirection="column"
-			justifyContent="center"
-			alignItems="center"
-			width={"100vw"}
-		>
-			<Box marginTop={3} textAlign={"center"}>
-				<TitleComponent title={"Aggiornamento Resources"} subTitle={""} />
-			</Box>
-			<Box sx={inputGroupStyle} mt={4}>
-				<form onSubmit={handleSubmit}>
-					<Grid container spacing={2}>
-						<Grid container item>
-							<EditNoteIcon sx={{ mr: 1 }} />
-							<Typography variant="body1" fontWeight="600">
-                                Compila tutti i campi per aggiornare una risorsa esistente
-							</Typography>
-						</Grid>
-						<Grid container item>
-							<Typography variant="body1">File della risorsa</Typography>
-							<UploadFileWithButton
-								name={"file"}
-								file={formData.file}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-								onClick={clearFile}
-								error={errors.file}
-							/>
-						</Grid>
-						<Grid container item my={1}>
-							<TextField
-								fullWidth
-								id="uuid"
-								name="uuid"
-								label={"Identificativo unico del file"}
-								placeholder={"Identificativo unico"}
-								size="small"
-								value={formData.uuid}
-								onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-								error={Boolean(errors.uuid)}
-								helperText={errors.uuid}
-							/>
-						</Grid>
-					</Grid>
-					<Box display="flex" justifyContent="flex-end" mt={2}>
-						<Button variant="contained" type="submit">
-                            Submit
-						</Button>
-					</Box>
-				</form>
-			</Box>
-		</Box>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Update Resources")}>
+			<Grid container item>
+				<Grid container item my={1}>
+					<Typography variant="body1">File della risorsa</Typography>
+					<UploadFileWithButton
+						name={"file"}
+						file={formData.file}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
+						onClick={clearFile}
+						error={errors.file}
+					/>
+				</Grid>
+				<Grid container item my={1}>
+					<TextField
+						fullWidth
+						id="uuid"
+						name="uuid"
+						label={"Identificativo unico del file"}
+						placeholder={"Identificativo unico"}
+						size="small"
+						value={formData.uuid}
+						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+						error={Boolean(errors.uuid)}
+						helperText={errors.uuid}
+					/>
+				</Grid>
+			</Grid>
+		</FormTemplate>
 	);
 };
 

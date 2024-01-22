@@ -68,7 +68,6 @@ const BpmnPage = () => {
                     <AssociateBpmn />
                     <DeleteBpmn />
                 </Box>
-
             </Box>
         </Box>
     );
