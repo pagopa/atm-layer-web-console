@@ -60,11 +60,11 @@ declare module "@mui/material/styles" {
     "caption-semibold"?: React.CSSProperties;
   }
 
-  interface ThemeBox {
-    customBox?: {
-      border?: string;
-      borderLite?: string;
-    };
+//   interface ThemeBox {
+//     customBox?: {
+//       border?: string;
+//       borderLite?: string;
+//     };
     // colorVariant?: {
     //   main?: string;
     //   customBorderColor?: string;
@@ -74,21 +74,21 @@ declare module "@mui/material/styles" {
     //   borderColor?: string;
     // };
   }
-  interface ThemeBoxOptions {
-    customBox?: {
-      border?: string;
-      borderLite?: string;
-    };
-    // colorVariant?: {
-    //   main?: string;
-    //   customBorderColor?: string;
-    // };
-    // cardStyle?: {
-    //   border?: string;
-    //   borderColor?: string;
-    // };
-  }
-}
+//   interface ThemeBoxOptions {
+//     customBox?: {
+//       border?: string;
+//       borderLite?: string;
+//     };
+// colorVariant?: {
+//   main?: string;
+//   customBorderColor?: string;
+// };
+// cardStyle?: {
+//   border?: string;
+//   borderColor?: string;
+// };
+//   }
+// }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
@@ -268,10 +268,10 @@ const foundation: Theme = createTheme({
 		borderRadius: 0,
 	},
 	spacing: 8,
-	customBox: {
-		border: "1px solid #DFE3EB",
-		borderLite: "0.5px solid #DFE3EB"
-	},
+	// customBox: {
+	// 	border: "1px solid #DFE3EB",
+	// 	borderLite: "0.5px solid #DFE3EB"
+	// },
 });
 
 export const themeApp: Theme = createTheme(foundation, {

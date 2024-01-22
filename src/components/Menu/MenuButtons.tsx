@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Fade, Menu, MenuItem, useTheme } from "@mui/material";
-import menuOption from "../../hook/menuOption";
+import { Button, useTheme } from "@mui/material";
+// import menuOption from "../../hook/menuOption";
 import IconBox from "../Commons/IconBox";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const MenuButtons = ({ name, route, iconButton }: Props) => {
-	const { getMenuOptions } = menuOption();
+	// const { _getMenuOptions } = menuOption();
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -21,9 +21,10 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 		setAnchorEl(event.currentTarget);
 		return	route ? navigate(route):null;
 	};
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
+
+	// const handleClose = () => {
+	// 	setAnchorEl(null);
+	// };
 
 	// const handleOptionClick = (onClick: () => void) => {
 	// 	onClick();

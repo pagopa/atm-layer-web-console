@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Container, Button, Stack, IconButton } from "@mui/material";
+import { Container, Button, Stack } from "@mui/material";
 
 /* Icons */
 
-import { AccountDropdown, ButtonNaked, LogoPagoPACompany } from "@pagopa/mui-italia";
+import { AccountDropdown, ButtonNaked } from "@pagopa/mui-italia";
 
 export type JwtUser = {
     id: string;

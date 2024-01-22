@@ -1,8 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import React, { useRef, useEffect, useContext } from "react";
-import { Header } from "../../components/Header";
 import CustomAppBar from "../../components/Menu/CustomAppBar";
 import { Ctx } from "../../DataContext";
+import { Header } from "../../components/HeaderComponents/Header";
 
 type Props = {
 	children?: React.ReactNode;
