@@ -11,13 +11,7 @@ const CustomAppBar = () => {
 
 	const location = useLocation();
 
-	const el=[{
-		title: "Home",
-		description:"home Page",
-		icon:"HomeOutlined",
-		pageLink: routes.HOME
-	}];
-	const menulist=[...el,...homePageCardItems];
+	
 
 
 	return (
@@ -28,7 +22,10 @@ const CustomAppBar = () => {
 					{location.pathname !== routes.BPMN && <MenuButtons name={"Processi"} route={routes.BPMN} iconButton={"AccountTree"}/>}
 					{location.pathname !== routes.RESOURCES && <MenuButtons name={"Risorse statiche"} route={routes.RESOURCES} iconButton={"Description"}/>}
 					{location.pathname !== routes.WORKFLOW_RESOURCES && <MenuButtons name={"Risorse per processi"} route={routes.WORKFLOW_RESOURCES} iconButton="Widgets"/>} */}
-					{menulist.filter(el=>el.pageLink!== location.pathname).map((e, i) => (
+					{/* {menulist.filter(el=>el.pageLink!== location.pathname).map((e, i) => (
+						<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon}/>
+					)) */}
+					{homePageCardItems.map((e, i) => (
 						<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon}/>
 					))
 					}
