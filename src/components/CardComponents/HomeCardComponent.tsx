@@ -55,7 +55,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 					<Button
 						variant="naked"
 						size="large"
-						onClick={() => navigate(pageLink)}
+						onClick={() => console.log(pageLink)}
 						sx={{"&:hover": {
 							color:theme.palette.primary.main ,
 							backgroundColor: "transparent",

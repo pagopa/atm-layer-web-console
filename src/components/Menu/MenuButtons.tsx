@@ -19,7 +19,7 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
-		return	route ? navigate(route):null;
+		return	console.log(event.currentTarget);
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
