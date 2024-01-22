@@ -33,9 +33,4 @@ jobs:
         run: |
           npm install
           npm run build
-
-      - name: Zip Pre-release Artifacts
-        id: zip-pre-release
-        uses: montudor/action-zip@v1
-        with:
-          args: '-r ciao.zip build'
+          zip -r prova.zip build
