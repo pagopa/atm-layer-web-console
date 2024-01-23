@@ -49,17 +49,17 @@ export const NewBpmn = () => {
 			console.log("VALUES:", formData);
 
 			const createBpmn = new Promise((resolve) => {
-				void fetchCreateBpmn({ abortController, formData })
-				().then((response: any) => {
-					if (response) {
-						resolve({
-							data: response,
-							type: "SUCCESS"
-						});
-					} else {
-						resolve({ type: "ERROR" });
-					}
-				});
+				void fetchCreateBpmn({ abortController, formData })()
+					.then((response: any) => {
+						if (response) {
+							console.log("SUCCESS RESPONSE", response);
+						} else {
+							console.log("EMPTY RESPONSE");
+						}
+					})
+					.catch((err) => {
+						console.log("ERROR", err);
+					});
 			});
 
 			createBpmn.then((res) => {
