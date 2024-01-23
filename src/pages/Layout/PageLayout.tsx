@@ -27,7 +27,7 @@ export default function PageLayout({ children }: Prop) {
 						<Header />
 						<CustomAppBar />
 					</Box>
-					<Grid container direction="row" flexGrow={1}  sx={{maxHeight:"calc(100vh - 110px)", overflowY:"scroll"}}>
+					<Grid container direction="row" flexGrow={1}  sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto"}}>
 						{loading ? <LoadingPage /> : children}
 					</Grid>
 				</Box>
