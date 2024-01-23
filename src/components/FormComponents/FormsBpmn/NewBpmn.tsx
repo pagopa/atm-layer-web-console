@@ -6,13 +6,7 @@ import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
-
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-
-};
+import DeployBpmn from "./DeployBpmn";
 
 export const NewBpmn = () => {
 	// const theme = useTheme();
@@ -49,12 +43,17 @@ export const NewBpmn = () => {
 			console.log("VALUES:", formData);
 
 			const createBpmn = new Promise((resolve) => {
-				void fetchCreateBpmn({ abortController, formData })()
+				void fetchCreateBpmn({ abortController, body: formData })()
 					.then((response: any) => {
 						if (response) {
-							console.log("SUCCESS RESPONSE", response);
+							resolve({
+								data: response,
+								type: "SUCCESS"
+							});
 						} else {
-							console.log("EMPTY RESPONSE");
+							resolve({ 
+								type: "ERROR"
+							});
 						}
 					})
 					.catch((err) => {
@@ -62,10 +61,14 @@ export const NewBpmn = () => {
 					});
 			});
 
-			createBpmn.then((res) => {
-				console.log("PROMISE RESPONSE", res);
-				return res;
-			}).catch((err) => console.log("ERROR", err));
+			createBpmn
+				.then((res) => {
+					console.log("CREATE BPMN RESPONSE", res);
+					return res;
+				})
+				.catch((err) => 
+					console.log("CREATE BPMN ERROR", err)
+				);
 		}
 	};
 
@@ -78,7 +81,7 @@ export const NewBpmn = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")} >
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")}>
 			<Grid container item>
 				<Grid container item my={1}>
 					<Typography variant="body1">File BPMN</Typography>
@@ -87,8 +90,7 @@ export const NewBpmn = () => {
 						file={formData.file}
 						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
 						onClick={clearFile}
-						error={errors.file}
-					/>
+						error={errors.file} />
 				</Grid>
 				<Grid container item my={1}>
 					<TextField
@@ -101,8 +103,7 @@ export const NewBpmn = () => {
 						value={formData.fileName}
 						onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
 						error={Boolean(errors.fileName)}
-						helperText={errors.fileName}
-					/>
+						helperText={errors.fileName} />
 				</Grid>
 				<Grid container item my={1}>
 					<TextField
@@ -115,8 +116,7 @@ export const NewBpmn = () => {
 						value={formData.functionType}
 						onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
 						error={Boolean(errors.functionType)}
-						helperText={errors.functionType}
-					/>
+						helperText={errors.functionType} />
 				</Grid>
 			</Grid>
 		</FormTemplate>

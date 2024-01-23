@@ -4,44 +4,12 @@ import { useContext } from "react";
 import { Ctx } from "../DataContext";
 import NewBpmn from "../components/FormComponents/FormsBpmn/NewBpmn";
 import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
-import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
 import AssociateBpmn from "../components/FormComponents/FormsBpmn/AssociateBpmn";
 import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
+import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
-
-    // const initialValues: BpmnDto = {
-	// 	file: undefined,
-	// 	fileName: undefined,
-	// 	functionType: undefined,
-	// };
-
-	// const [formData, setFormData] = useState();
-	// const [errors, setErrors] = useState();
-
-    // const validateForm = () => {
-	// 	const newErrors = {
-	// 		file: formData.file ? "" : "Campo obbligatorio",
-	// 		fileName: formData.fileName ? "" : "Campo obbligatorio",
-	// 		functionType: formData.functionType ? "" : "Campo obbligatorio",
-	// 	};
-
-	// 	setErrors(newErrors);
-
-	// 	// Determines whether all the members of the array satisfy the conditions "!error".
-	// 	return Object.values(newErrors).every((error) => !error);
-	// };
-
-	// const handleSubmit = (e: React.FormEvent) => {
-	// 	e.preventDefault();
-
-	// 	if (validateForm()) {
-	// 		console.log("VALUES:", formData);
-	// 	}
-	// };
-
-
 
     return (
         <Box
