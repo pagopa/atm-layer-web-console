@@ -69,7 +69,6 @@ const Icons : { [key: string]: any } ={
 	"SaveAlt": 	SaveAltIcon, 
 	"PushPinOutlined": 	PushPinOutlinedIcon, 
 	"MoreVertOutlined": 	MoreVertOutlinedIcon, 
-	"EuroOutlined": 	EuroOutlinedIcon, 
 	"HelpOutlineOutlined": 	HelpOutlineOutlinedIcon, 
 	"Percent": 	PercentIcon, 
 	"ReportProblemOutlined": 	ReportProblemOutlinedIcon, 
@@ -93,7 +92,8 @@ const Icons : { [key: string]: any } ={
 	"Description": DescriptionOutlinedIcon,
 	"Widgets": WidgetsOutlinedIcon,
 	"EditNote": EditNoteOutlinedIcon,
-	"FileUpload": FileUploadOutlinedIcon
+	"FileUpload": FileUploadOutlinedIcon,
+	"Close": CloseIcon
 };
 
 
