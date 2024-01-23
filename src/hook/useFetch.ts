@@ -3,7 +3,7 @@ export default function useFetch(endPoint: string) {
 	// endpoint per test di ingrazione interni
 
 	// const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const SERVER_API_ORIGIN = endPoint ? endPoint : window.BACKEND_URL;
+	const SERVER_API_ORIGIN = endPoint ?? window.BACKEND_URL;
 	const CODE_SUCCESS = 200;
 
 	const fetchFromServer = async ({
