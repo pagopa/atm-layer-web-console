@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeployBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-};
+import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 
 export const DeployBpmn = () => {
 	// const theme = useTheme();
@@ -23,6 +18,7 @@ export const DeployBpmn = () => {
 	const [formData, setFormData] = useState<DeployBpmnDto>(initialValues);
 	const [errors, setErrors] = useState({ uuid: "", version: "" });
 	const { getFormOptions } = formOption();
+	const abortController = useRef(new AbortController());
 
 	const validateForm = () => {
 		const newErrors = {
@@ -43,12 +39,41 @@ export const DeployBpmn = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const deployBpmn = new Promise((resolve) => {
+
+				if (formData.uuid && formData.version !== undefined) {
+					void fetchDeployBpmn({ abortController, body: formData }, formData.uuid, formData.version)()
+						.then((response: any) => {
+							if (response) {
+								resolve({
+									data: response,
+									type: "SUCCESS"
+								});
+							} else {
+								resolve({
+									type: "ERROR"
+								});
+							}
+						})
+						.catch((err) => {
+							console.log("ERROR", err);
+						});
+				}
+			});
+
+			deployBpmn
+				.then((res) => {
+					console.log("UPGRADE BPMN RESPONSE", res);
+					return res;
+				})
+				.catch((err) =>
+					console.log("UPGRADE BPMN ERROR", err)
+				);
 		}
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy")} >
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy BPMN")} >
 			<Grid container item my={1}>
 				<TextField
 					fullWidth

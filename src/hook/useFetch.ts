@@ -1,9 +1,9 @@
 /* eslint-disable functional/no-let */
-export default function useFetch(endPoint: string) {
+export default function useFetch(endPoint: string | undefined) {
 	// endpoint per test di ingrazione interni
 
 	// const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const SERVER_API_ORIGIN = endPoint ?? window.BACKEND_URL;
+	const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : window.BACKEND_URL;
 	const CODE_SUCCESS = 200;
 
 	const fetchFromServer = async ({

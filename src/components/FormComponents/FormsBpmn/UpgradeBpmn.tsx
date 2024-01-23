@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { Grid, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
@@ -6,12 +6,7 @@ import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-  };
+import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 
 export const UpgradeBpmn = () => {
 	// const theme = useTheme();
@@ -27,6 +22,7 @@ export const UpgradeBpmn = () => {
 
 	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
+	const abortController = useRef(new AbortController());
 
 	const validateForm = () => {
 		const newErrors = {
@@ -53,7 +49,33 @@ export const UpgradeBpmn = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const upgradeBpmn = new Promise((resolve) => {
+				void fetchUpgradeBpmn({ abortController, body: formData })()
+					.then((response: any) => {
+						if (response) {
+							resolve({
+								data: response,
+								type: "SUCCESS"
+							});
+						} else {
+							resolve({ 
+								type: "ERROR"
+							});
+						}
+					})
+					.catch((err) => {
+						console.log("ERROR", err);
+					});
+			});
+
+			upgradeBpmn
+				.then((res) => {
+					console.log("UPGRADE BPMN RESPONSE", res);
+					return res;
+				})
+				.catch((err) => 
+					console.log("UPGRADE BPMN ERROR", err)
+				);
 		}
 	};
 
