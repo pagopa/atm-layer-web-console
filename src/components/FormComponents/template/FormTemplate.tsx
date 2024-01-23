@@ -20,17 +20,11 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 		borderColor: theme.palette.divider,
 		p: 3,
 		mb: 3,
-		width: "50%",
+		maxWidth: "45%",
 	};
 
 	return (
-		<Box
-			display="flex"
-			flexDirection="column"
-			justifyContent="center"
-			alignItems="center"
-			width={"100vw"}
-		>
+		<React.Fragment>
 			{getFormOptions.map((el: any, ind: any) => (
 				<React.Fragment key={el.title}>
 					<Box marginTop={3} textAlign={"center"}>
@@ -58,6 +52,6 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 				</React.Fragment>
 			)
 			)}
-		</Box>
+		</React.Fragment>
 	);
 }

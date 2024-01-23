@@ -6,7 +6,6 @@ import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
-import Layout from "./pages/Layout/Layout";
 import NoPage from "./pages/NoPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage";
@@ -31,16 +30,16 @@ import BpmnPage from "./pages/BpmnPage";
 const LocalRoutes = () => (
 	
 	<BrowserRouter basename="/webconsole">
-		<PageLayout>
-			<Routes>
-				<Route path="/" element={<Layout children={<HomePage />} />} />
-				<Route index path={routes.HOME} element={<Layout children={<HomePage />} />} />
-				<Route path={routes.BPMN} element={<Layout children={<BpmnPage />} />} />
-				<Route path={routes.RESOURCES} element={<Layout children={<ResourcesPage />} />} />
-				<Route path={routes.WORKFLOW_RESOURCES} element={<Layout children={<WorkflowResourcePage />} />} />
-				<Route path="*" element={<NoPage />} />
-			</Routes>
-		</PageLayout>
+		
+		<Routes>
+			<Route path="/" element={<PageLayout children={<HomePage />} />} />
+			<Route index path={routes.HOME} element={<PageLayout children={<HomePage />} />} />
+			<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
+			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+			<Route path="*" element={<NoPage />} />
+		</Routes>
+		
 	</BrowserRouter>
 );
 
