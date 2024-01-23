@@ -10,7 +10,7 @@ export default function HomePage () {
 		<Box
 			display="flex"
 			flexDirection="column"
-			width={"100%"}
+			// width={"100%"}
 			my={5}
 			paddingInline={15}
 		>
@@ -20,7 +20,7 @@ export default function HomePage () {
 					subTitle={"Console per la gestione delle risorse"}
 				/>
 			</Grid>
-			<Box  my="auto">
+			<Box  my="8%">
 				<Grid container spacing={8} >
 					{
 						homePageCardItems.filter(el=> el.id!=="home").map((e, i) => (
