@@ -1,14 +1,14 @@
 /* eslint-disable quotes */
 import React, { useContext } from "react";
 import { Ctx } from "../../DataContext";
-import { LoadingPage } from "../LoadingPage/LoadingPage";
+import { LoadingPage } from "../LoadingPage";
 
 
 type Prop= {
 	children: any;
 };
 
-export default function PageLayout({children}: Prop) {
+export default function PageLayout({ children }: Readonly<Prop>) {
 
 	const { loading } = useContext(Ctx);
 

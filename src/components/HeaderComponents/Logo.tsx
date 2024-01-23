@@ -1,11 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { LogoPagoPACompany } from "@pagopa/mui-italia";
 
-type Props = {
-	bankLogo: string;
-};
-
-export default function Logo({ bankLogo }: Props) {
+export default function Logo() {
 	const theme=useTheme();
 	return (
 		<Box display="flex" alignItems="center" mr={theme.spacing(2)}>

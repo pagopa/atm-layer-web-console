@@ -43,6 +43,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 
 const Icons : { [key: string]: any } ={
 	"HomeOutlined": HomeOutlinedIcon, 
@@ -90,7 +91,7 @@ const Icons : { [key: string]: any } ={
 	"AccountTree": AccountTreeOutlinedIcon,
 	"Description": DescriptionOutlinedIcon,
 	"Widgets": WidgetsOutlinedIcon,
-	// "KeyboardArrowDownIcon": 
+	"EditNote": EditNoteOutlinedIcon
 };
 
 

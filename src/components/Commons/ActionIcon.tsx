@@ -17,7 +17,7 @@ type Props = {
 	id?: string;
   };
 
-export default function ActionIcon({ icon, color, size, action, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
+export default function ActionIcon({ icon, color, size, action, pad, transform, disableAction, id }: Props) {
 	const theme = useTheme();
 	const { getIcon } = getIconBySetType();
 
@@ -28,7 +28,7 @@ export default function ActionIcon({ icon, color, size, action, pad, border, bor
 			color="primary" 
 			aria-label={id} 
 			style={{ padding: pad, borderRadius: 0, pointerEvents: "none" }} 
-			 	disabled={disableAction ? disableAction : false}
+			 	disabled={disableAction ?? false}
 			onClick={()=>action}
 			disableRipple
 				 >
@@ -36,9 +36,9 @@ export default function ActionIcon({ icon, color, size, action, pad, border, bor
 			{
 				React.createElement(getIcon(icon), {
 					style: {
-						fontSize: size ? size : "0.8em",
-						color: color ? color : theme.palette.common.black,
-						transform: transform? transform : ""
+						fontSize: size ?? "0.8em",
+						color: color ?? theme.palette.common.black,
+						transform: transform ?? ""
 					},
 				})
 			}

@@ -3,8 +3,8 @@ import { Box } from "@mui/material";
 import { useContext } from "react";
 import SideBar from "../../components/Menu/SideBar";
 import { Ctx } from "../../DataContext";
+import UpgradeBpmn from "../../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import NewBpmn from "./Forms/NewBpmn";
-import UpgradeBpmn from "./Forms/UpgradeBpmn";
 
 const BpmnPage = () => {
     const { headerHeight } = useContext(Ctx);
