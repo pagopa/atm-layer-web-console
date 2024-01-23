@@ -63,11 +63,11 @@ export const DeployBpmn = () => {
 
 			deployBpmn
 				.then((res) => {
-					console.log("UPGRADE BPMN RESPONSE", res);
+					console.log("DEPLOY BPMN RESPONSE", res);
 					return res;
 				})
 				.catch((err) =>
-					console.log("UPGRADE BPMN ERROR", err)
+					console.log("DEPLOY BPMN ERROR", err)
 				);
 		}
 	};

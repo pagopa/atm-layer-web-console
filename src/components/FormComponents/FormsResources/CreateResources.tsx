@@ -1,9 +1,10 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
+import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 
 
 export const CreateResources = () => {
@@ -20,6 +21,7 @@ export const CreateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
+	const abortController = useRef(new AbortController());
     
 	const validateForm = () => {
 		const newErrors = {
@@ -50,7 +52,33 @@ export const CreateResources = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const createBpmn = new Promise((resolve) => {
+				void fetchCreateResources({ abortController, body: formData })()
+					.then((response: any) => {
+						if (response) {
+							resolve({
+								data: response,
+								type: "SUCCESS"
+							});
+						} else {
+							resolve({ 
+								type: "ERROR"
+							});
+						}
+					})
+					.catch((err) => {
+						console.log("ERROR", err);
+					});
+			});
+
+			createBpmn
+				.then((res) => {
+					console.log("CREATE RESOURCE RESPONSE", res);
+					return res;
+				})
+				.catch((err) => 
+					console.log("CREATE RESOURCE ERROR", err)
+				);
 		}
 	};
 

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Grid, TextField } from "@mui/material";
 import { ResourcesUpdateDto } from "../../../model/ResourcesModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
+import fetchUpgradeResources from "../../../hook/fetch/Resources/fetchUpgradeResources";
 
+type Props = {
+	errors: any;
+	formData: any;
+	setFormData: any;
+};
 
 export const UpdateResources = () => {
 	// const theme = useTheme();
@@ -19,10 +25,11 @@ export const UpdateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	
+	const abortController = useRef(new AbortController());
+
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid==="" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido", 
+			uuid: formData.uuid === "" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido",
 			file: formData.file ? "" : "Campo obbligatorio"
 		};
 
@@ -43,7 +50,35 @@ export const UpdateResources = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const createBpmn = new Promise((resolve) => {
+				if (formData.uuid !== undefined) {
+					void fetchUpgradeResources({ abortController, body: formData }, formData.uuid)()
+						.then((response: any) => {
+							if (response) {
+								resolve({
+									data: response,
+									type: "SUCCESS"
+								});
+							} else {
+								resolve({
+									type: "ERROR"
+								});
+							}
+						})
+						.catch((err) => {
+							console.log("ERROR", err);
+						});
+				}
+			});
+
+			createBpmn
+				.then((res) => {
+					console.log("UPGRADE RESOURCE RESPONSE", res);
+					return res;
+				})
+				.catch((err) =>
+					console.log("UPGRADE RESOURCE ERROR", err)
+				);
 		}
 	};
 

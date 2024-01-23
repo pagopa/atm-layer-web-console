@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
-
+import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
 
 export const UpdateWR = () => {
 	// const theme = useTheme();
@@ -19,6 +19,7 @@ export const UpdateWR = () => {
 
 	const [formData, setFormData] = useState<WRUpdateDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
+	const abortController = useRef(new AbortController());
 
 	const validateForm = () => {
 		const newErrors = {
@@ -43,7 +44,33 @@ export const UpdateWR = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const deployWorkflowResource = new Promise((resolve) => {
+				void fetchUpdateWorkflowResource({ abortController, body: formData }, formData.uuid)()
+					.then((response: any) => {
+						if (response) {
+							resolve({
+								data: response,
+								type: "SUCCESS"
+							});
+						} else {
+							resolve({
+								type: "ERROR"
+							});
+						}
+					})
+					.catch((err) => {
+						console.log("ERROR", err);
+					});
+			});
+
+			deployWorkflowResource
+				.then((res) => {
+					console.log("UPDATE WORKFLOW RESOURCE RESPONSE", res);
+					return res;
+				})
+				.catch((err) =>
+					console.log("UPDATE WORKFLOW RESOURCE BPMN ERROR", err)
+				);
 		}
 	};
 
