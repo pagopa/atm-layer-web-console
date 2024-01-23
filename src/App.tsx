@@ -7,11 +7,11 @@ import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
 import Layout from "./pages/Layout/Layout";
-import BpmnPage from "./pages/BpmnPage/BpmnPage";
 import NoPage from "./pages/NoPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage";
 import HomePage from "./pages/HomePage";
+import BpmnPage from "./pages/BpmnPage";
 
 // const LocalRoutes = () => (
 // 	<Layout>
