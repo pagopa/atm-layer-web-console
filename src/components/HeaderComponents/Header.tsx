@@ -1,5 +1,5 @@
 import { LogoPagoPACompany } from "@pagopa/mui-italia";
-import { HeaderAccountCustom } from "./HeaderComponents/HeaderAccountCustom";
+import { HeaderAccountCustom } from "./HeaderAccountCustom";
 
 
 export const Header = () => (

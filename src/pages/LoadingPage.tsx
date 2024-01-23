@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import { LogoPagoPACompany, theme } from "@pagopa/mui-italia";
-import { Header } from "../../components/Header";
-import { getCompletePathImage } from "../../utils/Commons";
+import { theme } from "@pagopa/mui-italia";
+import { Header } from "../components/HeaderComponents/Header";
 
 export const LoadingPage = () => (
 	<>

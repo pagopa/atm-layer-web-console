@@ -6,12 +6,12 @@ import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
-import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
-import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
 import Layout from "./pages/Layout/Layout";
 import BpmnPage from "./pages/BpmnPage/BpmnPage";
-import HomePage from "./pages/Layout/HomePage";
 import NoPage from "./pages/NoPage";
+import ResourcesPage from "./pages/ResourcesPage";
+import WorkflowResourcePage from "./pages/WorkflowResourcePage";
+import HomePage from "./pages/HomePage";
 
 // const LocalRoutes = () => (
 // 	<Layout>
@@ -36,17 +36,12 @@ const LocalRoutes = () => (
 				<Route path="/" element={<Layout children={<HomePage />} />} />
 				<Route index path={routes.HOME} element={<Layout children={<HomePage />} />} />
 				<Route path={routes.BPMN} element={<Layout children={<BpmnPage />} />} />
-				<Route path={routes.WARNING_CODE} element={<Layout children={<WarningCodeInput />} />} />
-				<Route
-					path={routes.ERROR_PAGE}
-					element={<Layout children={<CommonErrorPage title={""} icon={undefined} />} />}
-				/>
+				<Route path={routes.RESOURCES} element={<Layout children={<ResourcesPage />} />} />
+				<Route path={routes.WORKFLOW_RESOURCES} element={<Layout children={<WorkflowResourcePage />} />} />
 				<Route path="*" element={<NoPage />} />
 			</Routes>
 		</PageLayout>
 	</BrowserRouter>
-
-	
 );
 
 function App() {
@@ -66,13 +61,13 @@ function App() {
 	};
 
 	useEffect(() => {
-		console.log("ATM-LAYER-EMULATOR-RELEASE VERSION:", RELEASE_VERSION);
+		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
 
 	return (
 		<ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>
-				{LocalRoutes()}
+				{LocalRoutes()}				
 			</Ctx.Provider>
 		</ThemeProvider>
 	);

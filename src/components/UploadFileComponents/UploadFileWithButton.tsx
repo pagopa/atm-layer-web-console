@@ -12,7 +12,7 @@ type Props = {
     file?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
-    error?: boolean;
+    error?: string;
 };
 
 const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error }: Props) => {

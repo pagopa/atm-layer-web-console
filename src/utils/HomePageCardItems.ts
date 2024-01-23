@@ -20,13 +20,13 @@ export const homePageCardItems = [
 		id: "static",
 		description:"Le risorse statiche sono file HTML, immagini che possono essere visualizzati nel terminale ATM per la costruzione della pagina.",
 		icon:"Description",
-		pageLink: "/"
+		pageLink: routes.RESOURCES
 	},
 	{
 		title: "Risorse aggiuntive per processi",
 		id: "workflow",
 		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
-		pageLink: "/"
+		pageLink: routes.WORKFLOW_RESOURCES
 	}
 ];
