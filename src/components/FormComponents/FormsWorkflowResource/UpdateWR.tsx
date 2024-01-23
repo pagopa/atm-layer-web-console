@@ -76,31 +76,31 @@ export const UpdateWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Update WR")}>
-			<Grid container >
+			
 				
-				<UploadField 
-					titleField="File della risorsa" 
-					name={"file"}
-					file={formData.file}
-					changeFile={changeFile}
-					clearFile={clearFile}
-					error={errors.file}
+			<UploadField 
+				titleField="File della risorsa" 
+				name={"file"}
+				file={formData.file}
+				changeFile={changeFile}
+				clearFile={clearFile}
+				error={errors.file}
+			/>
+			<Grid item xs={12} my={1}>
+				<TextField
+					fullWidth
+					id="uuid"
+					name="uuid"
+					label={"Identificativo unico del file"}
+					placeholder={"Identificativo unico"}
+					size="small"
+					value={formData.uuid}
+					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					error={Boolean(errors.uuid)}
+					helperText={errors.uuid}
 				/>
-				<Grid item xs={12} my={1}>
-					<TextField
-						fullWidth
-						id="uuid"
-						name="uuid"
-						label={"Identificativo unico del file"}
-						placeholder={"Identificativo unico"}
-						size="small"
-						value={formData.uuid}
-						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-						error={Boolean(errors.uuid)}
-						helperText={errors.uuid}
-					/>
-				</Grid>
 			</Grid>
+		
 		</FormTemplate>
 	);
 };

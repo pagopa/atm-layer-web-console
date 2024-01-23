@@ -80,58 +80,58 @@ export const UpgradeBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Upgrade BPMN")}>
-			<Grid container >
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="uuid"
-						name="uuid"
-						label={"Identificatore Univoco"}
-						placeholder={"Identificatore Univoco"}
-						size="small"
-						value={formData.uuid}
-						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-						error={Boolean(errors.uuid)}
-						helperText={errors.uuid}
-					/>
-				</Grid>
-				<UploadField 
-					titleField="File BPMN" 
-					name={"file"}
-					file={formData.file}
-					changeFile={changeFile}
-					clearFile={clearFile}
-					error={errors.file}
+			
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="uuid"
+					name="uuid"
+					label={"Identificatore Univoco"}
+					placeholder={"Identificatore Univoco"}
+					size="small"
+					value={formData.uuid}
+					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					error={Boolean(errors.uuid)}
+					helperText={errors.uuid}
 				/>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="fileName"
-						name="fileName"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.fileName}
-						onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-						error={Boolean(errors.fileName)}
-						helperText={errors.fileName}
-					/>
-				</Grid>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="functionType"
-						name="functionType"
-						label={"Tipo di funzione"}
-						placeholder={"Tipo di funzione"}
-						size="small"
-						value={formData.functionType}
-						onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-						error={Boolean(errors.functionType)}
-						helperText={errors.functionType}
-					/>
-				</Grid>
 			</Grid>
+			<UploadField 
+				titleField="File BPMN" 
+				name={"file"}
+				file={formData.file}
+				changeFile={changeFile}
+				clearFile={clearFile}
+				error={errors.file}
+			/>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="fileName"
+					name="fileName"
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
+					size="small"
+					value={formData.fileName}
+					onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+					error={Boolean(errors.fileName)}
+					helperText={errors.fileName}
+				/>
+			</Grid>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="functionType"
+					name="functionType"
+					label={"Tipo di funzione"}
+					placeholder={"Tipo di funzione"}
+					size="small"
+					value={formData.functionType}
+					onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+					error={Boolean(errors.functionType)}
+					helperText={errors.functionType}
+				/>
+			</Grid>
+			
 		</FormTemplate>
 	);
 };

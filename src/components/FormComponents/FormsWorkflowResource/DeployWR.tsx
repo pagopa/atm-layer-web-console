@@ -64,22 +64,22 @@ export const DeployWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy WR")}>
-			<Grid container item>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="uuid"
-						name="uuid"
-						label={"Identificativo unico del file"}
-						placeholder={"Identificativo unico"}
-						size="small"
-						value={formData.uuid}
-						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-						error={Boolean(errors.uuid)}
-						helperText={errors.uuid}
-					/>
-				</Grid>
+			
+			<Grid item xs={12} my={1}>
+				<TextField
+					fullWidth
+					id="uuid"
+					name="uuid"
+					label={"Identificativo unico del file"}
+					placeholder={"Identificativo unico"}
+					size="small"
+					value={formData.uuid}
+					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					error={Boolean(errors.uuid)}
+					helperText={errors.uuid}
+				/>
 			</Grid>
+	
 		</FormTemplate>
 	);
 };

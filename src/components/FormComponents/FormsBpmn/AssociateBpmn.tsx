@@ -284,7 +284,7 @@ export const AssociateBpmn = () => {
 
     return (
         <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Associate BPMN")}>
-            <Grid container >
+          
                 <Grid xs={12} item my={1}>
                     <TextField
                         fullWidth
@@ -490,7 +490,7 @@ export const AssociateBpmn = () => {
                             )) : null
                     }
                 </Grid>
-            </Grid>
+           
         </FormTemplate>
     );
 };

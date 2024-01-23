@@ -84,30 +84,30 @@ export const UpdateResources = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Update Resources")}>
-			<Grid container >
-				<UploadField 
-					titleField="File della risorsa" 
-					name={"file"}
-					file={formData.file}
-					changeFile={changeFile}
-					clearFile={clearFile}
-					error={errors.file}
+			
+			<UploadField 
+				titleField="File della risorsa" 
+				name={"file"}
+				file={formData.file}
+				changeFile={changeFile}
+				clearFile={clearFile}
+				error={errors.file}
+			/>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="uuid"
+					name="uuid"
+					label={"Identificativo unico del file"}
+					placeholder={"Identificativo unico"}
+					size="small"
+					value={formData.uuid}
+					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					error={Boolean(errors.uuid)}
+					helperText={errors.uuid}
 				/>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="uuid"
-						name="uuid"
-						label={"Identificativo unico del file"}
-						placeholder={"Identificativo unico"}
-						size="small"
-						value={formData.uuid}
-						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-						error={Boolean(errors.uuid)}
-						helperText={errors.uuid}
-					/>
-				</Grid>
 			</Grid>
+			
 		</FormTemplate>
 	);
 };

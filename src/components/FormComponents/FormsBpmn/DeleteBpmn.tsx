@@ -70,37 +70,37 @@ export const DeleteBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Delete BPMN")}>
-			<Grid container>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="bpmnid"
-						name="bpmnid"
-						label={"Identificatore Univoco Bpmn"}
-						placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
-						size="small"
-						value={formData.bpmnid}
-						onChange={(e) => setFormData({ ...formData, bpmnid: e.target.value })}
-						error={Boolean(errors.bpmnid)}
-						helperText={errors.bpmnid}
-					/>
-				</Grid>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="version"
-						name="version"
-						label={"Versione"}
-						placeholder={"Versione"}
-						type="number"
-						size="small"
-						value={formData.version}
-						onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
-						error={Boolean(errors.version)}
-						helperText={errors.version}
-					/>
-				</Grid>
+			
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="bpmnid"
+					name="bpmnid"
+					label={"Identificatore Univoco Bpmn"}
+					placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+					size="small"
+					value={formData.bpmnid}
+					onChange={(e) => setFormData({ ...formData, bpmnid: e.target.value })}
+					error={Boolean(errors.bpmnid)}
+					helperText={errors.bpmnid}
+				/>
 			</Grid>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="version"
+					name="version"
+					label={"Versione"}
+					placeholder={"Versione"}
+					type="number"
+					size="small"
+					value={formData.version}
+					onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
+					error={Boolean(errors.version)}
+					helperText={errors.version}
+				/>
+			</Grid>
+	
 		</FormTemplate>
 	);
 };

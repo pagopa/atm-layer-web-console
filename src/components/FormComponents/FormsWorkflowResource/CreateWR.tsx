@@ -98,7 +98,7 @@ export const CreateWR = () => {
 				clearFile={clearFile}
 				error={errors.file}
 			/>
-			<Grid container item my={1}>
+			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="filename"
@@ -112,7 +112,7 @@ export const CreateWR = () => {
 					helperText={errors.filename}
 				/>
 			</Grid>
-			<Grid container item my={1}>
+			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="resourceType"
