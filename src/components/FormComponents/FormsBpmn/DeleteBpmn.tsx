@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeleteBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
 import formOption from "../../../hook/formOption";
+import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 
 export const DeleteBpmn = () => {
 	// const theme = useTheme();
@@ -18,6 +19,7 @@ export const DeleteBpmn = () => {
 
 	const [formData, setFormData] = useState<DeleteBpmnDto>(initialValues);
 	const [errors, setErrors] = useState({ bpmnid: "", version: "" });
+	const abortController = useRef(new AbortController());
 
 	const validateForm = () => {
 		const newErrors = {
@@ -34,7 +36,35 @@ export const DeleteBpmn = () => {
 		e.preventDefault();
 
 		if (validateForm()) {
-			console.log("VALUES:", formData);
+			const createBpmn = new Promise((resolve) => {
+				if (formData.bpmnid && formData.version !== undefined) {
+					void fetchDeleteBpmn({ abortController, body: formData }, formData.bpmnid, formData.version)()
+						.then((response: any) => {
+							if (response) {
+								resolve({
+									data: response,
+									type: "SUCCESS"
+								});
+							} else {
+								resolve({
+									type: "ERROR"
+								});
+							}
+						})
+						.catch((err) => {
+							console.log("ERROR", err);
+						});
+				}
+			});
+
+			createBpmn
+				.then((res) => {
+					console.log("CREATE BPMN RESPONSE", res);
+					return res;
+				})
+				.catch((err) =>
+					console.log("CREATE BPMN ERROR", err)
+				);
 		}
 	};
 
@@ -70,7 +100,7 @@ export const DeleteBpmn = () => {
 						helperText={errors.version}
 					/>
 				</Grid>
-			 </Grid>
+			</Grid>
 		</FormTemplate>
 	);
 };

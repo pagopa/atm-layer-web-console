@@ -3,16 +3,10 @@ import { Grid, MenuItem, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { isValidDeployableFilename } from "../../../utils/Commons";
-import fetchCreate from "../../../hook/fetch/WorkflowResource/fetchCreate";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
-
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-  };
+import fetchCreateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchCreateWorkflowResource";
 
 export const CreateWR = () => {
 	// const theme = useTheme();
@@ -63,22 +57,33 @@ export const CreateWR = () => {
 		if (validateForm()) {
 			console.log("VALUES:", formData);
 
-			const created = new Promise((resolve) =>{
-				void fetchCreate({ abortController, body:formData })().then((dataObj:any) => {
-					if (dataObj) {
-						resolve({
-							data: dataObj,
-							type: "SUCCES",
-						});
-					} else {resolve({ type: "error" });} // procedo comunque, altrimenti avrei lanciato reject
-					console.log("Auth res",dataObj);
-				});
+			const createWorkflowResource = new Promise((resolve) => {
+				void fetchCreateWorkflowResource({ abortController, body: formData })()
+					.then((response: any) => {
+						if (response) {
+							resolve({
+								data: response,
+								type: "SUCCESS"
+							});
+						} else {
+							resolve({
+								type: "ERROR"
+							});
+						}
+					})
+					.catch((err) => {
+						console.log("ERROR", err);
+					});
 			});
 
-			created.then(({ data}:any) => {
-				console.log("Auth res",data);
-				return data;
-			})	.catch((e) => e);
+			createWorkflowResource
+				.then((res) => {
+					console.log("CREATE WORKFLOW RESOURCE RESPONSE", res);
+					return res;
+				})
+				.catch((err) =>
+					console.log("CREATE WORKFLOW RESOURCE BPMN ERROR", err)
+				);
 
 		};
 	};
