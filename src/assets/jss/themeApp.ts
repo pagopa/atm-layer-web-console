@@ -107,6 +107,7 @@ declare module "@mui/material/styles" {
     checkIban: Palette["primary"];
     extraLight: Palette["warning"];
     primaryAction: Palette["action"];
+    normal: Palette["primary"];
   }
   interface PaletteOptions {
     pagoPA?: PaletteOptions["primary"];
@@ -114,6 +115,7 @@ declare module "@mui/material/styles" {
     checkIban?: PaletteOptions["primary"];
     extraLight?: PaletteOptions["warning"];
     primaryAction: PaletteOptions["action"];
+	normal: Palette["primary"];
   }
 
   interface PaletteColor {
@@ -197,6 +199,12 @@ const foundation: Theme = createTheme({
 		negative: {
 			main: "#FFFFFF",
 			contrastText: colorPrimary,
+		},
+		normal:{
+			main: colorPrimary,
+			contrastText: colorPrimary,
+			light: "#EBFDFF",
+			dark: "#00707B",
 		},
 		text: {
 			primary: colorTextPrimary,
@@ -494,11 +502,12 @@ export const themeApp: Theme = createTheme(foundation, {
 					style: {
 						color: foundation.palette.primary.main,
 						"&:hover": {
-							color: colorPrimaryContainedHover,
+							color: alpha(foundation.palette.primary.main, 0.8),
+							backgroundColor: "transparent",
 						},
 						"&.Mui-focusVisible": {
 							boxShadow: `0 0 0 3px ${alpha(
-								foundation.palette.primary.main,
+								foundation.palette.text.primary,
 								0.35
 							)}`,
 						},
@@ -525,7 +534,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						color: foundation.palette.text.primary,
 						"&:hover": {
 							color: alpha(foundation.palette.text.primary, 0.8),
-							backgroundColor: "transparent",
+							
 						},
 						"&.Mui-focusVisible": {
 							boxShadow: `0 0 0 3px ${alpha(

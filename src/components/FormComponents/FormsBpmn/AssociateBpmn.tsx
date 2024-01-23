@@ -284,8 +284,8 @@ export const AssociateBpmn = () => {
 
     return (
         <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Associate BPMN")}>
-            <Grid container item>
-                <Grid container item my={1}>
+            <Grid container >
+                <Grid xs={12} item my={1}>
                     <TextField
                         fullWidth
                         id="acquirerId"
@@ -299,7 +299,7 @@ export const AssociateBpmn = () => {
                         helperText={errors.acquirerId}
                     />
                 </Grid>
-                <Grid container item my={1}>
+                <Grid xs={12} item my={1}>
                     <TextField
                         fullWidth
                         id="functionType"
@@ -313,7 +313,7 @@ export const AssociateBpmn = () => {
                         helperText={errors.functionType}
                     />
                 </Grid>
-                <Grid container item my={1}>
+                <Grid xs={12} item my={1}>
                     <TextField
                         fullWidth
                         id="defaultTemplateId"
@@ -327,7 +327,7 @@ export const AssociateBpmn = () => {
                         helperText={errors.body.defaultTemplateId}
                     />
                 </Grid>
-                <Grid container item my={1}>
+                <Grid xs={12} item my={1}>
                     <TextField
                         fullWidth
                         id="defaultTemplateVersion"

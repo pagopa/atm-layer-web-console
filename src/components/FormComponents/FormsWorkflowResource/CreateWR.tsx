@@ -1,18 +1,12 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { Grid, MenuItem, TextField, Typography } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
+import React, { useRef, useState } from "react";
+import { Grid, MenuItem, TextField } from "@mui/material";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { isValidDeployableFilename } from "../../../utils/Commons";
 import fetchCreate from "../../../hook/fetch/WorkflowResource/fetchCreate";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import UploadField from "../UploadField";
 
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-  };
 
 export const CreateWR = () => {
 	// const theme = useTheme();
@@ -85,51 +79,49 @@ export const CreateWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create WR")}>
-			<Grid container item>
-				<Grid container item my={1}>
-					<Typography variant="body1">File BPMN</Typography>
-					<UploadFileWithButton
-						name={"file"}
-						file={formData.file}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-						onClick={clearFile}
-						error={errors.file}
-					/>
-				</Grid>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="filename"
-						name="filename"
-						label={"Nome del file senza estensione"}
-						placeholder={"Nome del file senza estensione"}
-						size="small"
-						value={formData.filename}
-						onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename}
-					/>
-				</Grid>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="resourceType"
-						name="resourceType"
-						select
-						label={"Estensione del file"}
-						placeholder={"Estensione del file"}
-						size="small"
-						value={formData.resourceType}
-						onChange={changeResourceType}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename}
-					>
-						<MenuItem value={"BPMN"}>BPMN</MenuItem>
-						<MenuItem value={"DMN"}>DMN</MenuItem>
-						<MenuItem value={"FORM"}>FORM</MenuItem>
-					</TextField>
-				</Grid>
+			
+			<UploadField 
+				titleField="File BPMN" 
+				name={"file"}
+				file={formData.file}
+				changeFile={changeFile}
+				clearFile={clearFile}
+				error={errors.file}
+			/>
+			<Grid container item my={1}>
+				<TextField
+					fullWidth
+					id="filename"
+					name="filename"
+					label={"Nome del file senza estensione"}
+					placeholder={"Nome del file senza estensione"}
+					size="small"
+					value={formData.filename}
+					onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename}
+				/>
 			</Grid>
+			<Grid container item my={1}>
+				<TextField
+					fullWidth
+					id="resourceType"
+					name="resourceType"
+					select
+					label={"Estensione del file"}
+					placeholder={"Estensione del file"}
+					size="small"
+					value={formData.resourceType}
+					onChange={changeResourceType}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename}
+				>
+					<MenuItem value={"BPMN"}>BPMN</MenuItem>
+					<MenuItem value={"DMN"}>DMN</MenuItem>
+					<MenuItem value={"FORM"}>FORM</MenuItem>
+				</TextField>
+			</Grid>
+		
 		</FormTemplate>
 	);
 };

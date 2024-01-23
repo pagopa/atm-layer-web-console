@@ -1,12 +1,11 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { Grid, TextField, Typography } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import React, { useRef, useState } from "react";
+import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
+import UploadField from "../UploadField";
 
 export const UpgradeBpmn = () => {
 	// const theme = useTheme();
@@ -81,8 +80,8 @@ export const UpgradeBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Upgrade BPMN")}>
-			<Grid container item>
-				<Grid container item my={1}>
+			<Grid container >
+				<Grid xs={12} item my={1}>
 					<TextField
 						fullWidth
 						id="uuid"
@@ -96,17 +95,15 @@ export const UpgradeBpmn = () => {
 						helperText={errors.uuid}
 					/>
 				</Grid>
-				<Grid container item my={1}>
-					<Typography variant="body1">File BPMN</Typography>
-					<UploadFileWithButton
-						name={"file"}
-						file={formData.file}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-						onClick={clearFile}
-						error={errors.file}
-					/>
-				</Grid>
-				<Grid container item my={1}>
+				<UploadField 
+					titleField="File BPMN" 
+					name={"file"}
+					file={formData.file}
+					changeFile={changeFile}
+					clearFile={clearFile}
+					error={errors.file}
+				/>
+				<Grid xs={12} item my={1}>
 					<TextField
 						fullWidth
 						id="fileName"
@@ -120,7 +117,7 @@ export const UpgradeBpmn = () => {
 						helperText={errors.fileName}
 					/>
 				</Grid>
-				<Grid container item my={1}>
+				<Grid xs={12} item my={1}>
 					<TextField
 						fullWidth
 						id="functionType"

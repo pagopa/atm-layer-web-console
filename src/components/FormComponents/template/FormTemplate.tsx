@@ -3,7 +3,6 @@ import React from "react";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
 
-
 type Props = {
 	handleSubmit: React.FormEventHandler<HTMLFormElement>;
 	children?: any;
@@ -18,22 +17,21 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 		borderRadius: 1,
 		border: 1,
 		borderColor: theme.palette.divider,
-		p: 3,
-		mb: 3,
-		maxWidth: "45%",
+		maxWidth: "60%",
+		minWidth: "55%"
 	};
 
 	return (
-		<React.Fragment>
+		<Box >
 			{getFormOptions.map((el: any, ind: any) => (
 				<React.Fragment key={el.title}>
 					<Box marginTop={3} textAlign={"center"}>
 						<TitleComponent title={el.title} subTitle={""} />
 					</Box>
-					<Box sx={inputGroupStyle} mt={4}>
+					<Box p={3} my={3} mx={"auto"} sx={inputGroupStyle}  >
 						<form onSubmit={handleSubmit}>
-							<Grid container spacing={2}>
-								<Grid container item>
+							<Grid container >
+								<Grid container item xs={12}>
 									{/* <EditNoteIcon sx={{ mr: 1 }} /> */}
 									<IconBox icon={"EditNote"} marg={"0 0.2em 0  0"} size={"1.8em"} />
 									<Typography variant="body1" fontWeight="600">
@@ -52,6 +50,6 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 				</React.Fragment>
 			)
 			)}
-		</React.Fragment>
+		</Box>
 	);
 }

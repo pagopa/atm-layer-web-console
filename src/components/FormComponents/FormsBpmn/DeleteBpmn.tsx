@@ -40,8 +40,8 @@ export const DeleteBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Delete BPMN")}>
-			<Grid container item>
-				<Grid container item my={1}>
+			<Grid container>
+				<Grid xs={12} item my={1}>
 					<TextField
 						fullWidth
 						id="bpmnid"
@@ -55,7 +55,7 @@ export const DeleteBpmn = () => {
 						helperText={errors.bpmnid}
 					/>
 				</Grid>
-				<Grid container item my={1}>
+				<Grid xs={12} item my={1}>
 					<TextField
 						fullWidth
 						id="version"

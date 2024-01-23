@@ -1,12 +1,10 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { Grid, TextField, Typography } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import React, {useRef, useState } from "react";
+import { Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
-import DeployBpmn from "./DeployBpmn";
+import UploadField from "../UploadField";
 
 export const NewBpmn = () => {
 	// const theme = useTheme();
@@ -82,43 +80,41 @@ export const NewBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")}>
-			<Grid container item>
-				<Grid container item my={1}>
-					<Typography variant="body1">File BPMN</Typography>
-					<UploadFileWithButton
-						name={"file"}
-						file={formData.file}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-						onClick={clearFile}
-						error={errors.file} />
-				</Grid>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="fileName"
-						name="fileName"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.fileName}
-						onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
-						error={Boolean(errors.fileName)}
-						helperText={errors.fileName} />
-				</Grid>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="functionType"
-						name="functionType"
-						label={"Tipo di funzione"}
-						placeholder={"Tipo di funzione"}
-						size="small"
-						value={formData.functionType}
-						onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
-						error={Boolean(errors.functionType)}
-						helperText={errors.functionType} />
-				</Grid>
+			<UploadField 
+				titleField="File BPMN" 
+				name={"file"}
+				file={formData.file}
+				changeFile={changeFile}
+				clearFile={clearFile}
+				error={errors.file}
+			/>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="fileName"
+					name="fileName"
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
+					size="small"
+					value={formData.fileName}
+					onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+					error={Boolean(errors.fileName)}
+					helperText={errors.fileName} />
 			</Grid>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="functionType"
+					name="functionType"
+					label={"Tipo di funzione"}
+					placeholder={"Tipo di funzione"}
+					size="small"
+					value={formData.functionType}
+					onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+					error={Boolean(errors.functionType)}
+					helperText={errors.functionType} />
+			</Grid>
+		
 		</FormTemplate>
 	);
 };

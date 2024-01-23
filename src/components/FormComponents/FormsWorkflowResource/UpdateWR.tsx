@@ -1,17 +1,11 @@
-import React, { ChangeEvent, useState } from "react";
-import { Grid, TextField, Typography } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
+import React, { useState } from "react";
+import { Grid, TextField } from "@mui/material";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
+import UploadField from "../UploadField";
 
-type Props = {
-	errors: any;
-	formData: any;
-	setFormData: any;
-  };
 
 export const UpdateWR = () => {
 	// const theme = useTheme();
@@ -55,18 +49,17 @@ export const UpdateWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Update WR")}>
-			<Grid container item>
-				<Grid container item my={1}>
-					<Typography variant="body1">File della risorsa</Typography>
-					<UploadFileWithButton
-						name={"file"}
-						file={formData.file}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-						onClick={clearFile}
-						error={errors.file}
-					/>
-				</Grid>
-				<Grid container item my={1}>
+			<Grid container >
+				
+				<UploadField 
+					titleField="File della risorsa" 
+					name={"file"}
+					file={formData.file}
+					changeFile={changeFile}
+					clearFile={clearFile}
+					error={errors.file}
+				/>
+				<Grid item xs={12} my={1}>
 					<TextField
 						fullWidth
 						id="uuid"

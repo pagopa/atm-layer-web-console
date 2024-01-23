@@ -1,17 +1,10 @@
-// import { useTheme } from "@mui/material/styles";
-import { Grid, MenuItem, TextField, Typography } from "@mui/material";
-import { useState, ChangeEvent } from "react";
+import { Grid, MenuItem, TextField } from "@mui/material";
+import { useState } from "react";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
-import UploadFileWithButton from "../../UploadFileComponents/UploadFileWithButton";
 import FormTemplate from "../template/FormTemplate";
+import UploadField from "../UploadField";
 
-type Props = {
-	errors:any ;
-	formData: any; 
-	setFormData: any; 
-	
-  };
 
 export const CreateResources = () => {
 	// const theme = useTheme();
@@ -63,18 +56,16 @@ export const CreateResources = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create Resources")} >
-			<Grid container item>
-				<Grid container item my={1}>
-					<Typography variant="body1">Resource File</Typography>
-					<UploadFileWithButton
-						name={"file"}
-						file={formData.file}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
-						onClick={clearFile}
-						error={errors.file}
-					/>
-				</Grid>
-				<Grid container item my={1}>
+			<Grid container >
+				<UploadField 
+					titleField="Resource File" 
+					name={"file"}
+					file={formData.file}
+					changeFile={changeFile}
+					clearFile={clearFile}
+					error={errors.file}
+				/>
+				<Grid item xs={12} my={1}>
 					<TextField
 						fullWidth
 						id="fileName"
@@ -88,7 +79,7 @@ export const CreateResources = () => {
 						helperText={errors.filename}
 					/>
 				</Grid>
-				<Grid container item my={1}>
+				<Grid item xs={12} my={1}>
 					<TextField
 						fullWidth
 						id="resourceType"
@@ -106,7 +97,7 @@ export const CreateResources = () => {
                             	<MenuItem value={"OTHER"}>OTHER</MenuItem>
 					</TextField>
 				</Grid>
-				<Grid container item my={1}>
+				<Grid item xs={12} my={1}>
 					<TextField   fullWidth
 						id="path"
 						name="path"

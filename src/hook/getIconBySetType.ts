@@ -44,6 +44,7 @@ import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
 const Icons : { [key: string]: any } ={
 	"HomeOutlined": HomeOutlinedIcon, 
@@ -91,7 +92,8 @@ const Icons : { [key: string]: any } ={
 	"AccountTree": AccountTreeOutlinedIcon,
 	"Description": DescriptionOutlinedIcon,
 	"Widgets": WidgetsOutlinedIcon,
-	"EditNote": EditNoteOutlinedIcon
+	"EditNote": EditNoteOutlinedIcon,
+	"FileUpload": FileUploadOutlinedIcon
 };
 
 
