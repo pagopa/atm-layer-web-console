@@ -1,6 +1,6 @@
 {
   "name": "web-console",
-  "version": "v1.0.0-dev.5",
+  "version": "v1.0.0-dev.6",
   "private": true,
   "homepage": "/webconsole",
   "dependencies": {
