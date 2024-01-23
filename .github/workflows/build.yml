@@ -24,20 +24,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v2
         with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
+          node-version: 20.9.0
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build docker image
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ vars.DOCKER_IMAGE_NAME}}
-          DOCKER_IMAGE_TAG: ${{ github.sha }}
+      - name: Build app
         run: |
-          docker build -f src/Dockerfile -t $REGISTRY/$REPOSITORY:$DOCKER_IMAGE_TAG .
+          npm install
+          npm run build
