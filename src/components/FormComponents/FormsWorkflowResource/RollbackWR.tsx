@@ -72,22 +72,22 @@ export const RollbackWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Rollback WR")}>
-			<Grid container item>
-				<Grid container item my={1}>
-					<TextField
-						fullWidth
-						id="uuid"
-						name="uuid"
-						label={"Identificativo unico del file"}
-						placeholder={"Identificativo unico"}
-						size="small"
-						value={formData.uuid}
-						onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
-						error={Boolean(errors.uuid)}
-						helperText={errors.uuid}
-					/>
-				</Grid>
+			
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="uuid"
+					name="uuid"
+					label={"Identificativo unico del file"}
+					placeholder={"Identificativo unico"}
+					size="small"
+					value={formData.uuid}
+					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					error={Boolean(errors.uuid)}
+					helperText={errors.uuid}
+				/>
 			</Grid>
+			
 		</FormTemplate>
 	);
 };

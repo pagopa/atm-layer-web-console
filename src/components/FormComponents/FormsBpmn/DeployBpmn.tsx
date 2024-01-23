@@ -74,7 +74,8 @@ export const DeployBpmn = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy BPMN")} >
-			<Grid container item my={1}>
+		
+			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="uuid"
@@ -88,7 +89,9 @@ export const DeployBpmn = () => {
 					helperText={errors.uuid}
 				/>
 			</Grid>
-			<Grid container item my={1}>
+			
+			<Grid item xs={12} my={1}>
+
 				<TextField
 					fullWidth
 					id="version"
@@ -103,6 +106,7 @@ export const DeployBpmn = () => {
 					helperText={errors.version}
 				/>
 			</Grid>
+		
 		</FormTemplate>
 	);
 };

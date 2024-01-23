@@ -13,6 +13,8 @@ function FormPageTemplate({ children }: Prop) {
 			flexDirection="column"
 			justifyContent="center"
 			alignItems="center"
+			mx={"15%"}
+			px={"10%"}
 		>
 			{children}
 		</Box>

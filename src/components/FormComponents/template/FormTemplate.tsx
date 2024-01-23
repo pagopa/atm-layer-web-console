@@ -17,8 +17,7 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 		borderRadius: 1,
 		border: 1,
 		borderColor: theme.palette.divider,
-		maxWidth: "60%",
-		minWidth: "55%"
+	
 	};
 
 	return (
@@ -31,13 +30,14 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 					<Box p={3} my={3} mx={"auto"} sx={inputGroupStyle}  >
 						<form onSubmit={handleSubmit}>
 							<Grid container >
+								{/* <EditNoteIcon sx={{ mr: 1 }} /> */}
 								<Grid container item xs={12}>
-									{/* <EditNoteIcon sx={{ mr: 1 }} /> */}
 									<IconBox icon={"EditNote"} marg={"0 0.2em 0  0"} size={"1.8em"} />
 									<Typography variant="body1" fontWeight="600">
 										{el.description}
 									</Typography>
 								</Grid>
+						
 								{children}
 							</Grid>
 							<Box display="flex" justifyContent="flex-end" mt={2}>
