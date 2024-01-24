@@ -77,7 +77,7 @@ export const DeleteBpmn = () => {
 					id="bpmnid"
 					name="bpmnid"
 					label={"Identificatore Univoco Bpmn"}
-					placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.bpmnid}
 					onChange={(e) => setFormData({ ...formData, bpmnid: e.target.value })}
@@ -91,7 +91,7 @@ export const DeleteBpmn = () => {
 					id="version"
 					name="version"
 					label={"Versione"}
-					placeholder={"Versione"}
+					placeholder={""}
 					type="number"
 					size="small"
 					value={formData.version}

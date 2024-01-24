@@ -14,14 +14,13 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 	const theme = useTheme();
 
 	const inputGroupStyle = {
-		borderRadius: 1,
-		border: 1,
+		borderWidth: "1px",
+		borderStyle: "solid",
 		borderColor: theme.palette.divider,
-	
 	};
 
 	return (
-		<Box >
+		<Box sx={{maxWidth:"75%"}}>
 			{getFormOptions.map((el: any, ind: any) => (
 				<React.Fragment key={el.title}>
 					<Box marginTop={3} textAlign={"center"}>
@@ -31,7 +30,7 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 						<form onSubmit={handleSubmit}>
 							<Grid container >
 								<Grid item xs={12}>
-									<Box display="flex">
+									<Box display="flex" mb={2}>
 										<IconBox icon={"EditNote"} marg={"0 0.2em 0  0"} size={"1.8em"} />
 										<Typography variant="body1" fontWeight="600">
 											{el.description}

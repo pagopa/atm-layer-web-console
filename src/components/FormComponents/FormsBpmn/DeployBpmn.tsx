@@ -81,7 +81,7 @@ export const DeployBpmn = () => {
 					id="uuid"
 					name="uuid"
 					label={"Identificatore Univoco"}
-					placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.uuid}
 					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
@@ -97,7 +97,7 @@ export const DeployBpmn = () => {
 					id="version"
 					name="version"
 					label={"Versione"}
-					placeholder={"Versione"}
+					placeholder={""}
 					type="number"
 					size="small"
 					value={formData.version}
