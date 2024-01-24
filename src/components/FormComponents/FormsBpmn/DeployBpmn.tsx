@@ -2,11 +2,12 @@ import { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeployBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID } from "../../../utils/Commons";
+import { isValidUUID, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import { Ctx } from "../../../DataContext";
+import { DEPLOY_BPMN } from "../../../commons/constants";
 
 export const DeployBpmn = () => {
 	// const theme = useTheme();
@@ -20,6 +21,16 @@ export const DeployBpmn = () => {
 	const [errors, setErrors] = useState({ uuid: "", version: "" });
 	const { getFormOptions } = formOption();
 	const { abortController } = useContext(Ctx);
+
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		if(e.target.name==="version"){
+			setFormData({ ...formData, [e.target.name]: parseInt(e.target.value, 10) });
+		}else{
+			setFormData({ ...formData, [e.target.name]: e.target.value });
+		}
+	};
+
 
 	const validateForm = () => {
 		const newErrors = {
@@ -37,7 +48,7 @@ export const DeployBpmn = () => {
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+		
 
 		if (validateForm()) {
 			const deployBpmn = new Promise((resolve) => {
@@ -74,7 +85,7 @@ export const DeployBpmn = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Deploy BPMN")} >
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DEPLOY_BPMN)} >
 		
 			<Grid item xs={12} my={1}>
 				<TextField
@@ -85,7 +96,7 @@ export const DeployBpmn = () => {
 					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.uuid}
-					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.uuid)}
 					helperText={errors.uuid}
 				/>
@@ -102,7 +113,7 @@ export const DeployBpmn = () => {
 					type="number"
 					size="small"
 					value={formData.version}
-					onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
+					onChange={handleChange}
 					error={Boolean(errors.version)}
 					helperText={errors.version}
 				/>

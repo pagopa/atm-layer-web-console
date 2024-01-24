@@ -1,12 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
-import { isValidDeployableFilename } from "../../../utils/Commons";
+import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchCreateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchCreateWorkflowResource";
 import { Ctx } from "../../../DataContext";
+import { CREATE_WR } from "../../../commons/constants";
 
 export const CreateWR = () => {
 	// const theme = useTheme();
@@ -23,6 +24,11 @@ export const CreateWR = () => {
 	const [formData, setFormData] = useState<WorkflowResourceDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 
+	
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
 
 	function validateForm() {
 		const newErrors = {
@@ -38,22 +44,14 @@ export const CreateWR = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
-	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, file: e.target.value });
-	};
 
 	const clearFile = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	const changeResourceType = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		setFormData({ ...formData, resourceType: e.target.value });
-	};
 
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-
+		
 		if (validateForm()) {
 			console.log("VALUES:", formData);
 
@@ -89,13 +87,13 @@ export const CreateWR = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create WR")}>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_WR)}>
 			
 			<UploadField 
 				titleField="File BPMN" 
 				name={"file"}
 				file={formData.file}
-				changeFile={changeFile}
+				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
 			/>
@@ -108,7 +106,7 @@ export const CreateWR = () => {
 					placeholder={"Nome del file senza estensione"}
 					size="small"
 					value={formData.filename}
-					onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				/>
@@ -123,7 +121,7 @@ export const CreateWR = () => {
 					placeholder={"Estensione del file"}
 					size="small"
 					value={formData.resourceType}
-					onChange={changeResourceType}
+					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				>

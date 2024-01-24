@@ -48,11 +48,11 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
             sx={{
                 maxWidth:"95%",
                 border: "2px dashed",
-                backgroundColor: error ? theme?.palette?.error?.main : `${theme.palette.primary.main}40`,
+                backgroundColor: error ? alpha(theme?.palette?.error?.light, 0.3) : `${theme.palette.primary.main}40`,
                 borderColor: error ? theme?.palette?.error?.dark: theme?.palette?.primary?.main,
                 "&:hover":{
-                    backgroundColor: error ? theme?.palette?.error?.light : alpha(theme.palette.primary.light, 0.9),
-                    color: error ? theme?.palette?.error?.main :  alpha(theme.palette.text.primary, 0.3),
+                    backgroundColor: error ? alpha(theme?.palette?.error?.light, 0.1) : alpha(theme.palette.primary.light, 0.9),
+                    color: error ? theme?.palette?.error?.dark :  alpha(theme.palette.text.primary, 0.3),
                 }
             }}
      >

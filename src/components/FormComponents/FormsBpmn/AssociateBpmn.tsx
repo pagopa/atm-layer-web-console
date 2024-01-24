@@ -7,6 +7,7 @@ import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/B
 import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
+import { ASSOCIATE_BPMN } from "../../../commons/constants";
 
 export const AssociateBpmn = () => {
     const theme = useTheme();
@@ -283,7 +284,7 @@ export const AssociateBpmn = () => {
     };
 
     return (
-        <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Associate BPMN")}>
+        <FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(ASSOCIATE_BPMN)}>
           
                 <Grid xs={12} item my={1}>
                     <TextField

@@ -1,12 +1,13 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeleteBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID } from "../../../utils/Commons";
+import { isValidUUID, resetErrors } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
 import formOption from "../../../hook/formOption";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 import { Ctx } from "../../../DataContext";
+import { DELETE_BPMN } from "../../../commons/constants";
 
 export const DeleteBpmn = () => {
 	// const theme = useTheme();
@@ -33,11 +34,20 @@ export const DeleteBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		if(e.target.name==="version"){
+			setFormData({ ...formData, [e.target.name]: parseInt(e.target.value, 10) });
+		}else{
+			setFormData({ ...formData, [e.target.name]: e.target.value });
+		}
+	};
+
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+		
 
 		if (validateForm()) {
-			const createBpmn = new Promise((resolve) => {
+			const deleteBpmn = new Promise((resolve) => {
 				if (formData.bpmnid && formData.version !== undefined) {
 					void fetchDeleteBpmn({ abortController, body: formData }, formData.bpmnid, formData.version)()
 						.then((response: any) => {
@@ -58,19 +68,19 @@ export const DeleteBpmn = () => {
 				}
 			});
 
-			createBpmn
+			deleteBpmn
 				.then((res) => {
-					console.log("CREATE BPMN RESPONSE", res);
+					console.log("DELETE BPMN RESPONSE", res);
 					return res;
 				})
 				.catch((err) =>
-					console.log("CREATE BPMN ERROR", err)
+					console.log("DELETE BPMN ERROR", err)
 				);
 		}
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Delete BPMN")}>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DELETE_BPMN)}>
 			
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -81,7 +91,7 @@ export const DeleteBpmn = () => {
 					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.bpmnid}
-					onChange={(e) => setFormData({ ...formData, bpmnid: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.bpmnid)}
 					helperText={errors.bpmnid}
 				/>
@@ -96,7 +106,7 @@ export const DeleteBpmn = () => {
 					type="number"
 					size="small"
 					value={formData.version}
-					onChange={(e) => setFormData({ ...formData, version: parseInt(e.target.value, 10) })}
+					onChange={handleChange}
 					error={Boolean(errors.version)}
 					helperText={errors.version}
 				/>

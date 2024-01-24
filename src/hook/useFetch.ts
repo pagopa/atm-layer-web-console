@@ -58,7 +58,7 @@ export default function useFetch(endPoint: string | undefined) {
 				(response.status === 0 && response.type === "opaqueredirect") ||
 				response.status === 302
 			) {
-				window.location.reload();
+				// window.location.reload();
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore

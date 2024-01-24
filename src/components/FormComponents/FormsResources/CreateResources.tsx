@@ -6,6 +6,8 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
+import { CREATE_RES } from "../../../commons/constants";
+import { resetErrors } from "../../../utils/Commons";
 
 
 export const CreateResources = () => {
@@ -24,6 +26,12 @@ export const CreateResources = () => {
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
     
+
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+	
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
@@ -50,7 +58,7 @@ export const CreateResources = () => {
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+		
 
 		if (validateForm()) {
 			const createBpmn = new Promise((resolve) => {
@@ -84,13 +92,13 @@ export const CreateResources = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create Resources")} >
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_RES)} >
 			
 			<UploadField 
 				titleField="Resource File" 
 				name={"file"}
 				file={formData.file}
-				changeFile={changeFile}
+				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
 			/>
@@ -103,7 +111,7 @@ export const CreateResources = () => {
 					placeholder={"Nome del file senza estensione"}
 					size="small"
 					value={formData.filename}
-					onChange={(e) => setFormData({ ...formData, filename: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				/>
@@ -118,16 +126,17 @@ export const CreateResources = () => {
 					placeholder={"Estensione del file"}
 					size="small"
 					value={formData.resourceType}
-					onChange={changeResourceType}
+					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				>
 					<MenuItem value={"HTML"}>HTML</MenuItem>
-                            	<MenuItem value={"OTHER"}>OTHER</MenuItem>
+					<MenuItem value={"OTHER"}>OTHER</MenuItem>
 				</TextField>
 			</Grid>
 			<Grid item xs={12} my={1}>
-				<TextField   fullWidth
+				<TextField   
+					fullWidth
 					id="path"
 					name="path"
 					label={"Percorso (Opzionale)"}

@@ -1,59 +1,61 @@
+import { ASSOCIATE_BPMN, CREATE_BPMN, CREATE_RES, CREATE_WR, DELETE_BPMN, DEPLOY_BPMN, DEPLOY_WR, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, UPGRADE_BPMN } from "../commons/constants";
+
 const formOption:any = () => {
   
 	const getFormOptions:any = (driver: string) => {
 		switch (driver) {
 
-		case "Create BPMN":
+		case CREATE_BPMN:
 			return [
 				{title:"Creazione BPMN", description: " Compila tutti i campi per creare un nuovo BPMN"}
 			];
 
-	    case "Deploy BPMN":
+	    case DEPLOY_BPMN:
 			return [
 				{title:"Rilascio BPMN", description: "Compila tutti i campi per rilasciare un BPMN"}
 			];
 
-		case "Delete BPMN":
+		case DELETE_BPMN:
 			return [
 				{title:"Eliminazione BPMN", description: "Compila tutti i campi per Eliminare un BPMN"}
 			];
 
-		case "Upgrade BPMN":
+		case UPGRADE_BPMN:
 			return [
 				{title:"Aggiornamento BPMN", description: "Compila tutti i campi per modificare un BPMN"}
 			];
 
-		case "Associate BPMN":
+		case ASSOCIATE_BPMN:
 			return [
 				{title:"Associa BPMN", description: "Compila tutti i campi per Associare un BPMN"}
 			];
 
-		case "Create Resources":
+		case CREATE_RES:
 			return [
 				{title:"Creazione Resources", description: " Compila tutti i campi per creare un nuovo Resource"}
 			];
 
-		case "Update Resources":
+		case UPDATE_RES:
 			return [
 				{title:"Aggiornamento Resources", description: " Compila tutti i campi per aggiornare una risorsa esistente"}
 			];
 
-		case "Create WR":
+		case CREATE_WR:
 			return [
 				{title:"Creazione Workflow Resource", description: " Compila tutti i campi per creare una nuova Workflow Resource"}
 			];
 
-		case "Deploy WR":
+		case DEPLOY_WR:
 			return [
 				{title:"Rilascio Workflow Resource", description: " Compila il campo di identificativo unico per rilasciare una risorsa esistente"}
 			];
 
-		case "Rollback WR":
+		case ROLLBACK_WR:
 			return [
 				{title:"Rollback Workflow Resource", description: " Compila il campo di identificativo unico per ripristinare l&apos;ultima versione rilasciata"}
 			];
 
-		case "Update WR":
+		case UPDATE_WR:
 			return [
 				{title:"Aggiornamento Workflow Resource", description: " Compila tutti i campi per aggiornare una risorsa esistente"}
 			];

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
@@ -7,6 +7,8 @@ import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { getAllBpmn } from "../../../services/AtmlLayerServices";
 import { Ctx } from "../../../DataContext";
+import { CREATE_BPMN } from "../../../commons/constants";
+import { resetErrors } from "../../../utils/Commons";
 
 export const CreateBpmn = () => {
 	// const theme = useTheme();
@@ -23,16 +25,23 @@ export const CreateBpmn = () => {
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
 
-	useEffect(() => {
-		getAllBpmn(1, 10)
-			.then((res) => {
-				console.log("GET ALL BPMN RESPONSE", res);
-				return res;
-			})
-			.catch((err) => 
-				console.log("GET ALL BPMN ERROR", err)
-			);
-	}, []);
+	// useEffect(() => {
+	// 	getAllBpmn(1, 10)
+	// 		.then((res) => {
+	// 			console.log("GET ALL BPMN RESPONSE", res);
+	// 			return res;
+	// 		})
+	// 		.catch((err) => 
+	// 			console.log("GET ALL BPMN ERROR", err)
+	// 		);
+	// }, []);3
+
+	
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
 
 	const validateForm = () => {
 		const newErrors = {
@@ -40,15 +49,14 @@ export const CreateBpmn = () => {
 			fileName: formData.fileName ? "" : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
 		};
-
+		
 		setErrors(newErrors);
-
+		
 		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
 
 		if (validateForm()) {
 			console.log("VALUES:", formData);
@@ -83,21 +91,18 @@ export const CreateBpmn = () => {
 		}
 	};
 
-	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, file: e.target.value });
-	};
-
+	
 	const clearFile = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Create BPMN")}>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
 			<UploadField 
 				titleField="File BPMN" 
 				name={"file"}
 				file={formData.file}
-				changeFile={changeFile}
+				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
 			/>
@@ -110,7 +115,7 @@ export const CreateBpmn = () => {
 					placeholder={"Nome del file"}
 					size="small"
 					value={formData.fileName}
-					onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.fileName)}
 					helperText={errors.fileName} />
 			</Grid>
@@ -123,9 +128,10 @@ export const CreateBpmn = () => {
 					placeholder={"Tipo di funzione"}
 					size="small"
 					value={formData.functionType}
-					onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.functionType)}
-					helperText={errors.functionType} />
+					helperText={errors.functionType} 
+				/>
 			</Grid>
 		
 		</FormTemplate>

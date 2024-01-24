@@ -1,12 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID } from "../../../utils/Commons";
+import { isValidUUID, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
+import { UPGRADE_BPMN } from "../../../commons/constants";
 
 export const UpgradeBpmn = () => {
 	// const theme = useTheme();
@@ -24,6 +25,11 @@ export const UpgradeBpmn = () => {
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
 
+	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
 	const validateForm = () => {
 		const newErrors = {
 			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
@@ -37,16 +43,12 @@ export const UpgradeBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
-	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, file: e.target.value });
-	};
-
 	const clearFile = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+		
 
 		if (validateForm()) {
 			const upgradeBpmn = new Promise((resolve) => {
@@ -80,7 +82,7 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions("Upgrade BPMN")}>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
 			
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -91,7 +93,7 @@ export const UpgradeBpmn = () => {
 					placeholder={"Identificatore Univoco"}
 					size="small"
 					value={formData.uuid}
-					onChange={(e) => setFormData({ ...formData, uuid: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.uuid)}
 					helperText={errors.uuid}
 				/>
@@ -100,7 +102,7 @@ export const UpgradeBpmn = () => {
 				titleField="File BPMN" 
 				name={"file"}
 				file={formData.file}
-				changeFile={changeFile}
+				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
 			/>
@@ -113,7 +115,7 @@ export const UpgradeBpmn = () => {
 					placeholder={"Nome del file"}
 					size="small"
 					value={formData.fileName}
-					onChange={(e) => setFormData({ ...formData, fileName: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.fileName)}
 					helperText={errors.fileName}
 				/>
@@ -127,7 +129,7 @@ export const UpgradeBpmn = () => {
 					placeholder={"Tipo di funzione"}
 					size="small"
 					value={formData.functionType}
-					onChange={(e) => setFormData({ ...formData, functionType: e.target.value })}
+					onChange={handleChange}
 					error={Boolean(errors.functionType)}
 					helperText={errors.functionType}
 				/>
