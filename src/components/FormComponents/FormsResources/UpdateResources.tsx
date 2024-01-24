@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Grid, TextField } from "@mui/material";
 import { ResourcesUpdateDto } from "../../../model/ResourcesModel";
 import { isValidUUID } from "../../../utils/Commons";
@@ -6,6 +6,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchUpgradeResources from "../../../hook/fetch/Resources/fetchUpgradeResources";
+import { Ctx } from "../../../DataContext";
 
 type Props = {
 	errors: any;
@@ -25,7 +26,7 @@ export const UpdateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {

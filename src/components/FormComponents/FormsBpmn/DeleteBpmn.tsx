@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeleteBpmnDto } from "../../../model/BpmnModel";
@@ -6,6 +6,7 @@ import { isValidUUID } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
 import formOption from "../../../hook/formOption";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
+import { Ctx } from "../../../DataContext";
 
 export const DeleteBpmn = () => {
 	// const theme = useTheme();
@@ -19,7 +20,7 @@ export const DeleteBpmn = () => {
 
 	const [formData, setFormData] = useState<DeleteBpmnDto>(initialValues);
 	const [errors, setErrors] = useState({ bpmnid: "", version: "" });
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {

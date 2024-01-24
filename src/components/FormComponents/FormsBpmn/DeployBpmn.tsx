@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { DeployBpmnDto } from "../../../model/BpmnModel";
@@ -6,6 +6,7 @@ import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
+import { Ctx } from "../../../DataContext";
 
 export const DeployBpmn = () => {
 	// const theme = useTheme();
@@ -18,7 +19,7 @@ export const DeployBpmn = () => {
 	const [formData, setFormData] = useState<DeployBpmnDto>(initialValues);
 	const [errors, setErrors] = useState({ uuid: "", version: "" });
 	const { getFormOptions } = formOption();
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {

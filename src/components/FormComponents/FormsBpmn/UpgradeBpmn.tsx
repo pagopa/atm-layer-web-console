@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID } from "../../../utils/Commons";
@@ -6,6 +6,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 import UploadField from "../UploadField";
+import { Ctx } from "../../../DataContext";
 
 export const UpgradeBpmn = () => {
 	// const theme = useTheme();
@@ -21,7 +22,7 @@ export const UpgradeBpmn = () => {
 
 	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {

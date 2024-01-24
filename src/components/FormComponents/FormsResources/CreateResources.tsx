@@ -1,10 +1,11 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
+import { Ctx } from "../../../DataContext";
 
 
 export const CreateResources = () => {
@@ -21,7 +22,7 @@ export const CreateResources = () => {
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
     
 	const validateForm = () => {
 		const newErrors = {

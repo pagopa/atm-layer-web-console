@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { WRDeployDto } from "../../../model/WorkflowResourceModel";
@@ -6,6 +6,7 @@ import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchDeployWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDeployWorkflowResource";
+import { Ctx } from "../../../DataContext";
 
 export const DeployWR = () => {
 	const { getFormOptions } = formOption();
@@ -16,7 +17,7 @@ export const DeployWR = () => {
 
 	const [formData, setFormData] = useState<WRDeployDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {

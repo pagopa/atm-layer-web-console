@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { WRRollbackDto } from "../../../model/WorkflowResourceModel";
@@ -6,6 +6,7 @@ import { isValidUUID } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchRollbackWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchRollbackWorkflowResource";
+import { Ctx } from "../../../DataContext";
 
 type Props = {
 	errors: any;
@@ -24,7 +25,7 @@ export const RollbackWR = () => {
 
 	const [formData, setFormData] = useState<WRRollbackDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
-	const abortController = useRef(new AbortController());
+	const { abortController } = useContext(Ctx);
 
 	const validateForm = () => {
 		const newErrors = {
