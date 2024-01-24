@@ -8,7 +8,7 @@ import UploadField from "../UploadField";
 import { getAllBpmn } from "../../../services/AtmlLayerServices";
 import { Ctx } from "../../../DataContext";
 
-export const NewBpmn = () => {
+export const CreateBpmn = () => {
 	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
@@ -132,4 +132,4 @@ export const NewBpmn = () => {
 	);
 };
 
-export default NewBpmn;
+export default CreateBpmn;

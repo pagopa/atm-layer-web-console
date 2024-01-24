@@ -1,13 +1,13 @@
-import NewBpmn from "../components/FormComponents/FormsBpmn/NewBpmn";
 import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import AssociateBpmn from "../components/FormComponents/FormsBpmn/AssociateBpmn";
 import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
 import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
+import CreateBpmn from "../components/FormComponents/FormsBpmn/CreateBpmn";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const BpmnPage = () => (
 	<FormPageTemplate>
-		<NewBpmn />
+		<CreateBpmn />
 		<DeployBpmn />
 		<UpgradeBpmn />
 		<AssociateBpmn />

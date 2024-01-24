@@ -46,6 +46,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
             mt={0.5}
             mb={1}
             sx={{
+                maxWidth:"95%",
                 border: "2px dashed",
                 backgroundColor: error ? theme?.palette?.error?.main : `${theme.palette.primary.main}40`,
                 borderColor: error ? theme?.palette?.error?.dark: theme?.palette?.primary?.main,

@@ -592,6 +592,60 @@ export const themeApp: Theme = createTheme(foundation, {
 			],
 		},
 		/* END Button */
+		/* START Input */
+		MuiInput: {
+			styleOverrides: {
+				root: {
+					fontWeight: foundation.typography.fontWeightRegular,
+				},
+			},
+		},
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					fontWeight: foundation.typography.fontWeightRegular,
+					"& .MuiOutlinedInput-notchedOutline": {},
+					"&.Mui-error .MuiOutlinedInput-notchedOutline": {
+						borderColor: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				root: {
+					color: foundation.palette.text.primary,
+					fontWeight: foundation.typography.fontWeightRegular,
+					"&.Mui-error": {
+						color: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+		MuiInputAdornment: {
+			styleOverrides: {
+				root: {
+					"& .MuiSvgIcon-colorError": {
+						color: `${foundation.palette.error.dark}`,
+					},
+				},
+			},
+		},
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					fontSize: pxToRem(12),
+					lineHeight: 1.25 /* 15px */,
+					color: foundation.palette.text.secondary,
+					fontWeight: foundation.typography.fontWeightMedium,
+					letterSpacing: 0.5,
+					"&.Mui-error": {
+						color: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+
 	}
 });
 

@@ -291,7 +291,7 @@ export const AssociateBpmn = () => {
                         id="acquirerId"
                         name="acquirerId"
                         label={"Codice identificativo banca"}
-                        placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+                        placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.acquirerId}
                         onChange={(e) => handleInputChange("acquirerId", e.target.value)}
@@ -319,7 +319,7 @@ export const AssociateBpmn = () => {
                         id="defaultTemplateId"
                         name="defaultTemplateId"
                         label={"Identificatore univoco Bmpn di default"}
-                        placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+                        placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.body?.defaultTemplateId ?? undefined}
                         onChange={(e) => handleInputChange("defaultTemplateId", e.target.value)}
@@ -349,7 +349,7 @@ export const AssociateBpmn = () => {
                 </Grid>
                 <Grid container item my={1}>
                     {
-                        formData.body?.branchesConfigs ?
+                        formData.body?.branchesConfigs &&
                             formData.body.branchesConfigs.map((branch, branchIndex) => (
                                 <Box key={branch.branchId} display={"flex"} flexDirection={"row"} width={"100%"}>
                                     <RemoveCircleOutline
@@ -397,7 +397,7 @@ export const AssociateBpmn = () => {
                                                         id="branchDefaultTemplateId"
                                                         name="branchDefaultTemplateId"
                                                         label={"Identificatore univoco di default del Branch"}
-                                                        placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+                                                        placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                                                         size="small"
                                                         value={branch.branchDefaultTemplateId}
                                                         onChange={(e) => handleBranchChange(branchIndex, "branchDefaultTemplateId", e.target.value)}
@@ -456,7 +456,7 @@ export const AssociateBpmn = () => {
                                                                         id="templateId"
                                                                         name="templateId"
                                                                         label={"Identificatore univoco template"}
-                                                                        placeholder={"Es: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
+                                                                        placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                                                                         size="small"
                                                                         value={terminal.templateId}
                                                                         onChange={(e) => e.target.value}
@@ -487,7 +487,7 @@ export const AssociateBpmn = () => {
                                         )}
                                     </Box>
                                 </Box>
-                            )) : null
+                            )) 
                     }
                 </Grid>
            
