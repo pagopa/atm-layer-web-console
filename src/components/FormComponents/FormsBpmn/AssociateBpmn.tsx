@@ -62,11 +62,6 @@ export const AssociateBpmn = () => {
     const [formData, setFormData] = useState<AssociateBpmnDto>(initialValues);
     const [errors, setErrors] = useState(initialErrors);
 
-    useEffect(() => {
-        console.log("FORM DATA: ", formData);
-        console.log("ERRORS: ", errors);
-    }, [errors]);
-
     const validateForm = () => {
         const newErrors = {
             acquirerId: formData.acquirerId ?

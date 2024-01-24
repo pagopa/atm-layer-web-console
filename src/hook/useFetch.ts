@@ -65,14 +65,14 @@ export default function useFetch(endPoint: string | undefined) {
 			} else if (status !== CODE_SUCCESS && status !== 206) {
 				data = { valuesObj: { message: "Errore" }, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
-				
+				console.log("SUCESS!");
 				data = await response?.json(); // parses JSON response into native JavaScript objects
 				data = { valuesObj: data, status, success: true }; // CODE_SUCCESS 200/206
 				
 			}
 		} catch (error) {
 			data = {
-				valuesObj: { message: "Errore durante la useFetch" }, // aluesObj conterrà il messaggio di errore
+				valuesObj: { message: `Errore durante la useFetch${error}` }, // aluesObj conterrà il messaggio di errore
 				success: false,
 			}; 
 		}

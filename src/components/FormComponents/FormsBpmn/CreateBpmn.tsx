@@ -1,11 +1,10 @@
-import React, {useContext, useEffect, useRef, useState } from "react";
+import React, {useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
-import { getAllBpmn } from "../../../services/AtmlLayerServices";
 import { Ctx } from "../../../DataContext";
 
 export const CreateBpmn = () => {
@@ -22,17 +21,6 @@ export const CreateBpmn = () => {
 	const [formData, setFormData] = useState<BpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
-
-	useEffect(() => {
-		getAllBpmn(1, 10)
-			.then((res) => {
-				console.log("GET ALL BPMN RESPONSE", res);
-				return res;
-			})
-			.catch((err) => 
-				console.log("GET ALL BPMN ERROR", err)
-			);
-	}, []);
 
 	const validateForm = () => {
 		const newErrors = {
