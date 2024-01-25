@@ -101,8 +101,8 @@ export const UpdateResources = () => {
 					fullWidth
 					id="uuid"
 					name="uuid"
-					label={"Identificativo unico del file"}
-					placeholder={"Identificativo unico"}
+					label={"ID risorsa"}
+					placeholder={"ID risorsa"}
 					size="small"
 					value={formData.uuid}
 					onChange={handleChange}

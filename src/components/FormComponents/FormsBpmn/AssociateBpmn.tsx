@@ -286,7 +286,7 @@ export const AssociateBpmn = () => {
                         fullWidth
                         id="acquirerId"
                         name="acquirerId"
-                        label={"Codice identificativo banca"}
+                        label={"ID banca"}
                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.acquirerId}
@@ -300,8 +300,8 @@ export const AssociateBpmn = () => {
                         fullWidth
                         id="functionType"
                         name="functionType"
-                        label={"Tipo di funzione"}
-                        placeholder={"Tipo di funzione"}
+                        label={"Funzionalità"}
+                        placeholder={"Funzionalità"}
                         size="small"
                         value={formData.functionType}
                         onChange={(e) => handleInputChange("functionType", e.target.value)}
@@ -314,7 +314,7 @@ export const AssociateBpmn = () => {
                         fullWidth
                         id="defaultTemplateId"
                         name="defaultTemplateId"
-                        label={"Identificatore univoco Bmpn di default"}
+                        label={"ID processo di default"}
                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.body?.defaultTemplateId ?? undefined}
@@ -328,8 +328,8 @@ export const AssociateBpmn = () => {
                         fullWidth
                         id="defaultTemplateVersion"
                         name="defaultTemplateVersion"
-                        label={"Versione Bmpn di default"}
-                        placeholder={"Versione Bmpn di default"}
+                        label={"Versione processo di default"}
+                        placeholder={"Versione processo di default"}
                         size="small"
                         type="number"
                         value={formData.body?.defaultTemplateVersion ?? undefined}
@@ -340,7 +340,7 @@ export const AssociateBpmn = () => {
                 </Grid>
                 <Grid container item mb={1}>
                     <Button variant="text" size="small" onClick={() => addBranches()}>
-                        Aggiungi branches
+                        Aggiungi filiale
                     </Button>
                 </Grid>
                 <Grid container item my={1}>
@@ -370,7 +370,6 @@ export const AssociateBpmn = () => {
                                         ml={2}
                                         key={`id${branch.branchId}`}
                                     >
-                                        {/* Aggiungere onBlur al posto  */}
                                         {branch && (
                                             <>
                                                 <Grid container item my={1} >
@@ -378,8 +377,8 @@ export const AssociateBpmn = () => {
                                                         fullWidth
                                                         id="branchId"
                                                         name="branchId"
-                                                        label={"Branch Id"}
-                                                        placeholder={"Branch Id"}
+                                                        label={"ID filiale"}
+                                                        placeholder={"ID filiale"}
                                                         size="small"
                                                         value={branch.branchId}
                                                         onChange={(e) => handleBranchChange(branchIndex, "branchId", e.target.value)}
@@ -392,7 +391,7 @@ export const AssociateBpmn = () => {
                                                         fullWidth
                                                         id="branchDefaultTemplateId"
                                                         name="branchDefaultTemplateId"
-                                                        label={"Identificatore univoco di default del Branch"}
+                                                        label={"ID processo della filiale"}
                                                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                                                         size="small"
                                                         value={branch.branchDefaultTemplateId}
@@ -406,8 +405,8 @@ export const AssociateBpmn = () => {
                                                         fullWidth
                                                         id="branchDefaultTemplateVersion"
                                                         name="branchDefaultTemplateVersion"
-                                                        label={"Versione branchDefaultTemplate di default"}
-                                                        placeholder={"Versione branchDefaultTemplate di default"}
+                                                        label={"Versione processo della filiale"}
+                                                        placeholder={"Versione processo della filiale"}
                                                         size="small"
                                                         type="number"
                                                         value={branch.branchDefaultTemplateVersion}
@@ -418,7 +417,7 @@ export const AssociateBpmn = () => {
                                                 </Grid>
                                                 <Grid container item mb={1}>
                                                     <Button variant="text" size="small" onClick={() => addTerminal(branchIndex, terminalsInitialValues)}>
-                                                        Aggiungi terminals
+                                                        Aggiungi terminale
                                                     </Button>
                                                 </Grid>
                                                 {
@@ -451,7 +450,7 @@ export const AssociateBpmn = () => {
                                                                         fullWidth
                                                                         id="templateId"
                                                                         name="templateId"
-                                                                        label={"Identificatore univoco template"}
+                                                                        label={"ID processo del terminale"}
                                                                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                                                                         size="small"
                                                                         value={terminal.templateId}
@@ -465,8 +464,8 @@ export const AssociateBpmn = () => {
                                                                         fullWidth
                                                                         id="templateVersion"
                                                                         name="templateVersion"
-                                                                        label={"Versione Template"}
-                                                                        placeholder={"Versione branchDefaultTemplate di default"}
+                                                                        label={"Versione processo del terminale"}
+                                                                        placeholder={"Versione processo del terminale"}
                                                                         size="small"
                                                                         type="number"
                                                                         value={terminal.templateVersion}

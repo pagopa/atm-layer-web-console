@@ -32,6 +32,32 @@ export function buildColumnDefs() {
 			flex: 3,
 		},
 		{
+			field: "createdAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "createdAt",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.createdAt),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "lastUpdatedAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "lastUpdatedAt",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.lastUpdatedAt),
+			sortable: false,
+			flex: 3,
+		},
+		{
 			field: "functionType",
 			cellClassName: "justifyContentNormal",
 			headerName: "functionType",
@@ -54,19 +80,6 @@ export function buildColumnDefs() {
 			disableColumnMenu: true,
 			renderHeader: showCustomHeader,
 			renderCell: (params) => renderCell(params, params.row.deployedFileName),
-			sortable: false,
-			flex: 3,
-		},
-		{
-			field: "functionType",
-			cellClassName: "justifyContentNormal",
-			headerName: "functionType",
-			align: "left",
-			headerAlign: "left",
-			editable: false,
-			disableColumnMenu: true,
-			renderHeader: showCustomHeader,
-			renderCell: (params) => renderCell(params, params.row.functionType),
 			sortable: false,
 			flex: 3,
 		},
@@ -97,15 +110,15 @@ export function buildColumnDefs() {
 			flex: 3,
 		},
 		{
-			field: "resourceType",
+			field: "resource",
 			cellClassName: "justifyContentNormal",
-			headerName: "resourceType",
+			headerName: "resource",
 			align: "left",
 			headerAlign: "left",
 			editable: false,
 			disableColumnMenu: true,
 			renderHeader: showCustomHeader,
-			renderCell: (params) => renderCell(params, params.row.resourceFile.resourceType),
+			renderCell: (params) => renderCell(params, params.row.resourceFile.resource),
 			sortable: false,
 			flex: 3,
 		},
@@ -181,8 +194,8 @@ export function showCustomHeader(params: GridColumnHeaderParams) {
 	return (
 		<Typography
 			color="colorTextPrimary"
-			variant="caption"
-			sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1 }}
+			variant="body2"
+			sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1, color: "#ffffff" }}
 		>
 			{params.colDef.headerName}
 		</Typography>

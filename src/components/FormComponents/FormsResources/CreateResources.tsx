@@ -95,7 +95,7 @@ export const CreateResources = () => {
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_RES)} >
 			
 			<UploadField 
-				titleField="Resource File" 
+				titleField="File della risorsa" 
 				name={"file"}
 				file={formData.file}
 				changeFile={handleChange}
@@ -107,8 +107,8 @@ export const CreateResources = () => {
 					fullWidth
 					id="fileName"
 					name="fileName"
-					label={"Nome del file senza estensione"}
-					placeholder={"Nome del file senza estensione"}
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}
@@ -139,8 +139,8 @@ export const CreateResources = () => {
 					fullWidth
 					id="path"
 					name="path"
-					label={"Percorso (Opzionale)"}
-					placeholder={"Percorso (Opzionale)"}
+					label={"Percorso nella cartella di destinazione"}
+					placeholder={"(Opzionale)"}
 					size="small"
 					value={formData.path}
 					error={Boolean(errors.path)}

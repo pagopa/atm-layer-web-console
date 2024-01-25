@@ -90,7 +90,7 @@ export const CreateWR = () => {
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_WR)}>
 			
 			<UploadField 
-				titleField="File BPMN" 
+				titleField="File risorsa" 
 				name={"file"}
 				file={formData.file}
 				changeFile={handleChange}
@@ -102,8 +102,8 @@ export const CreateWR = () => {
 					fullWidth
 					id="filename"
 					name="filename"
-					label={"Nome del file senza estensione"}
-					placeholder={"Nome del file senza estensione"}
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}

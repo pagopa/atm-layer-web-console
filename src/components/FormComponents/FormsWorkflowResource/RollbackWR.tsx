@@ -84,8 +84,8 @@ export const RollbackWR = () => {
 					fullWidth
 					id="uuid"
 					name="uuid"
-					label={"Identificativo unico del file"}
-					placeholder={"Identificativo unico"}
+					label={"ID file"}
+					placeholder={"ID file"}
 					size="small"
 					value={formData.uuid}
 					onChange={handleChange}

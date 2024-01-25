@@ -7,7 +7,7 @@ import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
-import { resetErrors } from "../../../utils/Commons";
+import { deployableFilename, isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 
 export const CreateBpmn = () => {
 	// const theme = useTheme();
@@ -88,7 +88,7 @@ export const CreateBpmn = () => {
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
 			<UploadField 
-				titleField="File BPMN" 
+				titleField="File BPMN del processo" 
 				name={"file"}
 				file={formData.file}
 				changeFile={handleChange}
@@ -103,6 +103,7 @@ export const CreateBpmn = () => {
 					label={"Nome del file"}
 					placeholder={"Nome del file"}
 					size="small"
+					// value={deployableFilename(formData.file ?? "")}
 					value={formData.fileName}
 					onChange={handleChange}
 					error={Boolean(errors.fileName)}
@@ -113,8 +114,8 @@ export const CreateBpmn = () => {
 					fullWidth
 					id="functionType"
 					name="functionType"
-					label={"Tipo di funzione"}
-					placeholder={"Tipo di funzione"}
+					label={"Funzionalità"}
+					placeholder={"Funzionalità"}
 					size="small"
 					value={formData.functionType}
 					onChange={handleChange}

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
+import { Box, Grid, Paper } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
 import { CustomDataGrid } from "./CustomDataGrid";
@@ -12,31 +12,30 @@ export const AllFileTableList = () => {
 	const pageIndex = 0;
 	const pageSize = 10;
 
-	const rowHeight = 64;
+	const rowHeight = 55;
 
 	const columns: Array<GridColDef> = buildColumnDefs();
 
+	const getAllBpmn = new Promise((resolve) => {
+		void fetchGetAllFiltered({ abortController, pageIndex, pageSize })()
+			.then((response: any) => {
+				if (response?.success) {
+					resolve({
+						data: response.valuesObj,
+						type: "SUCCESS"
+					});
+				} else {
+					resolve({
+						type: "ERROR"
+					});
+				}
+			})
+			.catch((err) => {
+				console.log("ERROR", err);
+			});
+	});
+
 	useEffect(() => {
-
-		const getAllBpmn = new Promise((resolve) => {
-			void fetchGetAllFiltered({ abortController, pageIndex, pageSize })()
-				.then((response: any) => {
-					if (response?.success) {
-						resolve({
-							data: response.valuesObj,
-							type: "SUCCESS"
-						});
-					} else {
-						resolve({
-							type: "ERROR"
-						});
-					}
-				})
-				.catch((err) => {
-					console.log("ERROR", err);
-				});
-		});
-
 		getAllBpmn
 			.then((res: any) => {
 				console.log("GET ALL BPMN RESPONSE", res);
@@ -49,32 +48,28 @@ export const AllFileTableList = () => {
 	}, []);
 
 	return (
-		<Box sx={{ maxWidth: "100%" }}>
-			<Grid container>
-				<Grid item xs={12}>
-					{(<CustomDataGrid
-						disableColumnFilter
-						disableColumnSelector
-						disableDensitySelector
-						disableRowSelectionOnClick
-						autoHeight={true}
-						className="CustomDataGrid"
-						// columnBuffer={6}
-						columns={columns}
-						getRowId={(r) => r.bpmnId}
-						hideFooterSelectedRowCount={true}
-						pagination
-						rowHeight={rowHeight}
-						rows={tableList ?? []}
-						rowCount={tableList?.length ?? 0}
-						sortingMode="client"
-						pageSizeOptions={[]}
-					/>
-					)
-					}
-				</Grid>
+		<Grid container padding={8}>
+			<Grid item xs={12}>
+				<CustomDataGrid
+					disableColumnFilter
+					disableColumnSelector
+					disableDensitySelector
+					disableRowSelectionOnClick
+					autoHeight={true}
+					className="CustomDataGrid"
+					columnBuffer={6}
+					columns={columns}
+					getRowId={(r) => r.bpmnId}
+					hideFooterSelectedRowCount={true}
+					pagination
+					rowHeight={rowHeight}
+					rows={tableList ?? []}
+					rowCount={tableList?.length ?? 0}
+					sortingMode="client"
+					pageSizeOptions={[]}
+				/>
 			</Grid>
-		</Box>
+		</Grid>
 	);
 };
 

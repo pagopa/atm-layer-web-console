@@ -7,15 +7,19 @@ import AllFileTableList from "../components/DataGrid/AllFileTableList";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const BpmnPage = () => (
-	<FormPageTemplate>
-		<AllFileTableList />
-		 {/* <CreateBpmn />
-		<DeployBpmn />
-		<UpgradeBpmn /> */}
-		<AssociateBpmn />
-		{/* <DeleteBpmn /> */}
-	</FormPageTemplate>
 
+	<>
+		<AllFileTableList />
+		{/* <FormPageTemplate>
+			
+			<CreateBpmn />
+			<DeployBpmn />
+			<UpgradeBpmn />
+			<AssociateBpmn />
+			 <DeleteBpmn /> 
+			
+		</FormPageTemplate>
+*/}</>
 );
 
 export default BpmnPage;

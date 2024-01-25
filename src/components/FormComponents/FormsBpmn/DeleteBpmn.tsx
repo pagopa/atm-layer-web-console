@@ -87,7 +87,7 @@ export const DeleteBpmn = () => {
 					fullWidth
 					id="bpmnid"
 					name="bpmnid"
-					label={"Identificatore Univoco Bpmn"}
+					label={"ID processo"}
 					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.bpmnid}
@@ -101,7 +101,7 @@ export const DeleteBpmn = () => {
 					fullWidth
 					id="version"
 					name="version"
-					label={"Versione"}
+					label={"Versione processo"}
 					placeholder={""}
 					type="number"
 					size="small"
