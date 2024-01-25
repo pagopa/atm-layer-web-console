@@ -1,3 +1,5 @@
+/* eslint-disable functional/immutable-data */
+/* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 const checks = () => {
 	const alphaNumeric = /^[a-z0-9 ]+$/i; 
@@ -82,6 +84,15 @@ const checks = () => {
 		 oggetto ? JSON.parse(JSON.stringify(oggetto)) : null
 	;
 
+	const copyArrayObject = (array:Array<any>) => {
+		let arr = [...array];
+		let tmp: Array<any> = [];
+		arr.forEach((el) => {
+			let tempObj = {};
+			tmp.push({ ...tempObj, ...el });
+		});
+		return tmp;
+	};
 
 
 	const isInvalidField = (field: string | number | null | undefined) => (
@@ -104,7 +115,8 @@ const checks = () => {
 		copyObject,
 		regexTestField,
 		isInvalidField,
-		isValidNumber
+		isValidNumber,
+		copyArrayObject
 	};
 };
 
