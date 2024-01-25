@@ -4,7 +4,7 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import { RemoveCircleOutline } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
-import { isValidUUID } from "../../../utils/Commons";
+import { isValidUUID, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
@@ -116,11 +116,14 @@ export const AssociateBpmn = () => {
     };
 
     const handleInputChange = (field: string, value: string | number) => {
-        setFormData(() => ({
-            ...formData,
-            [field]: value,
-        }));
+        resetErrors(errors, setErrors, field);
+        setFormData(() => ({...formData,[field]: value}));
     };
+
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
 
     const handleBranchChange = (index: number, field: string, value: string | number) => {
         setFormData((prevData) => {
@@ -290,7 +293,7 @@ export const AssociateBpmn = () => {
                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.acquirerId}
-                        onChange={(e) => handleInputChange("acquirerId", e.target.value)}
+                        onChange={handleChange}
                         error={Boolean(errors.acquirerId)}
                         helperText={errors.acquirerId}
                     />
@@ -304,7 +307,7 @@ export const AssociateBpmn = () => {
                         placeholder={"Tipo di funzione"}
                         size="small"
                         value={formData.functionType}
-                        onChange={(e) => handleInputChange("functionType", e.target.value)}
+                        onChange={handleChange}
                         error={Boolean(errors.functionType)}
                         helperText={errors.functionType}
                     />
@@ -318,7 +321,7 @@ export const AssociateBpmn = () => {
                         placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
                         size="small"
                         value={formData.body?.defaultTemplateId ?? undefined}
-                        onChange={(e) => handleInputChange("defaultTemplateId", e.target.value)}
+                        onChange={handleChange}
                         error={Boolean(errors.body.defaultTemplateId)}
                         helperText={errors.body.defaultTemplateId}
                     />
@@ -338,8 +341,8 @@ export const AssociateBpmn = () => {
                         helperText={errors.body.defaultTemplateVersion}
                     />
                 </Grid>
-                <Grid container item mb={1}>
-                    <Button variant="text" size="small" onClick={() => addBranches()}>
+                <Grid container item my={1.5}>
+                    <Button variant="outlined" size="small" onClick={() => addBranches()}>
                         Aggiungi branches
                     </Button>
                 </Grid>
@@ -416,8 +419,8 @@ export const AssociateBpmn = () => {
                                                         helperText={errors.body.branchesConfigs[branchIndex]?.branchDefaultTemplateVersion}
                                                     />
                                                 </Grid>
-                                                <Grid container item mb={1}>
-                                                    <Button variant="text" size="small" onClick={() => addTerminal(branchIndex, terminalsInitialValues)}>
+                                                <Grid container item my={1.5}>
+                                                    <Button variant="outlined" size="small" onClick={() => addTerminal(branchIndex, terminalsInitialValues)}>
                                                         Aggiungi terminals
                                                     </Button>
                                                 </Grid>
