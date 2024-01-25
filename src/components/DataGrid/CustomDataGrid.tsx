@@ -4,11 +4,15 @@ import { DataGrid } from "@mui/x-data-grid";
 export const CustomDataGrid = styled(DataGrid)({
 	border: "none !important",
 	"& .MuiDataGrid-main": {
-		padding: "0 24px 24px 24px",
+		// padding: "0 24px 24px 24px",
 		marginTop: "24px",
 	},
+	// "&.MuiDataGrid-root .MuiDataGrid-columnHeaders" : {
+	// 	padding: "8px"
+	// },
 	"&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, &.MuiDataGrid-root .MuiDataGrid-cell:focus-within":
-    { outline: "none" },
+		{ outline: "none" },
+
 	"&.MuiDataGrid-root .MuiDataGrid-cell": {
 		whiteSpace: "normal !important",
 		wordWrap: "break-word !important",
@@ -27,13 +31,8 @@ export const CustomDataGrid = styled(DataGrid)({
 	".MuiDataGrid-cell ": { padding: "0px", borderBottom: "none" },
 	".MuiDataGrid-columnHeaders": { borderBottom: "none" },
 	".MuiDataGrid-row": {
-		backgroundColor: "white",
-		"&.Mui-selected": {
-			backgroundColor: "transparent",
-			"&:hover": { backgroundColor: "transparent" },
-		},
-		"&:hover": {
-			backgroundColor: "rgba(23, 50, 77, 0.04)",
+		"&.Mui-hovered": {
+			backgroundColor: "inherit",
 		},
 	},
 	".justifyContentNormal": {

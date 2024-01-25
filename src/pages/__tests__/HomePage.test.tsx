@@ -1,5 +1,4 @@
 import { render } from "@testing-library/react";
-import { Router } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import HomePage from "../HomePage";
 

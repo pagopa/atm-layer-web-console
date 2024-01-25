@@ -46,34 +46,34 @@ const shadowsArray = Array(25).fill("none") as any;
 
 /* Custom Typography */
 declare module "@mui/material/styles" {
-  interface TypographyVariants {
-    headline: React.CSSProperties;
-    sidenav: React.CSSProperties;
-    monospaced: React.CSSProperties;
-    "caption-semibold": React.CSSProperties;
-  }
+	interface TypographyVariants {
+		headline: React.CSSProperties;
+		sidenav: React.CSSProperties;
+		monospaced: React.CSSProperties;
+		"caption-semibold": React.CSSProperties;
+	}
 
-  interface TypographyVariantsOptions {
-    headline?: React.CSSProperties;
-    sidenav?: React.CSSProperties;
-    monospaced?: React.CSSProperties;
-    "caption-semibold"?: React.CSSProperties;
-  }
+	interface TypographyVariantsOptions {
+		headline?: React.CSSProperties;
+		sidenav?: React.CSSProperties;
+		monospaced?: React.CSSProperties;
+		"caption-semibold"?: React.CSSProperties;
+	}
 
-//   interface ThemeBox {
-//     customBox?: {
-//       border?: string;
-//       borderLite?: string;
-//     };
-    // colorVariant?: {
-    //   main?: string;
-    //   customBorderColor?: string;
-    // };
-    // cardStyle?: {
-    //   border?: string;
-    //   borderColor?: string;
-    // };
-  }
+	//   interface ThemeBox {
+	//     customBox?: {
+	//       border?: string;
+	//       borderLite?: string;
+	//     };
+	// colorVariant?: {
+	//   main?: string;
+	//   customBorderColor?: string;
+	// };
+	// cardStyle?: {
+	//   border?: string;
+	//   borderColor?: string;
+	// };
+}
 //   interface ThemeBoxOptions {
 //     customBox?: {
 //       border?: string;
@@ -91,36 +91,36 @@ declare module "@mui/material/styles" {
 // }
 
 declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    headline: true;
-    sidenav: true;
-    monospaced: true;
-    "caption-semibold": true;
-  }
+	interface TypographyPropsVariantOverrides {
+		headline: true;
+		sidenav: true;
+		monospaced: true;
+		"caption-semibold": true;
+	}
 }
 
 /* Custom Palette */
 declare module "@mui/material/styles" {
-  interface Palette {
-    pagoPA: Palette["primary"];
-    europeanUnion: Palette["primary"];
-    checkIban: Palette["primary"];
-    extraLight: Palette["warning"];
-    primaryAction: Palette["action"];
-    normal: Palette["primary"];
-  }
-  interface PaletteOptions {
-    pagoPA?: PaletteOptions["primary"];
-    europeanUnion: PaletteOptions["primary"];
-    checkIban?: PaletteOptions["primary"];
-    extraLight?: PaletteOptions["warning"];
-    primaryAction: PaletteOptions["action"];
-	normal: Palette["primary"];
-  }
+	interface Palette {
+		pagoPA: Palette["primary"];
+		europeanUnion: Palette["primary"];
+		checkIban: Palette["primary"];
+		extraLight: Palette["warning"];
+		primaryAction: Palette["action"];
+		normal: Palette["primary"];
+	}
+	interface PaletteOptions {
+		pagoPA?: PaletteOptions["primary"];
+		europeanUnion: PaletteOptions["primary"];
+		checkIban?: PaletteOptions["primary"];
+		extraLight?: PaletteOptions["warning"];
+		primaryAction: PaletteOptions["action"];
+		normal: Palette["primary"];
+	}
 
-  interface PaletteColor {
-    extraLight?: string;
-  }
+	interface PaletteColor {
+		extraLight?: string;
+	}
 }
 
 declare module "@mui/material/Button" {
@@ -131,7 +131,7 @@ declare module "@mui/material/Button" {
 
 declare module "@mui/material/Button" {
 	interface CustomButtonProps {
-	  CustomButton: "root";
+		CustomButton: "root";
 	}
 }
 
@@ -200,7 +200,7 @@ const foundation: Theme = createTheme({
 			main: "#FFFFFF",
 			contrastText: colorPrimary,
 		},
-		normal:{
+		normal: {
 			main: colorPrimary,
 			contrastText: colorPrimary,
 			light: "#EBFDFF",
@@ -211,7 +211,7 @@ const foundation: Theme = createTheme({
 			secondary: colorPrimary,
 			disabled: "#97a1b5",
 		},
-		action: { 
+		action: {
 			active: "#0073E6" /* Text/Secondary */,
 			hover: "rgba(0, 161, 176, 0.08)" /* Text/Primary 8% */,
 			hoverOpacity: 0.08,
@@ -258,12 +258,12 @@ const foundation: Theme = createTheme({
 	},
 	typography: {
 		/* Using a constant because type variants
-    don't inherit the typeface general color */
+	don't inherit the typeface general color */
 		allVariants: {
 			color: colorTextPrimary,
 		},
 		/* Using a constant because type variants
-    don't inherit the typeface font family */
+	don't inherit the typeface font family */
 		fontFamily: mainTypeface,
 		fontWeightRegular: 400,
 		fontWeightMedium: 600 /* Semibold */,
@@ -359,8 +359,8 @@ export const themeApp: Theme = createTheme(foundation, {
 			fontWeight: foundation.typography.fontWeightRegular,
 			letterSpacing: 0,
 			/* a: {
-    color: italia[500],
-    textDecoration: "underline",
+	color: italia[500],
+	textDecoration: "underline",
   }, */
 		},
 		body2: {
@@ -534,7 +534,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						color: foundation.palette.text.primary,
 						"&:hover": {
 							color: alpha(foundation.palette.text.primary, 0.8),
-							
+
 						},
 						"&.Mui-focusVisible": {
 							boxShadow: `0 0 0 3px ${alpha(
@@ -547,7 +547,7 @@ export const themeApp: Theme = createTheme(foundation, {
 				{
 					props: { variant: "text", color: "negative" },
 					style: {
-						
+
 						color: foundation.palette.primary.contrastText,
 						"&:hover": {
 							// padding: "0 20px 0 24px",
@@ -574,7 +574,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						alignItems: "center",
 						minHeight: foundation.spacing(8.5),
 						borderWidth: "2px",
-						border: "2px solid"+ lightGrey,
+						border: "2px solid" + lightGrey,
 						"&:hover": {
 							borderWidth: "2px",
 						},
@@ -645,15 +645,14 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			},
 		},
-
 	}
 });
 
 export const themeButton = createTheme({
 	components: {
-	  MuiButton: {
+		MuiButton: {
 			styleOverrides: {
-		  root: {
+				root: {
 					fontSize: foundation.typography.pxToRem(12),
 					height: "100%",
 					width: "100%",
@@ -662,7 +661,7 @@ export const themeButton = createTheme({
 					alignItems: "center",
 					minHeight: foundation.spacing(8.5),
 					borderWidth: "2px",
-					border: "2px solid "+ lightGrey,
+					border: "2px solid " + lightGrey,
 					"&:hover": {
 						borderWidth: "2px",
 					},
@@ -675,8 +674,8 @@ export const themeButton = createTheme({
 							0.35
 						)}`,
 					},
-		  }
+				}
 			},
-	  },
+		},
 	},
 });

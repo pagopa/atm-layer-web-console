@@ -1,19 +1,19 @@
-import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
+// import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import AssociateBpmn from "../components/FormComponents/FormsBpmn/AssociateBpmn";
-import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
-import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
-import CreateBpmn from "../components/FormComponents/FormsBpmn/CreateBpmn";
-import TableBpmn from "../components/FormComponents/FormsBpmn/TableBpmn";
+// import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
+// import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
+// import CreateBpmn from "../components/FormComponents/FormsBpmn/CreateBpmn";
+import AllFileTableList from "../components/DataGrid/AllFileTableList";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const BpmnPage = () => (
 	<FormPageTemplate>
-		<TableBpmn />
-		<CreateBpmn />
+		<AllFileTableList />
+		 {/* <CreateBpmn />
 		<DeployBpmn />
-		<UpgradeBpmn />
+		<UpgradeBpmn /> */}
 		<AssociateBpmn />
-		<DeleteBpmn />
+		{/* <DeleteBpmn /> */}
 	</FormPageTemplate>
 
 );
