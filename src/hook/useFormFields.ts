@@ -9,7 +9,7 @@ const useFormFields:any = () => {
 		case CREATE_BPMN:
 			return [
 				{name:"fileName", id: "fileName", label: "Nome del file", placeholder:"Nome del file"},
-				{name:"functionType", id: "functionType", label: "Tipo di funzione", placeholder:"Tipo di funzione"}
+				{name:"functionType", id: "functionType", label: "Funzionalità", placeholder:"Funzionalità"}
 			];
 		
 			// case DEPLOY_BPMN:

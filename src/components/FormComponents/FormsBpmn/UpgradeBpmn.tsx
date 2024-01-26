@@ -89,7 +89,7 @@ export const UpgradeBpmn = () => {
 					fullWidth
 					id="uuid"
 					name="uuid"
-					label={"Identificatore Univoco"}
+					label={"ID processo"}
 					placeholder={"Identificatore Univoco"}
 					size="small"
 					value={formData.uuid}
@@ -99,7 +99,7 @@ export const UpgradeBpmn = () => {
 				/>
 			</Grid>
 			<UploadField 
-				titleField="File BPMN" 
+				titleField="File BPMN del processo" 
 				name={"file"}
 				file={formData.file}
 				changeFile={handleChange}
@@ -125,8 +125,8 @@ export const UpgradeBpmn = () => {
 					fullWidth
 					id="functionType"
 					name="functionType"
-					label={"Tipo di funzione"}
-					placeholder={"Tipo di funzione"}
+					label={"Funzionalità"}
+					placeholder={"Funzionalità"}
 					size="small"
 					value={formData.functionType}
 					onChange={handleChange}

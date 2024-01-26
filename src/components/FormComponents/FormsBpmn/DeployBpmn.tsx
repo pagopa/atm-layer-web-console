@@ -92,7 +92,7 @@ export const DeployBpmn = () => {
 					fullWidth
 					id="uuid"
 					name="uuid"
-					label={"Identificatore Univoco"}
+					label={"ID processo"}
 					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
 					size="small"
 					value={formData.uuid}
@@ -108,7 +108,7 @@ export const DeployBpmn = () => {
 					fullWidth
 					id="version"
 					name="version"
-					label={"Versione"}
+					label={"Versione processo"}
 					placeholder={""}
 					type="number"
 					size="small"

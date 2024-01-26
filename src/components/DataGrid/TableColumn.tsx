@@ -19,15 +19,41 @@ export function buildColumnDefs() {
 			flex: 4,
 		},
 		{
-			field: "deployedFileName",
+			field: "modelVersion",
 			cellClassName: "justifyContentNormal",
-			headerName: "deployedFileName",
+			headerName: "modelVersion",
 			align: "left",
 			headerAlign: "left",
 			editable: false,
 			disableColumnMenu: true,
 			renderHeader: showCustomHeader,
-			renderCell: (params) => renderCell(params, params.row.deployedFileName),
+			renderCell: (params) => renderCell(params, params.row.modelVersion),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "createdAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "createdAt",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.createdAt),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "lastUpdatedAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "lastUpdatedAt",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.lastUpdatedAt),
 			sortable: false,
 			flex: 3,
 		},
@@ -41,6 +67,58 @@ export function buildColumnDefs() {
 			disableColumnMenu: true,
 			renderHeader: showCustomHeader,
 			renderCell: (params) => renderCell(params, params.row.functionType),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "deployedFileName",
+			cellClassName: "justifyContentNormal",
+			headerName: "deployedFileName",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.deployedFileName),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "description",
+			cellClassName: "justifyContentNormal",
+			headerName: "description",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.description),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "status",
+			cellClassName: "justifyContentNormal",
+			headerName: "status",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.status),
+			sortable: false,
+			flex: 3,
+		},
+		{
+			field: "resource",
+			cellClassName: "justifyContentNormal",
+			headerName: "resource",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params) => renderCell(params, params.row.resourceFile.resource),
 			sortable: false,
 			flex: 3,
 		},
@@ -116,8 +194,8 @@ export function showCustomHeader(params: GridColumnHeaderParams) {
 	return (
 		<Typography
 			color="colorTextPrimary"
-			variant="caption"
-			sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1 }}
+			variant="body2"
+			sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1, color: "#ffffff" }}
 		>
 			{params.colDef.headerName}
 		</Typography>
@@ -133,9 +211,8 @@ export function showBpmnId(params: GridRenderCellParams) {
 					<Grid item xs={12} sx={{ width: "100%" }}>
 						<Typography
 							variant="body2"
-							color="primary"
 							sx={{
-								fontWeight: "fontWeightMedium",
+								// fontWeight: "fontWeightMedium",
 								overflow: "hidden",
 								textOverflow: "ellipsis",
 								display: "-webkit-box",

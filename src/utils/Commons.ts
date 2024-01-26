@@ -11,23 +11,32 @@ export const isValidDeployableFilename = (filename: string) => {
 	return deployableFileNameRegex.test(filename);
 };
 
+export const deployableFilename = (filename: string) => {
+	const fileNameIndex = filename.split("/").lastIndexOf("/");
+	const splittedFileName = filename.split("/");
+	if (isValidDeployableFilename(filename)) {
+		return splittedFileName[fileNameIndex];
+	}
+};
+
 export const isValidResourcesFilename = (filename: string) => {
 	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
 	return resourcesFileNameRegex.test(filename);
 };
 
-export const resetErrors = (errors: any, setErrors:any, field: string | number) => {
+export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
 	if (field) {
 		// reset errore specifico field
-		if (errors[field]){
-			setErrors((prevErrors: { [x: string]: any}) => {
+		if (errors[field]) {
+			setErrors((prevErrors: { [x: string]: any }) => {
 				delete prevErrors[field];
 				return { ...prevErrors };
-			});}
+			});
+		}
 	} else {
 		// reset di tutti gli errori dei field
 		setErrors((prevErrors: any) => {
-			let newErr:any;
+			let newErr: any;
 			for (let e of Object.keys(prevErrors)) {
 				delete newErr[e];
 				newErr = { ...newErr };

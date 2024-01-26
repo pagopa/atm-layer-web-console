@@ -7,61 +7,57 @@ const formOption:any = () => {
 
 		case CREATE_BPMN:
 			return [
-				{ title: "Creazione BPMN", description: " Compila tutti i campi per creare un nuovo BPMN" }
+				{ title: "Creazione processo", description: " Compilare tutti i campi per creare un nuovo processo" }
 			];
 
 	    case DEPLOY_BPMN:
 			return [
-				{ title: "Rilascio BPMN", description: "Compila tutti i campi per rilasciare un BPMN" }
+				{ title: "Rilascio processo", description: "Compilare tutti i campi per rilasciare un processo" }
 			];
 
 		case DELETE_BPMN:
 			return [
-				{ title: "Eliminazione BPMN", description: "Compila tutti i campi per Eliminare un BPMN" }
+				{ title: "Eliminazione processo", description: "Compilare tutti i campi per eliminare un processo" }
 			];
 
 		case UPGRADE_BPMN:
 			return [
-				{ title: "Aggiornamento BPMN", description: "Compila tutti i campi per modificare un BPMN" }
+				{ title: "Aggiornamento processo", description: "Compilare tutti i campi per creare una nuova versione di un processo" }
 			];
 
 		case ASSOCIATE_BPMN:
 			return [
-				{ title: "Associa BPMN", description: "Compila tutti i campi per Associare un BPMN" }
+				{ title: "Associa processo", description: "Compilare tutti i campi per associare un processo ad una banca" }
 			];
 
 		case CREATE_RES:
 			return [
-				{ title: "Creazione Resources", description: " Compila tutti i campi per creare un nuovo Resource" }
+				{ title: "Creazione risorsa statica", description: "Compilare tutti i campi per creare una nuova risorsa statica" }
 			];
 
 		case UPDATE_RES:
 			return [
-				{ title: "Aggiornamento Resources", description: " Compila tutti i campi per aggiornare una risorsa esistente" }
+				{ title: "Modifica risorsa statica", description: "Compilare tutti i campi per modificare una risorsa statica"}
 			];
 
 		case CREATE_WR:
 			return [
-				{ title: "Creazione Workflow Resource", description: " Compila tutti i campi per creare una nuova Workflow Resource" }
+				{ title: "Creazione risorsa per processi", description: "Compilare tutti i campi per creare una nuova risorsa per processi" }
 			];
 
 		case DEPLOY_WR:
 			return [
-				{ title: "Rilascio Workflow Resource", description: " Compila il campo di identificativo unico per rilasciare una risorsa esistente" }
+				{ title: "Rilascio risorsa per processi", description: "Inserire ID per rilasciare una risorsa per processi" }
 			];
 
 		case ROLLBACK_WR:
 			return [
-				{ title: "Rollback Workflow Resource", description: " Compila il campo di identificativo unico per ripristinare l&apos;ultima versione rilasciata" }
+				{ title: "Ripristino risorsa per processi", description: "Inserire ID per ripristinare l'ultima versione rilasciata" }
 			];
 
 		case UPDATE_WR:
 			return [
-				{ title: "Aggiornamento Workflow Resource", description: " Compila tutti i campi per aggiornare una risorsa esistente" }
-			];
-		case "GetAll":
-			return [
-				{ title: "BPMN disponibili", description: "Lista BPMN" }
+				{ title: "Modifica risorsa per processi", description: "Compilare tutti i campi per aggiornare una risorsa" }
 			];
 		default:
 			return [];

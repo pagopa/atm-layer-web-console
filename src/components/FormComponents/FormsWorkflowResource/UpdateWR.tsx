@@ -80,8 +80,6 @@ export const UpdateWR = () => {
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPDATE_WR)}>
-			
-				
 			<UploadField 
 				titleField="File della risorsa" 
 				name={"file"}
@@ -95,8 +93,8 @@ export const UpdateWR = () => {
 					fullWidth
 					id="uuid"
 					name="uuid"
-					label={"Identificativo unico del file"}
-					placeholder={"Identificativo unico"}
+					label={"ID file"}
+					placeholder={"ID file"}
 					size="small"
 					value={formData.uuid}
 					onChange={handleChange}
@@ -104,7 +102,6 @@ export const UpdateWR = () => {
 					helperText={errors.uuid}
 				/>
 			</Grid>
-		
 		</FormTemplate>
 	);
 };
