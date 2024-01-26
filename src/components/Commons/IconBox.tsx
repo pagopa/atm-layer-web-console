@@ -22,8 +22,10 @@ export default function IconBox({ icon, color, size, marg, pad,transform }: Prop
 	const { getIcon } = getIconBySetType();
 
 	return (
-
-		<Box m={marg} p={pad}>
+		<Box
+			data-testId="icon-box"
+			m={marg}
+			p={pad}>
 			{
 				React.createElement(getIcon(icon), {
 					style: {

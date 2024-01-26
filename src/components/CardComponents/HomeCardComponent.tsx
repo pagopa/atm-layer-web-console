@@ -53,6 +53,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 			<Grid item xs={12}>
 				<Box my={1} justifyContent={"flex-end"} display={"flex"}>
 					<Button
+						data-testId="section-id"
 						variant="text"
 						size="large"
 						onClick={() => navigate(pageLink)}

@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
-import React, { useContext, useEffect, useRef } from "react";
-import { Box, Grid } from "@mui/material";
+import React, { useContext } from "react";
+import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
 import { LoadingPage } from "../LoadingPage";
 import { Header } from "../../components/HeaderComponents/Header";
@@ -12,7 +12,6 @@ type Prop= {
 };
 
 export default function PageLayout({ children }: Prop) {
-
 	const { loading } = useContext(Ctx);
 
 	return (
@@ -24,14 +23,13 @@ export default function PageLayout({ children }: Prop) {
 					minHeight={"100vh"}
 				>
 					<Box gridArea="header" sx={{ position: "sticky", top: 0, zIndex: "100" }}>
-						<Header />
-						<CustomAppBar />
+						<Header  data-testId="header-id" />
+						<CustomAppBar data-testId="customAppBar-id" />
 					</Box>
 					<Box sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto", width:"100%"}}>
 						{loading ? <LoadingPage /> : children}
 					</Box>
 				</Box>
-				
 			)}
 		</Ctx.Consumer>
 	);
