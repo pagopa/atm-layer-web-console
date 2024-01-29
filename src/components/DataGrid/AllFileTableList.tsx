@@ -4,6 +4,7 @@ import { DataGrid, GridColDef, GridColumnVisibilityModel } from "@mui/x-data-gri
 import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
+import { BPMN } from "../../commons/constants";
 import { CustomDataGrid } from "./CustomDataGrid";
 
 import FilterBar from "./Filter";
@@ -11,8 +12,12 @@ import TableColumn from "./TableColumn";
 
 export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
-	const {buildColumnDefs}=TableColumn();
-	const columns: Array<GridColDef> = buildColumnDefs();
+	const {buildColumnDefs, visibleColumns}=TableColumn();
+	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
+	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	useEffect(()=>{
+		console.log("vis", columnVisibilityModel);
+	},[columnVisibilityModel]);
 
 	const { abortController } = useContext(Ctx);
 	const pageIndex = 0;
@@ -72,6 +77,7 @@ export const AllFileTableList = () => {
 				rowCount={tableList?.length ?? 0}
 				sortingMode="client"
 				pageSizeOptions={[]}
+				columnVisibilityModel={{...columnVisibilityModel}}
 			/>
 			
 		</Box>

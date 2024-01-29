@@ -8,10 +8,13 @@ import { BPMN } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 
 const TableColumn = () => {
-	const buildColumnDefs=()=>{
-		const {getColumnsGrid}=useColumns();
-		return getColumnsGrid(BPMN,showCustomHeader, renderCell, showBpmnId, actionColumn)as Array<GridColDef> ;
+	
+	const {getColumnsGrid, getVisibleColumns}=useColumns();
+	const buildColumnDefs=(driver:string)=>{
+		const cols= getColumnsGrid(driver,showCustomHeader, renderCell, showBpmnId, actionColumn);
+		return cols as Array<GridColDef > ;
 	};
+	const visibleColumns=(driver:string)=>getVisibleColumns(driver) ;
 
 	const actionColumn = (p: any) => {
 		const navigate = useNavigate();
@@ -119,7 +122,8 @@ const TableColumn = () => {
 		actionColumn,
 		renderCell,
 		showCustomHeader,
-		showBpmnId
+		showBpmnId,
+		visibleColumns
 	};
 };
 

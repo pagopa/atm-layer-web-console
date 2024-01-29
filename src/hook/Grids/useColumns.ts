@@ -17,7 +17,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.functionType),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "deployedFileName",
@@ -30,7 +30,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.deployedFileName),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "status",
@@ -43,7 +43,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.status),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "modelVersion",
@@ -56,7 +56,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "createdAt",
@@ -69,7 +69,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.createdAt),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "lastUpdatedAt",
@@ -82,7 +82,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.lastUpdatedAt),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "bpmnId",
@@ -95,7 +95,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => showBpmnId(params),
 					sortable: false,
-					flex: 4,
+					flex: 4
 				},
 				{
 					field: "enabled",
@@ -108,8 +108,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any)=> renderCell(params, params.row.enabled),
 					sortable: false,
-					flex: 3,
-					initialVisibilityModel: false
+					flex: 3
 				},
 				{
 					field: "deployment_id",
@@ -122,8 +121,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.deployment_id),
 					sortable: false,
-					flex: 3,
-					initialVisibilityModel: false
+					flex: 3
 				},
 				{
 					field: "definition_key",
@@ -136,8 +134,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 3,
-					initialVisibilityModel: false
+					flex: 3
 				},
 				{
 					field: "description",
@@ -150,7 +147,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.description),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "resource",
@@ -163,7 +160,7 @@ const useColumns:any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params:any) => renderCell(params, params.row.resourceFile.resource),
 					sortable: false,
-					flex: 3,
+					flex: 3
 				},
 				{
 					field: "actions",
@@ -175,13 +172,26 @@ const useColumns:any = () => {
 					editable: false,
 					renderCell: (params:any) => actionColumn(params),
 					sortable: false,
-					flex: 1,
+					flex: 1
 				}
 			];
 		default:
 			return [];
 		}
 	};
-	return { getColumnsGrid };
+	const getVisibleColumns:any = (driver: string) => {
+		switch (driver) {
+		case BPMN:
+			return (
+				{
+					"bpmnId":false,
+					"enabled":false
+				}
+			);
+		default:
+			return [];
+		}
+	};
+	return { getColumnsGrid, getVisibleColumns };
 };
 export default useColumns;
