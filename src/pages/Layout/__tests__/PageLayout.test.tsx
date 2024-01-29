@@ -14,13 +14,12 @@ beforeEach(() => {
 
 describe("PageLayout test", () => {
 
-	test("Test render PageLayout component with loading flase", () => {
-
+	test("Test render PageLayout component with loading false", () => {
 		render(
 			<Ctx.Provider value={{ loading: false }}>
 				<BrowserRouter>
 					<ThemeProvider theme={themeApp}>
-						<PageLayout children={<div></div>} />
+						<PageLayout children={<React.Fragment />} />
 					</ThemeProvider>
 				</BrowserRouter>
 			</Ctx.Provider>
@@ -32,7 +31,7 @@ describe("PageLayout test", () => {
 			<Ctx.Provider value={{ loading: true }}>
 				<BrowserRouter>
 					<ThemeProvider theme={themeApp}>
-						<PageLayout children={<div></div>} />
+						<PageLayout children={<React.Fragment />} />
 					</ThemeProvider>
 				</BrowserRouter>
 			</Ctx.Provider>

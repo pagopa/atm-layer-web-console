@@ -45,3 +45,6 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 		});
 	}
 };
+
+export const getQueryString = (URL: string, pageSize: number, currentPage: number) => 
+	`${URL}?size=${pageSize}&page=${currentPage}`;

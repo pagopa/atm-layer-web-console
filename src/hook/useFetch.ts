@@ -11,39 +11,41 @@ export default function useFetch(endPoint: string | undefined) {
 		method,
 		body,
 		abortController
-	}:any) => {
-		let data; 
+	}: any) => {
+		let data;
 		let status;
-		const headers= {
-			"Content-Type": "application/json"
+		const headers = {
+			"Content-Type": "multipart/form-data",
+			"Accept": "application/json",
+			"x-api-key": process.env.REACT_APP_API_KEY
 		};
-		
-		const options:any = 
-		
-			 (method === "POST" || method === "PUT")
-			 	? {
-			 		method, // *GET, POST, PUT, DELETE, etc.
-			 		mode: "cors", // no-cors, *cors, same-origin
-			 		credentials: "include",
-			 		signal: abortController?.current?.signal,
-			 		cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			 		headers: {...headers},
-			 		redirect: "manual", // manual, *follow, error
-			 		referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-			 		body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
-			  }
-			 	: {
-			 		method, // *GET, POST, PUT, DELETE, etc.
-			 		mode: "cors", // no-cors, *cors, same-origin
-			 		credentials: "include",
-			 		signal: abortController?.current?.signal,
-			 		cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			 		headers: {...headers},
-			 		redirect: "manual", // manual, *follow, error
-			 		referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-			  };
 
-		
+		const options: any =
+
+			(method === "POST" || method === "PUT")
+				? {
+					method, // *GET, POST, PUT, DELETE, etc.
+					mode: "cors", // no-cors, *cors, same-origin
+					credentials: "include",
+					signal: abortController?.current?.signal,
+					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+					headers: { ...headers },
+					redirect: "manual", // manual, *follow, error
+					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
+				}
+				: {
+					method, // *GET, POST, PUT, DELETE, etc.
+					mode: "cors", // no-cors, *cors, same-origin
+					credentials: "include",
+					signal: abortController?.current?.signal,
+					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+					headers: { ...headers },
+					redirect: "manual", // manual, *follow, error
+					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+				};
+
+
 		try {
 			const response = await fetch(
 				SERVER_API_ORIGIN + urlEndpoint,
@@ -68,13 +70,13 @@ export default function useFetch(endPoint: string | undefined) {
 				console.log("SUCESS!");
 				data = await response?.json(); // parses JSON response into native JavaScript objects
 				data = { valuesObj: data, status, success: true }; // CODE_SUCCESS 200/206
-				
+
 			}
 		} catch (error) {
 			data = {
 				valuesObj: { message: `Errore durante la useFetch${error}` }, // aluesObj conterrà il messaggio di errore
 				success: false,
-			}; 
+			};
 		}
 		// return {data, status};
 		return data;

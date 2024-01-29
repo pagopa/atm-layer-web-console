@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Box, Grid, Paper } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
 import { CustomDataGrid } from "./CustomDataGrid";
@@ -8,13 +8,11 @@ import { buildColumnDefs } from "./TableColumn";
 
 export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
+	const columns = buildColumnDefs();
 	const { abortController } = useContext(Ctx);
 	const pageIndex = 0;
 	const pageSize = 10;
-
 	const rowHeight = 55;
-
-	const columns: Array<GridColDef> = buildColumnDefs();
 
 	const getAllBpmn = new Promise((resolve) => {
 		void fetchGetAllFiltered({ abortController, pageIndex, pageSize })()
