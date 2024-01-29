@@ -5,12 +5,15 @@ import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { CustomDataGrid } from "./CustomDataGrid";
-import { buildColumnDefs } from "./TableColumn";
+
 import FilterBar from "./Filter";
+import TableColumn from "./TableColumn";
 
 export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
-	const columns : Array<GridColDef> =buildColumnDefs();
+	const {buildColumnDefs}=TableColumn();
+	const columns: Array<GridColDef> = buildColumnDefs();
+
 	const { abortController } = useContext(Ctx);
 	const pageIndex = 0;
 	const pageSize = 10;
