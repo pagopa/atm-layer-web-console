@@ -5,6 +5,7 @@ import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
 import { CustomDataGrid } from "./CustomDataGrid";
 import { buildColumnDefs } from "./TableColumn";
+import FilterBar from "./Filter";
 
 export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
@@ -47,6 +48,7 @@ export const AllFileTableList = () => {
 
 	return (
 		<Grid container padding={8}>
+			<FilterBar />
 			<Grid item xs={12}>
 				<CustomDataGrid
 					disableColumnFilter
