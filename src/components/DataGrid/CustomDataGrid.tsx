@@ -7,7 +7,7 @@ export const CustomDataGrid: React.FC<DataGridProps> = (props) => {
 
 	const StyledDataGrid = styled(DataGrid)({
 		border: "none !important",
-		boxShadow: "0px 16px 32px rgba(0, 0, 0, 0.2)",
+		// boxShadow: "0px 16px 32px rgba(0, 0, 0, 0.2)",
 		"& .MuiDataGrid-main": {
 			// padding: "0 24px 24px 24px",
 		},

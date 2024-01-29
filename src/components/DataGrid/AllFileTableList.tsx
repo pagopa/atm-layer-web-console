@@ -1,19 +1,21 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Grid, Paper, useTheme } from "@mui/material";
 import { DataGrid, GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { Ctx } from "../../DataContext";
+import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { CustomDataGrid } from "./CustomDataGrid";
 import { buildColumnDefs } from "./TableColumn";
 import FilterBar from "./Filter";
 
 export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
-	const columns = buildColumnDefs();
+	const columns : Array<GridColDef> =buildColumnDefs();
 	const { abortController } = useContext(Ctx);
 	const pageIndex = 0;
 	const pageSize = 10;
 	const rowHeight = 55;
+	const theme=useTheme();
 
 	const getAllBpmn = new Promise((resolve) => {
 		void fetchGetAllFiltered({ abortController, pageIndex, pageSize })()
@@ -47,29 +49,29 @@ export const AllFileTableList = () => {
 	}, []);
 
 	return (
-		<Grid container padding={8}>
+		<Box sx={{boxShadow: theme.shadows[4]}}>
 			<FilterBar />
-			<Grid item xs={12}>
-				<CustomDataGrid
-					disableColumnFilter
-					disableColumnSelector
-					disableDensitySelector
-					disableRowSelectionOnClick
-					autoHeight={true}
-					className="CustomDataGrid"
-					columnBuffer={6}
-					columns={columns}
-					getRowId={(r) => r.bpmnId}
-					hideFooterSelectedRowCount={true}
-					pagination
-					rowHeight={rowHeight}
-					rows={tableList ?? []}
-					rowCount={tableList?.length ?? 0}
-					sortingMode="client"
-					pageSizeOptions={[]}
-				/>
-			</Grid>
-		</Grid>
+			
+			<CustomDataGrid
+				disableColumnFilter
+				disableColumnSelector
+				disableDensitySelector
+				disableRowSelectionOnClick
+				autoHeight={true}
+				className="CustomDataGrid"
+				columnBuffer={6}
+				columns={columns}
+				getRowId={(r) => r.bpmnId}
+				hideFooterSelectedRowCount={true}
+				pagination
+				rowHeight={rowHeight}
+				rows={tableList ?? []}
+				rowCount={tableList?.length ?? 0}
+				sortingMode="client"
+				pageSizeOptions={[]}
+			/>
+			
+		</Box>
 	);
 };
 
