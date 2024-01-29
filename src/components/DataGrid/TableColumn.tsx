@@ -2,8 +2,11 @@ import { Typography, Grid, Box, IconButton } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
 import { ReactNode } from "react";
 import { ArrowForwardIos } from "@mui/icons-material";
+import { generatePath, useNavigate } from "react-router-dom";
+import ROUTES from "../../routes";
 
 export function buildColumnDefs() {
+
 	return [
 		{
 			field: "functionType",
@@ -172,31 +175,36 @@ export function buildColumnDefs() {
 			hideSortIcons: true,
 			disableColumnMenu: true,
 			editable: false,
-			renderCell: (p) => (
-				<Box
-					display="flex"
-					justifyContent="flex-end"
-					width="100%"
-					mr={2}
-					sx={{ cursor: "pointer" }}
-				>
-					<IconButton
-						onClick={() => console.log("clicked!")}
-						data-testid={`open-${p.row.iban}`}
-						sx={{
-							width: "100%",
-							"&:hover": { backgroundColor: "transparent !important" },
-						}}
-					>
-						<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
-					</IconButton>
-				</Box>
-			),
+			renderCell: (p) => ActionIcon(p),
 			sortable: false,
 			flex: 1,
 		},
 	] as Array<GridColDef>;
 }
+
+export const ActionIcon = (p: any) => {
+	const navigate = useNavigate();
+
+	return (
+		<Box
+			display="flex"
+			justifyContent="flex-end"
+			width="100%"
+			mr={2}
+			sx={{ cursor: "pointer" }}
+		>
+			<IconButton
+				onClick={() => navigate(generatePath(ROUTES.BPMN_DETAILS, { bpmnId: p.row.bpmnId, modelVersion: p.row.modelVersion }))}
+				sx={{
+					width: "100%",
+					"&:hover": { backgroundColor: "transparent !important" },
+				}}
+			>
+				<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
+			</IconButton>
+		</Box>
+	);
+};
 
 export function renderCell(
 	params: GridRenderCellParams,

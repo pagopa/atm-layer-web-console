@@ -11,6 +11,7 @@ import ResourcesPage from "./pages/ResourcesPage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage";
 import HomePage from "./pages/HomePage";
 import BpmnPage from "./pages/BpmnPage";
+import DetailPage from "./pages/DetailPage";
 
 const LocalRoutes = () => (
 	
@@ -20,6 +21,7 @@ const LocalRoutes = () => (
 			<Route path="/" element={<PageLayout children={<HomePage />} />} />
 			<Route index path={routes.HOME} element={<PageLayout children={<HomePage />} />} />
 			<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
+			<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
 			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
 			<Route path="*" element={<NoPage />} />
