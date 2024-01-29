@@ -1,10 +1,17 @@
-import AppBar from "@mui/material/AppBar";
 import TextField from "@mui/material/TextField";
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Toolbar, useTheme } from "@mui/material";
 import React from "react";
 
-
 export default function FilterBar() {
+
+	const theme = useTheme();
+
+	const inputGroupStyle = {
+		borderWidth: "1px",
+		borderStyle: "solid",
+		borderColor: theme.palette.divider,
+		width: "100%",
+	};
 
 	const [state, setState] = React.useState("");
 
@@ -12,12 +19,9 @@ export default function FilterBar() {
 		setState(event.target.value as string);
 	};
 
-
 	return (
-
-		<AppBar position="static" sx={{backgroundColor: "white"}}>
-			<Grid container columns={12} spacing={1} padding={1}>
-
+		<Toolbar sx={inputGroupStyle}>
+			<Grid container columns={12} spacing={1}>
 				<Grid item xs={2}>
 					<TextField id="function-type" label="Tipo Funzione" variant="outlined" fullWidth />	
 				</Grid>
@@ -60,8 +64,7 @@ export default function FilterBar() {
 				<Grid item xs={1}>			
 					<Button variant="outlined" sx={{height: "100%", width: "100%"}}>Cancella Filtri</Button>	
 				</Grid>
-
 			</Grid>
-		</AppBar>
+		</Toolbar>
 	);
 }
