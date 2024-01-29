@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Toolbar, useTheme } from "@mui/material";
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, useTheme } from "@mui/material";
 import React from "react";
+import { Box } from "@mui/system";
 
 export default function FilterBar() {
 
@@ -11,6 +12,8 @@ export default function FilterBar() {
 		borderStyle: "solid",
 		borderColor: theme.palette.divider,
 		width: "100%",
+		position: "static",
+		padding: 2
 	};
 
 	const [state, setState] = React.useState("");
@@ -20,7 +23,7 @@ export default function FilterBar() {
 	};
 
 	return (
-		<Toolbar sx={inputGroupStyle}>
+		<Box sx={inputGroupStyle}>
 			<Grid container columns={12} spacing={1}>
 				<Grid item xs={2}>
 					<TextField id="function-type" label="Tipo Funzione" variant="outlined" fullWidth />	
@@ -65,6 +68,6 @@ export default function FilterBar() {
 					<Button variant="outlined" sx={{height: "100%", width: "100%"}}>Cancella Filtri</Button>	
 				</Grid>
 			</Grid>
-		</Toolbar>
+		</Box>
 	);
 }
