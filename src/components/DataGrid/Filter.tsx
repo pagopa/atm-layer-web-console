@@ -22,7 +22,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 	const handleSubmit = () => {
 		const getAllBpmn = new Promise((resolve) => {
 			void fetchGetAllFiltered({
-				abortController, pageIndex: 0, pageSize: 10, body: null, headerParams: {
+				abortController, pageIndex: 0, pageSize: 10, headerParams: {
 					"functionType": filterValues.functionType,
 					"fileName": filterValues.fileName,
 					"modelVersion": filterValues.modelVersion,
@@ -59,7 +59,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 	};
 
 	const cleanFilter = () => {
-		setFilterValues({
+		setFilterValues( {
 			functionType: "",
 			fileName: "",
 			modelVersion: "",

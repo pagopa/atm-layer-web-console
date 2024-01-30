@@ -53,7 +53,7 @@ const Icons : { [key: string]: any } ={
 	"CreateOutlined": 	CreateOutlinedIcon, 
 	"PrintOutlined":  	PrintOutlinedIcon, 
 	"Room":  	RoomIcon, 
-	"Comment": 	CommentIcon, 
+	"Comment": 	CommentIcon,
 	"AssessmentOutlined": 	AssessmentOutlinedIcon, 
 	"AssignmentOutlined": 	AssignmentOutlinedIcon, 
 	"ExpandMore": 	ExpandMoreIcon, 

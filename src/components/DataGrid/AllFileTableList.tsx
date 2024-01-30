@@ -11,10 +11,13 @@ import TableColumn from "./TableColumn";
 export const AllFileTableList = () => {
 
 	const [tableList, setTableList] = useState<any>([]);
-	const {buildColumnDefs, visibleColumns}=TableColumn();
+	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
 	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
-
+	const [paginationModel, setPaginationModel] = useState({
+		page: 0,
+		pageSize: 10,
+	});
 	const initialValues = {
 		functionType: "",
 		fileName: "",
@@ -31,10 +34,12 @@ export const AllFileTableList = () => {
 
 	const { abortController } = useContext(Ctx);
 	const rowHeight = 55;
-	const theme=useTheme();
+	const theme = useTheme();
+
+
 
 	const getAllBpmn = new Promise((resolve) => {
-		void fetchGetAllFiltered({ abortController, pageIndex: 0, pageSize: 10 })()
+		void fetchGetAllFiltered({ abortController, pageIndex: paginationModel.page, pageSize: 10 })()
 			.then((response: any) => {
 				if (response?.success) {
 					resolve({
@@ -62,12 +67,12 @@ export const AllFileTableList = () => {
 				console.log("GET ALL BPMN ERROR", err);
 				setTableList([]);
 			});
-	}, []);
+	}, [paginationModel]);
 
 	return (
-		<Box sx={{boxShadow: theme.shadows[4]}}>
-			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableList}/>
-			
+		<Box sx={{ boxShadow: theme.shadows[4] }}>
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableList} />
+
 			<CustomDataGrid
 				disableColumnFilter
 				disableColumnSelector
@@ -77,17 +82,20 @@ export const AllFileTableList = () => {
 				className="CustomDataGrid"
 				columnBuffer={6}
 				columns={columns}
-				getRowId={(r) => new Date(r.createdAt).getTime()}
+				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
 				pagination
 				rowHeight={rowHeight}
 				rows={tableList ?? []}
 				rowCount={tableList?.length}
-				sortingMode="client"
-				pageSizeOptions={[]}
-				columnVisibilityModel={{...columnVisibilityModel}}
+				sortingMode="server"
+				columnVisibilityModel={{ ...columnVisibilityModel }}
+				pageSizeOptions={[5]}
+				paginationModel={paginationModel}
+				onPaginationModelChange={setPaginationModel}
+				paginationMode="server"
 			/>
-			
+
 		</Box>
 	);
 };

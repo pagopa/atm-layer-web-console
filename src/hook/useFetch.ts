@@ -37,7 +37,7 @@ export default function useFetch(endPoint: string | undefined) {
 					credentials: "include",
 					signal: abortController?.current?.signal,
 					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-					headers: { ...headers },
+					header: { ...headerRequest },
 					redirect: "manual", // manual, *follow, error
 					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
@@ -48,7 +48,7 @@ export default function useFetch(endPoint: string | undefined) {
 					credentials: "include",
 					signal: abortController?.current?.signal,
 					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-					headers: { ...headers },
+					headers: { ...headerRequest },
 					redirect: "manual", // manual, *follow, error
 					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				};
