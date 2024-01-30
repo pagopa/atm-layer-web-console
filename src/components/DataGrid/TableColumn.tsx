@@ -9,16 +9,16 @@ import useColumns from "../../hook/Grids/useColumns";
 
 const TableColumn = () => {
 	
-	const {getColumnsGrid, getVisibleColumns}=useColumns();
+	const {getColumnsGrid, getVisibleColumns, getNavigationPaths}=useColumns();
 	const buildColumnDefs=(driver:string)=>{
 		const cols= getColumnsGrid(driver,showCustomHeader, renderCell, showBpmnId, actionColumn);
 		return cols as Array<GridColDef > ;
 	};
 	const visibleColumns=(driver:string)=>getVisibleColumns(driver) ;
 
-	const actionColumn = (p: any) => {
+	const actionColumn = (param: any) => {
 		const navigate = useNavigate();
-
+		const path=getNavigationPaths(BPMN, param);
 		return (
 		// <Box
 		// 	display="flex"
@@ -39,7 +39,7 @@ const TableColumn = () => {
 		// 	</IconButton>
 		// </Box>
 			<ActionIcon 
-				action={() => navigate(generatePath(ROUTES.BPMN_DETAILS, { bpmnId: p.row.bpmnId, modelVersion: p.row.modelVersion }))} 
+				action={() => navigate(path)} 
 				icon={"ArrowForward"}		
 			/>
 		);

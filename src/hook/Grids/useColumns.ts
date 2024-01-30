@@ -1,4 +1,6 @@
+import { generatePath } from "react-router-dom";
 import { BPMN } from "../../commons/constants";
+import ROUTES from "../../routes";
 
 const useColumns:any = () => {
   
@@ -192,6 +194,20 @@ const useColumns:any = () => {
 			return [];
 		}
 	};
-	return { getColumnsGrid, getVisibleColumns };
+	const getNavigationPaths:any = (driver: string, param:any) => {
+		switch (driver) {
+		case BPMN:
+			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
+			
+		default:
+			return [];
+		}
+	};
+
+	return { 
+		getColumnsGrid, 
+		getVisibleColumns,
+		getNavigationPaths 
+	};
 };
 export default useColumns;
