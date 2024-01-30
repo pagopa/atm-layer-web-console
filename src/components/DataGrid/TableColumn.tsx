@@ -15,10 +15,10 @@ const TableColumn = () => {
 		return cols as Array<GridColDef > ;
 	};
 	const visibleColumns=(driver:string)=>getVisibleColumns(driver) ;
+	const navigate = useNavigate();
 
 	const actionColumn = (param: any) => {
-		const navigate = useNavigate();
-		const path=getNavigationPaths(BPMN, param);
+		const path = getNavigationPaths(BPMN, param);
 		return (
 		// <Box
 		// 	display="flex"

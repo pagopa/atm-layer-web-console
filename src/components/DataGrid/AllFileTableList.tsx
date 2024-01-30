@@ -74,7 +74,7 @@ export const AllFileTableList = () => {
 				pagination
 				rowHeight={rowHeight}
 				rows={tableList ?? []}
-				rowCount={tableList?.length ?? 0}
+				rowCount={tableList?.length}
 				sortingMode="client"
 				pageSizeOptions={[]}
 				columnVisibilityModel={{...columnVisibilityModel}}

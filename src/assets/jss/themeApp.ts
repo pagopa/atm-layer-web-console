@@ -591,8 +591,6 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			],
 		},
-		/* END Button */
-		/* START Input */
 		MuiInput: {
 			styleOverrides: {
 				root: {

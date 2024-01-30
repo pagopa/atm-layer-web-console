@@ -2,9 +2,9 @@ import { generatePath } from "react-router-dom";
 import { BPMN } from "../../commons/constants";
 import ROUTES from "../../routes";
 
-const useColumns:any = () => {
-  
-	const getColumnsGrid:any = (driver: string, showCustomHeader:any, renderCell:any, showBpmnId:any, actionColumn:any) => {
+const useColumns: any = () => {
+
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any) => {
 		switch (driver) {
 		case BPMN:
 			return [
@@ -17,7 +17,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.functionType),
+					renderCell: (params: any) => renderCell(params, params.row.functionType),
 					sortable: false,
 					flex: 3
 				},
@@ -30,7 +30,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.deployedFileName),
+					renderCell: (params: any) => renderCell(params, params.row.deployedFileName),
 					sortable: false,
 					flex: 3
 				},
@@ -43,7 +43,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.status),
+					renderCell: (params: any) => renderCell(params, params.row.status),
 					sortable: false,
 					flex: 3
 				},
@@ -56,7 +56,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.modelVersion),
+					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
 					flex: 3
 				},
@@ -69,7 +69,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.createdAt),
+					renderCell: (params: any) => renderCell(params, params.row.createdAt),
 					sortable: false,
 					flex: 3
 				},
@@ -82,7 +82,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.lastUpdatedAt),
+					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedAt),
 					sortable: false,
 					flex: 3
 				},
@@ -108,7 +108,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any)=> renderCell(params, params.row.enabled),
+					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
 					flex: 3
 				},
@@ -121,7 +121,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.deployment_id),
+					renderCell: (params: any) => renderCell(params, params.row.deployment_id),
 					sortable: false,
 					flex: 3
 				},
@@ -134,7 +134,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.definition_key),
+					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
 					flex: 3
 				},
@@ -147,7 +147,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.description),
+					renderCell: (params: any) => renderCell(params, params.row.description),
 					sortable: false,
 					flex: 3
 				},
@@ -160,7 +160,7 @@ const useColumns:any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params:any) => renderCell(params, params.row.resourceFile.resource),
+					renderCell: (params: any) => renderCell(params, params.row.resourceFile.resource),
 					sortable: false,
 					flex: 3
 				},
@@ -172,7 +172,7 @@ const useColumns:any = () => {
 					hideSortIcons: true,
 					disableColumnMenu: true,
 					editable: false,
-					renderCell: (params:any) => actionColumn(params),
+					renderCell: (params: any) => actionColumn(params),
 					sortable: false,
 					flex: 1
 				}
@@ -181,33 +181,37 @@ const useColumns:any = () => {
 			return [];
 		}
 	};
-	const getVisibleColumns:any = (driver: string) => {
+	const getVisibleColumns: any = (driver: string) => {
 		switch (driver) {
 		case BPMN:
 			return (
 				{
-					"bpmnId":false,
-					"enabled":false
+					"bpmnId": false,
+					"enabled": false,
+					"deployment_id": false,
+					"definition_key": false,
+					"description": false,
+					"resource": false
 				}
 			);
 		default:
 			return [];
 		}
 	};
-	const getNavigationPaths:any = (driver: string, param:any) => {
+	const getNavigationPaths: any = (driver: string, param: any) => {
 		switch (driver) {
 		case BPMN:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
-			
+
 		default:
 			return [];
 		}
 	};
 
-	return { 
-		getColumnsGrid, 
+	return {
+		getColumnsGrid,
 		getVisibleColumns,
-		getNavigationPaths 
+		getNavigationPaths
 	};
 };
 export default useColumns;
