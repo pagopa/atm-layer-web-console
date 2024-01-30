@@ -1,71 +1,75 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { Container} from "@mui/system";
-import { useEffect, useState } from "react";
+import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const DetailPage = () => {
 	const theme = useTheme();
+	console.log("QUIIII",theme);
 
 	return (
-		<Box position="static" display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-			<Typography variant="h2">
-				Pagina di Dettaglio
-			</Typography>
-			<Container style={{ display: "flex", alignItems: "center", border:`solid 1px ${theme.palette.divider}`, padding:"24px", margin:"24px 0px"}}>
-				<Grid container spacing={2} alignItems={"center"} justifyContent={"center"}>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Tipo Funzione:
-						</Typography>
+		<BoxPageLayout px={10}>
+			<Box mb={2}>
+				<Grid container spacing={1}>
+					<Grid item xs={12}>
+						<Box p={1}>
+							<Typography variant="h5" textAlign="center" noWrap>
+								Dettaglio risorsa di processo
+							</Typography>
+						</Box>
 					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Nome file:
-						</Typography>
-					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Stato:
-						</Typography>
-					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Versione:
-						</Typography>
-					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Data creazione:
-						</Typography>
-					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1">
-									Data ultima modifica:
-						</Typography>
-					</Grid>
-					<Grid item xs={4}>
-							placeholder
-					</Grid>
-				
 				</Grid>
-			</Container>
-		</Box>
-	);
+			</Box>
 
+			<Grid container spacing={2}>
+				<Grid item xs={12} >
+					<Box bgcolor={theme.palette?.primary?.main} p={1}>
+						<Typography variant="h6" fontWeight={"bold"} color={"white"} >
+						NomeFile  Versione:nVers
+						</Typography>
+					</Box>
+				</Grid>
+			</Grid>
+			<Box p={2}>
+				<Grid container spacing={2}>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Tipo Funzione:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Nome file:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Stato:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Versione:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Data creazione:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+					<Grid item xs={2}>
+						<Typography variant="body1" fontWeight={"bold"}>Data ultima modifica:</Typography>
+					</Grid>
+					<Grid item xs={4}>
+          			placeholder
+					</Grid>
+				</Grid>
+			</Box>
+		</BoxPageLayout>
+	);
 };
 
 export default DetailPage;
