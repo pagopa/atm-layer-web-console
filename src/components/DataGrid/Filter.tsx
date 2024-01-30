@@ -68,6 +68,14 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 		});
 	};
 
+	const menuItems = [
+		{ label: "CREATED", value:"CREATED" },
+		{ label: "WAITING_DEPLOY", value:"WAITING_DEPLOY" },
+		{ label: "UPDATED_BUT_NOT_DEPLOYED", value:"UPDATED_BUT_NOT_DEPLOYED" },
+		{ label: "DEPLOYED", value:"DEPLOYED" },
+		{ label: "DEPLOY_ERROR", value:"DEPLOY_ERROR" }
+	];
+
 	return (
 		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter}>
 			<Grid item xs={4}>
@@ -134,11 +142,11 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
 					>
-						<MenuItem value="CREATED">CREATED</MenuItem>
-						<MenuItem value="WAITING_DEPLOY">WAITING_DEPLOY</MenuItem>
-						<MenuItem value="UPDATED_BUT_NOT_DEPLOYED">UPDATED_BUT_NOT_DEPLOYED</MenuItem>
-						<MenuItem value="DEPLOYED">DEPLOYED</MenuItem>
-						<MenuItem value="DEPLOY_ERROR">DEPLOY_ERROR</MenuItem>
+						{menuItems.map((item) => (
+							<MenuItem key={item.value} value={item.value}>
+								{item.label}
+							</MenuItem>
+						))}
 					</TextField>
 				</FormControl>
 			</Grid>
