@@ -212,11 +212,11 @@ const foundation: Theme = createTheme({
 			disabled: "#97a1b5",
 		},
 		action: {
-			active: "#0073E6" /* Text/Secondary */,
+			active: "rgba(0, 0, 0, 0.54)" /* Text/Secondary */,
 			hover: "rgba(0, 161, 176, 0.08)" /* Text/Primary 8% */,
 			hoverOpacity: 0.08,
 			selected: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
-			disabled: "rgba(0, 161, 176, 0.26)" /* Text/Primary 26% */,
+			disabled: "rgba(0, 161, 176, 0.26)"   /* Text/Primary 26% */,
 			disabledBackground: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
 			focus: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
 		},
@@ -643,7 +643,9 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			},
 		},
+
 	}
+	
 });
 
 export const themeButton = createTheme({
