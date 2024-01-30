@@ -51,6 +51,7 @@ const TableColumn = () => {
 	) {
 		return (
 			<Box
+				key={`${value}`}
 				sx={{
 					width: "100%",
 					height: "100%",

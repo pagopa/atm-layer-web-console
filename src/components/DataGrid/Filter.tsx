@@ -1,70 +1,148 @@
 import TextField from "@mui/material/TextField";
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, useTheme } from "@mui/material";
-import React from "react";
+import { FormControl, Grid, MenuItem } from "@mui/material";
+import React, { useContext } from "react";
+import { Ctx } from "../../DataContext";
+import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
+import FilterTemplate from "./FilterTemplate";
 
-export default function FilterBar() {
+type Props = {
+	filterValues: any;
+	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
+	setTableList: React.Dispatch<any>;
+};
 
-	const theme = useTheme();
+export default function FilterBar({ filterValues, setFilterValues, setTableList }: Props) {
 
-	const inputGroupStyle = {
-		borderWidth: "1px",
-		borderStyle: "solid",
-		borderColor: theme.palette.divider,
-		position: "static",
-		padding: 2
+	const { abortController } = useContext(Ctx);
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
+		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
 	};
 
-	const [state, setState] = React.useState("");
+	const handleSubmit = () => {
+		const getAllBpmn = new Promise((resolve) => {
+			void fetchGetAllFiltered({
+				abortController, pageIndex: 0, pageSize: 10, body: null, headerParams: {
+					"functionType": filterValues.functionType,
+					"fileName": filterValues.fileName,
+					"modelVersion": filterValues.modelVersion,
+					"acquirerId": filterValues.acquirerId,
+					"status": filterValues.status,
+				}
+			})()
+				.then((response: any) => {
+					if (response?.success) {
+						resolve({
+							data: response.valuesObj,
+							type: "SUCCESS"
+						});
+					} else {
+						resolve({
+							type: "ERROR"
+						});
+					}
+				})
+				.catch((err) => {
+					console.log("ERROR", err);
+				});
+		});
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setState(event.target.value as string);
+		getAllBpmn
+			.then((res: any) => {
+				console.log("GET ALL BPMN RESPONSE FILTER", res);
+				setTableList(res.data);
+			})
+			.catch((err) => {
+				console.log("GET ALL BPMN ERROR FILTER", err);
+				setTableList([]);
+			});
+	};
+
+	const cleanFilter = () => {
+		setFilterValues({
+			functionType: "",
+			fileName: "",
+			modelVersion: "",
+			acquirerId: "",
+			status: ""
+		});
 	};
 
 	return (
-		<Box sx={inputGroupStyle}>
-			<Grid container spacing={3}>
-				<Grid item xs={4}>
-					<TextField id="function-type" label="Tipo Funzione" variant="outlined" fullWidth size="small" />
-				</Grid>
-
-				<Grid item xs={4}>
-					<TextField id="file-name" label="Nome File" variant="outlined" fullWidth size="small" />
-				</Grid>
-
-				<Grid item xs={4}>
-					<TextField id="version" label="Versione" variant="outlined" fullWidth size="small" />
-				</Grid>
-
-				<Grid item xs={4}>
-					<TextField id="acquirer-id" label="Acquirer Id" variant="outlined" fullWidth size="small" />
-				</Grid>
-
-				<Grid item xs={4}>
-					<FormControl fullWidth>
-						<TextField
-							id="state-id"
-							value={state}
-							label="Stato"
-							select
-							onChange={handleChange}
-							size="small"
-						>
-							<MenuItem value="CREATED">CREATED</MenuItem>
-							<MenuItem value="WAITING_DEPLOY">WAITING_DEPLOY</MenuItem>
-							<MenuItem value="UPDATED_BUT_NOT_DEPLOYED">UPDATED_BUT_NOT_DEPLOYED</MenuItem>
-							<MenuItem value="DEPLOYED">DEPLOYED</MenuItem>
-							<MenuItem value="DEPLOY_ERROR">DEPLOY_ERROR</MenuItem>
-						</TextField>
-					</FormControl>
-				</Grid>
-				<Grid item xs={4} />
-				<Grid item xs={12}>
-					<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"flex-end"}>
-						<Box mr={2}><Button variant="outlined">Cancella Filtri</Button></Box>
-						<Box><Button variant="contained">Filtra</Button></Box>
-					</Box>
-				</Grid>
+		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter}>
+			<Grid item xs={4}>
+				<TextField
+					id="functionType"
+					name="functionType"
+					label="Tipo Funzione"
+					variant="outlined"
+					value={filterValues.functionType}
+					onChange={(e) => handleChange(e, e.target.name)}
+					size="small"
+					fullWidth
+				/>
 			</Grid>
-		</Box>
+
+			<Grid item xs={4}>
+				<TextField
+					id="fileName"
+					name="fileName"
+					label="Nome File"
+					value={filterValues.fileName}
+					onChange={(e) => handleChange(e, e.target.name)}
+					variant="outlined"
+					size="small"
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid item xs={4}>
+				<TextField
+					id="modelVersion"
+					name="modelVersion"
+					label="Versione"
+					value={filterValues.modelVersion}
+					type="number"
+					onChange={(e) => handleChange(e, e.target.name)}
+					variant="outlined"
+					fullWidth
+					size="small"
+				/>
+			</Grid>
+
+			<Grid item xs={4}>
+				<TextField
+					id="acquirerId"
+					name="acquirerId"
+					label="Acquirer Id"
+					value={filterValues.acquirerId}
+					onChange={(e) => handleChange(e, e.target.name)}
+					variant="outlined"
+					fullWidth
+					size="small"
+				/>
+			</Grid>
+
+			<Grid item xs={4}>
+				<FormControl fullWidth>
+					<TextField
+						id="status"
+						name="status"
+						value={filterValues.status}
+						label="Stato"
+						select
+						onChange={(e) => handleChange(e, e.target.name)}
+						size="small"
+					>
+						<MenuItem value="CREATED">CREATED</MenuItem>
+						<MenuItem value="WAITING_DEPLOY">WAITING_DEPLOY</MenuItem>
+						<MenuItem value="UPDATED_BUT_NOT_DEPLOYED">UPDATED_BUT_NOT_DEPLOYED</MenuItem>
+						<MenuItem value="DEPLOYED">DEPLOYED</MenuItem>
+						<MenuItem value="DEPLOY_ERROR">DEPLOY_ERROR</MenuItem>
+					</TextField>
+				</FormControl>
+			</Grid>
+			<Grid item xs={4} />
+		</FilterTemplate>
 	);
 }

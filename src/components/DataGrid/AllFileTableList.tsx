@@ -1,32 +1,40 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Grid, Paper, useTheme } from "@mui/material";
-import { DataGrid, GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
+import { Box, useTheme } from "@mui/material";
+import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Ctx } from "../../DataContext";
-import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { BPMN } from "../../commons/constants";
+import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { CustomDataGrid } from "./CustomDataGrid";
-
 import FilterBar from "./Filter";
 import TableColumn from "./TableColumn";
 
 export const AllFileTableList = () => {
+
 	const [tableList, setTableList] = useState<any>([]);
 	const {buildColumnDefs, visibleColumns}=TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
 	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
-	useEffect(()=>{
-		console.log("vis", columnVisibilityModel);
-	},[columnVisibilityModel]);
+
+	const initialValues = {
+		functionType: "",
+		fileName: "",
+		modelVersion: "",
+		acquirerId: "",
+		status: ""
+	};
+
+	const [filterValues, setFilterValues] = useState(initialValues);
+
+	// useEffect(()=>{
+	// 	console.log("vis", columnVisibilityModel);
+	// },[columnVisibilityModel]);
 
 	const { abortController } = useContext(Ctx);
-	const pageIndex = 0;
-	const pageSize = 10;
 	const rowHeight = 55;
 	const theme=useTheme();
 
 	const getAllBpmn = new Promise((resolve) => {
-		void fetchGetAllFiltered({ abortController, pageIndex, pageSize })()
+		void fetchGetAllFiltered({ abortController, pageIndex: 0, pageSize: 10 })()
 			.then((response: any) => {
 				if (response?.success) {
 					resolve({
@@ -58,7 +66,7 @@ export const AllFileTableList = () => {
 
 	return (
 		<Box sx={{boxShadow: theme.shadows[4]}}>
-			<FilterBar />
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableList}/>
 			
 			<CustomDataGrid
 				disableColumnFilter
@@ -69,7 +77,7 @@ export const AllFileTableList = () => {
 				className="CustomDataGrid"
 				columnBuffer={6}
 				columns={columns}
-				getRowId={(r) => r.bpmnId}
+				getRowId={(r) => new Date(r.createdAt).getTime()}
 				hideFooterSelectedRowCount={true}
 				pagination
 				rowHeight={rowHeight}

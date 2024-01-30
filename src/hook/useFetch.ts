@@ -10,15 +10,23 @@ export default function useFetch(endPoint: string | undefined) {
 		urlEndpoint,
 		method,
 		body,
-		abortController
+		abortController,
+		headers
 	}: any) => {
 		let data;
 		let status;
-		const headers = {
-			"Content-Type": "multipart/form-data",
-			"Accept": "application/json",
-			"x-api-key": process.env.REACT_APP_API_KEY
-		};
+
+		let headerRequest = {};
+		if (headers) {
+			headerRequest = {
+				"Content-Type": "application/json",
+				"Accept": "application/json",
+				// "x-api-key": process.env.REACT_APP_API_KEY,
+				...headers
+			};
+		} else {
+			headerRequest = { "Content-Type": "application/json" };
+		}
 
 		const options: any =
 
