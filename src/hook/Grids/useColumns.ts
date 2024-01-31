@@ -19,7 +19,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.functionType),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "fileName",
@@ -32,7 +32,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceFile.fileName),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "status",
@@ -45,7 +45,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.status),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "modelVersion",
@@ -58,7 +58,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 3
+					flex: 1
 				},
 				{
 					field: "createdAt",
@@ -71,7 +71,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.createdAt),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "lastUpdatedAt",
@@ -97,7 +97,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => showBpmnId(params),
 					sortable: false,
-					flex: 4
+					flex: 2
 				},
 				{
 					field: "enabled",
@@ -110,7 +110,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "deployment_id",
@@ -123,7 +123,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.deployment_id),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "definition_key",
@@ -136,7 +136,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "description",
@@ -149,7 +149,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.description),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "resource",
@@ -162,7 +162,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceFile.resource),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "actions",

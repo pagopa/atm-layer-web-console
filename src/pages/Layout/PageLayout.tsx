@@ -1,8 +1,7 @@
-/* eslint-disable quotes */
-import React, { useContext } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
-import { LoadingPage } from "../LoadingPage";
+// import { LoadingPage } from "../LoadingPage";
 import { Header } from "../../components/HeaderComponents/Header";
 import CustomAppBar from "../../components/Menu/CustomAppBar";
 
@@ -11,8 +10,8 @@ type Prop= {
 	children: React.ReactNode;
 };
 
-export default function PageLayout({ children }: Prop) {
-	const { loading } = useContext(Ctx);
+export default function PageLayout({ children }: Readonly<Prop>) {
+	// const { loading } = useContext(Ctx);
 
 	return (
 		<Ctx.Consumer>
@@ -27,7 +26,7 @@ export default function PageLayout({ children }: Prop) {
 						<CustomAppBar data-testId="customAppBar-id" />
 					</Box>
 					<Box sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto", width:"100%"}}>
-						{loading ? <LoadingPage /> : children}
+						{/* loading ? <LoadingPage /> :  */children}
 					</Box>
 				</Box>
 			)}

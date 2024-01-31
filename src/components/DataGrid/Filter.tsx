@@ -2,16 +2,16 @@ import TextField from "@mui/material/TextField";
 import { FormControl, Grid, MenuItem } from "@mui/material";
 import React, { useContext } from "react";
 import { Ctx } from "../../DataContext";
-import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import FilterTemplate from "./FilterTemplate";
 
 type Props = {
 	filterValues: any;
 	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
 	setTableList: React.Dispatch<any>;
+	getAllBpmnList: (filterValues: any) => void;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, setTableList }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllBpmnList }: Props) {
 
 	const { abortController } = useContext(Ctx);
 
@@ -20,42 +20,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 	};
 
 	const handleSubmit = () => {
-		const getAllBpmn = new Promise((resolve) => {
-			void fetchGetAllFiltered({
-				abortController, pageIndex: 0, pageSize: 10, headerParams: {
-					"functionType": filterValues.functionType,
-					"fileName": filterValues.fileName,
-					"modelVersion": filterValues.modelVersion,
-					"acquirerId": filterValues.acquirerId,
-					"status": filterValues.status,
-				}
-			})()
-				.then((response: any) => {
-					if (response?.success) {
-						resolve({
-							data: response.valuesObj,
-							type: "SUCCESS"
-						});
-					} else {
-						resolve({
-							type: "ERROR"
-						});
-					}
-				})
-				.catch((err) => {
-					console.log("ERROR", err);
-				});
-		});
-
-		getAllBpmn
-			.then((res: any) => {
-				console.log("GET ALL BPMN RESPONSE FILTER", res);
-				setTableList(res.data);
-			})
-			.catch((err) => {
-				console.log("GET ALL BPMN ERROR FILTER", err);
-				setTableList([]);
-			});
+		getAllBpmnList(filterValues);
 	};
 
 	const cleanFilter = () => {
