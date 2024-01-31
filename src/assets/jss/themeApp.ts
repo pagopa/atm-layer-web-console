@@ -46,79 +46,81 @@ const shadowsArray = Array(25).fill("none") as any;
 
 /* Custom Typography */
 declare module "@mui/material/styles" {
-  interface TypographyVariants {
-    headline: React.CSSProperties;
-    sidenav: React.CSSProperties;
-    monospaced: React.CSSProperties;
-    "caption-semibold": React.CSSProperties;
-  }
+	interface TypographyVariants {
+		headline: React.CSSProperties;
+		sidenav: React.CSSProperties;
+		monospaced: React.CSSProperties;
+		"caption-semibold": React.CSSProperties;
+	}
 
-  interface TypographyVariantsOptions {
-    headline?: React.CSSProperties;
-    sidenav?: React.CSSProperties;
-    monospaced?: React.CSSProperties;
-    "caption-semibold"?: React.CSSProperties;
-  }
+	interface TypographyVariantsOptions {
+		headline?: React.CSSProperties;
+		sidenav?: React.CSSProperties;
+		monospaced?: React.CSSProperties;
+		"caption-semibold"?: React.CSSProperties;
+	}
 
-  interface ThemeBox {
-    customBox?: {
-      border?: string;
-      borderLite?: string;
-    };
-    // colorVariant?: {
-    //   main?: string;
-    //   customBorderColor?: string;
-    // };
-    // cardStyle?: {
-    //   border?: string;
-    //   borderColor?: string;
-    // };
-  }
-  interface ThemeBoxOptions {
-    customBox?: {
-      border?: string;
-      borderLite?: string;
-    };
-    // colorVariant?: {
-    //   main?: string;
-    //   customBorderColor?: string;
-    // };
-    // cardStyle?: {
-    //   border?: string;
-    //   borderColor?: string;
-    // };
-  }
+	//   interface ThemeBox {
+	//     customBox?: {
+	//       border?: string;
+	//       borderLite?: string;
+	//     };
+	// colorVariant?: {
+	//   main?: string;
+	//   customBorderColor?: string;
+	// };
+	// cardStyle?: {
+	//   border?: string;
+	//   borderColor?: string;
+	// };
 }
+//   interface ThemeBoxOptions {
+//     customBox?: {
+//       border?: string;
+//       borderLite?: string;
+//     };
+// colorVariant?: {
+//   main?: string;
+//   customBorderColor?: string;
+// };
+// cardStyle?: {
+//   border?: string;
+//   borderColor?: string;
+// };
+//   }
+// }
 
 declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    headline: true;
-    sidenav: true;
-    monospaced: true;
-    "caption-semibold": true;
-  }
+	interface TypographyPropsVariantOverrides {
+		headline: true;
+		sidenav: true;
+		monospaced: true;
+		"caption-semibold": true;
+	}
 }
 
 /* Custom Palette */
 declare module "@mui/material/styles" {
-  interface Palette {
-    pagoPA: Palette["primary"];
-    europeanUnion: Palette["primary"];
-    checkIban: Palette["primary"];
-    extraLight: Palette["warning"];
-    primaryAction: Palette["action"];
-  }
-  interface PaletteOptions {
-    pagoPA?: PaletteOptions["primary"];
-    europeanUnion: PaletteOptions["primary"];
-    checkIban?: PaletteOptions["primary"];
-    extraLight?: PaletteOptions["warning"];
-    primaryAction: PaletteOptions["action"];
-  }
+	interface Palette {
+		pagoPA: Palette["primary"];
+		europeanUnion: Palette["primary"];
+		checkIban: Palette["primary"];
+		extraLight: Palette["warning"];
+		primaryAction: Palette["action"];
+		normal: Palette["primary"];
+	}
+	interface PaletteOptions {
+		pagoPA?: PaletteOptions["primary"];
+		europeanUnion: PaletteOptions["primary"];
+		checkIban?: PaletteOptions["primary"];
+		extraLight?: PaletteOptions["warning"];
+		primaryAction: PaletteOptions["action"];
+		normal: Palette["primary"];
+	}
 
-  interface PaletteColor {
-    extraLight?: string;
-  }
+	interface PaletteColor {
+		extraLight?: string;
+	}
 }
 
 declare module "@mui/material/Button" {
@@ -129,7 +131,7 @@ declare module "@mui/material/Button" {
 
 declare module "@mui/material/Button" {
 	interface CustomButtonProps {
-	  CustomButton: "root";
+		CustomButton: "root";
 	}
 }
 
@@ -198,17 +200,23 @@ const foundation: Theme = createTheme({
 			main: "#FFFFFF",
 			contrastText: colorPrimary,
 		},
+		normal: {
+			main: colorPrimary,
+			contrastText: colorPrimary,
+			light: "#EBFDFF",
+			dark: "#00707B",
+		},
 		text: {
 			primary: colorTextPrimary,
 			secondary: colorPrimary,
 			disabled: "#97a1b5",
 		},
-		action: { 
-			active: "#0073E6" /* Text/Secondary */,
+		action: {
+			active: "rgba(0, 0, 0, 0.54)" /* Text/Secondary */,
 			hover: "rgba(0, 161, 176, 0.08)" /* Text/Primary 8% */,
 			hoverOpacity: 0.08,
 			selected: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
-			disabled: "rgba(0, 161, 176, 0.26)" /* Text/Primary 26% */,
+			disabled: "rgba(0, 161, 176, 0.26)"   /* Text/Primary 26% */,
 			disabledBackground: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
 			focus: "rgba(0, 161, 176, 0.12)" /* Text/Primary 12% */,
 		},
@@ -250,12 +258,12 @@ const foundation: Theme = createTheme({
 	},
 	typography: {
 		/* Using a constant because type variants
-    don't inherit the typeface general color */
+	don't inherit the typeface general color */
 		allVariants: {
 			color: colorTextPrimary,
 		},
 		/* Using a constant because type variants
-    don't inherit the typeface font family */
+	don't inherit the typeface font family */
 		fontFamily: mainTypeface,
 		fontWeightRegular: 400,
 		fontWeightMedium: 600 /* Semibold */,
@@ -268,10 +276,10 @@ const foundation: Theme = createTheme({
 		borderRadius: 0,
 	},
 	spacing: 8,
-	customBox: {
-		border: "1px solid #DFE3EB",
-		borderLite: "0.5px solid #DFE3EB"
-	},
+	// customBox: {
+	// 	border: "1px solid #DFE3EB",
+	// 	borderLite: "0.5px solid #DFE3EB"
+	// },
 });
 
 export const themeApp: Theme = createTheme(foundation, {
@@ -351,8 +359,8 @@ export const themeApp: Theme = createTheme(foundation, {
 			fontWeight: foundation.typography.fontWeightRegular,
 			letterSpacing: 0,
 			/* a: {
-    color: italia[500],
-    textDecoration: "underline",
+	color: italia[500],
+	textDecoration: "underline",
   }, */
 		},
 		body2: {
@@ -494,11 +502,12 @@ export const themeApp: Theme = createTheme(foundation, {
 					style: {
 						color: foundation.palette.primary.main,
 						"&:hover": {
-							color: colorPrimaryContainedHover,
+							color: alpha(foundation.palette.primary.main, 0.8),
+							backgroundColor: "transparent",
 						},
 						"&.Mui-focusVisible": {
 							boxShadow: `0 0 0 3px ${alpha(
-								foundation.palette.primary.main,
+								foundation.palette.text.primary,
 								0.35
 							)}`,
 						},
@@ -525,6 +534,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						color: foundation.palette.text.primary,
 						"&:hover": {
 							color: alpha(foundation.palette.text.primary, 0.8),
+
 							backgroundColor: "transparent",
 						},
 						"&.Mui-focusVisible": {
@@ -538,10 +548,10 @@ export const themeApp: Theme = createTheme(foundation, {
 				{
 					props: { variant: "text", color: "negative" },
 					style: {
-						
+
 						color: foundation.palette.primary.contrastText,
 						"&:hover": {
-							padding: "0 20px 0 24px",
+							// padding: "0 20px 0 24px",
 							// color: alpha(foundation.palette.text.primary, 0.8),
 							backgroundColor: alpha(foundation.palette.primary.light, 0.3),
 						},
@@ -565,7 +575,7 @@ export const themeApp: Theme = createTheme(foundation, {
 						alignItems: "center",
 						minHeight: foundation.spacing(8.5),
 						borderWidth: "2px",
-						border: "2px solid"+ lightGrey,
+						border: "2px solid" + lightGrey,
 						"&:hover": {
 							borderWidth: "2px",
 						},
@@ -582,15 +592,68 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			],
 		},
-		/* END Button */
+		MuiInput: {
+			styleOverrides: {
+				root: {
+					fontWeight: foundation.typography.fontWeightRegular,
+				},
+			},
+		},
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					fontWeight: foundation.typography.fontWeightRegular,
+					"& .MuiOutlinedInput-notchedOutline": {},
+					"&.Mui-error .MuiOutlinedInput-notchedOutline": {
+						borderColor: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				root: {
+					color: foundation.palette.text.primary,
+					fontWeight: foundation.typography.fontWeightRegular,
+					"&.Mui-error": {
+						color: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+		MuiInputAdornment: {
+			styleOverrides: {
+				root: {
+					"& .MuiSvgIcon-colorError": {
+						color: `${foundation.palette.error.dark}`,
+					},
+				},
+			},
+		},
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					fontSize: pxToRem(12),
+					lineHeight: 1.25 /* 15px */,
+					color: foundation.palette.text.secondary,
+					fontWeight: foundation.typography.fontWeightMedium,
+					letterSpacing: 0.5,
+					"&.Mui-error": {
+						color: foundation.palette.error.dark,
+					},
+				},
+			},
+		},
+
 	}
+	
 });
 
 export const themeButton = createTheme({
 	components: {
-	  MuiButton: {
+		MuiButton: {
 			styleOverrides: {
-		  root: {
+				root: {
 					fontSize: foundation.typography.pxToRem(12),
 					height: "100%",
 					width: "100%",
@@ -599,7 +662,7 @@ export const themeButton = createTheme({
 					alignItems: "center",
 					minHeight: foundation.spacing(8.5),
 					borderWidth: "2px",
-					border: "2px solid "+ lightGrey,
+					border: "2px solid " + lightGrey,
 					"&:hover": {
 						borderWidth: "2px",
 					},
@@ -612,8 +675,8 @@ export const themeButton = createTheme({
 							0.35
 						)}`,
 					},
-		  }
+				}
 			},
-	  },
+		},
 	},
 });

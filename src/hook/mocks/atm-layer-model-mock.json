@@ -1,0 +1,1161 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "atm-layer-model",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3003/api/v1/model"
+        }
+    ],
+    "paths": {
+        "/api/v1/model/bpmn": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "[\n  {\n    \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"modelVersion\": 0,\n    \"deployedFileName\": \"string\",\n    \"definitionKey\": \"string\",\n    \"functionType\": \"string\",\n    \"status\": \"CREATED\",\n    \"sha256\": \"string\",\n    \"enabled\": true,\n    \"definitionVersionCamunda\": 0,\n    \"camundaDefinitionId\": \"string\",\n    \"description\": \"string\",\n    \"resourceFile\": {\n      \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"resourceType\": \"BPMN\",\n      \"storageKey\": \"string\",\n      \"fileName\": \"string\",\n      \"extension\": \"string\",\n      \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\n      \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\n      \"createdBy\": \"string\",\n      \"lastUpdatedBy\": \"string\"\n    },\n    \"resource\": \"string\",\n    \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\n    \"createdBy\": \"string\",\n    \"lastUpdatedBy\": \"string\"\n  }\n]"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/model/bpmn/associations/bank/{acquirerId}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "[\r\n  {\r\n    \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"bpmnModelVersion\": 0,\r\n    \"acquirerId\": \"string\",\r\n    \"branchId\": \"string\",\r\n    \"terminalId\": \"string\",\r\n    \"functionType\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  }\r\n]"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "acquirerId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/bank/{acquirerId}/associations/function/{functionType}": {
+            "put": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"defaultTemplateId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"defaultTemplateVersion\": 1,\r\n  \"branchesConfigs\": [\r\n    {\r\n      \"branchId\": \"string\",\r\n      \"branchDefaultTemplateId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"branchDefaultTemplateVersion\": 0,\r\n      \"terminals\": [\r\n        {\r\n          \"templateId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n          \"templateVersion\": 0,\r\n          \"terminalIds\": [\r\n            \"string\"\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "acquirerId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "functionType",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/deploy/{uuid}/version/{version}": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/disable/{uuid}/version/{version}": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/download/{uuid}/version/{version}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/octet-stream": {
+                                "example": "[\r\n  {\r\n    \"bytes\": \"string\",\r\n    \"byteBuf\": {\r\n      \"direct\": true,\r\n      \"readOnly\": true,\r\n      \"readable\": true,\r\n      \"writable\": true,\r\n      \"contiguous\": true,\r\n      \"accessible\": true\r\n    }\r\n  }\r\n]"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/function/{functionType}/bank/{acquirerId}/branch/{branchId}/terminal/{terminalId}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "functionType",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acquirerId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "branchId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "terminalId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/process/function/{functionType}/bank/{acquirerId}/branch/{branchId}/terminal/{terminalId}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\n  \"camundaDefinitionId\": \"\"\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "functionType",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acquirerId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "branchId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "terminalId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/bpmn/upgrade": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/model/bpmn/{bpmnId}/version/{version}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "bpmnId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            },
+            "delete": {
+                "description": "",
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "bpmnId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/info": {
+            "get": {
+                "description": "Application info - ATM Layer - Model",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": "{\n  \"name\": \"atm-layer-model\",\n  \"version\": \"1.2.3\",\n  \"environment\": \"dev\",\n  \"description\": \"ATM Layer - Model Service\"\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "example": "{\n  \"type\": \"\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"An unexpected error has occurred. Please contact support.\",\n  \"instance\": \"ATMLM-500\"\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/model/resources": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "[\n  \"\"\n]"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/model/resources/{uuid}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            },
+            "put": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/workflow-resource": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "[\n  \"\"\n]"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "{\r\n  \"workflowResourceId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"resourceType\": \"BPMN\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/model/workflow-resource/deploy/{uuid}": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/workflow-resource/rollback/{uuid}": {
+            "put": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/workflow-resource/update/{uuid}": {
+            "put": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/api/v1/model/workflow-resource/{uuid}": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": "\"\""
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            },
+            "delete": {
+                "description": "",
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "*/*": {
+                                "example": "{}"
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Credentials": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "true"
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "GET, POST, PUT, DELETE, OPTIONS"
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "application/json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

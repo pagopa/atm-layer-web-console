@@ -1,6 +1,6 @@
 {
-  "short_name": "atml emulator",
-  "name": "ATM Layer Emulator",
+  "short_name": "web console",
+  "name": "ATM Layer Web Console",
   "icons": [
     {
       "src": "static/media/icons/icon-48x48.png",
@@ -43,7 +43,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

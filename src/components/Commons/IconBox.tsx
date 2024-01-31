@@ -17,19 +17,21 @@ type Props = {
 	id?: string;
   };
 
-export default function IconBox({ icon, color, size, marg, pad, border, borderRadius, bgcolor,transform, disableAction, id, justifyContent }: Props) {
+export default function IconBox({ icon, color, size, marg, pad,transform }: Props) {
 	const theme = useTheme();
 	const { getIcon } = getIconBySetType();
 
 	return (
-
-		<Box m={marg} p={pad}>
+		<Box
+			data-testId="icon-box"
+			m={marg}
+			p={pad}>
 			{
 				React.createElement(getIcon(icon), {
 					style: {
-						fontSize: size ? size : "0.8em",
-						color: color ? color : theme.palette.common.black,
-						transform: transform? transform : ""
+						fontSize: size ?? "1em",
+						color: color ?? theme.palette.common.black,
+						transform: transform ?? ""
 					},
 				})
 			}

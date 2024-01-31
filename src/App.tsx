@@ -6,53 +6,57 @@ import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
-import { CommonErrorPage } from "./pages/ErrorPage/CommonErrorPage";
-import WarningCodeInput from "./pages/WarningCodePage/WarningCodeInput";
-import Layout from "./pages/Layout/Layout";
-import BpmnPage from "./pages/BpmnPage/BpmnPage";
-import HomePage from "./pages/Layout/HomePage";
+import NoPage from "./pages/NoPage";
+import ResourcesPage from "./pages/ResourcesPage";
+import WorkflowResourcePage from "./pages/WorkflowResourcePage";
+import HomePage from "./pages/HomePage";
+import BpmnPage from "./pages/BpmnPage";
+import DetailPage from "./pages/DetailPage";
+
 
 const LocalRoutes = () => (
-	<Layout>
+	
+	<BrowserRouter basename="/webconsole">
+		
 		<Routes>
-			<Route path="/" element={<PageLayout page={<HomePage />} />} />
-			<Route path="/home" element={<PageLayout page={<HomePage />} />} />
-			<Route path={routes.BPMN} element={<PageLayout page={<BpmnPage />} />} />
-			<Route path={routes.WARNING_CODE} element={<PageLayout page={<WarningCodeInput />} />} />
-			<Route
-				path={routes.ERROR_PAGE}
-				element={<PageLayout page={<CommonErrorPage title={""} icon={undefined} />} />}
-			/>
+			<Route path="/" element={<PageLayout children={<HomePage />} />} />
+			<Route index path={routes.HOME} element={<PageLayout children={<HomePage />} />} />
+			<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
+			<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
+			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+			<Route path="*" element={<NoPage />} />
 		</Routes>
-	</Layout>
+		
+	</BrowserRouter>
 );
 
 function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	const [loading, setLoading] = useState(false);
-	const [headerHeight, setHeaderHeight] = useState(null);
+	// const [loading, setLoading] = useState(false);
+	const [recordParams, setRecordParams] = useState();
+	const abortController = new AbortController();
 
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
-		loading,
-		setLoading,
-		headerHeight,
-		setHeaderHeight
+		// loading,
+		// setLoading,
+		abortController,
+		setRecordParams,
+		recordParams
 	};
 
 	useEffect(() => {
-		console.log("ATM-LAYER-EMULATOR-RELEASE VERSION:", RELEASE_VERSION);
+		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
 
 	return (
 		<ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>
-				<BrowserRouter>
-					{LocalRoutes()}
-				</BrowserRouter>
+				{LocalRoutes()}				
 			</Ctx.Provider>
 		</ThemeProvider>
 	);
