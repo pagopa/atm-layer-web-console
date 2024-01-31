@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveIcon from "@mui/icons-material/Save";
 import PanToolOutlinedIcon from "@mui/icons-material/PanToolOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
@@ -19,7 +20,6 @@ import GetAppOutlinedIcon from "@mui/icons-material/GetAppOutlined";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
-import EuroOutlinedIcon from "@mui/icons-material/EuroOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import PercentIcon from "@mui/icons-material/Percent";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
@@ -60,6 +60,7 @@ const Icons : { [key: string]: any } ={
 	"ExpandLessOutlined": ExpandLessOutlinedIcon,
 	"MenuBook": 	MenuBookIcon, 
 	"ArrowForward": 	ArrowForwardIcon, 
+	"ArrowForwardIos": 	ArrowForwardIosIcon, 
 	"Save": 	SaveIcon, 
 	"PanToolOutlined": 	PanToolOutlinedIcon, 
 	"MenuBookOutlined": 	MenuBookOutlinedIcon, 
