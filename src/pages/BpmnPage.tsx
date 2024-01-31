@@ -69,11 +69,9 @@ const BpmnPage = () => {
 	},[]);
 
 	return (
-		<BoxPageLayout shadow={false} px={0} mx={5}>
-			<Box sx={{ boxShadow: theme.shadows[4] }}>
-				<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList(filterValues)}/>
-				<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
-			</Box>
+		<BoxPageLayout shadow={true} px={0} mx={5}>
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList(filterValues)}/>
+			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
 		</BoxPageLayout>
 	);
 };
