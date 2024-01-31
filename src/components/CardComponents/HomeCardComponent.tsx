@@ -53,13 +53,17 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 			<Grid item xs={12}>
 				<Box my={1} justifyContent={"flex-end"} display={"flex"}>
 					<Button
-						variant="naked"
+						data-testId="section-id"
+						variant="text"
 						size="large"
 						onClick={() => navigate(pageLink)}
-						sx={{"&:hover": {
-							color:theme.palette.primary.main ,
-							backgroundColor: "transparent",
-						},}}
+						sx={{
+							"&:hover": {
+								color:theme.palette.primary.main ,
+								backgroundColor: "transparent",
+								textDecoration:"underline"
+							},
+						}}
 					>
 							VAI ALLA SEZIONE
 						<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main} pad={1} />

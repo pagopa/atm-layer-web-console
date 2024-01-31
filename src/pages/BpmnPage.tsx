@@ -1,76 +1,79 @@
-/* eslint-disable indent */
-import { Box } from "@mui/material";
-import { useContext } from "react";
+import { Box, useTheme } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import AllFileTableList from "../components/DataGrid/AllFileTableList";
+import FilterBar from "../components/DataGrid/Filter";
+import fetchGetAllFiltered from "../hook/fetch/fetchGetAllFiltered";
+import { getQueryString } from "../utils/Commons";
+import { GET_ALL_BPMN_FILTER } from "../commons/endpoints";
 import { Ctx } from "../DataContext";
-import NewBpmn from "../components/FormComponents/FormsBpmn/NewBpmn";
-import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
-import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
-import AssociateBpmn from "../components/FormComponents/FormsBpmn/AssociateBpmn";
-import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
+import { BPMN } from "../commons/constants";
+import TableColumn from "../components/DataGrid/TableColumn";
+import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const BpmnPage = () => {
-    const { headerHeight } = useContext(Ctx);
-
-    // const initialValues: BpmnDto = {
-	// 	file: undefined,
-	// 	fileName: undefined,
-	// 	functionType: undefined,
-	// };
-
-	// const [formData, setFormData] = useState();
-	// const [errors, setErrors] = useState();
-
-    // const validateForm = () => {
-	// 	const newErrors = {
-	// 		file: formData.file ? "" : "Campo obbligatorio",
-	// 		fileName: formData.fileName ? "" : "Campo obbligatorio",
-	// 		functionType: formData.functionType ? "" : "Campo obbligatorio",
-	// 	};
-
-	// 	setErrors(newErrors);
-
-	// 	// Determines whether all the members of the array satisfy the conditions "!error".
-	// 	return Object.values(newErrors).every((error) => !error);
-	// };
-
-	// const handleSubmit = (e: React.FormEvent) => {
-	// 	e.preventDefault();
-
-	// 	if (validateForm()) {
-	// 		console.log("VALUES:", formData);
-	// 	}
-	// };
+	const initialValues = {
+		functionType: "",
+		fileName: "",
+		modelVersion: "",
+		acquirerId: "",
+		status: ""
+	};
+	const theme = useTheme();
+	const { abortController } = useContext(Ctx);
+	const [tableListBpmn, setTableListBpmn] = useState<any>([]);
+	const [filterValues, setFilterValues] = useState(initialValues);
+	const [paginationModel, setPaginationModel] = useState({
+		pageIndex: 0,
+		pageSize: 10,
+	});
+	const { buildColumnDefs, visibleColumns } = TableColumn();
+	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
+	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
 
 
+	function getAllBpmnList(filterValues?: any): any {
+		const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
+		const getAllBpmn = new Promise((resolve) => {
+			void fetchGetAllFiltered({ abortController, url })()
+				.then((response: any) => {
+					if (response?.success) {
+						resolve({
+							data: response.valuesObj,
+							type: "SUCCESS"
+						});
+					} else {
+						resolve({
+							type: "ERROR"
+						});
+					}
+				})
+				.catch((err) => {
+					console.log("ERROR", err);
+				});
+		});
+	
+		getAllBpmn
+			.then((res: any) => {
+				console.log("GET ALL BPMN RESPONSE", res);
+				setTableListBpmn(res.data);
+			})
+			.catch((err) => {
+				console.log("GET ALL BPMN ERROR", err);
+				setTableListBpmn([]);
+			});
+	};
 
-    return (
-        <Box
-            display="flex"
-            flexDirection="column"
-        >
-            <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                width={"100vm"}
-            >
-                <Box
-                    alignItems="center"
-                    sx={{
-                        maxHeight: `calc(100vh - ${headerHeight}px)`, // Sottrai l'altezza dell'header dall'altezza massima
-                        overflowY: "auto",
-                        mr: "14px"
-                    }}>
-                    <NewBpmn />
-                    <DeployBpmn />
-                    <UpgradeBpmn />
-                    <AssociateBpmn />
-                    <DeleteBpmn />
-                </Box>
-            </Box>
-        </Box>
-    );
+	useEffect(() => {
+		getAllBpmnList();
+	},[]);
+
+	return (
+		<BoxPageLayout shadow={true} px={0} mx={5}>
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList(filterValues)}/>
+			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
+		</BoxPageLayout>
+	);
 };
 
 export default BpmnPage;

@@ -6,7 +6,8 @@ const ROUTES = {
 	ERROR_PAGE: "/error",
 	BPMN: "/bpmn",
 	RESOURCES: "/resources",
-	WORKFLOW_RESOURCES: "/workflow_resources"
+	WORKFLOW_RESOURCES: "/workflow_resources",
+	BPMN_DETAILS: "/bpmnId/:bpmnId/modelVersion/:modelVersion"
 };
 // const ROUTES = {
 // 	HOME: "home",
