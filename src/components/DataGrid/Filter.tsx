@@ -1,30 +1,29 @@
 import TextField from "@mui/material/TextField";
 import { FormControl, Grid, MenuItem } from "@mui/material";
-import React, { useContext } from "react";
-import { Ctx } from "../../DataContext";
+import React from "react";
 import FilterTemplate from "./FilterTemplate";
 
 type Props = {
 	filterValues: any;
 	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
 	setTableList: React.Dispatch<any>;
-	getAllBpmnList: (filterValues: any) => void;
+	getAllBpmnList: (filterValues?: any) => void;
 };
 
 export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllBpmnList }: Props) {
-
-	const { abortController } = useContext(Ctx);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
 	};
 
 	const handleSubmit = () => {
-		getAllBpmnList(filterValues);
+		if (Object.values(filterValues).some(value => value !== "")) {
+			getAllBpmnList(filterValues);
+		}
 	};
 
 	const cleanFilter = () => {
-		setFilterValues( {
+		setFilterValues({
 			functionType: "",
 			fileName: "",
 			modelVersion: "",
@@ -34,11 +33,11 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 	};
 
 	const menuItems = [
-		{ label: "CREATED", value:"CREATED" },
-		{ label: "WAITING_DEPLOY", value:"WAITING_DEPLOY" },
-		{ label: "UPDATED_BUT_NOT_DEPLOYED", value:"UPDATED_BUT_NOT_DEPLOYED" },
-		{ label: "DEPLOYED", value:"DEPLOYED" },
-		{ label: "DEPLOY_ERROR", value:"DEPLOY_ERROR" }
+		{ label: "CREATED", value: "CREATED" },
+		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
+		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
+		{ label: "DEPLOYED", value: "DEPLOYED" },
+		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" }
 	];
 
 	return (

@@ -30,7 +30,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.resourceFile.fileName),
+					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
 					flex: 2
 				},
