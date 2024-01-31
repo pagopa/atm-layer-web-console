@@ -30,6 +30,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 			acquirerId: "",
 			status: ""
 		});
+		getAllBpmnList();
 	};
 
 	const menuItems = [
@@ -87,6 +88,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 					id="acquirerId"
 					name="acquirerId"
 					label="Banca"
+					placeholder="12345"
 					value={filterValues.acquirerId}
 					onChange={(e) => handleChange(e, e.target.name)}
 					variant="outlined"

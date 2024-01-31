@@ -24,7 +24,7 @@ export default function ActionIcon({ icon, color, size, action, pad, transform, 
 	return (
 
 		<IconButton
-			data-testId="iconButton-id"
+			data-testid="iconButton-id"
 			id={id}
 			color="primary"
 			aria-label={id}
