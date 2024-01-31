@@ -30,7 +30,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.resourceFile.fileName),
+					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
 					flex: 2
 				},
@@ -210,7 +210,7 @@ const useColumns: any = () => {
 
 	const getRecordParams: any = (param: any) => ({
 		bpmnId: param.bpmnId,
-		fileName: param.resourceFile.fileName,
+		fileName: param.fileName,
 		modelVersion: param.modelVersion,
 		status: param.status,
 		functionType: param.functionType,

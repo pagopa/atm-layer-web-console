@@ -30,9 +30,10 @@ const BpmnPage = () => {
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
 	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	const [isInitialLoad, setIsInitialLoad] = useState(true);
 
 
-	function getAllBpmnList(filterValues?: any): any {
+	const getAllBpmnList = (filterValues?: any): any => {
 		const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
 		const getAllBpmn = new Promise((resolve) => {
 			void fetchGetAllFiltered({ abortController, url })()
@@ -65,15 +66,16 @@ const BpmnPage = () => {
 	};
 
 	useEffect(() => {
-		getAllBpmnList();
+		if(isInitialLoad) {
+			getAllBpmnList();
+			setIsInitialLoad(false);
+		}
 	},[]);
 
 	return (
-		<BoxPageLayout shadow={false} px={0} mx={5}>
-			<Box sx={{ boxShadow: theme.shadows[4] }}>
-				<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList(filterValues)}/>
-				<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
-			</Box>
+		<BoxPageLayout shadow={true} px={0} mx={5}>
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList}/>
+			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
 		</BoxPageLayout>
 	);
 };
