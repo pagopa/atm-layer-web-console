@@ -13,7 +13,7 @@ export const AllFileTableList = () => {
 	const [tableList, setTableList] = useState<any>([]);
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
-	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
 		pageSize: 10,

@@ -22,15 +22,15 @@ const useColumns: any = () => {
 					flex: 3
 				},
 				{
-					field: "deployedFileName",
+					field: "fileName",
 					cellClassName: "justifyContentNormal",
-					headerName: "Nome file",
+					headerName: "Nome file",	
 					align: "left",
 					headerAlign: "left",
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.deployedFileName),
+					renderCell: (params: any) => renderCell(params, params.row.resourceFile.fileName),
 					sortable: false,
 					flex: 3
 				},
@@ -208,10 +208,21 @@ const useColumns: any = () => {
 		}
 	};
 
+	const getRecordParams: any = (param: any) => ({
+		bpmnId: param.bpmnId,
+		fileName: param.resourceFile.fileName,
+		modelVersion: param.modelVersion,
+		status: param.status,
+		functionType: param.functionType,
+		createdAt: param.createdAt,
+		lastUpdatedAt: param.lastUpdatedAt
+	});
+
 	return {
 		getColumnsGrid,
 		getVisibleColumns,
-		getNavigationPaths
+		getNavigationPaths,
+		getRecordParams
 	};
 };
 export default useColumns;

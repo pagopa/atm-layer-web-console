@@ -1,23 +1,22 @@
 import { Typography, Grid, Box, IconButton } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { ReactNode } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { ReactNode, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ROUTES from "../../routes";
 import { BPMN } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
-import ActionIcon from "../Commons/ActionIcon";
+import { Ctx } from "../../DataContext";
 
 const TableColumn = () => {
 
-	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordParams } = useColumns();
 	const buildColumnDefs = (driver: string) => {
 		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
-
+	const { setRecordParams } = useContext(Ctx);
 	const actionColumn = (param: any) => {
 		const path = getNavigationPaths(BPMN, param);
 		return (
@@ -28,7 +27,7 @@ const TableColumn = () => {
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
-					onClick={() => navigate(path)}
+					onClick={() => {navigate(path); setRecordParams(getRecordParams(param.row));}}
 					sx={{
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },

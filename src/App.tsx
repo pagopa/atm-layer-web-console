@@ -36,6 +36,7 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [headerHeight, setHeaderHeight] = useState(null);
+	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 
 	const values = {
@@ -45,7 +46,9 @@ function App() {
 		setLoading,
 		headerHeight,
 		setHeaderHeight,
-		abortController
+		abortController,
+		setRecordParams,
+		recordParams,
 	};
 
 	useEffect(() => {
