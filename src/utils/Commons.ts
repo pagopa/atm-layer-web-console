@@ -67,4 +67,5 @@ export const getQueryString = (URL: string, pageIndex: number|string, pageSize: 
 	if(filter?.status) {
 		queryString = queryString.concat(`&status=${filter.status}`);
 	}
+	return queryString;
 };

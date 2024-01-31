@@ -21,11 +21,13 @@ export default function useFetch(endPoint: string | undefined) {
 			headerRequest = {
 				"Content-Type": "application/json",
 				"Accept": "application/json",
-				// "x-api-key": process.env.REACT_APP_API_KEY,
 				...headers
 			};
 		} else {
-			headerRequest = { "Content-Type": "application/json" };
+			headerRequest = { 
+				"Content-Type": "application/json", 
+				"Accept": "application/json",
+			};
 		}
 
 		const options: any =
@@ -34,23 +36,23 @@ export default function useFetch(endPoint: string | undefined) {
 				? {
 					method, // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
-					credentials: "include",
+					// credentials: "include",
 					signal: abortController?.current?.signal,
-					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+					// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
 					header: { ...headerRequest },
-					redirect: "manual", // manual, *follow, error
-					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+					// redirect: "manual", // manual, *follow, error
+					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
 				}
 				: {
 					method, // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
-					credentials: "include",
+					// credentials: "include",
 					signal: abortController?.current?.signal,
-					cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+					// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
 					headers: { ...headerRequest },
-					redirect: "manual", // manual, *follow, error
-					referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+					// redirect: "manual", // manual, *follow, error
+					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				};
 
 

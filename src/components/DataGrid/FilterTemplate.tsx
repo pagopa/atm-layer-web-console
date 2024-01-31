@@ -11,7 +11,7 @@ const FilterTemplate = ({ handleSubmit, cleanFilter, children }: Readonly<Props>
 	const theme = useTheme();
 
 	return (
-		<Box p={2} border={"1px solid"+ theme.palette.divider}>
+		<Box p={2} >
 			<Grid container spacing={2}>
 				{children}
 				<Grid item xs={12}>
@@ -20,7 +20,7 @@ const FilterTemplate = ({ handleSubmit, cleanFilter, children }: Readonly<Props>
 							<Button variant="outlined" onClick={() => cleanFilter()}>Cancella Filtri</Button>
 						</Box>
 						<Box>
-							<Button variant="contained" onClick={() => handleSubmit()}>Filtra</Button>
+							<Button variant="contained" onClick={handleSubmit}>Filtra</Button>
 						</Box>
 					</Box>
 				</Grid>
