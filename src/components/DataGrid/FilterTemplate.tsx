@@ -21,7 +21,7 @@ const FilterTemplate = ({ handleSubmit, cleanFilter, children }: Readonly<Props>
 	return (
 		<Box sx={inputGroupStyle}>
 			<Grid container display={"flex"} flexDirection={"column"} >
-				<Grid container spacing={2}>
+				<Grid container spacing={1}>
 					{children}
 					<Grid item xs={12}>
 						<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"flex-end"}>

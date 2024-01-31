@@ -34,18 +34,18 @@ function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	const [loading, setLoading] = useState(false);
-	const [headerHeight, setHeaderHeight] = useState(null);
+	// const [loading, setLoading] = useState(false);
+	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
-		loading,
-		setLoading,
-		headerHeight,
-		setHeaderHeight,
-		abortController
+		// loading,
+		// setLoading,
+		abortController,
+		setRecordParams,
+		recordParams,
 	};
 
 	useEffect(() => {

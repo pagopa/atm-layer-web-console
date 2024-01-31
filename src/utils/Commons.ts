@@ -46,5 +46,25 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string) => 
-	`${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any) => {
+	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+	if(filter?.functionType) {
+		queryString = queryString.concat(`&functionType=${filter.functionType}`);
+	}
+
+	if(filter?.fileName) {
+		queryString = queryString.concat(`&fileName=${filter.fileName}`);
+	}
+
+	if(filter?.modelVersion) {
+		queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
+	}
+
+	if(filter?.acquirerId) {
+		queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
+	}
+
+	if(filter?.status) {
+		queryString = queryString.concat(`&status=${filter.status}`);
+	}
+};

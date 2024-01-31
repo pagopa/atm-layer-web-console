@@ -1,47 +1,42 @@
 import { Typography, Grid, Box, IconButton } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { ReactNode } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
-import ROUTES from "../../routes";
-import ActionIcon from "../Commons/ActionIcon";
+import { ReactNode, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { BPMN } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
+import { Ctx } from "../../DataContext";
 
 const TableColumn = () => {
-	
-	const {getColumnsGrid, getVisibleColumns, getNavigationPaths}=useColumns();
-	const buildColumnDefs=(driver:string)=>{
-		const cols= getColumnsGrid(driver,showCustomHeader, renderCell, showBpmnId, actionColumn);
-		return cols as Array<GridColDef > ;
-	};
-	const visibleColumns=(driver:string)=>getVisibleColumns(driver) ;
-	const navigate = useNavigate();
 
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordParams } = useColumns();
+	const buildColumnDefs = (driver: string) => {
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
+		return cols as Array<GridColDef>;
+	};
+	const visibleColumns = (driver: string) => getVisibleColumns(driver);
+	const navigate = useNavigate();
+	const { setRecordParams } = useContext(Ctx);
 	const actionColumn = (param: any) => {
 		const path = getNavigationPaths(BPMN, param);
 		return (
-		// <Box
-		// 	display="flex"
-		// 	justifyContent="flex-end"
-		// 	width="100%"
-		// 	mr={2}
-		// 	sx={{ cursor: "pointer" }}
-		// >
-		// 	<IconButton
-		// 		onClick={() => navigate(generatePath(ROUTES.BPMN_DETAILS, { bpmnId: p.row.bpmnId, modelVersion: p.row.modelVersion }))}
-		// 		sx={{
-		// 			width: "100%",
-		// 			"&:hover": { backgroundColor: "transparent !important" },
-		// 		}}import useColumns from '../../hook/Grids/useColumns';
+			<Box
+				display="flex"
+				justifyContent="flex-end"
+				width="100%"
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={() => {navigate(path); setRecordParams(getRecordParams(param.row));}}
+					sx={{
+						width: "100%",
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+				>
+					<ArrowForwardIcon sx={{ color: "primary.main", fontSize: "24px" }} />
+				</IconButton>
+			</Box>
 
-		// 	>
-		// 		<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
-		// 	</IconButton>
-		// </Box>
-			<ActionIcon 
-				action={() => navigate(path)} 
-				icon={"ArrowForward"}		
-			/>
 		);
 	};
 
@@ -102,7 +97,7 @@ const TableColumn = () => {
 							<Typography
 								variant="body2"
 								sx={{
-								// fontWeight: "fontWeightMedium",
+									// fontWeight: "fontWeightMedium",
 									overflow: "hidden",
 									textOverflow: "ellipsis",
 									display: "-webkit-box",

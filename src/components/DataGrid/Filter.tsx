@@ -2,16 +2,16 @@ import TextField from "@mui/material/TextField";
 import { FormControl, Grid, MenuItem } from "@mui/material";
 import React, { useContext } from "react";
 import { Ctx } from "../../DataContext";
-import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import FilterTemplate from "./FilterTemplate";
 
 type Props = {
 	filterValues: any;
 	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
 	setTableList: React.Dispatch<any>;
+	getAllBpmnList: (filterValues: any) => void;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, setTableList }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllBpmnList }: Props) {
 
 	const { abortController } = useContext(Ctx);
 
@@ -20,46 +20,11 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 	};
 
 	const handleSubmit = () => {
-		const getAllBpmn = new Promise((resolve) => {
-			void fetchGetAllFiltered({
-				abortController, pageIndex: 0, pageSize: 10, body: null, headerParams: {
-					"functionType": filterValues.functionType,
-					"fileName": filterValues.fileName,
-					"modelVersion": filterValues.modelVersion,
-					"acquirerId": filterValues.acquirerId,
-					"status": filterValues.status,
-				}
-			})()
-				.then((response: any) => {
-					if (response?.success) {
-						resolve({
-							data: response.valuesObj,
-							type: "SUCCESS"
-						});
-					} else {
-						resolve({
-							type: "ERROR"
-						});
-					}
-				})
-				.catch((err) => {
-					console.log("ERROR", err);
-				});
-		});
-
-		getAllBpmn
-			.then((res: any) => {
-				console.log("GET ALL BPMN RESPONSE FILTER", res);
-				setTableList(res.data);
-			})
-			.catch((err) => {
-				console.log("GET ALL BPMN ERROR FILTER", err);
-				setTableList([]);
-			});
+		getAllBpmnList(filterValues);
 	};
 
 	const cleanFilter = () => {
-		setFilterValues({
+		setFilterValues( {
 			functionType: "",
 			fileName: "",
 			modelVersion: "",
@@ -67,6 +32,14 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 			status: ""
 		});
 	};
+
+	const menuItems = [
+		{ label: "CREATED", value:"CREATED" },
+		{ label: "WAITING_DEPLOY", value:"WAITING_DEPLOY" },
+		{ label: "UPDATED_BUT_NOT_DEPLOYED", value:"UPDATED_BUT_NOT_DEPLOYED" },
+		{ label: "DEPLOYED", value:"DEPLOYED" },
+		{ label: "DEPLOY_ERROR", value:"DEPLOY_ERROR" }
+	];
 
 	return (
 		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter}>
@@ -134,11 +107,11 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList 
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
 					>
-						<MenuItem value="CREATED">CREATED</MenuItem>
-						<MenuItem value="WAITING_DEPLOY">WAITING_DEPLOY</MenuItem>
-						<MenuItem value="UPDATED_BUT_NOT_DEPLOYED">UPDATED_BUT_NOT_DEPLOYED</MenuItem>
-						<MenuItem value="DEPLOYED">DEPLOYED</MenuItem>
-						<MenuItem value="DEPLOY_ERROR">DEPLOY_ERROR</MenuItem>
+						{menuItems.map((item) => (
+							<MenuItem key={item.value} value={item.value}>
+								{item.label}
+							</MenuItem>
+						))}
 					</TextField>
 				</FormControl>
 			</Grid>

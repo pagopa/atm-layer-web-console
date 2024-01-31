@@ -1,9 +1,11 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { useContext } from "react";
+import { Ctx } from "../DataContext";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const DetailPage = () => {
 	const theme = useTheme();
-	console.log("QUIIII",theme);
+	const { recordParams } = useContext(Ctx);
 
 	return (
 		<BoxPageLayout px={10}>
@@ -23,7 +25,7 @@ const DetailPage = () => {
 				<Grid item xs={12} >
 					<Box bgcolor={theme.palette?.primary?.main} p={1}>
 						<Typography variant="h6" fontWeight={"bold"} color={"white"} >
-						NomeFile  Versione:nVers
+							{recordParams.fileName} Versione: {recordParams.modelVersion}
 						</Typography>
 					</Box>
 				</Grid>
@@ -34,37 +36,37 @@ const DetailPage = () => {
 						<Typography variant="body1" fontWeight={"bold"}>Tipo Funzione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.functionType}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Nome file:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.fileName}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Stato:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.status}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Versione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.modelVersion}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Data creazione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.createdAt}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Data ultima modifica:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-          			placeholder
+						{recordParams.lastUpdatedAt}
 					</Grid>
 				</Grid>
 			</Box>
