@@ -87,7 +87,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 				<TextField
 					id="acquirerId"
 					name="acquirerId"
-					label="Acquirer Id"
+					label="Banca"
 					value={filterValues.acquirerId}
 					onChange={(e) => handleChange(e, e.target.name)}
 					variant="outlined"

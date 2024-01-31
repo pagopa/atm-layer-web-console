@@ -7,7 +7,7 @@ const formOption:any = () => {
 
 		case CREATE_BPMN:
 			return [
-				{ title: "Creazione processo", description: " Compilare tutti i campi per creare un nuovo processo" }
+				{ title: "Creazione risorsa", description: " Compilare tutti i campi per creare una nuova risorsa" }
 			];
 
 	    case DEPLOY_BPMN:
