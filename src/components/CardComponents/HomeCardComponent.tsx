@@ -57,13 +57,10 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 						variant="text"
 						size="large"
 						onClick={() => navigate(pageLink)}
-						sx={{
-							"&:hover": {
-								color:theme.palette.primary.main ,
-								backgroundColor: "transparent",
-								textDecoration:"underline"
-							},
-						}}
+						sx={{"&:hover": {
+							color:theme.palette.primary.main ,
+							backgroundColor: "transparent",
+						},}}
 					>
 							VAI ALLA SEZIONE
 						<ActionIcon  icon="ArrowForward" color={theme.palette.primary.main} pad={1} />

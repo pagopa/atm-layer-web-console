@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import BpmnPage from "./pages/BpmnPage";
 import DetailPage from "./pages/DetailPage";
 
+
 const LocalRoutes = () => (
 	
 	<BrowserRouter basename="/webconsole">
@@ -45,7 +46,7 @@ function App() {
 		// setLoading,
 		abortController,
 		setRecordParams,
-		recordParams,
+		recordParams
 	};
 
 	useEffect(() => {
