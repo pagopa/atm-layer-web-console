@@ -22,14 +22,6 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 		return	route ? navigate(route):null;
 	};
 
-	// const handleClose = () => {
-	// 	setAnchorEl(null);
-	// };
-
-	// const handleOptionClick = (onClick: () => void) => {
-	// 	onClick();
-	// 	handleClose();
-	// };
 
 	return (
 		<>

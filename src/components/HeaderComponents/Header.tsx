@@ -11,5 +11,4 @@ export const Header = () => (
 			title: "Sito di PagoPA S.p.A."
 		}}
 	/>
-	
 );

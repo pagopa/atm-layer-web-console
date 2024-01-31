@@ -1,3 +1,5 @@
+/* eslint-disable functional/immutable-data */
+/* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 const checks = () => {
 	const alphaNumeric = /^[a-z0-9 ]+$/i; 
@@ -6,28 +8,20 @@ const checks = () => {
 	const regFloat0_01to99_99 = /^(?!0{1,2}\.0(?![1-9]))\d{1,2}(?:\.\d{1,2})?$/;
 	const regInt1to100 = /^[1-9][0-9]?$|^100$/;
 	const int1to99 = /^[1-9][0-9]?$/;
-	const regEmail =
-		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
 	const stringWithoutSpaces = /^[^\s]*$/; // verifica la presenza di spazi all'interno della stringa
 	const stringNotEmptyNotSpaces = /^[^\s]+$/; // verifica se la stringa è composta da almeno un carattere e che non contenga spazi
 	const oreMinuti =
 		/^((?!(00:00)$)(([0-1]?[0-9]|2[0-3]):[0-5][0-9])|24:00)$/; /* /^(([0-1]?[0-9]|2[0-3]):[0-5][0-9])|24:00$/; */
-	const excludeTipoTargaEstera = /^[^4]/;
-	const cellWithPrefix = /^0039[0-9]{10}$|^[+]39[0-9]{10}$/;
-	const telaio = /^s*(?:\S\s*){4,20}$/;
+
 	const numeroIntero = /^\d+$/;
 	const numeDecimaleConSeparatore = /^(-)?\d{1,3}(\.?\d{3})*(,\d{2})?$/; // numero con , per parte decimale (2 cifre) e . per separatore migliaia
-	const Assegno = /^[a-zA-Z0-9]{16}$/;
-	const iban = /^[a-zA-Z0-9]{27}$/;
+
 	const date_aaaammgg = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/;
 	const regexTestField = (field: string, regType: string) => {
 		let regex;
 		switch (regType) {
-		case "cellulare":
-			// eslint-disable-next-line no-param-reassign
-			field = field.replaceAll(" ", "");
-			regex = cellWithPrefix;
-			break;
+		
 		case "int1to50":
 			regex = regInt1to50;
 			break;
@@ -47,9 +41,7 @@ const checks = () => {
 		case "int1to99":
 			regex = int1to99;
 			break;
-		case "email":
-			regex = regEmail;
-			break;
+		
 		case "stringWithoutSpaces":
 			regex = stringWithoutSpaces;
 			break;
@@ -59,23 +51,12 @@ const checks = () => {
 		case "oreMinuti":
 			regex = oreMinuti;
 			break;
-		case "excludeTipoTargaEstera":
-			regex = excludeTipoTargaEstera;
-			break;
-		case "telaio":
-			regex = telaio;
-			break;
+
 		case "numeroIntero":
 			regex = numeroIntero;
 			break;
 		case "numeDecimaleConSeparatore":
 			regex = numeDecimaleConSeparatore;
-			break;
-		case "Assegno":
-			regex = Assegno;
-			break;
-		case "iban":
-			regex = iban;
 			break;
 		case "date_aaaammgg":
 			regex = date_aaaammgg;
@@ -103,6 +84,15 @@ const checks = () => {
 		 oggetto ? JSON.parse(JSON.stringify(oggetto)) : null
 	;
 
+	const copyArrayObject = (array:Array<any>) => {
+		let arr = [...array];
+		let tmp: Array<any> = [];
+		arr.forEach((el) => {
+			let tempObj = {};
+			tmp.push({ ...tempObj, ...el });
+		});
+		return tmp;
+	};
 
 
 	const isInvalidField = (field: string | number | null | undefined) => (
@@ -125,7 +115,8 @@ const checks = () => {
 		copyObject,
 		regexTestField,
 		isInvalidField,
-		isValidNumber
+		isValidNumber,
+		copyArrayObject
 	};
 };
 
