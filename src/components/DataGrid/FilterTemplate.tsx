@@ -10,31 +10,22 @@ type Props = {
 const FilterTemplate = ({ handleSubmit, cleanFilter, children }: Readonly<Props>) => {
 	const theme = useTheme();
 
-	const inputGroupStyle = {
-		borderWidth: "1px",
-		borderStyle: "solid",
-		borderColor: theme.palette.divider,
-		position: "static",
-		padding: 2,
-	};
-
 	return (
-		<Box sx={inputGroupStyle}>
-			<Grid container display={"flex"} flexDirection={"column"} >
-				<Grid container spacing={1}>
-					{children}
-					<Grid item xs={12}>
-						<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"flex-end"}>
-							<Box mr={2}>
-								<Button variant="outlined" onClick={() => cleanFilter()}>Cancella Filtri</Button>
-							</Box>
-							<Box>
-								<Button variant="contained" onClick={() => handleSubmit()}>Filtra</Button>
-							</Box>
+		<Box p={2} border={"1px solid"+ theme.palette.divider}>
+			<Grid container spacing={2}>
+				{children}
+				<Grid item xs={12}>
+					<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"flex-end"}>
+						<Box mr={2}>
+							<Button variant="outlined" onClick={() => cleanFilter()}>Cancella Filtri</Button>
 						</Box>
-					</Grid>
+						<Box>
+							<Button variant="contained" onClick={() => handleSubmit()}>Filtra</Button>
+						</Box>
+					</Box>
 				</Grid>
 			</Grid>
+	
 		</Box>
 	);
 };
