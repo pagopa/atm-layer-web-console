@@ -210,7 +210,7 @@ const useColumns: any = () => {
 
 	const getRecordParams: any = (param: any) => ({
 		bpmnId: param.bpmnId,
-		fileName: param.resourceFile.fileName,
+		fileName: param.fileName,
 		modelVersion: param.modelVersion,
 		status: param.status,
 		functionType: param.functionType,
