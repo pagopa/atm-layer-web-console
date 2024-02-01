@@ -1,16 +1,25 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import { useEffect } from "react";
 import { CustomDataGrid } from "./CustomDataGrid";
 
 type Props = {
 	tableList: any;
 	columns: Array<GridColDef<any>>;
 	columnVisibilityModel: GridColumnVisibilityModel;
+	filterValues?: any;
+	getAllBpmnList: (filterValues?: any) => void;
 };
 
-export const AllFileTableList = ({ tableList, columns, columnVisibilityModel }: Props) => {
+export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList}: Props) => {
 
 	const rowHeight = 55;
+
+	useEffect(() => {
+		if(!Object.values(filterValues).some(value => value !== "")) {
+			getAllBpmnList();
+		}
+	},[]);
 
 	return (
 		<Box p={2}>
@@ -21,7 +30,7 @@ export const AllFileTableList = ({ tableList, columns, columnVisibilityModel }: 
 				disableRowSelectionOnClick
 				autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
+				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
@@ -31,7 +40,7 @@ export const AllFileTableList = ({ tableList, columns, columnVisibilityModel }: 
 				rowCount={tableList?.length}
 				sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
-				pageSizeOptions={[10]}
+				pageSizeOptions={[100]}
 				// paginationModel={paginationModel}
 				// onPaginationModelChange={setPaginationModel}
 				paginationMode="server"

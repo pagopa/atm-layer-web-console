@@ -32,46 +32,65 @@ const BpmnPage = () => {
 	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
 
 
-	function getAllBpmnList(filterValues?: any): any {
+	const getAllBpmnList = (filterValues?: any): any => {
 		const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
-		const getAllBpmn = new Promise((resolve) => {
+
+		void new Promise((resolve) => {
 			void fetchGetAllFiltered({ abortController, url })()
 				.then((response: any) => {
 					if (response?.success) {
-						resolve({
-							data: response.valuesObj,
-							type: "SUCCESS"
-						});
+						resolve(
+							setTableListBpmn(response.valuesObj)
+						);
 					} else {
-						resolve({
-							type: "ERROR"
-						});
+						resolve(
+							setTableListBpmn([])
+						);
 					}
 				})
 				.catch((err) => {
 					console.log("ERROR", err);
 				});
 		});
-	
-		getAllBpmn
-			.then((res: any) => {
-				console.log("GET ALL BPMN RESPONSE", res);
-				setTableListBpmn(res.data);
-			})
-			.catch((err) => {
-				console.log("GET ALL BPMN ERROR", err);
-				setTableListBpmn([]);
-			});
 	};
 
-	useEffect(() => {
-		getAllBpmnList();
-	},[]);
+
+	// function getAllBpmnList(filterValues?: any): any {
+	// 	const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
+	// 	const getAllBpmn = new Promise((resolve) => {
+	// 		void fetchGetAllFiltered({ abortController, url })()
+	// 			.then((response: any) => {
+	// 				if (response?.success) {
+	// 					resolve({
+	// 						data: response.valuesObj,
+	// 						type: "SUCCESS"
+	// 					});
+	// 				} else {
+	// 					resolve({
+	// 						type: "ERROR"
+	// 					});
+	// 				}
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log("ERROR", err);
+	// 			});
+	// 	});
+	
+	// 	getAllBpmn
+	// 		.then((res: any) => {
+	// 			console.log("GET ALL BPMN RESPONSE", res);
+	// 			setTableListBpmn(res.data);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log("GET ALL BPMN ERROR", err);
+	// 			setTableListBpmn([]);
+	// 		});
+	// };
 
 	return (
 		<BoxPageLayout shadow={true} px={0} mx={5}>
-			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList(filterValues)}/>
-			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel}/>
+			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList} />
+			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel} filterValues={filterValues} getAllBpmnList={getAllBpmnList} />
 		</BoxPageLayout>
 	);
 };
