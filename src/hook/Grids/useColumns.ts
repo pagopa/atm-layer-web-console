@@ -1,9 +1,11 @@
 import { generatePath } from "react-router-dom";
 import { BPMN } from "../../commons/constants";
 import ROUTES from "../../routes";
+import formatValues from "../../utils/formatValues";
 
 const useColumns: any = () => {
 
+	const { formatDateToString } = formatValues();
 	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any) => {
 		switch (driver) {
 		case BPMN:
@@ -19,7 +21,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.functionType),
 					sortable: false,
-					flex: 2
+					flex: 3
 				},
 				{
 					field: "fileName",
@@ -30,9 +32,9 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.resourceFile.fileName),
+					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
-					flex: 2
+					flex: 4
 				},
 				{
 					field: "status",
@@ -69,7 +71,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.createdAt),
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
 					sortable: false,
 					flex: 2
 				},
@@ -82,7 +84,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedAt),
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
 					sortable: false,
 					flex: 3
 				},
@@ -210,7 +212,7 @@ const useColumns: any = () => {
 
 	const getRecordParams: any = (param: any) => ({
 		bpmnId: param.bpmnId,
-		fileName: param.resourceFile.fileName,
+		fileName: param.fileName,
 		modelVersion: param.modelVersion,
 		status: param.status,
 		functionType: param.functionType,

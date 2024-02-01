@@ -1,7 +1,10 @@
-import { Grid, Button, Box, useTheme } from "@mui/material";
-import React, { FormEventHandler } from "react";
+import { Grid, Button, Box, useTheme, ListItemIcon } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes";
 
 type Props = {
+
     handleSubmit: () => void;
     cleanFilter: () => void;
     children?: any;
@@ -10,17 +13,26 @@ type Props = {
 const FilterTemplate = ({ handleSubmit, cleanFilter, children }: Readonly<Props>) => {
 	const theme = useTheme();
 
+	const navigate = useNavigate();
+
 	return (
 		<Box p={2} >
 			<Grid container spacing={2}>
 				{children}
 				<Grid item xs={12}>
-					<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"flex-end"}>
-						<Box mr={2}>
-							<Button variant="outlined" onClick={() => cleanFilter()}>Cancella Filtri</Button>
-						</Box>
+						
+					<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
+
 						<Box>
+							<Button variant="contained" onClick={() => navigate(ROUTES.CREATE_BPMN)}>
+									Crea Risorsa
+							</Button>
+						</Box>
+							
+						<Box >
+							<Button sx={{marginRight: 2}} variant="outlined" onClick={() => cleanFilter()}>Cancella Filtri</Button>
 							<Button variant="contained" onClick={handleSubmit}>Filtra</Button>
+
 						</Box>
 					</Box>
 				</Grid>

@@ -23,7 +23,7 @@ export default function IconBox({ icon, color, size, marg, pad,transform }: Prop
 
 	return (
 		<Box
-			data-testId="icon-box"
+			data-testid="icon-box"
 			m={marg}
 			p={pad}>
 			{
