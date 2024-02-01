@@ -22,7 +22,6 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 		return	route ? navigate(route):null;
 	};
 
-
 	return (
 		<>
 			<Button
