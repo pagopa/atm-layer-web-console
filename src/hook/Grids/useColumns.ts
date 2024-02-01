@@ -1,4 +1,5 @@
 import { generatePath } from "react-router-dom";
+import { GridColDef } from "@mui/x-data-grid";
 import { BPMN } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
@@ -21,12 +22,12 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.functionType),
 					sortable: false,
-					flex: 3
+					flex: 2
 				},
 				{
 					field: "fileName",
 					cellClassName: "justifyContentNormal",
-					headerName: "Nome file",	
+					headerName: "Nome file",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -34,7 +35,8 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
-					flex: 4
+					resizable: false,
+					flex: 1
 				},
 				{
 					field: "status",
@@ -47,7 +49,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.status),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "modelVersion",
@@ -73,7 +75,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "lastUpdatedAt",
@@ -86,7 +88,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
 					sortable: false,
-					flex: 3
+					flex: 1
 				},
 				{
 					field: "bpmnId",
@@ -99,7 +101,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => showBpmnId(params),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "enabled",
@@ -112,7 +114,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "deployment_id",
@@ -125,7 +127,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.deployment_id),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "definition_key",
@@ -138,7 +140,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "description",
@@ -151,7 +153,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.description),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "resource",
@@ -164,7 +166,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceFile.resource),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "actions",
@@ -176,7 +178,7 @@ const useColumns: any = () => {
 					editable: false,
 					renderCell: (params: any) => actionColumn(params),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				}
 			];
 		default:

@@ -24,33 +24,51 @@ const BpmnPage = () => {
 	const [tableListBpmn, setTableListBpmn] = useState<any>([]);
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
-		pageIndex: 0,
+		page: 0,
 		pageSize: 10,
 	});
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
 	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 
-	const getAllBpmnList = async (filterValues?: any): Promise<void> => {
-		const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
+	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
+		const url = getQueryString(GET_ALL_BPMN_FILTER, pageIndex ?? paginationModel.page, paginationModel.pageSize, filterValues);
 
 		try {
 			const response = await fetchGetAllFiltered({ abortController, url })();
 			if (response?.success) {
-				setTableListBpmn(response.valuesObj.results);
+			  const { page, limit, results, itemsFound } = response.valuesObj;
+			  setTableListBpmn(results);
+			  setPaginationModel({ page, pageSize: limit });
+			  setTotalItemsFound(itemsFound);
 			} else {
-				setTableListBpmn([]);
+			  setTableListBpmn([]);
 			}
-		} catch (error) {
+		  } catch (error) {
 			console.error("ERROR", error);
-		}
+		  }
 	};
 
 	return (
 		<BoxPageLayout shadow={true} px={0} mx={5}>
-			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList} />
-			<BpmnDataGrid tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel} filterValues={filterValues} getAllBpmnList={getAllBpmnList} />
+			<FilterBar
+				filterValues={filterValues}
+				setFilterValues={setFilterValues}
+				setTableList={setTableListBpmn}
+				getAllBpmnList={getAllBpmnList}
+			/>
+			<BpmnDataGrid
+				tableList={tableListBpmn}
+				columns={columns}
+				columnVisibilityModel={columnVisibilityModel}
+				filterValues={filterValues}
+				getAllBpmnList={getAllBpmnList}
+				setPaginationModel={setPaginationModel}
+				paginationModel={paginationModel}
+				totalItemsFound={totalItemsFound}
+			/>
 		</BoxPageLayout>
 	);
 };
