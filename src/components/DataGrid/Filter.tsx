@@ -20,17 +20,20 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 	};
 
 	const handleSubmit = () => {
-		getAllBpmnList(filterValues);
+		if (Object.values(filterValues).some(value => value !== "")) {
+			getAllBpmnList(filterValues);
+		}
 	};
 
 	const cleanFilter = () => {
-		setFilterValues( {
+		setFilterValues({
 			functionType: "",
 			fileName: "",
 			modelVersion: "",
 			acquirerId: "",
 			status: ""
 		});
+		
 	};
 
 	const menuItems = [
@@ -87,7 +90,8 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 				<TextField
 					id="acquirerId"
 					name="acquirerId"
-					label="Acquirer Id"
+					label="Banca"
+					placeholder="12345"
 					value={filterValues.acquirerId}
 					onChange={(e) => handleChange(e, e.target.name)}
 					variant="outlined"

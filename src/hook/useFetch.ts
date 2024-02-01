@@ -3,6 +3,7 @@ export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
 	// const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
+	// const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : window.BACKEND_URL;
 	const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
 	const CODE_SUCCESS = 200;
 
