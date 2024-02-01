@@ -16,19 +16,10 @@ export default function useFetch(endPoint?: string | undefined) {
 		let data;
 		let status;
 
-		let headerRequest = {};
-		if (headers) {
-			headerRequest = {
-				"Content-Type": "application/json",
-				"Accept": "application/json",
-				...headers
-			};
-		} else {
-			headerRequest = { 
-				"Content-Type": "application/json", 
-				"Accept": "application/json",
-			};
-		}
+		const headerRequest = {
+			...headers,
+			"Accept": "application/json",
+		};
 
 		const options: any =
 
@@ -39,7 +30,7 @@ export default function useFetch(endPoint?: string | undefined) {
 					// credentials: "include",
 					signal: abortController?.current?.signal,
 					// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-					header: { ...headerRequest },
+					headers: { ...headerRequest },
 					// redirect: "manual", // manual, *follow, error
 					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
