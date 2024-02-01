@@ -38,7 +38,8 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
 		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
 		{ label: "DEPLOYED", value: "DEPLOYED" },
-		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" }
+		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
+		{ label: "Stato", value: "" }
 	];
 
 	return (
