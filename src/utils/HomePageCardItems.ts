@@ -28,12 +28,5 @@ export const homePageCardItems = [
 		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
 		pageLink: routes.WORKFLOW_RESOURCES
-		
-	},
-	{
-		title: "Risorse per processi",
-		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
-		icon:"Widgets",
-		pageLink: "/"
 	}
 ];

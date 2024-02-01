@@ -12,7 +12,7 @@ import WorkflowResourcePage from "./pages/WorkflowResourcePage";
 import HomePage from "./pages/HomePage";
 import BpmnPage from "./pages/BpmnPage";
 import DetailPage from "./pages/DetailPage";
-
+import CreateBpmnPage from "./pages/CreateBpmnPage";
 
 const LocalRoutes = () => (
 	
@@ -25,6 +25,7 @@ const LocalRoutes = () => (
 			<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
 			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+			<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
 			<Route path="*" element={<NoPage />} />
 		</Routes>
 		
@@ -46,7 +47,7 @@ function App() {
 		// setLoading,
 		abortController,
 		setRecordParams,
-		recordParams
+		recordParams,
 	};
 
 	useEffect(() => {

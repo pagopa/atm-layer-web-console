@@ -6,11 +6,10 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Header } from "../../components/Header";
 import { TitleComponent } from "../../components/TitleComponents/TitleComponent";
-import { getCompletePathImage } from "../../utils/Commons";
-import { Footer } from "../../components/Footer";
 import { Ctx } from "../../DataContext";
+import { Header } from "../../components/HeaderComponents/Header";
+
 
 const UploadFile = () => {
 	const navigate = useNavigate();
@@ -83,13 +82,13 @@ const UploadFile = () => {
 				</Box>
 			</Box>
 
-			<Footer
+			{/* <Footer
 				backButton={() => navigate("/")}
 				disabled={false}
 				continueButton={"Avanti"}
 				// startIcon={<KeyboardHideOutlinedIcon color="disabled" fontSize="medium" />}
 				endIcon={<ChevronRightIcon color="primary" fontSize="medium" sx={{ ml: "16px" }} />}
-			/>
+			/> */}
 		</>
 	);
 };

@@ -1,10 +1,13 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { Ctx } from "../DataContext";
+import formatValues from "../utils/formatValues";
 import BoxPageLayout from "./Layout/BoxPageLayout";
+
 
 const DetailPage = () => {
 	const theme = useTheme();
+	const { formatDateToString } = formatValues();
 	const { recordParams } = useContext(Ctx);
 
 	return (
@@ -60,13 +63,13 @@ const DetailPage = () => {
 						<Typography variant="body1" fontWeight={"bold"}>Data creazione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.createdAt}
+						{formatDateToString(recordParams.createdAt)}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Data ultima modifica:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.lastUpdatedAt}
+						{formatDateToString(recordParams.lastUpdatedAt)}
 					</Grid>
 				</Grid>
 			</Box>
