@@ -1,7 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import AllFileTableList from "../components/DataGrid/AllFileTableList";
+import BpmnDataGrid from "../components/DataGrid/BpmnDataGrid";
 import FilterBar from "../components/DataGrid/Filter";
 import fetchGetAllFiltered from "../hook/fetch/fetchGetAllFiltered";
 import { getQueryString } from "../utils/Commons";
@@ -24,73 +24,51 @@ const BpmnPage = () => {
 	const [tableListBpmn, setTableListBpmn] = useState<any>([]);
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
-		pageIndex: 0,
+		page: 0,
 		pageSize: 10,
 	});
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
 	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 
-	const getAllBpmnList = (filterValues?: any): any => {
-		const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
+	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
+		const url = getQueryString(GET_ALL_BPMN_FILTER, pageIndex ?? paginationModel.page, paginationModel.pageSize, filterValues);
 
-		void new Promise((resolve) => {
-			void fetchGetAllFiltered({ abortController, url })()
-				.then((response: any) => {
-					if (response?.success) {
-						resolve(
-							setTableListBpmn(response.valuesObj)
-						);
-					} else {
-						resolve(
-							setTableListBpmn([])
-						);
-					}
-				})
-				.catch((err) => {
-					console.log("ERROR", err);
-				});
-		});
+		try {
+			const response = await fetchGetAllFiltered({ abortController, url })();
+			if (response?.success) {
+			  const { page, limit, results, itemsFound } = response.valuesObj;
+			  setTableListBpmn(results);
+			  setPaginationModel({ page, pageSize: limit });
+			  setTotalItemsFound(itemsFound);
+			} else {
+			  setTableListBpmn([]);
+			}
+		  } catch (error) {
+			console.error("ERROR", error);
+		  }
 	};
-
-
-	// function getAllBpmnList(filterValues?: any): any {
-	// 	const url = getQueryString(GET_ALL_BPMN_FILTER, paginationModel.pageIndex, paginationModel.pageSize, filterValues);
-	// 	const getAllBpmn = new Promise((resolve) => {
-	// 		void fetchGetAllFiltered({ abortController, url })()
-	// 			.then((response: any) => {
-	// 				if (response?.success) {
-	// 					resolve({
-	// 						data: response.valuesObj,
-	// 						type: "SUCCESS"
-	// 					});
-	// 				} else {
-	// 					resolve({
-	// 						type: "ERROR"
-	// 					});
-	// 				}
-	// 			})
-	// 			.catch((err) => {
-	// 				console.log("ERROR", err);
-	// 			});
-	// 	});
-	
-	// 	getAllBpmn
-	// 		.then((res: any) => {
-	// 			console.log("GET ALL BPMN RESPONSE", res);
-	// 			setTableListBpmn(res.data);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log("GET ALL BPMN ERROR", err);
-	// 			setTableListBpmn([]);
-	// 		});
-	// };
 
 	return (
 		<BoxPageLayout shadow={true} px={0} mx={5}>
-			<FilterBar filterValues={filterValues} setFilterValues={setFilterValues} setTableList={setTableListBpmn} getAllBpmnList={getAllBpmnList} />
-			<AllFileTableList tableList={tableListBpmn} columns={columns} columnVisibilityModel={columnVisibilityModel} filterValues={filterValues} getAllBpmnList={getAllBpmnList} />
+			<FilterBar
+				filterValues={filterValues}
+				setFilterValues={setFilterValues}
+				setTableList={setTableListBpmn}
+				getAllBpmnList={getAllBpmnList}
+			/>
+			<BpmnDataGrid
+				tableList={tableListBpmn}
+				columns={columns}
+				columnVisibilityModel={columnVisibilityModel}
+				filterValues={filterValues}
+				getAllBpmnList={getAllBpmnList}
+				setPaginationModel={setPaginationModel}
+				paginationModel={paginationModel}
+				totalItemsFound={totalItemsFound}
+			/>
 		</BoxPageLayout>
 	);
 };

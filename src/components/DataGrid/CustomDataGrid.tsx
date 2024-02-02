@@ -11,8 +11,9 @@ export const CustomDataGrid: React.FC<DataGridProps> = (props) => {
 		"& .MuiDataGrid-main": {
 			// padding: "0 24px 24px 24px",
 		},
-		"&.MuiDataGrid-root .MuiDataGrid-columnHeaders" : {
-			backgroundColor: theme.palette.primary.main,		},
+		"&.MuiDataGrid-root .MuiDataGrid-columnHeaders": {
+			backgroundColor: theme.palette.primary.main,
+		},
 		"&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, &.MuiDataGrid-root .MuiDataGrid-cell:focus-within":
 			{ outline: "none" },
 

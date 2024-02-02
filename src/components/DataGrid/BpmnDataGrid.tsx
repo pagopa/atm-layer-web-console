@@ -1,6 +1,6 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CustomDataGrid } from "./CustomDataGrid";
 
 type Props = {
@@ -8,18 +8,28 @@ type Props = {
 	columns: Array<GridColDef<any>>;
 	columnVisibilityModel: GridColumnVisibilityModel;
 	filterValues?: any;
-	getAllBpmnList: (filterValues?: any) => void;
+	getAllBpmnList: (filterValues?: any, pageIndex?: any) => void;
+	setPaginationModel: React.Dispatch<React.SetStateAction<{
+		page: number;
+		pageSize: number;
+	}>>;
+	paginationModel: {
+		page: number;
+		pageSize: number;
+	};
+	totalItemsFound: number;
 };
 
-export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList}: Props) => {
+export const BpmnDataGrid = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList, paginationModel, totalItemsFound }: Props) => {
 
 	const rowHeight = 55;
 
 	useEffect(() => {
-		if(!Object.values(filterValues).some(value => value !== "")) {
+		if (!Object.values(filterValues).some(value => value !== "")) {
 			getAllBpmnList();
 		}
-	},[]);
+		console.log("tableList.length", tableList.length);
+	}, []);
 
 	return (
 		<Box p={2}>
@@ -30,23 +40,23 @@ export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, fi
 				disableRowSelectionOnClick
 				autoHeight={true}
 				className="CustomDataGrid"
-				// columnBuffer={6}
+				columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
-				pagination
 				rowHeight={rowHeight}
-				rows={tableList ?? []}
-				rowCount={tableList?.length}
+				rows={tableList}
+				rowCount={totalItemsFound}
 				sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
-				pageSizeOptions={[100]}
-				// paginationModel={paginationModel}
-				// onPaginationModelChange={setPaginationModel}
 				paginationMode="server"
+				pagination
+				pageSizeOptions={[10]}
+				paginationModel={{ ...paginationModel }}
+				onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
 			/>
 		</Box>
 	);
 };
 
-export default AllFileTableList;
+export default BpmnDataGrid;

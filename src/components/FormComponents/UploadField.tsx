@@ -27,6 +27,7 @@ export default function UploadField({titleField, file, clearFile, changeFile,err
 					onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
 					onClick={clearFile}
 					error={error}
+					allowedType=".bpmn"
 				/>
 			</Grid>
 		</React.Fragment>
