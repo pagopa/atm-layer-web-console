@@ -49,7 +49,7 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any) => {
 	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
 	if(filter?.functionType) {
-		queryString = queryString.concat(`&functionType=${filter.functionType}`);
+		queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
 	}
 
 	if(filter?.fileName) {
