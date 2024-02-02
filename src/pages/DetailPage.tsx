@@ -2,6 +2,7 @@ import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { Ctx } from "../DataContext";
 import formatValues from "../utils/formatValues";
+import BreadCrumb from "../components/NavigationComponents/Breadcrumb";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 
@@ -9,9 +10,23 @@ const DetailPage = () => {
 	const theme = useTheme();
 	const { formatDateToString } = formatValues();
 	const { recordParams } = useContext(Ctx);
+	const breadComponent = [
+		<Typography key="3" color="text.primary">
+			Home
+		</Typography>,
+		<Typography key="3" color="text.primary">
+			Bpmn
+		</Typography>,
+		<Typography key="3" color="text.primary">
+			Dettaglio risorsa statica
+		</Typography>
+	];
 
 	return (
 		<BoxPageLayout px={10}>
+			<Box mb={2} display={"flex"} justifyContent={"flex-start"}>
+				<BreadCrumb breadcrumb={breadComponent} />
+			</Box>
 			<Box mb={2}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
