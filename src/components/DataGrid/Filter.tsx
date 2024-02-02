@@ -77,6 +77,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 					label="Versione"
 					value={filterValues.modelVersion}
 					type="number"
+					InputProps={{ inputProps: { min: 1 } }}
 					onChange={(e) => handleChange(e, e.target.name)}
 					variant="outlined"
 					fullWidth
