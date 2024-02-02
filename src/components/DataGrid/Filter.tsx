@@ -82,7 +82,6 @@ export default function FilterBar({ filterValues, setFilterValues, getAllBpmnLis
 					variant="outlined"
 					fullWidth
 					size="small"
-					InputProps={{ inputProps: { min: 1 } }}
 				/>
 			</Grid>
 
