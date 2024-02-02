@@ -9,6 +9,8 @@ import { GET_ALL_BPMN_FILTER } from "../commons/endpoints";
 import { Ctx } from "../DataContext";
 import { BPMN } from "../commons/constants";
 import TableColumn from "../components/DataGrid/TableColumn";
+import ROUTES from "../routes";
+import GoBackButton from "../components/Commons/GoBackButton";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const BpmnPage = () => {
@@ -52,24 +54,27 @@ const BpmnPage = () => {
 	};
 
 	return (
-		<BoxPageLayout shadow={true} px={0} mx={5}>
-			<FilterBar
-				filterValues={filterValues}
-				setFilterValues={setFilterValues}
-				setTableList={setTableListBpmn}
-				getAllBpmnList={getAllBpmnList}
-			/>
-			<BpmnDataGrid
-				tableList={tableListBpmn}
-				columns={columns}
-				columnVisibilityModel={columnVisibilityModel}
-				filterValues={filterValues}
-				getAllBpmnList={getAllBpmnList}
-				setPaginationModel={setPaginationModel}
-				paginationModel={paginationModel}
-				totalItemsFound={totalItemsFound}
-			/>
-		</BoxPageLayout>
+		<>
+			<Box ml={4}>
+				<GoBackButton route={ROUTES.HOME} />
+			</Box>
+			<BoxPageLayout shadow={true} px={0} mx={5} my={0}>
+				<FilterBar
+					filterValues={filterValues}
+					setFilterValues={setFilterValues}
+					setTableList={setTableListBpmn}
+					getAllBpmnList={getAllBpmnList} />
+				<BpmnDataGrid
+					tableList={tableListBpmn}
+					columns={columns}
+					columnVisibilityModel={columnVisibilityModel}
+					filterValues={filterValues}
+					getAllBpmnList={getAllBpmnList}
+					setPaginationModel={setPaginationModel}
+					paginationModel={paginationModel}
+					totalItemsFound={totalItemsFound} />
+			</BoxPageLayout>
+		</>
 	);
 };
 

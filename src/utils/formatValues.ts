@@ -55,7 +55,7 @@ const formatValues = () => {
 	const formatDateToString = (v: string | number | Date) => {
 		if (v) {
 			const d = new Date(v);
-			return d.toLocaleDateString("en-GB");
+			return d.toLocaleDateString("en-GB", { hour: "2-digit", minute: "2-digit" });
 		} else {return placeholder;}
 	};
 
