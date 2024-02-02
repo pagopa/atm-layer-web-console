@@ -8,7 +8,8 @@ const ROUTES = {
 	RESOURCES: "/resources",
 	WORKFLOW_RESOURCES: "/workflow_resources",
 	BPMN_DETAILS: "/bpmnId/:bpmnId/modelVersion/:modelVersion",
-	CREATE_BPMN: "/bpmn/create"
+	CREATE_BPMN: "/bpmn/create",
+	CREATE_WORKFLOW_RESOURCES: "/workflow_resources/create"
 };
 // const ROUTES = {
 // 	HOME: "home",

@@ -6,10 +6,11 @@ type Props = {
 	handleSubmit: () => void;
 	cleanFilter: () => void;
 	filterValues: any;
+	filterRoutes: string;
 	children?: any;
 };
 
-const FilterTemplate = ({ handleSubmit, cleanFilter, filterValues, children }: Readonly<Props>) => {
+const FilterTemplate = ({ handleSubmit, cleanFilter, filterValues,  filterRoutes, children }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
 	const disabledButtons = () => {
@@ -27,7 +28,7 @@ const FilterTemplate = ({ handleSubmit, cleanFilter, filterValues, children }: R
 				<Grid item xs={12}>
 					<Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
 						<Box>
-							<Button variant="contained" onClick={() => navigate(ROUTES.CREATE_BPMN)}>
+							<Button variant="contained" onClick={() => navigate(filterRoutes)}>
 								Crea Risorsa
 							</Button>
 						</Box>

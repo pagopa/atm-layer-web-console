@@ -2,7 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import BpmnDataGrid from "../components/DataGrid/BpmnDataGrid";
-import FilterBar from "../components/DataGrid/Filter";
+import FilterBar from "../components/DataGrid/FilterBar";
 import fetchGetAllFiltered from "../hook/fetch/fetchGetAllFiltered";
 import { getQueryString } from "../utils/Commons";
 import { GET_ALL_BPMN_FILTER } from "../commons/endpoints";
@@ -36,7 +36,7 @@ const BpmnPage = () => {
 
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
-		const url = getQueryString(GET_ALL_BPMN_FILTER, pageIndex ?? paginationModel.page, paginationModel.pageSize, filterValues);
+		const url = getQueryString(GET_ALL_BPMN_FILTER, pageIndex ?? paginationModel.page, paginationModel.pageSize, filterValues, BPMN);
 
 		try {
 			const response = await fetchGetAllFiltered({ abortController, url })();
@@ -63,7 +63,10 @@ const BpmnPage = () => {
 					filterValues={filterValues}
 					setFilterValues={setFilterValues}
 					setTableList={setTableListBpmn}
-					getAllBpmnList={getAllBpmnList} />
+					getAllList={getAllBpmnList} 
+					newFilterValues={initialValues}
+					driver={BPMN}
+				/>
 				<BpmnDataGrid
 					tableList={tableListBpmn}
 					columns={columns}
