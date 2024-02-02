@@ -4,12 +4,14 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 type Prop = {
     breadcrumb: any;
+    mb: any;
 };
 
-const BreadCrumb = ({ breadcrumb }: Prop) => (
+const BreadCrumb = ({ breadcrumb, mb }: Prop) => (
 	<Breadcrumbs
 		separator={<NavigateNextIcon fontSize="small" />}
 		aria-label="breadcrumb"
+		sx={{ marginBottom: mb }}
 	>
 		{breadcrumb}
 	</Breadcrumbs>

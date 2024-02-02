@@ -10,7 +10,7 @@ type Props = {
 	getAllBpmnList: (filterValues?: any) => void;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllBpmnList }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, getAllBpmnList }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
@@ -30,7 +30,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 			acquirerId: "",
 			status: ""
 		});
-		getAllBpmnList(filterValues);
+		getAllBpmnList();
 	};
 
 	const menuItems = [
@@ -43,7 +43,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 	];
 
 	return (
-		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter}>
+		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues}>
 			<Grid item xs={4}>
 				<TextField
 					id="functionType"
@@ -81,6 +81,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 					variant="outlined"
 					fullWidth
 					size="small"
+					InputProps={{ inputProps: { min: 1 } }}
 				/>
 			</Grid>
 

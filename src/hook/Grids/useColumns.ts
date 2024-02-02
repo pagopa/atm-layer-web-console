@@ -22,7 +22,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.functionType),
 					sortable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "fileName",
@@ -36,7 +36,7 @@ const useColumns: any = () => {
 					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
 					resizable: false,
-					flex: 1
+					flex: 2
 				},
 				{
 					field: "status",
@@ -62,7 +62,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				{
 					field: "createdAt",
