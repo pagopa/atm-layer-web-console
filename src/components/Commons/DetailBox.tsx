@@ -16,10 +16,10 @@ const DetailBox = () => {
 
 	const breadComponent = [
 		<Typography key="1" color="text.primary">
-			 <Link underline="hover" key="1" color="inherit"  onClick={() => navigate(ROUTES.HOME)} sx={{ cursor: "pointer" }}>Home</Link>
+			 Home
 		</Typography>,
 		<Typography key="2" color="text.primary">
-			<Link underline="hover" key="1" color="inherit" onClick={() => navigate(ROUTES.BPMN)} sx={{ cursor: "pointer" }}>Risorse di processo</Link>
+			Risorse di processo
 		</Typography>,
 		<Typography key="3" color="primary">
 			Dettaglio risorsa di processo
@@ -47,7 +47,7 @@ const DetailBox = () => {
 				<Grid item xs={12}>
 					<Box bgcolor={theme.palette?.primary?.main} p={1}>
 						<Typography variant="h6" fontWeight={"bold"} color={"white"}>
-							{recordParams.fileName} Versione: {recordParams.modelVersion}
+							{recordParams.fileName}
 						</Typography>
 					</Box>
 				</Grid>

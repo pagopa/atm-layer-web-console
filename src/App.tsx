@@ -13,6 +13,8 @@ import HomePage from "./pages/HomePage";
 import BpmnPage from "./pages/BpmnPage";
 import DetailPage from "./pages/DetailPage";
 import CreateBpmnPage from "./pages/CreateBpmnPage";
+import AssociateBpmnPage from "./pages/AssociateBpmnPage";
+import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
 
 const LocalRoutes = () => (
 	
@@ -26,6 +28,8 @@ const LocalRoutes = () => (
 			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
 			<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
+			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
+			<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
 			<Route path="*" element={<NoPage />} />
 		</Routes>
 		
