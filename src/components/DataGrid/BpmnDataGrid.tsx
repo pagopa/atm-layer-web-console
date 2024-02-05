@@ -1,6 +1,6 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CustomDataGrid } from "./CustomDataGrid";
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 	totalItemsFound: number;
 };
 
-export const BpmnDataGrid = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList, paginationModel, totalItemsFound }: Props) => {
+export const BpmnDataGrid = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList, setPaginationModel, paginationModel, totalItemsFound }: Props) => {
 
 	const rowHeight = 55;
 

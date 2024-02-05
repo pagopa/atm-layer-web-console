@@ -1,5 +1,5 @@
 import { Box, useTheme } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import BpmnDataGrid from "../components/DataGrid/BpmnDataGrid";
 import FilterBar from "../components/DataGrid/FilterBar";

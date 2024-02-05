@@ -1,19 +1,47 @@
 import { Box, Grid, Link, Typography, useTheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Ctx } from "../DataContext";
 import formatValues from "../utils/formatValues";
 import BreadCrumb from "../components/NavigationComponents/Breadcrumb";
 import ROUTES from "../routes";
+import fetchGetAllAssociatedBpmn from "../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
+import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
+import TableColumn from "../components/DataGrid/TableColumn";
+import { BPMN_ASSCOIATED } from "../commons/constants";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 
 const DetailPage = () => {
 	const theme = useTheme();
 	const { formatDateToString } = formatValues();
-	const { recordParams } = useContext(Ctx);
-	const { bpmnId } = useParams();
+	const { recordParams, abortController } = useContext(Ctx);
+	const { bpmnId, modelVersion } = useParams();
 	const navigate = useNavigate();
+	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
+	const { buildColumnDefs, visibleColumns } = TableColumn();
+	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSCOIATED);
+	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN_ASSCOIATED));
+
+	const getAllAssociatedBpmn = async () => {
+
+		const url = `/bpmn/associations/${bpmnId}/version/${modelVersion}`;
+
+		try {
+			const response = await fetchGetAllAssociatedBpmn({ abortController, url })();
+			console.log("response", response);
+			if (response?.success) {
+				setTableListBpmnAssociated(response.valuesObj);
+			} else {
+				setTableListBpmnAssociated([]);
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
+
+
 
 	const breadComponent = [
 		<Typography key="1" color="text.primary">
@@ -93,6 +121,14 @@ const DetailPage = () => {
 					</Grid>
 				</Grid>
 			</Box>
+
+		
+			<BpmnAssociatedDataGrid
+				tableList={tableListBpmnAssociated}
+				columns={columns}
+				columnVisibilityModel={columnVisibilityModel}
+				getAllList={getAllAssociatedBpmn}
+			/>
 		</BoxPageLayout>
 	);
 };

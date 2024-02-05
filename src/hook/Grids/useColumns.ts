@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN } from "../../commons/constants";
+import { BPMN, BPMN_ASSCOIATED } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -180,6 +180,153 @@ const useColumns: any = () => {
 					flex: 0.5
 				}
 			];
+
+		case BPMN_ASSCOIATED:
+			return [
+				{
+					field: "bpmnId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Bpmn",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.bpmnId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "bpmnModelVersion",
+					cellClassName: "justifyContentNormal",
+					headerName: "Versione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.bpmnModelVersion),
+					sortable: false,
+					resizable: false,
+					flex: 2
+				},
+				{
+					field: "acquirerId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Acquirer",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.acquirerId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "branchId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Branch",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.branchId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "terminalId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Terminale",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.terminalId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "functionType",
+					cellClassName: "justifyContentNormal",
+					headerName: "Tipo funzione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.functionType),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "createdAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data creazione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "lastUpdatedAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data ultima modifica",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "createdBy",
+					cellClassName: "justifyContentNormal",
+					headerName: "Creata Da",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.createdBy),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "lastUpdatedBy",
+					cellClassName: "justifyContentNormal",
+					headerName: "Modificata Da",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
+					sortable: false,
+					flex: 1
+				},
+				// {
+				// 	field: "actions",
+				// 	cellClassName: "justifyContentNormalRight",
+				// 	headerName: "",
+				// 	align: "right",
+				// 	hideSortIcons: true,
+				// 	disableColumnMenu: true,
+				// 	editable: false,
+				// 	renderCell: (params: any) => actionColumn(params),
+				// 	sortable: false,
+				// 	flex: 0.5
+				// }
+			];
 		default:
 			return [];
 		}
@@ -195,6 +342,14 @@ const useColumns: any = () => {
 					"definition_key": false,
 					"description": false,
 					"resource": false
+				}
+			);
+		case BPMN_ASSCOIATED:
+			return (
+				{
+					"bpmnId": false,
+					"createdBy": false,
+					"lastUpdatedBy": false
 				}
 			);
 		default:

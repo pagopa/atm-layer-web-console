@@ -14,7 +14,7 @@ type Props = {
 	driver: string;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllList, newFilterValues, driver }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
