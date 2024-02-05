@@ -22,7 +22,7 @@ const DetailPage = () => {
 		<Typography key="2" color="text.primary">
 			<Link underline="hover" key="1" color="inherit" onClick={() => navigate(ROUTES.BPMN)} sx={{ cursor: "pointer" }}>Risorse di processo</Link>
 		</Typography>,
-		<Typography key="3" color="text.primary">
+		<Typography key="3" color="primary">
 			Dettaglio risorsa di processo
 		</Typography>
 	];
