@@ -1,5 +1,4 @@
 import { generatePath } from "react-router-dom";
-import { GridColDef } from "@mui/x-data-grid";
 import { BPMN } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";

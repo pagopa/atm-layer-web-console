@@ -1,11 +1,10 @@
 import { Box } from "@mui/material";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { useContext, useState } from "react";
 import { Ctx } from "../DataContext";
 import { BPMN, WORKFLOW_RESOURCE } from "../commons/constants";
-import { GET_ALL_BPMN_FILTER, GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../commons/endpoints";
+import { GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../commons/endpoints";
 import GoBackButton from "../components/Commons/GoBackButton";
-import BpmnDataGrid from "../components/DataGrid/BpmnDataGrid";
 import FilterBar from "../components/DataGrid/FilterBar";
 import TableColumn from "../components/DataGrid/TableColumn";
 import fetchGetAllFiltered from "../hook/fetch/fetchGetAllFiltered";

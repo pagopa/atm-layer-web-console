@@ -1,10 +1,9 @@
 import React from "react";
-import { Routes } from "react-router-dom";
 import { BPMN, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./Filters/BpmnFilterComponent";
-import WorkflowResourcesFilterComponent from "./Filters/BpmnFilterComponent";
+import WorkflowResourcesFilterComponent from "./Filters/WorkflowResourcesFilterComponent";
 
 type Props = {
 	filterValues: any;
