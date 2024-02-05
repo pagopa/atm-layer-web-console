@@ -54,30 +54,26 @@ const BpmnPage = () => {
 	};
 
 	return (
-		<>
-			<Box ml={4}>
-				<GoBackButton route={ROUTES.HOME} />
-			</Box>
-			<BoxPageLayout shadow={true} px={0} mx={5} my={0}>
-				<FilterBar
-					filterValues={filterValues}
-					setFilterValues={setFilterValues}
-					setTableList={setTableListBpmn}
-					getAllList={getAllBpmnList} 
-					newFilterValues={initialValues}
-					driver={BPMN}
-				/>
-				<BpmnDataGrid
-					tableList={tableListBpmn}
-					columns={columns}
-					columnVisibilityModel={columnVisibilityModel}
-					filterValues={filterValues}
-					getAllBpmnList={getAllBpmnList}
-					setPaginationModel={setPaginationModel}
-					paginationModel={paginationModel}
-					totalItemsFound={totalItemsFound} />
-			</BoxPageLayout>
-		</>
+		<BoxPageLayout shadow={true} px={0} mx={5}>
+			<FilterBar
+				filterValues={filterValues}
+				setFilterValues={setFilterValues}
+				setTableList={setTableListBpmn}
+				getAllList={getAllBpmnList} 
+				newFilterValues={initialValues}
+				driver={BPMN}
+			/>
+			<BpmnDataGrid
+				tableList={tableListBpmn}
+				columns={columns}
+				columnVisibilityModel={columnVisibilityModel}
+				filterValues={filterValues}
+				getAllBpmnList={getAllBpmnList}
+				setPaginationModel={setPaginationModel}
+				paginationModel={paginationModel}
+				totalItemsFound={totalItemsFound} />
+		</BoxPageLayout>
+		
 	);
 };
 
