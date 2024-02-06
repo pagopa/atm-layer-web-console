@@ -16,11 +16,11 @@ export const UpdateWR = () => {
 
 	const initialValues: WRUpdateDto = {
 		uuid: "",
-		file: ""
+		file: undefined
 	};
 
 	const [formData, setFormData] = useState<WRUpdateDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
 
 
@@ -41,7 +41,7 @@ export const UpdateWR = () => {
 	};
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
+		setFormData({ ...formData, file: undefined });
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -84,9 +84,10 @@ export const UpdateWR = () => {
 				titleField="File della risorsa" 
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
+				setFormData={setFormData}
+				formData={formData}
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField

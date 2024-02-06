@@ -5,14 +5,24 @@ import UploadFileWithButton from "../UploadFileComponents/UploadFileWithButton";
 type Props = {
     name: string;
     titleField?: string;
-    file?: string;
-    changeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    file?: File;
     clearFile: () => void;
-    error?: string; 
+    error?: string;
+	setFormData: React.Dispatch<React.SetStateAction<any>>;
+	formData: any;
 };
 
 
-export default function UploadField({titleField, file, clearFile, changeFile,error, name}:Props) {
+export default function UploadField({titleField, file, clearFile,error, name, setFormData, formData}:Props) {
+
+	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+		if (files && files.length > 0) {
+			const selectedFile = files[0];
+			setFormData({ ...formData, file: selectedFile });
+		}
+	};
+
 	return (
 		<React.Fragment>
 			{titleField && 
@@ -24,7 +34,7 @@ export default function UploadField({titleField, file, clearFile, changeFile,err
 				<UploadFileWithButton
 					name={name}
 					file={file}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => changeFile(e)}
+					onChange={handleChangeFile}
 					onClick={clearFile}
 					error={error}
 					allowedType=".bpmn"

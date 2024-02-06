@@ -1,12 +1,12 @@
 export type WorkflowResourceDto = {
-    file: string;
+    file?: File;
     filename: string;
     resourceType: string;
 };
 
 export type WRUpdateDto = {
     uuid: string;
-    file: string;
+    file?: File;
 };
 
 export type WRDeployDto = {

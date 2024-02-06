@@ -8,28 +8,18 @@ type Props = {
 	columns: Array<GridColDef<any>>;
 	columnVisibilityModel: GridColumnVisibilityModel;
 	filterValues?: any;
-	getAllBpmnList: (filterValues?: any, pageIndex?: any) => void;
-	setPaginationModel: React.Dispatch<React.SetStateAction<{
-		page: number;
-		pageSize: number;
-	}>>;
-	paginationModel: {
-		page: number;
-		pageSize: number;
-	};
-	totalItemsFound: number;
+	getAllBpmnList: (filterValues?: any) => void;
 };
 
-export const BpmnDataGrid = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList, setPaginationModel, paginationModel, totalItemsFound }: Props) => {
+export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, filterValues, getAllBpmnList}: Props) => {
 
 	const rowHeight = 55;
 
 	useEffect(() => {
-		if (!Object.values(filterValues).some(value => value !== "")) {
+		if(!Object.values(filterValues).some(value => value !== "")) {
 			getAllBpmnList();
 		}
-		console.log("tableList.length", tableList.length);
-	}, []);
+	},[]);
 
 	return (
 		<Box p={2}>
@@ -40,23 +30,23 @@ export const BpmnDataGrid = ({ tableList, columns, columnVisibilityModel, filter
 				disableRowSelectionOnClick
 				autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
+				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
+				pagination
 				rowHeight={rowHeight}
-				rows={tableList}
-				rowCount={totalItemsFound}
+				rows={tableList ?? []}
+				rowCount={tableList?.length}
 				sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
+				pageSizeOptions={[100]}
+				// paginationModel={paginationModel}
+				// onPaginationModelChange={setPaginationModel}
 				paginationMode="server"
-				pagination
-				pageSizeOptions={[10]}
-				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
 			/>
 		</Box>
 	);
 };
 
-export default BpmnDataGrid;
+export default AllFileTableList;

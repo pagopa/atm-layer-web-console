@@ -1,14 +1,14 @@
 
 export type BpmnDto = {
-    file?: string;
-    fileName?: string;
-    functionType?: string;
+    file?: File;
+    filename: string;
+    functionType: string;
 };
 
 export type UpgradeBpmnDto = {
     uuid?: string;
-    file?: string;
-    fileName?: string;
+    file?: File;
+    filename?: string;
     functionType?: string;
 };
 

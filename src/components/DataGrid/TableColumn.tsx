@@ -12,7 +12,7 @@ const TableColumn = () => {
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordParams } = useColumns();
 	const buildColumnDefs = (driver: string) => {
 		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
-		return cols as Array<GridColDef>;
+		return cols as Array<GridColDef>;	
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
