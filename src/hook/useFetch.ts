@@ -16,10 +16,17 @@ export default function useFetch(endPoint?: string | undefined) {
 		let data;
 		let status;
 
-		const headerRequest = {
-			...headers,
-			"Accept": "application/json",
-		};
+		let headerRequest = {};
+		if (headers) {
+			headerRequest = {
+				"Accept": "application/json",
+				...headers
+			};
+		} else {
+			headerRequest = { 
+				"Accept": "application/json",
+			};
+		}
 
 		const options: any =
 
@@ -33,7 +40,7 @@ export default function useFetch(endPoint?: string | undefined) {
 					headers: { ...headerRequest },
 					// redirect: "manual", // manual, *follow, error
 					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
+					body: body ? body : JSON.stringify(""), // body data type must match "Content-Type" header
 				}
 				: {
 					method, // *GET, POST, PUT, DELETE, etc.

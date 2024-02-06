@@ -22,11 +22,11 @@ export const UpdateResources = () => {
 
 	const initialValues: ResourcesUpdateDto = {
 		uuid: "",
-		file: ""
+		file: undefined
 	};
 
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
 
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ export const UpdateResources = () => {
 	};
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
+		setFormData({ ...formData, file: undefined });
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -92,9 +92,10 @@ export const UpdateResources = () => {
 				titleField="File della risorsa" 
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
+				setFormData={setFormData}
+				formData={formData}
 			/>
 			<Grid xs={12} item my={1}>
 				<TextField

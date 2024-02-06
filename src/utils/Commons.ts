@@ -1,5 +1,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
+
+import { BPMN, WORKFLOW_RESOURCE } from "../commons/constants";
+
 /* eslint-disable functional/immutable-data */
 export const isValidUUID = (uuid: string) => {
 	const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
@@ -46,26 +49,43 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any) => {
+export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any, driver: string) => {
 	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-	if(filter?.functionType) {
-		queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
-	}
 
-	if(filter?.fileName) {
-		queryString = queryString.concat(`&fileName=${filter.fileName}`);
+	switch(driver) {
+	case BPMN: 
+		if(filter?.functionType) {
+			queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
+		}
+		
+		if(filter?.fileName) {
+			queryString = queryString.concat(`&fileName=${filter.fileName}`);
+		}
+		
+		if(filter?.modelVersion) {
+			queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
+		}
+		
+		if(filter?.acquirerId) {
+			queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
+		}
+		
+		if(filter?.status) {
+			queryString = queryString.concat(`&status=${filter.status}`);
+		}
+		break;
+	case WORKFLOW_RESOURCE:
+		if(filter?.deployedFileName) {
+			queryString = queryString.concat(`&deployedFileName=${filter.deployedFileName}`);
+		}
+		
+		if(filter?.status) {
+			queryString = queryString.concat(`&status=${filter.status}`);
+		}
+		break;
+	default:
+		return "";
 	}
-
-	if(filter?.modelVersion) {
-		queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
-	}
-
-	if(filter?.acquirerId) {
-		queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
-	}
-
-	if(filter?.status) {
-		queryString = queryString.concat(`&status=${filter.status}`);
-	}
+	
 	return queryString;
 };

@@ -7,7 +7,7 @@ import UploadField from "../UploadField";
 import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
-import { resetErrors } from "../../../utils/Commons";
+import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 
 
 export const CreateResources = () => {
@@ -16,14 +16,14 @@ export const CreateResources = () => {
 	const { getFormOptions } = formOption();
 
 	const initialValues: ResourcesDto = {
-		file: "",
+		file: undefined,
 		filename: "",
 		resourceType: "",
 		path:"",
 	};
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
     
 
@@ -35,7 +35,7 @@ export const CreateResources = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? "" : "Campo obbligatorio",
+			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 			path: formData.path ?? "",
 		};
@@ -45,12 +45,8 @@ export const CreateResources = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
-	const changeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, file: e.target.value });
-	};
-
 	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
+		setFormData({ ...formData, file: undefined });
 	};
 
 	const changeResourceType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,9 +94,10 @@ export const CreateResources = () => {
 				titleField="File della risorsa" 
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
+				setFormData={setFormData}
+				formData={formData}
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField

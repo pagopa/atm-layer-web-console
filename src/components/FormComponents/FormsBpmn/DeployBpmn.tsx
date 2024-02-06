@@ -113,6 +113,7 @@ export const DeployBpmn = () => {
 					type="number"
 					size="small"
 					value={formData.version}
+					InputProps={{ inputProps: { min: 1 } }}
 					onChange={handleChange}
 					error={Boolean(errors.version)}
 					helperText={errors.version}

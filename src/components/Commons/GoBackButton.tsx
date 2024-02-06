@@ -27,7 +27,7 @@ const GoBackButton = ({ route }: Props) => {
 				}}
 			>
 				<ArrowBackIcon />
-				TORNA INDIETRO
+				 INDIETRO
 			</Button>
 		</Box>
 	);

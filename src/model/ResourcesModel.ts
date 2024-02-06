@@ -1,5 +1,5 @@
 export type ResourcesDto = {
-    file: string;
+    file?: File;
     filename: string;
     resourceType: string;
     path?: string;
@@ -7,5 +7,5 @@ export type ResourcesDto = {
 
 export type ResourcesUpdateDto = {
     uuid: string;
-    file: string;
+    file?: File;
 };
