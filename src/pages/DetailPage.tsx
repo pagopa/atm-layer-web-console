@@ -1,6 +1,7 @@
 import { Box, Grid, Link, Typography, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
 import { Ctx } from "../DataContext";
 import formatValues from "../utils/formatValues";
 import BreadCrumb from "../components/NavigationComponents/Breadcrumb";
