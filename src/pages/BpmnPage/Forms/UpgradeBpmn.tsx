@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Paper, Grid, TextField, Typography, useTheme, Button } from "@mui/material";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { Header } from "../../../components/Header";
 import { TitleComponent } from "../../../components/TitleComponents/TitleComponent";
 import { Ctx } from "../../../DataContext";
 import SideBar from "../../../components/Menu/SideBar";
