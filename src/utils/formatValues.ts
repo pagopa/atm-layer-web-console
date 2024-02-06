@@ -15,13 +15,6 @@ const formatValues = () => {
 	};
 
 	// input data format: gg-mm-aaaa
-	const checkValiditaDocumento = (rilascio: string, scadenza: string) => {
-		if (scadenza) {
-			if (rilascio) {return rilascio.replaceAll("-", "/") + " - " + scadenza.replaceAll("-", "/");}
-			else {return scadenza.replaceAll("-", "/");}
-		} else {return placeholder;}
-	};
-
 	const checkValueToLower = (v: string) => v ? v.toLowerCase() : placeholder;
 
 	const checkValueToLowerEmpty = (v: string) => v ? v.toLowerCase() : "";
@@ -55,7 +48,7 @@ const formatValues = () => {
 	const formatDateToString = (v: string | number | Date) => {
 		if (v) {
 			const d = new Date(v);
-			return d.toLocaleDateString("en-GB");
+			return d.toLocaleDateString("en-GB", { hour: "2-digit", minute: "2-digit" });
 		} else {return placeholder;}
 	};
 
@@ -131,7 +124,6 @@ const formatValues = () => {
 	return {
 		checkValue,
 		checkTwoValues,
-		checkValiditaDocumento,
 		checkFormatDate,
 		formatPercent,
 		formatCurrency,

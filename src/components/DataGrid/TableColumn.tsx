@@ -2,7 +2,8 @@ import { Typography, Grid, Box, IconButton } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
 import { ReactNode, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
+import React from "react";
 import { BPMN } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 import { Ctx } from "../../DataContext";
@@ -33,7 +34,7 @@ const TableColumn = () => {
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
 				>
-					<ArrowForwardIcon sx={{ color: "primary.main", fontSize: "24px" }} />
+					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
 				</IconButton>
 			</Box>
 

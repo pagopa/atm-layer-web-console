@@ -1,19 +1,16 @@
 import TextField from "@mui/material/TextField";
 import { FormControl, Grid, MenuItem } from "@mui/material";
-import React, { useContext } from "react";
-import { Ctx } from "../../DataContext";
+import React from "react";
 import FilterTemplate from "./FilterTemplate";
 
 type Props = {
 	filterValues: any;
 	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
 	setTableList: React.Dispatch<any>;
-	getAllBpmnList: (filterValues: any) => void;
+	getAllBpmnList: (filterValues?: any) => void;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, setTableList, getAllBpmnList }: Props) {
-
-	const { abortController } = useContext(Ctx);
+export default function FilterBar({ filterValues, setFilterValues, getAllBpmnList }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
@@ -33,19 +30,20 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 			acquirerId: "",
 			status: ""
 		});
-		
+		getAllBpmnList();
 	};
 
 	const menuItems = [
-		{ label: "CREATED", value:"CREATED" },
-		{ label: "WAITING_DEPLOY", value:"WAITING_DEPLOY" },
-		{ label: "UPDATED_BUT_NOT_DEPLOYED", value:"UPDATED_BUT_NOT_DEPLOYED" },
-		{ label: "DEPLOYED", value:"DEPLOYED" },
-		{ label: "DEPLOY_ERROR", value:"DEPLOY_ERROR" }
+		{ label: "CREATED", value: "CREATED" },
+		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
+		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
+		{ label: "DEPLOYED", value: "DEPLOYED" },
+		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
+		{ label: "Stato", value: "" }
 	];
 
 	return (
-		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter}>
+		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues}>
 			<Grid item xs={4}>
 				<TextField
 					id="functionType"
@@ -79,6 +77,7 @@ export default function FilterBar({ filterValues, setFilterValues, setTableList,
 					label="Versione"
 					value={filterValues.modelVersion}
 					type="number"
+					InputProps={{ inputProps: { min: 1 } }}
 					onChange={(e) => handleChange(e, e.target.name)}
 					variant="outlined"
 					fullWidth

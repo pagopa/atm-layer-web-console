@@ -3,7 +3,6 @@ export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
 	// const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	// const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : window.BACKEND_URL;
 	const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
 	const CODE_SUCCESS = 200;
 
@@ -20,13 +19,11 @@ export default function useFetch(endPoint?: string | undefined) {
 		let headerRequest = {};
 		if (headers) {
 			headerRequest = {
-				"Content-Type": "application/json",
 				"Accept": "application/json",
 				...headers
 			};
 		} else {
-			headerRequest = { 
-				"Content-Type": "application/json", 
+			headerRequest = {  
 				"Accept": "application/json",
 			};
 		}
@@ -40,7 +37,7 @@ export default function useFetch(endPoint?: string | undefined) {
 					// credentials: "include",
 					signal: abortController?.current?.signal,
 					// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-					header: { ...headerRequest },
+					headers: { ...headerRequest },
 					// redirect: "manual", // manual, *follow, error
 					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
