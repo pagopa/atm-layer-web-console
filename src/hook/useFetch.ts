@@ -16,10 +16,17 @@ export default function useFetch(endPoint?: string | undefined) {
 		let data;
 		let status;
 
-		const headerRequest = {
-			...headers,
-			"Accept": "application/json",
-		};
+		let headerRequest = {};
+		if (headers) {
+			headerRequest = {
+				"Accept": "application/json",
+				...headers
+			};
+		} else {
+			headerRequest = { 
+				"Accept": "application/json",
+			};
+		}
 
 		const options: any =
 
