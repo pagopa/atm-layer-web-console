@@ -13,5 +13,12 @@ const ROUTES = {
 	ASSOCIATE_BPMN: "/bpmn/associate",
 	UPGRADE_BPMN: "/bpmn/upgrade/:bpmnId"
 };
+// const ROUTES = {
+// 	HOME: "home",
+// 	WARNING_CODE: "warning-code",
+// 	ERROR_PAGE: "error",
+// 	BPMN: "bpmn",
+// 	RESOURCES: "resources",
+// 	WORKFLOW_RESOURCES: "workflow_resources",
 
 export default ROUTES;
