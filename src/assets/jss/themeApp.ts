@@ -534,7 +534,6 @@ export const themeApp: Theme = createTheme(foundation, {
 						color: foundation.palette.text.primary,
 						"&:hover": {
 							color: alpha(foundation.palette.text.primary, 0.8),
-
 						},
 						"&.Mui-focusVisible": {
 							boxShadow: `0 0 0 3px ${alpha(
