@@ -71,7 +71,7 @@ export const CreateBpmn = () => {
 		postData.append("file", formData.file);
 		postData.append("fileName", formData.fileName);
 		postData.append("functionType", formData.functionType);
-		console.log("body postData",postData);
+		
 		fetchCreateBpmn({ abortController, body:postData })().then(data => {
 			if (data?.success) {
 				console.log("Response positive: ", data);
@@ -85,7 +85,6 @@ export const CreateBpmn = () => {
 	};
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("body", e.currentTarget);
 		if (validateForm()) {
 			createBpmn();
 		}
