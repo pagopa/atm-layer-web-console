@@ -11,7 +11,7 @@ const ROUTES = {
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
 	ASSOCIATE_BPMN: "/bpmn/associate",
-	UPGRADE_BPMN: "/bpmn/upgrade"
+	UPGRADE_BPMN: "/bpmn/upgrade/:bpmnId"
 };
 
 export default ROUTES;

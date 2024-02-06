@@ -10,7 +10,7 @@ import IconBox from "../Commons/IconBox";
 type Props = {
     name: string;
     allowedType?: string;
-    file?: string;
+    file?: File;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
     error?: string;
@@ -60,7 +60,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                 <React.Fragment>
                     <Box>
                         <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
-                            {file.substring(file.lastIndexOf("\\") + 1)}
+                            {file.name}
                         </Typography>
                     </Box>
                     <Box ml={2}>

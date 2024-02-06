@@ -1,11 +1,12 @@
 import { generatePath } from "react-router-dom";
-import { BPMN, BPMN_ASSCOIATED } from "../../commons/constants";
+import { BPMN, BPMN_ASSOCIATED } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
 const useColumns: any = () => {
 
 	const { formatDateToString } = formatValues();
+
 	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any) => {
 		switch (driver) {
 		case BPMN:
@@ -181,7 +182,7 @@ const useColumns: any = () => {
 				}
 			];
 
-		case BPMN_ASSCOIATED:
+		case BPMN_ASSOCIATED:
 			return [
 				{
 					field: "bpmnId",
@@ -234,7 +235,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.branchId),
 					sortable: false,
-					flex: 0.5
+					flex: 1
 				},
 				{
 					field: "terminalId",
@@ -247,7 +248,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.terminalId),
 					sortable: false,
-					flex: 0.5
+					flex: 1
 				},
 				{
 					field: "functionType",
@@ -344,10 +345,14 @@ const useColumns: any = () => {
 					"resource": false
 				}
 			);
-		case BPMN_ASSCOIATED:
+		case BPMN_ASSOCIATED:
 			return (
 				{
 					"bpmnId": false,
+					"bpmnModelVersion": false,
+					"functionType" : false,
+					"createdAt" : false,
+					"lastUpdatedAt" : false,
 					"createdBy": false,
 					"lastUpdatedBy": false
 				}

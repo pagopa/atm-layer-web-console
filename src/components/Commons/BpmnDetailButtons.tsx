@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useNavigate, useParams } from "react-router-dom";
 import ROUTES from "../../routes";
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
 
 const BpmnDetailButtons = () => {
 	const navigate = useNavigate();
+	const { bpmnId } = useParams();
 
 	return(
 		<Box>
@@ -21,7 +22,7 @@ const BpmnDetailButtons = () => {
 			<Button 
 				sx={{ marginRight: 3 }}
 				variant="contained" 
-				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}>
+				onClick={() => navigate(generatePath(ROUTES.UPGRADE_BPMN, { bpmnId }))}>
 								Upgrade
 			</Button>
 			<Button 

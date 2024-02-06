@@ -16,13 +16,13 @@ export const CreateWR = () => {
 	const { getFormOptions } = formOption();
 
 	const initialValues: WorkflowResourceDto = {
-		file: "",
+		file: undefined,
 		filename: "",
 		resourceType: "",
 	};
 
 	const [formData, setFormData] = useState<WorkflowResourceDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
 
 	
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ export const CreateWR = () => {
 	function validateForm() {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename === "" ? "Campo obbligatorio" : isValidDeployableFilename(formData.filename) ? "" : "nome del file non valido",
+			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "nome del file non valido" : "Campo obbligatorio",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
 
@@ -46,7 +46,7 @@ export const CreateWR = () => {
 
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
+		setFormData({ ...formData, file: undefined });
 	};
 
 
@@ -93,9 +93,10 @@ export const CreateWR = () => {
 				titleField="File risorsa" 
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
+				setFormData={setFormData}
+				formData={formData}
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
