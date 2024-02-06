@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Grid, TextField } from "@mui/material";
+import React, { useContext, useRef, useState } from "react";
+import { Button, Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
@@ -8,6 +8,7 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
 import { deployableFilename, isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+
 
 export const CreateBpmn = () => {
 	// const theme = useTheme();
@@ -23,12 +24,14 @@ export const CreateBpmn = () => {
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
+	
 
-
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement| HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
 		resetErrors(errors, setErrors, e.target.name);
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+		setFormData((prevFormData) => ({
+			...prevFormData, 
+			[name]: value }));
 	};
 
 
@@ -45,24 +48,49 @@ export const CreateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	// const handleSubmit = async (e: React.FormEvent) => {
 
-		if (validateForm()) {
-			try {
-				const data2Send = new URLSearchParams();
-				data2Send.set("file", formData.file);
-				data2Send.set("fileName", formData.fileName);
-				data2Send.set("functionType", formData.functionType);
-				const response = await fetchCreateBpmn({ abortController, body: data2Send})();
+	// 	if (validateForm()) {
+	// 		try {
+	// 			const data2Send = new URLSearchParams();
+	// 			data2Send.set("file", formData.file);
+	// 			data2Send.set("fileName", formData.fileName);
+	// 			data2Send.set("functionType", formData.functionType);
+	// 			const response = await fetchCreateBpmn({ abortController, body: data2Send})();
 
-				if (response?.success) {
-					console.log("Response positive: ", response.valuesObj);
-				}
-			} catch (error) {
-				console.error("ERROR", error);
+	// 			if (response?.success) {
+	// 				console.log("Response positive: ", response.valuesObj);
+	// 			}
+	// 		} catch (error) {
+	// 			console.error("ERROR", error);
+	// 		}
+	// 	}
+	// };
+	function createBpmn(){
+		const postData = new FormData();
+		postData.append("file", formData.file);
+		postData.append("fileName", formData.fileName);
+		postData.append("functionType", formData.functionType);
+		console.log("body postData",postData);
+		fetchCreateBpmn({ abortController, body:postData })().then(data => {
+			if (data?.success) {
+				console.log("Response positive: ", data);
+				
 			}
+		}).catch(() => {
+			console.log("Response negative: ");
+			
+		});		
+	
+	};
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		console.log("body", e.currentTarget);
+		if (validateForm()) {
+			createBpmn();
 		}
 	};
+
 
 
 	const clearFile = () => {
@@ -107,7 +135,7 @@ export const CreateBpmn = () => {
 					helperText={errors.functionType}
 				/>
 			</Grid>
-
+				
 		</FormTemplate>
 	);
 };
