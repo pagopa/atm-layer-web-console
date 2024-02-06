@@ -12,6 +12,19 @@ const useColumns: any = () => {
 		case BPMN:
 			return [
 				{
+					field: "bpmnId",
+					cellClassName: "justifyContentBold",
+					headerName: "bpmnId",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => showBpmnId(params),
+					sortable: false,
+					flex: 2
+				},
+				{
 					field: "functionType",
 					cellClassName: "justifyContentNormal",
 					headerName: "Tipo funzione",
@@ -36,7 +49,7 @@ const useColumns: any = () => {
 					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
 					resizable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "status",
@@ -87,19 +100,6 @@ const useColumns: any = () => {
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "bpmnId",
-					cellClassName: "justifyContentBold",
-					headerName: "bpmnId",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => showBpmnId(params),
 					sortable: false,
 					flex: 1
 				},
@@ -444,7 +444,6 @@ const useColumns: any = () => {
 		case BPMN:
 			return (
 				{
-					"bpmnId": false,
 					"enabled": false,
 					"deployment_id": false,
 					"definition_key": false,
