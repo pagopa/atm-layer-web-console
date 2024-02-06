@@ -69,7 +69,7 @@ export const CreateBpmn = () => {
 	function createBpmn(){
 		const postData = new FormData();
 		postData.append("file", formData.file);
-		postData.append("fileName", formData.fileName);
+		postData.append("filename", formData.fileName);
 		postData.append("functionType", formData.functionType);
 		
 		fetchCreateBpmn({ abortController, body:postData })().then(data => {

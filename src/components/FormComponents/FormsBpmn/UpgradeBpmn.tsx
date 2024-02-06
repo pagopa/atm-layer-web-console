@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
-import { Grid, TextField } from "@mui/material";
+import { Alert, Grid, Snackbar, TextField } from "@mui/material";
+import { useParams } from "react-router-dom";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidUUID, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
@@ -7,15 +8,18 @@ import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
+import ROUTES from "../../../routes";
+import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
 
 export const UpgradeBpmn = () => {
 	// const theme = useTheme();
+	const { bpmnId } = useParams();
 
 	const { getFormOptions } = formOption();
 
 	const initialValues: UpgradeBpmnDto = {
-		uuid: undefined,
+		uuid: bpmnId,
 		file: undefined,
 		fileName: undefined,
 		functionType: undefined,
@@ -24,6 +28,8 @@ export const UpgradeBpmn = () => {
 	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
 	const [errors, setErrors] = useState(initialValues);
 	const { abortController } = useContext(Ctx);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
 
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -32,7 +38,6 @@ export const UpgradeBpmn = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
 			file: formData.file ? "" : "Campo obbligatorio",
 			fileName: formData.fileName ? "" : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
@@ -47,65 +52,30 @@ export const UpgradeBpmn = () => {
 		setFormData({ ...formData, file: "" });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
-		
-
+	const handleSubmit = async (e: React.FormEvent) => {
+	
 		if (validateForm()) {
-			const upgradeBpmn = new Promise((resolve) => {
-				void fetchUpgradeBpmn({ abortController, body: formData })()
-					.then((response: any) => {
-						if (response) {
-							resolve({
-								data: response,
-								type: "SUCCESS"
-							});
-						} else {
-							resolve({ 
-								type: "ERROR"
-							});
-						}
-					})
-					.catch((err) => {
-						console.log("ERROR", err);
-					});
-			});
-
-			upgradeBpmn
-				.then((res) => {
-					console.log("UPGRADE BPMN RESPONSE", res);
-					return res;
-				})
-				.catch((err) => 
-					console.log("UPGRADE BPMN ERROR", err)
-				);
+			try {
+				const response = await fetchUpgradeBpmn({ abortController, body: formData, URL: UPGRADE_BPMN_PATH })();
+				if(response?.success) {
+					console.log("response", response);
+					setOpenSnackBar(true);
+				}
+			} catch (error) {
+				console.error("ERROR", error);
+			}
 		}
 	};
 
 	return (
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
-			
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="uuid"
-					name="uuid"
-					label={"ID processo"}
-					placeholder={"Identificatore Univoco"}
-					size="small"
-					value={formData.uuid}
-					onChange={handleChange}
-					error={Boolean(errors.uuid)}
-					helperText={errors.uuid}
-				/>
-			</Grid>
-			<UploadField 
-				titleField="File BPMN del processo" 
+			<UploadField
+				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
 				changeFile={handleChange}
 				clearFile={clearFile}
-				error={errors.file}
-			/>
+				error={errors.file} />
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
@@ -117,8 +87,7 @@ export const UpgradeBpmn = () => {
 					value={formData.fileName}
 					onChange={handleChange}
 					error={Boolean(errors.fileName)}
-					helperText={errors.fileName}
-				/>
+					helperText={errors.fileName} />
 			</Grid>
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -131,11 +100,19 @@ export const UpgradeBpmn = () => {
 					value={formData.functionType}
 					onChange={handleChange}
 					error={Boolean(errors.functionType)}
-					helperText={errors.functionType}
-				/>
+					helperText={errors.functionType} />
 			</Grid>
-			
+			<Snackbar
+				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+				open={openSnackBar}
+				onClose={() => setOpenSnackBar(false)}
+				message={message}
+
+			>
+				<Alert severity="success">This is a success Alert.</Alert>
+			</Snackbar>
 		</FormTemplate>
+
 	);
 };
 
