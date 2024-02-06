@@ -4,7 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import formatValues from "../../utils/formatValues";
 import { Ctx } from "../../DataContext";
 import ROUTES from "../../routes";
-import BreadCrumb from "../NavigationComponents/Breadcrumb";
+import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../NavigationComponents/BreadCrumbMapper";
 
 
 const DetailBox = () => {
@@ -14,22 +15,12 @@ const DetailBox = () => {
 	const { bpmnId } = useParams();
 	const navigate = useNavigate();
 
-	const breadComponent = [
-		<Typography key="1" color="text.primary">
-			 Home
-		</Typography>,
-		<Typography key="2" color="text.primary">
-			Risorse di processo
-		</Typography>,
-		<Typography key="3" color="primary">
-			Dettaglio risorsa di processo
-		</Typography>
-	];
+	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
 
 	return (
 		<>
 			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"}>
-				<BreadCrumb breadcrumb={breadComponent} mb={"4px"}/>
+				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
 			</Box>
 			<Box mb={2}>
 				<Grid container spacing={1}>
