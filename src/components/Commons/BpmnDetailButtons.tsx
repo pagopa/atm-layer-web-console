@@ -22,7 +22,7 @@ const BpmnDetailButtons = () => {
 			<Button 
 				sx={{ marginRight: 3 }}
 				variant="contained" 
-				onClick={() => navigate(generatePath(ROUTES.UPGRADE_BPMN, { bpmnId }))}>
+				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}>
 								Upgrade
 			</Button>
 			<Button 
