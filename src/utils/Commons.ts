@@ -1,8 +1,71 @@
-import { DEFAULT_PATH_IMAGES } from "./Constants";
+/* eslint-disable prefer-const */
+/* eslint-disable functional/no-let */
+/* eslint-disable functional/immutable-data */
+export const isValidUUID = (uuid: string) => {
+	const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+	return uuidRegex.test(uuid);
+};
 
-export function getCompletePathImage (image: string){
-	const frontend_url = process.env.REACT_APP_URL_FE;
-	const pathImg=frontend_url + DEFAULT_PATH_IMAGES+ image;
-	// console.log("path: " + pathImg);
-	return pathImg;
-}
+export const isValidDeployableFilename = (filename: string) => {
+	const deployableFileNameRegex = /^[a-zA-Z0-9_-]+$/;
+	return deployableFileNameRegex.test(filename);
+};
+
+export const deployableFilename = (filename: string) => {
+	const fileNameIndex = filename.split("/").lastIndexOf("/");
+	const splittedFileName = filename.split("/");
+	if (isValidDeployableFilename(filename)) {
+		return splittedFileName[fileNameIndex];
+	}
+};
+
+export const isValidResourcesFilename = (filename: string) => {
+	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
+	return resourcesFileNameRegex.test(filename);
+};
+
+export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
+	if (field) {
+		// reset errore specifico field
+		if (errors[field]) {
+			setErrors((prevErrors: { [x: string]: any }) => {
+				delete prevErrors[field];
+				return { ...prevErrors };
+			});
+		}
+	} else {
+		// reset di tutti gli errori dei field
+		setErrors((prevErrors: any) => {
+			let newErr: any;
+			for (let e of Object.keys(prevErrors)) {
+				delete newErr[e];
+				newErr = { ...newErr };
+			}
+			return newErr;
+		});
+	}
+};
+
+export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any) => {
+	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+	if(filter?.functionType) {
+		queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
+	}
+
+	if(filter?.fileName) {
+		queryString = queryString.concat(`&fileName=${filter.fileName}`);
+	}
+
+	if(filter?.modelVersion) {
+		queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
+	}
+
+	if(filter?.acquirerId) {
+		queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
+	}
+
+	if(filter?.status) {
+		queryString = queryString.concat(`&status=${filter.status}`);
+	}
+	return queryString;
+};

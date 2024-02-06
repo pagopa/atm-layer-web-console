@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import { Container, Button, Stack, IconButton } from "@mui/material";
+import { Container, Button, Stack } from "@mui/material";
 
 /* Icons */
-import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import { AccountDropdown, ButtonNaked, LogoPagoPACompany } from "@pagopa/mui-italia";
+
+import { AccountDropdown, ButtonNaked } from "@pagopa/mui-italia";
 
 export type JwtUser = {
     id: string;
@@ -32,27 +31,21 @@ export type RootLinkType = {
 type HeaderAccountProps = {
     rootLink: RootLinkType;
     loggedUser?: JwtUser | false;
-    onAssistanceClick: () => void;
     onLogin?: () => void;
     onLogout?: () => void;
     userActions?: Array<UserAction>;
     enableDropdown?: boolean;
     enableLogin?: boolean;
-    enableAssistanceButton?: boolean;
-    onDocumentationClick?: () => void;
 };
 
 export const HeaderAccountCustom = ({
 	rootLink,
 	loggedUser,
 	userActions,
-	onAssistanceClick,
-	onDocumentationClick,
 	onLogout,
 	onLogin,
 	enableDropdown = false,
-	enableLogin = true,
-	enableAssistanceButton = true,
+	enableLogin = true
 }: HeaderAccountProps) => (
 	<Stack
 		component="div"

@@ -1,8 +1,8 @@
 {
-  "name": "atm-layer-console",
-  "version": "0.1.0",
+  "name": "web-console",
+  "version": "v1.0.0-dev.14",
   "private": true,
-  "homepage": ".",
+  "homepage": "/webconsole",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -12,6 +12,7 @@
     "@mui/material": "^5.14.17",
     "@mui/system": "^5.14.17",
     "@mui/utils": "^5.14.18",
+    "@mui/x-data-grid": "^6.19.1",
     "@pagopa/mui-italia": "^1.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,12 +21,12 @@
     "@types/node": "^16.18.60",
     "@types/react": "^18.2.36",
     "@types/react-dom": "^18.2.14",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.53.0",
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-router-dom": "^6.20.1",
     "react-scripts": "^5.0.1",
     "source-map-explorer": "^2.5.3",
     "typescript": "^4.9.5",
@@ -37,6 +38,9 @@
     "start-win": "set PORT=3005 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:last-commit-coverage": "react-scripts test -i --coverage",
+    "test:coverage": "react-scripts test --coverage",
+    "test:full-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint-autofix": "eslint /src -c .eslintrc.js --ext .js,.ts,.tsx --fix",
     "lint": "eslint /src -c .eslintrc.js --ext .js,.ts,.tsx ",
@@ -53,6 +57,7 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [
@@ -71,6 +76,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "^0.23.0",
     "prettier": "^3.0.3",
-    "prettier-eslint": "^16.1.2"
+    "prettier-eslint": "^16.1.2",
+    "react-router-dom": "^6.20.1"
   }
 }

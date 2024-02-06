@@ -1,21 +1,18 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import routes from "../../routes";
-import MenuButtons from "./components/MenuButtons";
+import { homePageCardItems } from "../../utils/HomePageCardItems";
+import MenuButtons from "./MenuButtons";
 
-const  CustomAppBar = () => (
+const CustomAppBar = () => (
 	<Box sx={{ flexGrow: 1 }}>
-		<AppBar position="static" sx={{ py: 1 }}>
+		<AppBar position="static" >
 			<Toolbar variant="dense">
-				<MenuButtons name={"Home"} route={"/"} />
-				<MenuButtons name={"BPMN"}/>
-				<MenuButtons name={"Resources"}/>
-				<MenuButtons name={"WorkFlow Resource"}/>
+
+				{homePageCardItems.map((e, i) => (
+					<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon}/>
+				))
+				}
 			</Toolbar>
 		</AppBar>
 	</Box>
