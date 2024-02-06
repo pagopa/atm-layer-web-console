@@ -13,7 +13,6 @@ const ROUTES = {
 	CREATE_WORKFLOW_RESOURCES: "/workflow_resources/create",
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
-	
 };
 
 export default ROUTES;
