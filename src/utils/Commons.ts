@@ -49,43 +49,48 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = (URL: string, pageIndex: number|string, pageSize: number|string, filter: any, driver: string) => {
+export const getQueryString = (URL: string, pageIndex: number | string, pageSize: number | string, filter: any, driver: string) => {
 	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
 
-	switch(driver) {
-	case BPMN: 
-		if(filter?.functionType) {
+	switch (driver) {
+	case BPMN:
+		if (filter?.functionType) {
 			queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
 		}
-		
-		if(filter?.fileName) {
+
+		if (filter?.fileName) {
 			queryString = queryString.concat(`&fileName=${filter.fileName}`);
 		}
-		
-		if(filter?.modelVersion) {
+
+		if (filter?.modelVersion) {
 			queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
 		}
-		
-		if(filter?.acquirerId) {
+
+		if (filter?.acquirerId) {
 			queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
 		}
-		
-		if(filter?.status) {
+
+		if (filter?.status) {
 			queryString = queryString.concat(`&status=${filter.status}`);
 		}
 		break;
 	case WORKFLOW_RESOURCE:
-		if(filter?.deployedFileName) {
-			queryString = queryString.concat(`&deployedFileName=${filter.deployedFileName}`);
+
+		if (filter?.resourceType) {
+			queryString = queryString.concat(`&resourceType=${filter.resourceType}`);
 		}
-		
-		if(filter?.status) {
+
+		if (filter?.fileName) {
+			queryString = queryString.concat(`&fileName=${filter.fileName}`);
+		}
+
+		if (filter?.status) {
 			queryString = queryString.concat(`&status=${filter.status}`);
 		}
 		break;
 	default:
 		return "";
 	}
-	
+
 	return queryString;
 };

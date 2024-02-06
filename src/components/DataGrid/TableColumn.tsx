@@ -9,7 +9,7 @@ import { Ctx } from "../../DataContext";
 
 const TableColumn = () => {
 
-	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordParams } = useColumns();
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordBpmnParams } = useColumns();
 	const buildColumnDefs = (driver: string) => {
 		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
 		return cols as Array<GridColDef>;	
@@ -27,7 +27,7 @@ const TableColumn = () => {
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
-					onClick={() => {navigate(path); setRecordParams(getRecordParams(param.row));}}
+					onClick={() => {navigate(path); setRecordParams(getRecordBpmnParams(param.row));}}
 					sx={{
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
