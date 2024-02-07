@@ -30,6 +30,7 @@ export const UpgradeBpmn = () => {
 	const { abortController } = useContext(Ctx);
 	const [openSnackBar, setOpenSnackBar] = useState(false);
 	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -51,6 +52,17 @@ export const UpgradeBpmn = () => {
 		setFormData({ ...formData, file: undefined });
 	};
 
+	const handleSnackbar = (success: boolean) => {
+		if (success) {
+		  setMessage("Operazione riuscita");
+		  setSeverity("success");
+		} else {
+		  setMessage("Operazione fallita");
+		  setSeverity("error");
+		}
+		setOpenSnackBar(true);
+	  };
+
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		console.log("Error: ", errors);
@@ -70,10 +82,12 @@ export const UpgradeBpmn = () => {
 				const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
 				if (response?.success) {
 					console.log("response", response);
-					setOpenSnackBar(true);
+					handleSnackbar(true);
 				}
+				handleSnackbar(false);
 			} catch (error) {
 				console.error("ERROR", error);
+				handleSnackbar(false);
 			}
 		}
 	};
@@ -102,14 +116,17 @@ export const UpgradeBpmn = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename} />
 			</Grid>
-			<Snackbar
-				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-				open={openSnackBar}
-				onClose={() => setOpenSnackBar(false)}
-				message={message}
-			>
-				<Alert severity="success">This is a success Alert.</Alert>
-			</Snackbar>
+			<Grid xs={12} item my={1}>
+				<Snackbar
+					anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+					open={openSnackBar}
+					onClose={() => setOpenSnackBar(false)}
+					// message={message}
+				>
+					<Alert severity={severity}>{message}</Alert>
+				</Snackbar>
+			</Grid>
+			
 		</FormTemplate>
 
 	);
