@@ -12,7 +12,8 @@ const CreateBpmnPage = () => {
 		<>
 			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"} mt={5} ml={10}>
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />
-			</Box><FormPageTemplate>
+			</Box>
+			<FormPageTemplate>
 				<CreateBpmn />
 			</FormPageTemplate>
 		</>
