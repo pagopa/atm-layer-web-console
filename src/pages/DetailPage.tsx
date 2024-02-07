@@ -8,6 +8,8 @@ import TableColumn from "../components/DataGrid/TableColumn";
 import { BPMN_ASSOCIATED } from "../commons/constants";
 import DetailBox from "../components/Commons/DetailBox";
 import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
+import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
+import { ActionAlert } from "../components/Commons/ActionAlert";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
@@ -24,6 +26,8 @@ const DetailPage = () => {
 		pageSize: 5,
 	});
 	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
+	const [snackBarVerticalAlign, setSnackBarVerticalAlign] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -32,9 +36,9 @@ const DetailPage = () => {
 		}
 	}, []);
 
-	const getAllAssociatedBpmn = async () => {
+	const getAllAssociatedBpmn = async (pageIndex?: number) => {
 		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
-		const paginatedUrl = `${baseUrl}?pageIndex=${paginationModel.page}&pageSize=${paginationModel.pageSize}`;
+		const paginatedUrl = `${baseUrl}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 		try {
 			const response = await fetchGetAllAssociatedBpmn({
 				abortController, url: paginatedUrl
@@ -54,6 +58,7 @@ const DetailPage = () => {
 	};
 
 	return (<BoxPageLayout px={10}>
+		<ActionAlert openSnackBar={false} severity={undefined} message={""} snackBarVerticalAlign={snackBarVerticalAlign}/>
 		<DetailBox detail={detail} />
 		<BpmnAssociatedDataGrid
 			tableList={tableListBpmnAssociated}
@@ -64,7 +69,8 @@ const DetailPage = () => {
 			paginationModel={paginationModel}
 			totalAssociationsFound={totalAssociationsFound}
 		/>
-		<BpmnDetailButtons />
+		<BpmnDetailButtons openDialog={() => setOpen(true)}/>
+		<DeployBpmn open={open} setOpen={setOpen}/>
 	</BoxPageLayout>
 	);
 };

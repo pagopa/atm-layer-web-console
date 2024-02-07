@@ -1,4 +1,4 @@
-import { Alert, Grid, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
 
@@ -6,9 +6,10 @@ type Props = {
     openSnackBar: boolean;
     severity: any;
     message: string;
+	snackBarVerticalAlign?: boolean;
 };
 
-export const ActionAlert = ({openSnackBar, severity, message}:Props) => {
+export const ActionAlert = ({openSnackBar, severity, message, snackBarVerticalAlign}:Props) => {
 	const navigate = useNavigate();
 	return(
 		<Snackbar
@@ -18,6 +19,7 @@ export const ActionAlert = ({openSnackBar, severity, message}:Props) => {
 			sx={{
 				position: "static",
 			}}
+			anchorOrigin={ snackBarVerticalAlign ? { vertical: "top", horizontal: "right" } : undefined}
 		>
 			<Alert severity={severity}>
 				{message}

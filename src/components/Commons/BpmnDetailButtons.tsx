@@ -3,43 +3,42 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
 
 type Props = {
-    associateRoute: string;
-    upgradeRoute: string;
+	openDialog: () => void;
 };
 
-const BpmnDetailButtons = () => {
+const BpmnDetailButtons = ({ openDialog }: Props) => {
 	const navigate = useNavigate();
 
-	return(
+	return (
 		<Box>
 			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
+				variant="contained"
 				onClick={() => navigate(ROUTES.ASSOCIATE_BPMN)}>
-								Associa
+				Associa
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
+				variant="contained"
 				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}>
-								Upgrade
+				Upgrade
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
-				onClick={() => console.log("Deploy")}>
-								Deploy
+				variant="contained"
+				onClick={openDialog}>
+				Deploy
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
+				variant="contained"
 				onClick={() => console.log("Delete")}>
-								Delete
+				Delete
 			</Button>
-			<Button 
-				variant="contained" 
+			<Button
+				variant="contained"
 				onClick={() => console.log("Download")}>
-								Download
+				Download
 			</Button>
 		</Box>
 	);

@@ -1,126 +1,64 @@
-import { useContext, useRef, useState } from "react";
-import { Grid, TextField } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
-import { DeployBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
-import formOption from "../../../hook/formOption";
-import FormTemplate from "../template/FormTemplate";
-import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
+import React, { forwardRef, useContext/* , useState */ } from "react";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
+// import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
+import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { DEPLOY_BPMN } from "../../../commons/constants";
+import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
+import { BPMN_DEPLOY } from "../../../commons/endpoints";
 
-export const DeployBpmn = () => {
-	// const theme = useTheme();
+type Props = {
+	open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-	const initialValues: DeployBpmnDto = {
-		uuid: undefined,
-		version: undefined,
-	};
+const Transition = forwardRef(function Transition(
+	props: TransitionProps & {
+		children: React.ReactElement<any, any>;
+	},
+	ref: React.Ref<unknown>,
+) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
 
-	const [formData, setFormData] = useState<DeployBpmnDto>(initialValues);
-	const [errors, setErrors] = useState({ uuid: "", version: "" });
-	const { getFormOptions } = formOption();
+export const DeployBpmn = ({ open, setOpen }: Props) => {
+	
 	const { abortController } = useContext(Ctx);
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-		resetErrors(errors, setErrors, e.target.name);
-		if(e.target.name==="version"){
-			setFormData({ ...formData, [e.target.name]: parseInt(e.target.value, 10) });
-		}else{
-			setFormData({ ...formData, [e.target.name]: e.target.value });
+	const handleSubmit = async (e: React.FormEvent) => {
+
+		try {
+			const response = await fetchDeployBpmn({ abortController, URL: generatePath(BPMN_DEPLOY, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
+			if (response?.success) {
+				console.log("response", response);
+				setOpen(false);
+			}
+			setOpen(false);
+		} catch (error) {
+			console.error("ERROR", error);
 		}
 	};
 
-
-	const validateForm = () => {
-		const newErrors = {
-			uuid: formData.uuid
-				? isValidUUID(formData.uuid)
-					? ""
-					: "uuid non valido"
-				: "Campo obbligatorio",
-			version: formData.version ? "" : "Campo obbligatorio",
-		};
-
-		setErrors(newErrors);
-
-		return Object.values(newErrors).every((error) => !error);
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		
-
-		if (validateForm()) {
-			const deployBpmn = new Promise((resolve) => {
-
-				if (formData.uuid && formData.version !== undefined) {
-					void fetchDeployBpmn({ abortController, body: formData }, formData.uuid, formData.version)()
-						.then((response: any) => {
-							if (response) {
-								resolve({
-									data: response,
-									type: "SUCCESS"
-								});
-							} else {
-								resolve({
-									type: "ERROR"
-								});
-							}
-						})
-						.catch((err) => {
-							console.log("ERROR", err);
-						});
-				}
-			});
-
-			deployBpmn
-				.then((res) => {
-					console.log("DEPLOY BPMN RESPONSE", res);
-					return res;
-				})
-				.catch((err) =>
-					console.log("DEPLOY BPMN ERROR", err)
-				);
-		}
-	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DEPLOY_BPMN)} >
-		
-			<Grid item xs={12} my={1}>
-				<TextField
-					fullWidth
-					id="uuid"
-					name="uuid"
-					label={"ID processo"}
-					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
-					size="small"
-					value={formData.uuid}
-					onChange={handleChange}
-					error={Boolean(errors.uuid)}
-					helperText={errors.uuid}
-				/>
-			</Grid>
-			
-			<Grid item xs={12} my={1}>
-
-				<TextField
-					fullWidth
-					id="version"
-					name="version"
-					label={"Versione processo"}
-					placeholder={""}
-					type="number"
-					size="small"
-					value={formData.version}
-					InputProps={{ inputProps: { min: 1 } }}
-					onChange={handleChange}
-					error={Boolean(errors.version)}
-					helperText={errors.version}
-				/>
-			</Grid>
-		
-		</FormTemplate>
+		<Dialog
+			open={open}
+			TransitionComponent={Transition}
+			keepMounted
+			onClose={() => setOpen(false)}
+		>
+			<DialogTitle>Deploy Risorsa di processo</DialogTitle>
+			<DialogContent>
+				<DialogContentText>
+					Sei sicuro di voler deployare questa risorsa di proccesso?
+				</DialogContentText>
+			</DialogContent>
+			<DialogActions>
+				<Button onClick={() => setOpen(false)}>Annulla</Button>
+				<Button onClick={handleSubmit}>Conferma</Button>
+			</DialogActions>
+		</Dialog>
 	);
 };
 

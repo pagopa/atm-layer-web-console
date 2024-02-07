@@ -22,7 +22,7 @@ type Props = {
 const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, getAllList, setPaginationModel, paginationModel, totalAssociationsFound }: Props) => {
 
 	useEffect(() => {
-		getAllList();
+		getAllList(paginationModel.page);
 	}, []);
 
 	return (
