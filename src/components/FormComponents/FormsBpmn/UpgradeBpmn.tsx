@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Alert, Grid, Snackbar, TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
@@ -10,11 +10,14 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
+import { ActionAlert } from "../../Commons/ActionAlert";
+import ROUTES from "../../../routes";
 
 export const UpgradeBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const { recordParams } = useContext(Ctx);
+	
 
 	const initialValues: UpgradeBpmnDto = {
 		uuid: recordParams.bpmnId,
@@ -95,16 +98,15 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
+		<><FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
 			<UploadField
 				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
-				error={errors.file} 
+				error={errors.file}
 				setFormData={setFormData}
-				formData={formData}
-			/>
+				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
@@ -118,18 +120,9 @@ export const UpgradeBpmn = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename} />
 			</Grid>
-			<Grid xs={12} item my={1}>
-				<Snackbar
-					anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-					open={openSnackBar}
-					onClose={() => setOpenSnackBar(false)}
-					// message={message}
-				>
-					<Alert severity={severity}>{message}</Alert>
-				</Snackbar>
-			</Grid>
-			
 		</FormTemplate>
+		<ActionAlert openSnackBar = {openSnackBar} severity={severity} message={message}/>
+		</>
 
 	);
 };
