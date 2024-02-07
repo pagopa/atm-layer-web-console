@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Alert, Grid, Snackbar, TextField } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
@@ -16,8 +15,7 @@ import ROUTES from "../../../routes";
 export const UpgradeBpmn = () => {
 
 	const { getFormOptions } = formOption();
-	const { recordParams } = useContext(Ctx);
-	
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 
 	const initialValues: UpgradeBpmnDto = {
 		uuid: recordParams.bpmnId,
@@ -78,8 +76,7 @@ export const UpgradeBpmn = () => {
 			if (formData.uuid && formData.file && formData.filename && formData.functionType) {
 				postData.append("uuid", formData.uuid);
 				postData.append("file", formData.file);
-				// TODO: delete the replace and find a different solution
-				postData.append("filename", formData.filename.replace(" ", ""));
+				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType);
 			}
 
