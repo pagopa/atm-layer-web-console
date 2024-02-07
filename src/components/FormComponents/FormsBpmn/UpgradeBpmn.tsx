@@ -85,8 +85,9 @@ export const UpgradeBpmn = () => {
 				if (response?.success) {
 					console.log("response", response);
 					handleSnackbar(true);
+				} else {
+					handleSnackbar(false);
 				}
-				handleSnackbar(false);
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false);

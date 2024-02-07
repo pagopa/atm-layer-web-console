@@ -68,7 +68,7 @@ export const CreateBpmn = () => {
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		// e.preventDefault();
+		e.preventDefault();
 
 		if (validateForm()) {
 			const postData = new FormData();
@@ -83,8 +83,9 @@ export const CreateBpmn = () => {
 				if (response?.success) {
 					console.log("Response positive: ", response);
 					handleSnackbar(true);
+				} else {
+					handleSnackbar(false);
 				}
-				handleSnackbar(false);
 			} catch (error) {
 				console.log("Response negative: ", error);
 				handleSnackbar(false);
