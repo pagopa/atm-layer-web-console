@@ -484,21 +484,10 @@ const useColumns: any = () => {
 		}
 	};
 
-	const getRecordBpmnParams: any = (param: any) => ({
-		bpmnId: param.bpmnId,
-		fileName: param.fileName,
-		modelVersion: param.modelVersion,
-		status: param.status,
-		functionType: param.functionType,
-		createdAt: param.createdAt,
-		lastUpdatedAt: param.lastUpdatedAt
-	});
-
 	return {
 		getColumnsGrid,
 		getVisibleColumns,
-		getNavigationPaths,
-		getRecordBpmnParams
+		getNavigationPaths
 	};
 };
 export default useColumns;

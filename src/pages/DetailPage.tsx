@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { generatePath, useParams } from "react-router-dom";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Ctx } from "../DataContext";
 import fetchGetAllAssociatedBpmn from "../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
@@ -14,14 +14,20 @@ import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 const DetailPage = () => {
 
 	const { abortController } = useContext(Ctx);
+	const [detail, setDetail] = useState({});
 	const { bpmnId, modelVersion } = useParams();
 	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSOCIATED);
-	const [columnVisibilityModel, _setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN_ASSOCIATED));
+
+	useEffect(() => {
+		const storedRecordParams = localStorage.getItem("recordParams");
+		if (storedRecordParams) {
+			setDetail(JSON.parse(storedRecordParams));
+		}
+	}, []);
 
 	const getAllAssociatedBpmn = async () => {
-
 		try {
 			const response = await fetchGetAllAssociatedBpmn({ abortController, url: generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" }) })();
 			console.log("response", response);
@@ -36,11 +42,11 @@ const DetailPage = () => {
 	};
 
 	return (<BoxPageLayout px={10}>
-		<DetailBox />
+		<DetailBox detail={detail}/>
 		<BpmnAssociatedDataGrid
 			tableList={tableListBpmnAssociated}
 			columns={columns}
-			columnVisibilityModel={columnVisibilityModel}
+			columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
 			getAllList={getAllAssociatedBpmn}
 		/>
 		<BpmnDetailButtons />

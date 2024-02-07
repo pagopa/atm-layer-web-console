@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { generatePath, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
 
 type Props = {
@@ -9,7 +9,6 @@ type Props = {
 
 const BpmnDetailButtons = () => {
 	const navigate = useNavigate();
-	const { bpmnId } = useParams();
 
 	return(
 		<Box>
