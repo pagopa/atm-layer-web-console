@@ -7,10 +7,19 @@ type Props = {
 	tableList: any;
 	columns: Array<GridColDef<any>>;
 	columnVisibilityModel: GridColumnVisibilityModel;
-	getAllList: ( pageIndex?: any) => void;
+	getAllList: (pageIndex?: any) => void;
+	setPaginationModel: React.Dispatch<React.SetStateAction<{
+		page: number;
+		pageSize: number;
+	}>>;
+	paginationModel: {
+		page: number;
+		pageSize: number;
+	};
+	totalAssociationsFound: number;
 };
 
-const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, getAllList}: Props) => {
+const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, getAllList, setPaginationModel, paginationModel, totalAssociationsFound }: Props) => {
 
 	useEffect(() => {
 		getAllList();
@@ -31,14 +40,14 @@ const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, get
 				hideFooterSelectedRowCount={true}
 				rowHeight={55}
 				rows={tableList}
-				rowCount={tableList.length}
+				rowCount={totalAssociationsFound}
 				sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
 				paginationMode="server"
 				pagination
-				pageSizeOptions={[10]}
-				// paginationModel={{ ...paginationModel }}
-				// onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
+				pageSizeOptions={[5]}
+				paginationModel={{ ...paginationModel }}
+				onPaginationModelChange={(newPage) => getAllList(newPage.page)}
 			/>
 		</Box>
 	);

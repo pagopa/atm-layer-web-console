@@ -19,6 +19,11 @@ const DetailPage = () => {
 	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSOCIATED);
+	const [paginationModel, setPaginationModel] = useState({
+		page: 0,
+		pageSize: 5,
+	});
+	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -28,11 +33,18 @@ const DetailPage = () => {
 	}, []);
 
 	const getAllAssociatedBpmn = async () => {
+		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
+		const paginatedUrl = `${baseUrl}?pageIndex=${paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 		try {
-			const response = await fetchGetAllAssociatedBpmn({ abortController, url: generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" }) })();
+			const response = await fetchGetAllAssociatedBpmn({
+				abortController, url: paginatedUrl
+			})();
 			console.log("response", response);
 			if (response?.success) {
-				setTableListBpmnAssociated(response.valuesObj);
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListBpmnAssociated(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalAssociationsFound(itemsFound);
 			} else {
 				setTableListBpmnAssociated([]);
 			}
@@ -42,12 +54,15 @@ const DetailPage = () => {
 	};
 
 	return (<BoxPageLayout px={10}>
-		<DetailBox detail={detail}/>
+		<DetailBox detail={detail} />
 		<BpmnAssociatedDataGrid
 			tableList={tableListBpmnAssociated}
 			columns={columns}
 			columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
 			getAllList={getAllAssociatedBpmn}
+			setPaginationModel={setPaginationModel}
+			paginationModel={paginationModel}
+			totalAssociationsFound={totalAssociationsFound}
 		/>
 		<BpmnDetailButtons />
 	</BoxPageLayout>
