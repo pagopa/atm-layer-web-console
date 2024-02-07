@@ -8,6 +8,7 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
 import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { ActionAlert } from "../../Commons/ActionAlert";
 
 export const CreateBpmn = () => {
 
@@ -22,6 +23,9 @@ export const CreateBpmn = () => {
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
 
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,75 +50,92 @@ export const CreateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-
-		if (validateForm()) {
-			const postData = new FormData();
-			if (formData.file) {
-				postData.append("file", formData.file);
-			}
-			postData.append("filename", formData.filename.replace(" ", ""));
-			postData.append("functionType", formData.functionType);
-
-			fetchCreateBpmn({ abortController, body: postData })().then(data => {
-				if (data?.success) {
-					console.log("Response positive: ", data);
-
-				}
-			}).catch(() => {
-				console.log("Response negative: ");
-
-			});
-		}
-	};
-
-
-
 	const clearFile = () => {
 		setFormData({ ...formData, file: undefined });
 	};
 
-	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
-			<UploadField
-				titleField="File BPMN del processo"
-				name={"file"}
-				file={formData.file}
-				clearFile={clearFile}
-				error={errors.file}
-				setFormData={setFormData}
-				formData={formData}
-			/>
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="filename"
-					name="filename"
-					label={"Nome del file"}
-					placeholder={"Nome del file"}
-					size="small"
-					value={formData.filename}
-					onChange={handleChange}
-					error={Boolean(errors.filename)}
-					helperText={errors.filename} />
-			</Grid>
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="functionType"
-					name="functionType"
-					label={"Funzionalità"}
-					placeholder={"Funzionalità"}
-					size="small"
-					value={formData.functionType}
-					onChange={handleChange}
-					error={Boolean(errors.functionType)}
-					helperText={errors.functionType}
-				/>
-			</Grid>
+	const handleSnackbar = (success: boolean) => {
+		if (success) {
+			setMessage("Operazione riuscita");
+			setSeverity("success");
+		} else {
+			setMessage("Operazione fallita");
+			setSeverity("error");
+		}
+		setOpenSnackBar(true);
+	};
 
-		</FormTemplate>
+
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (validateForm()) {
+			const postData = new FormData();
+			if (formData.file && formData.filename && formData.functionType) {
+				postData.append("file", formData.file);
+				postData.append("filename", formData.filename.replace(/\s/g, ""));
+				postData.append("functionType", formData.functionType);
+			}
+
+			try {
+				const response = await fetchCreateBpmn({ abortController, body: postData })();
+				if (response?.success) {
+					console.log("Response positive: ", response);
+					handleSnackbar(true);
+				} else {
+					handleSnackbar(false);
+				}
+			} catch (error) {
+				console.log("Response negative: ", error);
+				handleSnackbar(false);
+			}
+		}
+
+	};
+
+
+
+	return (
+		<>
+			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
+				<UploadField
+					titleField="File BPMN del processo"
+					name={"file"}
+					file={formData.file}
+					clearFile={clearFile}
+					error={errors.file}
+					setFormData={setFormData}
+					formData={formData} />
+				<Grid xs={12} item my={1}>
+					<TextField
+						fullWidth
+						id="filename"
+						name="filename"
+						label={"Nome del file"}
+						placeholder={"Nome del file"}
+						size="small"
+						value={formData.filename}
+						onChange={handleChange}
+						error={Boolean(errors.filename)}
+						helperText={errors.filename} />
+				</Grid>
+				<Grid xs={12} item my={1}>
+					<TextField
+						fullWidth
+						id="functionType"
+						name="functionType"
+						label={"Funzionalità"}
+						placeholder={"Funzionalità"}
+						size="small"
+						value={formData.functionType}
+						onChange={handleChange}
+						error={Boolean(errors.functionType)}
+						helperText={errors.functionType} />
+				</Grid>
+			</FormTemplate>
+			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
+		</>
 	);
 };
 

@@ -56,14 +56,14 @@ export const UpgradeBpmn = () => {
 
 	const handleSnackbar = (success: boolean) => {
 		if (success) {
-		  setMessage("Operazione riuscita");
-		  setSeverity("success");
+			setMessage("Operazione riuscita");
+			setSeverity("success");
 		} else {
-		  setMessage("Operazione fallita");
-		  setSeverity("error");
+			setMessage("Operazione fallita");
+			setSeverity("error");
 		}
 		setOpenSnackBar(true);
-	  };
+	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 
@@ -85,8 +85,9 @@ export const UpgradeBpmn = () => {
 				if (response?.success) {
 					console.log("response", response);
 					handleSnackbar(true);
+				} else {
+					handleSnackbar(false);
 				}
-				handleSnackbar(false);
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false);
@@ -95,30 +96,31 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<><FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
-			<UploadField
-				titleField="File BPMN del processo"
-				name={"file"}
-				file={formData.file}
-				clearFile={clearFile}
-				error={errors.file}
-				setFormData={setFormData}
-				formData={formData} />
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="filename"
-					name="filename"
-					label={"Nome del file"}
-					placeholder={"Nome del file"}
-					size="small"
-					value={formData.filename}
-					onChange={handleChange}
-					error={Boolean(errors.filename)}
-					helperText={errors.filename} />
-			</Grid>
-		</FormTemplate>
-		<ActionAlert openSnackBar = {openSnackBar} severity={severity} message={message}/>
+		<>
+			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
+				<UploadField
+					titleField="File BPMN del processo"
+					name={"file"}
+					file={formData.file}
+					clearFile={clearFile}
+					error={errors.file}
+					setFormData={setFormData}
+					formData={formData} />
+				<Grid xs={12} item my={1}>
+					<TextField
+						fullWidth
+						id="filename"
+						name="filename"
+						label={"Nome del file"}
+						placeholder={"Nome del file"}
+						size="small"
+						value={formData.filename}
+						onChange={handleChange}
+						error={Boolean(errors.filename)}
+						helperText={errors.filename} />
+				</Grid>
+			</FormTemplate>
+			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
 		</>
 
 	);
