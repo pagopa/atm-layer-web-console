@@ -31,8 +31,8 @@ const TableColumn = () => {
 					onClick={(
 					) => {
 						navigate(path);
-						// localStorage.setItem("recordParams", JSON.stringify(param.row));
-						setRecordParams(getRecordBpmnParams(param.row));
+					    localStorage.setItem("recordParams", JSON.stringify(param.row));
+						// setRecordParams(getRecordBpmnParams(param.row));
 					}}
 					sx={{
 						width: "100%",

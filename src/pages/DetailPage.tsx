@@ -10,6 +10,8 @@ import DetailBox from "../components/Commons/DetailBox";
 import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
 import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
 import { ActionAlert } from "../components/Commons/ActionAlert";
+import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
+import ModalBpmn from "../components/FormComponents/FormsBpmn/ModalBpmn";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
@@ -28,6 +30,7 @@ const DetailPage = () => {
 	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
 	const [snackBarVerticalAlign, setSnackBarVerticalAlign] = useState(false);
 	const [open, setOpen] = useState(false);
+	const [type, setType] = useState("");
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -69,8 +72,8 @@ const DetailPage = () => {
 			paginationModel={paginationModel}
 			totalAssociationsFound={totalAssociationsFound}
 		/>
-		<BpmnDetailButtons openDialog={() => setOpen(true)} />
-		<DeployBpmn open={open} setOpen={setOpen} />
+		<BpmnDetailButtons openDialog={() => setOpen(true)} type={type} setType={setType}  />
+		<ModalBpmn open={open} setOpen={setOpen} type={type} />
 	</BoxPageLayout>
 	);
 };

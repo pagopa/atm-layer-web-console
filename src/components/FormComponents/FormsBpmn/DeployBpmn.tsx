@@ -39,38 +39,6 @@ export const DeployBpmn = ({ open, setOpen }: Props) => {
 			console.error("ERROR", error);
 		}
 	};
-
-
-	return (
-		<Dialog
-			open={open}
-			TransitionComponent={Transition}
-			keepMounted
-			onClose={() => setOpen(false)}
-			fullWidth
-			maxWidth={"sm"}
-		>
-			<DialogTitle>Deploy Risorsa di processo</DialogTitle>
-			<Divider/>
-			<Box py={2}>
-				<DialogContent>
-					<DialogContentText>
-					Sei sicuro di voler deployare questa risorsa di proccesso?
-					</DialogContentText>
-				</DialogContent>
-			</Box>
-			<DialogActions >
-				<Box display={"flex"} flexDirection={"row"} p={2}>
-					<Box mr={2}>
-						<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
-					</Box>
-					<Box>
-						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
-					</Box>
-				</Box>
-			</DialogActions>
-		</Dialog>
-	);
 };
 
 export default DeployBpmn;
