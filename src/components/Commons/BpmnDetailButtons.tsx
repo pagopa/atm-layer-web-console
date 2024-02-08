@@ -3,11 +3,18 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
 
 type Props = {
-	openDialog: () => void;
+	type?: string;
+	setType: React.Dispatch<React.SetStateAction<string>>;
+	openDialog: (type: string) => void;
 };
 
-const BpmnDetailButtons = ({ openDialog }: Props) => {
+const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 	const navigate = useNavigate();
+	function handleClick(variable: string) {
+		setType(variable);
+		openDialog(variable);
+	};
+
 
 	return (
 		<Box>
@@ -21,24 +28,24 @@ const BpmnDetailButtons = ({ openDialog }: Props) => {
 				sx={{ marginRight: 3 }}
 				variant="contained"
 				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}>
-				Upgrade
+				Aggiorna
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={openDialog}>
-				Deploy
+				onClick={() => handleClick("DEPLOY")}>
+				Rilascia
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => console.log("Delete")}>
-				Delete
+				onClick={() => handleClick("DELETE")}>
+				Cancella
 			</Button>
 			<Button
 				variant="contained"
 				onClick={() => console.log("Download")}>
-				Download
+				Scarica
 			</Button>
 		</Box>
 	);

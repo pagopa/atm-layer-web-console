@@ -1,119 +1,46 @@
-import React, { useContext, useState } from "react";
-import { Grid, TextField } from "@mui/material";
+import React, { forwardRef, useContext } from "react";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Slide, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
-import { DeleteBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
-import FormTemplate from "../template/FormTemplate";
-import formOption from "../../../hook/formOption";
+import { TransitionProps } from "@mui/material/transitions";
+import { generatePath } from "react-router-dom";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 import { Ctx } from "../../../DataContext";
-import { DELETE_BPMN } from "../../../commons/constants";
+import { BPMN_DELETE } from "../../../commons/endpoints";
 
-export const DeleteBpmn = () => {
-	// const theme = useTheme();
 
-	const initialValues: DeleteBpmnDto = {
-		bpmnid: undefined,
-		version: undefined,
-	};
 
-	const { getFormOptions } = formOption();
+type Props = {
+	open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-	const [formData, setFormData] = useState<DeleteBpmnDto>(initialValues);
-	const [errors, setErrors] = useState({ bpmnid: "", version: "" });
-	const { abortController } = useContext(Ctx);
+const Transition = forwardRef(function Transition(
+	props: TransitionProps & {
+		children: React.ReactElement<any, any>;
+	},
+	ref: React.Ref<unknown>,
+) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
 
-	const validateForm = () => {
-		const newErrors = {
-			bpmnid: formData.bpmnid ? isValidUUID(formData.bpmnid) ? "" : "uuid non valido" : "Campo obbligatorio",
-			version: formData.version ? "" : "Campo obbligatorio",
-		};
-
-		setErrors(newErrors);
-
-		return Object.values(newErrors).every((error) => !error);
-	};
-
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-		resetErrors(errors, setErrors, e.target.name);
-		if(e.target.name==="version"){
-			setFormData({ ...formData, [e.target.name]: parseInt(e.target.value, 10) });
-		}else{
-			setFormData({ ...formData, [e.target.name]: e.target.value });
-		}
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		
-
-		if (validateForm()) {
-			const deleteBpmn = new Promise((resolve) => {
-				if (formData.bpmnid && formData.version !== undefined) {
-					void fetchDeleteBpmn({ abortController, body: formData }, formData.bpmnid, formData.version)()
-						.then((response: any) => {
-							if (response) {
-								resolve({
-									data: response,
-									type: "SUCCESS"
-								});
-							} else {
-								resolve({
-									type: "ERROR"
-								});
-							}
-						})
-						.catch((err) => {
-							console.log("ERROR", err);
-						});
-				}
-			});
-
-			deleteBpmn
-				.then((res) => {
-					console.log("DELETE BPMN RESPONSE", res);
-					return res;
-				})
-				.catch((err) =>
-					console.log("DELETE BPMN ERROR", err)
-				);
-		}
-	};
-
-	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DELETE_BPMN)}>
-			
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="bpmnid"
-					name="bpmnid"
-					label={"ID processo"}
-					placeholder={"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"}
-					size="small"
-					value={formData.bpmnid}
-					onChange={handleChange}
-					error={Boolean(errors.bpmnid)}
-					helperText={errors.bpmnid}
-				/>
-			</Grid>
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="version"
-					name="version"
-					label={"Versione processo"}
-					placeholder={""}
-					type="number"
-					size="small"
-					value={formData.version}
-					onChange={handleChange}
-					error={Boolean(errors.version)}
-					helperText={errors.version}
-				/>
-			</Grid>
+export const DeleteBpmn = ({ open, setOpen }: Props) => {
 	
-		</FormTemplate>
-	);
+	const { abortController } = useContext(Ctx);
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+
+	const handleSubmit = async (e: React.FormEvent) => {
+
+		try {
+			const response = await fetchDeleteBpmn({ abortController, URL: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
+			if (response?.success) {
+				console.log("response", response);
+				setOpen(false);
+			}
+			setOpen(false);
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
 };
 
 export default DeleteBpmn;
