@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
 
@@ -14,14 +14,10 @@ export const ActionAlert = ({openSnackBar, severity, message, snackBarVerticalAl
 	return(
 		<Snackbar
 			open={openSnackBar}
-			autoHideDuration={4000}
-			onClose={() => navigate(ROUTES.BPMN)}
-			sx={{
-				position: "static",
-			}}
 			anchorOrigin={ snackBarVerticalAlign ? { vertical: "top", horizontal: "right" } : undefined}
 		>
-			<Alert severity={severity}>
+			<Alert severity={severity} onClose={() => navigate(ROUTES.BPMN)}>
+				<AlertTitle>{severity}</AlertTitle>
 				{message}
 			</Alert>
 		</Snackbar>
