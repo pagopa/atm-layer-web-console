@@ -26,6 +26,7 @@ export const CreateBpmn = () => {
 	const [openSnackBar, setOpenSnackBar] = useState(false);
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
 
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,9 +59,11 @@ export const CreateBpmn = () => {
 		if (success) {
 			setMessage("Operazione riuscita");
 			setSeverity("success");
+			setTitle("Successo");
 		} else {
 			setMessage("Operazione fallita");
 			setSeverity("error");
+			setTitle("Errore");
 		}
 		setOpenSnackBar(true);
 	};
@@ -98,7 +101,7 @@ export const CreateBpmn = () => {
 
 	return (
 		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message}>
+			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message} title={title}>
 				<UploadField
 					titleField="File BPMN del processo"
 					name={"file"}

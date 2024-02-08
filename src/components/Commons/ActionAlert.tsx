@@ -9,16 +9,17 @@ type Props = {
     severity?: any;
     message?: string;
 	snackBarVerticalAlign?: boolean;
+	title?: string;
 };
 
-export const ActionAlert = ({openSnackBar, severity, message, snackBarVerticalAlign=true}:Props) => {
+export const ActionAlert = ({openSnackBar, severity, message, title, snackBarVerticalAlign=true}:Props) => {
 	const navigate = useNavigate();
 	return(
 		
 		<Box my={2}>
 			{openSnackBar === true &&
 				<Alert severity={severity} onClose={() => navigate(ROUTES.BPMN)}>
-					<AlertTitle>{severity}</AlertTitle>
+					<AlertTitle>{title}</AlertTitle>
 					{message}
 				</Alert>
 			}

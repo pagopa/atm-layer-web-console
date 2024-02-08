@@ -11,10 +11,10 @@ type Props = {
 	openSnackBar?: boolean;
     severity?: any;
     message?: string;
-
+	title?: string;
 };
 
-export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message, title }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -48,7 +48,7 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions, o
 								Submit
 							</Button>
 						</Box>
-						<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
+						<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title}/>
 					</Box>
 				</React.Fragment>
 			)
