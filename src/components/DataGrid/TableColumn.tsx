@@ -1,11 +1,11 @@
 import { Typography, Grid, Box, IconButton } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import { BPMN } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
-import { Ctx } from "../../DataContext";
+// import { Ctx } from "../../DataContext";
 
 const TableColumn = () => {
 
@@ -16,7 +16,7 @@ const TableColumn = () => {
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
-	const { setRecordParams } = useContext(Ctx);
+	// const { setRecordParams } = useContext(Ctx);
 
 	const actionColumn = (param: any) => {
 		const path = getNavigationPaths(BPMN, param);
@@ -31,8 +31,8 @@ const TableColumn = () => {
 					onClick={(
 					) => {
 						navigate(path);
-						// localStorage.setItem("recordParams", JSON.stringify(param.row));
-						setRecordParams(getRecordBpmnParams(param.row));
+						localStorage.setItem("recordParams", JSON.stringify(param.row));
+						// setRecordParams(getRecordBpmnParams(param.row));
 					}}
 					sx={{
 						width: "100%",
