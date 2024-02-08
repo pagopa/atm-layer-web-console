@@ -2,15 +2,19 @@ import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
 import React from "react";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
+import { ActionAlert } from "../../Commons/ActionAlert";
 
 type Props = {
 	handleSubmit: (e: React.FormEvent) => void;
 	children?: any;
 	getFormOptions: any;
+	openSnackBar?: boolean;
+    severity?: any;
+    message?: string;
 
 };
 
-export default function FormTemplate({ handleSubmit, children, getFormOptions }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -44,6 +48,7 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 								Submit
 							</Button>
 						</Box>
+						<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
 					</Box>
 				</React.Fragment>
 			)

@@ -98,7 +98,7 @@ export const CreateBpmn = () => {
 
 	return (
 		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
+			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message}>
 				<UploadField
 					titleField="File BPMN del processo"
 					name={"file"}
@@ -134,7 +134,6 @@ export const CreateBpmn = () => {
 						helperText={errors.functionType} />
 				</Grid>
 			</FormTemplate>
-			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
 		</>
 	);
 };

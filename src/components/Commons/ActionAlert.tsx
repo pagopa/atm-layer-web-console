@@ -1,25 +1,28 @@
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Box } from "@mui/system";
 import ROUTES from "../../routes";
 
 type Props = {
-    openSnackBar: boolean;
-    severity: any;
-    message: string;
+    openSnackBar?: boolean;
+    severity?: any;
+    message?: string;
 	snackBarVerticalAlign?: boolean;
 };
 
-export const ActionAlert = ({openSnackBar, severity, message, snackBarVerticalAlign}:Props) => {
+export const ActionAlert = ({openSnackBar, severity, message, snackBarVerticalAlign=true}:Props) => {
 	const navigate = useNavigate();
 	return(
-		<Snackbar
-			open={openSnackBar}
-			anchorOrigin={ snackBarVerticalAlign ? { vertical: "top", horizontal: "right" } : undefined}
-		>
-			<Alert severity={severity} onClose={() => navigate(ROUTES.BPMN)}>
-				<AlertTitle>{severity}</AlertTitle>
-				{message}
-			</Alert>
-		</Snackbar>
+		
+		<Box my={2}>
+			{openSnackBar === true &&
+				<Alert severity={severity} onClose={() => navigate(ROUTES.BPMN)}>
+					<AlertTitle>{severity}</AlertTitle>
+					{message}
+				</Alert>
+			}
+		</Box>
+		
 	);
 };

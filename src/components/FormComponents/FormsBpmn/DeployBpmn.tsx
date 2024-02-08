@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext/* , useState */ } from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide, Typography } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 // import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import { generatePath } from "react-router-dom";
@@ -47,16 +47,27 @@ export const DeployBpmn = ({ open, setOpen }: Props) => {
 			TransitionComponent={Transition}
 			keepMounted
 			onClose={() => setOpen(false)}
+			fullWidth
+			maxWidth={"sm"}
 		>
 			<DialogTitle>Deploy Risorsa di processo</DialogTitle>
-			<DialogContent>
-				<DialogContentText>
+			<Divider/>
+			<Box py={2}>
+				<DialogContent>
+					<DialogContentText>
 					Sei sicuro di voler deployare questa risorsa di proccesso?
-				</DialogContentText>
-			</DialogContent>
-			<DialogActions>
-				<Button onClick={() => setOpen(false)}>Annulla</Button>
-				<Button onClick={handleSubmit}>Conferma</Button>
+					</DialogContentText>
+				</DialogContent>
+			</Box>
+			<DialogActions >
+				<Box display={"flex"} flexDirection={"row"} p={2}>
+					<Box mr={2}>
+						<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+					</Box>
+					<Box>
+						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
+					</Box>
+				</Box>
 			</DialogActions>
 		</Dialog>
 	);

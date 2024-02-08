@@ -97,7 +97,7 @@ export const UpgradeBpmn = () => {
 
 	return (
 		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
+			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message}>
 				<UploadField
 					titleField="File BPMN del processo"
 					name={"file"}
@@ -120,7 +120,6 @@ export const UpgradeBpmn = () => {
 						helperText={errors.filename} />
 				</Grid>
 			</FormTemplate>
-			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} />
 		</>
 
 	);
