@@ -15,7 +15,7 @@ import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
 const DetailPage = () => {
 
-	const { abortController } = useContext(Ctx);
+	const { abortController, recordParams} = useContext(Ctx);
 	const [detail, setDetail] = useState({});
 	const { bpmnId, modelVersion } = useParams();
 	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
@@ -58,7 +58,7 @@ const DetailPage = () => {
 	};
 
 	return (<BoxPageLayout px={10}>
-		<ActionAlert openSnackBar={false} severity={undefined} message={""} snackBarVerticalAlign={snackBarVerticalAlign}/>
+		<ActionAlert openSnackBar={false} severity={undefined} message={""} snackBarVerticalAlign={snackBarVerticalAlign} />
 		<DetailBox detail={detail} />
 		<BpmnAssociatedDataGrid
 			tableList={tableListBpmnAssociated}
@@ -69,8 +69,8 @@ const DetailPage = () => {
 			paginationModel={paginationModel}
 			totalAssociationsFound={totalAssociationsFound}
 		/>
-		<BpmnDetailButtons openDialog={() => setOpen(true)}/>
-		<DeployBpmn open={open} setOpen={setOpen}/>
+		<BpmnDetailButtons openDialog={() => setOpen(true)} />
+		<DeployBpmn open={open} setOpen={setOpen} />
 	</BoxPageLayout>
 	);
 };
