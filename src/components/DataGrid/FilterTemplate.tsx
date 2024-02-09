@@ -22,7 +22,7 @@ const FilterTemplate = ({ handleSubmit, cleanFilter, filterValues,  filterRoutes
 	};
 
 	return (
-		<Box p={2} >
+		<Box py={2} >
 			<Grid container spacing={2}>
 				{children}
 				<Grid item xs={12}>
