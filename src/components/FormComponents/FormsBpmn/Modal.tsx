@@ -8,9 +8,8 @@ import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
-import { DELETE_ASSOCIATION } from "../../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../../commons/constants";
 import { getQueryString } from "../../../utils/Commons";
-import { ActionAlert } from "../../Commons/ActionAlert";
 
 
 type Props = {
@@ -57,7 +56,7 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		switch (type) {
-		case "DELETE": {
+		case DELETE: {
 			try {
 				const response = await fetchDeleteBpmn({ abortController, URL: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
@@ -74,7 +73,7 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 			}
 			break;
 		}
-		case "DEPLOY": {
+		case DEPLOY: {
 			try {
 				const response = await fetchDeployBpmn({ abortController, URL: generatePath(BPMN_DEPLOY, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {

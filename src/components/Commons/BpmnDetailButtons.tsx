@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
+import { DELETE, DEPLOY } from "../../commons/constants";
 
 type Props = {
 	type?: string;
@@ -34,13 +35,13 @@ const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => handleClick("DEPLOY")}>
+				onClick={() => handleClick(DEPLOY)}>
 				Rilascia
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => handleClick("DELETE")}>
+				onClick={() => handleClick(DELETE)}>
 				Cancella
 			</Button>
 			<Button
