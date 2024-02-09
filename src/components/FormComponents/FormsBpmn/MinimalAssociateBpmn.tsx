@@ -63,10 +63,10 @@ const MinimalAssociateBpmn = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		const postData = new FormData();
-		if (formData.acquirerId && formData.branchId && formData.terminalId) {
-			postData.append("acquirerId", formData.acquirerId);
-			postData.append("branchId", formData.branchId);
-			postData.append("terminalId", formData.terminalId);
+		if (formData?.acquirerId && formData?.branchId && formData?.terminalId) {
+			postData.append("acquirerId", formData.acquirerId.trim());
+			postData.append("branchId", formData.branchId.trim());
+			postData.append("terminalId", formData.terminalId.trim());
 		}
 
 		if (validateForm()) {
@@ -75,7 +75,6 @@ const MinimalAssociateBpmn = () => {
 				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
 
 				if (response?.success) {
-					console.log("response", response);
 					handleSnackbar(true);
 				} else {
 					handleSnackbar(false);
