@@ -12,13 +12,8 @@ const DetailBox = ({ detail }: Prop) => {
 	const theme = useTheme();
 	const { formatDateToString } = formatValues();
 
-	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
-
 	return (
 		<>
-			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"}>
-				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
-			</Box>
 			<Box mb={2}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>

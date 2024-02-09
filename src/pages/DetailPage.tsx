@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { generatePath, useParams } from "react-router-dom";
 import { GridColDef } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 import { Ctx } from "../DataContext";
 import fetchGetAllAssociatedBpmn from "../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
@@ -10,6 +11,8 @@ import DetailBox from "../components/Commons/DetailBox";
 import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
 import { ActionAlert } from "../components/Commons/ActionAlert";
 import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
+import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
@@ -32,6 +35,7 @@ const DetailPage = () => {
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
+	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -63,7 +67,12 @@ const DetailPage = () => {
 
 	return (
 		<BoxPageLayout px={10}>
-			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
+			<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
+				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
+				<Box width={"25%"}>
+					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
+				</Box>
+			</Box>
 			<DetailBox detail={detail} />
 			<BpmnAssociatedDataGrid
 				tableList={tableListBpmnAssociated}
