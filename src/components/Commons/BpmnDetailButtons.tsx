@@ -10,6 +10,7 @@ type Props = {
 
 const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 	const navigate = useNavigate();
+	
 	function handleClick(variable: string) {
 		setType(variable);
 		openDialog(variable);

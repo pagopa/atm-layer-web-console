@@ -9,7 +9,7 @@ import { BPMN_ASSOCIATED } from "../commons/constants";
 import DetailBox from "../components/Commons/DetailBox";
 import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
 import { ActionAlert } from "../components/Commons/ActionAlert";
-import ModalBpmn from "../components/FormComponents/FormsBpmn/ModalBpmn";
+import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
@@ -28,7 +28,10 @@ const DetailPage = () => {
 		pageSize: 5,
 	});
 	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
-	const [snackBarVerticalAlign, setSnackBarVerticalAlign] = useState(false);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -58,21 +61,22 @@ const DetailPage = () => {
 		}
 	};
 
-	return (<BoxPageLayout px={10}>
-		<ActionAlert openSnackBar={false} severity={undefined} message={""} snackBarVerticalAlign={snackBarVerticalAlign} />
-		<DetailBox detail={detail} />
-		<BpmnAssociatedDataGrid
-			tableList={tableListBpmnAssociated}
-			columns={columns}
-			columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
-			getAllList={getAllAssociatedBpmn}
-			setPaginationModel={setPaginationModel}
-			paginationModel={paginationModel}
-			totalAssociationsFound={totalAssociationsFound}
-		/>
-		<BpmnDetailButtons openDialog={() => setOpen(true)} type={type} setType={setType}  />
-		<ModalBpmn open={open} setOpen={setOpen} type={type} />
-	</BoxPageLayout>
+	return (
+		<BoxPageLayout px={10}>
+			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
+			<DetailBox detail={detail} />
+			<BpmnAssociatedDataGrid
+				tableList={tableListBpmnAssociated}
+				columns={columns}
+				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
+				getAllList={getAllAssociatedBpmn}
+				setPaginationModel={setPaginationModel}
+				paginationModel={paginationModel}
+				totalAssociationsFound={totalAssociationsFound}
+			/>
+			<BpmnDetailButtons openDialog={() => setOpen(true)} type={type} setType={setType}  />
+			<ModalBpmn open={open} setOpen={setOpen} type={type} openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} severity={severity} setSeverity={setSeverity} message={message} setMessage={setMessage} title={title} setTitle={setTitle} />
+		</BoxPageLayout>
 	);
 };
 
