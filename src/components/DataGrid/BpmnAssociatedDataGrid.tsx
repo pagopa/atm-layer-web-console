@@ -1,28 +1,54 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { useParams, generatePath } from "react-router-dom";
+import { Ctx } from "../../DataContext";
+import { BPMN_ASSOCIATED } from "../../commons/constants";
+import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
+import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import { CustomDataGrid } from "./CustomDataGrid";
+import TableColumn from "./TableColumn";
 
 type Props = {
-	tableList: any;
-	columns: Array<GridColDef<any>>;
-	columnVisibilityModel: GridColumnVisibilityModel;
-	getAllList: (pageIndex?: any) => void;
-	setPaginationModel: React.Dispatch<React.SetStateAction<{
-		page: number;
-		pageSize: number;
-	}>>;
-	paginationModel: {
-		page: number;
-		pageSize: number;
-	};
-	totalAssociationsFound: number;
+	buildColumnDefs: (driver: string) => Array<GridColDef>;
+	visibleColumns: (driver: string) => any;
 };
 
-const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, getAllList, setPaginationModel, paginationModel, totalAssociationsFound }: Props) => {
+const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
+
+	const { abortController} = useContext(Ctx);
+	const { bpmnId, modelVersion } = useParams();
+	const [paginationModel, setPaginationModel] = useState({
+		page: 0,
+		pageSize: 5,
+	});
+	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
+	
+	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
+
+	const getAllAssociatedBpmn = async (pageIndex?: number) => {
+		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
+		const paginatedUrl = `${baseUrl}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
+		try {
+			const response = await fetchGetAllAssociatedBpmn({
+				abortController, url: paginatedUrl
+			})();
+			console.log("response", response);
+			if (response?.success) {
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListBpmnAssociated(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalAssociationsFound(itemsFound);
+			} else {
+				setTableListBpmnAssociated([]);
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
 
 	useEffect(() => {
-		getAllList(paginationModel.page);
+		void getAllAssociatedBpmn(paginationModel.page);
 	}, []);
 
 	return (
@@ -35,19 +61,19 @@ const BpmnAssociatedDataGrid = ({ tableList, columns, columnVisibilityModel, get
 				autoHeight={true}
 				className="CustomDataGrid"
 				columnBuffer={6}
-				columns={columns}
+				columns={buildColumnDefs(BPMN_ASSOCIATED)}
 				getRowId={(r) => r.bpmnId.concat(r.createdAt)}
 				hideFooterSelectedRowCount={true}
 				rowHeight={55}
-				rows={tableList}
+				rows={tableListBpmnAssociated}
 				rowCount={totalAssociationsFound}
 				sortingMode="server"
-				columnVisibilityModel={{ ...columnVisibilityModel }}
+				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[5]}
 				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllList(newPage.page)}
+				onPaginationModelChange={(newPage) => getAllAssociatedBpmn(newPage.page)}
 			/>
 		</Box>
 	);

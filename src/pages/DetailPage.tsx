@@ -1,33 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { generatePath, useParams } from "react-router-dom";
-import { GridColDef } from "@mui/x-data-grid";
-import { Ctx } from "../DataContext";
-import fetchGetAllAssociatedBpmn from "../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
+import { useEffect, useState } from "react";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
-import TableColumn from "../components/DataGrid/TableColumn";
-import { BPMN_ASSOCIATED } from "../commons/constants";
 import DetailBox from "../components/Commons/DetailBox";
-import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
 import { ActionAlert } from "../components/Commons/ActionAlert";
 import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
+import TableColumn from "../components/DataGrid/TableColumn";
+import { BPMN_ASSOCIATED } from "../commons/constants";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
 const DetailPage = () => {
 
-	const { abortController, recordParams} = useContext(Ctx);
 	const [detail, setDetail] = useState({});
-	const { bpmnId, modelVersion } = useParams();
-	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
 	const [open, setOpen] = useState(false);
 	const [type, setType] = useState("");
 	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
-	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSOCIATED);
-	const [paginationModel, setPaginationModel] = useState({
-		page: 0,
-		pageSize: 5,
-	});
-	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
 	const [openSnackBar, setOpenSnackBar] = useState(false);
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
@@ -40,42 +26,37 @@ const DetailPage = () => {
 		}
 	}, []);
 
-	const getAllAssociatedBpmn = async (pageIndex?: number) => {
-		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
-		const paginatedUrl = `${baseUrl}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		try {
-			const response = await fetchGetAllAssociatedBpmn({
-				abortController, url: paginatedUrl
-			})();
-			console.log("response", response);
-			if (response?.success) {
-				const { page, limit, results, itemsFound } = response.valuesObj;
-				setTableListBpmnAssociated(results);
-				setPaginationModel({ page, pageSize: limit });
-				setTotalAssociationsFound(itemsFound);
-			} else {
-				setTableListBpmnAssociated([]);
-			}
-		} catch (error) {
-			console.error("ERROR", error);
-		}
-	};
-
 	return (
 		<BoxPageLayout px={10}>
-			<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
-			<DetailBox detail={detail} />
-			<BpmnAssociatedDataGrid
-				tableList={tableListBpmnAssociated}
-				columns={columns}
-				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
-				getAllList={getAllAssociatedBpmn}
-				setPaginationModel={setPaginationModel}
-				paginationModel={paginationModel}
-				totalAssociationsFound={totalAssociationsFound}
+			<ActionAlert
+				openSnackBar={openSnackBar}
+				severity={severity}
+				message={message}
+				title={title}
 			/>
-			<BpmnDetailButtons openDialog={() => setOpen(true)} type={type} setType={setType}  />
-			<ModalBpmn open={open} setOpen={setOpen} type={type} openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} severity={severity} setSeverity={setSeverity} message={message} setMessage={setMessage} title={title} setTitle={setTitle} />
+			<DetailBox detail={detail} />
+			<BpmnAssociatedDataGrid 
+				buildColumnDefs={buildColumnDefs}
+				visibleColumns={visibleColumns}
+			/>
+			<BpmnDetailButtons
+				openDialog={() => setOpen(true)}
+				type={type}
+				setType={setType}
+			/>
+			<ModalBpmn
+				open={open}
+				setOpen={setOpen}
+				type={type}
+				openSnackBar={openSnackBar}
+				setOpenSnackBar={setOpenSnackBar}
+				severity={severity}
+				setSeverity={setSeverity}
+				message={message}
+				setMessage={setMessage}
+				title={title}
+				setTitle={setTitle}
+			/>
 		</BoxPageLayout>
 	);
 };
