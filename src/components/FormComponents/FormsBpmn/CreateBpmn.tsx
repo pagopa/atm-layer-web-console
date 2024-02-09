@@ -8,7 +8,6 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
 import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
-import { ActionAlert } from "../../Commons/ActionAlert";
 
 export const CreateBpmn = () => {
 
@@ -100,44 +99,42 @@ export const CreateBpmn = () => {
 
 
 	return (
-		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message} title={title}>
-				<UploadField
-					titleField="File BPMN del processo"
-					name={"file"}
-					file={formData.file}
-					clearFile={clearFile}
-					error={errors.file}
-					setFormData={setFormData}
-					formData={formData} />
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="filename"
-						name="filename"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.filename}
-						onChange={handleChange}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename} />
-				</Grid>
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="functionType"
-						name="functionType"
-						label={"Funzionalità"}
-						placeholder={"Funzionalità"}
-						size="small"
-						value={formData.functionType}
-						onChange={handleChange}
-						error={Boolean(errors.functionType)}
-						helperText={errors.functionType} />
-				</Grid>
-			</FormTemplate>
-		</>
+		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message} title={title}>
+			<UploadField
+				titleField="File BPMN del processo"
+				name={"file"}
+				file={formData.file}
+				clearFile={clearFile}
+				error={errors.file}
+				setFormData={setFormData}
+				formData={formData} />
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="filename"
+					name="filename"
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
+					size="small"
+					value={formData.filename}
+					onChange={handleChange}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
+			</Grid>
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="functionType"
+					name="functionType"
+					label={"Funzionalità"}
+					placeholder={"Funzionalità"}
+					size="small"
+					value={formData.functionType}
+					onChange={handleChange}
+					error={Boolean(errors.functionType)}
+					helperText={errors.functionType} />
+			</Grid>
+		</FormTemplate>
 	);
 };
 
