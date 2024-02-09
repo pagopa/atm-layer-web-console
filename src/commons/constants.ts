@@ -14,3 +14,4 @@ export const BPMN="BPMN";
 export const RESOURCES="Resources";
 export const WORKFLOW_RESOURCE="WorkFlow Resource";
 export const BPMN_ASSOCIATED = "Bpmn Associated";
+export const DELETE_ASSOCIATION = "DELETE_ASSOCIATION";

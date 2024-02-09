@@ -7,7 +7,7 @@ const useColumns: any = () => {
 
 	const { formatDateToString } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any, deleteColumn: any) => {
 		switch (driver) {
 		case BPMN:
 			return [
@@ -314,6 +314,18 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
+				{
+					field: "actions",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => deleteColumn(params),
+					sortable: false,
+					flex: 0.5
+				}
 			];
 		case WORKFLOW_RESOURCE:
 			return [

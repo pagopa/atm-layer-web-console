@@ -34,7 +34,8 @@ const BpmnPage = () => {
 
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
-		const url = getQueryString(GET_ALL_BPMN_FILTER, pageIndex ?? paginationModel.page, paginationModel.pageSize, filterValues, BPMN);
+		const URL = `${GET_ALL_BPMN_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
+		const url = getQueryString(URL, filterValues, BPMN);
 
 		try {
 			const response = await fetchGetAllFiltered({ abortController, url })();

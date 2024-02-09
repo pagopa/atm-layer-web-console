@@ -1,21 +1,23 @@
-import { Typography, Grid, Box, IconButton } from "@mui/material";
+import { Typography, Grid, Box, IconButton, useTheme } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
-import { BPMN } from "../../commons/constants";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { BPMN, DELETE_ASSOCIATION } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 // import { Ctx } from "../../DataContext";
 
-const TableColumn = () => {
+const TableColumn = (setOpen?: any, setType?: any) => {
 
-	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordBpmnParams } = useColumns();
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, /* getRecordBpmnParams */ } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn, deleteColumn);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
+	const theme = useTheme();
 	// const { setRecordParams } = useContext(Ctx);
 
 	const actionColumn = (param: any) => {
@@ -31,7 +33,7 @@ const TableColumn = () => {
 					onClick={(
 					) => {
 						navigate(path);
-					    localStorage.setItem("recordParams", JSON.stringify(param.row));
+						localStorage.setItem("recordParams", JSON.stringify(param.row));
 						// setRecordParams(getRecordBpmnParams(param.row));
 					}}
 					sx={{
@@ -43,6 +45,32 @@ const TableColumn = () => {
 				</IconButton>
 			</Box>
 
+		);
+	};
+
+	const deleteColumn = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(DELETE_ASSOCIATION);
+			localStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
+		};
+
+		return (
+			<Box
+				width="100%"
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={actions}
+					sx={{
+						width: "100%%",
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+				>
+					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+				</IconButton>
+			</Box>
 		);
 	};
 
@@ -125,7 +153,8 @@ const TableColumn = () => {
 		renderCell,
 		showCustomHeader,
 		showBpmnId,
-		visibleColumns
+		visibleColumns,
+		deleteColumn
 	};
 };
 

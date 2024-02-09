@@ -8,9 +8,7 @@ import TableColumn from "../components/DataGrid/TableColumn";
 import { BPMN_ASSOCIATED } from "../commons/constants";
 import DetailBox from "../components/Commons/DetailBox";
 import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
-import DeployBpmn from "../components/FormComponents/FormsBpmn/DeployBpmn";
 import { ActionAlert } from "../components/Commons/ActionAlert";
-import DeleteBpmn from "../components/FormComponents/FormsBpmn/DeleteBpmn";
 import ModalBpmn from "../components/FormComponents/FormsBpmn/ModalBpmn";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
@@ -21,7 +19,9 @@ const DetailPage = () => {
 	const [detail, setDetail] = useState({});
 	const { bpmnId, modelVersion } = useParams();
 	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
-	const { buildColumnDefs, visibleColumns } = TableColumn();
+	const [open, setOpen] = useState(false);
+	const [type, setType] = useState("");
+	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSOCIATED);
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
@@ -29,8 +29,6 @@ const DetailPage = () => {
 	});
 	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
 	const [snackBarVerticalAlign, setSnackBarVerticalAlign] = useState(false);
-	const [open, setOpen] = useState(false);
-	const [type, setType] = useState("");
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");

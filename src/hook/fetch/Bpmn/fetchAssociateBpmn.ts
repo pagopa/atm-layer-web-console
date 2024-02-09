@@ -5,7 +5,7 @@ const fetchAssociateBpmn = ({ abortController, body, url }: any) => async () => 
 
 	return await fetchFromServer({
 		urlEndpoint: url,
-		method: "PUT",
+		method: "POST",
 		body,
 		abortController,
 		headers: { "Content-Type" : "application/json" }

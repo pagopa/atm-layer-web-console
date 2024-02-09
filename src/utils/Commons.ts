@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 
-import { BPMN, WORKFLOW_RESOURCE } from "../commons/constants";
+import { BPMN, DELETE_ASSOCIATION, WORKFLOW_RESOURCE } from "../commons/constants";
 
 /* eslint-disable functional/immutable-data */
 export const isValidUUID = (uuid: string) => {
@@ -49,43 +49,53 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = (URL: string, pageIndex: number | string, pageSize: number | string, filter: any, driver: string) => {
-	let queryString = `${URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+export const getQueryString = (URL: string, filterValues: any, driver: string) => {
+
+	let queryString = URL;
 
 	switch (driver) {
 	case BPMN:
-		if (filter?.functionType) {
-			queryString = queryString.concat(`&functionType=${filter.functionType.toUpperCase()}`);
+		if (filterValues?.functionType) {
+			queryString = queryString.concat(`&functionType=${filterValues.functionType.toUpperCase()}`);
 		}
 
-		if (filter?.fileName) {
-			queryString = queryString.concat(`&fileName=${filter.fileName}`);
+		if (filterValues?.fileName) {
+			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
 		}
 
-		if (filter?.modelVersion) {
-			queryString = queryString.concat(`&modelVersion=${filter.modelVersion}`);
+		if (filterValues?.modelVersion) {
+			queryString = queryString.concat(`&modelVersion=${filterValues.modelVersion}`);
 		}
 
-		if (filter?.acquirerId) {
-			queryString = queryString.concat(`&acquirerId=${filter.acquirerId}`);
+		if (filterValues?.acquirerId) {
+			queryString = queryString.concat(`&acquirerId=${filterValues.acquirerId}`);
 		}
 
-		if (filter?.status) {
-			queryString = queryString.concat(`&status=${filter.status}`);
+		if (filterValues?.status) {
+			queryString = queryString.concat(`&status=${filterValues.status}`);
 		}
 		break;
 	case WORKFLOW_RESOURCE:
 
-		if (filter?.resourceType) {
-			queryString = queryString.concat(`&resourceType=${filter.resourceType}`);
+		if (filterValues?.resourceType) {
+			queryString = queryString.concat(`&resourceType=${filterValues.resourceType}`);
 		}
 
-		if (filter?.fileName) {
-			queryString = queryString.concat(`&fileName=${filter.fileName}`);
+		if (filterValues?.fileName) {
+			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
 		}
 
-		if (filter?.status) {
-			queryString = queryString.concat(`&status=${filter.status}`);
+		if (filterValues?.status) {
+			queryString = queryString.concat(`&status=${filterValues.status}`);
+		}
+		break;
+	case DELETE_ASSOCIATION:
+		if (filterValues?.branchId) {
+			queryString = queryString.concat(`&branchId=${filterValues.branchId}`);
+		}
+
+		if (filterValues?.terminalId) {
+			queryString = queryString.concat(`&terminalId=${filterValues.terminalId}`);
 		}
 		break;
 	default:
