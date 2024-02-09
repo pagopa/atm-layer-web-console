@@ -1,6 +1,6 @@
 
 const ROUTES = {
-	HOME: "/home",
+	HOME: "/",
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
 	BPMN: "/bpmn",
