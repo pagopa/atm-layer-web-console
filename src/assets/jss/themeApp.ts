@@ -208,7 +208,7 @@ const foundation: Theme = createTheme({
 		},
 		text: {
 			primary: colorTextPrimary,
-			secondary: colorPrimary,
+			secondary: colorTextPrimary,
 			disabled: "#97a1b5",
 		},
 		action: {
