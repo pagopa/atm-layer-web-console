@@ -5,7 +5,7 @@ import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const AssociateBpmnPage = () => {
-	const breadComponent = ["Home", "Risorse di processo", "Associazione risorsa di processo"];
+	const breadComponent = ["Home", "Risorse di processo", "Dettaglio risorsa di processo",  "Associazione risorsa di processo"];
 
 	return (
 		<>
