@@ -5,11 +5,12 @@ import { TransitionProps } from "@mui/material/transitions";
 import { generatePath } from "react-router-dom";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 import { Ctx } from "../../../DataContext";
-import { BPMN_DELETE, BPMN_DEPLOY, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
+import { BPMN_DELETE, BPMN_DEPLOY, BPMN_DOWNLOAD, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
 import { getQueryString } from "../../../utils/Commons";
+import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 
 
 type Props = {
@@ -110,6 +111,24 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 			}
 			break;
 		}
+		case DOWNLOAD: {
+			try{
+				const response = await fetchDownloadBpmn({ abortController, URL: generatePath(BPMN_DOWNLOAD, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
+				if (response?.success) {
+					console.log("response", response);
+					setOpen(false);
+					handleSnackbar(true);
+				}else{
+					setOpen(false);
+					handleSnackbar(false);
+				}
+			} catch (error) {
+				console.error("ERROR", error);
+				handleSnackbar(false);
+			}
+			break;
+			
+		}
 
 		default: return;
 		}
@@ -119,7 +138,7 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 	return (
 		<>
 			{
-				type === "DELETE" && 
+				type === DELETE && 
 			<Dialog
 				open={open}
 				TransitionComponent={Transition}
@@ -151,7 +170,7 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 				</DialogActions>
 			</Dialog>
 			}
-			{type === "DEPLOY" &&
+			{type === DEPLOY &&
 				<Dialog
 					open={open}
 					TransitionComponent={Transition}
@@ -200,6 +219,38 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 						<DialogContent>
 							<DialogContentText>
 								Sei sicuro di voler eliminare questa associazione?
+							</DialogContentText>
+						</DialogContent>
+					</Box>
+					<DialogActions >
+						<Box display={"flex"} flexDirection={"row"} p={2}>
+							<Box mr={2}>
+								<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+							</Box>
+							<Box>
+								<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
+							</Box>
+						</Box>
+					</DialogActions>
+				</Dialog>
+			}
+			{type === DOWNLOAD &&
+				<Dialog
+					open={open}
+					TransitionComponent={Transition}
+					keepMounted
+					onClose={() => setOpen(false)}
+					fullWidth
+					maxWidth={"sm"}
+				>
+					<DialogTitle>
+					Scarica risorsa di processo
+					</DialogTitle>
+					<Divider />
+					<Box py={2}>
+						<DialogContent>
+							<DialogContentText>
+							Sei sicuro di voler scaricare questa risorsa?
 							</DialogContentText>
 						</DialogContent>
 					</Box>

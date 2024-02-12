@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
-import { DELETE, DEPLOY } from "../../commons/constants";
+import { DELETE, DEPLOY, DOWNLOAD } from "../../commons/constants";
 
 type Props = {
 	type?: string;
@@ -46,7 +46,7 @@ const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 			</Button>
 			<Button
 				variant="contained"
-				onClick={() => console.log("Download")}>
+				onClick={() => handleClick(DOWNLOAD)}>
 				Scarica
 			</Button>
 		</Box>
