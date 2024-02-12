@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -18,6 +18,7 @@ import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPageCallback from "./pages/LoginPageCallback";
 import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
+import ROUTES from "./routes";
 
 const LocalRoutes = () =>(
 	<BrowserRouter basename="/webconsole">	
@@ -51,12 +52,19 @@ function App() {
 	const [logged, setLogged] = useState(temp?temp:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
+	// const navigate = useNavigate();
 
 	function clearAll(){
 		localStorage.removeItem("token");
 		localStorage.removeItem("recordParams");
 		localStorage.removeItem("recordParamsAssociated");
 		setLogged(false);
+	}
+
+	function setTokenExpired(){
+		localStorage.removeItem("token");
+		setLogged(false);
+		// navigate(ROUTES.LOGIN);
 	}
 	
 
@@ -66,11 +74,12 @@ function App() {
 		// loading,
 		// setLoading,
 		clearAll,
+		setTokenExpired,
 		logged, 
 		setLogged,
 		abortController,
 		setRecordParams,
-		recordParams,
+		recordParams
 	};
 
 	useEffect(() => {
