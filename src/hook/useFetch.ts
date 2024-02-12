@@ -7,8 +7,7 @@ import { Ctx } from "../DataContext";
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
-	const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	// const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
+	const SERVER_API_ORIGIN = endPoint&& endPoint!=="" ? endPoint : process.env.REACT_APP_BACKEND_URL;
 	const CODE_SUCCESS = 200;
 
 	const fetchFromServer = async ({
@@ -20,8 +19,7 @@ export default function useFetch(endPoint?: string | undefined) {
 	}: any) => {
 		let data;
 		let status;
-		// const navigate = useNavigate();
-		// const { logged, setLogged } = useContext(Ctx);
+		const { setTokenExpired } = useContext(Ctx);
 
 
 		let headerRequest = {};
@@ -76,10 +74,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				// (response.status === 0 && response.type === "opaqueredirect") ||
 				response.status === 401
 			) {
-				// window.location.reload();
-				// setLogged(false);
-				// localStorage.removeItem("token");
-				// navigate(ROUTES.LOGIN);
+				setTokenExpired();
 				console.log("status: " + response?.status);
 			}
 			if (status === 204) {
