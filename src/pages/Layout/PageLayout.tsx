@@ -23,7 +23,8 @@ export default function PageLayout({ children }: Readonly<Prop>) {
 				>
 					<Box gridArea="header" sx={{ position: "sticky", top: 0, zIndex: "100" }}>
 						<Header  data-testid="header-id" />
-						{logged===true&&<CustomAppBar data-testid="customAppBar-id" />}
+						{/* {logged===true&&<CustomAppBar data-testid="customAppBar-id" />} */}
+						<CustomAppBar data-testid="customAppBar-id" />
 					</Box>
 					<Box sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto", width:"100%"}}>
 						{/* loading ? <LoadingPage /> :  */children}
