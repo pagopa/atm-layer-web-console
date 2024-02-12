@@ -1,6 +1,6 @@
 {
   "name": "web-console",
-  "version": "v1.0.0-dev.15",
+  "version": "v1.0.0-dev.16",
   "private": true,
   "homepage": "/webconsole",
   "dependencies": {
@@ -37,7 +37,7 @@
     "start": "PORT=3005 react-scripts start",
     "start-win": "set PORT=3005 && react-scripts start",
     "build": "react-scripts build",
-    "build:dev": "env-cmd -f .env.development react-scripts build" ,
+    "build:dev": "env-cmd -f .env.development react-scripts build",
     "build:uat": "env-cmd -f .env.test react-scripts build",
     "build:prod": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
