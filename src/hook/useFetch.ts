@@ -19,7 +19,7 @@ export default function useFetch(endPoint?: string | undefined) {
 	}: any) => {
 		let data;
 		let status;
-		const { setTokenExpired } = useContext(Ctx);
+		
 
 
 		let headerRequest = {};
@@ -74,8 +74,8 @@ export default function useFetch(endPoint?: string | undefined) {
 				// (response.status === 0 && response.type === "opaqueredirect") ||
 				response.status === 401
 			) {
-				setTokenExpired();
 				console.log("status: " + response?.status);
+				window.location.reload();
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
