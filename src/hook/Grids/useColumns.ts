@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN, BPMN_ASSOCIATED } from "../../commons/constants";
+import { BPMN, BPMN_ASSOCIATED, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -7,10 +7,23 @@ const useColumns: any = () => {
 
 	const { formatDateToString } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any, deleteColumn: any) => {
 		switch (driver) {
 		case BPMN:
 			return [
+				{
+					field: "bpmnId",
+					cellClassName: "justifyContentBold",
+					headerName: "bpmnId",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => showBpmnId(params),
+					sortable: false,
+					flex: 2
+				},
 				{
 					field: "functionType",
 					cellClassName: "justifyContentNormal",
@@ -36,7 +49,7 @@ const useColumns: any = () => {
 					renderCell: (params: any) => renderCell(params, params.row.fileName),
 					sortable: false,
 					resizable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "status",
@@ -87,19 +100,6 @@ const useColumns: any = () => {
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "bpmnId",
-					cellClassName: "justifyContentBold",
-					headerName: "bpmnId",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => showBpmnId(params),
 					sortable: false,
 					flex: 1
 				},
@@ -181,7 +181,6 @@ const useColumns: any = () => {
 					flex: 0.5
 				}
 			];
-
 		case BPMN_ASSOCIATED:
 			return [
 				{
@@ -315,6 +314,126 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
+				{
+					field: "actions",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => deleteColumn(params),
+					sortable: false,
+					flex: 0.5
+				}
+			];
+		case WORKFLOW_RESOURCE:
+			return [
+				{
+					field: "workflowResourceId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Workflow Resource",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.workflowResourceId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "fileName",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome file",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.fileName),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "resourceType",
+					cellClassName: "justifyContentNormal",
+					headerName: "Tipo risorsa",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.resourceType),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "status",
+					cellClassName: "justifyContentNormal",
+					headerName: "Stato",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.status),
+					sortable: false,
+					resizable: false,
+					flex: 1
+				},
+				{
+					field: "createdAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data creazione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "lastUpdatedAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data ultima modifica",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "createdBy",
+					cellClassName: "justifyContentNormal",
+					headerName: "Creata Da",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.createdBy),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "lastUpdatedBy",
+					cellClassName: "justifyContentNormal",
+					headerName: "Modificata Da",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
+					sortable: false,
+					flex: 1
+				},
 				// {
 				// 	field: "actions",
 				// 	cellClassName: "justifyContentNormalRight",
@@ -337,7 +456,6 @@ const useColumns: any = () => {
 		case BPMN:
 			return (
 				{
-					"bpmnId": false,
 					"enabled": false,
 					"deployment_id": false,
 					"definition_key": false,
@@ -350,9 +468,17 @@ const useColumns: any = () => {
 				{
 					"bpmnId": false,
 					"bpmnModelVersion": false,
-					"functionType" : false,
-					"createdAt" : false,
-					"lastUpdatedAt" : false,
+					"functionType": false,
+					"createdAt": false,
+					"lastUpdatedAt": false,
+					"createdBy": false,
+					"lastUpdatedBy": false
+				}
+			);
+		case WORKFLOW_RESOURCE:
+			return (
+				{
+					"workflowResourceId": false,
 					"createdBy": false,
 					"lastUpdatedBy": false
 				}
@@ -365,13 +491,12 @@ const useColumns: any = () => {
 		switch (driver) {
 		case BPMN:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
-
 		default:
 			return [];
 		}
 	};
 
-	const getRecordParams: any = (param: any) => ({
+	const getRecordBpmnParams: any = (param: any) => ({
 		bpmnId: param.bpmnId,
 		fileName: param.fileName,
 		modelVersion: param.modelVersion,
@@ -385,7 +510,7 @@ const useColumns: any = () => {
 		getColumnsGrid,
 		getVisibleColumns,
 		getNavigationPaths,
-		getRecordParams
+		getRecordBpmnParams
 	};
 };
 export default useColumns;

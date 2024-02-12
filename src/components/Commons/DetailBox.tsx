@@ -1,36 +1,19 @@
-import { Box, Grid, Link, Typography, useTheme } from "@mui/material";
-import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import formatValues from "../../utils/formatValues";
-import { Ctx } from "../../DataContext";
-import ROUTES from "../../routes";
-import BreadCrumb from "../NavigationComponents/Breadcrumb";
+import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../NavigationComponents/BreadCrumbMapper";
 
+type Prop = {
+	detail: any;
+};
 
-const DetailBox = () => {
+const DetailBox = ({ detail }: Prop) => {
+
 	const theme = useTheme();
 	const { formatDateToString } = formatValues();
-	const { recordParams } = useContext(Ctx);
-	const { bpmnId } = useParams();
-	const navigate = useNavigate();
-
-	const breadComponent = [
-		<Typography key="1" color="text.primary">
-			 Home
-		</Typography>,
-		<Typography key="2" color="text.primary">
-			Risorse di processo
-		</Typography>,
-		<Typography key="3" color="primary">
-			Dettaglio risorsa di processo
-		</Typography>
-	];
 
 	return (
 		<>
-			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"}>
-				<BreadCrumb breadcrumb={breadComponent} mb={"4px"}/>
-			</Box>
 			<Box mb={2}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
@@ -47,7 +30,7 @@ const DetailBox = () => {
 				<Grid item xs={12}>
 					<Box bgcolor={theme.palette?.primary?.main} p={1}>
 						<Typography variant="h6" fontWeight={"bold"} color={"white"}>
-							{recordParams.fileName}
+							{detail.fileName}
 						</Typography>
 					</Box>
 				</Grid>
@@ -58,37 +41,37 @@ const DetailBox = () => {
 						<Typography variant="body1" fontWeight={"bold"}>Tipo Funzione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.functionType}
+						{detail.functionType}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Nome file:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.fileName}
+						{detail.fileName}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Stato:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.status}
+						{detail.status}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Versione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{recordParams.modelVersion}
+						{detail.modelVersion}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Data creazione:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{formatDateToString(recordParams.createdAt)}
+						{formatDateToString(detail.createdAt)}
 					</Grid>
 					<Grid item xs={2}>
 						<Typography variant="body1" fontWeight={"bold"}>Data ultima modifica:</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						{formatDateToString(recordParams.lastUpdatedAt)}
+						{formatDateToString(detail.lastUpdatedAt)}
 					</Grid>
 				</Grid>
 			</Box>

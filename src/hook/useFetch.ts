@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import ROUTES from "../routes";
+import { Ctx } from "../DataContext";
+
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
-	// const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
+	const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
+	// const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
 	const CODE_SUCCESS = 200;
 
 	const fetchFromServer = async ({
@@ -15,6 +20,9 @@ export default function useFetch(endPoint?: string | undefined) {
 	}: any) => {
 		let data;
 		let status;
+		// const navigate = useNavigate();
+		// const { logged, setLogged } = useContext(Ctx);
+
 
 		let headerRequest = {};
 		if (headers) {
@@ -65,10 +73,14 @@ export default function useFetch(endPoint?: string | undefined) {
 			// TOKEN SCADUTO
 			if (
 				!response ||
-				(response.status === 0 && response.type === "opaqueredirect") ||
-				response.status === 302
+				// (response.status === 0 && response.type === "opaqueredirect") ||
+				response.status === 401
 			) {
 				// window.location.reload();
+				// setLogged(false);
+				// localStorage.removeItem("token");
+				// navigate(ROUTES.LOGIN);
+				console.log("status: " + response?.status);
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore

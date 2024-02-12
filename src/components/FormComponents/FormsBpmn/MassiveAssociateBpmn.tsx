@@ -9,7 +9,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
 
-export const AssociateBpmn = () => {
+export const MassiveAssociateBpmn = () => {
     const theme = useTheme();
 
     const initialValues: AssociateBpmnDto = {
@@ -493,4 +493,4 @@ export const AssociateBpmn = () => {
     );
 };
 
-export default AssociateBpmn;
+export default MassiveAssociateBpmn;

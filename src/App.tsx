@@ -15,22 +15,28 @@ import DetailPage from "./pages/DetailPage";
 import CreateBpmnPage from "./pages/CreateBpmnPage";
 import AssociateBpmnPage from "./pages/AssociateBpmnPage";
 import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
+import LoginPage from "./pages/LoginPage";
+import LoginPageCallback from "./pages/LoginPageCallback";
+import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
 
-const LocalRoutes = () => (
-	
-	<BrowserRouter basename="/webconsole">
-		
+const LocalRoutes = () =>(
+	<BrowserRouter basename="/webconsole">	
 		<Routes>
-			<Route path="/" element={<PageLayout children={<HomePage />} />} />
-			<Route index path={routes.HOME} element={<PageLayout children={<HomePage />} />} />
-			<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
-			<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
-			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
-			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
-			<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
-			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
-			<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+			<Route element={<PrivateRoute />}>
+				<Route path="/" element={ <PageLayout children={<HomePage />} />}/>
+				{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
+				<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
+				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
+				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
+				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
+				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
+				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+			</Route>
+			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
+			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />
 			<Route path="*" element={<NoPage />} />
+		
 		</Routes>
 		
 	</BrowserRouter>
@@ -41,14 +47,27 @@ function App() {
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
+	const temp= localStorage.getItem("tempLog");
+	const [logged, setLogged] = useState(temp?temp:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
+
+	function clearAll(){
+		localStorage.removeItem("token");
+		localStorage.removeItem("recordParams");
+		localStorage.removeItem("recordParamsAssociated");
+		setLogged(false);
+	}
+	
 
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
 		// loading,
 		// setLoading,
+		clearAll,
+		logged, 
+		setLogged,
 		abortController,
 		setRecordParams,
 		recordParams,
@@ -57,6 +76,9 @@ function App() {
 	useEffect(() => {
 		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
+	useEffect(() => {
+		console.log("login utente", logged);
+	}, [logged]);
 
 	return (
 		<ThemeProvider theme={themeApp}>

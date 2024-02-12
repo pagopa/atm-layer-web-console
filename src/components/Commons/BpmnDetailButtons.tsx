@@ -1,46 +1,53 @@
 import { Box, Button } from "@mui/material";
-import { generatePath, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
+import { DELETE, DEPLOY } from "../../commons/constants";
 
 type Props = {
-    associateRoute: string;
-    upgradeRoute: string;
+	type?: string;
+	setType: React.Dispatch<React.SetStateAction<string>>;
+	openDialog: (type: string) => void;
 };
 
-const BpmnDetailButtons = () => {
+const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 	const navigate = useNavigate();
-	const { bpmnId } = useParams();
+	
+	function handleClick(variable: string) {
+		setType(variable);
+		openDialog(variable);
+	};
 
-	return(
+
+	return (
 		<Box>
 			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
+				variant="contained"
 				onClick={() => navigate(ROUTES.ASSOCIATE_BPMN)}>
-								Associa
+				Associa
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
+				variant="contained"
 				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}>
-								Upgrade
+				Aggiorna
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
-				onClick={() => console.log("Deploy")}>
-								Deploy
+				variant="contained"
+				onClick={() => handleClick(DEPLOY)}>
+				Rilascia
 			</Button>
-			<Button 
+			<Button
 				sx={{ marginRight: 3 }}
-				variant="contained" 
-				onClick={() => console.log("Delete")}>
-								Delete
+				variant="contained"
+				onClick={() => handleClick(DELETE)}>
+				Cancella
 			</Button>
-			<Button 
-				variant="contained" 
+			<Button
+				variant="contained"
 				onClick={() => console.log("Download")}>
-								Download
+				Scarica
 			</Button>
 		</Box>
 	);

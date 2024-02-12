@@ -1,50 +1,66 @@
-import { useContext, useState } from "react";
-import { generatePath, useParams } from "react-router-dom";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Ctx } from "../DataContext";
-import fetchGetAllAssociatedBpmn from "../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
+import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
-import TableColumn from "../components/DataGrid/TableColumn";
-import { BPMN_ASSOCIATED } from "../commons/constants";
 import DetailBox from "../components/Commons/DetailBox";
-import { GET_ALL_BPMN_ASSOCIATED } from "../commons/endpoints";
+import { ActionAlert } from "../components/Commons/ActionAlert";
+import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
+import TableColumn from "../components/DataGrid/TableColumn";
+import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
 const DetailPage = () => {
 
-	const { abortController } = useContext(Ctx);
-	const { bpmnId, modelVersion } = useParams();
-	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
-	const { buildColumnDefs, visibleColumns } = TableColumn();
-	const columns: Array<GridColDef> = buildColumnDefs(BPMN_ASSOCIATED);
-	const [columnVisibilityModel, _setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN_ASSOCIATED));
+	const [detail, setDetail] = useState({});
+	const [open, setOpen] = useState(false);
+	const [type, setType] = useState("");
+	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
+	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
 
-	const getAllAssociatedBpmn = async () => {
-
-		try {
-			const response = await fetchGetAllAssociatedBpmn({ abortController, url: generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" }) })();
-			console.log("response", response);
-			if (response?.success) {
-				setTableListBpmnAssociated(response.valuesObj);
-			} else {
-				setTableListBpmnAssociated([]);
-			}
-		} catch (error) {
-			console.error("ERROR", error);
+	useEffect(() => {
+		const storedRecordParams = localStorage.getItem("recordParams");
+		if (storedRecordParams) {
+			setDetail(JSON.parse(storedRecordParams));
 		}
-	};
+	}, []);
 
-	return (<BoxPageLayout px={10}>
-		<DetailBox />
-		<BpmnAssociatedDataGrid
-			tableList={tableListBpmnAssociated}
-			columns={columns}
-			columnVisibilityModel={columnVisibilityModel}
-			getAllList={getAllAssociatedBpmn}
-		/>
-		<BpmnDetailButtons />
-	</BoxPageLayout>
+	return (
+		<BoxPageLayout px={10}>
+			<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
+				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
+				<Box width={"25%"}>
+					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
+				</Box>
+			</Box>
+			<DetailBox detail={detail} />
+			<BpmnAssociatedDataGrid 
+				buildColumnDefs={buildColumnDefs}
+				visibleColumns={visibleColumns}
+			/>
+			<BpmnDetailButtons
+				openDialog={() => setOpen(true)}
+				type={type}
+				setType={setType}
+			/>
+			<ModalBpmn
+				open={open}
+				setOpen={setOpen}
+				type={type}
+				openSnackBar={openSnackBar}
+				setOpenSnackBar={setOpenSnackBar}
+				severity={severity}
+				setSeverity={setSeverity}
+				message={message}
+				setMessage={setMessage}
+				title={title}
+				setTitle={setTitle}
+			/>
+		</BoxPageLayout>
 	);
 };
 
