@@ -95,6 +95,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					console.log(response.valuesObj.fileContent);
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
