@@ -6,7 +6,7 @@ import { BPMN_DELETE, BPMN_DEPLOY, BPMN_DOWNLOAD, DELETE_ASSOCIATE_BPMN } from "
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
 import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from "../../../commons/constants";
-import { getQueryString } from "../../../utils/Commons";
+import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
 
@@ -31,19 +31,6 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 
-	const handleSnackbar = (success: boolean) => {
-		if (success) {
-			setMessage("Operazione riuscita");
-			setSeverity("success");
-			setTitle("Successo");
-		} else {
-			setMessage("Operazione fallita");
-			setSeverity("error");
-			setTitle("Errore");
-		}
-		setOpenSnackBar(true);
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		switch (type) {
@@ -52,14 +39,14 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				const response = await fetchDeleteBpmn({ abortController, URL: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
 					setOpen(false);
-					handleSnackbar(true);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -68,15 +55,15 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				const response = await fetchDeployBpmn({ abortController, URL: generatePath(BPMN_DEPLOY, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
 					setOpen(false);
-					handleSnackbar(true);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 
 				} else {
 					setOpen(false);
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -91,10 +78,10 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				const response = await fetchDeleteAssociatedBpmn({ abortController, url })();
 				if (response?.success) {
 					setOpen(false);
-					handleSnackbar(true);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 
 			} catch (error) {
@@ -107,14 +94,14 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				const response = await fetchDownloadBpmn({ abortController, URL: generatePath(BPMN_DOWNLOAD, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
 					setOpen(false);
-					handleSnackbar(true);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 

@@ -4,7 +4,7 @@ import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
-import { resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
 import fetchAssociateBpmn from "../../../hook/fetch/Bpmn/fetchAssociateBpmn";
 import { BPMN_ASSOCIATE } from "../../../commons/endpoints";
@@ -46,20 +46,6 @@ const MinimalAssociateBpmn = () => {
 
 		return Object.values(newErrors).every((error) => !error);
 	};
-
-	const handleSnackbar = (success: boolean) => {
-		if (success) {
-			setMessage("Operazione riuscita");
-			setSeverity("success");
-			setTitle("Successo");
-		} else {
-			setMessage("Operazione fallita");
-			setSeverity("error");
-			setTitle("Errore");
-		}
-		setOpenSnackBar(true);
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		const postData = new FormData();
@@ -76,13 +62,13 @@ const MinimalAssociateBpmn = () => {
 				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
 
 				if (response?.success) {
-					handleSnackbar(true);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			// } else {
 			// 	try {

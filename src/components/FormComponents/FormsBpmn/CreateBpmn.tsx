@@ -7,7 +7,7 @@ import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
-import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
 
 export const CreateBpmn = () => {
 
@@ -54,19 +54,6 @@ export const CreateBpmn = () => {
 		setFormData({ ...formData, file: undefined });
 	};
 
-	const handleSnackbar = (success: boolean) => {
-		if (success) {
-			setMessage("Operazione riuscita");
-			setSeverity("success");
-			setTitle("Successo");
-		} else {
-			setMessage("Operazione fallita");
-			setSeverity("error");
-			setTitle("Errore");
-		}
-		setOpenSnackBar(true);
-	};
-
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -82,13 +69,14 @@ export const CreateBpmn = () => {
 			try {
 				const response = await fetchCreateBpmn({ abortController, body: postData })();
 				if (response?.success) {
-					handleSnackbar(true);
+					console.log("Response positive: ", response);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} catch (error) {
 				console.log("Response negative: ", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 
