@@ -10,6 +10,7 @@ import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
 import ROUTES from "../../../routes";
+import { downloadFile } from "../../../commons/decode";
 
 
 type Props = {
@@ -101,6 +102,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 					console.log(response.valuesObj.fileContent);
+					downloadFile(response.valuesObj.fileContent,"text/xml","download");
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
