@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext } from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY, BPMN_DOWNLOAD, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
@@ -9,6 +9,7 @@ import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
+import ROUTES from "../../../routes";
 
 
 type Props = {
@@ -30,7 +31,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-
+	const navigate = useNavigate();
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		switch (type) {
@@ -56,7 +57,11 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-
+					const deployedResponse = {
+						...response.valuesObj,
+						fileName: response.valuesObj?.resourceFile?.fileName
+					};
+					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

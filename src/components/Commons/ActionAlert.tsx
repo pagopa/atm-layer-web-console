@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import React from "react";
 import ROUTES from "../../routes";
-import { DELETE_ASSOCIATION } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
 
 type Props = {
 	openSnackBar?: boolean;
@@ -16,10 +16,10 @@ type Props = {
 };
 
 export const ActionAlert = ({ openSnackBar, severity, message, title, type, errorCode, handleSwitchAssociationFetch }: Props) => {
-	
+
 	const navigate = useNavigate();
 	const conditionalReload = () => {
-		if (type === DELETE_ASSOCIATION) {
+		if (type === DELETE_ASSOCIATION || type === DEPLOY) {
 			window.location.reload();
 		} else {
 			navigate(ROUTES.BPMN);
