@@ -1,7 +1,9 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import ROUTES from "../../routes";
 import { DELETE, DEPLOY } from "../../commons/constants";
+import { Ctx } from "../../DataContext";
 
 type Props = {
 	type?: string;
@@ -11,7 +13,6 @@ type Props = {
 
 const BpmnDetailButtons = ({ type, setType, openDialog }: Props) => {
 	const navigate = useNavigate();
-	
 	function handleClick(variable: string) {
 		setType(variable);
 		openDialog(variable);

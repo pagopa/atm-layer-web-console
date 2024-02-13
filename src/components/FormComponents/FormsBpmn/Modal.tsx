@@ -8,7 +8,7 @@ import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY, UPDATE_ASSOCIATION } from "../../../commons/constants";
 import { getQueryString } from "../../../utils/Commons";
 
 
@@ -102,9 +102,12 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 				if (response?.success) {
 					console.log("response", response);
 					setOpen(false);
-					window.location.reload();
+					handleSnackbar(true);
+				} else {
+					setOpen(false);
+					handleSnackbar(false);
 				}
-				setOpen(false);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 			}
@@ -200,6 +203,38 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 						<DialogContent>
 							<DialogContentText>
 								Sei sicuro di voler eliminare questa associazione?
+							</DialogContentText>
+						</DialogContent>
+					</Box>
+					<DialogActions >
+						<Box display={"flex"} flexDirection={"row"} p={2}>
+							<Box mr={2}>
+								<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+							</Box>
+							<Box>
+								<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
+							</Box>
+						</Box>
+					</DialogActions>
+				</Dialog>
+			}
+			{type === UPDATE_ASSOCIATION &&
+				<Dialog
+					open={open}
+					TransitionComponent={Transition}
+					keepMounted
+					onClose={() => setOpen(false)}
+					fullWidth
+					maxWidth={"sm"}
+				>
+					<DialogTitle>
+						Modifica Associazione
+					</DialogTitle>
+					<Divider />
+					<Box py={2}>
+						<DialogContent>
+							<DialogContentText>
+								Sei sicuro di voler modificare questa associazione?
 							</DialogContentText>
 						</DialogContent>
 					</Box>

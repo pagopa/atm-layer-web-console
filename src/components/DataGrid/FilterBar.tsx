@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BPMN, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import FilterTemplate from "./FilterTemplate";
@@ -18,6 +18,16 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+		const filterWithoutStatus = Object.fromEntries(
+			Object.entries(filterValues).filter(([key, value]) => key !== "status")
+		);
+		if (
+			event.target.name === "status" &&
+			event.target.value === "" &&
+			!Object.values(filterWithoutStatus).some((value => value !== ""))
+		) {
+			getAllList();
+		}
 	};
 
 	const handleSubmit = () => {
@@ -32,12 +42,12 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	const menuItems = [
+		{ label: "STATO", value: "" },
 		{ label: "CREATED", value: "CREATED" },
 		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
 		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
 		{ label: "DEPLOYED", value: "DEPLOYED" },
 		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
-		{ label: "Stato", value: "" }
 	];
 
 	const filterType = () => {
