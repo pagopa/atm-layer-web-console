@@ -9,12 +9,14 @@ type Props = {
 	children?: any;
 	getFormOptions: any;
 	openSnackBar?: boolean;
-    severity?: any;
-    message?: string;
+	severity?: any;
+	message?: string;
 	title?: string;
+	errorCode?: string;
+	handleSwitchAssociationFetch?: () => Promise<void>;
 };
 
-export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message, title }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -48,7 +50,14 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions, o
 								Submit
 							</Button>
 						</Box>
-						<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title}/>
+						<ActionAlert
+							openSnackBar={openSnackBar}
+							severity={severity}
+							message={message}
+							title={title}
+							errorCode={errorCode}
+							handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+						/>
 					</Box>
 				</React.Fragment>
 			)

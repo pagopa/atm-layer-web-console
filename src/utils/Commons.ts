@@ -105,19 +105,16 @@ export const getQueryString = (URL: string, filterValues: any, driver: string) =
 	return queryString;
 };
 
-export const handleSnackbar = (success: boolean,
+export const handleSnackbar = (
+	success: boolean,
 	setMessage: React.Dispatch<React.SetStateAction<any>>,
 	setSeverity: React.Dispatch<React.SetStateAction<any>>,
 	setTitle: React.Dispatch<React.SetStateAction<any>>,
-	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>) => {
-	if (success) {
-		setMessage("Operazione riuscita");
-		setSeverity("success");
-		setTitle("Successo");
-	} else {
-		setMessage("Operazione fallita");
-		setSeverity("error");
-		setTitle("Errore");
-	}
+	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
+	valueMessage?: string
+) => {
+	setMessage(success ? "Operazione riuscita" : valueMessage ? valueMessage : "Operazione fallita");
+	setSeverity(success ? "success" : "error");
+	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);
 };

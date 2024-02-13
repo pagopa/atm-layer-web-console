@@ -7,7 +7,8 @@ import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
 import fetchAssociateBpmn from "../../../hook/fetch/Bpmn/fetchAssociateBpmn";
-import { BPMN_ASSOCIATE } from "../../../commons/endpoints";
+import { BPMN_ASSOCIATE, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
+import fetchUpdateBpmnAssociated from "../../../hook/fetch/Bpmn/fetchUpdateBpmnAssociated";
 
 const MinimalAssociateBpmn = () => {
 
@@ -31,6 +32,7 @@ const MinimalAssociateBpmn = () => {
 	const [title, setTitle] = useState("");
 	const [branchChecked, setBranchChecked] = useState(true);
 	const [terminalChecked, setTerminalChecked] = useState(true);
+	const [errorCode, setErrorCode] = useState();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -47,16 +49,7 @@ const MinimalAssociateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
-
-		const postData = new FormData();
-		if (formData?.acquirerId && formData?.branchId && formData?.terminalId) {
-			postData.append("acquirerId", formData.acquirerId.trim());
-			postData.append("branchId", formData.branchId.trim());
-			postData.append("terminalId", formData.terminalId.trim());
-		}
-
 		if (validateForm()) {
-			// if(newAssociation) {
 			try {
 				const URL = generatePath(BPMN_ASSOCIATE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
 				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
@@ -64,27 +57,31 @@ const MinimalAssociateBpmn = () => {
 				if (response?.success) {
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					console.log("response", response);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					setErrorCode(response.valuesObj.errorCode);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
-			// } else {
-			// 	try {
-			// 		const URL = generatePath(UPDATE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-			// 		const response = await fetchUpdateBpmnAssociated({ abortController, body: JSON.stringify(formData), url: URL })();
+		}
+	};
 
-			// 		if (response?.success) {
-			// 			handleSnackbar(true);
-			// 		} else {
-			// 			handleSnackbar(false);
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("ERROR", error);
-			// 		handleSnackbar(false);
-			// 	}
-			// }
+	const handleSwitchAssociationFetch = async () => {
+		setErrorCode(undefined);
+		try {
+			const URL = generatePath(UPDATE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
+			const response = await fetchUpdateBpmnAssociated({ abortController, body: JSON.stringify(formData), url: URL })();
+
+			if (response?.success) {
+				handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			} else {
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+			handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 		}
 	};
 
@@ -96,6 +93,8 @@ const MinimalAssociateBpmn = () => {
 			severity={severity}
 			message={message}
 			title={title}
+			errorCode={errorCode}
+			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
 		>
 			<Grid xs={12} item my={1}>
 				<TextField

@@ -79,7 +79,8 @@ export default function useFetch(endPoint?: string | undefined) {
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
 			} else if (status !== CODE_SUCCESS && status !== 206) {
-				data = { valuesObj: { message: "Errore" }, status, success: false }; // valuesObj conterrà il messaggio di errore
+				const errorResponse = await response?.json();
+				data = { valuesObj: errorResponse, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
 				data = await response?.json(); // parses JSON response into native JavaScript objects
 				data = { valuesObj: data, status, success: true }; // CODE_SUCCESS 200/206
