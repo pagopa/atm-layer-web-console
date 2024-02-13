@@ -208,7 +208,7 @@ const foundation: Theme = createTheme({
 		},
 		text: {
 			primary: colorTextPrimary,
-			secondary: colorTextPrimary,
+			secondary: colorPrimary,
 			disabled: "#97a1b5",
 		},
 		action: {
@@ -643,6 +643,13 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			},
 		},
+		MuiDialogContentText: {
+			styleOverrides: {
+				root: {
+					color: foundation.palette.text.primary
+				},
+			},
+		}
 
 	}
 	

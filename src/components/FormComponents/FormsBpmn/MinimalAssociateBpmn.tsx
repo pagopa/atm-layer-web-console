@@ -70,6 +70,7 @@ const MinimalAssociateBpmn = () => {
 		}
 
 		if (validateForm()) {
+			// if(newAssociation) {
 			try {
 				const URL = generatePath(BPMN_ASSOCIATE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
 				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
@@ -83,6 +84,21 @@ const MinimalAssociateBpmn = () => {
 				console.error("ERROR", error);
 				handleSnackbar(false);
 			}
+			// } else {
+			// 	try {
+			// 		const URL = generatePath(UPDATE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
+			// 		const response = await fetchUpdateBpmnAssociated({ abortController, body: JSON.stringify(formData), url: URL })();
+
+			// 		if (response?.success) {
+			// 			handleSnackbar(true);
+			// 		} else {
+			// 			handleSnackbar(false);
+			// 		}
+			// 	} catch (error) {
+			// 		console.error("ERROR", error);
+			// 		handleSnackbar(false);
+			// 	}
+			// }
 		}
 	};
 

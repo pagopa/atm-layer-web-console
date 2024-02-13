@@ -5,7 +5,7 @@ import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY, BPMN_DOWNLOAD, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchDeployBpmn from "../../../hook/fetch/Bpmn/fetchDeployBpmn";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from "../../../commons/constants";
 import { getQueryString } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
@@ -17,9 +17,9 @@ type Props = {
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	openSnackBar?: boolean;
 	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-    severity?: any;
+	severity?: any;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-    message?: string;
+	message?: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
 	title?: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
@@ -27,7 +27,7 @@ type Props = {
 
 
 export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
-	
+
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 
@@ -53,7 +53,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true);
-				}else{
+				} else {
 					setOpen(false);
 					handleSnackbar(false);
 				}
@@ -69,8 +69,8 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true);
-					
-				}else{
+
+				} else {
 					setOpen(false);
 					handleSnackbar(false);
 				}
@@ -91,21 +91,24 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				const response = await fetchDeleteAssociatedBpmn({ abortController, url })();
 				if (response?.success) {
 					setOpen(false);
-					window.location.reload();
+					handleSnackbar(true);
+				} else {
+					setOpen(false);
+					handleSnackbar(false);
 				}
-				setOpen(false);
+
 			} catch (error) {
 				console.error("ERROR", error);
 			}
 			break;
 		}
 		case DOWNLOAD: {
-			try{
+			try {
 				const response = await fetchDownloadBpmn({ abortController, URL: generatePath(BPMN_DOWNLOAD, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true);
-				}else{
+				} else {
 					setOpen(false);
 					handleSnackbar(false);
 				}
@@ -114,7 +117,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 				handleSnackbar(false);
 			}
 			break;
-			
+
 		}
 
 		default: return;
@@ -124,47 +127,54 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 
 	return (
 		<>
-			{
-				type === DELETE && 
-
-					<ModalTemplate 
-						titleModal={"Cancellazione risorsa di processo"}
-						contentText={"Sei sicuro di voler cancellare questa risorsa di proccesso?"}
-						open={open}
-						setOpen={setOpen}
-						handleSubmit={handleSubmit} 
-					/>
+			{type === DELETE &&
+				<ModalTemplate
+					titleModal={"Cancellazione risorsa di processo"}
+					contentText={"Sei sicuro di voler cancellare questa risorsa di proccesso?"}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>
 			}
 			{type === DEPLOY &&
 
-				<ModalTemplate 
+				<ModalTemplate
 					titleModal={"Rilascio risorsa di processo"}
 					contentText={"Sei sicuro di voler rilasciare questa risorsa di proccesso?"}
 					open={open}
 					setOpen={setOpen}
-					handleSubmit={handleSubmit} 
+					handleSubmit={handleSubmit}
 				/>
 
 			}
 			{type === DELETE_ASSOCIATION &&
-				<ModalTemplate 
+				<ModalTemplate
 					titleModal={"Eliminazione Associazione"}
 					contentText={"Sei sicuro di voler eliminare questa associazione?"}
 					open={open}
 					setOpen={setOpen}
-					handleSubmit={handleSubmit} 
+					handleSubmit={handleSubmit}
 				/>
-		
+
 			}
 			{type === DOWNLOAD &&
-				<ModalTemplate 
+				<ModalTemplate
 					titleModal={"Scarica risorsa di processo"}
 					contentText={"Sei sicuro di voler scaricare questa risorsa?"}
 					open={open}
 					setOpen={setOpen}
-					handleSubmit={handleSubmit} 
+					handleSubmit={handleSubmit}
 				/>
 
+			}
+			{type === UPDATE_ASSOCIATION &&
+				<ModalTemplate
+					titleModal={"Modifica Associazione"}
+					contentText={"Sei sicuro di voler modificare questa associazione?"}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>
 			}
 		</>
 	);
