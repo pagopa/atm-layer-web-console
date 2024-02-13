@@ -1,7 +1,4 @@
-import React, { SetStateAction, forwardRef, useContext } from "react";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
-import { TransitionProps } from "@mui/material/transitions";
+import React, { SetStateAction, useContext } from "react";
 import { generatePath } from "react-router-dom";
 import fetchDeleteBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmn";
 import { Ctx } from "../../../DataContext";
@@ -11,6 +8,7 @@ import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnA
 import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
 import { getQueryString } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
+import ModalTemplate from "../template/ModalTemplate";
 
 
 type Props = {
@@ -27,16 +25,8 @@ type Props = {
 	setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
-const Transition = forwardRef(function Transition(
-	props: TransitionProps & {
-		children: React.ReactElement<any, any>;
-	},
-	ref: React.Ref<unknown>,
-) {
-	return <Slide direction="up" ref={ref} {...props} />;
-});
 
-export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
+export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
 	
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
@@ -81,6 +71,7 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 					console.log("response", response);
 					setOpen(false);
 					handleSnackbar(true);
+					
 				}else{
 					setOpen(false);
 					handleSnackbar(false);
@@ -139,135 +130,48 @@ export const ModalBpmn = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, 
 		<>
 			{
 				type === DELETE && 
-			<Dialog
-				open={open}
-				TransitionComponent={Transition}
-				keepMounted
-				onClose={() => setOpen(false)}
-				fullWidth
-				maxWidth={"sm"}
-			>
-				<DialogTitle>
-					Cancellazione risorsa di processo
-				</DialogTitle>
-				<Divider />
-				<Box py={2}>
-					<DialogContent>
-						<DialogContentText>
-							Sei sicuro di voler cancellare questa risorsa di proccesso?
-						</DialogContentText>
-					</DialogContent>
-				</Box>
-				<DialogActions >
-					<Box display={"flex"} flexDirection={"row"} p={2}>
-						<Box mr={2}>
-							<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
-						</Box>
-						<Box>
-							<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
-						</Box>
-					</Box>
-				</DialogActions>
-			</Dialog>
+
+					<ModalTemplate 
+						titleModal={"Cancellazione risorsa di processo"}
+						contentText={"Sei sicuro di voler cancellare questa risorsa di proccesso?"}
+						open={open}
+						setOpen={setOpen}
+						handleSubmit={handleSubmit} 
+					/>
 			}
 			{type === DEPLOY &&
-				<Dialog
+
+				<ModalTemplate 
+					titleModal={"Rilascio risorsa di processo"}
+					contentText={"Sei sicuro di voler rilasciare questa risorsa di proccesso?"}
 					open={open}
-					TransitionComponent={Transition}
-					keepMounted
-					onClose={() => setOpen(false)}
-					fullWidth
-					maxWidth={"sm"}
-				>
-					<DialogTitle>
-						Rilascio risorsa di processo
-					</DialogTitle>
-					<Divider />
-					<Box py={2}>
-						<DialogContent>
-							<DialogContentText>
-								Sei sicuro di voler rilasciare questa risorsa di proccesso?
-							</DialogContentText>
-						</DialogContent>
-					</Box>
-					<DialogActions >
-						<Box display={"flex"} flexDirection={"row"} p={2}>
-							<Box mr={2}>
-								<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
-							</Box>
-							<Box>
-								<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
-							</Box>
-						</Box>
-					</DialogActions>
-				</Dialog>
+					setOpen={setOpen}
+					handleSubmit={handleSubmit} 
+				/>
+
 			}
 			{type === DELETE_ASSOCIATION &&
-				<Dialog
+				<ModalTemplate 
+					titleModal={"Eliminazione Associazione"}
+					contentText={"Sei sicuro di voler eliminare questa associazione?"}
 					open={open}
-					TransitionComponent={Transition}
-					keepMounted
-					onClose={() => setOpen(false)}
-					fullWidth
-					maxWidth={"sm"}
-				>
-					<DialogTitle>
-						Eliminazione Associazione
-					</DialogTitle>
-					<Divider />
-					<Box py={2}>
-						<DialogContent>
-							<DialogContentText>
-								Sei sicuro di voler eliminare questa associazione?
-							</DialogContentText>
-						</DialogContent>
-					</Box>
-					<DialogActions >
-						<Box display={"flex"} flexDirection={"row"} p={2}>
-							<Box mr={2}>
-								<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
-							</Box>
-							<Box>
-								<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
-							</Box>
-						</Box>
-					</DialogActions>
-				</Dialog>
+					setOpen={setOpen}
+					handleSubmit={handleSubmit} 
+				/>
+		
 			}
 			{type === DOWNLOAD &&
-				<Dialog
+				<ModalTemplate 
+					titleModal={"Scarica risorsa di processo"}
+					contentText={"Sei sicuro di voler scaricare questa risorsa?"}
 					open={open}
-					TransitionComponent={Transition}
-					keepMounted
-					onClose={() => setOpen(false)}
-					fullWidth
-					maxWidth={"sm"}
-				>
-					<DialogTitle>
-					Scarica risorsa di processo
-					</DialogTitle>
-					<Divider />
-					<Box py={2}>
-						<DialogContent>
-							<DialogContentText>
-							Sei sicuro di voler scaricare questa risorsa?
-							</DialogContentText>
-						</DialogContent>
-					</Box>
-					<DialogActions >
-						<Box display={"flex"} flexDirection={"row"} p={2}>
-							<Box mr={2}>
-								<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
-							</Box>
-							<Box>
-								<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
-							</Box>
-						</Box>
-					</DialogActions>
-				</Dialog>
+					setOpen={setOpen}
+					handleSubmit={handleSubmit} 
+				/>
+
 			}
 		</>
 	);
 };
 
-export default ModalBpmn;
+export default Modal;
