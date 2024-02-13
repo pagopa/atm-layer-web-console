@@ -29,6 +29,7 @@ const DetailPage = () => {
 		}
 	}, []);
 
+
 	return (
 		<BoxPageLayout px={10}>
 			<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
@@ -45,7 +46,8 @@ const DetailPage = () => {
 			<BpmnDetailButtons
 				openDialog={() => setOpen(true)}
 				type={type}
-				setType={setType}
+				setType={setType} 
+				detail={detail}
 			/>
 			<Modal
 				open={open}

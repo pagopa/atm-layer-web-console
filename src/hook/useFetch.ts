@@ -74,7 +74,6 @@ export default function useFetch(endPoint?: string | undefined) {
 				// (response.status === 0 && response.type === "opaqueredirect") ||
 				response.status === 401
 			) {
-				console.log("status: " + response?.status);
 				window.location.reload();
 			}
 			if (status === 204) {
@@ -82,7 +81,6 @@ export default function useFetch(endPoint?: string | undefined) {
 			} else if (status !== CODE_SUCCESS && status !== 206) {
 				data = { valuesObj: { message: "Errore" }, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
-				console.log("SUCESS!");
 				data = await response?.json(); // parses JSON response into native JavaScript objects
 				data = { valuesObj: data, status, success: true }; // CODE_SUCCESS 200/206
 

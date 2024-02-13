@@ -86,7 +86,6 @@ export const UpgradeBpmn = () => {
 			try {
 				const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
 				if (response?.success) {
-					console.log("response", response);
 					handleSnackbar(true);
 				} else {
 					handleSnackbar(false);

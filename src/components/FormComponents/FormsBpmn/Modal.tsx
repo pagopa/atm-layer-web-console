@@ -51,7 +51,6 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 			try {
 				const response = await fetchDeleteBpmn({ abortController, URL: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
-					console.log("response", response);
 					setOpen(false);
 					handleSnackbar(true);
 				}else{
@@ -68,7 +67,6 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 			try {
 				const response = await fetchDeployBpmn({ abortController, URL: generatePath(BPMN_DEPLOY, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
-					console.log("response", response);
 					setOpen(false);
 					handleSnackbar(true);
 					
@@ -92,7 +90,6 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 			try {
 				const response = await fetchDeleteAssociatedBpmn({ abortController, url })();
 				if (response?.success) {
-					console.log("response", response);
 					setOpen(false);
 					window.location.reload();
 				}
@@ -106,7 +103,6 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 			try{
 				const response = await fetchDownloadBpmn({ abortController, URL: generatePath(BPMN_DOWNLOAD, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }) })();
 				if (response?.success) {
-					console.log("response", response);
 					setOpen(false);
 					handleSnackbar(true);
 				}else{

@@ -79,11 +79,9 @@ export const CreateBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType);
 			}
-
 			try {
 				const response = await fetchCreateBpmn({ abortController, body: postData })();
 				if (response?.success) {
-					console.log("Response positive: ", response);
 					handleSnackbar(true);
 				} else {
 					handleSnackbar(false);
