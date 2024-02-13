@@ -18,13 +18,11 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
 		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
-		const filterWithoutStatus = Object.fromEntries(
-			Object.entries(filterValues).filter(([key, value]) => key !== "status")
-		);
+		const filterWithoutStatus = Object.entries(	filterValues).filter(el=>el[0]!=="status");
 		if (
 			event.target.name === "status" &&
 			event.target.value === "" &&
-			!Object.values(filterWithoutStatus).some((value => value !== ""))
+			!(filterWithoutStatus.some((value => value[1] !== "")))
 		) {
 			getAllList();
 		}
