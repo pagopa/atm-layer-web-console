@@ -68,7 +68,7 @@ export const HeaderAccountCustom = ({
 				>
 					{rootLink?.element}
 				</ButtonNaked> */}
-				<Box className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
+				<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
 					{rootLink?.element}
 				</Box>
 
@@ -94,7 +94,7 @@ export const HeaderAccountCustom = ({
 
 					{/* 2. Logged User with Logout CTA */}
 					{loggedUser && (
-						<Button variant="text" onClick={onLogout} title="Esci">
+						<Button variant="outlined" onClick={onLogout} title="Esci">
                             Esci
 						</Button>
 					)}

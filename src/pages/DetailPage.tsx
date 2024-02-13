@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
 import DetailBox from "../components/Commons/DetailBox";
 import { ActionAlert } from "../components/Commons/ActionAlert";
-import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
+import Modal from "../components/FormComponents/FormsBpmn/Modal";
 import TableColumn from "../components/DataGrid/TableColumn";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
@@ -47,7 +47,7 @@ const DetailPage = () => {
 				type={type}
 				setType={setType}
 			/>
-			<ModalBpmn
+			<Modal
 				open={open}
 				setOpen={setOpen}
 				type={type}
