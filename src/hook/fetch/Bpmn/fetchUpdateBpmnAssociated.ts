@@ -7,7 +7,8 @@ const fetchUpdateBpmnAssociated = ({ abortController, body, url }: any) => async
 		urlEndpoint: url,
 		method: "PUT",
 		body,
-		abortController
+		abortController,
+		headers: { "Content-Type" : "application/json" }
 	});
 };
 
