@@ -1,11 +1,12 @@
 import { Alert, AlertTitle, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import React from "react";
+import { useNavigate } from "react-router";
 import ROUTES from "../../routes";
-import { DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
 
 type Props = {
+	setOpenSnackBar?: React.Dispatch<React.SetStateAction<boolean>>;
 	openSnackBar?: boolean;
 	severity?: any;
 	message?: string;
@@ -15,14 +16,19 @@ type Props = {
 	handleSwitchAssociationFetch?: () => Promise<void>;
 };
 
-export const ActionAlert = ({ openSnackBar, severity, message, title, type, errorCode, handleSwitchAssociationFetch }: Props) => {
+export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, title, type, errorCode, handleSwitchAssociationFetch }: Props) => {
 
 	const navigate = useNavigate();
+
 	const conditionalReload = () => {
 		if (type === DELETE_ASSOCIATION || type === DEPLOY) {
 			window.location.reload();
-		} else {
+		} else if (type === DELETE) {
 			navigate(ROUTES.BPMN);
+		} else {
+			if (typeof setOpenSnackBar !== "undefined") {
+				setOpenSnackBar(false);
+			}
 		}
 	};
 

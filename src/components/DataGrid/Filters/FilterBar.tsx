@@ -17,14 +17,29 @@ type Props = {
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
-		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
-		const filterWithoutStatus = Object.entries(	filterValues).filter(el=>el[0]!=="status");
-		if (
-			event.target.name === "status" &&
-			event.target.value === "" &&
-			!(filterWithoutStatus.some((value => value[1] !== "")))
-		) {
-			getAllList();
+		switch (driver) {
+		case BPMN:
+			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+			if (
+				event.target.name === "status" &&
+					event.target.value === "" &&
+					!(filterBpmnWithoutStatus.some((value => value[1] !== "")))
+			) {
+				getAllList();
+			}
+			break;
+		case WORKFLOW_RESOURCE:
+			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
+
+			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
+			const resourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
+			if (statusCondition || resourceCondition) {
+				getAllList();
+			}
+			break;
 		}
 	};
 
