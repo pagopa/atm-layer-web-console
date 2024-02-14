@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN, BPMN_ASSOCIATED, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN, BPMN_ASSOCIATED, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -327,6 +327,86 @@ const useColumns: any = () => {
 					flex: 0.5
 				}
 			];
+		case RESOURCES:
+			return [
+				{
+					field: "resourceId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Risorse statiche",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.resourceId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "fileName",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome file",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.fileName),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "resourceType",
+					cellClassName: "justifyContentNormal",
+					headerName: "Tipo risorsa",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.resourceType),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "createdAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data creazione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "lastUpdatedAt",
+					cellClassName: "justifyContentNormal",
+					headerName: "Data ultima modifica",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "actions",
+					cellClassName: "justifyContentNormalRight",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => actionColumn(params, RESOURCES),
+					sortable: false,
+					flex: 0.5
+				}
+			];
 		case WORKFLOW_RESOURCE:
 			return [
 				{
@@ -475,6 +555,12 @@ const useColumns: any = () => {
 					"lastUpdatedBy": false
 				}
 			);
+		case RESOURCES:
+			return (
+				{
+					"resourceId" : false
+				}
+			);
 		case WORKFLOW_RESOURCE:
 			return (
 				{
@@ -491,6 +577,9 @@ const useColumns: any = () => {
 		switch (driver) {
 		case BPMN:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
+		case RESOURCES:
+		 
+		 break;
 		case WORKFLOW_RESOURCE:
 			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
 		default:

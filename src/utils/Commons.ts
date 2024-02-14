@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 
-import { BPMN, DELETE_ASSOCIATION, WORKFLOW_RESOURCE } from "../commons/constants";
+import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 
 /* eslint-disable functional/immutable-data */
 export const isValidUUID = (uuid: string) => {
@@ -73,6 +73,15 @@ export const getQueryString = (URL: string, filterValues: any, driver: string) =
 
 		if (filterValues?.status) {
 			queryString = queryString.concat(`&status=${filterValues.status}`);
+		}
+		break;
+	case RESOURCES:
+		if (filterValues?.fileName) {
+			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
+		}
+
+		if (filterValues?.noDeployableResourceType) {
+			queryString = queryString.concat(`&noDeployableResourceType=${filterValues.noDeployableResourceType}`);
 		}
 		break;
 	case WORKFLOW_RESOURCE:
