@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -17,22 +17,22 @@ import AssociateBpmnPage from "./pages/AssociateBpmnPage";
 import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPageCallback from "./pages/LoginPageCallback";
-import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
+// import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
 
 const LocalRoutes = () =>(
 	<BrowserRouter basename="/webconsole">	
 		<Routes>
-			<Route element={<PrivateRoute />}>
-				<Route path="/" element={ <PageLayout children={<HomePage />} />}/>
-				{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
-				<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
-				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
-				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
-				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
-				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
-				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
-				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
-			</Route>
+			{/* <Route element={<PrivateRoute />}> */}
+			<Route path="/" element={ <PageLayout children={<HomePage />} />}/>
+			{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
+			<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
+			<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
+			<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+			<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
+			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
+			<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+			{/* </Route> */}
 			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
 			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />
 			<Route path="*" element={<NoPage />} />
@@ -83,7 +83,7 @@ function App() {
 	useEffect(() => {
 		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
-	
+
 	useEffect(() => {
 		console.log("login utente", logged);
 	}, [logged]);
