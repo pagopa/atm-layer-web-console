@@ -1,7 +1,9 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
-
+import { Link } from "@mui/material";
+import { generatePath } from "react-router-dom";
 import { BPMN, DELETE_ASSOCIATION, WORKFLOW_RESOURCE } from "../commons/constants";
+import ROUTES from "../routes";
 
 /* eslint-disable functional/immutable-data */
 export const isValidUUID = (uuid: string) => {
@@ -117,4 +119,23 @@ export const handleSnackbar = (
 	setSeverity(success ? "success" : "error");
 	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);
+};
+
+export const breadCrumbLinkComponent = (message: string) => {
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const hrefValue = generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
+	
+	return [
+		"Home",
+		"Risorse di processo",
+		<Link
+			key="link"
+			href={hrefValue}
+			color="inherit"
+			underline="hover"
+		>
+            Dettaglio risorsa di processo
+		</Link>,
+		message
+	];
 };

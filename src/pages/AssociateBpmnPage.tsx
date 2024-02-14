@@ -5,24 +5,11 @@ import MinimalAssociateBpmn from "../components/FormComponents/FormsBpmn/Minimal
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import ROUTES from "../routes";
+import { breadCrumbLinkComponent } from "../utils/Commons";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const AssociateBpmnPage = () => {
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	// eslint-disable-next-line react/jsx-key
-	const breadComponent = [
-		"Home",
-		"Risorse di processo",
-		<Link
-			key="link"
-			href={generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion })}
-			color="inherit"
-			underline="hover"
-		>
-			Dettaglio risorsa di processo
-		</Link>,
-		"Associazione risorsa di processo"
-	];
+	const breadComponent = breadCrumbLinkComponent("Associazione risorsa di processo");
 
 	return (
 		<>
