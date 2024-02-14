@@ -27,11 +27,13 @@ const LocalRoutes = () =>(
 				{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
 				<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
 				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
-				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
-				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
 				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
 				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
 				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+				<Route path={routes.CREATE_WR} element={<PageLayout children={<CreateBpmnPage />} />} />
+
+				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			</Route>
 			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
 			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />

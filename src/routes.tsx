@@ -10,7 +10,7 @@ const ROUTES = {
 	CREATE_BPMN: "/bpmn/create",
 	ASSOCIATE_BPMN: "/bpmn/associate",
 	UPGRADE_BPMN: "/bpmn/upgrade",
-	CREATE_WORKFLOW_RESOURCES: "/workflow_resources/create",
+	CREATE_WR: "/workflow_resources/create",
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
 };

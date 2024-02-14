@@ -64,7 +64,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			return ROUTES.CREATE_BPMN;
 		case WORKFLOW_RESOURCE:
-			return ROUTES.CREATE_WORKFLOW_RESOURCES;
+			return ROUTES.CREATE_WR;
 		default:
 			return "/";
 		}
