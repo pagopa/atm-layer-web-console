@@ -9,8 +9,6 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
-import { ActionAlert } from "../../Commons/ActionAlert";
-import ROUTES from "../../../routes";
 
 export const UpgradeBpmn = () => {
 

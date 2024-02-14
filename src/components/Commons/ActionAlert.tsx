@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import React from "react";
 import ROUTES from "../../routes";
-import { DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
 
 type Props = {
 	openSnackBar?: boolean;
@@ -21,9 +21,14 @@ export const ActionAlert = ({ openSnackBar, severity, message, title, type, erro
 	const conditionalReload = () => {
 		if (type === DELETE_ASSOCIATION || type === DEPLOY) {
 			window.location.reload();
-		} else {
+		} else if(type ===DELETE){
 			navigate(ROUTES.BPMN);
+		}else{
+			// setOpenSnackBar(false);
 		}
+		// else if(severity === "success") {
+		// 	navigate(ROUTES.BPMN);
+		// }
 	};
 
 	return (
