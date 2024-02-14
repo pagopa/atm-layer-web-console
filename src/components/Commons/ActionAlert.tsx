@@ -6,7 +6,7 @@ import ROUTES from "../../routes";
 import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
 
 type Props = {
-	setOpenSnackBar: React.Dispatch<React.SetStateAction<boolean>>;
+	setOpenSnackBar?: React.Dispatch<React.SetStateAction<boolean>>;
 	openSnackBar?: boolean;
 	severity?: any;
 	message?: string;
@@ -23,10 +23,12 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 	const conditionalReload = () => {
 		if (type === DELETE_ASSOCIATION || type === DEPLOY) {
 			window.location.reload();
-		} else if(type ===DELETE){
+		} else if (type === DELETE) {
 			navigate(ROUTES.BPMN);
-		}else{
-			setOpenSnackBar(false);
+		} else {
+			if (typeof setOpenSnackBar !== "undefined") {
+				setOpenSnackBar(false);
+			}
 		}
 	};
 
