@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -48,7 +48,7 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
-	const [logged, setLogged] = useState(temp?temp:false);
+	const [logged, setLogged] = useState(temp?true:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 	// const navigate = useNavigate();
@@ -83,6 +83,7 @@ function App() {
 	useEffect(() => {
 		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
+
 	useEffect(() => {
 		console.log("login utente", logged);
 	}, [logged]);

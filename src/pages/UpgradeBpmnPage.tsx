@@ -1,11 +1,26 @@
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
+import { generatePath } from "react-router-dom";
 import UpgradeBpmn from "../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
+import ROUTES from "../routes";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const UpgradeBpmnPage = () => {
-	const breadComponent = ["Home", "Risorse di processo", "Dettaglio risorsa di processo", "Aggiornamento risorsa di processo"];
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const breadComponent = [
+		"Home", 
+		"Risorse di processo", 
+		<Link
+			key="link"
+			href={generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion })}
+			color="inherit"
+			underline="hover"
+		>
+			Dettaglio risorsa di processo
+		</Link>, 
+		"Aggiornamento risorsa di processo"
+	];
 
 	return(
 		<>
