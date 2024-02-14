@@ -36,11 +36,11 @@ export const downloadFile_ols = (doc:any, type :string, docName:string) => {
 	}
 };
 
-export const downloadFile = (doc:any, type :string, docName:string) => {
+export const downloadFile = (doc:any, type :string, docName:string, extension: string) => {
 	if (doc) {
-		const decodedString = base64_decode(doc);;
+		const decodedString = base64_decode(doc);
 
-		const fileName = docName;
+		const fileName = `${docName}.${extension}`;
 		const fileType = type;
 	
 		const blob = new Blob([decodedString], { type: fileType });
@@ -54,8 +54,5 @@ export const downloadFile = (doc:any, type :string, docName:string) => {
 		a.click();
 		document.body.removeChild(a);
 		setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500); 
-
-		// Clean up and remove the link
-		// link.parentNode.removeChild(link);
 	}
 };

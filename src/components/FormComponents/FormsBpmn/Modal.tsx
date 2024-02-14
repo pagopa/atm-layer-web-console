@@ -102,7 +102,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 					console.log(response.valuesObj.fileContent);
-					downloadFile(response.valuesObj.fileContent,"text/xml","download");
+					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
