@@ -176,7 +176,7 @@ const useColumns: any = () => {
 					hideSortIcons: true,
 					disableColumnMenu: true,
 					editable: false,
-					renderCell: (params: any) => actionColumn(params),
+					renderCell: (params: any) => actionColumn(params, BPMN),
 					sortable: false,
 					flex: 0.5
 				}
@@ -434,18 +434,18 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				// {
-				// 	field: "actions",
-				// 	cellClassName: "justifyContentNormalRight",
-				// 	headerName: "",
-				// 	align: "right",
-				// 	hideSortIcons: true,
-				// 	disableColumnMenu: true,
-				// 	editable: false,
-				// 	renderCell: (params: any) => actionColumn(params),
-				// 	sortable: false,
-				// 	flex: 0.5
-				// }
+				{
+					field: "actions",
+					cellClassName: "justifyContentNormalRight",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => actionColumn(params, WORKFLOW_RESOURCE),
+					sortable: false,
+					flex: 0.5
+				}
 			];
 		default:
 			return [];
@@ -491,6 +491,8 @@ const useColumns: any = () => {
 		switch (driver) {
 		case BPMN:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
+		case WORKFLOW_RESOURCE:
+			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
 		default:
 			return [];
 		}

@@ -7,10 +7,11 @@ import Modal from "../components/FormComponents/FormsBpmn/Modal";
 import TableColumn from "../components/DataGrid/TableColumn";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
+import BpmnDetailButtons from "../components/Commons/BpmnDetailButtons";
+import formatValues from "../utils/formatValues";
 import BoxPageLayout from "./Layout/BoxPageLayout";
-import BpmnDetailButtons from "./../components/Commons/BpmnDetailButtons";
 
-const DetailPage = () => {
+const BpmnDetailPage = () => {
 
 	const [detail, setDetail] = useState({});
 	const [open, setOpen] = useState(false);
@@ -21,6 +22,17 @@ const DetailPage = () => {
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
 	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
+	const { formatDateToString } = formatValues();
+	const fields = [
+		{ label: "Tipo Funzione", value: "functionType" },
+		{ label: "Nome file", value: "fileName" },
+		{ label: "Stato", value: "status" },
+		{ label: "Versione", value: "modelVersion" },
+		{ label: "Data creazione", value: "createdAt", format: formatDateToString},
+		{ label: "Data ultima modifica", value: "lastUpdatedAt", format: formatDateToString},
+	];
+	const detailTitle = "Dettaglio risorsa di processo";
+	
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -37,7 +49,7 @@ const DetailPage = () => {
 					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 				</Box>
 			</Box>
-			<DetailBox detail={detail} />
+			<DetailBox detail={detail} fields={fields} detailTitle={detailTitle}/>
 			<BpmnAssociatedDataGrid 
 				buildColumnDefs={buildColumnDefs}
 				visibleColumns={visibleColumns}
@@ -66,4 +78,4 @@ const DetailPage = () => {
 };
 
 
-export default DetailPage;
+export default BpmnDetailPage;

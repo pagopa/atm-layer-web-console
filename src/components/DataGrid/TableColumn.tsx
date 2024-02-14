@@ -20,8 +20,8 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	const theme = useTheme();
 	// const { setRecordParams } = useContext(Ctx);
 
-	const actionColumn = (param: any) => {
-		const path = getNavigationPaths(BPMN, param);
+	const actionColumn = (param: any, dataType: string) => {
+		const path = getNavigationPaths(dataType, param);
 		return (
 			<Box
 				display="flex"
@@ -30,8 +30,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
-					onClick={(
-					) => {
+					onClick={() => {
 						navigate(path);
 						localStorage.setItem("recordParams", JSON.stringify(param.row));
 						// setRecordParams(getRecordBpmnParams(param.row));
@@ -44,7 +43,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
 				</IconButton>
 			</Box>
-
 		);
 	};
 
