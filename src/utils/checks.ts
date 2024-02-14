@@ -108,10 +108,10 @@ const checks = () => {
 		return regexTestField(number, "numeroIntero");
 	};
 
-	const isValidResourcesFilename = (filename: string) => {
-		const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
-		return resourcesFileNameRegex.test(filename);
-	};
+	// const isValidResourcesFilename = (filename: string) => {
+	// 	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
+	// 	return resourcesFileNameRegex.test(filename);
+	// };
 
 	const isValidUUID = (uuid: string) => {
 		const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
@@ -140,7 +140,7 @@ const checks = () => {
 		isInvalidField,
 		isValidNumber,
 		copyArrayObject,
-		isValidResourcesFilename,
+		// isValidResourcesFilename,
 		isValidUUID,
 		isValidDeployableFilename,
 		deployableFilename
