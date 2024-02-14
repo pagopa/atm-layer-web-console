@@ -13,7 +13,6 @@ export const breadCrumbLinkComponent = (message: string) => {
 			key="link"
 			href={hrefValue}
 			color="inherit"
-			underline="always"
 		>
             Dettaglio risorsa di processo
 		</Link>,
