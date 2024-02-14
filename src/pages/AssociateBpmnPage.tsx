@@ -1,10 +1,7 @@
 import { Box } from "@mui/system";
-import { generatePath } from "react-router";
-import Link from "@mui/material/Link";
-import MinimalAssociateBpmn from "../components/FormComponents/FormsBpmn/MinimalAssociateBpmn";
+import MinimalAssociateBpmn from "../components/FormComponents/FormsBpmn/AssociateBpmn";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
-import ROUTES from "../routes";
 import { breadCrumbLinkComponent } from "../utils/Commons";
 import FormPageTemplate from "./Layout/FormPageTemplate";
 

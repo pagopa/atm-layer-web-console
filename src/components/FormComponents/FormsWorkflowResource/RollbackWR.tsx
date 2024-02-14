@@ -20,7 +20,7 @@ export const RollbackWR = () => {
 	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
-	const { isValidUUID } = checks();
+	const { regexTestField } = checks();
 
 	const initialValues: WRRollbackDto = {
 		uuid: ""
@@ -37,7 +37,7 @@ export const RollbackWR = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid === "" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido",
+			uuid: formData.uuid === "" ? "Campo obbligatorio" : regexTestField(formData.uuid, "uuid") ? "" : "uuid non valido",
 		};
 
 		setErrors(newErrors);

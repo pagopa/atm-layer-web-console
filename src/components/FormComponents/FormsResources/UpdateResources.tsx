@@ -29,7 +29,7 @@ export const UpdateResources = () => {
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
-	const { isValidUUID } = checks();
+	const { regexTestField } = checks();
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,7 +37,7 @@ export const UpdateResources = () => {
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid === "" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido",
+			uuid: formData.uuid === "" ? "Campo obbligatorio" : regexTestField(formData.uuid, "uuid") ? "" : "uuid non valido",
 			file: formData.file ? "" : "Campo obbligatorio"
 		};
 

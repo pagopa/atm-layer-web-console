@@ -12,7 +12,7 @@ import checks from "../../../utils/checks";
 
 export const DeployWR = () => {
 	const { getFormOptions } = formOption();
-	const { isValidUUID } = checks();
+	const { regexTestField } = checks();
 
 	const initialValues: WRDeployDto = {
 		uuid: ""
@@ -29,7 +29,7 @@ export const DeployWR = () => {
 	
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid === "" ? "Campo obbligatorio" : isValidUUID(formData.uuid) ? "" : "uuid non valido",
+			uuid: formData.uuid === "" ? "Campo obbligatorio" : regexTestField(formData.uuid, "uuid") ? "" : "uuid non valido",
 		};
 
 		setErrors(newErrors);
