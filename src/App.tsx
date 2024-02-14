@@ -18,6 +18,7 @@ import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPageCallback from "./pages/LoginPageCallback";
 import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
+import CreateWRPage from "./pages/CreateWRPage";
 
 const LocalRoutes = () =>(
 	<BrowserRouter basename="/webconsole">	
@@ -30,8 +31,9 @@ const LocalRoutes = () =>(
 				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
 				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
 				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+				
 				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
-				<Route path={routes.CREATE_WR} element={<PageLayout children={<CreateBpmnPage />} />} />
+				<Route path={routes.CREATE_WR} element={<PageLayout children={<CreateWRPage />} />} />
 
 				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			</Route>
