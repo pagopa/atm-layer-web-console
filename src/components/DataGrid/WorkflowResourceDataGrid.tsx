@@ -7,7 +7,7 @@ import { GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../../commons/endpoints";
 import fetchGetAllWfResourcesFiltered from "../../hook/fetch/WorkflowResource/fetchGetAllWfResourcesFiltered";
 import { getQueryString } from "../../utils/Commons";
 import { CustomDataGrid } from "./CustomDataGrid";
-import FilterBar from "./FilterBar";
+import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
 
 export const WorkflowResourceDataGrid = () => {

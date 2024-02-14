@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BPMN, WORKFLOW_RESOURCE } from "../../commons/constants";
-import ROUTES from "../../routes";
+import { BPMN, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
-import BpmnFilterComponent from "./Filters/BpmnFilterComponent";
-import WorkflowResourcesFilterComponent from "./Filters/WorkflowResourcesFilterComponent";
+import BpmnFilterComponent from "./BpmnFilterComponent";
+import WRFilterComponent from "./WRFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -53,7 +53,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		case WORKFLOW_RESOURCE:
-			return <WorkflowResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		default:
 			return <></>;
 		}

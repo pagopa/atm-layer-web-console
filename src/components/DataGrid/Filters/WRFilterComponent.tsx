@@ -7,7 +7,7 @@ type Props = {
 	menuItems: any;
 };
 
-const WorkflowResourcesFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
+const WRFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
 
 	const resourceItems = [
 		{ label: "Stato", value: "" },
@@ -73,4 +73,4 @@ const WorkflowResourcesFilterComponent = ({ filterValues, handleChange, menuItem
 	);
 };
 
-export default WorkflowResourcesFilterComponent;
+export default WRFilterComponent;
