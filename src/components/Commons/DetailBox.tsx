@@ -1,7 +1,5 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import formatValues from "../../utils/formatValues";
-import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
-import BreadCrumbMapper from "../NavigationComponents/BreadCrumbMapper";
 
 type Prop = {
 	detail: any;

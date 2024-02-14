@@ -643,6 +643,13 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			},
 		},
+		MuiDialogContentText: {
+			styleOverrides: {
+				root: {
+					color: foundation.palette.text.primary
+				},
+			},
+		}
 
 	}
 	

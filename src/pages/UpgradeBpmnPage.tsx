@@ -5,7 +5,7 @@ import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMappe
 import FormPageTemplate from "./Layout/FormPageTemplate";
 
 const UpgradeBpmnPage = () => {
-	const breadComponent = ["Home", "Risorse di processo", "Aggiornamento risorsa di processo"];
+	const breadComponent = ["Home", "Risorse di processo", "Dettaglio risorsa di processo", "Aggiornamento risorsa di processo"];
 
 	return(
 		<>

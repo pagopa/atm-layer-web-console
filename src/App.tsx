@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -51,6 +51,7 @@ function App() {
 	const [logged, setLogged] = useState(temp?temp:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
+	// const navigate = useNavigate();
 
 	function clearAll(){
 		localStorage.removeItem("token");
@@ -58,19 +59,25 @@ function App() {
 		localStorage.removeItem("recordParamsAssociated");
 		setLogged(false);
 	}
-	
 
+	function setTokenExpired(){
+		localStorage.removeItem("token");
+		setLogged(false);
+		// navigate(ROUTES.LOGIN);
+	}
+	
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
 		// loading,
 		// setLoading,
 		clearAll,
+		setTokenExpired,
 		logged, 
 		setLogged,
 		abortController,
 		setRecordParams,
-		recordParams,
+		recordParams
 	};
 
 	useEffect(() => {

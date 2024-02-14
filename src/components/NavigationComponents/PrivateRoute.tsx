@@ -9,9 +9,7 @@ const PrivateRoutes = () => {
 	const { logged } = useContext(Ctx);
   
 	useEffect(() => {
-		if (logged===true) {
-			navigate(routes.HOME);
-		} else {
+		if (logged===false) {
 			navigate(routes.LOGIN);
 		}
 	}, [logged, navigate]);

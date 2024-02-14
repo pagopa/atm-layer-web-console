@@ -11,7 +11,6 @@ export const Header = () => {
 	
 	const handleLogin=()=>{
 		const urlLogin=process.env.REACT_APP_LOGIN_URL;
-		console.log("URL_LOGIN", urlLogin);
 		const newWindow = window.open(urlLogin, "_blank", "noopener,noreferrer");
 		if (newWindow) {
 			// eslint-disable-next-line functional/immutable-data

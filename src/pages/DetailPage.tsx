@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import BpmnAssociatedDataGrid from "../components/DataGrid/BpmnAssociatedDataGrid";
 import DetailBox from "../components/Commons/DetailBox";
 import { ActionAlert } from "../components/Commons/ActionAlert";
-import ModalBpmn from "../components/FormComponents/FormsBpmn/Modal";
+import Modal from "../components/FormComponents/FormsBpmn/Modal";
 import TableColumn from "../components/DataGrid/TableColumn";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
@@ -34,7 +34,7 @@ const DetailPage = () => {
 			<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
 				<Box width={"25%"}>
-					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} />
+					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 				</Box>
 			</Box>
 			<DetailBox detail={detail} />
@@ -45,9 +45,10 @@ const DetailPage = () => {
 			<BpmnDetailButtons
 				openDialog={() => setOpen(true)}
 				type={type}
-				setType={setType}
+				setType={setType} 
+				detail={detail}
 			/>
-			<ModalBpmn
+			<Modal
 				open={open}
 				setOpen={setOpen}
 				type={type}
