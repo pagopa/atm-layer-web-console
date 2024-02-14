@@ -46,7 +46,7 @@ const BpmnDetailPage = () => {
 			<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"}/>
 				<Box width={"25%"}>
-					<ActionAlert openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
+					<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 				</Box>
 			</Box>
 			<DetailBox detail={detail} fields={fields} detailTitle={detailTitle}/>
