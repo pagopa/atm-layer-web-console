@@ -48,7 +48,7 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
-	const [logged, setLogged] = useState(temp?temp:false);
+	const [logged, setLogged] = useState(temp?true:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 	// const navigate = useNavigate();
@@ -83,6 +83,7 @@ function App() {
 	useEffect(() => {
 		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
 	}, []);
+	
 	useEffect(() => {
 		console.log("login utente", logged);
 	}, [logged]);
