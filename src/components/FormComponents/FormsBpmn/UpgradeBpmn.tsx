@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Alert, Grid, Snackbar, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
-import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
@@ -11,11 +11,13 @@ import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
 import { ActionAlert } from "../../Commons/ActionAlert";
 import ROUTES from "../../../routes";
+import checks from "../../../utils/checks";
 
 export const UpgradeBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const { isValidDeployableFilename } = checks();
 
 	const initialValues: UpgradeBpmnDto = {
 		uuid: recordParams.bpmnId,

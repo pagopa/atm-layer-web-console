@@ -1,31 +1,11 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
-
+import { Link } from "@mui/material";
+import { generatePath } from "react-router-dom";
 import { BPMN, DELETE_ASSOCIATION, WORKFLOW_RESOURCE } from "../commons/constants";
+import ROUTES from "../routes";
 
 /* eslint-disable functional/immutable-data */
-export const isValidUUID = (uuid: string) => {
-	const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-	return uuidRegex.test(uuid);
-};
-
-export const isValidDeployableFilename = (filename: string) => {
-	const deployableFileNameRegex = /^[a-zA-Z0-9_-]+$/;
-	return deployableFileNameRegex.test(filename);
-};
-
-export const deployableFilename = (filename: string) => {
-	const fileNameIndex = filename.split("/").lastIndexOf("/");
-	const splittedFileName = filename.split("/");
-	if (isValidDeployableFilename(filename)) {
-		return splittedFileName[fileNameIndex];
-	}
-};
-
-export const isValidResourcesFilename = (filename: string) => {
-	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
-	return resourcesFileNameRegex.test(filename);
-};
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
 	if (field) {
@@ -117,4 +97,23 @@ export const handleSnackbar = (
 	setSeverity(success ? "success" : "error");
 	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);
+};
+
+export const breadCrumbLinkComponent = (message: string) => {
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const hrefValue = generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
+	
+	return [
+		"Home",
+		"Risorse di processo",
+		<Link
+			key="link"
+			href={hrefValue}
+			color="inherit"
+			underline="hover"
+		>
+            Dettaglio risorsa di processo
+		</Link>,
+		message
+	];
 };

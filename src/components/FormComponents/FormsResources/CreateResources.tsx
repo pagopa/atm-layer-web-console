@@ -7,14 +7,15 @@ import UploadField from "../UploadField";
 import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
-import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
+import checks from "../../../utils/checks";
 
 
 export const CreateResources = () => {
 	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
-
+	const { isValidDeployableFilename } = checks();
 	const initialValues: ResourcesDto = {
 		file: undefined,
 		filename: "",

@@ -18,6 +18,8 @@ const checks = () => {
 	const numeDecimaleConSeparatore = /^(-)?\d{1,3}(\.?\d{3})*(,\d{2})?$/; // numero con , per parte decimale (2 cifre) e . per separatore migliaia
 
 	const date_aaaammgg = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/;
+	const uuid=/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+
 	const regexTestField = (field: string, regType: string) => {
 		let regex;
 		switch (regType) {
@@ -60,6 +62,9 @@ const checks = () => {
 			break;
 		case "date_aaaammgg":
 			regex = date_aaaammgg;
+			break;
+		case "uuid":
+			regex = uuid;
 			break;
 		default:
 			break;
@@ -108,6 +113,24 @@ const checks = () => {
 		return regexTestField(number, "numeroIntero");
 	};
 
+	// const isValidResourcesFilename = (filename: string) => {
+	// 	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
+	// 	return resourcesFileNameRegex.test(filename);
+	// };
+
+	const isValidDeployableFilename = (filename: string) => {
+		const deployableFileNameRegex = /^[a-zA-Z0-9_-]+$/;
+		return deployableFileNameRegex.test(filename);
+	};
+	
+	const deployableFilename = (filename: string) => {
+		const fileNameIndex = filename.split("/").lastIndexOf("/");
+		const splittedFileName = filename.split("/");
+		if (isValidDeployableFilename(filename)) {
+			return splittedFileName[fileNameIndex];
+		}
+	};
+
 
 	return {
 		checkIsEmptyString,
@@ -116,7 +139,10 @@ const checks = () => {
 		regexTestField,
 		isInvalidField,
 		isValidNumber,
-		copyArrayObject
+		copyArrayObject,
+		// isValidResourcesFilename,
+		isValidDeployableFilename,
+		deployableFilename
 	};
 };
 
