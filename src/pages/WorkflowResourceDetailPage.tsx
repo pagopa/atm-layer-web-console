@@ -7,8 +7,8 @@ import Modal from "../components/FormComponents/FormsBpmn/Modal";
 import TableColumn from "../components/DataGrid/TableColumn";
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
-import BpmnDetailButtons from "../components/Commons/BpmnDetailButtons";
 import formatValues from "../utils/formatValues";
+import WorkflowResourcesDetailButtons from "../components/Commons/WorkflowResourcesDetailButtons";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const WorkflowResourceDetailPage = () => {
@@ -48,6 +48,12 @@ const WorkflowResourceDetailPage = () => {
 				</Box>
 			</Box>
 			<DetailBox detail={detail} fields={fields} detailTitle={detailTitle}/>
+			<WorkflowResourcesDetailButtons
+				openDialog={() => setOpen(true)}
+				type={type}
+				setType={setType} 
+				detail={detail}
+			/>
 		</BoxPageLayout>
 	);
 };
