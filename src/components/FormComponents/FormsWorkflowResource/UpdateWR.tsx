@@ -1,18 +1,20 @@
 import React, { useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
 import { Ctx } from "../../../DataContext";
 import { UPDATE_WR } from "../../../commons/constants";
+import checks from "../../../utils/checks";
 
 export const UpdateWR = () => {
 	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
+	const { isValidUUID } = checks();
 
 	const initialValues: WRUpdateDto = {
 		uuid: "",

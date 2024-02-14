@@ -4,14 +4,15 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import { RemoveCircleOutline } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { AssociateBpmnDto, BranchConfigDto, TerminalDto } from "../../../model/BpmnModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
+import checks from "../../../utils/checks";
 
 export const MassiveAssociateBpmn = () => {
     const theme = useTheme();
-
+    const { isValidUUID } = checks();
     const initialValues: AssociateBpmnDto = {
         acquirerId: undefined,
         functionType: undefined,

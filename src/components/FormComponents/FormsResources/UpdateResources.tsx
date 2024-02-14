@@ -1,13 +1,14 @@
 import React, { useState, useRef, useContext } from "react";
 import { Grid, TextField } from "@mui/material";
 import { ResourcesUpdateDto } from "../../../model/ResourcesModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchUpgradeResources from "../../../hook/fetch/Resources/fetchUpgradeResources";
 import { Ctx } from "../../../DataContext";
 import { UPDATE_RES } from "../../../commons/constants";
+import checks from "../../../utils/checks";
 
 type Props = {
 	errors: any;
@@ -28,7 +29,7 @@ export const UpdateResources = () => {
 	const [formData, setFormData] = useState<ResourcesUpdateDto>(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
-
+	const { isValidUUID } = checks();
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData({ ...formData, [e.target.name]: e.target.value });

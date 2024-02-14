@@ -1,17 +1,19 @@
 import React, { useContext, useRef, useState } from "react";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
-import { isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import fetchCreateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchCreateWorkflowResource";
 import { Ctx } from "../../../DataContext";
 import { CREATE_WR } from "../../../commons/constants";
+import checks from "../../../utils/checks";
 
 export const CreateWR = () => {
 	// const theme = useTheme();
 	const { abortController } = useContext(Ctx);
+	const { isValidDeployableFilename } = checks();
 
 	const { getFormOptions } = formOption();
 

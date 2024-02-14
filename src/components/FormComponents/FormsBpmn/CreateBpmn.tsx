@@ -7,11 +7,13 @@ import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
-import { handleSnackbar, isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import checks from "../../../utils/checks";
 
 export const CreateBpmn = () => {
 
 	const { getFormOptions } = formOption();
+	const { isValidDeployableFilename } = checks();
 
 	const initialValues: BpmnDto = {
 		file: undefined,

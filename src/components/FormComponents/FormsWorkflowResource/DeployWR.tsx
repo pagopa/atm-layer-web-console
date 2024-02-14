@@ -2,15 +2,17 @@ import React, { useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 // import { useTheme } from "@mui/material/styles";
 import { WRDeployDto } from "../../../model/WorkflowResourceModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
+import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchDeployWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDeployWorkflowResource";
 import { Ctx } from "../../../DataContext";
 import { DEPLOY_WR } from "../../../commons/constants";
+import checks from "../../../utils/checks";
 
 export const DeployWR = () => {
 	const { getFormOptions } = formOption();
+	const { isValidUUID } = checks();
 
 	const initialValues: WRDeployDto = {
 		uuid: ""
