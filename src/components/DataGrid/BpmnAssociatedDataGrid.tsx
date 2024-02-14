@@ -33,7 +33,6 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 			const response = await fetchGetAllAssociatedBpmn({
 				abortController, url: paginatedUrl
 			})();
-			console.log("response", response);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
 				setTableListBpmnAssociated(results);

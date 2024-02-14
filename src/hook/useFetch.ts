@@ -7,8 +7,7 @@ import { Ctx } from "../DataContext";
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
-	const SERVER_API_ORIGIN = endPoint ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	// const SERVER_API_ORIGIN = "https://8o3pf45im8.execute-api.eu-south-1.amazonaws.com/dev/api/v1/model";
+	const SERVER_API_ORIGIN = endPoint&& endPoint!=="" ? endPoint : process.env.REACT_APP_BACKEND_URL;
 	const CODE_SUCCESS = 200;
 
 	const fetchFromServer = async ({
@@ -20,8 +19,7 @@ export default function useFetch(endPoint?: string | undefined) {
 	}: any) => {
 		let data;
 		let status;
-		// const navigate = useNavigate();
-		// const { logged, setLogged } = useContext(Ctx);
+		
 
 
 		let headerRequest = {};
@@ -76,18 +74,14 @@ export default function useFetch(endPoint?: string | undefined) {
 				// (response.status === 0 && response.type === "opaqueredirect") ||
 				response.status === 401
 			) {
-				// window.location.reload();
-				// setLogged(false);
-				// localStorage.removeItem("token");
-				// navigate(ROUTES.LOGIN);
-				console.log("status: " + response?.status);
+				window.location.reload();
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
 			} else if (status !== CODE_SUCCESS && status !== 206) {
-				data = { valuesObj: { message: "Errore" }, status, success: false }; // valuesObj conterrà il messaggio di errore
+				const errorResponse = await response?.json();
+				data = { valuesObj: errorResponse, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
-				console.log("SUCESS!");
 				data = await response?.json(); // parses JSON response into native JavaScript objects
 				data = { valuesObj: data, status, success: true }; // CODE_SUCCESS 200/206
 

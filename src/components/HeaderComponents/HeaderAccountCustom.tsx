@@ -68,7 +68,11 @@ export const HeaderAccountCustom = ({
 				>
 					{rootLink?.element}
 				</ButtonNaked> */}
+<<<<<<< HEAD
 				<Box className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
+=======
+				<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
+>>>>>>> a4c114f5fd5b0d95a62cbf288a4cf5c908521ece
 					{rootLink?.element}
 				</Box>
 
@@ -94,7 +98,11 @@ export const HeaderAccountCustom = ({
 
 					{/* 2. Logged User with Logout CTA */}
 					{loggedUser && (
+<<<<<<< HEAD
 						<Button variant="text" onClick={onLogout} title="Esci">
+=======
+						<Button variant="outlined" onClick={onLogout} title="Esci">
+>>>>>>> a4c114f5fd5b0d95a62cbf288a4cf5c908521ece
                             Esci
 						</Button>
 					)}
