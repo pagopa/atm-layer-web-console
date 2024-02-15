@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { BPMN, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
+import ResourcesFilterComponent from "./ResourcesFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -25,6 +26,15 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 				event.target.name === "status" &&
 					event.target.value === "" &&
 					!(filterBpmnWithoutStatus.some((value => value[1] !== "")))
+			) {
+				getAllList();
+			}
+			break;
+		case RESOURCES:
+			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			if (
+				event.target.name === "status" &&
+					event.target.value === ""
 			) {
 				getAllList();
 			}
@@ -67,6 +77,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		switch (driver) {
 		case BPMN:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+		case RESOURCES:
+			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		default:
