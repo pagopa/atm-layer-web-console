@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
-import { generatePath } from "react-router-dom";
 import { Link } from "@mui/material";
+import { generatePath } from "react-router-dom";
 import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 import ROUTES from "../routes";
 
