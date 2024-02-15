@@ -9,6 +9,8 @@ export const CREATE_WR= "createWR";
 export const DEPLOY_WR= "deployWR";
 export const ROLLBACK_WR= "rollbackWR";
 export const UPDATE_WR= "updateWR";
+export const DELETE_WR= "deleteWR";
+export const DOWNLOAD_WR= "downloadWR";
 
 export const BPMN="BPMN";
 export const RESOURCES="Resources";
