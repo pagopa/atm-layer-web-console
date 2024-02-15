@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import React from "react";
-import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
-import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
-import ResourcesDataGrid from "../components/DataGrid/ResourcesDataGrid";
-import BoxPageLayout from "./Layout/BoxPageLayout";
+import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
+import ResourcesDataGrid from "../../components/DataGrid/ResourcesDataGrid";
+import BoxPageLayout from "../Layout/BoxPageLayout";
 
 const ResourcesPage = () => {
 	const breadComponent = ["Home", "Risorse statiche"];

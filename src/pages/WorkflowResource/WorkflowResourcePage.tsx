@@ -1,9 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
-import WorkflowResourceDataGrid from "../components/DataGrid/WorkflowResourceDataGrid";
-import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
-import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
-import BoxPageLayout from "./Layout/BoxPageLayout";
+import WorkflowResourceDataGrid from "../../components/DataGrid/WorkflowResourceDataGrid";
+import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
+import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
+import BoxPageLayout from "../Layout/BoxPageLayout";
 
 const WorkflowResourcePage = () => {
 	const breadComponent = ["Home", "Risorse aggiuntive per processi"];

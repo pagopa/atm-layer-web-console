@@ -1,13 +1,13 @@
 import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
 import React from "react";
+import StatusFilter from "./StatusFilter";
 
 type Props = {
 	filterValues: any;
 	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
-	menuItems: any;
 };
 
-const WRFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
+const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceItems = [
 		{ label: "Stato", value: "" },
@@ -50,23 +50,7 @@ const WRFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => 
 				/>
 			</Grid>
 			<Grid item xs={4}>
-				<FormControl fullWidth>
-					<TextField
-						id="status"
-						name="status"
-						value={filterValues.status}
-						label="Stato"
-						select
-						onChange={(e) => handleChange(e, e.target.name)}
-						size="small"
-					>
-						{menuItems.map((item: any) => (
-							<MenuItem key={item.value} value={item.value}>
-								{item.label}
-							</MenuItem>
-						))}
-					</TextField>
-				</FormControl>
+				<StatusFilter filterValues={filterValues} handleChange={handleChange} />
 			</Grid>
 			<Grid item xs={4} />
 		</>

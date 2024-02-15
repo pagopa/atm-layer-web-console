@@ -7,63 +7,139 @@ const useColumns: any = () => {
 
 	const { formatDateToString } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, showBpmnId: any, actionColumn: any, deleteColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
+
+		const functionTypeColumn = {
+			field: "functionType",
+			cellClassName: "justifyContentNormal",
+			headerName: "Tipo funzione",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, params.row.functionType),
+			sortable: false,
+			flex: 1
+		};
+
+		const fileNameColumn = {
+			field: "fileName",
+			cellClassName: "justifyContentNormal",
+			headerName: "Nome file",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, params.row.fileName),
+			sortable: false,
+			resizable: false,
+			flex: 1
+		};
+
+		const statusColumn = {
+			field: "status",
+			cellClassName: "justifyContentNormal",
+			headerName: "Stato",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, params.row.status),
+			sortable: false,
+			flex: 1
+		};
+
+		const createdAtColumn = {
+			field: "createdAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "Data creazione",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
+			sortable: false,
+			flex: 1
+		};
+
+		const lastUpdatedAtColumn = {
+			field: "lastUpdatedAt",
+			cellClassName: "justifyContentNormal",
+			headerName: "Data ultima modifica",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
+			sortable: false,
+			flex: 1
+		};
+
+		const createdByColumn = {
+			field: "createdBy",
+			cellClassName: "justifyContentNormal",
+			headerName: "Creata Da",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, params.row.createdBy),
+			sortable: false,
+			flex: 1
+		};
+
+		const lastUpdatedByColumn = {
+			field: "lastUpdatedBy",
+			cellClassName: "justifyContentNormal",
+			headerName: "Modificata Da",
+			align: "left",
+			headerAlign: "left",
+			editable: false,
+			disableColumnMenu: true,
+			renderHeader: showCustomHeader,
+			renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
+			sortable: false,
+			flex: 1
+		};
+
+		const commonActionColumn = (driver: string) => ({
+			field: "actions",
+			cellClassName: "justifyContentNormalRight",
+			headerName: "",
+			align: "right",
+			hideSortIcons: true,
+			disableColumnMenu: true,
+			editable: false,
+			renderCell: (params: any) => actionColumn(params, driver),
+			sortable: false,
+			flex: 0.5
+		});
+
 		switch (driver) {
 		case BPMN:
 			return [
 				{
 					field: "bpmnId",
-					cellClassName: "justifyContentBold",
+					cellClassName: "justifyContentNormal",
 					headerName: "bpmnId",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => showBpmnId(params),
+					renderCell: (params: any) => renderCell(params, params.row.bpmnId),
 					sortable: false,
 					flex: 2
 				},
-				{
-					field: "functionType",
-					cellClassName: "justifyContentNormal",
-					headerName: "Tipo funzione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.functionType),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "fileName",
-					cellClassName: "justifyContentNormal",
-					headerName: "Nome file",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.fileName),
-					sortable: false,
-					resizable: false,
-					flex: 1
-				},
-				{
-					field: "status",
-					cellClassName: "justifyContentNormal",
-					headerName: "Stato",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.status),
-					sortable: false,
-					flex: 1
-				},
+				functionTypeColumn,
+				fileNameColumn,
+				statusColumn,
 				{
 					field: "modelVersion",
 					cellClassName: "justifyContentNormal",
@@ -77,32 +153,8 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 0.5
 				},
-				{
-					field: "createdAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data creazione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data ultima modifica",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
+				createdAtColumn,
+				lastUpdatedAtColumn,
 				{
 					field: "enabled",
 					cellClassName: "justifyContentNormal",
@@ -168,18 +220,7 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "actions",
-					cellClassName: "justifyContentNormalRight",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => actionColumn(params, BPMN),
-					sortable: false,
-					flex: 0.5
-				}
+				commonActionColumn(BPMN)
 			];
 		case BPMN_ASSOCIATED:
 			return [
@@ -249,71 +290,11 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "functionType",
-					cellClassName: "justifyContentNormal",
-					headerName: "Tipo funzione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.functionType),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "createdAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data creazione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data ultima modifica",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "createdBy",
-					cellClassName: "justifyContentNormal",
-					headerName: "Creata Da",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.createdBy),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedBy",
-					cellClassName: "justifyContentNormal",
-					headerName: "Modificata Da",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
-					sortable: false,
-					flex: 1
-				},
+				functionTypeColumn,
+				createdAtColumn,
+				lastUpdatedAtColumn,
+				createdByColumn,
+				lastUpdatedByColumn,
 				{
 					field: "actions",
 					cellClassName: "justifyContentNormal",
@@ -342,19 +323,7 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "fileName",
-					cellClassName: "justifyContentNormal",
-					headerName: "Nome file",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.fileName),
-					sortable: false,
-					flex: 1
-				},
+				fileNameColumn,
 				{
 					field: "resourceType",
 					cellClassName: "justifyContentNormal",
@@ -368,32 +337,8 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "createdAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data creazione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data ultima modifica",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
+				createdAtColumn,
+				lastUpdatedAtColumn,
 				{
 					field: "actions",
 					cellClassName: "justifyContentNormalRight",
@@ -422,19 +367,7 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "fileName",
-					cellClassName: "justifyContentNormal",
-					headerName: "Nome file",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.fileName),
-					sortable: false,
-					flex: 1
-				},
+				fileNameColumn,
 				{
 					field: "resourceType",
 					cellClassName: "justifyContentNormal",
@@ -448,84 +381,12 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "status",
-					cellClassName: "justifyContentNormal",
-					headerName: "Stato",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.status),
-					sortable: false,
-					resizable: false,
-					flex: 1
-				},
-				{
-					field: "createdAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data creazione",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedAt",
-					cellClassName: "justifyContentNormal",
-					headerName: "Data ultima modifica",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "createdBy",
-					cellClassName: "justifyContentNormal",
-					headerName: "Creata Da",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.createdBy),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "lastUpdatedBy",
-					cellClassName: "justifyContentNormal",
-					headerName: "Modificata Da",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "actions",
-					cellClassName: "justifyContentNormalRight",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => actionColumn(params, WORKFLOW_RESOURCE),
-					sortable: false,
-					flex: 0.5
-				}
+				statusColumn,
+				createdAtColumn,
+				lastUpdatedAtColumn,
+				createdByColumn,
+				lastUpdatedByColumn,
+				commonActionColumn(WORKFLOW_RESOURCE)
 			];
 		default:
 			return [];

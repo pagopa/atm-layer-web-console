@@ -54,21 +54,12 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		getAllList();
 	};
 
-	const menuItems = [
-		{ label: "STATO", value: "" },
-		{ label: "CREATED", value: "CREATED" },
-		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
-		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
-		{ label: "DEPLOYED", value: "DEPLOYED" },
-		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
-	];
-
 	const filterType = () => {
 		switch (driver) {
 		case BPMN:
-			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
-			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}
