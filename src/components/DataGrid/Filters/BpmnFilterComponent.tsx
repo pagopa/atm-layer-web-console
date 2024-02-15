@@ -1,10 +1,11 @@
 import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
 import React from "react";
+import StatusFilter from "./StatusFilter";
 
 type Props = {
     filterValues: any;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    menuItems: any;
+    menuItems?: any;
 };
 
 const BpmnFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => (
@@ -60,23 +61,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, menuItems }: Props) =
 			/>
 		</Grid>
 		<Grid item xs={4}>
-			<FormControl fullWidth>
-				<TextField
-					id="status"
-					name="status"
-					value={filterValues.status}
-					label="Stato"
-					select
-					onChange={(e) => handleChange(e)}
-					size="small"
-				>
-					{menuItems.map((item: any) => (
-						<MenuItem key={item.value} value={item.value}>
-							{item.label}
-						</MenuItem>
-					))}
-				</TextField>
-			</FormControl>
+			<StatusFilter filterValues={filterValues} handleChange={handleChange} />
 		</Grid>
 		<Grid item xs={4} />
 	</React.Fragment>

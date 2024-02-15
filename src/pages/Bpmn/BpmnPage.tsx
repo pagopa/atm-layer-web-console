@@ -1,9 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
-import BpmnDataGrid from "../components/DataGrid/BpmnDataGrid";
-import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
-import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
-import BoxPageLayout from "./Layout/BoxPageLayout";
+import BpmnDataGrid from "../../components/DataGrid/BpmnDataGrid";
+import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
+import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
+import BoxPageLayout from "../Layout/BoxPageLayout";
 
 const BpmnPage = () => { 
 	const breadComponent = ["Home", "Risorse di processo"];

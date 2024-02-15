@@ -12,7 +12,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn, deleteColumn);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
@@ -109,38 +109,11 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	};
 
 
-	function showBpmnId(params: GridRenderCellParams) {
-		return (
-			<>
-				{renderCell(
-					params,
-					<Grid container sx={{ width: "100%" }}>
-						<Grid item xs={12} sx={{ width: "100%" }}>
-							<Typography
-								variant="body2"
-								sx={{
-									// fontWeight: "fontWeightMedium",
-									overflow: "hidden",
-									textOverflow: "ellipsis",
-									display: "-webkit-box",
-									WebkitLineClamp: 2,
-									WebkitBoxOrient: "vertical" as const,
-								}}
-							>
-								{params.row.bpmnId}
-							</Typography>
-						</Grid>
-					</Grid>
-				)}
-			</>
-		);
-	};
 	return {
 		buildColumnDefs,
 		actionColumn,
 		renderCell,
 		showCustomHeader,
-		showBpmnId,
 		visibleColumns,
 		deleteColumn
 	};
