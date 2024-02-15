@@ -11,13 +11,15 @@ import ResourcesPage from "./pages/ResourcesPage";
 import WorkflowResourcePage from "./pages/WorkflowResourcePage";
 import HomePage from "./pages/HomePage";
 import BpmnPage from "./pages/BpmnPage";
-import DetailPage from "./pages/DetailPage";
+import BpmnDetailPage from "./pages/BpmnDetailPage";
 import CreateBpmnPage from "./pages/CreateBpmnPage";
 import AssociateBpmnPage from "./pages/AssociateBpmnPage";
 import UpgradeBpmnPage from "./pages/UpgradeBpmnPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPageCallback from "./pages/LoginPageCallback";
 import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
+import CreateWRPage from "./pages/CreateWRPage";
+import WorkflowResourceDetailPage from "./pages/WorkflowResourceDetailPage";
 
 const LocalRoutes = () =>(
 	<BrowserRouter basename="/webconsole">	
@@ -26,12 +28,16 @@ const LocalRoutes = () =>(
 				<Route path="/" element={ <PageLayout children={<HomePage />} />}/>
 				{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
 				<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
-				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<DetailPage />} />} />
-				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
-				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<BpmnDetailPage />} />} />
+				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout children={<WorkflowResourceDetailPage />} />} />
 				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
 				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
 				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+
+				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
+				<Route path={routes.CREATE_WR} element={<PageLayout children={<CreateWRPage />} />} />
+
+				<Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} />
 			</Route>
 			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
 			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />

@@ -3,12 +3,13 @@ import formatValues from "../../utils/formatValues";
 
 type Prop = {
 	detail: any;
+	fields: Array<{ label: string; value: string; format?: (value: any) => string }>;
+	detailTitle: string;
 };
 
-const DetailBox = ({ detail }: Prop) => {
+const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 
 	const theme = useTheme();
-	const { formatDateToString } = formatValues();
 
 	return (
 		<>
@@ -17,7 +18,7 @@ const DetailBox = ({ detail }: Prop) => {
 					<Grid item xs={12}>
 						<Box p={1}>
 							<Typography variant="h5" textAlign="center" noWrap>
-								Dettaglio risorsa di processo
+								{detailTitle}
 							</Typography>
 						</Box>
 					</Grid>
@@ -35,42 +36,16 @@ const DetailBox = ({ detail }: Prop) => {
 			</Grid>
 			<Box p={2}>
 				<Grid container spacing={2}>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Tipo Funzione:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{detail.functionType}
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Nome file:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{detail.fileName}
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Stato:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{detail.status}
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Versione:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{detail.modelVersion}
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Data creazione:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{formatDateToString(detail.createdAt)}
-					</Grid>
-					<Grid item xs={2}>
-						<Typography variant="body1" fontWeight={"bold"}>Data ultima modifica:</Typography>
-					</Grid>
-					<Grid item xs={4}>
-						{formatDateToString(detail.lastUpdatedAt)}
-					</Grid>
+					{fields.map(({ label, value, format }) => (
+						<>
+							<Grid item xs={2}>
+								<Typography variant="body1" fontWeight={"bold"}>{label}:</Typography>
+							</Grid>
+							<Grid item xs={4}>
+								{format ? format(detail[value]) : detail[value]}
+							</Grid>
+						</>
+					))}
 				</Grid>
 			</Box>
 		</>

@@ -2,9 +2,6 @@
 /* eslint-disable functional/immutable-data */
 /* eslint-disable functional/no-let */
 export function base64_decode(base64: string) {  
-	// // eslint-disable-next-line functional/immutable-data
-	// window.Buffer = Buffer;    
-	// const back =  JSON.parse(Buffer.from(base64, "base64").toString("utf-8"));
 	const decoded= atob(base64);
 	console.log(decoded);
 	return decoded;
@@ -18,7 +15,6 @@ export function base64_encode(htmlText: string) {
 
 export const downloadFile_ols = (doc:any, type :string, docName:string) => {
 	if (doc) {
-		// const temp=base64_decode(doc);
 		const binaryString = window.atob(doc);
 		const binaryLen = binaryString.length;
 		const bytes = new Uint8Array(binaryLen);

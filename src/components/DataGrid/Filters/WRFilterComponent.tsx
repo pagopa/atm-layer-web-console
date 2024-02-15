@@ -7,13 +7,13 @@ type Props = {
 	menuItems: any;
 };
 
-const WorkflowResourcesFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
+const WRFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
 
 	const resourceItems = [
+		{ label: "Stato", value: "" },
 		{ label: "BPMN", value: "BPMN" },
 		{ label: "DMN", value: "DMN" },
-		{ label: "FORM", value: "FORM" },
-		{ label: "Stato", value: "" }
+		{ label: "FORM", value: "FORM" }
 	];
 
 	return (
@@ -24,7 +24,7 @@ const WorkflowResourcesFilterComponent = ({ filterValues, handleChange, menuItem
 						id="resourceType"
 						name="resourceType"
 						value={filterValues.resourceType}
-						label="Stato"
+						label="Tipo di risorsa"
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
@@ -73,4 +73,4 @@ const WorkflowResourcesFilterComponent = ({ filterValues, handleChange, menuItem
 	);
 };
 
-export default WorkflowResourcesFilterComponent;
+export default WRFilterComponent;
