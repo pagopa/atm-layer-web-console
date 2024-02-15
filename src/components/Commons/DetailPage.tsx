@@ -75,13 +75,14 @@ const DetailPage = ({
 				</Box>
 			</Box>
 			<DetailBox detail={detail} fields={detailFields} detailTitle={detailTitle} />
+			{DetailButtons()}
+
 			{bpmnAssociateTable &&
                     <BpmnAssociatedDataGrid
                     	buildColumnDefs={buildColumnDefs}
                     	visibleColumns={visibleColumns}
                     />
 			}
-			{DetailButtons()}
 			<Modal
 				open={open}
 				setOpen={setOpen}
