@@ -11,6 +11,7 @@ import { ActionAlert } from "./ActionAlert";
 import DetailBox from "./DetailBox";
 import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";
 import BpmnDetailButtons from "./BpmnDetailButtons";
+import ResourcesDetailButtons from "./ResourcesDetailButtons";
 
 type Props = {
     detailFields: any;
@@ -52,6 +53,13 @@ const DetailPage = ({
 				setType={setType}
 				detail={detail}
 			/>;
+		case RESOURCES:
+			return <ResourcesDetailButtons 
+				openDialog={() => setOpen(true)}
+				type={type}
+				setType={setType}
+				detail={detail}
+			/>;
 		case WORKFLOW_RESOURCE: 
 			return <WorkflowResourcesDetailButtons
 				openDialog={() => setOpen(true)}
@@ -59,8 +67,6 @@ const DetailPage = ({
 				setType={setType}
 				detail={detail}
 			/>;
-		case RESOURCES:
-			return <></>;
 		default:
 			return null;
 		};
