@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
 import { RESOURCES } from "../../commons/constants";
@@ -14,8 +14,8 @@ import { CustomDataGrid } from "./CustomDataGrid";
 export const ResourcesDataGrid = () => {
 
 	const initialValues = {
-		fileName: "",
-		noDeployableResourceType: ""
+		noDeployableResourceType: "",
+		fileName: ""
 	};
 
 	const { abortController } = useContext(Ctx);

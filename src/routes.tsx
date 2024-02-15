@@ -10,6 +10,7 @@ const ROUTES = {
 	WORKFLOW_RESOURCE_DETAILS: "/workflowResourceId/:workflowResourceId",
 	CREATE_BPMN: "/bpmn/create",
 	ASSOCIATE_BPMN: "/bpmn/associate",
+	CREATE_RESOURCE: "/resources/create",
 	UPGRADE_BPMN: "/bpmn/upgrade",
 	CREATE_WR: "/workflow_resources/create",
 	LOGIN: "/login",

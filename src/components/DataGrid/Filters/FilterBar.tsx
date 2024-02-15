@@ -32,21 +32,20 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			break;
 		case RESOURCES:
 			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
-			if (
-				event.target.name === "status" &&
-					event.target.value === ""
-			) {
+			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
+			const resourceCondition = (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
+			if (resourceCondition) {
 				getAllList();
 			}
 			break;
 		case WORKFLOW_RESOURCE:
 			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
 			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
+			const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
 
 			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
-			const resourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
-			if (statusCondition || resourceCondition) {
+			const wrResourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutWRResourceType.some((value => value[1] !== ""))));
+			if (statusCondition || wrResourceCondition) {
 				getAllList();
 			}
 			break;
@@ -78,7 +77,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		case RESOURCES:
-			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		default:
@@ -90,6 +89,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		switch (driver) {
 		case BPMN:
 			return ROUTES.CREATE_BPMN;
+		case RESOURCES:
+			return ROUTES.CREATE_RESOURCE;
 		case WORKFLOW_RESOURCE:
 			return ROUTES.CREATE_WR;
 		default:

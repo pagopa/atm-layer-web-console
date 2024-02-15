@@ -3,11 +3,10 @@ import React from "react";
 
 type Props = {
     filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
-    menuItems: any;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;   
 };
 
-const ResourcesFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => {
+const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceTypes = [
 		{ label: "Stato", value: "" },
@@ -22,7 +21,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange, menuItems }: Pro
 					<TextField
 						id="noDeployableResourceType"
 						name="noDeployableResourceType"
-						value={filterValues.resourceType}
+						value={filterValues.noDeployableResourceType}
 						label="Tipo di risorsa"
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
