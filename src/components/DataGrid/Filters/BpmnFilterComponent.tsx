@@ -5,10 +5,9 @@ import StatusFilter from "./StatusFilter";
 type Props = {
     filterValues: any;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    menuItems?: any;
 };
 
-const BpmnFilterComponent = ({ filterValues, handleChange, menuItems }: Props) => (
+const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
