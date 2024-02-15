@@ -7,6 +7,7 @@ import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
 import Modal from "../FormComponents/FormsBpmn/Modal";
 import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
 import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import ModalWR from "../FormComponents/FormsBpmn/ModalWR";
 import { ActionAlert } from "./ActionAlert";
 import DetailBox from "./DetailBox";
 import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";
@@ -81,14 +82,28 @@ const DetailPage = ({
 				</Box>
 			</Box>
 			<DetailBox detail={detail} fields={detailFields} detailTitle={detailTitle} />
+			{DetailButtons()}
+
 			{bpmnAssociateTable &&
                     <BpmnAssociatedDataGrid
                     	buildColumnDefs={buildColumnDefs}
                     	visibleColumns={visibleColumns}
                     />
 			}
-			{DetailButtons()}
 			<Modal
+				open={open}
+				setOpen={setOpen}
+				type={type}
+				openSnackBar={openSnackBar}
+				setOpenSnackBar={setOpenSnackBar}
+				severity={severity}
+				setSeverity={setSeverity}
+				message={message}
+				setMessage={setMessage}
+				title={title}
+				setTitle={setTitle}
+			/>
+			<ModalWR
 				open={open}
 				setOpen={setOpen}
 				type={type}

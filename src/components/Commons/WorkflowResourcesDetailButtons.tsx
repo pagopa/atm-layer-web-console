@@ -1,7 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes";
-import { DELETE, DEPLOY, DOWNLOAD } from "../../commons/constants";
+import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, ROLLBACK_WR, UPDATE_WR } from "../../commons/constants";
 
 type Props = {
   type?: string;
@@ -10,8 +8,7 @@ type Props = {
   detail: any;
 };
 
-const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
-	const navigate = useNavigate();
+const WorkflowResourcesDetailButtons = ({ setType, openDialog, detail }: Props) => {
 	
 	function handleClick(variable: string) {
 		setType(variable);
@@ -19,25 +16,25 @@ const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: P
 	}
 
 	return (
-		<Box>
+		<Box mt={2} mx={4} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => console.log("aggiornamento")}
+				onClick={() => handleClick(UPDATE_WR)}
 			>
         Aggiorna
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => console.log("rollback")}
+				onClick={() => handleClick(ROLLBACK_WR)}
 			>
         Ripristina
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => handleClick(DEPLOY)}
+				onClick={() => handleClick(DEPLOY_WR)}
 				disabled={detail.status === "DEPLOYED"}
 			>
         Rilascia
@@ -45,12 +42,12 @@ const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: P
 			<Button 
 				sx={{ marginRight: 3 }} 
 				variant="contained" 
-				onClick={() => handleClick(DELETE)}>
+				onClick={() => handleClick(DELETE_WR)}>
         Cancella
 			</Button>
 			<Button 
 				variant="contained" 
-				onClick={() => handleClick(DOWNLOAD)}>
+				onClick={() => handleClick(DOWNLOAD_WR)}>
         Scarica
 			</Button>
 		</Box>

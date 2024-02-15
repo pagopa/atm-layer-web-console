@@ -127,7 +127,7 @@ const useColumns: any = () => {
 				{
 					field: "bpmnId",
 					cellClassName: "justifyContentNormal",
-					headerName: "bpmnId",
+					headerName: "ID risorsa di processo",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -227,7 +227,7 @@ const useColumns: any = () => {
 				{
 					field: "bpmnId",
 					cellClassName: "justifyContentNormal",
-					headerName: "ID Bpmn",
+					headerName: "ID risorsa di processo",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -249,12 +249,12 @@ const useColumns: any = () => {
 					renderCell: (params: any) => renderCell(params, params.row.bpmnModelVersion),
 					sortable: false,
 					resizable: false,
-					flex: 2
+					flex: 1
 				},
 				{
 					field: "acquirerId",
 					cellClassName: "justifyContentNormal",
-					headerName: "ID Acquirer",
+					headerName: "ID Banca",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -267,7 +267,7 @@ const useColumns: any = () => {
 				{
 					field: "branchId",
 					cellClassName: "justifyContentNormal",
-					headerName: "ID Branch",
+					headerName: "ID Filiale",
 					align: "left",
 					headerAlign: "left",
 					editable: false,

@@ -6,6 +6,7 @@ import { Ctx } from "../../DataContext";
 import { BPMN_ASSOCIATED } from "../../commons/constants";
 import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
 import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
+import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import CustomDataGrid from "./CustomDataGrid";
 
 
@@ -51,15 +52,13 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 	}, []);
 
 	return (
-		<Box mt={2}>
+		<BoxPageLayout shadow={true} px={0} mx={4}>
 			<CustomDataGrid
 				disableColumnFilter
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
 				columns={buildColumnDefs(BPMN_ASSOCIATED)}
 				getRowId={(r) => r.bpmnId.concat(r.createdAt)}
 				hideFooterSelectedRowCount={true}
@@ -74,7 +73,7 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllAssociatedBpmn(newPage.page)}
 			/>
-		</Box>
+		</BoxPageLayout>
 	);
 };
 
