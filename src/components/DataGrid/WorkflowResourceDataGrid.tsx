@@ -6,7 +6,7 @@ import { WORKFLOW_RESOURCE } from "../../commons/constants";
 import { GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../../commons/endpoints";
 import fetchGetAllWfResourcesFiltered from "../../hook/fetch/WorkflowResource/fetchGetAllWfResourcesFiltered";
 import { getQueryString } from "../../utils/Commons";
-import { CustomDataGrid } from "./CustomDataGrid";
+import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
 

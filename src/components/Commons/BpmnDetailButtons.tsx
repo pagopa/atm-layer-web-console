@@ -10,7 +10,7 @@ type Props = {
   detail: any;
 };
 
-const BpmnDetailButtons = ({ setType, openDialog, detail }: Props) => {
+const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 	const navigate = useNavigate();
 	
 	function handleClick(variable: string) {

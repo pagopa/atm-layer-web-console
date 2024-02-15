@@ -10,7 +10,7 @@ type Props = {
   detail: any;
 };
 
-const WorkflowResourcesDetailButtons = ({ setType, openDialog, detail }: Props) => {
+const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 	const navigate = useNavigate();
 	
 	function handleClick(variable: string) {

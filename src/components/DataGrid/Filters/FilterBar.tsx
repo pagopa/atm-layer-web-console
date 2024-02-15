@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { BPMN, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import React from "react";
+import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
+import ResourcesFilterComponent from "./ResourcesFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -16,27 +17,30 @@ type Props = {
 
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		switch (driver) {
 		case BPMN:
-			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			if (
-				event.target.name === "status" &&
-					event.target.value === "" &&
-					!(filterBpmnWithoutStatus.some((value => value[1] !== "")))
-			) {
+			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
+				getAllList();
+			}
+			break;
+		case RESOURCES:
+			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
+			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
+			if (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== "")))) {
 				getAllList();
 			}
 			break;
 		case WORKFLOW_RESOURCE:
-			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
+			const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
 
 			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
-			const resourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
-			if (statusCondition || resourceCondition) {
+			const wrResourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutWRResourceType.some((value => value[1] !== ""))));
+			if (statusCondition || wrResourceCondition) {
 				getAllList();
 			}
 			break;
@@ -54,21 +58,14 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		getAllList();
 	};
 
-	const menuItems = [
-		{ label: "STATO", value: "" },
-		{ label: "CREATED", value: "CREATED" },
-		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
-		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },
-		{ label: "DEPLOYED", value: "DEPLOYED" },
-		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
-	];
-
 	const filterType = () => {
 		switch (driver) {
 		case BPMN:
-			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case RESOURCES:
+			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
-			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}
@@ -78,10 +75,12 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		switch (driver) {
 		case BPMN:
 			return ROUTES.CREATE_BPMN;
+		case RESOURCES:
+			return ROUTES.CREATE_RESOURCE;
 		case WORKFLOW_RESOURCE:
 			return ROUTES.CREATE_WR;
 		default:
-			return "/";
+			return ROUTES.HOME;
 		}
 	};
 

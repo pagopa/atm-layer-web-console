@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
 import { RESOURCES } from "../../commons/constants";
@@ -8,14 +8,14 @@ import { getQueryString } from "../../utils/Commons";
 import fetchGetAllResourcesFiltered from "../../hook/fetch/Resources/fetchGetAllResourcesFiltered";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
-import { CustomDataGrid } from "./CustomDataGrid";
+import CustomDataGrid from "./CustomDataGrid";
 
 
 export const ResourcesDataGrid = () => {
 
 	const initialValues = {
-		fileName: "",
-		noDeployableResourceType: ""
+		noDeployableResourceType: "",
+		fileName: ""
 	};
 
 	const { abortController } = useContext(Ctx);
