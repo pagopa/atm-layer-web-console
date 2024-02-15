@@ -8,7 +8,7 @@ import { getQueryString } from "../../utils/Commons";
 import { Ctx } from "../../DataContext";
 import { CustomDataGrid } from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
-import FilterBar from "./FilterBar";
+import FilterBar from "./Filters/FilterBar";
 
 export const BpmnDataGrid = () => {
 

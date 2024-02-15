@@ -5,10 +5,9 @@ import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMappe
 import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
-const BpmnPage = () =>{ 
+const BpmnPage = () => { 
 	const breadComponent = ["Home", "Risorse di processo"];
 	return (
-	
 		<React.Fragment>
 			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"} mt={5} ml={5}>
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />

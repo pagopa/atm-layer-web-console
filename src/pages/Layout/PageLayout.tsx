@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
-// import { LoadingPage } from "../LoadingPage";
 import { Header } from "../../components/HeaderComponents/Header";
 import CustomAppBar from "../../components/Menu/CustomAppBar";
 
@@ -26,7 +25,7 @@ export default function PageLayout({ children }: Readonly<Prop>) {
 						{logged===true&&<CustomAppBar data-testid="customAppBar-id" />}
 					</Box>
 					<Box sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto", width:"100%"}}>
-						{/* loading ? <LoadingPage /> :  */children}
+						{children}
 					</Box>
 				</Box>
 			)}

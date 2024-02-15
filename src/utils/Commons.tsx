@@ -2,7 +2,7 @@
 /* eslint-disable functional/no-let */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { BPMN, DELETE_ASSOCIATION, WORKFLOW_RESOURCE } from "../commons/constants";
+import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 import ROUTES from "../routes";
 
 /* eslint-disable functional/immutable-data */
@@ -55,6 +55,15 @@ export const getQueryString = (URL: string, filterValues: any, driver: string) =
 			queryString = queryString.concat(`&status=${filterValues.status}`);
 		}
 		break;
+	case RESOURCES:
+		if (filterValues?.fileName) {
+			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
+		}
+
+		if (filterValues?.noDeployableResourceType) {
+			queryString = queryString.concat(`&noDeployableResourceType=${filterValues.noDeployableResourceType}`);
+		}
+		break;
 	case WORKFLOW_RESOURCE:
 
 		if (filterValues?.resourceType) {
@@ -102,7 +111,7 @@ export const handleSnackbar = (
 export const breadCrumbLinkComponent = (message: string) => {
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const hrefValue = generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-	
+
 	return [
 		"Home",
 		"Risorse di processo",

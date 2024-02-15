@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BPMN, WORKFLOW_RESOURCE } from "../../commons/constants";
-import ROUTES from "../../routes";
+import { BPMN, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
-import BpmnFilterComponent from "./Filters/BpmnFilterComponent";
-import WorkflowResourcesFilterComponent from "./Filters/WorkflowResourcesFilterComponent";
+import BpmnFilterComponent from "./BpmnFilterComponent";
+import WRFilterComponent from "./WRFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -17,14 +17,29 @@ type Props = {
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
-		setFilterValues({ ...filterValues, [fieldName]: event.target.value });
-		const filterWithoutStatus = Object.entries(	filterValues).filter(el=>el[0]!=="status");
-		if (
-			event.target.name === "status" &&
-			event.target.value === "" &&
-			!(filterWithoutStatus.some((value => value[1] !== "")))
-		) {
-			getAllList();
+		switch (driver) {
+		case BPMN:
+			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+			if (
+				event.target.name === "status" &&
+					event.target.value === "" &&
+					!(filterBpmnWithoutStatus.some((value => value[1] !== "")))
+			) {
+				getAllList();
+			}
+			break;
+		case WORKFLOW_RESOURCE:
+			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
+
+			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
+			const resourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
+			if (statusCondition || resourceCondition) {
+				getAllList();
+			}
+			break;
 		}
 	};
 
@@ -53,7 +68,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		case WORKFLOW_RESOURCE:
-			return <WorkflowResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
+			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} menuItems={menuItems} />;
 		default:
 			return <></>;
 		}
@@ -64,7 +79,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			return ROUTES.CREATE_BPMN;
 		case WORKFLOW_RESOURCE:
-			return ROUTES.CREATE_WORKFLOW_RESOURCES;
+			return ROUTES.CREATE_WR;
 		default:
 			return "/";
 		}

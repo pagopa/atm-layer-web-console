@@ -1,11 +1,12 @@
 import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
-import React from "react";
+import React, { SetStateAction } from "react";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
 import { ActionAlert } from "../../Commons/ActionAlert";
 
 type Props = {
 	handleSubmit: (e: React.FormEvent) => void;
+	setOpenSnackBar?: React.Dispatch<SetStateAction<boolean>>;
 	children?: any;
 	getFormOptions: any;
 	openSnackBar?: boolean;
@@ -16,7 +17,7 @@ type Props = {
 	handleSwitchAssociationFetch?: () => Promise<void>;
 };
 
-export default function FormTemplate({ handleSubmit, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -51,6 +52,7 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions, o
 							</Button>
 						</Box>
 						<ActionAlert
+							setOpenSnackBar={setOpenSnackBar}
 							openSnackBar={openSnackBar}
 							severity={severity}
 							message={message}
