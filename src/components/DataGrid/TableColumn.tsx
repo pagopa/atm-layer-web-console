@@ -10,7 +10,7 @@ import useColumns from "../../hook/Grids/useColumns";
 
 const TableColumn = (setOpen?: any, setType?: any) => {
 
-	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, /* getRecordBpmnParams */ } = useColumns();
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
 		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn, deleteColumn);
 		return cols as Array<GridColDef>;
@@ -20,13 +20,49 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	const theme = useTheme();
 	// const { setRecordParams } = useContext(Ctx);
 
+	function showCustomHeader(params: GridColumnHeaderParams) {
+		return (
+			<Typography
+				color={theme.palette.primary.contrastText}
+				variant="body2"
+				sx={{ outline: "none" }}
+			>
+				{params.colDef.headerName}
+			</Typography>
+		);
+	};
+
+	function renderCell(
+		params: GridRenderCellParams,
+		value: any,
+	) {
+		return (
+			<Box
+				px={1.5}
+				sx={{
+					overflow: "hidden",
+					textOverflow: "ellipsis",
+					display: "inline",
+				}}
+			>
+
+				<Typography
+					variant="body1"
+				>
+					{value}
+				</Typography>
+				
+			</Box>
+		);
+	}
+
 	const actionColumn = (param: any, dataType: string) => {
 		const path = getNavigationPaths(dataType, param);
 		return (
 			<Box
 				display="flex"
 				justifyContent="flex-end"
-				width="100%"
+				width="50%"
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
@@ -62,7 +98,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				<IconButton
 					onClick={actions}
 					sx={{
-						width: "100%%",
+						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
 				>
@@ -72,52 +108,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		);
 	};
 
-	function renderCell(
-		params: GridRenderCellParams,
-		value: ReactNode = params.value,
-	) {
-		return (
-			<Box
-				key={`${value}`}
-				sx={{
-					width: "100%",
-					height: "100%",
-					paddingRight: "18px",
-					paddingLeft: "18px",
-					paddingTop: "-16px",
-					paddingBottom: "-16px",
-					WebkitBoxOrient: "vertical" as const,
-				}}
-			>
-				<Box
-					sx={{
-						overflow: "hidden",
-						textOverflow: "ellipsis",
-						display: "-webkit-box",
-						WebkitLineClamp: 2,
-						WebkitBoxOrient: "vertical" as const,
-						width: "100%",
-						color: params.row.status === "SUSPENDED" ? "text.disabled" : undefined,
-						fontSize: "14px",
-					}}
-				>
-					{value}
-				</Box>
-			</Box>
-		);
-	}
-
-	function showCustomHeader(params: GridColumnHeaderParams) {
-		return (
-			<Typography
-				color="colorTextPrimary"
-				variant="body2"
-				sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1, color: "#ffffff" }}
-			>
-				{params.colDef.headerName}
-			</Typography>
-		);
-	};
 
 	function showBpmnId(params: GridRenderCellParams) {
 		return (

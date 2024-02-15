@@ -6,11 +6,11 @@ import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
 import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { getQueryString } from "../../utils/Commons";
 import { Ctx } from "../../DataContext";
-import { CustomDataGrid } from "./CustomDataGrid";
+import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 
-export const BpmnDataGrid = () => {
+export default function BpmnDataGrid() {
 
 	const initialValues = {
 		functionType: "",
@@ -28,7 +28,7 @@ export const BpmnDataGrid = () => {
 	});
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
-	const [columnVisibilityModel, setColumnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
+	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
@@ -71,18 +71,18 @@ export const BpmnDataGrid = () => {
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				autoHeight={true}
+				// autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
+				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
-				rowHeight={55}
+				rowHeight={50}
 				rows={tableListBpmn}
 				rowCount={totalItemsFound}
-				sortingMode="server"
+				// sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
-				paginationMode="server"
+				// paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
@@ -91,5 +91,3 @@ export const BpmnDataGrid = () => {
 		</Box>
 	);
 };
-
-export default BpmnDataGrid;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BPMN, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
@@ -16,10 +16,10 @@ type Props = {
 
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		switch (driver) {
 		case BPMN:
-			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
 			if (
 				event.target.name === "status" &&
@@ -30,7 +30,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			}
 			break;
 		case WORKFLOW_RESOURCE:
-			setFilterValues({ ...filterValues, [fieldName]: event.target.value });
+			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
 			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
 
@@ -81,7 +81,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case WORKFLOW_RESOURCE:
 			return ROUTES.CREATE_WR;
 		default:
-			return "/";
+			return ROUTES.HOME;
 		}
 	};
 

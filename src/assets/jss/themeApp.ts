@@ -60,35 +60,8 @@ declare module "@mui/material/styles" {
 		"caption-semibold"?: React.CSSProperties;
 	}
 
-	//   interface ThemeBox {
-	//     customBox?: {
-	//       border?: string;
-	//       borderLite?: string;
-	//     };
-	// colorVariant?: {
-	//   main?: string;
-	//   customBorderColor?: string;
-	// };
-	// cardStyle?: {
-	//   border?: string;
-	//   borderColor?: string;
-	// };
 }
-//   interface ThemeBoxOptions {
-//     customBox?: {
-//       border?: string;
-//       borderLite?: string;
-//     };
-// colorVariant?: {
-//   main?: string;
-//   customBorderColor?: string;
-// };
-// cardStyle?: {
-//   border?: string;
-//   borderColor?: string;
-// };
-//   }
-// }
+
 
 declare module "@mui/material/Typography" {
 	interface TypographyPropsVariantOverrides {
@@ -135,11 +108,6 @@ declare module "@mui/material/Button" {
 	}
 }
 
-// declare module "@mui/material/Card" {
-// 	interface CardPropsVariantOverrides {
-// 		homepage: true;
-// 	}
-// }
 
 const foundation: Theme = createTheme({
 	breakpoints: {
@@ -154,12 +122,6 @@ const foundation: Theme = createTheme({
 	mixins: {
 		toolbar: {
 			minHeight: 120,
-			// "@media (min-width:0px) and (orientation: landscape)": {
-			//   minHeight: 48
-			// },
-			// "@media (min-width:600px)": {
-			//   minHeight: 64
-			// }
 		},
 	},
 	palette: {
@@ -172,7 +134,7 @@ const foundation: Theme = createTheme({
 			main: colorPrimary,
 			light: "#EBFDFF",
 			dark: "#00707B",
-			contrastText: "#FFF",
+			contrastText: "#fff",
 		},
 		secondary: {
 			main: "#0073E6",
@@ -364,9 +326,9 @@ export const themeApp: Theme = createTheme(foundation, {
   }, */
 		},
 		body2: {
-			fontSize: pxToRem(16),
+			fontSize: pxToRem(18),
 			// lineHeight: 1.4 /* ~20px */, // TODO: tolto da quello del tema originale
-			fontWeight: foundation.typography.fontWeightRegular,
+			fontWeight: foundation.typography.fontWeightMedium,
 			letterSpacing: 0.15,
 		},
 		button: {

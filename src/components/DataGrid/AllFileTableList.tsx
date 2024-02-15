@@ -1,7 +1,7 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useEffect } from "react";
-import { CustomDataGrid } from "./CustomDataGrid";
+import CustomDataGrid from "./CustomDataGrid";
 
 type Props = {
 	tableList: any;

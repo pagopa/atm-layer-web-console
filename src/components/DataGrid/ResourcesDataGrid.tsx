@@ -8,7 +8,7 @@ import { getQueryString } from "../../utils/Commons";
 import fetchGetAllResourcesFiltered from "../../hook/fetch/Resources/fetchGetAllResourcesFiltered";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
-import { CustomDataGrid } from "./CustomDataGrid";
+import CustomDataGrid from "./CustomDataGrid";
 
 
 export const ResourcesDataGrid = () => {

@@ -13,7 +13,7 @@ const useColumns: any = () => {
 			return [
 				{
 					field: "bpmnId",
-					cellClassName: "justifyContentBold",
+					cellClassName: "justifyContentNormal",
 					headerName: "bpmnId",
 					align: "left",
 					headerAlign: "left",

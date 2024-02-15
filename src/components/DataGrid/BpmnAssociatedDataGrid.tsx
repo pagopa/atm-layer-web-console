@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { useParams, generatePath } from "react-router-dom";
 import { Ctx } from "../../DataContext";
 import { BPMN_ASSOCIATED } from "../../commons/constants";
 import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
 import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
-import { CustomDataGrid } from "./CustomDataGrid";
-import TableColumn from "./TableColumn";
+import CustomDataGrid from "./CustomDataGrid";
+
 
 type Props = {
 	buildColumnDefs: (driver: string) => Array<GridColDef>;
