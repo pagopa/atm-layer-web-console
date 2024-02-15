@@ -151,7 +151,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 0.5
+					flex: 1
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
@@ -305,7 +305,7 @@ const useColumns: any = () => {
 					editable: false,
 					renderCell: (params: any) => deleteColumn(params),
 					sortable: false,
-					flex: 0.5
+					flex: 1
 				}
 			];
 		case RESOURCES:

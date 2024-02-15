@@ -22,19 +22,14 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case BPMN:
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			if (
-				event.target.name === "status" &&
-					event.target.value === "" &&
-					!(filterBpmnWithoutStatus.some((value => value[1] !== "")))
-			) {
+			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
 				getAllList();
 			}
 			break;
 		case RESOURCES:
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
-			const resourceCondition = (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== ""))));
-			if (resourceCondition) {
+			if (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== "")))) {
 				getAllList();
 			}
 			break;

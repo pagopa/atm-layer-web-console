@@ -1,6 +1,5 @@
-import { Typography, Grid, Box, IconButton, useTheme } from "@mui/material";
+import { Typography, Box, IconButton, useTheme } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -62,7 +61,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			<Box
 				display="flex"
 				justifyContent="flex-end"
-				width="50%"
+				width="30%"
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
