@@ -58,36 +58,40 @@ export default function BpmnDataGrid() {
 
 	return (
 		<Box p={2}>
-			<FilterBar
-				filterValues={filterValues}
-				setFilterValues={setFilterValues}
-				setTableList={setTableListBpmn}
-				getAllList={getAllBpmnList} 
-				newFilterValues={initialValues}
-				driver={BPMN}
-			/>
-			<CustomDataGrid
-				disableColumnFilter
-				disableColumnSelector
-				disableDensitySelector
-				disableRowSelectionOnClick
-				// autoHeight={true}
-				className="CustomDataGrid"
-				// columnBuffer={6}
-				columns={columns}
-				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
-				hideFooterSelectedRowCount={true}
-				rowHeight={50}
-				rows={tableListBpmn}
-				rowCount={totalItemsFound}
-				// sortingMode="server"
-				columnVisibilityModel={{ ...columnVisibilityModel }}
-				// paginationMode="server"
-				pagination
-				pageSizeOptions={[10]}
-				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
-			/>
+			<Box mb={1}>
+				<FilterBar
+					filterValues={filterValues}
+					setFilterValues={setFilterValues}
+					setTableList={setTableListBpmn}
+					getAllList={getAllBpmnList} 
+					newFilterValues={initialValues}
+					driver={BPMN}
+				/>
+			</Box>
+			<Box mt={2}>
+				<CustomDataGrid
+					disableColumnFilter
+					disableColumnSelector
+					disableDensitySelector
+					disableRowSelectionOnClick
+					// autoHeight={true}
+					className="CustomDataGrid"
+					// columnBuffer={6}
+					columns={columns}
+					getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
+					hideFooterSelectedRowCount={true}
+					rowHeight={55}
+					rows={tableListBpmn}
+					rowCount={totalItemsFound}
+					// sortingMode="server"
+					columnVisibilityModel={{ ...columnVisibilityModel }}
+					// paginationMode="server"
+					pagination
+					pageSizeOptions={[10]}
+					paginationModel={{ ...paginationModel }}
+					onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
+				/>
+			</Box>
 		</Box>
 	);
 };

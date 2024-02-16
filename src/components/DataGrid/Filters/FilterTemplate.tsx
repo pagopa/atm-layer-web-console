@@ -37,7 +37,7 @@ const FilterTemplate = ({
 						alignItems={"center"}
 						justifyContent={"space-between"}
 					>
-						<Box>
+						<Box my={1}>
 							<Button variant="contained" onClick={() => navigate(filterRoutes)}>
                 Crea Risorsa
 							</Button>

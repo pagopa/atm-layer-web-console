@@ -5,7 +5,7 @@ import { resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
-import fetchUpgradeResources from "../../../hook/fetch/Resources/fetchUpgradeResources";
+import fetchUpdateResources from "../../../hook/fetch/Resources/fetchUpdateResources";
 import { Ctx } from "../../../DataContext";
 import { UPDATE_RES } from "../../../commons/constants";
 import checks from "../../../utils/checks";
@@ -54,9 +54,9 @@ export const UpdateResources = () => {
 		
 
 		if (validateForm()) {
-			const createBpmn = new Promise((resolve) => {
+			const updateResources = new Promise((resolve) => {
 				if (formData.uuid !== undefined) {
-					void fetchUpgradeResources({ abortController, body: formData }, formData.uuid)()
+					void fetchUpdateResources({ abortController, body: formData })()
 						.then((response: any) => {
 							if (response) {
 								resolve({
@@ -75,7 +75,7 @@ export const UpdateResources = () => {
 				}
 			});
 
-			createBpmn
+			updateResources
 				.then((res) => {
 					console.log("UPGRADE RESOURCE RESPONSE", res);
 					return res;

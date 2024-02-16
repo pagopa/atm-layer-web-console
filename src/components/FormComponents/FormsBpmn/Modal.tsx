@@ -9,7 +9,6 @@ import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
-import ROUTES from "../../../routes";
 import { downloadFile } from "../../../commons/decode";
 
 
@@ -44,7 +43,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
@@ -65,7 +64,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
@@ -87,7 +86,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 
 			} catch (error) {
@@ -105,7 +104,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
