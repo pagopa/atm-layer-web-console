@@ -386,7 +386,7 @@ const useColumns: any = () => {
 				lastUpdatedAtColumn,
 				createdByColumn,
 				lastUpdatedByColumn,
-				commonActionColumn(WORKFLOW_RESOURCE)
+				// commonActionColumn(WORKFLOW_RESOURCE)
 			];
 		default:
 			return [];

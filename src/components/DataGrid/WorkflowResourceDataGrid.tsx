@@ -27,7 +27,7 @@ export const WorkflowResourceDataGrid = () => {
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(WORKFLOW_RESOURCE);
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
-	const rowHeight = 55;
+	const rowHeight = 50;
 
 	const getAllWfResourcesList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_WORKFLOW_RESOURCES_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
@@ -70,18 +70,18 @@ export const WorkflowResourceDataGrid = () => {
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				autoHeight={true}
+				// autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
+				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.workflowResourceId.concat(r.createdAt)}
 				hideFooterSelectedRowCount={true}
 				rowHeight={rowHeight}
 				rows={tableListWfResources}
 				rowCount={totalItemsFound}
-				sortingMode="server"
+				// sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
-				paginationMode="server"
+				// paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
