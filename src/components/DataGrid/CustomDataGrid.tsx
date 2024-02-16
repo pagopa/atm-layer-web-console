@@ -31,6 +31,8 @@ const StyledDataGrid = styled(DataGrid)({
 	".MuiDataGrid-columnSeparator": { display: "none" },
 	".MuiDataGrid-cell ": { padding: "0px", borderBottom: "none" },
 	".MuiDataGrid-virtualScroller": {
+		minHeight:"100px",
+		overflowX: "hidden",
 		"&.Mui-hovered": {
 			backgroundColor: "inherit",
 		},
