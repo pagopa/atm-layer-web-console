@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Button } from "@mui/material";
+import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
@@ -41,11 +41,11 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 						{title}
 					</AlertTitle>
 					{errorCode && errorCode === "ATMLM_4000047" ?
-						<React.Fragment>
+						<Typography variant="body1">
 							{message + ", vuoi sostiuire l'associazione per questa banca?"}
 							{<p><Button onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
-						</React.Fragment>
-						: message
+						</Typography>
+						: <Typography variant="body1">message</Typography>
 					}
 				</Alert>
 			}
