@@ -48,7 +48,7 @@ export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, 
 						</Grid>
 						<Box display="flex" justifyContent="flex-end" mt={2}>
 							<Button variant="contained" onClick={handleSubmit}>
-								Submit
+								Conferma
 							</Button>
 						</Box>
 						<ActionAlert

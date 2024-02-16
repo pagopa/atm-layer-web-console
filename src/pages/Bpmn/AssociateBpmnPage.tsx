@@ -2,11 +2,12 @@ import { Box } from "@mui/system";
 import MinimalAssociateBpmn from "../../components/FormComponents/FormsBpmn/AssociateBpmn";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
-import { breadCrumbLinkComponent } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRootComp } from "../../utils/Commons";
 import FormPageTemplate from "../Layout/FormPageTemplate";
 
 const AssociateBpmnPage = () => {
-	const breadComponent = breadCrumbLinkComponent("Associazione risorsa di processo");
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const breadComponent = breadCrumbLinkComponent(commonBreadRootComp(recordParams), "Associazione risorsa di processo");
 
 	return (
 		<>

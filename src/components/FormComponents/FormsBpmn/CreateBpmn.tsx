@@ -74,7 +74,7 @@ export const CreateBpmn = () => {
 					console.log("Response positive: ", response);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				}
 			} catch (error) {
 				console.log("Response negative: ", error);

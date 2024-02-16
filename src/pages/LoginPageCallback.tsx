@@ -1,7 +1,7 @@
 /* eslint-disable functional/no-let */
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { Ctx } from "../DataContext";
 import routes from "../routes";
 
@@ -15,13 +15,15 @@ const LoginPageCallback = () => {
 		if(token && logged===false) {
 			setLogged(true);
 			localStorage.setItem("jwt", token);
-			navigate(routes.HOME);
+			setTimeout(() => {
+				navigate(routes.HOME);
+			}, 5000);
 		}
 	}, []);
 
 	return(
-		<Box m={1} p={1}>
-			<Typography variant="h4">Benvenuto!</Typography>
+		<Box display={"flex"} justifyContent={"center"} alignItems={"center"} sx={{ maxHeight: "calc(100vh-110px)" }}>
+			<CircularProgress size={20} />
 		</Box>		
 	);
 };
