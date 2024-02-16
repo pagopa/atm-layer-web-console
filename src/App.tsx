@@ -6,7 +6,6 @@ import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
 import routes from "./routes";
-import NoPage from "./pages/NoPage";
 import ResourcesPage from "./pages/Resources/ResourcesPage";
 import WorkflowResourcePage from "./pages/WorkflowResource/WorkflowResourcePage";
 import HomePage from "./pages/HomePage";
@@ -20,6 +19,7 @@ import LoginPageCallback from "./pages/LoginPageCallback";
 import PrivateRoute from "./components/NavigationComponents/PrivateRoute";
 import CreateWRPage from "./pages/WorkflowResource/CreateWRPage";
 import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourceDetailPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const LocalRoutes = () =>(
 	<BrowserRouter basename="/webconsole">	
@@ -41,7 +41,7 @@ const LocalRoutes = () =>(
 			{/* </Route> */}
 			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
 			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />
-			<Route path="*" element={<NoPage />} />
+			<Route path="*" element={<ErrorPage />} />
 		
 		</Routes>
 		

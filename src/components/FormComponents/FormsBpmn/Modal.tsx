@@ -44,7 +44,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
@@ -65,7 +65,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
@@ -87,7 +87,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 
 			} catch (error) {
@@ -105,7 +105,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
 				} else {
 					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
