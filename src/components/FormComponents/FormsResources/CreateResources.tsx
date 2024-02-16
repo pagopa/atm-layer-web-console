@@ -7,7 +7,7 @@ import UploadField from "../UploadField";
 import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
-import { resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import checks from "../../../utils/checks";
 
 
@@ -15,17 +15,22 @@ export const CreateResources = () => {
 	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
-	const { isValidDeployableFilename } = checks();
+	const { isValidResourcesFilename } = checks();
 	const initialValues: ResourcesDto = {
 		file: undefined,
 		filename: "",
 		resourceType: "",
 		path:"",
+		description:""
 	};
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
     
 
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +41,8 @@ export const CreateResources = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
-			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
-			path: formData.path ?? "",
+			filename: formData.filename ? isValidResourcesFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
+			resourceType: formData.resourceType ? "" : "Campo obbligatorio"
 		};
 
 		setErrors(newErrors);
@@ -50,41 +54,31 @@ export const CreateResources = () => {
 		setFormData({ ...formData, file: undefined });
 	};
 
-	const changeResourceType = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({...formData, resourceType: e.target.value});
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
 
 		if (validateForm()) {
-			const createBpmn = new Promise((resolve) => {
-				void fetchCreateResources({ abortController, body: formData })()
-					.then((response: any) => {
-						if (response) {
-							resolve({
-								data: response,
-								type: "SUCCESS"
-							});
-						} else {
-							resolve({ 
-								type: "ERROR"
-							});
-						}
-					})
-					.catch((err) => {
-						console.log("ERROR", err);
-					});
-			});
+			const postData = new FormData();
+			if (formData.file && formData.filename && formData.resourceType) {
+				postData.append("file", formData.file);
+				postData.append("filename", formData.filename.replace(/\s/g, ""));
+				postData.append("resourceType", formData.resourceType);
+			}
+			
+			try {
+				console.log("append", postData);
+				const response = await fetchCreateResources({ abortController, body: postData })();
+				if (response?.success) {
+					console.log("Response positive: ", response);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				} else {
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				}
+			} catch (error) {
+				console.log("Response negative: ", error);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
 
-			createBpmn
-				.then((res) => {
-					console.log("CREATE RESOURCE RESPONSE", res);
-					return res;
-				})
-				.catch((err) => 
-					console.log("CREATE RESOURCE ERROR", err)
-				);
 		}
 	};
 
@@ -92,7 +86,7 @@ export const CreateResources = () => {
 		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_RES)} >
 			
 			<UploadField 
-				titleField="File della risorsa" 
+				titleField="File della risorsa statica" 
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
@@ -103,8 +97,8 @@ export const CreateResources = () => {
 			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
-					id="fileName"
-					name="fileName"
+					id="filename"
+					name="filename"
 					label={"Nome del file"}
 					placeholder={"Nome del file"}
 					size="small"
@@ -137,12 +131,27 @@ export const CreateResources = () => {
 					fullWidth
 					id="path"
 					name="path"
-					label={"Percorso nella cartella di destinazione"}
-					placeholder={"(Opzionale)"}
+					label={"Percorso nella cartella di destinazione (Opzionale)"}
+					placeholder={"Percorso nella cartella di destinazione (Opzionale)"}
 					size="small"
 					value={formData.path}
+					onChange={handleChange}
 					error={Boolean(errors.path)}
 					helperText={errors.path}>
+				</TextField>
+			</Grid>
+			<Grid item xs={12} my={1}>
+				<TextField   
+					fullWidth
+					id="description"
+					name="description"
+					label={"Descrizione (Opzionale)"}
+					placeholder={"Descrizione (Opzionale)"}
+					size="small"
+					value={formData.description}
+					onChange={handleChange}
+					error={Boolean(errors.description)}
+					helperText={errors.description}>
 				</TextField>
 			</Grid>
 			

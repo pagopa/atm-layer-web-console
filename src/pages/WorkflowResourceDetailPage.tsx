@@ -6,7 +6,7 @@ import BreadCrumb from "../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../components/NavigationComponents/BreadCrumbMapper";
 import formatValues from "../utils/formatValues";
 import WorkflowResourcesDetailButtons from "../components/Commons/WorkflowResourcesDetailButtons";
-import ModalWR from "../components/FormComponents/FormsBpmn/ModalWR";
+import ModalWR from "../components/FormComponents/FormsWorkflowResource/ModalWR";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const WorkflowResourceDetailPage = () => {

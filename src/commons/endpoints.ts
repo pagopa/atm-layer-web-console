@@ -14,3 +14,5 @@ export const WR_UPDATE = "/workflow-resource/update/:workflowResourceId";
 export const WR_ROLLBACK = "/workflow-resource/rollback/:workflowResourceId";
 export const WR_DEPLOY = "/workflow-resource/deploy/:workflowResourceId";
 export const WR_DOWNLOAD = "/workflow-resource/downloadFrontEnd/:workflowResourceId";
+export const RESOURCES_UPDATE = "/resources/:resourceId";
+export const RESOURCES_CREATE = "/resources";
