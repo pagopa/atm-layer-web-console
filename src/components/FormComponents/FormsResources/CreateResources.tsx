@@ -20,7 +20,7 @@ export const CreateResources = () => {
 		file: undefined,
 		filename: "",
 		resourceType: "",
-		path:"",
+		path: "",
 		description:""
 	};
 
@@ -63,10 +63,11 @@ export const CreateResources = () => {
 				postData.append("file", formData.file);
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("resourceType", formData.resourceType);
+				postData.append("path", formData.path ?? "");
 			}
 			
 			try {
-				console.log("append", postData);
+
 				const response = await fetchCreateResources({ abortController, body: postData })();
 				if (response?.success) {
 					console.log("Response positive: ", response);

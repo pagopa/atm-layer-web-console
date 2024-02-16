@@ -18,7 +18,7 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 	}
 
 	return (
-		<Box>
+		<Box mt={2} mx={4} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
