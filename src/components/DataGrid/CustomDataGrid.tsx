@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { alpha, styled } from "@mui/material";
 import { DataGrid, DataGridProps } from "@mui/x-data-grid";
 
 const StyledDataGrid = styled(DataGrid)({
@@ -18,6 +18,7 @@ const StyledDataGrid = styled(DataGrid)({
 		wordWrap: "break-word !important",
 		lineHeight: "25px !important",
 	},
+	
 	"&.MuiDataGrid-columnHeaders": { borderBottom: "none !important", padding: "0px" },
 	".justifyContentBold": {
 		fontSize: "16px",
@@ -34,6 +35,7 @@ const StyledDataGrid = styled(DataGrid)({
 			backgroundColor: "inherit",
 		},
 	},
+
 	".justifyContentNormal": {
 		fontSize: "16px",
 		fontWeight: "normal",
@@ -51,6 +53,16 @@ const StyledDataGrid = styled(DataGrid)({
 			justifyContent: "right",
 		},
 	},
+	".MuiTablePagination-displayedRows":{
+		fontWeight:400
+	},
+	".MuiTablePagination-actions .MuiIconButton-root:hover":{
+		backgroundColor: alpha("#00A1B0", 0.08),
+		".MuiSvgIcon-root":{
+			color:"#00A1B0"
+		}
+	},
+
 });
 
 const CustomDataGrid: React.FC<DataGridProps> = (props) => <StyledDataGrid {...props} />;
