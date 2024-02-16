@@ -11,85 +11,85 @@ import { DEPLOY_WR } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 
 export const DeployWR = () => {
-	const { getFormOptions } = formOption();
-	const { regexTestField } = checks();
+	// const { getFormOptions } = formOption();
+	// const { regexTestField } = checks();
 
-	const initialValues: WRDeployDto = {
-		uuid: ""
-	};
+	// const initialValues: WRDeployDto = {
+	// 	uuid: ""
+	// };
 
-	const [formData, setFormData] = useState<WRDeployDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
-	const { abortController } = useContext(Ctx);
+	// const [formData, setFormData] = useState<WRDeployDto>(initialValues);
+	// const [errors, setErrors] = useState(initialValues);
+	// const { abortController } = useContext(Ctx);
 
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-		resetErrors(errors, setErrors, e.target.name);
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
+	// const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+	// 	resetErrors(errors, setErrors, e.target.name);
+	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
+	// };
 	
-	const validateForm = () => {
-		const newErrors = {
-			uuid: formData.uuid === "" ? "Campo obbligatorio" : regexTestField(formData.uuid, "uuid") ? "" : "uuid non valido",
-		};
+	// const validateForm = () => {
+	// 	const newErrors = {
+	// 		uuid: formData.uuid === "" ? "Campo obbligatorio" : regexTestField(formData.uuid, "uuid") ? "" : "uuid non valido",
+	// 	};
 
-		setErrors(newErrors);
+	// 	setErrors(newErrors);
 
-		return Object.values(newErrors).every((error) => !error);
-	};
+	// 	return Object.values(newErrors).every((error) => !error);
+	// };
 
-	const handleSubmit = (e: React.FormEvent) => {
+	// const handleSubmit = (e: React.FormEvent) => {
 		
-		if (validateForm()) {
-			const deployWorkflowResource = new Promise((resolve) => {
-				void fetchDeployWorkflowResource({ abortController, body: formData }, formData.uuid)()
-					.then((response: any) => {
-						if (response) {
-							resolve({
-								data: response,
-								type: "SUCCESS"
-							});
-						} else {
-							resolve({
-								type: "ERROR"
-							});
-						}
-					})
-					.catch((err) => {
-						console.log("ERROR", err);
-					});
-			});
+	// 	if (validateForm()) {
+	// 		const deployWorkflowResource = new Promise((resolve) => {
+	// 			void fetchDeployWorkflowResource({ abortController, body: formData }, formData.uuid)()
+	// 				.then((response: any) => {
+	// 					if (response) {
+	// 						resolve({
+	// 							data: response,
+	// 							type: "SUCCESS"
+	// 						});
+	// 					} else {
+	// 						resolve({
+	// 							type: "ERROR"
+	// 						});
+	// 					}
+	// 				})
+	// 				.catch((err) => {
+	// 					console.log("ERROR", err);
+	// 				});
+	// 		});
 
-			deployWorkflowResource
-				.then((res) => {
-					console.log("DEPLOY WORKFLOW RESOURCE RESPONSE", res);
-					return res;
-				})
-				.catch((err) =>
-					console.log("DEPLOY WORKFLOW RESOURCE BPMN ERROR", err)
-				);
-		};
-	};
+	// 		deployWorkflowResource
+	// 			.then((res) => {
+	// 				console.log("DEPLOY WORKFLOW RESOURCE RESPONSE", res);
+	// 				return res;
+	// 			})
+	// 			.catch((err) =>
+	// 				console.log("DEPLOY WORKFLOW RESOURCE BPMN ERROR", err)
+	// 			);
+	// 	};
+	// };
 
-	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DEPLOY_WR)}>
+	// return (
+	// 	<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(DEPLOY_WR)}>
 			
-			<Grid item xs={12} my={1}>
-				<TextField
-					fullWidth
-					id="uuid"
-					name="uuid"
-					label={"ID file"}
-					placeholder={"ID file"}
-					size="small"
-					value={formData.uuid}
-					onChange={handleChange}
-					error={Boolean(errors.uuid)}
-					helperText={errors.uuid}
-				/>
-			</Grid>
+	// 		<Grid item xs={12} my={1}>
+	// 			<TextField
+	// 				fullWidth
+	// 				id="uuid"
+	// 				name="uuid"
+	// 				label={"ID file"}
+	// 				placeholder={"ID file"}
+	// 				size="small"
+	// 				value={formData.uuid}
+	// 				onChange={handleChange}
+	// 				error={Boolean(errors.uuid)}
+	// 				helperText={errors.uuid}
+	// 			/>
+	// 		</Grid>
 	
-		</FormTemplate>
-	);
+	// 	</FormTemplate>
+	// );
 };
 
 export default DeployWR;

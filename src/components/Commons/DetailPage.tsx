@@ -7,10 +7,12 @@ import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
 import Modal from "../FormComponents/FormsBpmn/Modal";
 import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
 import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import ModalWR from "../FormComponents/FormsBpmn/ModalWR";
 import { ActionAlert } from "./ActionAlert";
 import DetailBox from "./DetailBox";
 import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";
 import BpmnDetailButtons from "./BpmnDetailButtons";
+import ResourcesDetailButtons from "./ResourcesDetailButtons";
 
 type Props = {
     detailFields: any;
@@ -52,6 +54,13 @@ const DetailPage = ({
 				setType={setType}
 				detail={detail}
 			/>;
+		case RESOURCES:
+			return <ResourcesDetailButtons 
+				openDialog={() => setOpen(true)}
+				type={type}
+				setType={setType}
+				detail={detail}
+			/>;
 		case WORKFLOW_RESOURCE: 
 			return <WorkflowResourcesDetailButtons
 				openDialog={() => setOpen(true)}
@@ -59,8 +68,6 @@ const DetailPage = ({
 				setType={setType}
 				detail={detail}
 			/>;
-		case RESOURCES:
-			return <></>;
 		default:
 			return null;
 		};
@@ -84,6 +91,19 @@ const DetailPage = ({
                     />
 			}
 			<Modal
+				open={open}
+				setOpen={setOpen}
+				type={type}
+				openSnackBar={openSnackBar}
+				setOpenSnackBar={setOpenSnackBar}
+				severity={severity}
+				setSeverity={setSeverity}
+				message={message}
+				setMessage={setMessage}
+				title={title}
+				setTitle={setTitle}
+			/>
+			<ModalWR
 				open={open}
 				setOpen={setOpen}
 				type={type}

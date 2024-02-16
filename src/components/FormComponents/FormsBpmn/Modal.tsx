@@ -9,7 +9,6 @@ import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import fetchDownloadBpmn from "../../../hook/fetch/Bpmn/fetchDownloadBpmn";
 import ModalTemplate from "../template/ModalTemplate";
-import ROUTES from "../../../routes";
 import { downloadFile } from "../../../commons/decode";
 
 

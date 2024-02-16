@@ -339,18 +339,19 @@ const useColumns: any = () => {
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
-				{
-					field: "actions",
-					cellClassName: "justifyContentNormalRight",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => actionColumn(params, RESOURCES),
-					sortable: false,
-					flex: 0.5
-				}
+				// {
+				// 	field: "actions",
+				// 	cellClassName: "justifyContentNormalRight",
+				// 	headerName: "",
+				// 	align: "right",
+				// 	hideSortIcons: true,
+				// 	disableColumnMenu: true,
+				// 	editable: false,
+				// 	renderCell: (params: any) => actionColumn(params, RESOURCES),
+				// 	sortable: false,
+				// 	flex: 0.5
+				// },
+				commonActionColumn(RESOURCES)				
 			];
 		case WORKFLOW_RESOURCE:
 			return [
@@ -439,8 +440,7 @@ const useColumns: any = () => {
 		case BPMN:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
 		case RESOURCES:
-		 
-		 break;
+		     return generatePath(ROUTES.RESOURCES_DETAILS, { resourceId: param.row.resourceId });
 		case WORKFLOW_RESOURCE:
 			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
 		default:

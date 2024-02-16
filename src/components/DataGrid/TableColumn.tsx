@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ReactNode } from "react";
-import { BPMN, DELETE_ASSOCIATION } from "../../commons/constants";
+import { DELETE_ASSOCIATION } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 // import { Ctx } from "../../DataContext";
 
