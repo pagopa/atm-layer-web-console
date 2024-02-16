@@ -45,7 +45,7 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 							{message + ", vuoi sostiuire l'associazione per questa banca?"}
 							{<p><Button onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
 						</Typography>
-						: <Typography variant="body1">message</Typography>
+						: <Typography variant="body1">{message}</Typography>
 					}
 				</Alert>
 			}
