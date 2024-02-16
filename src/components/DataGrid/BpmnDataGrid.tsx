@@ -80,7 +80,7 @@ export default function BpmnDataGrid() {
 					columns={columns}
 					getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 					hideFooterSelectedRowCount={true}
-					rowHeight={50}
+					rowHeight={55}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
 					// sortingMode="server"
