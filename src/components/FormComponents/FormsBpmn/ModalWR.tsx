@@ -7,7 +7,7 @@ import ModalTemplate from "../template/ModalTemplate";
 import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
 import fetchRollbackWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchRollbackWorkflowResource";
 import fetchDeployWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDeployWorkflowResource";
-import { DEPLOY_WR, DOWNLOAD_WR, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
+import { BPMN, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
 import fetchDownloadWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDownloadWorkflowResource";
 import { downloadFile } from "../../../commons/decode";
 
@@ -88,8 +88,23 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					console.log(response.valuesObj.fileContent);
-					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
+					switch (recordParams.resourceS3Type) {
+					case BPMN: {
+						downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
+						break;
+					} 
+					case DMN: {
+						downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "dmn");
+						break;
+					}
+					case FORM: {
+						downloadFile(response.valuesObj.fileContent,"application/json",recordParams.fileName, "form");
+						break;
+					}
+					default: return;
+					}
+					
+					
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
