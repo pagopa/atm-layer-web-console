@@ -4,7 +4,7 @@ import BoxPageLayout from "./Layout/BoxPageLayout";
 
 const ErrorPage = () => (
 	<BoxPageLayout >
-		<Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} height={"calc(100vh - 220px)"}> 
+		<Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} height={"80vh"}> 
 			<Box >
 				<ReportIcon color="error" sx={{ fontSize: 100 }} />
 			</Box>

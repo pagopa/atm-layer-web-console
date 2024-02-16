@@ -9,6 +9,15 @@ export const Header = () => {
 	const { logged, setLogged } = useContext(Ctx);
 	const navigate = useNavigate();
 	
+	const handleLogin=()=>{
+		const urlLogin=process.env.REACT_APP_LOGIN_URL;
+		const newWindow = window.open(urlLogin, "_blank", "noopener,noreferrer");
+		if (newWindow) {
+			// eslint-disable-next-line functional/immutable-data
+			newWindow.opener = null;
+		}
+	};
+	
 	const handleLogout=()=>{
 		setLogged(false);
 		localStorage.removeItem("jwt");
@@ -17,6 +26,7 @@ export const Header = () => {
 
 	return(
 		<HeaderAccountCustom
+			onLogin={handleLogin}
 			onLogout={handleLogout}
 			loggedUser={logged}
 			rootLink={{

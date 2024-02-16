@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { render, screen, getByRole } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "../Header";

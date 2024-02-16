@@ -100,7 +100,7 @@ export const HeaderAccountCustom = ({
 					)}
 
 					{/* 3. User not logged with Login CTA */}
-					{/* {!loggedUser && (
+					{!loggedUser && (
 						<Button
 							variant="contained"
 							size="small"
@@ -109,7 +109,7 @@ export const HeaderAccountCustom = ({
 						>
                             Accedi
 						</Button>
-					)} */}
+					)}
 				</Stack>
 			</Stack>
 		</Container>
