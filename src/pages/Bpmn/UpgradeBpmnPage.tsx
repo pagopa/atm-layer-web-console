@@ -2,12 +2,13 @@ import { Box } from "@mui/material";
 import UpgradeBpmn from "../../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
-import { breadCrumbLinkComponent } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRootComp } from "../../utils/Commons";
 import FormPageTemplate from "../Layout/FormPageTemplate";
 
 const UpgradeBpmnPage = () => {
 	
-	const breadComponent = breadCrumbLinkComponent("Aggiornamento risorsa di processo");
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const breadComponent = breadCrumbLinkComponent(commonBreadRootComp(recordParams), "Aggiornamento risorsa di processo");
 
 	return(
 		<>

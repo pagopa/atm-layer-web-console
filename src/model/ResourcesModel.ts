@@ -3,9 +3,14 @@ export type ResourcesDto = {
     filename: string;
     resourceType: string;
     path?: string;
+    description?: string;
 };
 
 export type ResourcesUpdateDto = {
-    uuid: string;
     file?: File;
+    uuid: string;  
+};
+
+export type ResourcesDeleteDto = {
+    uuid: string;
 };

@@ -102,27 +102,34 @@ export const handleSnackbar = (
 	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
 	valueMessage?: string
 ) => {
-	setMessage(success ? "Operazione eseguita con successo" : valueMessage ? valueMessage : "Operazione fallita");
 	setSeverity(success ? "success" : "error");
+	setMessage(success ? "Operazione riuscita" : valueMessage ? valueMessage : "Operazione fallita");
 	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);
 };
 
-export const breadCrumbLinkComponent = (message: string) => {
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const hrefValue = generatePath(`/webconsole/${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-
-	return [
-		"Home",
-		"Risorse di processo",
+export const breadCrumbLinkComponent = (arrLinks: Array<{ rootName: string; rootValue: string }>, message: string) => [
+	"Home",
+	...arrLinks.map((e, i) =>
 		<Link
 			key="link"
-			href={hrefValue}
+			href={e.rootValue}
 			color="inherit"
 			underline="hover"
 		>
-            Dettaglio risorsa di processo
-		</Link>,
-		message
-	];
-};
+			{e.rootName}
+		</Link>	
+	),
+	message
+];
+
+export const commonBreadRootComp = (recordParams: any) => [
+	{
+		rootValue: `/webconsole${ROUTES.BPMN}`,
+		rootName: "Risorse di processo"
+	},
+	{
+		rootValue: generatePath(`/webconsole${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }),
+		rootName: "Dettaglio risorsa di processo"
+
+	}];

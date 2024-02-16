@@ -1,12 +1,13 @@
 import { BPMN } from "../../commons/constants";
-import BpmnDetailButtons from "../../components/Commons/BpmnDetailButtons";
 import DetailPage from "../../components/Commons/DetailPage";
+import ROUTES from "../../routes";
+import { breadCrumbLinkComponent } from "../../utils/Commons";
 import formatValues from "../../utils/formatValues";
 
 const BpmnDetailPage = () => {
 
 	const { formatDateToString } = formatValues();
-	const breadComponent = [ "Home", "Risorse di processo", "Dettaglio risorsa di processo"];
+	const breadComponent = breadCrumbLinkComponent([{rootValue: `/webconsole${ROUTES.BPMN}`, rootName: "Risorse di processo"}], "Dettaglio risorsa di processo");
 	const fields = [
 		{ label: "Tipo Funzione", value: "functionType" },
 		{ label: "Nome file", value: "fileName" },

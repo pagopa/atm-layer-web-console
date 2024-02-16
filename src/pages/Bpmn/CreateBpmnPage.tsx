@@ -3,10 +3,12 @@ import CreateBpmn from "../../components/FormComponents/FormsBpmn/CreateBpmn";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import FormPageTemplate from "../Layout/FormPageTemplate";
+import ROUTES from "../../routes";
+import { breadCrumbLinkComponent } from "../../utils/Commons";
 
 
 const CreateBpmnPage = () => {
-	const breadComponent = ["Home", "Risorse di processo", "Creazione risorsa di processo"];
+	const breadComponent = breadCrumbLinkComponent([{rootValue: `/webconsole${ROUTES.BPMN}`, rootName: "Risorse di processo"}], "Creazione risorsa di processo");
 
 	return(
 		<>

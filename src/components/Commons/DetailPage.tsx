@@ -7,7 +7,7 @@ import BreadCrumb from "../NavigationComponents/BreadcrumbComponent";
 import Modal from "../FormComponents/FormsBpmn/Modal";
 import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
 import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
-import ModalWR from "../FormComponents/FormsBpmn/ModalWR";
+import ModalWR from "../FormComponents/FormsWorkflowResource/ModalWR";
 import { ActionAlert } from "./ActionAlert";
 import DetailBox from "./DetailBox";
 import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";

@@ -113,10 +113,10 @@ const checks = () => {
 		return regexTestField(number, "numeroIntero");
 	};
 
-	// const isValidResourcesFilename = (filename: string) => {
-	// 	const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
-	// 	return resourcesFileNameRegex.test(filename);
-	// };
+	const isValidResourcesFilename = (filename: string) => {
+		const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
+		return resourcesFileNameRegex.test(filename);
+	};
 
 	const isValidDeployableFilename = (filename: string) => {
 		const deployableFileNameRegex = /^[a-zA-Z0-9_-]+$/;
@@ -140,7 +140,7 @@ const checks = () => {
 		isInvalidField,
 		isValidNumber,
 		copyArrayObject,
-		// isValidResourcesFilename,
+		isValidResourcesFilename,
 		isValidDeployableFilename,
 		deployableFilename
 	};
