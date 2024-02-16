@@ -1,5 +1,6 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import formatValues from "../../utils/formatValues";
+import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 
 type Prop = {
 	detail: any;
@@ -24,30 +25,31 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 					</Grid>
 				</Grid>
 			</Box>
-
-			<Grid container spacing={2}>
-				<Grid item xs={12}>
-					<Box bgcolor={theme.palette?.primary?.main} p={1}>
-						<Typography variant="h6" fontWeight={"bold"} color={"white"}>
-							{detail.fileName}
-						</Typography>
-					</Box>
-				</Grid>
-			</Grid>
-			<Box p={2}>
+			{/* <Box my={2}  sx={{border:"1px solid" + theme.palette.primary.main}}> */}
+			<BoxPageLayout shadow={true} px={0} mx={4} my={3}>
 				<Grid container spacing={2}>
-					{fields.map(({ label, value, format }) => (
-						<>
-							<Grid item xs={2}>
-								<Typography variant="body1" fontWeight={"bold"}>{label}:</Typography>
-							</Grid>
-							<Grid item xs={4}>
-								{format ? format(detail[value]) : detail[value]}
-							</Grid>
-						</>
-					))}
+					<Grid item xs={12}>
+						<Box bgcolor={theme.palette?.primary?.main} py={1} px={2}>
+							<Typography variant="h6" fontWeight={"bold"} color={"white"}>
+								{detail.fileName}
+							</Typography>
+						</Box>
+					</Grid>
 				</Grid>
-			</Box>
+				<Box p={2}>
+					<Grid container spacing={2}>
+						{fields.map(({ label, value, format }) => (
+							<Grid item xs={4} key={label}>
+								<Box display={"flex"}>
+									<Typography variant="body2" >{label}: &nbsp;</Typography>
+									<Typography variant="body1" >{format ? format(detail[value]) : detail[value]}</Typography>
+								</Box>
+							</Grid>
+
+						))}
+					</Grid>
+				</Box>
+			</BoxPageLayout>
 		</>
 	);
 };

@@ -3,7 +3,8 @@ import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { BPMN, DELETE_ASSOCIATION } from "../../commons/constants";
+import { ReactNode } from "react";
+import { DELETE_ASSOCIATION } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 // import { Ctx } from "../../DataContext";
 
@@ -24,7 +25,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			<Typography
 				color={theme.palette.primary.contrastText}
 				variant="body2"
-				sx={{ outline: "none" }}
 			>
 				{params.colDef.headerName}
 			</Typography>
@@ -33,7 +33,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 	function renderCell(
 		params: GridRenderCellParams,
-		value: any,
+		value: ReactNode = params.value,
 	) {
 		return (
 			<Box
@@ -44,13 +44,9 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 					display: "inline",
 				}}
 			>
-
-				<Typography
-					variant="body1"
-				>
+				<Typography variant="body1"	>
 					{value}
 				</Typography>
-				
 			</Box>
 		);
 	}

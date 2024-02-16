@@ -30,7 +30,6 @@ export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, fi
 				disableRowSelectionOnClick
 				autoHeight={true}
 				className="CustomDataGrid"
-				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 				hideFooterSelectedRowCount={true}
@@ -41,8 +40,6 @@ export const AllFileTableList = ({ tableList, columns, columnVisibilityModel, fi
 				sortingMode="server"
 				columnVisibilityModel={{ ...columnVisibilityModel }}
 				pageSizeOptions={[100]}
-				// paginationModel={paginationModel}
-				// onPaginationModelChange={setPaginationModel}
 				paginationMode="server"
 			/>
 		</Box>

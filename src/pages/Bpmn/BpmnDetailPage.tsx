@@ -15,12 +15,11 @@ const BpmnDetailPage = () => {
 		{ label: "Data creazione", value: "createdAt", format: formatDateToString},
 		{ label: "Data ultima modifica", value: "lastUpdatedAt", format: formatDateToString},
 	];
-	const detailTitle = "Dettaglio risorsa di processo";
 
 	return (
 		<DetailPage 
 			detailFields={fields}
-			detailTitle={detailTitle}
+			detailTitle={"Dettaglio risorsa di processo"}
 			breadComponent={breadComponent}
 			detailButtonsComponentType={BPMN}
 			bpmnAssociateTable={true}/>

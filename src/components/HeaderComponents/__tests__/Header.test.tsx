@@ -1,7 +1,7 @@
-import React from "react";
 import { render, screen, getByRole } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "../Header";
+import { Ctx } from "../../../DataContext";
 
 beforeEach(() => {
 	jest.spyOn(console, "error").mockImplementation(() => {});
@@ -9,11 +9,23 @@ beforeEach(() => {
 });
 
 describe("Header test", () => {
-	test("First render", () => {
+	test("Test render Header component with login false", () => {
 		render(
-			<BrowserRouter>
-				<Header />
-			</BrowserRouter>
+			<Ctx.Provider value={{ logged: false }}>
+				<BrowserRouter>
+					<Header />
+				</BrowserRouter>
+			</Ctx.Provider>
+		);
+	});
+
+	test("Test render Header component with login true", () => {
+		render(
+			<Ctx.Provider value={{ logged: true }}>
+				<BrowserRouter>
+					<Header />
+				</BrowserRouter>
+			</Ctx.Provider>
 		);
 	});
 });

@@ -10,3 +10,7 @@ export const BPMN_DEPLOY = "/bpmn/deploy/:bpmnId/version/:modelVersion";
 export const BPMN_DELETE = "/bpmn/disable/:bpmnId/version/:modelVersion";
 export const UPDATE_ASSOCIATE_BPMN = "/bpmn/associations/:bpmnId/version/:modelVersion";
 export const BPMN_DOWNLOAD = "/bpmn/downloadFrontEnd/:bpmnId/version/:modelVersion";
+export const WR_UPDATE = "/workflow-resource/update/:workflowResourceId";
+export const WR_ROLLBACK = "/workflow-resource/rollback/:workflowResourceId";
+export const WR_DEPLOY = "/workflow-resource/deploy/:workflowResourceId";
+export const WR_DOWNLOAD = "/workflow-resource/downloadFrontEnd/:workflowResourceId";
