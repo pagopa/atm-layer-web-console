@@ -102,7 +102,7 @@ export const handleSnackbar = (
 	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
 	valueMessage?: string
 ) => {
-	setMessage(success ? "Operazione riuscita" : valueMessage ? valueMessage : "Operazione fallita");
+	setMessage(success ? "Operazione eseguita con successo" : valueMessage ? valueMessage : "Operazione fallita");
 	setSeverity(success ? "success" : "error");
 	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);

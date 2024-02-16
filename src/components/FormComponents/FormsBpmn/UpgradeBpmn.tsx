@@ -59,11 +59,11 @@ export const UpgradeBpmn = () => {
 
 	const handleSnackbar = (success: boolean) => {
 		if (success) {
-			setMessage("Operazione riuscita");
+			setMessage("Operazione eseguita con successo");
 			setSeverity("success");
 			setTitle("Successo");
 		} else {
-			setMessage("Operazione fallita");
+			setMessage("Qualcosa è andato storto");
 			setSeverity("error");
 			setTitle("Errore");
 		}
