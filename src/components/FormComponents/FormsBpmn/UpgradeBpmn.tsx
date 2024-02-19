@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Alert, Grid, Snackbar, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
-import { resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
@@ -57,19 +57,6 @@ export const UpgradeBpmn = () => {
 		setFormData({ ...formData, file: undefined });
 	};
 
-	const handleSnackbar = (success: boolean) => {
-		if (success) {
-			setMessage("Operazione eseguita con successo");
-			setSeverity("success");
-			setTitle("Successo");
-		} else {
-			setMessage("Qualcosa è andato storto");
-			setSeverity("error");
-			setTitle("Errore");
-		}
-		setOpenSnackBar(true);
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		console.log("Error: ", errors);
@@ -88,20 +75,27 @@ export const UpgradeBpmn = () => {
 			try {
 				const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
 				if (response?.success) {
-					handleSnackbar(true);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} else {
-					handleSnackbar(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				}
 			} catch (error) {
 				console.error("ERROR", error);
-				handleSnackbar(false);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 	};
 
 	return (
 		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message} title={title}>
+			<FormTemplate
+				handleSubmit={handleSubmit}
+				getFormOptions={getFormOptions(UPGRADE_BPMN)}
+				openSnackBar={openSnackBar}
+				severity={severity}
+				message={message}
+				title={title}
+			>
 				<UploadField
 					titleField="File BPMN del processo"
 					name={"file"}
