@@ -17,4 +17,5 @@ export const WR_DEPLOY = "/workflow-resource/deploy/:workflowResourceId";
 export const WR_DOWNLOAD = "/workflow-resource/downloadFrontEnd/:workflowResourceId";
 export const RESOURCES_UPDATE = "/resources/:resourceId";
 export const RESOURCES_CREATE = "/resources";
+export const RESOURCES_DELETE = "/resources/disable/:uuid";
 export const WR_DELETE = "/workflow-resource/disable/:workflowResourceId";
