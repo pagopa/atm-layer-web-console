@@ -10,7 +10,7 @@ import fetchAssociateBpmn from "../../../hook/fetch/Bpmn/fetchAssociateBpmn";
 import { BPMN_ASSOCIATE, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchUpdateBpmnAssociated from "../../../hook/fetch/Bpmn/fetchUpdateBpmnAssociated";
 
-const MinimalAssociateBpmn = () => {
+const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
@@ -95,6 +95,7 @@ const MinimalAssociateBpmn = () => {
 			title={title}
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+			setOpenSnackBar={setOpenSnackBar}
 		>
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -152,4 +153,4 @@ const MinimalAssociateBpmn = () => {
 
 };
 
-export default MinimalAssociateBpmn;
+export default AssociateBpmn;

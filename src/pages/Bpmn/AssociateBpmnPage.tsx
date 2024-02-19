@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import MinimalAssociateBpmn from "../../components/FormComponents/FormsBpmn/AssociateBpmn";
+import AssociateBpmn from "../../components/FormComponents/FormsBpmn/AssociateBpmn";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import { breadCrumbLinkComponent, commonBreadRootComp } from "../../utils/Commons";
@@ -15,7 +15,7 @@ const AssociateBpmnPage = () => {
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />
 			</Box>
 			<FormPageTemplate>
-				<MinimalAssociateBpmn />
+				<AssociateBpmn />
 			</FormPageTemplate>
 		</>);
 

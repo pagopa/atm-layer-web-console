@@ -98,32 +98,36 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<>
-			<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)} openSnackBar={openSnackBar} severity={severity} message={message} title={title}>
-				<UploadField
-					titleField="File BPMN del processo"
-					name={"file"}
-					file={formData.file}
-					clearFile={clearFile}
-					error={errors.file}
-					setFormData={setFormData}
-					formData={formData} />
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="filename"
-						name="filename"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.filename}
-						onChange={handleChange}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename} />
-				</Grid>
-			</FormTemplate>
-		</>
 
+		<FormTemplate 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} title={title}
+		>
+			<UploadField
+				titleField="File BPMN del processo"
+				name={"file"}
+				file={formData.file}
+				clearFile={clearFile}
+				error={errors.file}
+				setFormData={setFormData}
+				formData={formData} />
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="filename"
+					name="filename"
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
+					size="small"
+					value={formData.filename}
+					onChange={handleChange}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
+			</Grid>
+		</FormTemplate>
 	);
 };
 
