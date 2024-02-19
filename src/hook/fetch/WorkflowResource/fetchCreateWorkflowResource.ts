@@ -1,8 +1,9 @@
+import { CREATE_WR } from "../../../commons/endpoints";
 import fetch from "../../useFetch";
 
 const fetchCreateWorkflowResource = ({abortController, body}:any) => async () => {
-	const fetchCreationWorkFlow= fetch(process.env.REACT_APP_BACKEND_URL);
-	const data = await fetchCreationWorkFlow({urlEndpoint: "/workflow-resource", method: "POST", body, abortController});
+	const fetchFromServer = fetch();
+	const data = await fetchFromServer({urlEndpoint: CREATE_WR, method: "POST", body, abortController});
 	return data;
 };
 
