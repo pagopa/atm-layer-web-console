@@ -1,5 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../commons/constants";
 
 
 type Props = {
@@ -22,8 +23,19 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => console.log("aggiornamento")}>
+				onClick={() => handleClick(UPDATE_RES)}>
                 Aggiorna
+			</Button>
+			<Button 
+				sx={{ marginRight: 3 }} 
+				variant="contained" 
+				onClick={() => handleClick(DELETE_RES)}>
+        Cancella
+			</Button>
+			<Button 
+				variant="contained" 
+				onClick={() => console.log("scaricando")}>
+        Scarica
 			</Button>
 		</Box>
 	);

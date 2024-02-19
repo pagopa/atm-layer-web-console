@@ -35,7 +35,6 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 		switch (type) {
 
 		case UPDATE_WR: {
-			
 			break;
 		}
 		case ROLLBACK_WR: {
@@ -120,8 +119,7 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
-			break;
-		    
+			break;    
 		}
 		default: return;
 		};
@@ -134,8 +132,7 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 					contentText={"Carica il file aggiornato"}
 					open={open}
 					setOpen={setOpen}
-					recordParams={recordParams} handleSnackbar={handleSnackbar} abortController={abortController} setMessage={setMessage} setSeverity={setSeverity} setTitle={setTitle} setOpenSnackBar={setOpenSnackBar}
-				/>
+					recordParams={recordParams} handleSnackbar={handleSnackbar} abortController={abortController} setMessage={setMessage} setSeverity={setSeverity} setTitle={setTitle} setOpenSnackBar={setOpenSnackBar} type={UPDATE_WR}				/>
 			}
 			{type === ROLLBACK_WR &&
 				<ModalTemplate
