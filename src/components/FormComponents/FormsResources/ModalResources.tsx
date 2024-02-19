@@ -7,7 +7,6 @@ import { handleSnackbar } from "../../../utils/Commons";
 import fetchDeleteResources from "../../../hook/fetch/Resources/fetchDeleteResources";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
-import fetchDownloadResources from "../../../hook/fetch/Resources/fetchDownloadResources";
 
 
 type Props = {
@@ -48,19 +47,6 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 			break;
 		}
 		case DOWNLOAD_RES:{
-			try {
-				const response = await fetchDownloadResources({ abortController, URL: recordParams.cdnUrl })();
-				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				}
-			} catch (error) {
-				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
 			break;
 		}
 		case UPDATE_RES: {
