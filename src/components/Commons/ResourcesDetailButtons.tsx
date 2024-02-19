@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../commons/constants";
 
 
@@ -11,7 +10,6 @@ type Props = {
   };
 
 const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
-	const navigate = useNavigate();
 
 	function handleClick(variable: string) {
 		setType(variable);
@@ -34,7 +32,7 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 			</Button>
 			<Button 
 				variant="contained" 
-				onClick={() => console.log("scaricando")}>
+				onClick={() => handleClick(DOWNLOAD_RES)}>
         Scarica
 			</Button>
 		</Box>

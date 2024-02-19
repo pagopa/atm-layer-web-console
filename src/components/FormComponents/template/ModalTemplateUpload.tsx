@@ -1,6 +1,5 @@
 import React, { forwardRef, useState }  from "react";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
@@ -24,15 +23,6 @@ type Props = {
 	setTitle: any;
 	setOpenSnackBar: any;
 };
-
-const Transition = forwardRef(function Transition(
-	props: TransitionProps & {
-		children: React.ReactElement<any, any>;
-	},
-	ref: React.Ref<unknown>,
-) {
-	return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export default function ModalTemplateUpload({ type, titleModal, contentText, open, setOpen, recordParams, handleSnackbar, abortController, setMessage, setSeverity, setTitle, setOpenSnackBar}: Props) {
 
@@ -120,8 +110,6 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 	return (
 		<Dialog
 			open={open}
-			TransitionComponent={Transition}
-			keepMounted
 			onClose={() => setOpen(false)}
 			fullWidth
 			maxWidth={"sm"}

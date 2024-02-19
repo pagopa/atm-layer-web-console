@@ -1,12 +1,13 @@
 import { SetStateAction, useContext } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { DELETE_RES, UPDATE_RES } from "../../../commons/constants";
+import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
 import { handleSnackbar } from "../../../utils/Commons";
 import fetchDeleteResources from "../../../hook/fetch/Resources/fetchDeleteResources";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
+import fetchDownloadResources from "../../../hook/fetch/Resources/fetchDownloadResources";
 
 
 type Props = {
@@ -27,7 +28,6 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 	
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		switch (type) {
@@ -38,6 +38,22 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}else {
+					setOpen(false);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				}
+			} catch (error) {
+				console.error("ERROR", error);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
+			break;
+		}
+		case DOWNLOAD_RES:{
+			try {
+				const response = await fetchDownloadResources({ abortController, URL: recordParams.cdnUrl })();
+				if (response?.success) {
+					setOpen(false);
+					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}
@@ -60,6 +76,14 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 		<ModalTemplate
 			titleModal={"Cancellazione risorsa statica"}
 			contentText={"Sei sicuro di voler cancellare questa risorsa statica?"}
+			open={open}
+			setOpen={setOpen}
+			handleSubmit={handleSubmit}
+		/>}
+			{type === DOWNLOAD_RES &&
+		<ModalTemplate
+			titleModal={"Scarica risorsa statica"}
+			contentText={"Sei sicuro di voler scaricare questa risorsa statica?"}
 			open={open}
 			setOpen={setOpen}
 			handleSubmit={handleSubmit}
