@@ -85,7 +85,7 @@ export default function BpmnDataGrid() {
 					rowCount={totalItemsFound}
 					// sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
-					// paginationMode="server"
+					paginationMode="server"
 					pagination
 					pageSizeOptions={[10]}
 					paginationModel={{ ...paginationModel }}
