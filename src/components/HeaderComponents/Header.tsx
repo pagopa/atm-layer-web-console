@@ -11,11 +11,13 @@ export const Header = () => {
 	
 	const handleLogin=()=>{
 		const urlLogin=process.env.REACT_APP_LOGIN_URL;
-		const newWindow = window.open(urlLogin, "_blank", "noopener,noreferrer");
-		if (newWindow) {
-			// eslint-disable-next-line functional/immutable-data
-			newWindow.opener = null;
-		}
+		console.log("url login", urlLogin);
+		window.open(urlLogin, "_blank");
+		// window.open(urlLogin, "_blank",  "noopener,noreferrer");
+		// if (newWindow) {
+		// 	// eslint-disable-next-line functional/immutable-data
+		// 	newWindow.opener = null;
+		// }
 	};
 	
 	const handleLogout=()=>{
