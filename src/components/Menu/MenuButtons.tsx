@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, useTheme } from "@mui/material";
-// import menuOption from "../../hook/menuOption";
 import IconBox from "../Commons/IconBox";
 
 type Props = {
