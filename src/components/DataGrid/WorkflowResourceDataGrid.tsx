@@ -80,7 +80,7 @@ export const WorkflowResourceDataGrid = () => {
 				rowCount={totalItemsFound}
 				// sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
-				// paginationMode="server"
+				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
