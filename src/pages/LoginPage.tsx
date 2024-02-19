@@ -7,14 +7,14 @@ import BoxPageLayout from "./Layout/BoxPageLayout";
 const LoginPage = () => {
 	const { logged } = useContext(Ctx);
 
-	// const handleLogin=()=>{
-	// 	const urlLogin=process.env.REACT_APP_LOGIN_URL;
-	// 	const newWindow = window.open(urlLogin, "_blank", "noopener,noreferrer");
-	// 	if (newWindow) {
-	// 		// eslint-disable-next-line functional/immutable-data
-	// 		newWindow.opener = null;
-	// 	}
-	// };
+	const handleLogin=()=>{
+		const urlLogin=process.env.REACT_APP_LOGIN_URL;
+		const newWindow = window.open(urlLogin, "_blank", "noopener,noreferrer");
+		if (newWindow) {
+			// eslint-disable-next-line functional/immutable-data
+			newWindow.opener = null;
+		}
+	};
 
 	return(
 
@@ -22,18 +22,20 @@ const LoginPage = () => {
 			<Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} height={"calc(100vh - 220px)"}> 
 				<Box mb={5}>
 					<Typography variant="h6">Accedi alla console</Typography>
-
 				</Box>
-				{/* <Box>
-					<Button
-						variant="contained"
-						size="large"
-						onClick={handleLogin}
-						title="Accedi"
-					>
-                Accedi
-					</Button>
-				</Box> */}
+				{!logged && (
+					<Box width={"25%"}>
+						<Button
+							variant="contained"
+							size="large"
+							onClick={handleLogin}
+							title="Accedi"
+							fullWidth
+						>
+							Accedi
+						</Button>
+					</Box>
+				)}
 			</Box>
 		</BoxPageLayout>
 	);
