@@ -23,7 +23,7 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 	};
 
 	return (
-		<>
+		<React.Fragment>
 			<Button
 				startIcon={iconButton&& <IconBox id={"iconMenu_"+name} icon={iconButton} color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
 				id="toolbar-button"
@@ -39,28 +39,7 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 			>
 				{name}
 			</Button>
-			{/* {
-				name !== "Home" && (
-					<Menu
-						id="fade-menu"
-						MenuListProps={{
-							"aria-labelledby": "fade-button",
-						}}
-						anchorEl={anchorEl}
-						open={open}
-						onClose={handleClose}
-						TransitionComponent={Fade}
-					>
-
-						{getMenuOptions(name).map((options: any, i: React.Key | null | undefined) => (
-							<MenuItem key={i} onClick={() => handleOptionClick(options.onClick)}>
-								{options.label}
-							</MenuItem>
-						))}
-					</Menu>
-				)
-			} */}
-		</>
+		</React.Fragment>
 	);
 };
 
