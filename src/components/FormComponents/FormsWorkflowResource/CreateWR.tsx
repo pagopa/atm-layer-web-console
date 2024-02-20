@@ -81,7 +81,15 @@ export const CreateWR = () => {
 	};
 
 	return (
-		<FormTemplate setOpenSnackBar={setOpenSnackBar} handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_WR)}>
+		<FormTemplate 
+			setOpenSnackBar={setOpenSnackBar} 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(CREATE_WR)}
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+		>
 			
 			<UploadField 
 				titleField="File risorsa" 
