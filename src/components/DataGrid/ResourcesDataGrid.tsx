@@ -13,6 +13,8 @@ import CustomDataGrid from "./CustomDataGrid";
 
 export const ResourcesDataGrid = () => {
 
+	const [loading, setLoading] = useState(true);
+
 	const initialValues = {
 		noDeployableResourceType: "",
 		fileName: ""
@@ -45,7 +47,9 @@ export const ResourcesDataGrid = () => {
 			}
 		  } catch (error) {
 			console.error("ERROR", error);
-		  }
+		  } finally {
+			setLoading(false);
+		}
 	};
 
 	useEffect(() => {
@@ -84,7 +88,8 @@ export const ResourcesDataGrid = () => {
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}     
+				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}  
+				loading={loading}   
 			/>
 		</Box>
 	);
