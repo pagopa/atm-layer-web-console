@@ -22,14 +22,7 @@ const WorkflowResourcesDetailButtons = ({ setType, openDialog, detail }: Props) 
 				variant="contained"
 				onClick={() => handleClick(UPDATE_WR)}
 			>
-        Aggiorna
-			</Button>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
-				onClick={() => handleClick(ROLLBACK_WR)}
-			>
-        Ripristina
+        		Aggiorna
 			</Button>
 			<Button
 				sx={{ marginRight: 3 }}
@@ -37,18 +30,25 @@ const WorkflowResourcesDetailButtons = ({ setType, openDialog, detail }: Props) 
 				onClick={() => handleClick(DEPLOY_WR)}
 				disabled={detail.status === "DEPLOYED"}
 			>
-        Rilascia
+     			Rilascia
+			</Button>
+			<Button
+				sx={{ marginRight: 3 }}
+				variant="contained"
+				onClick={() => handleClick(ROLLBACK_WR)}
+			>
+        		Ripristina
 			</Button>
 			<Button 
 				sx={{ marginRight: 3 }} 
 				variant="contained" 
 				onClick={() => handleClick(DELETE_WR)}>
-        Cancella
+        		Cancella
 			</Button>
 			<Button 
 				variant="contained" 
 				onClick={() => handleClick(DOWNLOAD_WR)}>
-        Scarica
+        		Scarica
 			</Button>
 		</Box>
 	);

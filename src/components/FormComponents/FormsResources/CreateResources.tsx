@@ -108,8 +108,8 @@ export const CreateResources = () => {
 					fullWidth
 					id="filename"
 					name="filename"
-					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					label={"Nome del file con Estensione"}
+					placeholder={"Esempio_file.txt"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}
@@ -124,7 +124,7 @@ export const CreateResources = () => {
 					name="resourceType"
 					select
 					label={"Estensione del file"}
-					placeholder={"Estensione del file"}
+					placeholder={"HTML"}
 					size="small"
 					value={formData.resourceType}
 					onChange={handleChange}
@@ -141,7 +141,7 @@ export const CreateResources = () => {
 					id="path"
 					name="path"
 					label={"Percorso nella cartella di destinazione (Opzionale)"}
-					placeholder={"Percorso nella cartella di destinazione (Opzionale)"}
+					placeholder={"esempio/percorso"}
 					size="small"
 					value={formData.path}
 					onChange={handleChange}
@@ -155,7 +155,7 @@ export const CreateResources = () => {
 					id="description"
 					name="description"
 					label={"Descrizione (Opzionale)"}
-					placeholder={"Descrizione (Opzionale)"}
+					placeholder={""}
 					size="small"
 					value={formData.description}
 					onChange={handleChange}
