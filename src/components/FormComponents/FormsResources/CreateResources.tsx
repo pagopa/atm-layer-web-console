@@ -84,7 +84,15 @@ export const CreateResources = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_RES)} >
+		<FormTemplate 
+			setOpenSnackBar={setOpenSnackBar}
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(CREATE_RES)}
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+		 >
 			
 			<UploadField 
 				titleField="File della risorsa statica" 
