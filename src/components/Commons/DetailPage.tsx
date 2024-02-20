@@ -129,6 +129,7 @@ const DetailPage = ({
 				setMessage={setMessage}
 				title={title}
 				setTitle={setTitle}
+				detail={detail}
 			/>
 		</BoxPageLayout>
 	);

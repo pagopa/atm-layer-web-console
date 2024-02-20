@@ -1,7 +1,6 @@
 import { SetStateAction, useContext } from "react";
 import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import fetchUpdateResources from "../../../hook/fetch/Resources/fetchUpdateResources";
 import { handleSnackbar } from "../../../utils/Commons";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
@@ -22,43 +21,21 @@ type Props = {
   setMessage: React.Dispatch<SetStateAction<string>>;
   title?: string;
   setTitle: React.Dispatch<SetStateAction<string>>;
+  detail: any;
 };
 
-// export const ModalResources = ({
-// 	type,
-// 	open,
-// 	setOpen,
-// 	openSnackBar,
-// 	setOpenSnackBar,
-// 	severity,
-// 	setSeverity,
-// 	message,
-// 	setMessage,
-// 	title,
-// 	setTitle,
-// }: Props) => {
-// 	const { abortController } = useContext(Ctx);
-// 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-// 	const navigate = useNavigate();
-// 	const handleSubmit = async (e: React.FormEvent) => {
-// 		switch (type) {
-// 		case UPDATE_RES: {
-// 			try {
-// 				const response = await fetchUpdateResources({
-// 					abortController,
-// 					URL: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }),
-// 				})();
-// 				if (response?.success) {
-// 					setOpen(false);
-// 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-// 					console.log(response);
-// 				} else {
-// 					setOpen(false);
-// 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
+
+export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle, detail }: Props) => {
 	
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const handleDownload = () => {  const link = document.createElement("a");
+	  // eslint-disable-next-line functional/immutable-data
+	  link.href = detail.cdnUrl;
+		link.click();
+	};
+	
+
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		switch (type) {
@@ -79,6 +56,7 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 			break;
 		}
 		case DOWNLOAD_RES:{
+			handleDownload();
 			break;
 		}
 		case UPDATE_RES: {
