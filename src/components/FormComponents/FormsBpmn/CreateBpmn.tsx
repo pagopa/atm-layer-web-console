@@ -110,7 +110,7 @@ export const CreateBpmn = () => {
 					id="filename"
 					name="filename"
 					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					placeholder={"Esempio_processo"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}
@@ -123,7 +123,7 @@ export const CreateBpmn = () => {
 					id="functionType"
 					name="functionType"
 					label={"Funzionalità"}
-					placeholder={"Funzionalità"}
+					placeholder={"MENU"}
 					size="small"
 					value={formData.functionType}
 					onChange={handleChange}

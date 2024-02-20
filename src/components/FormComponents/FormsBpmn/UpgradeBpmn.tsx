@@ -108,7 +108,7 @@ export const UpgradeBpmn = () => {
 					id="filename"
 					name="filename"
 					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					placeholder={"Esempio_Processo"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}

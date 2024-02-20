@@ -106,7 +106,7 @@ export const CreateWR = () => {
 					id="filename"
 					name="filename"
 					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					placeholder={"Esempio_Risorsa"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}
@@ -121,7 +121,7 @@ export const CreateWR = () => {
 					name="resourceType"
 					select
 					label={"Estensione del file"}
-					placeholder={"Estensione del file"}
+					placeholder={"DMN"}
 					size="small"
 					value={formData.resourceType}
 					onChange={handleChange}
