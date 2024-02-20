@@ -25,3 +25,5 @@ export const DELETE = "DELETE";
 export const DEPLOY = "DEPLOY";
 export const DMN = "DMN";
 export const FORM = "FORM";
+export const DELETE_VALUES = [DELETE, DELETE_BPMN, DELETE_WR, DELETE_RES];
+export const DEPLOY_VALUES = [DEPLOY, DEPLOY_BPMN, DEPLOY_WR];

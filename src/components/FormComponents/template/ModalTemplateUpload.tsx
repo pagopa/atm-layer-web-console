@@ -70,7 +70,6 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					if (response?.success) {
 						setOpen(false);
 						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-						console.log(response);
 					} else {
 						setOpen(false);
 						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -87,7 +86,6 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					if (response?.success) {
 						setOpen(false);
 						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-						console.log(response);
 					} else {
 						setOpen(false);
 						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

@@ -12,12 +12,10 @@ const LoginPageCallback = () => {
 
 	useEffect(() => {
 		const token=window?.location?.hash?.split("&")[1]?.split("=")[1];
-		if(token && logged===false) {
+		if(token) {
 			setLogged(true);
 			localStorage.setItem("jwt", token);
-			setTimeout(() => {
-				navigate(routes.HOME);
-			}, 5000);
+			navigate(routes.HOME);
 		}
 	}, []);
 
