@@ -4,6 +4,7 @@ import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
 import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 import ROUTES from "../routes";
+import { LinkModelDto, PageDto } from "../model/LinkModel";
 
 /* eslint-disable functional/immutable-data */
 
@@ -108,12 +109,12 @@ export const handleSnackbar = (
 	setOpenSnackBar(true);
 };
 
-export const breadCrumbLinkComponent = (arrLinks: Array<{ rootName: string; rootValue: string }>, message: string) => [
-	"Home",
+export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: string) => [
+	// "Home",
 	...arrLinks.map((e, i) =>
 		<Link
 			key="link"
-			href={e.rootValue}
+			href={process.env.REACT_APP_HOME_PATH+ e.rootValue}
 			color="inherit"
 			underline="hover"
 		>
@@ -123,15 +124,28 @@ export const breadCrumbLinkComponent = (arrLinks: Array<{ rootName: string; root
 	message
 ];
 
-export const commonBreadRootComp = (recordParams: any) => [
-	{
-		rootValue: `/webconsole${ROUTES.BPMN}`,
-		rootName: "Risorse di processo"
-	},
-	{
-		rootValue: generatePath(`/webconsole${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }),
-		rootName: "Dettaglio risorsa di processo"
-
+export const commonBreadRootBpmn = (currentPage:PageDto, isDetail:boolean=false, recordParams?: any ) => {
+	let links=[
+		{
+			rootValue: ROUTES.HOME,
+			rootName: "Home"
+		}		
+	];
+	if(currentPage?.isBpmn){
+		links.push(
+			{
+				rootValue: ROUTES.BPMN,
+				rootName: "Risorse di processo"
+			}
+		);
 	}
-];
+	if(currentPage?.isBpmn && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.BPMN_DETAILS, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }),
+			rootName: "Dettaglio risorsa di processo"
+
+		});
+	}
+	return links;
+};
 
