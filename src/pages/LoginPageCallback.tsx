@@ -1,7 +1,6 @@
-/* eslint-disable functional/no-let */
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Ctx } from "../DataContext";
 import routes from "../routes";
 

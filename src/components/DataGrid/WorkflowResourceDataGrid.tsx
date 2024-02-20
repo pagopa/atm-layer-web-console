@@ -12,6 +12,8 @@ import TableColumn from "./TableColumn";
 
 export const WorkflowResourceDataGrid = () => {
 
+	const [loading, setLoading] = useState(true);
+
 	const initialValues = {
 		resourceType: "",
 		filename: "",
@@ -44,6 +46,8 @@ export const WorkflowResourceDataGrid = () => {
 			}
 		} catch (error) {
 			console.error("ERROR", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 	
@@ -85,6 +89,7 @@ export const WorkflowResourceDataGrid = () => {
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllWfResourcesList(filterValues, newPage.page)}
+				loading={loading}
 			/>
 		</Box>
 	);

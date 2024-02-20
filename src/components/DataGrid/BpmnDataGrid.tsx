@@ -12,6 +12,8 @@ import FilterBar from "./Filters/FilterBar";
 
 export default function BpmnDataGrid() {
 
+	const [loading, setLoading] = useState(true);
+
 	const initialValues = {
 		functionType: "",
 		fileName: "",
@@ -36,6 +38,7 @@ export default function BpmnDataGrid() {
 		const url = getQueryString(URL, filterValues, BPMN);
 
 		try {
+			await new Promise(resolve => setTimeout(resolve, 3000));
 			const response = await fetchGetAllFiltered({ abortController, url })();
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -47,6 +50,8 @@ export default function BpmnDataGrid() {
 			}
 		} catch (error) {
 			console.error("ERROR", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -89,6 +94,7 @@ export default function BpmnDataGrid() {
 					pageSizeOptions={[10]}
 					paginationModel={{ ...paginationModel }}
 					onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
+					loading={loading}
 				/>
 			</Box>
 		</Box>
