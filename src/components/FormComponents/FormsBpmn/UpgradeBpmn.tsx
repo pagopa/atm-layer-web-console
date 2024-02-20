@@ -91,7 +91,8 @@ export const UpgradeBpmn = () => {
 			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
 			openSnackBar={openSnackBar} 
 			severity={severity} 
-			message={message} title={title}
+			message={message} 
+			title={title}
 		>
 			<UploadField
 				titleField="File BPMN del processo"

@@ -21,9 +21,9 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 	const navigate = useNavigate();
 
 	const conditionalReload = () => {
-		if (type === DELETE_ASSOCIATION || typeof type !== "undefined" && DEPLOY_VALUES.includes(type)) {
+		if (type === DELETE_ASSOCIATION || (type && DEPLOY_VALUES.includes(type))) {
 			window.location.reload();
-		} else if (typeof type !== "undefined" && DELETE_VALUES.includes(type)) {
+		} else if (type && DELETE_VALUES.includes(type)) {
 			navigate(ROUTES.BPMN);
 		} else if(setOpenSnackBar){
 			setOpenSnackBar(false);

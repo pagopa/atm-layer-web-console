@@ -1,12 +1,12 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
+/* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
 import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 import ROUTES from "../routes";
 import { LinkModelDto, PageDto } from "../model/LinkModel";
 
-/* eslint-disable functional/immutable-data */
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
 	if (field) {
