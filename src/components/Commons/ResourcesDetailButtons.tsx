@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../commons/constants";
 
 
 type Props = {
@@ -10,7 +10,6 @@ type Props = {
   };
 
 const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
-	const navigate = useNavigate();
 
 	function handleClick(variable: string) {
 		setType(variable);
@@ -18,12 +17,23 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 	}
 
 	return (
-		<Box>
+		<Box mt={2} mx={4} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => console.log("aggiornamento")}>
+				onClick={() => handleClick(UPDATE_RES)}>
                 Aggiorna
+			</Button>
+			<Button 
+				sx={{ marginRight: 3 }} 
+				variant="contained" 
+				onClick={() => handleClick(DELETE_RES)}>
+        Cancella
+			</Button>
+			<Button 
+				variant="contained" 
+				onClick={() => handleClick(DOWNLOAD_RES)}>
+        Scarica
 			</Button>
 		</Box>
 	);

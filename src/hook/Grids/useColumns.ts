@@ -339,18 +339,19 @@ const useColumns: any = () => {
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
-				{
-					field: "actions",
-					cellClassName: "justifyContentNormalRight",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => actionColumn(params, RESOURCES),
-					sortable: false,
-					flex: 0.5
-				}
+				// {
+				// 	field: "actions",
+				// 	cellClassName: "justifyContentNormalRight",
+				// 	headerName: "",
+				// 	align: "right",
+				// 	hideSortIcons: true,
+				// 	disableColumnMenu: true,
+				// 	editable: false,
+				// 	renderCell: (params: any) => actionColumn(params, RESOURCES),
+				// 	sortable: false,
+				// 	flex: 0.5
+				// },
+				commonActionColumn(RESOURCES)				
 			];
 		case WORKFLOW_RESOURCE:
 			return [
@@ -386,7 +387,7 @@ const useColumns: any = () => {
 				lastUpdatedAtColumn,
 				createdByColumn,
 				lastUpdatedByColumn,
-				// commonActionColumn(WORKFLOW_RESOURCE)
+				commonActionColumn(WORKFLOW_RESOURCE)
 			];
 		default:
 			return [];

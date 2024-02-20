@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Alert, Grid, Snackbar, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
@@ -9,8 +9,6 @@ import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
-import { ActionAlert } from "../../Commons/ActionAlert";
-import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 
 export const UpgradeBpmn = () => {
@@ -87,39 +85,36 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<>
-			<FormTemplate
-				handleSubmit={handleSubmit}
-				getFormOptions={getFormOptions(UPGRADE_BPMN)}
-				openSnackBar={openSnackBar}
-				severity={severity}
-				message={message}
-				title={title}
-			>
-				<UploadField
-					titleField="File BPMN del processo"
-					name={"file"}
-					file={formData.file}
-					clearFile={clearFile}
-					error={errors.file}
-					setFormData={setFormData}
-					formData={formData} />
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="filename"
-						name="filename"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.filename}
-						onChange={handleChange}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename} />
-				</Grid>
-			</FormTemplate>
-		</>
 
+		<FormTemplate 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} title={title}
+		>
+			<UploadField
+				titleField="File BPMN del processo"
+				name={"file"}
+				file={formData.file}
+				clearFile={clearFile}
+				error={errors.file}
+				setFormData={setFormData}
+				formData={formData} />
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="filename"
+					name="filename"
+					label={"Nome del file"}
+					placeholder={"Nome del file"}
+					size="small"
+					value={formData.filename}
+					onChange={handleChange}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
+			</Grid>
+		</FormTemplate>
 	);
 };
 

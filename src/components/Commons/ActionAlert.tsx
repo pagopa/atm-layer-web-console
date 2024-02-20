@@ -25,10 +25,8 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 			window.location.reload();
 		} else if (type === DELETE) {
 			navigate(ROUTES.BPMN);
-		} else {
-			if (typeof setOpenSnackBar !== "undefined") {
-				setOpenSnackBar(false);
-			}
+		} else if(setOpenSnackBar){
+			setOpenSnackBar(false);
 		}
 	};
 

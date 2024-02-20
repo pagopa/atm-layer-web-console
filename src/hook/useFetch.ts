@@ -8,7 +8,7 @@ export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
 	const SERVER_API_ORIGIN = endPoint&& endPoint!=="" ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const CODE_SUCCESS = 200;
+	const CODE_SUCCESS = [200, 201, 202, 203] ;
 
 	const fetchFromServer = async ({
 		urlEndpoint,
@@ -69,16 +69,12 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
-			if (
-				!response ||
-				// (response.status === 0 && response.type === "opaqueredirect") ||
-				response.status === 401
-			) {
+			if (!response || response.status === 401) {
 				window.location.reload();
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
-			} else if (status !== CODE_SUCCESS && status !== 206) {
+			} else if (status && !(CODE_SUCCESS.includes(status)) && status !== 206) {
 				const errorResponse = await response?.json();
 				data = { valuesObj: errorResponse, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
