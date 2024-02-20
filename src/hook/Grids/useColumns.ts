@@ -20,7 +20,8 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, params.row.functionType),
 			sortable: false,
-			flex: 1
+			width:300
+			// flex: 1
 		};
 
 		const fileNameColumn = {
@@ -35,7 +36,8 @@ const useColumns: any = () => {
 			renderCell: (params: any) => renderCell(params, params.row.fileName),
 			sortable: false,
 			resizable: false,
-			flex: 1
+			// flex: 1
+			width:200
 		};
 
 		const statusColumn = {
@@ -49,7 +51,9 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, params.row.status),
 			sortable: false,
-			flex: 1
+			// flex: 1
+			width:150
+
 		};
 
 		const createdAtColumn = {
@@ -63,7 +67,8 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
 			sortable: false,
-			flex: 1
+			// flex: 1
+			width:200
 		};
 
 		const lastUpdatedAtColumn = {
@@ -77,7 +82,8 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
 			sortable: false,
-			flex: 1
+			// flex: 1
+			width:200
 		};
 
 		const createdByColumn = {
@@ -91,7 +97,8 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, params.row.createdBy),
 			sortable: false,
-			flex: 1
+			// flex: 1
+			width:150
 		};
 
 		const lastUpdatedByColumn = {
@@ -105,7 +112,8 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, params.row.lastUpdatedBy),
 			sortable: false,
-			flex: 1
+			// flex: 1
+			width:150
 		};
 
 		const commonActionColumn = (driver: string) => ({
@@ -118,7 +126,9 @@ const useColumns: any = () => {
 			editable: false,
 			renderCell: (params: any) => actionColumn(params, driver),
 			sortable: false,
-			flex: 0.5
+			// flex: 0.5
+			width:50
+
 		});
 
 		switch (driver) {
@@ -135,7 +145,9 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.bpmnId),
 					sortable: false,
-					flex: 2
+					// flex: 2
+					width:400
+
 				},
 				functionTypeColumn,
 				fileNameColumn,
@@ -151,7 +163,9 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 1
+					// flex: 0.5
+					width:100
+
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
@@ -166,7 +180,9 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
-					flex: 1
+					// flex: 0.5
+					width:150
+
 				},
 				{
 					field: "deployment_id",
@@ -179,7 +195,8 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.deployment_id),
 					sortable: false,
-					flex: 1
+					// flex: 1
+					width:150
 				},
 				{
 					field: "definition_key",
@@ -192,7 +209,9 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 1
+					// flex: 1
+					width:150
+
 				},
 				{
 					field: "description",
@@ -205,7 +224,9 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.description),
 					sortable: false,
-					flex: 1
+					// flex: 1
+					width:250
+
 				},
 				{
 					field: "resource",
@@ -218,7 +239,8 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceFile.resource),
 					sortable: false,
-					flex: 1
+					// flex: 1
+					width:150
 				},
 				commonActionColumn(BPMN)
 			];

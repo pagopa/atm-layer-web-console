@@ -1,12 +1,12 @@
-import { Typography, Box, IconButton, useTheme } from "@mui/material";
+import { Typography, Box, IconButton, useTheme, Tooltip } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { DELETE_ASSOCIATION } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
-// import { Ctx } from "../../DataContext";
+
 
 const TableColumn = (setOpen?: any, setType?: any) => {
 
@@ -34,19 +34,37 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	function renderCell(
 		params: GridRenderCellParams,
 		value: ReactNode = params.value,
+		overrideStyle: CSSProperties = {}
 	) {
 		return (
 			<Box
 				px={1.5}
+				width= "100%"
+				height= "100%"
 				sx={{
-					overflow: "hidden",
-					textOverflow: "ellipsis",
-					display: "inline",
+					WebkitBoxOrient: "vertical" as const,
+					...overrideStyle,
 				}}
 			>
-				<Typography variant="body1"	>
-					{value}
-				</Typography>
+				<Box
+					sx={{
+						overflow: "hidden",
+						textOverflow: "ellipsis",
+						display: "-webkit-box",
+						WebkitLineClamp: 2,
+						WebkitBoxOrient: "vertical" as const,
+						width: "100%"					
+					}}
+				>
+					<Tooltip 
+						placement="bottom-start"
+						title={<span> {value}</span>}
+					>
+						<Typography variant="body1">
+							{value}
+						</Typography>
+					</Tooltip>
+				</Box>
 			</Box>
 		);
 	}

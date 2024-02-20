@@ -132,4 +132,6 @@ export const commonBreadRootComp = (recordParams: any) => [
 		rootValue: generatePath(`/webconsole${ROUTES.BPMN_DETAILS}`, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }),
 		rootName: "Dettaglio risorsa di processo"
 
-	}];
+	}
+];
+
