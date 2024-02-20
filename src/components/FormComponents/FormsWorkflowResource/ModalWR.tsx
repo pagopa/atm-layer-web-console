@@ -60,7 +60,11 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					console.log(response);
+					const deployedResponse = {
+						...response.valuesObj,
+						fileName: response.valuesObj?.resourceFile?.fileName
+					};
+					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
