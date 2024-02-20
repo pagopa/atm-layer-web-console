@@ -1,10 +1,11 @@
 import { RESOURCES } from "../../commons/constants";
 import DetailPage from "../../components/Commons/DetailPage";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 import formatValues from "../../utils/formatValues";
 
 
 const ResourcesDetailPage = () => {
-	const breadComponent = ["Home", "Risorse statiche", "Dettaglio risorsa statica"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isStatic:true}, false), "Dettaglio risorsa statica");
 	const { formatDateToString } = formatValues();
 	const fields = [
 		{ label: "Tipo risorsa", value: "noDeployableResourceType" },

@@ -3,10 +3,11 @@ import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponen
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import CreateWR from "../../components/FormComponents/FormsWorkflowResource/CreateWR";
 import FormPageTemplate from "../Layout/FormPageTemplate";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 
 
 const CreateWRPage = () => {
-	const breadComponent = ["Home", "Risorse aggiuntive per processi", "Creazione risorsa aggiuntiva"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isWR:true}, false), "Creazione risorsa aggiuntiva");
 
 	return(
 		<>

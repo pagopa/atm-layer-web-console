@@ -1,12 +1,12 @@
 import { BPMN } from "../../commons/constants";
 import DetailPage from "../../components/Commons/DetailPage";
-import { breadCrumbLinkComponent, commonBreadRootBpmn } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 import formatValues from "../../utils/formatValues";
 
 const BpmnDetailPage = () => {
 
 	const { formatDateToString } = formatValues();
-	const breadComponent = breadCrumbLinkComponent(commonBreadRootBpmn({isBpmn:true}, false), "Dettaglio risorsa di processo");
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:true}, false), "Dettaglio risorsa di processo");
 	const fields = [
 		{ label: "Tipo Funzione", value: "functionType" },
 		{ label: "Nome file", value: "fileName" },

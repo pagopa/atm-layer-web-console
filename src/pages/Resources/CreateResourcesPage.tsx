@@ -3,10 +3,11 @@ import CreateResources from "../../components/FormComponents/FormsResources/Crea
 import FormPageTemplate from "../Layout/FormPageTemplate";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 
 
 const CreateResourcesPage = () => {
-	const breadComponent = ["Home", "Risorse statiche", "Creazione risorsa statica"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isStatic:true}, false), "Creazione risorsa statica");
 
 	return (
 		<>

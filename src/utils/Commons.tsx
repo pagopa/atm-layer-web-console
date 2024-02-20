@@ -124,7 +124,7 @@ export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: 
 	message
 ];
 
-export const commonBreadRootBpmn = (currentPage:PageDto, isDetail:boolean=false, recordParams?: any ) => {
+export const commonBreadRoot = (currentPage:PageDto, isDetail:boolean=false, recordParams?: any ) => {
 	let links=[
 		{
 			rootValue: ROUTES.HOME,
@@ -146,6 +146,35 @@ export const commonBreadRootBpmn = (currentPage:PageDto, isDetail:boolean=false,
 
 		});
 	}
+	if(currentPage?.isStatic){
+		links.push(
+			{
+				rootValue: ROUTES.RESOURCES,
+				rootName: "Risorse statiche"
+			}
+		);
+	}
+	if(currentPage?.isStatic && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.RESOURCES_DETAILS, { resourceId: recordParams?.resourceId }),
+			rootName: "Dettaglio risorsa statica"
+
+		});
+	}
+	if(currentPage?.isWR){
+		links.push(
+			{
+				rootValue: ROUTES.WORKFLOW_RESOURCES,
+				rootName: "Risorse aggiuntive per processi"
+			}
+		);
+	}
+	if(currentPage?.isWR && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: recordParams?.workflowResourceId }),
+			rootName: "Dettaglio risorsa aggiuntiva per processo"
+
+		});
+	}
 	return links;
 };
-
