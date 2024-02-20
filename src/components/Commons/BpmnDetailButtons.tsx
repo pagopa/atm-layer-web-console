@@ -23,13 +23,6 @@ const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 			<Button
 				sx={{ marginRight: 3 }}
 				variant="contained"
-				onClick={() => navigate(ROUTES.ASSOCIATE_BPMN)}
-			>
-        Associa
-			</Button>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
 				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}
 			>
         Aggiorna
@@ -41,6 +34,13 @@ const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 				disabled={detail.status === "DEPLOYED"}
 			>
         Rilascia
+			</Button>
+			<Button
+				sx={{ marginRight: 3 }}
+				variant="contained"
+				onClick={() => navigate(ROUTES.ASSOCIATE_BPMN)}
+			>
+        Associa
 			</Button>
 			<Button sx={{ marginRight: 3 }} variant="contained" onClick={() => handleClick(DELETE)}>
         Cancella
