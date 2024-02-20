@@ -38,7 +38,6 @@ export default function BpmnDataGrid() {
 		const url = getQueryString(URL, filterValues, BPMN);
 
 		try {
-			await new Promise(resolve => setTimeout(resolve, 3000));
 			const response = await fetchGetAllFiltered({ abortController, url })();
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
