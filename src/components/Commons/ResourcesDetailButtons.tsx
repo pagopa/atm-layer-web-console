@@ -28,12 +28,12 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 				sx={{ marginRight: 3 }} 
 				variant="contained" 
 				onClick={() => handleClick(DELETE_RES)}>
-        Cancella
+        		Cancella
 			</Button>
 			<Button 
 				variant="contained" 
 				onClick={() => handleClick(DOWNLOAD_RES)}>
-        Scarica
+        		Scarica
 			</Button>
 		</Box>
 	);

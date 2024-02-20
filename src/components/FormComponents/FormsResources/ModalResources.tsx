@@ -30,8 +30,8 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const handleDownload = () => {  const link = document.createElement("a");
-	  // eslint-disable-next-line functional/immutable-data
-	  link.href = detail.cdnUrl;
+		// eslint-disable-next-line functional/immutable-data
+		link.href = detail.cdnUrl;
 		link.click();
 	};
 	
@@ -45,7 +45,7 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				}else {
+				} else {
 					setOpen(false);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				}

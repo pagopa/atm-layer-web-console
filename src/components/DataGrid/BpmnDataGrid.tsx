@@ -1,5 +1,5 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
@@ -38,16 +38,16 @@ export default function BpmnDataGrid() {
 		try {
 			const response = await fetchGetAllFiltered({ abortController, url })();
 			if (response?.success) {
-			  const { page, limit, results, itemsFound } = response.valuesObj;
-			  setTableListBpmn(results);
-			  setPaginationModel({ page, pageSize: limit });
-			  setTotalItemsFound(itemsFound);
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListBpmn(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalItemsFound(itemsFound);
 			} else {
-			  setTableListBpmn([]);
+				setTableListBpmn([]);
 			}
-		  } catch (error) {
+		} catch (error) {
 			console.error("ERROR", error);
-		  }
+		}
 	};
 
 	useEffect(() => {
@@ -63,7 +63,7 @@ export default function BpmnDataGrid() {
 					filterValues={filterValues}
 					setFilterValues={setFilterValues}
 					setTableList={setTableListBpmn}
-					getAllList={getAllBpmnList} 
+					getAllList={getAllBpmnList}
 					newFilterValues={initialValues}
 					driver={BPMN}
 				/>
@@ -74,16 +74,15 @@ export default function BpmnDataGrid() {
 					disableColumnSelector
 					disableDensitySelector
 					disableRowSelectionOnClick
-					// autoHeight={true}
 					className="CustomDataGrid"
-					// columnBuffer={6}
 					columns={columns}
 					getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 					hideFooterSelectedRowCount={true}
 					rowHeight={55}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
-					// sortingMode="server"
+					// slots={{ noRowsOverlay: {} }}
+					sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
 					paginationMode="server"
 					pagination
