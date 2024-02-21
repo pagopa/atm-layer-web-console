@@ -4,8 +4,8 @@ import { useParams, generatePath } from "react-router-dom";
 import { Ctx } from "../../DataContext";
 import { BPMN_ASSOCIATED } from "../../commons/constants";
 import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
-import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
+import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import CustomDataGrid from "./CustomDataGrid";
 
 

@@ -6,7 +6,7 @@ const fetchGetAllFiltered = ({ abortController, url }: any) => async () => {
 	return await fetchFromServer({
 		urlEndpoint: url,
 		method: "GET",
-		abortController,
+		abortController
 	});
 };
 
