@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -22,34 +22,32 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
+import ROUTES from "./routes";
 
 const LocalRoutes = () => (
-	<BrowserRouter basename="/webconsole">
-		<Routes>
-			<Route element={<PrivateRoute />}>
-				<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
+	<Routes>
+		<Route element={<PrivateRoute />}>
+			<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
 				
-				<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
-				<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
-				<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
-				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
-				<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
+			<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
+			<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
+			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
+			<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
 
-				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
-				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
-				<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
+			<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
 
-				<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
-				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
-				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
-			</Route>
-			<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
-			<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />
-			<Route path="*" element={<ErrorPage />} />
+			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
+			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+		</Route>
+		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
+		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />
+		<Route path="*" element={<ErrorPage />} />
 		
-		</Routes>
-		
-	</BrowserRouter>
+	</Routes>
 );
 
 function App() {
@@ -61,7 +59,7 @@ function App() {
 	const debugOn=localStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp?true:false);
 	const abortController = new AbortController();
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	function clearAll(){
 		if(localStorage.getItem("jwt")){
@@ -73,7 +71,7 @@ function App() {
 	function setTokenExpired(){
 		localStorage.removeItem("jwt");
 		setLogged(false);
-		// navigate(ROUTES.LOGIN);
+		navigate(ROUTES.LOGIN);
 	}
 
 	function clearStorage(){
