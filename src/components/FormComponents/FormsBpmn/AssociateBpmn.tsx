@@ -137,7 +137,7 @@ const AssociateBpmn = () => {
 					label={"ID Terminale"}
 					placeholder={"56"}
 					size="small"
-					disabled={terminalChecked}
+					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
 				/>
@@ -145,7 +145,7 @@ const AssociateBpmn = () => {
 			<Grid xs={2} item my={1}>
 				<Stack direction="row" spacing={1} alignItems={"center"}>
 					<Typography>Tutti</Typography>
-					<Switch checked={terminalChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
+					<Switch checked={terminalChecked} disabled={branchChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
 				</Stack>
 			</Grid>
 		</FormTemplate>
