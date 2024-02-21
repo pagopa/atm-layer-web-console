@@ -15,12 +15,13 @@ export default function useFetch(endPoint?: string | undefined) {
 		method,
 		body,
 		abortController,
-		headers
+		headers,
+		isFormData
 	}: any) => {
 		let data;
 		let status;
+		let response;
 		
-
 
 		let headerRequest = {};
 		if (headers) {
@@ -34,9 +35,19 @@ export default function useFetch(endPoint?: string | undefined) {
 			};
 		}
 
-		const options: any =
-
-			(method === "POST" || method === "PUT")
+		const options: any = isFormData
+			? {
+				method, //  POST, PUT, DELETE, etc.
+				mode: "cors", // no-cors, *cors, same-origin
+				// credentials: "include",
+				signal: abortController?.current?.signal,
+				// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+				headers: {...headerRequest},
+				// redirect: "follow", // manual, *follow, error
+				// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+				body, // body data type must match "Content-Type" header
+		  }
+			: 	(method === "POST" || method === "PUT")
 				? {
 					method, // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
@@ -46,7 +57,7 @@ export default function useFetch(endPoint?: string | undefined) {
 					headers: { ...headerRequest },
 					// redirect: "manual", // manual, *follow, error
 					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-					body: body ? body : JSON.stringify(""), // body data type must match "Content-Type" header
+					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
 				}
 				: {
 					method, // *GET, POST, PUT, DELETE, etc.
@@ -61,7 +72,7 @@ export default function useFetch(endPoint?: string | undefined) {
 
 
 		try {
-			const response = await fetch(
+			response = await fetch(
 				SERVER_API_ORIGIN + urlEndpoint,
 				options
 			).catch((e) => {
@@ -88,7 +99,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				success: false,
 			};
 		}
-		// return {data, status};
+		// return {response, data};
 		return data;
 	};
 

@@ -5,7 +5,7 @@ import { Ctx } from "../../DataContext";
 import { BPMN_ASSOCIATED } from "../../commons/constants";
 import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
-import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 
 
@@ -30,14 +30,15 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 
 	const getAllAssociatedBpmn = async (pageIndex?: number) => {
 		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
-		const paginatedUrl = `${baseUrl}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
+		const paginatedUrl = `?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 		try {
-			const response = await fetchGetAllAssociatedBpmn({ abortController, url: paginatedUrl }) ();
+			const response = await fetchRequest({ urlEndpoint: baseUrl, queryString: paginatedUrl, method: "GET", abortController })();
+
 			if (response?.success) {
-				const { page, limit, results, itemsFound } = response.valuesObj;
-				setTableListBpmnAssociated(results);
-				setPaginationModel({ page, pageSize: limit });
-				setTotalAssociationsFound(itemsFound);
+				const { page, totalPages } = response.valuesObj;
+				setTableListBpmnAssociated(response?.valuesObj?.results);
+				setPaginationModel({ page, pageSize: response?.valuesObj?.limit });
+				setTotalAssociationsFound(response?.valuesObj?.itemsFound);
 			} else {
 				setTableListBpmnAssociated([]);
 			}

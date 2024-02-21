@@ -10,6 +10,7 @@ import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
 import checks from "../../../utils/checks";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const UpgradeBpmn = () => {
 
@@ -71,12 +72,11 @@ export const UpgradeBpmn = () => {
 			}
 
 			try {
-				const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
-				if (response?.success) {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
+
+				// const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

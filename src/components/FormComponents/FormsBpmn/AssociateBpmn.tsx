@@ -6,9 +6,8 @@ import { ASSOCIATE_BPMN } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
-import fetchAssociateBpmn from "../../../hook/fetch/Bpmn/fetchAssociateBpmn";
-import { BPMN_ASSOCIATE, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import fetchUpdateBpmnAssociated from "../../../hook/fetch/Bpmn/fetchUpdateBpmnAssociated";
+import { BPMN_ASSOCIATE_API, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 const AssociateBpmn = () => {
 
@@ -51,14 +50,9 @@ const AssociateBpmn = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		if (validateForm()) {
 			try {
-				const URL = generatePath(BPMN_ASSOCIATE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
-
-				if (response?.success) {
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					console.log("response", response);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
 				}
 			} catch (error) {
@@ -71,14 +65,8 @@ const AssociateBpmn = () => {
 	const handleSwitchAssociationFetch = async () => {
 		setErrorCode(undefined);
 		try {
-			const URL = generatePath(UPDATE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-			const response = await fetchUpdateBpmnAssociated({ abortController, body: JSON.stringify(formData), url: URL })();
-
-			if (response?.success) {
-				handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			} else {
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
+			const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,{ bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "PUT", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 		} catch (error) {
 			console.error("ERROR", error);
 			handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

@@ -3,12 +3,13 @@ import { Grid, MenuItem, TextField } from "@mui/material";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
-import fetchCreateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchCreateWorkflowResource";
 import { Ctx } from "../../../DataContext";
 import { CREATE_WR } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import { CREATE_WR_API } from "../../../commons/endpoints";
 
 export const CreateWR = () => {
 	const { abortController } = useContext(Ctx);
@@ -28,7 +29,8 @@ export const CreateWR = () => {
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
-
+	
+	const optionFormMenu=[{key:"BPMN", value:"BPMN", },{key:"DMN", value:"DMN"},{key:"FORM", value:"FORM"}];
 	
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -43,9 +45,6 @@ export const CreateWR = () => {
 		};
 
 		setErrors(newErrors);
-
-		console.log("validate ouput: ", Object.values(newErrors).every((error)=> !error), Object.values(newErrors));
-
 		return Object.values(newErrors).every((error) => !error);
 	};
 
@@ -65,13 +64,9 @@ export const CreateWR = () => {
 				postData.append("resourceType", formData.resourceType);
 			}
 			try {
-				const response = await fetchCreateWorkflowResource({ abortController, body: postData }) ();
-				if (response?.success) {
-					console.log("Response positive: ", response);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "POST", abortController, body: postData, isFormData: true })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			 } catch (error) {
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -128,9 +123,10 @@ export const CreateWR = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				>
-					<MenuItem value={"BPMN"}>BPMN</MenuItem>
-					<MenuItem value={"DMN"}>DMN</MenuItem>
-					<MenuItem value={"FORM"}>FORM</MenuItem>
+					{optionFormMenu?.map((el)=>(
+						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
+					)
+					)}
 				</TextField>
 			</Grid>
 		

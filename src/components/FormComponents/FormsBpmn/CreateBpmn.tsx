@@ -3,12 +3,14 @@ import { Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import checks from "../../../utils/checks";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import { CREATE_BPMN_API } from "../../../commons/endpoints";
+
 
 export const CreateBpmn = () => {
 
@@ -69,13 +71,9 @@ export const CreateBpmn = () => {
 				postData.append("functionType", formData.functionType);
 			}
 			try {
-				const response = await fetchCreateBpmn({ abortController, body: postData })();
-				if (response?.success) {
-					console.log("Response positive: ", response);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

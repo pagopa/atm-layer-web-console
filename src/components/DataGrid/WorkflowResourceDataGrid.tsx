@@ -35,6 +35,8 @@ export const WorkflowResourceDataGrid = () => {
 		const url = getQueryString(URL, filterValues, WORKFLOW_RESOURCE);
 
 		try {
+			// const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "GET", abortController, body: postData, isFormData: true })();
+
 			const response = await fetchGetAllWfResourcesFiltered({ abortController, url })();
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
