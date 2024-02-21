@@ -1,30 +1,27 @@
-import { useContext, useEffect } from "react";
-import { Box, Button, Typography } from "@mui/material";
-import { theme } from "@pagopa/mui-italia";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { Ctx } from "../DataContext";
-import routes from "../routes";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 
 const LoginPage = () => {
-	const { logged, setLogged } = useContext(Ctx);
-	const navigate = useNavigate();
+	const { clearAll, debugOn } = useContext(Ctx);
+	const theme=useTheme();
 
 	const handleLogin=()=>{
 		const urlLogin=process.env.REACT_APP_LOGIN_URL;
-		console.log("url login", urlLogin);
-		window.open(urlLogin, "_blank");
+		if(debugOn){
+			console.log("url login", urlLogin);
+		}
+		window.open(urlLogin, "_self");
 	};
 
-	// useEffect(() => {
-	// 	const token=window?.location?.hash?.split("&")[1]?.split("=")[1];
-	// 	if(token) {
-	// 		setLogged(true);
-	// 		localStorage.setItem("jwt", token);
-	// 		navigate(routes.HOME);
-	// 	}
-	// }, []);
+	// pulisco il localStorage all'ingresso in pagina
+	useEffect(() => {
+		clearAll();
+	}, []);
+	
 
 	return(
 

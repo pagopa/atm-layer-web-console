@@ -29,15 +29,13 @@ export type RootLinkType = {
 type HeaderAccountProps = {
     rootLink: RootLinkType;
     loggedUser?: boolean;
-    onLogin?: () => void;
     onLogout?: () => void;
 };
 
 export const HeaderAccountCustom = ({
 	rootLink,
 	loggedUser,
-	onLogout,
-	onLogin,
+	onLogout
 }: HeaderAccountProps) => (
 	<Stack
 		component="div"
@@ -56,18 +54,6 @@ export const HeaderAccountCustom = ({
 				justifyContent="space-between"
 				alignItems="center"
 			>
-				{/* <ButtonNaked
-					component="div"
-					size="small"
-					aria-label={rootLink?.ariaLabel}
-					// href={rootLink?.href}
-					// target="_blank"
-					rel="noreferrer"
-					title={rootLink?.title}
-					sx={{ fontWeight: "bold", pl: 3 }}
-				>
-					{rootLink?.element}
-				</ButtonNaked> */}
 				<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
 					{rootLink?.element}
 				</Box>
@@ -92,24 +78,13 @@ export const HeaderAccountCustom = ({
 						</Box>
 					)}
 
-					{/* 2. Logged User with Logout CTA */}
+					{/* 2. Logged User */}
 					{loggedUser && (
 						<Button variant="outlined" onClick={onLogout} title="Esci">
                             Esci
 						</Button>
 					)}
 
-					{/* 3. User not logged with Login CTA */}
-					{/* {!loggedUser && (
-						<Button
-							variant="contained"
-							size="small"
-							onClick={onLogin}
-							title="Accedi"
-						>
-                            Accedi
-						</Button>
-					)} */}
 				</Stack>
 			</Stack>
 		</Container>

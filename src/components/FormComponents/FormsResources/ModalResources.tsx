@@ -32,7 +32,10 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 	const handleDownload = () => {  const link = document.createElement("a");
 		// eslint-disable-next-line functional/immutable-data
 		link.href = detail.cdnUrl;
+		// eslint-disable-next-line functional/immutable-data
+		link.target = "_blank";
 		link.click();
+		setOpen(false);
 	};
 	
 
