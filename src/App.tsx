@@ -28,20 +28,20 @@ const LocalRoutes = () => (
 		<Routes>
 			<Route element={<PrivateRoute />}>
 				<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
+				
 				<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
 				<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
-				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
-				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
 				<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
 				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
 				<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
 
 				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
+				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
 				<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
-				<Route path={routes.CREATE_WR} element={<PageLayout><ErrorPage /></PageLayout>} />
-				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+
 				<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
-				<Route path={routes.RESOURCES} element={<PageLayout><ErrorPage /></PageLayout>} />
+				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
+				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
 			</Route>
 			<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
 			<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />
@@ -58,23 +58,34 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
+	const debugOn=localStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp?true:false);
 	const abortController = new AbortController();
 	// const navigate = useNavigate();
 
 	function clearAll(){
-		localStorage.removeItem("token");
-		localStorage.removeItem("recordParams");
-		localStorage.removeItem("recordParamsAssociated");
-		setLogged(false);
+		if(localStorage.getItem("jwt")){
+			setTokenExpired();
+		}
+		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("token");
+		localStorage.removeItem("jwt");
 		setLogged(false);
 		// navigate(ROUTES.LOGIN);
 	}
-	
+
+	function clearStorage(){
+		if(localStorage.getItem("recordParams")){
+			localStorage.removeItem("recordParams");		
+		}
+		if(localStorage.getItem("recordParamsAssociated")){
+			localStorage.removeItem("recordParamsAssociated");
+		}
+	}
+
+
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
@@ -85,14 +96,19 @@ function App() {
 		logged, 
 		setLogged,
 		abortController,
+		debugOn
 	};
 
 	useEffect(() => {
-		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		if(debugOn){
+			console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		}
 	}, []);
 
 	useEffect(() => {
-		console.log("login utente", logged);
+		if(debugOn){
+			console.log("login utente", logged);
+		}
 	}, [logged]);
 
 	return (
