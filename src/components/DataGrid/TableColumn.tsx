@@ -18,7 +18,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
 	const theme = useTheme();
-	// const { setRecordParams } = useContext(Ctx);
 
 	function showCustomHeader(params: GridColumnHeaderParams) {
 		return (
@@ -82,7 +81,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 					onClick={() => {
 						navigate(path);
 						localStorage.setItem("recordParams", JSON.stringify(param.row));
-						// setRecordParams(getRecordBpmnParams(param.row));
 					}}
 					sx={{
 						width: "100%",

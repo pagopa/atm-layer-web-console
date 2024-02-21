@@ -59,7 +59,6 @@ function App() {
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
 	const [logged, setLogged] = useState(temp?true:false);
-	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 	// const navigate = useNavigate();
 
@@ -86,8 +85,6 @@ function App() {
 		logged, 
 		setLogged,
 		abortController,
-		setRecordParams,
-		recordParams
 	};
 
 	useEffect(() => {
