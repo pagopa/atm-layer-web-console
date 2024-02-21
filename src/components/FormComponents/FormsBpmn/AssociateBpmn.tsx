@@ -103,7 +103,7 @@ const AssociateBpmn = () => {
 					id="acquirerId"
 					name="acquirerId"
 					label={"ID Banca"}
-					placeholder={"ID Banca"}
+					placeholder={"01234"}
 					size="small"
 					value={formData.acquirerId}
 					onChange={handleChange}
@@ -116,7 +116,7 @@ const AssociateBpmn = () => {
 					id="branchId"
 					name="branchId"
 					label={"ID Filiale"}
-					placeholder={"ID Filiale"}
+					placeholder={"098"}
 					size="small"
 					disabled={branchChecked}
 					value={formData.branchId}
@@ -135,7 +135,7 @@ const AssociateBpmn = () => {
 					id="terminalId"
 					name="terminalId"
 					label={"ID Terminale"}
-					placeholder={"ID Terminale"}
+					placeholder={"56"}
 					size="small"
 					disabled={terminalChecked}
 					value={formData.terminalId}
