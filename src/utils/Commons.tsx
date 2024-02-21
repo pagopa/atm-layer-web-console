@@ -104,7 +104,7 @@ export const handleSnackbar = (
 	valueMessage?: string
 ) => {
 	setSeverity(success ? "success" : "error");
-	setMessage(success ? "Operazione riuscita" : valueMessage ? valueMessage : "Operazione fallita");
+	setMessage(success ? "" : valueMessage ? valueMessage : "Operazione fallita");
 	setTitle(success ? "Successo" : "Errore");
 	setOpenSnackBar(true);
 };
