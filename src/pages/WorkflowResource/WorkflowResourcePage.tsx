@@ -4,9 +4,10 @@ import WorkflowResourceDataGrid from "../../components/DataGrid/WorkflowResource
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BoxPageLayout from "../Layout/BoxPageLayout";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 
 const WorkflowResourcePage = () => {
-	const breadComponent = ["Home", "Risorse aggiuntive per processi"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isWR:false}, false), "Risorse aggiuntive per processi");
 
 	return(
 		<React.Fragment>
