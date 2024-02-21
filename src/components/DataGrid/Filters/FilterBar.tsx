@@ -49,7 +49,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleSubmit = () => {
 		if (Object.values(filterValues).some(value => value !== "")) {
-			getAllList(filterValues);
+			getAllList(filterValues, 0);
 		}
 	};
 
