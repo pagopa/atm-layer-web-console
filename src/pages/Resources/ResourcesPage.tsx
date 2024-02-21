@@ -4,9 +4,10 @@ import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponen
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import ResourcesDataGrid from "../../components/DataGrid/ResourcesDataGrid";
 import BoxPageLayout from "../Layout/BoxPageLayout";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 
 const ResourcesPage = () => {
-	const breadComponent = ["Home", "Risorse statiche"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isStatic:false}, false), "Risorse statiche");
 	return (
 		<React.Fragment>
 			<Box mb={2} display={"flex"} justifyContent={"flex-start"} alignItems={"center"} mt={5} ml={5}>
