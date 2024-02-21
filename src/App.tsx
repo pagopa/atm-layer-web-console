@@ -58,24 +58,35 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
+	const debugOn=localStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp?true:false);
 	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
 	// const navigate = useNavigate();
 
 	function clearAll(){
-		localStorage.removeItem("token");
-		localStorage.removeItem("recordParams");
-		localStorage.removeItem("recordParamsAssociated");
-		setLogged(false);
+		if(localStorage.getItem("jwt")){
+			setTokenExpired();
+		}
+		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("token");
+		localStorage.removeItem("jwt");
 		setLogged(false);
 		// navigate(ROUTES.LOGIN);
 	}
-	
+
+	function clearStorage(){
+		if(localStorage.getItem("recordParams")){
+			localStorage.removeItem("recordParams");		
+		}
+		if(localStorage.getItem("recordParamsAssociated")){
+			localStorage.removeItem("recordParamsAssociated");
+		}
+	}
+
+
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
@@ -87,15 +98,20 @@ function App() {
 		setLogged,
 		abortController,
 		setRecordParams,
-		recordParams
+		recordParams,
+		debugOn
 	};
 
 	useEffect(() => {
-		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		if(debugOn){
+			console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		}
 	}, []);
 
 	useEffect(() => {
-		console.log("login utente", logged);
+		if(debugOn){
+			console.log("login utente", logged);
+		}
 	}, [logged]);
 
 	return (
