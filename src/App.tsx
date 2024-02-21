@@ -96,7 +96,8 @@ function App() {
 		logged, 
 		setLogged,
 		abortController,
-		debugOn
+		debugOn,
+		clearStorage
 	};
 
 	useEffect(() => {
