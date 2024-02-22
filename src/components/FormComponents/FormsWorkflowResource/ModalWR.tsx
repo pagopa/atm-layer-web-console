@@ -53,6 +53,10 @@ export const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, set
 					};
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 				} 
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					window.location.reload();
+				}, 4000);
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
