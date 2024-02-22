@@ -6,7 +6,6 @@ import { handleSnackbar } from "../../../utils/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { BPMN, DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
 import { downloadFile } from "../../../commons/decode";
-import fetchDeleteWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDeleteWorkflowResource";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
@@ -62,7 +61,8 @@ export const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, set
 		}
 		case DELETE_WR: {
 			try {
-				const response = await fetchDeleteWorkflowResource({ abortController, URL: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				// const response = await fetchDeleteWorkflowResource({ abortController, URL: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				const response = await fetchRequest({ urlEndpoint: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) , method: "POST", abortController })();
 
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);

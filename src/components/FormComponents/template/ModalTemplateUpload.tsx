@@ -61,10 +61,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			case UPDATE_WR:{
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
-
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-					
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);					
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -73,14 +71,9 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			}
 			case UPDATE_RES: {
 				try {
-					const response = await fetchUpdateResources({ abortController, body:postData, URL: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }) })();
-					if (response?.success) {
-						setOpen(false);
-						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-					} else {
-						setOpen(false);
-						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					}
+					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+					setOpen(false);
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

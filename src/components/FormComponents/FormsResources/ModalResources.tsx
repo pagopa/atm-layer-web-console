@@ -7,38 +7,26 @@ import { RESOURCES_DELETE } from "../../../commons/endpoints";
 import fetchDeleteResources from "../../../hook/fetch/Resources/fetchDeleteResources";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
+import { downloadStaticFile } from "../../../commons/decode";
 
 
 type Props = {
 	type: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	openSnackBar?: boolean;
 	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-	severity?: any;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-	message?: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
-	title?: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
 	detail: any;
 };
 
 
-export const ModalResources = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle, detail }: Props) => {
+export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle, detail }: Props) => {
 
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const handleDownload = () => {
-		const link = document.createElement("a");
-		// eslint-disable-next-line functional/immutable-data
-		link.href = detail.cdnUrl;
-		// eslint-disable-next-line functional/immutable-data
-		link.target = "_blank";
-		link.click();
-		setOpen(false);
-	};
-
+	
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -60,10 +48,8 @@ export const ModalResources = ({ type, open, setOpen, openSnackBar, setOpenSnack
 			break;
 		}
 		case DOWNLOAD_RES: {
-			handleDownload();
-			break;
-		}
-		case UPDATE_RES: {
+			downloadStaticFile(detail);
+			setOpen(false);
 			break;
 		}
 		default: return;

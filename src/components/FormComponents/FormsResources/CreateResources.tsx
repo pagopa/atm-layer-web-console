@@ -1,18 +1,18 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { useState, useRef, useContext } from "react";
+import { useState, useContext } from "react";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
-import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import checks from "../../../utils/checks";
+import { RESOURCES_CREATE } from "../../../commons/endpoints";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 
 export const CreateResources = () => {
-	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
 	const { isValidResourcesFilename } = checks();
@@ -31,6 +31,7 @@ export const CreateResources = () => {
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
+	const optionFormMenu=[{key:"HTML", value:"HTML", },{key:"OTHER", value:"OTHER"}];
     
 
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -67,14 +68,9 @@ export const CreateResources = () => {
 			}
 			
 			try {
-
-				const response = await fetchCreateResources({ abortController, body: postData })();
-				if (response?.success) {
-					console.log("Response positive: ", response);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData:true })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -131,8 +127,10 @@ export const CreateResources = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				>
-					<MenuItem value={"HTML"}>HTML</MenuItem>
-					<MenuItem value={"OTHER"}>OTHER</MenuItem>
+					{optionFormMenu?.map((el)=>(
+						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
+					)
+					)}
 				</TextField>
 			</Grid>
 			<Grid item xs={12} my={1}>
