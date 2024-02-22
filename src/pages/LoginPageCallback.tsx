@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, CircularProgress } from "@mui/material";
 import { Ctx } from "../DataContext";
 import routes from "../routes";
+import { Loading } from "../components/Commons/Loading";
 
 
 const LoginPageCallback = () => {
-	const { logged, setLogged } = useContext(Ctx);
+	const { setLogged } = useContext(Ctx);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -15,13 +15,13 @@ const LoginPageCallback = () => {
 			setLogged(true);
 			localStorage.setItem("jwt", token);
 			navigate(routes.HOME);
+		}else{
+			navigate(routes.LOGIN);
 		}
 	}, []);
 
 	return(
-		<Box display={"flex"} justifyContent={"center"} alignItems={"center"} sx={{ maxHeight: "calc(100vh-110px)" }}>
-			<CircularProgress size={20} />
-		</Box>		
+		<Loading/>
 	);
 };
 

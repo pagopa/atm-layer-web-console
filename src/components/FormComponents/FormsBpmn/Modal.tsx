@@ -2,7 +2,7 @@ import React, { SetStateAction, useContext } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from "../../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";

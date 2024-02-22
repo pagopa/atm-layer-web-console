@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
