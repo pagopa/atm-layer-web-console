@@ -2,7 +2,6 @@ import React, { SetStateAction, useContext } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
 import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from "../../../commons/constants";
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
 import ModalTemplate from "../template/ModalTemplate";
@@ -67,20 +66,11 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 			const baseUrl = generatePath(DELETE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
 			const URL = `${baseUrl}?acquirerId=${recordParamsAssociated.acquirerId}`;
 			const filterValues = { branchId: recordParamsAssociated.branchId, terminalId: recordParamsAssociated.terminalId };
-			const url = getQueryString(URL, filterValues, DELETE_ASSOCIATION);
-
+			
 			try {
-				const response = await fetchDeleteAssociatedBpmn({ abortController, url })();
-				// const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API,{ bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
-				
-				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				}
-
+				const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, DELETE_ASSOCIATION),  method: "DELETE", abortController })();
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 			} catch (error) {
 				console.error("ERROR", error);
 			}
@@ -89,7 +79,6 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 		case DOWNLOAD: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DOWNLOAD_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "GET", abortController })();
-
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {

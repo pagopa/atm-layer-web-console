@@ -30,10 +30,13 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = (URL: string, filterValues: any, driver: string) => {
-
-	let queryString = URL;
-
+export const getQueryString = ( filterValues: any, driver: string, URL?: string) => {
+	
+	let queryString="";
+	if(URL&& URL!=="") {
+	  queryString = queryString.concat(URL);
+	}
+		
 	switch (driver) {
 	case BPMN:
 		if (filterValues?.functionType) {

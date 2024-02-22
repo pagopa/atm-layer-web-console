@@ -1,11 +1,11 @@
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Ctx } from "../../DataContext";
 import { WORKFLOW_RESOURCE } from "../../commons/constants";
 import { GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../../commons/endpoints";
-import fetchGetAllWfResourcesFiltered from "../../hook/fetch/WorkflowResource/fetchGetAllWfResourcesFiltered";
 import { getQueryString } from "../../utils/Commons";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
@@ -32,12 +32,10 @@ export const WorkflowResourceDataGrid = () => {
 
 	const getAllWfResourcesList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_WORKFLOW_RESOURCES_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		const url = getQueryString(URL, filterValues, WORKFLOW_RESOURCE);
-
+		
 		try {
-			// const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "GET", abortController, body: postData, isFormData: true })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, WORKFLOW_RESOURCE),  method: "GET", abortController })();
 
-			const response = await fetchGetAllWfResourcesFiltered({ abortController, url })();
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
 				setTableListWfResources(results);

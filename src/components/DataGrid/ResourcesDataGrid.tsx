@@ -5,7 +5,7 @@ import { Ctx } from "../../DataContext";
 import { RESOURCES } from "../../commons/constants";
 import { GET_ALL_RESOURCES_FILTER } from "../../commons/endpoints";
 import { getQueryString } from "../../utils/Commons";
-import fetchGetAllResourcesFiltered from "../../hook/fetch/Resources/fetchGetAllResourcesFiltered";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 import CustomDataGrid from "./CustomDataGrid";
@@ -33,10 +33,10 @@ export const ResourcesDataGrid = () => {
 
 	const getAllResourcesList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_RESOURCES_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		const url = getQueryString(URL, filterValues, RESOURCES);
-
+		
 		try {
-			const response = await fetchGetAllResourcesFiltered({ abortController, url })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, RESOURCES),  method: "GET", abortController })();
+
 			if (response?.success) {
 			  const { page, limit, results, itemsFound } = response.valuesObj;
 			  setTableListResources(results);
@@ -73,16 +73,16 @@ export const ResourcesDataGrid = () => {
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				autoHeight={true}
+				// autoHeight={true}
 				className="CustomDataGrid"
-				columnBuffer={6}
+				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.resourceId}
 				hideFooterSelectedRowCount={true}
-				rowHeight={55}
+				rowHeight={50}
 				rows={tableListResources}
 				rowCount={totalItemsFound}
-				sortingMode="server"
+				// sortingMode="server"
 				columnVisibilityModel={visibleColumns(RESOURCES)}
 				paginationMode="server"
 				pagination

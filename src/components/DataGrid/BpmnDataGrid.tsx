@@ -1,11 +1,11 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Box, styled } from "@mui/material";
+import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
-import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { getQueryString } from "../../utils/Commons";
 import { Ctx } from "../../DataContext";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
@@ -35,10 +35,10 @@ export default function BpmnDataGrid() {
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_BPMN_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		const url = getQueryString(URL, filterValues, BPMN);
 
 		try {
-			const response = await fetchGetAllFiltered({ abortController, url })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, BPMN),  method: "GET", abortController })();
+
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
 				setTableListBpmn(results);
@@ -82,7 +82,7 @@ export default function BpmnDataGrid() {
 					columns={columns}
 					getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 					hideFooterSelectedRowCount={true}
-					rowHeight={55}
+					rowHeight={50}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
 					// slots={{ noRowsOverlay: {} }}
