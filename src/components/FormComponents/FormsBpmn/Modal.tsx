@@ -55,7 +55,10 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 				}
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					window.location.reload();
+				}, 4000);
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -108,57 +111,40 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 
 	};
 
+	const modalConfigs = {
+		DELETE: {
+			titleModal: "Cancellazione risorsa di processo",
+			contentText: "Sei sicuro di voler cancellare questa risorsa di proccesso?",
+		},
+		DEPLOY: {
+			titleModal: "Rilascio risorsa di processo",
+			contentText: "Sei sicuro di voler rilasciare questa risorsa di proccesso?",
+		},
+		DELETE_ASSOCIATION: {
+			titleModal: "Eliminazione Associazione",
+			contentText: "Sei sicuro di voler eliminare questa associazione?",
+		},
+		DOWNLOAD: {
+			titleModal: "Scarica risorsa di processo",
+			contentText: "Sei sicuro di voler scaricare questa risorsa?",
+		},
+	};
+	
 	return (
 		<>
-			{type === DELETE &&
-				<ModalTemplate
-					titleModal={"Cancellazione risorsa di processo"}
-					contentText={"Sei sicuro di voler cancellare questa risorsa di proccesso?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
-			}
-			{type === DEPLOY &&
+			{Object.keys(modalConfigs).map((key) => (
+				type === key && (
+					<ModalTemplate
+						key={key}
+						titleModal={modalConfigs[key as keyof typeof modalConfigs].titleModal}
+						contentText={modalConfigs[key as keyof typeof modalConfigs].contentText}
+						open={open}
+						setOpen={setOpen}
+						handleSubmit={handleSubmit}
+					/>
+				)
+			))}
 
-				<ModalTemplate
-					titleModal={"Rilascio risorsa di processo"}
-					contentText={"Sei sicuro di voler rilasciare questa risorsa di proccesso?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
-
-			}
-			{type === DELETE_ASSOCIATION &&
-				<ModalTemplate
-					titleModal={"Eliminazione Associazione"}
-					contentText={"Sei sicuro di voler eliminare questa associazione?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
-
-			}
-			{type === DOWNLOAD &&
-				<ModalTemplate
-					titleModal={"Scarica risorsa di processo"}
-					contentText={"Sei sicuro di voler scaricare questa risorsa?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
-
-			}
-			{type === UPDATE_ASSOCIATION &&
-				<ModalTemplate
-					titleModal={"Modifica Associazione"}
-					contentText={"Sei sicuro di voler modificare questa associazione?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
-			}
 		</>
 	);
 };
