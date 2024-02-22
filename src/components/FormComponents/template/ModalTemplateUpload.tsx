@@ -70,6 +70,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					if (response?.success) {
 						setOpen(false);
 						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+						setFormData(initialValues);
 					} else {
 						setOpen(false);
 						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -86,6 +87,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					if (response?.success) {
 						setOpen(false);
 						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+						setFormData(initialValues);
 					} else {
 						setOpen(false);
 						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -146,7 +148,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+						<Button variant={"outlined"} onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
 						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
