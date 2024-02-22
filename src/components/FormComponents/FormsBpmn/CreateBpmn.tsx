@@ -68,7 +68,7 @@ export const CreateBpmn = () => {
 			if (formData.file && formData.filename && formData.functionType) {
 				postData.append("file", formData.file);
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
-				postData.append("functionType", formData.functionType);
+				postData.append("functionType", formData.functionType.toUpperCase());
 			}
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();

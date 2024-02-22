@@ -1,7 +1,7 @@
 import React, { SetStateAction, useContext } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { BPMN_ASSOCIATE_API, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
+import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import fetchDeleteAssociatedBpmn from "../../../hook/fetch/Bpmn/fetchDeleteBpmnAssociated";
 import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD, UPDATE_ASSOCIATION } from "../../../commons/constants";
 import { getQueryString, handleSnackbar } from "../../../utils/Commons";
@@ -14,18 +14,14 @@ type Props = {
 	type: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	openSnackBar?: boolean;
 	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-	severity?: any;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-	message?: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
-	title?: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
 
-export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
+export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
@@ -35,7 +31,7 @@ export const Modal = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, seve
 		switch (type) {
 		case DELETE: {
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DEPLOY_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
+				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
 		
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);

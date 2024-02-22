@@ -54,7 +54,7 @@ const AssociateBpmn = () => {
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
-				}
+				}else { setErrorCode(undefined);}
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

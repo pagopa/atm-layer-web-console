@@ -26,6 +26,8 @@ export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, 
 		borderColor: theme.palette.divider,
 	};
 
+	const disabledConfirmButton = () => openSnackBar ? true : false;
+
 	return (
 		<Box sx={{ maxWidth: "75%" }}>
 			{getFormOptions.map((el: any, ind: any) => (
@@ -47,7 +49,7 @@ export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, 
 							{children}
 						</Grid>
 						<Box display="flex" justifyContent="flex-end" mt={2}>
-							<Button variant="contained" onClick={handleSubmit}>
+							<Button variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
 								Conferma
 							</Button>
 						</Box>
