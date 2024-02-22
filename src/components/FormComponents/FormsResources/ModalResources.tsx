@@ -10,26 +10,27 @@ import ModalTemplate from "../template/ModalTemplate";
 
 
 type Props = {
-  type: string;
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  openSnackBar?: boolean;
-  setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-  severity?: any;
-  setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-  message?: string;
-  setMessage: React.Dispatch<SetStateAction<string>>;
-  title?: string;
-  setTitle: React.Dispatch<SetStateAction<string>>;
-  detail: any;
+	type: string;
+	open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	openSnackBar?: boolean;
+	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
+	severity?: any;
+	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+	message?: string;
+	setMessage: React.Dispatch<SetStateAction<string>>;
+	title?: string;
+	setTitle: React.Dispatch<SetStateAction<string>>;
+	detail: any;
 };
 
 
-export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle, detail }: Props) => {
-	
+export const ModalResources = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle, detail }: Props) => {
+
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const handleDownload = () => {  const link = document.createElement("a");
+	const handleDownload = () => {
+		const link = document.createElement("a");
 		// eslint-disable-next-line functional/immutable-data
 		link.href = detail.cdnUrl;
 		// eslint-disable-next-line functional/immutable-data
@@ -37,14 +38,14 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 		link.click();
 		setOpen(false);
 	};
-	
+
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		switch (type) {
 		case DELETE_RES: {
 			try {
-				const response = await fetchDeleteResources({abortController, URL: generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }) })();
+				const response = await fetchDeleteResources({ abortController, URL: generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }) })();
 				if (response?.success) {
 					setOpen(false);
 					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -58,7 +59,7 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 			}
 			break;
 		}
-		case DOWNLOAD_RES:{
+		case DOWNLOAD_RES: {
 			handleDownload();
 			break;
 		}
@@ -72,28 +73,36 @@ export const ModalResources = ({type, open, setOpen, openSnackBar, setOpenSnackB
 	return (
 		<>
 			{type === DELETE_RES &&
-		<ModalTemplate
-			titleModal={"Cancellazione risorsa statica"}
-			contentText={"Sei sicuro di voler cancellare questa risorsa statica?"}
-			open={open}
-			setOpen={setOpen}
-			handleSubmit={handleSubmit}
-		/>}
+				<ModalTemplate
+					titleModal={"Cancellazione risorsa statica"}
+					contentText={"Sei sicuro di voler cancellare questa risorsa statica?"}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>}
 			{type === DOWNLOAD_RES &&
-		<ModalTemplate
-			titleModal={"Scarica risorsa statica"}
-			contentText={"Sei sicuro di voler scaricare questa risorsa statica?"}
-			open={open}
-			setOpen={setOpen}
-			handleSubmit={handleSubmit}
-		/>}
-			{type ===UPDATE_RES &&
-		<ModalTemplateUpload 
-			titleModal={"Update risorsa statica"}
-			contentText={"Carica il file aggiornato"}
-			open={open}
-			setOpen={setOpen}
-			recordParams={recordParams} handleSnackbar={handleSnackbar} abortController={abortController} setMessage={setMessage} setSeverity={setSeverity} setTitle={setTitle} setOpenSnackBar={setOpenSnackBar} type={UPDATE_RES}	/>}
+				<ModalTemplate
+					titleModal={"Scarica risorsa statica"}
+					contentText={"Sei sicuro di voler scaricare questa risorsa statica?"}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>}
+			{type === UPDATE_RES &&
+				<ModalTemplateUpload
+					titleModal={"Update risorsa statica"}
+					contentText={"Carica il file aggiornato"}
+					open={open}
+					setOpen={setOpen}
+					recordParams={recordParams}
+					handleSnackbar={handleSnackbar}
+					abortController={abortController}
+					setMessage={setMessage}
+					setSeverity={setSeverity}
+					setTitle={setTitle}
+					setOpenSnackBar={setOpenSnackBar}
+					type={UPDATE_RES}
+				/>}
 		</>
 	);
 };
