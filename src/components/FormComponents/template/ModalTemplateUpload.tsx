@@ -5,7 +5,6 @@ import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
-import fetchUpdateResources from "../../../hook/fetch/Resources/fetchUpdateResources";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 type Props = {
@@ -73,15 +72,9 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			}
 			case UPDATE_RES: {
 				try {
-					const response = await fetchUpdateResources({ abortController, body:postData, URL: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }) })();
-					if (response?.success) {
-						setOpen(false);
-						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-						setFormData(initialValues);
-					} else {
-						setOpen(false);
-						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					}
+					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+					setOpen(false);
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);

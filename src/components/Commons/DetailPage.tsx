@@ -113,13 +113,9 @@ const DetailPage = ({
 				open={open}
 				setOpen={setOpen}
 				type={type}
-				openSnackBar={openSnackBar}
 				setOpenSnackBar={setOpenSnackBar}
-				severity={severity}
 				setSeverity={setSeverity}
-				message={message}
 				setMessage={setMessage}
-				title={title}
 				setTitle={setTitle}
 				detail={detail}
 			/>
