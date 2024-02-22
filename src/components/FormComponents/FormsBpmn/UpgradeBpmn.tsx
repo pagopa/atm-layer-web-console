@@ -58,9 +58,6 @@ export const UpgradeBpmn = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 
-		console.log("Error: ", errors);
-		console.log("Body: ", formData);
-
 		if (validateForm()) {
 
 			const postData = new FormData();
@@ -74,7 +71,6 @@ export const UpgradeBpmn = () => {
 			try {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
 
-				// const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {

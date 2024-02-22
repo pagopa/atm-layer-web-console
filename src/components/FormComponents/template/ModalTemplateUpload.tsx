@@ -1,13 +1,12 @@
 import React, { forwardRef, useState }  from "react";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
-import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
-import { resetErrors } from "../../../utils/Commons";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
 import fetchUpdateResources from "../../../hook/fetch/Resources/fetchUpdateResources";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 type Props = {
 	type: string;
@@ -25,11 +24,6 @@ type Props = {
 };
 
 export default function ModalTemplateUpload({ type, titleModal, contentText, open, setOpen, recordParams, handleSnackbar, abortController, setMessage, setSeverity, setTitle, setOpenSnackBar}: Props) {
-
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-		resetErrors(errors, setErrors, e.target.name);
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
 
 	const clearFile = () => {
 		setFormData({ ...formData, file: undefined });
@@ -66,14 +60,11 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			switch (type) {
 			case UPDATE_WR:{
 				try {
-					const response = await fetchUpdateWorkflowResource({ abortController, body: postData, URL: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }) }) ();
-					if (response?.success) {
-						setOpen(false);
-						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					} else {
-						setOpen(false);
-						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					}
+					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+
+					setOpen(false);
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -85,7 +76,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					const response = await fetchUpdateResources({ abortController, body:postData, URL: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }) })();
 					if (response?.success) {
 						setOpen(false);
-						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+						handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					} else {
 						setOpen(false);
 						handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
