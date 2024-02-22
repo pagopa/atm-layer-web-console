@@ -16,7 +16,7 @@ type Props = {
   buttonConfigs: Array<ButtonConfig>;
 };
 
-const DetailButtons = ({ type, setType, openDialog, detail, buttonConfigs }: Props) => {
+const DetailButtons = ({ setType, openDialog, buttonConfigs }: Props) => {
 	const navigate = useNavigate();
 
 	function handleClick(variable: string, navigateTo?: string) {
