@@ -1,5 +1,5 @@
-import { Box, Button } from "@mui/material";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../commons/constants";
+import DetailButtons from "./DetailButtons";
 
 
 type Props = {
@@ -10,33 +10,13 @@ type Props = {
   };
 
 const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
-
-	function handleClick(variable: string) {
-		setType(variable);
-		openDialog(variable);
-	}
-
-	return (
-		<Box mt={2} mx={4} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
-				onClick={() => handleClick(UPDATE_RES)}>
-                Aggiorna
-			</Button>
-			<Button 
-				sx={{ marginRight: 3 }} 
-				variant="contained" 
-				onClick={() => handleClick(DELETE_RES)}>
-        		Cancella
-			</Button>
-			<Button 
-				variant="contained" 
-				onClick={() => handleClick(DOWNLOAD_RES)}>
-        		Scarica
-			</Button>
-		</Box>
-	);
+	const buttonConfigs = [
+	  { text: "Aggiorna", action: UPDATE_RES },
+	  { text: "Cancella", action: DELETE_RES },
+	  { text: "Scarica", action: DOWNLOAD_RES }
+	];
+  
+	return <DetailButtons type={type} setType={setType} openDialog={openDialog} detail={detail} buttonConfigs={buttonConfigs} />;
 };
 
 export default ResourcesDetailButtons;

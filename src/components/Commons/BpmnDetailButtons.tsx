@@ -1,7 +1,6 @@
-import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes";
-import { DELETE, DEPLOY, DOWNLOAD } from "../../commons/constants";
+import { ASSOCIATE_BPMN, DELETE, DEPLOY, DOWNLOAD, UPGRADE_BPMN } from "../../commons/constants";
+import DetailButtons from "./DetailButtons";
 
 type Props = {
   type?: string;
@@ -11,45 +10,15 @@ type Props = {
 };
 
 const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
-	const navigate = useNavigate();
-	
-	function handleClick(variable: string) {
-		setType(variable);
-		openDialog(variable);
-	}
-
-	return (
-		<Box mt={2} mx={4} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
-				onClick={() => navigate(ROUTES.UPGRADE_BPMN)}
-			>
-        		Aggiorna
-			</Button>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
-				onClick={() => handleClick(DEPLOY)}
-				disabled={detail.status === "DEPLOYED"}
-			>
-        		Rilascia
-			</Button>
-			<Button
-				sx={{ marginRight: 3 }}
-				variant="contained"
-				onClick={() => navigate(ROUTES.ASSOCIATE_BPMN)}
-			>
-        		Associa
-			</Button>
-			<Button sx={{ marginRight: 3 }} variant="contained" onClick={() => handleClick(DELETE)}>
-        		Cancella
-			</Button>
-			<Button variant="contained" onClick={() => handleClick(DOWNLOAD)}>
-        		Scarica
-			</Button>
-		</Box>
-	);
+	const buttonConfigs = [
+	  { text: "Aggiorna", action: UPGRADE_BPMN, navigate: ROUTES.UPGRADE_BPMN },
+	  { text: "Rilascia", action: DEPLOY, disabledCondition: () => detail.status === "DEPLOYED" },
+	  { text: "Associa", action: ASSOCIATE_BPMN, navigate: ROUTES.ASSOCIATE_BPMN },
+	  { text: "Cancella", action: DELETE },
+	  { text: "Scarica", action: DOWNLOAD }
+	];
+  
+	return <DetailButtons type={type} setType={setType} openDialog={openDialog} detail={detail} buttonConfigs={buttonConfigs} />;
 };
 
 export default BpmnDetailButtons;
