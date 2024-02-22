@@ -45,7 +45,7 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 					{errorCode && errorCode === "ATMLM_4000047" ?
 						<Typography variant="body1">
 							{message + ", vuoi sostiuire l'associazione per questa banca?"}
-							{<p><Button onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
+							{<p><Button  variant="outlined" onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
 						</Typography>
 						: <Typography variant="body1">{message}</Typography>
 					}
