@@ -4,10 +4,10 @@ import { Ctx } from "../../../DataContext";
 import { handleSnackbar } from "../../../utils/Commons";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
-import fetchDeleteResources from "../../../hook/fetch/Resources/fetchDeleteResources";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadStaticFile } from "../../../commons/decode";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 
 type Props = {
@@ -33,14 +33,11 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 		switch (type) {
 		case DELETE_RES: {
 			try {
-				const response = await fetchDeleteResources({ abortController, URL: generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }) })();
-				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				}
+				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
+			
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
