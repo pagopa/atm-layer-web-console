@@ -5,7 +5,6 @@ import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
-import fetchUpdateResources from "../../../hook/fetch/Resources/fetchUpdateResources";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 type Props = {
@@ -62,7 +61,9 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);					
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					setFormData(initialValues);
+					
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -130,7 +131,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+						<Button variant={"outlined"} onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
 						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
