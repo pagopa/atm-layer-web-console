@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
 import ROUTES from "../../routes";
-import { DELETE, DELETE_ASSOCIATION, DELETE_VALUES, DEPLOY_VALUES } from "../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VALUES, DELETE_WR, DEPLOY_VALUES } from "../../commons/constants";
 
 type Props = {
 	setOpenSnackBar?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,9 +23,13 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 	const conditionalReload = () => {
 		if (type === DELETE_ASSOCIATION || (type && DEPLOY_VALUES.includes(type))) {
 			window.location.reload();
-		} else if (type && DELETE_VALUES.includes(type)) {
+		} else if (type && type === DELETE_BPMN) {
 			navigate(ROUTES.BPMN);
-		} else if(setOpenSnackBar){
+		} else if (type && type === DELETE_RES) {
+			navigate(ROUTES.RESOURCES);
+		} else if (type && type === DELETE_WR) {
+			navigate(ROUTES.WORKFLOW_RESOURCES);
+		} else if (setOpenSnackBar) {
 			setOpenSnackBar(false);
 		}
 	};
