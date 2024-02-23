@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import { Grid, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,7 @@ type Props = {
   filterValues: any;
   filterRoutes: string;
   children?: any;
+  loading?: boolean;
 };
 
 const FilterTemplate = ({
@@ -15,6 +17,7 @@ const FilterTemplate = ({
 	filterValues,
 	filterRoutes,
 	children,
+	loading
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
@@ -52,9 +55,9 @@ const FilterTemplate = ({
 							>
                 Cancella Filtri
 							</Button>
-							<Button variant="contained" disabled={disabledButtons()} onClick={handleSubmit}>
+							<LoadingButton loading={loading} variant="contained" disabled={disabledButtons()} onClick={handleSubmit}>
                 Filtra
-							</Button>
+							</LoadingButton>
 						</Box>
 					</Box>
 				</Grid>

@@ -40,6 +40,7 @@ export default function BpmnDataGrid() {
 
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, BPMN), method: "GET", abortController })();
+			setLoading(false);
 			setStatusError(response?.status);
 
 			if (response?.success) {
@@ -51,6 +52,7 @@ export default function BpmnDataGrid() {
 				setTableListBpmn([]);
 			}
 		} catch (error) {
+			setLoading(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -73,6 +75,8 @@ export default function BpmnDataGrid() {
 					getAllList={getAllBpmnList}
 					newFilterValues={initialValues}
 					driver={BPMN}
+					loading={loading}
+					setLoading={setLoading}
 				/>
 			</Box>
 			<Box mt={2}>

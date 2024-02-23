@@ -37,6 +37,7 @@ export const WorkflowResourceDataGrid = () => {
 		
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, WORKFLOW_RESOURCE),  method: "GET", abortController })();
+			setLoading(false);
 			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -47,6 +48,7 @@ export const WorkflowResourceDataGrid = () => {
 				setTableListWfResources([]);
 			}
 		} catch (error) {
+			setLoading(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -69,6 +71,8 @@ export const WorkflowResourceDataGrid = () => {
 				getAllList={getAllWfResourcesList}
 				newFilterValues={initialValues}
 				driver={WORKFLOW_RESOURCE}
+				loading={loading}
+				setLoading={setLoading}
 			/>
 			<CustomDataGrid
 				disableColumnFilter

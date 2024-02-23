@@ -38,6 +38,7 @@ export const ResourcesDataGrid = () => {
 
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, RESOURCES), method: "GET", abortController })();
+			setLoading(false);
 			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -48,6 +49,7 @@ export const ResourcesDataGrid = () => {
 				setTableListResources([]);
 			}
 		} catch (error) {
+			setLoading(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -69,6 +71,8 @@ export const ResourcesDataGrid = () => {
 				getAllList={getAllResourcesList}
 				newFilterValues={initialValues}
 				driver={RESOURCES}
+				loading={loading}
+				setLoading={setLoading}
 			/>
 			<CustomDataGrid
 				disableColumnFilter
