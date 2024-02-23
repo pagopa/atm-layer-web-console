@@ -19,14 +19,22 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	const navigate = useNavigate();
 	const theme = useTheme();
 
-	function showCustomHeader(params: GridColumnHeaderParams) {
+	function showCustomHeader(params: GridColumnHeaderParams, overrideStyle: CSSProperties = {}) {
 		return (
-			<Typography
-				color={theme.palette.primary.contrastText}
-				variant="body2"
-			>
-				{params.colDef.headerName}
-			</Typography>
+			<Box sx={{		
+				display: "-webkit-box",
+				WebkitLineClamp: 2,
+				WebkitBoxOrient: "vertical" as const,
+				// whiteSpace:"normal"
+			}}>
+				<Typography
+					color={theme.palette.primary.contrastText}
+					variant="body2"
+					
+				>
+					{params.colDef.headerName}
+				</Typography>
+			</Box>
 		);
 	};
 
