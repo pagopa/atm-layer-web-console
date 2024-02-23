@@ -56,8 +56,9 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
+	const jwt= localStorage.getItem("jwt");
 	const debugOn=localStorage.getItem("debugOn");
-	const [logged, setLogged] = useState(temp?true:false);
+	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const abortController = new AbortController();
 	const navigate = useNavigate();
 
