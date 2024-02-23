@@ -151,14 +151,22 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
+<<<<<<< HEAD
 					flex: 0.5
+=======
+					flex: 1
+>>>>>>> uat
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
 				{
 					field: "enabled",
 					cellClassName: "justifyContentNormal",
+<<<<<<< HEAD
 					headerName: "enabled",
+=======
+					headerName: "Nome file",
+>>>>>>> uat
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -166,7 +174,12 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
+<<<<<<< HEAD
 					flex: 0.5
+=======
+					resizable: false,
+					flex: 2
+>>>>>>> uat
 				},
 				{
 					field: "deployment_id",
@@ -192,7 +205,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				{
 					field: "description",
@@ -248,7 +261,10 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.bpmnModelVersion),
 					sortable: false,
+<<<<<<< HEAD
 					resizable: false,
+=======
+>>>>>>> uat
 					flex: 1
 				},
 				{
@@ -366,6 +382,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.workflowResourceId),
 					sortable: false,
+<<<<<<< HEAD
 					flex: 1
 				},
 				fileNameColumn,
@@ -388,6 +405,10 @@ const useColumns: any = () => {
 				createdByColumn,
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
+=======
+					flex: 0.5
+				}
+>>>>>>> uat
 			];
 		default:
 			return [];

@@ -1,5 +1,6 @@
 import { alpha, styled } from "@mui/material";
 import { DataGrid, DataGridProps } from "@mui/x-data-grid";
+import React from "react";
 
 const StyledDataGrid = styled(DataGrid)({
 	border: "none !important",
@@ -39,6 +40,11 @@ const StyledDataGrid = styled(DataGrid)({
 			backgroundColor: "inherit",
 		},
 	},
+	// "&.MuiDataGrid-root .MuiDataGrid-columnHeaders": {
+	// 	backgroundColor: theme.palette.primary.main,
+	// },
+	// "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, &.MuiDataGrid-root .MuiDataGrid-cell:focus-within":
+	// 	{ outline: "none" },
 
 	".justifyContentNormal": {
 		fontSize: "16px",
