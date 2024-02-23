@@ -40,7 +40,8 @@ const LocalRoutes = () => (
 			<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
 
 			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
-			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
+			{/* <Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} /> */}
+			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ErrorPage /></PageLayout>} />
 			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
 		</Route>
 		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
