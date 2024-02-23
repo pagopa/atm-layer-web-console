@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import UpgradeBpmn from "../../components/FormComponents/FormsBpmn/UpgradeBpmn";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import FormPageTemplate from "../Layout/FormPageTemplate";
 
 const UpgradeBpmnPage = () => {

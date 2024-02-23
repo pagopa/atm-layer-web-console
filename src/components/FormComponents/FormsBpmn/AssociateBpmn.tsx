@@ -4,7 +4,7 @@ import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import FormTemplate from "../template/FormTemplate";
 import { BPMN_ASSOCIATE_API, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";

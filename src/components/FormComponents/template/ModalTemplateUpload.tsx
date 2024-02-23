@@ -103,29 +103,21 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<Divider />
 			<Box py={2}>
 				<DialogContent>
-					<DialogContentText>
-						{contentText}
-					</DialogContentText>
-					{type === UPDATE_WR &&
-					<UploadField
-						titleField="File Aggiuntivo per processo"
-						name={"file"}
-						file={formData.file}
-						clearFile={clearFile}
-						error={errors.file}
-						setFormData={setFormData}
-						formData={formData} 
-					/>}
-					{type === UPDATE_RES &&
-					<UploadField 
-						titleField="File Risorsa statica"
-						name={"file"}
-						file={formData.file}
-						clearFile={clearFile}
-						error={errors.file}
-						setFormData={setFormData}
-						formData={formData} 
-					/>}
+					{contentText&&
+						<DialogContentText>
+							{contentText}
+						</DialogContentText>
+					}
+					<Box mt={2}>
+						<UploadField
+							name={"file"}
+							file={formData.file}
+							clearFile={clearFile}
+							error={errors.file}
+							setFormData={setFormData}
+							formData={formData} 
+						/>
+					</Box>
 				</DialogContent>
 			</Box>
 			<DialogActions >

@@ -7,9 +7,10 @@ type Props = {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	handleSubmit: any;
+	children?:React.ReactNode;
 };
 
-export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit }: Props) {
+export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit, children }: Props) {
 	return (
 		<Dialog
 			open={open}
@@ -28,6 +29,7 @@ export default function ModalTemplate({ titleModal, contentText, open, setOpen, 
 					</DialogContentText>
 				</DialogContent>
 			</Box>
+			{children}
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>

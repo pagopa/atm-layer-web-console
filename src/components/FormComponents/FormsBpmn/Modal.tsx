@@ -1,9 +1,9 @@
 import React, { SetStateAction, useContext } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
-import { getQueryString, handleSnackbar } from "../../../utils/Commons";
+import { getQueryString, getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -20,11 +20,12 @@ type Props = {
 };
 
 
-export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
+const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const navigate = useNavigate();
+	
+	const content=getTextModal(type);
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		switch (type) {
@@ -99,42 +100,15 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 		}
 
 	};
-
-	const modalConfigs = {
-		DELETE: {
-			titleModal: "Cancellazione risorsa di processo",
-			contentText: "Sei sicuro di voler cancellare questa risorsa di proccesso?",
-		},
-		DEPLOY: {
-			titleModal: "Rilascio risorsa di processo",
-			contentText: "Sei sicuro di voler rilasciare questa risorsa di proccesso?",
-		},
-		DELETE_ASSOCIATION: {
-			titleModal: "Eliminazione Associazione",
-			contentText: "Sei sicuro di voler eliminare questa associazione?",
-		},
-		DOWNLOAD: {
-			titleModal: "Scarica risorsa di processo",
-			contentText: "Sei sicuro di voler scaricare questa risorsa?",
-		},
-	};
 	
 	return (
-		<>
-			{Object.keys(modalConfigs).map((key) => (
-				type === key && (
-					<ModalTemplate
-						key={key}
-						titleModal={modalConfigs[key as keyof typeof modalConfigs].titleModal}
-						contentText={modalConfigs[key as keyof typeof modalConfigs].contentText}
-						open={open}
-						setOpen={setOpen}
-						handleSubmit={handleSubmit}
-					/>
-				)
-			))}
-
-		</>
+		<ModalTemplate
+			titleModal={content?.titleModal}
+			contentText={content?.contentText}
+			open={open}
+			setOpen={setOpen}
+			handleSubmit={handleSubmit}
+		/>
 	);
 };
 

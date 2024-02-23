@@ -4,7 +4,7 @@ import BpmnDataGrid from "../../components/DataGrid/BpmnDataGrid";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BoxPageLayout from "../Layout/BoxPageLayout";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import { Ctx } from "../../DataContext";
 
 const BpmnPage = () => {

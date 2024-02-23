@@ -3,9 +3,9 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { BPMN, DELETE_ASSOCIATION, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
-import ROUTES from "../routes";
-import { LinkModelDto, PageDto } from "../model/LinkModel";
+import { BPMN, DELETE, DELETE_ASSOCIATION, DELETE_RES, DELETE_WR, DEPLOY, DEPLOY_WR, DOWNLOAD, DOWNLOAD_RES, DOWNLOAD_WR, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import ROUTES from "../../routes";
+import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
@@ -180,4 +180,50 @@ export const commonBreadRoot = (currentPage:PageDto, isDetail:boolean=false, rec
 		});
 	}
 	return links;
+};
+
+export function getTextModal(type:string):any {
+	
+	switch (type) {
+	case ROLLBACK_WR: {
+		return {titleModal:"Ripristino risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler ripristinare la versione precedente della risorsa?"};
+	}
+	case DEPLOY: {
+		return {titleModal:"Rilascio risorsa di processo", contentText:"Sei sicuro di voler rilasciare questa risorsa di proccesso?"};
+	}
+	case DEPLOY_WR: {
+		return {titleModal:"Rilascio risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler rilasciare questa risorsa aggiuntiva di processo?"};
+	}
+	case DELETE: {
+		return {titleModal:"Cancellazione risorsa di processo", contentText:"Sei sicuro di voler cancellare questa risorsa di proccesso?"};
+	}
+	case DELETE_ASSOCIATION: {
+		return {titleModal:"Eliminazione Associazione", contentText:"Sei sicuro di voler eliminare questa associazione?"};
+	}
+	case DELETE_RES: {
+		return {titleModal:"Cancellazione risorsa statica", contentText:"Sei sicuro di voler cancellare questa risorsa statica?"};
+	}
+	case DELETE_WR: {
+		return {titleModal:"Cancellazione risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler cancellare questa risorsa aggiuntiva di processo?"};
+	}
+	case DOWNLOAD: {
+		return {titleModal:"Scarica risorsa di processo", contentText:"Sei sicuro di voler scaricare questa risorsa?"};
+	}
+	case DOWNLOAD_RES: {
+		return {titleModal:"Scarica risorsa statica", contentText:"Sei sicuro di voler scaricare questa risorsa statica?"};
+	}
+	case DOWNLOAD_WR: {
+		return {titleModal:"Scarica risorsa aggiuntiva di processo", contentText:"Sei sicuro di voler scaricare questa risorsa aggiuntiva di processo?"};
+	}
+	case UPDATE_WR: {
+		return {titleModal:"Update risorsa aggiuntiva per processo", contentText:"Carica il file aggiornato:"};
+	}
+	case UPDATE_RES: {
+		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
+	}
+	default: {
+		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
+	}
+	}
+	
 };

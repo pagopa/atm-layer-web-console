@@ -1,7 +1,8 @@
 import { SetStateAction, useContext } from "react";
 import { generatePath } from "react-router-dom";
+import React from "react";
 import { Ctx } from "../../../DataContext";
-import { handleSnackbar } from "../../../utils/Commons";
+import { getTextModal, handleSnackbar } from "../../Commons/Commons";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
@@ -26,6 +27,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const content=getTextModal(type);
 	
 
 
@@ -34,7 +36,6 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 		case DELETE_RES: {
 			try {
 				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
-			
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
@@ -54,27 +55,12 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 	};
 
 	return (
-		<>
-			{type === DELETE_RES &&
-				<ModalTemplate
-					titleModal={"Cancellazione risorsa statica"}
-					contentText={"Sei sicuro di voler cancellare questa risorsa statica?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>}
-			{type === DOWNLOAD_RES &&
-				<ModalTemplate
-					titleModal={"Scarica risorsa statica"}
-					contentText={"Sei sicuro di voler scaricare questa risorsa statica?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>}
-			{type === UPDATE_RES &&
+		<React.Fragment>
+			
+			{type === UPDATE_RES ?
 				<ModalTemplateUpload
-					titleModal={"Update risorsa statica"}
-					contentText={"Carica il file aggiornato"}
+					titleModal={content?.titleModal}
+					contentText={content?.contentText}
 					open={open}
 					setOpen={setOpen}
 					recordParams={recordParams}
@@ -84,9 +70,18 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 					setSeverity={setSeverity}
 					setTitle={setTitle}
 					setOpenSnackBar={setOpenSnackBar}
-					type={UPDATE_RES}
-				/>}
-		</>
+					type={type}
+				/>
+				: 
+				<ModalTemplate
+					titleModal={content?.titleModal}
+					contentText={content?.contentText}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>
+			}
+		</React.Fragment>
 	);
 };
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import { Ctx } from "../../../DataContext";
 import { CREATE_WR } from "../../../commons/constants";

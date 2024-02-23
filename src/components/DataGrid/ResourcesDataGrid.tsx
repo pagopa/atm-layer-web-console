@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
 import { RESOURCES } from "../../commons/constants";
 import { GET_ALL_RESOURCES_FILTER } from "../../commons/endpoints";
-import { getQueryString } from "../../utils/Commons";
+import { getQueryString } from "../Commons/Commons";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";

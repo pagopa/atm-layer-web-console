@@ -1,7 +1,7 @@
 import formatValues from "../../utils/formatValues";
 import DetailPage from "../../components/Commons/DetailPage";
 import { WORKFLOW_RESOURCE } from "../../commons/constants";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 
 const WorkflowResourceDetailPage = () => {
 

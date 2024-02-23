@@ -3,7 +3,7 @@ import CreateResources from "../../components/FormComponents/FormsResources/Crea
 import FormPageTemplate from "../Layout/FormPageTemplate";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 
 
 const CreateResourcesPage = () => {

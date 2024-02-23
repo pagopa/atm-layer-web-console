@@ -1,6 +1,6 @@
 import { RESOURCES } from "../../commons/constants";
 import DetailPage from "../../components/Commons/DetailPage";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import formatValues from "../../utils/formatValues";
 
 

@@ -4,7 +4,7 @@ import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponen
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import ResourcesDataGrid from "../../components/DataGrid/ResourcesDataGrid";
 import BoxPageLayout from "../Layout/BoxPageLayout";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import { Ctx } from "../../DataContext";
 
 const ResourcesPage = () => {

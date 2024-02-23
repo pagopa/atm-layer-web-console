@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Ctx } from "../../DataContext";
 import { WORKFLOW_RESOURCE } from "../../commons/constants";
 import { GET_ALL_WORKFLOW_RESOURCES_FILTER } from "../../commons/endpoints";
-import { getQueryString } from "../../utils/Commons";
+import { getQueryString } from "../Commons/Commons";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
