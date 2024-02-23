@@ -13,7 +13,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 
 	return (
 		<>
-			<Box mb={2}>
+			<Box mt={2}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
 						<Box p={1}>

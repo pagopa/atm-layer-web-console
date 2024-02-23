@@ -23,6 +23,7 @@ export const ResourcesDataGrid = () => {
 
 	const { abortController } = useContext(Ctx);
 	const [tableListResources, setTableListResources] = useState<any>([]);
+	const [statusError, setStatusError] = useState(0);
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
@@ -34,21 +35,21 @@ export const ResourcesDataGrid = () => {
 
 	const getAllResourcesList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_RESOURCES_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		
-		try {
-			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, RESOURCES),  method: "GET", abortController })();
 
+		try {
+			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, RESOURCES), method: "GET", abortController })();
+			setStatusError(response?.status);
 			if (response?.success) {
-			  const { page, limit, results, itemsFound } = response.valuesObj;
-			  setTableListResources(results);
-			  setPaginationModel({ page, pageSize: limit });
-			  setTotalItemsFound(itemsFound);
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListResources(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalItemsFound(itemsFound);
 			} else {
-			  setTableListResources([]);
+				setTableListResources([]);
 			}
-		  } catch (error) {
+		} catch (error) {
 			console.error("ERROR", error);
-		  } finally {
+		} finally {
 			setLoading(false);
 		}
 	};
@@ -69,7 +70,7 @@ export const ResourcesDataGrid = () => {
 				newFilterValues={initialValues}
 				driver={RESOURCES}
 			/>
-			<CustomDataGrid 
+			<CustomDataGrid
 				disableColumnFilter
 				disableColumnSelector
 				disableDensitySelector
@@ -83,15 +84,21 @@ export const ResourcesDataGrid = () => {
 				rows={tableListResources}
 				rowCount={totalItemsFound}
 				sortingMode="server"
-				slots={{ noRowsOverlay: CustomNoRowsOverlay }}
+				slots={{
+					noRowsOverlay: () =>
+						<CustomNoRowsOverlay
+							message="Risorse statiche non presenti"
+							statusError={statusError}
+						/>
+				}}
 				columnVisibilityModel={visibleColumns(RESOURCES)}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}  
+				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}
 				loading={loading}
-				sx={{ "--DataGrid-overlayHeight": "250px" }} 
+				sx={{ "--DataGrid-overlayHeight": "250px" }}
 			/>
 		</Box>
 	);

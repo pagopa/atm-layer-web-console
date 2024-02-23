@@ -22,6 +22,7 @@ export const WorkflowResourceDataGrid = () => {
 	};
 	const { abortController } = useContext(Ctx);
 	const [tableListWfResources, setTableListWfResources] = useState<any>([]);
+	const [statusError, setStatusError] = useState(0);
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
@@ -36,7 +37,7 @@ export const WorkflowResourceDataGrid = () => {
 		
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, WORKFLOW_RESOURCE),  method: "GET", abortController })();
-
+			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
 				setTableListWfResources(results);
@@ -84,7 +85,13 @@ export const WorkflowResourceDataGrid = () => {
 				rowCount={totalItemsFound}
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
-				slots={{ noRowsOverlay: CustomNoRowsOverlay }}
+				slots={{
+					noRowsOverlay: () =>
+						<CustomNoRowsOverlay
+							message="Risorse aggiuntive per processi non presenti"
+							statusError={statusError}
+						/>
+				}}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
