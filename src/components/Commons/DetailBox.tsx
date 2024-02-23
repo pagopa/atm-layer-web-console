@@ -13,7 +13,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 
 	return (
 		<>
-			<Box mb={2}>
+			<Box mt={2}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
 						<Box p={1}>
@@ -41,7 +41,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 							<Grid item xs={4} key={label}>
 								<Box display={"flex"}>
 									<Typography variant="body2" >{label}: &nbsp;</Typography>
-									<Typography variant="body1" >{format ? format(detail[value]) : detail[value]}</Typography>
+									<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{format ? format(detail[value]) : detail[value]}</Typography>
 								</Box>
 							</Grid>
 

@@ -24,6 +24,7 @@ export default function BpmnDataGrid() {
 	};
 	const { abortController } = useContext(Ctx);
 	const [tableListBpmn, setTableListBpmn] = useState<any>([]);
+	const [statusError, setStatusError] = useState(0);
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
@@ -38,7 +39,8 @@ export default function BpmnDataGrid() {
 		const URL = `${GET_ALL_BPMN_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 
 		try {
-			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, BPMN),  method: "GET", abortController })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, BPMN), method: "GET", abortController })();
+			setStatusError(response?.status);
 
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -87,7 +89,13 @@ export default function BpmnDataGrid() {
 					rowHeight={50}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
-					slots={{ noRowsOverlay: CustomNoRowsOverlay }}
+					slots={{
+						noRowsOverlay: () =>
+							<CustomNoRowsOverlay
+								message="Risorse di processo non presenti"
+								statusError={statusError}
+							/>
+					}}
 					sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
 					paginationMode="server"
