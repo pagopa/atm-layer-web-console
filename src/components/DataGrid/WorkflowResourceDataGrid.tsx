@@ -9,7 +9,8 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
-import { CustomNoRowsOverlay } from "./NoRows";
+import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
+import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 export const WorkflowResourceDataGrid = () => {
 
@@ -90,11 +91,13 @@ export const WorkflowResourceDataGrid = () => {
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
 				slots={{
-					noRowsOverlay: () =>
-						<CustomNoRowsOverlay
+					noRowsOverlay: CustomNoRowsOverlay,
+					noResultsOverlay: () => (
+						<CustomNoResultsOverlay
 							message="Risorse aggiuntive per processi non presenti"
 							statusError={statusError}
 						/>
+					),
 				}}
 				paginationMode="server"
 				pagination
@@ -102,7 +105,6 @@ export const WorkflowResourceDataGrid = () => {
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllWfResourcesList(filterValues, newPage.page)}
 				loading={loading}
-				sx={{ "--DataGrid-overlayHeight": "250px" }} 
 			/>
 		</Box>
 	);

@@ -1,5 +1,5 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Box, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
@@ -9,7 +9,8 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
-import { CustomNoRowsOverlay } from "./NoRows";
+import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
+import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 export default function BpmnDataGrid() {
 
@@ -94,11 +95,13 @@ export default function BpmnDataGrid() {
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
 					slots={{
-						noRowsOverlay: () =>
-							<CustomNoRowsOverlay
+						noRowsOverlay: CustomNoRowsOverlay,
+						noResultsOverlay: () => (
+							<CustomNoResultsOverlay
 								message="Risorse di processo non presenti"
 								statusError={statusError}
 							/>
+						),
 					}}
 					sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
@@ -108,7 +111,6 @@ export default function BpmnDataGrid() {
 					paginationModel={{ ...paginationModel }}
 					onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
 					loading={loading}
-					sx={{ "--DataGrid-overlayHeight": "250px" }}
 				/>
 			</Box>
 		</Box>

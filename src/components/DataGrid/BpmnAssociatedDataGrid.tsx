@@ -7,7 +7,8 @@ import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
-import { CustomNoRowsOverlay } from "./NoRows";
+import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
+import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 
 type Props = {
@@ -71,11 +72,13 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
 				slots={{
-					noRowsOverlay: () =>
-						<CustomNoRowsOverlay
+					noRowsOverlay: CustomNoRowsOverlay,
+					noResultsOverlay: () => (
+						<CustomNoResultsOverlay
 							message="Associazioni non presenti"
 							statusError={statusError}
 						/>
+					),
 				}}
 				paginationMode="server"
 				pagination
@@ -83,7 +86,6 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllAssociatedBpmn(newPage.page)}
 				loading={loading}
-				sx={{ "--DataGrid-overlayHeight": "250px" }} 
 			/>
 		</BoxPageLayout>
 	);

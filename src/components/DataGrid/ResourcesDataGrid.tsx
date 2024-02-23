@@ -9,7 +9,8 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 import CustomDataGrid from "./CustomDataGrid";
-import { CustomNoRowsOverlay } from "./NoRows";
+import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
+import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 
 export const ResourcesDataGrid = () => {
@@ -89,11 +90,13 @@ export const ResourcesDataGrid = () => {
 				rowCount={totalItemsFound}
 				sortingMode="server"
 				slots={{
-					noRowsOverlay: () =>
-						<CustomNoRowsOverlay
+					noRowsOverlay: CustomNoRowsOverlay,
+					noResultsOverlay: () => (
+						<CustomNoResultsOverlay
 							message="Risorse statiche non presenti"
 							statusError={statusError}
 						/>
+					),
 				}}
 				columnVisibilityModel={visibleColumns(RESOURCES)}
 				paginationMode="server"
@@ -102,7 +105,6 @@ export const ResourcesDataGrid = () => {
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}
 				loading={loading}
-				sx={{ "--DataGrid-overlayHeight": "250px" }}
 			/>
 		</Box>
 	);
