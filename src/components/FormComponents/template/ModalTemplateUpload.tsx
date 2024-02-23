@@ -67,6 +67,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				} finally {
+					setFormData(initialValues);
 				}
 				break;
 			}
@@ -78,6 +80,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				} catch (error) {
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				} finally {
+					setFormData(initialValues);
 				}
 				break;
 			}
