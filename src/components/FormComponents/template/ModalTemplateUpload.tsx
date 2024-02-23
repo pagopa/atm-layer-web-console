@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
@@ -24,8 +24,11 @@ type Props = {
 
 export default function ModalTemplateUpload({ type, titleModal, contentText, open, setOpen, recordParams, handleSnackbar, abortController, setMessage, setSeverity, setTitle, setOpenSnackBar}: Props) {
 
+	const [showAlert, setShowAlert] = useState(false);
+
 	const clearFile = () => {
 		setFormData({ ...formData, file: undefined });
+		setShowAlert(false);
 	};
 
 	const validateForm = () => {
@@ -73,6 +76,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				break;
 			}
 			case UPDATE_RES: {
+				if (formData.file) {
+					// eslint-disable-next-line functional/immutable-data
+					const uploadedFileExtension = formData.file.name.split(".").pop()?.toLowerCase();
+
+					const localStorageFileExtension = recordParams.cdnUrl.split(".").pop()?.toLowerCase();
+				
+					if (uploadedFileExtension !== localStorageFileExtension) {
+					  setShowAlert(true);
+					  return;
+					}
+				  }
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
 					setOpen(false);
@@ -121,6 +135,10 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 							setFormData={setFormData}
 							formData={formData} 
 						/>
+						{showAlert && 
+						<Alert severity="error">
+							Il file che hai caricato ha un estensione diversa da quello che stai cercando di aggiornare.
+						</Alert>}
 					</Box>
 				</DialogContent>
 			</Box>
@@ -130,7 +148,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						<Button variant={"outlined"} onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
-						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
+						<Button variant={"contained"} onClick={handleSubmit} disabled={showAlert}>Conferma</Button>
 					</Box>
 				</Box>
 			</DialogActions>
