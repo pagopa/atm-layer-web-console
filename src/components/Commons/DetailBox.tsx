@@ -41,7 +41,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 							<Grid item xs={4} key={label}>
 								<Box display={"flex"}>
 									<Typography variant="body2" >{label}: &nbsp;</Typography>
-									<Typography variant="body1" >{format ? format(detail[value]) : detail[value]}</Typography>
+									<Typography variant="body1" style={{ overflowWrap: "anywhere" }}>{format ? format(detail[value]) : detail[value]}</Typography>
 								</Box>
 							</Grid>
 
