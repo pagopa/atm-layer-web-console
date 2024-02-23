@@ -14,6 +14,7 @@ import { CREATE_BPMN_API } from "../../../commons/endpoints";
 
 export const CreateBpmn = () => {
 
+	const [loading, setLoading] = useState(false);
 	const { getFormOptions } = formOption();
 	const { isValidDeployableFilename } = checks();
 
@@ -61,6 +62,7 @@ export const CreateBpmn = () => {
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 		e.preventDefault();
 
 		if (validateForm()) {
@@ -72,9 +74,11 @@ export const CreateBpmn = () => {
 			}
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -93,6 +97,7 @@ export const CreateBpmn = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
+			loading={loading}
 		>
 			<UploadField
 				titleField="File BPMN del processo"

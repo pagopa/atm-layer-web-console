@@ -14,6 +14,8 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const CreateResources = () => {
 
+	const [loading, setLoading] = useState(false);
+
 	const { getFormOptions } = formOption();
 	const { isValidResourcesFilename } = checks();
 	const initialValues: ResourcesDto = {
@@ -56,6 +58,7 @@ export const CreateResources = () => {
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 		e.preventDefault();
 
 		if (validateForm()) {
@@ -69,9 +72,11 @@ export const CreateResources = () => {
 			
 			try {
 				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData:true })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -88,6 +93,7 @@ export const CreateResources = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
+			loading={loading}
 		 >
 			
 			<UploadField 

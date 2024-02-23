@@ -1,4 +1,4 @@
-import { SetStateAction, useContext } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import { generatePath } from "react-router-dom";
 import React from "react";
 import { Ctx } from "../../../DataContext";
@@ -28,18 +28,20 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const content=getTextModal(type);
-	
-
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 		switch (type) {
 		case DELETE_RES: {
 			try {
 				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
+				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -79,6 +81,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 					open={open}
 					setOpen={setOpen}
 					handleSubmit={handleSubmit}
+					loading={loading}
 				/>
 			}
 		</React.Fragment>

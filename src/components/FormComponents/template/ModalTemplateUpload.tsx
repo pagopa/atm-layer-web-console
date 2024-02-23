@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
 import { generatePath } from "react-router";
+import { LoadingButton } from "@mui/lab";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
@@ -47,8 +48,11 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 	const [errors, setErrors] = useState<any>(initialValues);
 
 	const [formData, setFormData] = useState<WRUpdateDto>(initialValues);
+
+	const [loading, setLoading] = useState(false);
 	
 	const handleSubmit = async () => {
+		setLoading(true);
 		if (validateForm()) {
 			const postData = new FormData();
 	
@@ -60,11 +64,13 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			case UPDATE_WR:{
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					setFormData(initialValues);
 					
 				} catch (error) {
+					setLoading(false);
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
@@ -73,9 +79,11 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			case UPDATE_RES: {
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				} catch (error) {
+					setLoading(false);
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
@@ -123,10 +131,10 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button variant={"outlined"} onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
+						<Button  variant={"outlined"}  onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
-						<Button variant={"contained"} onClick={handleSubmit}>Conferma</Button>
+						<LoadingButton loading={loading} variant={"contained"} onClick={handleSubmit}>Conferma</LoadingButton>
 					</Box>
 				</Box>
 			</DialogActions>

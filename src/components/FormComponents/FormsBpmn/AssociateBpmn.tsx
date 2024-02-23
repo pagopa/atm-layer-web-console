@@ -13,6 +13,7 @@ const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const [loading, setLoading] = useState(false);
 
 	const initialValues = {
 		acquirerId: "",
@@ -48,14 +49,17 @@ const AssociateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 		if (validateForm()) {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
 				}else { setErrorCode(undefined);}
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -84,6 +88,7 @@ const AssociateBpmn = () => {
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
 			setOpenSnackBar={setOpenSnackBar}
+			loading={loading}
 		>
 			<Grid xs={12} item my={1}>
 				<TextField
