@@ -63,7 +63,7 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.createdAt)),
 			sortable: false,
-			flex: 1
+			flex: 0.7
 		};
 
 		const lastUpdatedAtColumn = {
@@ -77,7 +77,7 @@ const useColumns: any = () => {
 			renderHeader: showCustomHeader,
 			renderCell: (params: any) => renderCell(params, formatDateToString(params.row.lastUpdatedAt)),
 			sortable: false,
-			flex: 1
+			flex: 0.7
 		};
 
 		const createdByColumn = {
@@ -124,19 +124,19 @@ const useColumns: any = () => {
 		switch (driver) {
 		case BPMN:
 			return [
-				{
-					field: "bpmnId",
-					cellClassName: "justifyContentNormal",
-					headerName: "ID risorsa di processo",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.bpmnId),
-					sortable: false,
-					flex: 2
-				},
+				// {
+				// 	field: "bpmnId",
+				// 	cellClassName: "justifyContentNormal",
+				// 	headerName: "ID risorsa di processo",
+				// 	align: "left",
+				// 	headerAlign: "left",
+				// 	editable: false,
+				// 	disableColumnMenu: true,
+				// 	renderHeader: showCustomHeader,
+				// 	renderCell: (params: any) => renderCell(params, params.row.bpmnId),
+				// 	sortable: false,
+				// 	flex: 2,
+				// },
 				functionTypeColumn,
 				fileNameColumn,
 				statusColumn,
@@ -151,7 +151,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.modelVersion),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
@@ -166,7 +166,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.enabled),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				{
 					field: "deployment_id",
@@ -335,22 +335,23 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceType),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
-				{
-					field: "actions",
-					cellClassName: "justifyContentNormalRight",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => actionColumn(params, RESOURCES),
-					sortable: false,
-					flex: 0.5
-				}
+				// {
+				// 	field: "actions",
+				// 	cellClassName: "justifyContentNormalRight",
+				// 	headerName: "",
+				// 	align: "right",
+				// 	hideSortIcons: true,
+				// 	disableColumnMenu: true,
+				// 	editable: false,
+				// 	renderCell: (params: any) => actionColumn(params, RESOURCES),
+				// 	sortable: false,
+				// 	flex: 0.5
+				// },
+				commonActionColumn(RESOURCES)				
 			];
 		case WORKFLOW_RESOURCE:
 			return [
@@ -386,7 +387,7 @@ const useColumns: any = () => {
 				lastUpdatedAtColumn,
 				createdByColumn,
 				lastUpdatedByColumn,
-				// commonActionColumn(WORKFLOW_RESOURCE)
+				commonActionColumn(WORKFLOW_RESOURCE)
 			];
 		default:
 			return [];

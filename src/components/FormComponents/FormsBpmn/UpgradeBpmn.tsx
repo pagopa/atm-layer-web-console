@@ -1,17 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Alert, Grid, Snackbar, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
-import { ActionAlert } from "../../Commons/ActionAlert";
-import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const UpgradeBpmn = () => {
 
@@ -59,9 +57,6 @@ export const UpgradeBpmn = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 
-		console.log("Error: ", errors);
-		console.log("Body: ", formData);
-
 		if (validateForm()) {
 
 			const postData = new FormData();
@@ -73,12 +68,9 @@ export const UpgradeBpmn = () => {
 			}
 
 			try {
-				const response = await fetchUpgradeBpmn({ abortController, body: postData, URL: UPGRADE_BPMN_PATH })();
-				if (response?.success) {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -87,39 +79,37 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<>
-			<FormTemplate
-				handleSubmit={handleSubmit}
-				getFormOptions={getFormOptions(UPGRADE_BPMN)}
-				openSnackBar={openSnackBar}
-				severity={severity}
-				message={message}
-				title={title}
-			>
-				<UploadField
-					titleField="File BPMN del processo"
-					name={"file"}
-					file={formData.file}
-					clearFile={clearFile}
-					error={errors.file}
-					setFormData={setFormData}
-					formData={formData} />
-				<Grid xs={12} item my={1}>
-					<TextField
-						fullWidth
-						id="filename"
-						name="filename"
-						label={"Nome del file"}
-						placeholder={"Nome del file"}
-						size="small"
-						value={formData.filename}
-						onChange={handleChange}
-						error={Boolean(errors.filename)}
-						helperText={errors.filename} />
-				</Grid>
-			</FormTemplate>
-		</>
 
+		<FormTemplate 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+		>
+			<UploadField
+				titleField="File BPMN del processo"
+				name={"file"}
+				file={formData.file}
+				clearFile={clearFile}
+				error={errors.file}
+				setFormData={setFormData}
+				formData={formData} />
+			<Grid xs={12} item my={1}>
+				<TextField
+					fullWidth
+					id="filename"
+					name="filename"
+					label={"Nome del file"}
+					placeholder={"Esempio_Processo"}
+					size="small"
+					value={formData.filename}
+					onChange={handleChange}
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
+			</Grid>
+		</FormTemplate>
 	);
 };
 

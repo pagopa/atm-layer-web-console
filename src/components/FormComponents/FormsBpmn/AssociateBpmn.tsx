@@ -6,11 +6,10 @@ import { ASSOCIATE_BPMN } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import FormTemplate from "../template/FormTemplate";
-import fetchAssociateBpmn from "../../../hook/fetch/Bpmn/fetchAssociateBpmn";
-import { BPMN_ASSOCIATE, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import fetchUpdateBpmnAssociated from "../../../hook/fetch/Bpmn/fetchUpdateBpmnAssociated";
+import { BPMN_ASSOCIATE_API, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
-const MinimalAssociateBpmn = () => {
+const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
@@ -51,16 +50,11 @@ const MinimalAssociateBpmn = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		if (validateForm()) {
 			try {
-				const URL = generatePath(BPMN_ASSOCIATE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-				const response = await fetchAssociateBpmn({ abortController, body: JSON.stringify(formData), url: URL })();
-
-				if (response?.success) {
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					console.log("response", response);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
-				}
+				}else { setErrorCode(undefined);}
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -71,14 +65,8 @@ const MinimalAssociateBpmn = () => {
 	const handleSwitchAssociationFetch = async () => {
 		setErrorCode(undefined);
 		try {
-			const URL = generatePath(UPDATE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
-			const response = await fetchUpdateBpmnAssociated({ abortController, body: JSON.stringify(formData), url: URL })();
-
-			if (response?.success) {
-				handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			} else {
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
+			const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,{ bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "PUT", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 		} catch (error) {
 			console.error("ERROR", error);
 			handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -95,6 +83,7 @@ const MinimalAssociateBpmn = () => {
 			title={title}
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+			setOpenSnackBar={setOpenSnackBar}
 		>
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -102,7 +91,7 @@ const MinimalAssociateBpmn = () => {
 					id="acquirerId"
 					name="acquirerId"
 					label={"ID Banca"}
-					placeholder={"ID Banca"}
+					placeholder={"01234"}
 					size="small"
 					value={formData.acquirerId}
 					onChange={handleChange}
@@ -115,7 +104,7 @@ const MinimalAssociateBpmn = () => {
 					id="branchId"
 					name="branchId"
 					label={"ID Filiale"}
-					placeholder={"ID Filiale"}
+					placeholder={"098"}
 					size="small"
 					disabled={branchChecked}
 					value={formData.branchId}
@@ -134,9 +123,9 @@ const MinimalAssociateBpmn = () => {
 					id="terminalId"
 					name="terminalId"
 					label={"ID Terminale"}
-					placeholder={"ID Terminale"}
+					placeholder={"56"}
 					size="small"
-					disabled={terminalChecked}
+					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
 				/>
@@ -144,7 +133,7 @@ const MinimalAssociateBpmn = () => {
 			<Grid xs={2} item my={1}>
 				<Stack direction="row" spacing={1} alignItems={"center"}>
 					<Typography>Tutti</Typography>
-					<Switch checked={terminalChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
+					<Switch checked={terminalChecked} disabled={branchChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
 				</Stack>
 			</Grid>
 		</FormTemplate>
@@ -152,4 +141,4 @@ const MinimalAssociateBpmn = () => {
 
 };
 
-export default MinimalAssociateBpmn;
+export default AssociateBpmn;

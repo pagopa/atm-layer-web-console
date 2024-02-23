@@ -23,7 +23,7 @@ const HomeCardComponent = ({ title, description, icon, pageLink }: Prop) => {
 				boxShadow: theme.shadows[8],
 				backgroundColor: theme?.palette?.background?.paper
 			}}
-			minHeight={"90%"}
+			minHeight={"100%"}
 			display={"flex"}
 			flexDirection={"column"}
 			alignItems={"flex-end"}

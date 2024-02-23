@@ -10,7 +10,7 @@ type Props = {
 	filterValues: any;
 	setFilterValues: React.Dispatch<React.SetStateAction<any>>;
 	setTableList: React.Dispatch<any>;
-	getAllList: (filterValues?: any) => void;
+	getAllList: (filterValues?: any, pageIndex?: number) => void;
 	newFilterValues: any;
 	driver: string;
 };
@@ -23,14 +23,14 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
 			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
-				getAllList();
+				getAllList(undefined, 0);
 			}
 			break;
 		case RESOURCES:
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
 			if (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== "")))) {
-				getAllList();
+				getAllList(undefined, 0);
 			}
 			break;
 		case WORKFLOW_RESOURCE:
@@ -41,7 +41,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
 			const wrResourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutWRResourceType.some((value => value[1] !== ""))));
 			if (statusCondition || wrResourceCondition) {
-				getAllList();
+				getAllList(undefined, 0);
 			}
 			break;
 		}
@@ -49,13 +49,13 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleSubmit = () => {
 		if (Object.values(filterValues).some(value => value !== "")) {
-			getAllList(filterValues);
+			getAllList(filterValues, 0);
 		}
 	};
 
 	const cleanFilter = () => {
 		setFilterValues(newFilterValues);
-		getAllList();
+		getAllList(undefined, 0);
 	};
 
 	const filterType = () => {

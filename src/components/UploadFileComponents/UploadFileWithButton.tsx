@@ -3,7 +3,6 @@ import { Box, alpha } from "@mui/system";
 import { useEffect } from "react";
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
-import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";
 import IconBox from "../Commons/IconBox";
 

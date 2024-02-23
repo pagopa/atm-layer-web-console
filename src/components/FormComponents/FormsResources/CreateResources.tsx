@@ -1,18 +1,18 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { useState, useRef, useContext } from "react";
+import { useState, useContext } from "react";
 import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
-import fetchCreateResources from "../../../hook/fetch/Resources/fetchCreateResources";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../../utils/Commons";
 import checks from "../../../utils/checks";
+import { RESOURCES_CREATE } from "../../../commons/endpoints";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 
 export const CreateResources = () => {
-	// const theme = useTheme();
 
 	const { getFormOptions } = formOption();
 	const { isValidResourcesFilename } = checks();
@@ -20,7 +20,7 @@ export const CreateResources = () => {
 		file: undefined,
 		filename: "",
 		resourceType: "",
-		path:"",
+		path: "",
 		description:""
 	};
 
@@ -31,6 +31,7 @@ export const CreateResources = () => {
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
+	const optionFormMenu=[{key:"HTML", value:"HTML", },{key:"OTHER", value:"OTHER"}];
     
 
 	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -63,17 +64,13 @@ export const CreateResources = () => {
 				postData.append("file", formData.file);
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("resourceType", formData.resourceType);
+				postData.append("path", formData.path ?? "");
 			}
 			
 			try {
-				console.log("append", postData);
-				const response = await fetchCreateResources({ abortController, body: postData })();
-				if (response?.success) {
-					console.log("Response positive: ", response);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				} else {
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				}
+				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData:true })();
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -83,7 +80,15 @@ export const CreateResources = () => {
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_RES)} >
+		<FormTemplate 
+			setOpenSnackBar={setOpenSnackBar}
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(CREATE_RES)}
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+		 >
 			
 			<UploadField 
 				titleField="File della risorsa statica" 
@@ -99,8 +104,8 @@ export const CreateResources = () => {
 					fullWidth
 					id="filename"
 					name="filename"
-					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					label={"Nome del file con Estensione"}
+					placeholder={"Esempio_file.txt"}
 					size="small"
 					value={formData.filename}
 					onChange={handleChange}
@@ -115,15 +120,17 @@ export const CreateResources = () => {
 					name="resourceType"
 					select
 					label={"Estensione del file"}
-					placeholder={"Estensione del file"}
+					placeholder={"HTML"}
 					size="small"
 					value={formData.resourceType}
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
 				>
-					<MenuItem value={"HTML"}>HTML</MenuItem>
-					<MenuItem value={"OTHER"}>OTHER</MenuItem>
+					{optionFormMenu?.map((el)=>(
+						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
+					)
+					)}
 				</TextField>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -132,7 +139,7 @@ export const CreateResources = () => {
 					id="path"
 					name="path"
 					label={"Percorso nella cartella di destinazione (Opzionale)"}
-					placeholder={"Percorso nella cartella di destinazione (Opzionale)"}
+					placeholder={"esempio/percorso"}
 					size="small"
 					value={formData.path}
 					onChange={handleChange}
@@ -146,7 +153,7 @@ export const CreateResources = () => {
 					id="description"
 					name="description"
 					label={"Descrizione (Opzionale)"}
-					placeholder={"Descrizione (Opzionale)"}
+					placeholder={""}
 					size="small"
 					value={formData.description}
 					onChange={handleChange}

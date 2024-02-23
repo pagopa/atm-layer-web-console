@@ -1,6 +1,5 @@
-import React, { SetStateAction, forwardRef, useContext }  from "react";
+import React from "react";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
 
 type Props = {
 	titleModal: string;
@@ -10,21 +9,10 @@ type Props = {
 	handleSubmit: any;
 };
 
-const Transition = forwardRef(function Transition(
-	props: TransitionProps & {
-		children: React.ReactElement<any, any>;
-	},
-	ref: React.Ref<unknown>,
-) {
-	return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit }: Props) {
 	return (
 		<Dialog
 			open={open}
-			TransitionComponent={Transition}
-			keepMounted
 			onClose={() => setOpen(false)}
 			fullWidth
 			maxWidth={"sm"}

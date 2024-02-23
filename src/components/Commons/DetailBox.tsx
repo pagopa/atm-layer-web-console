@@ -1,5 +1,4 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import formatValues from "../../utils/formatValues";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 
 type Prop = {

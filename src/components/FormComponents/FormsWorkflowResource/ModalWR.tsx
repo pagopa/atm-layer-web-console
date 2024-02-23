@@ -1,64 +1,40 @@
 import React, { SetStateAction, useContext } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { WR_DEPLOY, WR_DOWNLOAD, WR_ROLLBACK, WR_UPDATE } from "../../../commons/endpoints";
+import { WR_DELETE, WR_DEPLOY, WR_DOWNLOAD, WR_ROLLBACK } from "../../../commons/endpoints";
 import { handleSnackbar } from "../../../utils/Commons";
 import ModalTemplate from "../template/ModalTemplate";
-import fetchUpdateWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchUpdateWorkflowResource";
-import fetchRollbackWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchRollbackWorkflowResource";
-import fetchDeployWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDeployWorkflowResource";
-import { BPMN, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
-import fetchDownloadWorkflowResource from "../../../hook/fetch/WorkflowResource/fetchDownloadWorkflowResource";
+import { BPMN, DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
 import { downloadFile } from "../../../commons/decode";
+import ModalTemplateUpload from "../template/ModalTemplateUpload";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 type Props = {
 	type: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	openSnackBar?: boolean;
 	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-	severity?: any;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-	message?: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
-	title?: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
 };
-export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
+export const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 	
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const handleSubmit = async (e: React.FormEvent) => {
 
 		switch (type) {
-		case UPDATE_WR: {
-			try {
-				const response = await fetchUpdateWorkflowResource({ abortController, URL: generatePath(WR_UPDATE, {workflowResourceId: recordParams.workflowResourceId }) }) ();
-				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					console.log(response);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				}
-			} catch (error) {
-				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
-			break;
-		}
+
 		case ROLLBACK_WR: {
 			try {
-				const response = await fetchRollbackWorkflowResource({ abortController, URL: generatePath(WR_ROLLBACK, {workflowResourceId: recordParams.workflowResourceId }) }) ();
-				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					console.log(response);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				}
+				const response = await fetchRequest({ urlEndpoint: generatePath(WR_ROLLBACK, {workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController })();
+
+				// const response = await fetchRollbackWorkflowResource({ abortController, URL: generatePath(WR_ROLLBACK, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -67,15 +43,34 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 		}
 		case DEPLOY_WR: {
 			try {
-				const response = await fetchDeployWorkflowResource({ abortController, URL: generatePath(WR_DEPLOY, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				const response = await fetchRequest({ urlEndpoint: generatePath(WR_DEPLOY, {workflowResourceId: recordParams.workflowResourceId }), method: "POST", abortController })();
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar,response?.valuesObj?.message);
 				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
-					console.log(response);
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				}
+					const deployedResponse = {
+						...response.valuesObj,
+						fileName: response.valuesObj?.resourceFile?.fileName
+					};
+					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+				} 
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					window.location.reload();
+				}, 4000);
+			} catch (error) {
+				console.error("ERROR", error);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
+			break;
+		}
+		case DELETE_WR: {
+			try {
+				// const response = await fetchDeleteWorkflowResource({ abortController, URL: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				const response = await fetchRequest({ urlEndpoint: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) , method: "POST", abortController })();
+
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
@@ -84,10 +79,11 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 		}
 		case DOWNLOAD_WR: {
 		    try {
-		        const response = await fetchDownloadWorkflowResource({ abortController, URL: generatePath(WR_DOWNLOAD, {workflowResourceId: recordParams.workflowResourceId }) }) ();
+				const response = await fetchRequest({ urlEndpoint: generatePath(WR_DOWNLOAD, {workflowResourceId: recordParams.workflowResourceId }), method: "GET", abortController })();
+				setOpen(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				if (response?.success) {
-					setOpen(false);
-					handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					
 					switch (recordParams.resourceS3Type) {
 					case BPMN: {
 						downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
@@ -104,17 +100,12 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 					default: return;
 					}
 					
-					
-				} else {
-					setOpen(false);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-				}
+				} 
 			} catch (error) {
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
-			break;
-		    
+			break;    
 		}
 		default: return;
 		};
@@ -122,13 +113,12 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
 	return (
 		<>
 			{type === UPDATE_WR &&
-				<ModalTemplate
+				<ModalTemplateUpload
 					titleModal={"Update risorsa aggiuntiva per processo"}
 					contentText={"Carica il file aggiornato"}
 					open={open}
 					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>
+					recordParams={recordParams} handleSnackbar={handleSnackbar} abortController={abortController} setMessage={setMessage} setSeverity={setSeverity} setTitle={setTitle} setOpenSnackBar={setOpenSnackBar} type={UPDATE_WR}				/>
 			}
 			{type === ROLLBACK_WR &&
 				<ModalTemplate
@@ -147,6 +137,15 @@ export const ModalWR = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, se
                 	setOpen={setOpen}
                 	handleSubmit={handleSubmit}
                 />
+			}
+			{type === DELETE_WR &&
+				<ModalTemplate
+					titleModal={"Cancellazione risorsa aggiuntiva per processo"}
+					contentText={"Sei sicuro di voler cancellare questa risorsa aggiuntiva di processo?"}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+				/>
 			}
 			{type === DOWNLOAD_WR &&
                 <ModalTemplate

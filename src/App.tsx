@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -22,35 +22,33 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
+import ROUTES from "./routes";
 
-const LocalRoutes = () =>(
-	<BrowserRouter basename="/webconsole">	
-		<Routes>
-			<Route element={<PrivateRoute />}>
-				<Route path="/" element={ <PageLayout children={<HomePage />} />}/>
-				{/* <Route path={routes.HOME} element={<PageLayout children={<HomePage />} />} /> */}
-				<Route path={routes.BPMN} element={<PageLayout children={<BpmnPage />} />} />
-				<Route path={routes.BPMN_DETAILS} element={<PageLayout children={<BpmnDetailPage />} />} />
-				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout children={<ResourcesDetailPage />} />} />
-				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout children={<WorkflowResourceDetailPage />} />} />
-				<Route path={routes.CREATE_BPMN} element={<PageLayout children={<CreateBpmnPage />} />} />
-				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout children={<AssociateBpmnPage />} />} />
-				<Route path={routes.UPGRADE_BPMN} element={<PageLayout children={<UpgradeBpmnPage />} />} />
+const LocalRoutes = () => (
+	<Routes>
+		<Route element={<PrivateRoute />}>
+			<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
+				
+			<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
+			<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
+			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
+			<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
 
-				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout children={<WorkflowResourcePage />} />} />
-				{/* <Route path={routes.CREATE_WR} element={<PageLayout children={<CreateWRPage />} />} /> */}
-				<Route path={routes.CREATE_WR} element={<PageLayout children={<ErrorPage />} />} />
-				<Route path={routes.CREATE_RESOURCE} element={<PageLayout children={<CreateResourcesPage />} />} />
-				{/* <Route path={routes.RESOURCES} element={<PageLayout children={<ResourcesPage />} />} /> */}
-				<Route path={routes.RESOURCES} element={<PageLayout children={<ErrorPage />} />} />
-			</Route>
-			<Route path={routes.LOGIN} element={<PageLayout children={<LoginPage />} />} />
-			<Route path={routes.LOGIN_BACK} element={<PageLayout children={<LoginPageCallback />} />} />
-			<Route path="*" element={<ErrorPage />} />
+			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
+			<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
+
+			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
+			{/* <Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} /> */}
+			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ErrorPage /></PageLayout>} />
+			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+		</Route>
+		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
+		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />
+		<Route path="*" element={<ErrorPage />} />
 		
-		</Routes>
-		
-	</BrowserRouter>
+	</Routes>
 );
 
 function App() {
@@ -59,24 +57,34 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
+	const debugOn=localStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp?true:false);
-	const [recordParams, setRecordParams] = useState();
 	const abortController = new AbortController();
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	function clearAll(){
-		localStorage.removeItem("token");
-		localStorage.removeItem("recordParams");
-		localStorage.removeItem("recordParamsAssociated");
-		setLogged(false);
+		if(localStorage.getItem("jwt")){
+			setTokenExpired();
+		}
+		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("token");
+		localStorage.removeItem("jwt");
 		setLogged(false);
-		// navigate(ROUTES.LOGIN);
+		navigate(ROUTES.LOGIN);
 	}
-	
+
+	function clearStorage(){
+		if(localStorage.getItem("recordParams")){
+			localStorage.removeItem("recordParams");		
+		}
+		if(localStorage.getItem("recordParamsAssociated")){
+			localStorage.removeItem("recordParamsAssociated");
+		}
+	}
+
+
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
@@ -87,16 +95,20 @@ function App() {
 		logged, 
 		setLogged,
 		abortController,
-		setRecordParams,
-		recordParams
+		debugOn,
+		clearStorage
 	};
 
 	useEffect(() => {
-		console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		if(debugOn){
+			console.log("ATM-LAYER-WEB-CONSOLE-RELEASE VERSION:", RELEASE_VERSION);
+		}
 	}, []);
 
 	useEffect(() => {
-		console.log("login utente", logged);
+		if(debugOn){
+			console.log("login utente", logged);
+		}
 	}, [logged]);
 
 	return (

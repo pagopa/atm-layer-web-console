@@ -1,10 +1,11 @@
 import formatValues from "../../utils/formatValues";
 import DetailPage from "../../components/Commons/DetailPage";
 import { WORKFLOW_RESOURCE } from "../../commons/constants";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
 
 const WorkflowResourceDetailPage = () => {
 
-	const breadComponent = [ "Home", "Risorse aggiuntive per processi", "Dettaglio risorsa aggiuntiva per processo"];
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isWR:true}, false), "Dettaglio risorsa aggiuntiva per processo");
 	const { formatDateToString } = formatValues();
 	const fields = [
 		{ label: "Tipo risorsa", value: "resourceS3Type" },

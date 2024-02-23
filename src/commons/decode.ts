@@ -13,25 +13,6 @@ export function base64_encode(htmlText: string) {
 	return encoded;
 }
 
-export const downloadFile_ols = (doc:any, type :string, docName:string) => {
-	if (doc) {
-		const binaryString = window.atob(doc);
-		const binaryLen = binaryString.length;
-		const bytes = new Uint8Array(binaryLen);
-		for (let i = 0; i < binaryLen; i++) {
-			const ascii = binaryString.charCodeAt(i);
-			bytes[i] = ascii;
-		}
-		const blob = new Blob([bytes], { type: type });
-		const link = document.createElement("a");
-		link.href = window.URL.createObjectURL(blob);
-		const fileName = docName;
-		link.download = fileName;
-		link.click();
-		console.log("temp",fileName);
-	}
-};
-
 export const downloadFile = (doc:any, type :string, docName:string, extension: string) => {
 	if (doc) {
 		const decodedString = base64_decode(doc);
@@ -50,5 +31,11 @@ export const downloadFile = (doc:any, type :string, docName:string, extension: s
 		a.click();
 		document.body.removeChild(a);
 		setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500); 
+	}
+};
+
+export const downloadStaticFile = (detail:any) => {
+	if(detail?.cdnUrl){
+		window.open(detail?.cdnUrl, "_blank")?.focus();
 	}
 };

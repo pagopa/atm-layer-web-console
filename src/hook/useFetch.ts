@@ -8,19 +8,20 @@ export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
 	const SERVER_API_ORIGIN = endPoint&& endPoint!=="" ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const CODE_SUCCESS = 200;
+	const CODE_SUCCESS = [200, 201, 202, 203] ;
 
 	const fetchFromServer = async ({
 		urlEndpoint,
 		method,
 		body,
 		abortController,
-		headers
+		headers,
+		isFormData
 	}: any) => {
 		let data;
 		let status;
+		let response;
 		
-
 
 		let headerRequest = {};
 		if (headers) {
@@ -34,9 +35,19 @@ export default function useFetch(endPoint?: string | undefined) {
 			};
 		}
 
-		const options: any =
-
-			(method === "POST" || method === "PUT")
+		const options: any = isFormData
+			? {
+				method, //  POST, PUT, DELETE, etc.
+				mode: "cors", // no-cors, *cors, same-origin
+				// credentials: "include",
+				signal: abortController?.current?.signal,
+				// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+				headers: {...headerRequest},
+				// redirect: "follow", // manual, *follow, error
+				// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+				body, // body data type must match "Content-Type" header
+		  }
+			: 	(method === "POST" || method === "PUT")
 				? {
 					method, // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
@@ -46,7 +57,7 @@ export default function useFetch(endPoint?: string | undefined) {
 					headers: { ...headerRequest },
 					// redirect: "manual", // manual, *follow, error
 					// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-					body: body ? body : JSON.stringify(""), // body data type must match "Content-Type" header
+					body: body ? JSON.stringify(body) : JSON.stringify(""), // body data type must match "Content-Type" header
 				}
 				: {
 					method, // *GET, POST, PUT, DELETE, etc.
@@ -61,7 +72,7 @@ export default function useFetch(endPoint?: string | undefined) {
 
 
 		try {
-			const response = await fetch(
+			response = await fetch(
 				SERVER_API_ORIGIN + urlEndpoint,
 				options
 			).catch((e) => {
@@ -69,16 +80,12 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
-			if (
-				!response ||
-				// (response.status === 0 && response.type === "opaqueredirect") ||
-				response.status === 401
-			) {
+			if (!response || response.status === 401) {
 				window.location.reload();
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
-			} else if (status !== CODE_SUCCESS && status !== 206) {
+			} else if (status && !(CODE_SUCCESS.includes(status)) && status !== 206) {
 				const errorResponse = await response?.json();
 				data = { valuesObj: errorResponse, status, success: false }; // valuesObj conterrà il messaggio di errore
 			} else {
@@ -92,7 +99,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				success: false,
 			};
 		}
-		// return {data, status};
+		// return {response, data};
 		return data;
 	};
 

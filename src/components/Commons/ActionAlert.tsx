@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
 import ROUTES from "../../routes";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY } from "../../commons/constants";
+import { DELETE, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VALUES, DELETE_WR, DEPLOY_VALUES } from "../../commons/constants";
 
 type Props = {
 	setOpenSnackBar?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,14 +21,16 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 	const navigate = useNavigate();
 
 	const conditionalReload = () => {
-		if (type === DELETE_ASSOCIATION || type === DEPLOY) {
+		if (type === DELETE_ASSOCIATION || (type && DEPLOY_VALUES.includes(type))) {
 			window.location.reload();
-		} else if (type === DELETE) {
+		} else if (type && type === DELETE_BPMN) {
 			navigate(ROUTES.BPMN);
-		} else {
-			if (typeof setOpenSnackBar !== "undefined") {
-				setOpenSnackBar(false);
-			}
+		} else if (type && type === DELETE_RES) {
+			navigate(ROUTES.RESOURCES);
+		} else if (type && type === DELETE_WR) {
+			navigate(ROUTES.WORKFLOW_RESOURCES);
+		} else if (setOpenSnackBar) {
+			setOpenSnackBar(false);
 		}
 	};
 
@@ -43,7 +45,7 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 					{errorCode && errorCode === "ATMLM_4000047" ?
 						<Typography variant="body1">
 							{message + ", vuoi sostiuire l'associazione per questa banca?"}
-							{<p><Button onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
+							{<p><Button  variant="outlined" onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
 						</Typography>
 						: <Typography variant="body1">{message}</Typography>
 					}

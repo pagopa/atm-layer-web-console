@@ -10,10 +10,11 @@ type Props = {
     error?: string;
 	setFormData: React.Dispatch<React.SetStateAction<any>>;
 	formData: any;
+	allowedFile?: string;
 };
 
 
-export default function UploadField({titleField, file, clearFile,error, name, setFormData, formData}:Props) {
+export default function UploadField({titleField, file, clearFile,error, name, setFormData, formData, allowedFile}:Props) {
 
 	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
@@ -37,7 +38,7 @@ export default function UploadField({titleField, file, clearFile,error, name, se
 					onChange={handleChangeFile}
 					onClick={clearFile}
 					error={error}
-					allowedType=".bpmn"
+					allowedType="*"
 				/>
 			</Grid>
 		</React.Fragment>

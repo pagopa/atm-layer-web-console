@@ -4,8 +4,8 @@ import { useParams, generatePath } from "react-router-dom";
 import { Ctx } from "../../DataContext";
 import { BPMN_ASSOCIATED } from "../../commons/constants";
 import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
-import fetchGetAllAssociatedBpmn from "../../hook/fetch/Bpmn/fetchGetAllAssociatedBpmn";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 
 
@@ -15,6 +15,8 @@ type Props = {
 };
 
 const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
+
+	const [loading, setLoading] = useState(true);
 
 	const { abortController} = useContext(Ctx);
 	const { bpmnId, modelVersion } = useParams();
@@ -28,21 +30,22 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 
 	const getAllAssociatedBpmn = async (pageIndex?: number) => {
 		const baseUrl = generatePath(GET_ALL_BPMN_ASSOCIATED, { bpmnId: bpmnId ?? "", modelVersion: modelVersion ?? "" });
-		const paginatedUrl = `${baseUrl}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
+		const paginatedUrl = `?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 		try {
-			const response = await fetchGetAllAssociatedBpmn({
-				abortController, url: paginatedUrl
-			})();
+			const response = await fetchRequest({ urlEndpoint: baseUrl, queryString: paginatedUrl, method: "GET", abortController })();
+
 			if (response?.success) {
-				const { page, limit, results, itemsFound } = response.valuesObj;
-				setTableListBpmnAssociated(results);
-				setPaginationModel({ page, pageSize: limit });
-				setTotalAssociationsFound(itemsFound);
+				const { page, totalPages } = response.valuesObj;
+				setTableListBpmnAssociated(response?.valuesObj?.results);
+				setPaginationModel({ page, pageSize: response?.valuesObj?.limit });
+				setTotalAssociationsFound(response?.valuesObj?.itemsFound);
 			} else {
 				setTableListBpmnAssociated([]);
 			}
 		} catch (error) {
 			console.error("ERROR", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -71,6 +74,7 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				pageSizeOptions={[5]}
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllAssociatedBpmn(newPage.page)}
+				loading={loading}
 			/>
 		</BoxPageLayout>
 	);

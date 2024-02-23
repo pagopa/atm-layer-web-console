@@ -3,14 +3,16 @@ import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
-import fetchGetAllFiltered from "../../hook/fetch/fetchGetAllFiltered";
 import { getQueryString } from "../../utils/Commons";
 import { Ctx } from "../../DataContext";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 
 export default function BpmnDataGrid() {
+
+	const [loading, setLoading] = useState(true);
 
 	const initialValues = {
 		functionType: "",
@@ -33,21 +35,23 @@ export default function BpmnDataGrid() {
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_BPMN_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		const url = getQueryString(URL, filterValues, BPMN);
 
 		try {
-			const response = await fetchGetAllFiltered({ abortController, url })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, BPMN),  method: "GET", abortController })();
+
 			if (response?.success) {
-			  const { page, limit, results, itemsFound } = response.valuesObj;
-			  setTableListBpmn(results);
-			  setPaginationModel({ page, pageSize: limit });
-			  setTotalItemsFound(itemsFound);
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListBpmn(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalItemsFound(itemsFound);
 			} else {
-			  setTableListBpmn([]);
+				setTableListBpmn([]);
 			}
-		  } catch (error) {
+		} catch (error) {
 			console.error("ERROR", error);
-		  }
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	useEffect(() => {
@@ -63,7 +67,7 @@ export default function BpmnDataGrid() {
 					filterValues={filterValues}
 					setFilterValues={setFilterValues}
 					setTableList={setTableListBpmn}
-					getAllList={getAllBpmnList} 
+					getAllList={getAllBpmnList}
 					newFilterValues={initialValues}
 					driver={BPMN}
 				/>
@@ -74,22 +78,22 @@ export default function BpmnDataGrid() {
 					disableColumnSelector
 					disableDensitySelector
 					disableRowSelectionOnClick
-					// autoHeight={true}
 					className="CustomDataGrid"
-					// columnBuffer={6}
 					columns={columns}
 					getRowId={(r) => r.bpmnId.concat(r.modelVersion)}
 					hideFooterSelectedRowCount={true}
-					rowHeight={55}
+					rowHeight={50}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
-					// sortingMode="server"
+					// slots={{ noRowsOverlay: {} }}
+					sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
 					paginationMode="server"
 					pagination
 					pageSizeOptions={[10]}
 					paginationModel={{ ...paginationModel }}
 					onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
+					loading={loading}
 				/>
 			</Box>
 		</Box>
