@@ -9,6 +9,7 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
+import { CustomNoRowsOverlay } from "./NoRows";
 
 export const WorkflowResourceDataGrid = () => {
 
@@ -73,23 +74,24 @@ export const WorkflowResourceDataGrid = () => {
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				// autoHeight={true}
+				autoHeight
 				className="CustomDataGrid"
-				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.workflowResourceId.concat(r.createdAt)}
 				hideFooterSelectedRowCount={true}
 				rowHeight={50}
 				rows={tableListWfResources}
 				rowCount={totalItemsFound}
-				// sortingMode="server"
+				sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
+				slots={{ noRowsOverlay: CustomNoRowsOverlay }}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllWfResourcesList(filterValues, newPage.page)}
 				loading={loading}
+				sx={{ "--DataGrid-overlayHeight": "250px" }} 
 			/>
 		</Box>
 	);

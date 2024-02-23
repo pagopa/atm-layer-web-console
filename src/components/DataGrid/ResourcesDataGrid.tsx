@@ -9,6 +9,7 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 import CustomDataGrid from "./CustomDataGrid";
+import { CustomNoRowsOverlay } from "./NoRows";
 
 
 export const ResourcesDataGrid = () => {
@@ -73,23 +74,24 @@ export const ResourcesDataGrid = () => {
 				disableColumnSelector
 				disableDensitySelector
 				disableRowSelectionOnClick
-				// autoHeight={true}
+				autoHeight
 				className="CustomDataGrid"
-				// columnBuffer={6}
 				columns={columns}
 				getRowId={(r) => r.resourceId}
 				hideFooterSelectedRowCount={true}
 				rowHeight={50}
 				rows={tableListResources}
 				rowCount={totalItemsFound}
-				// sortingMode="server"
+				sortingMode="server"
+				slots={{ noRowsOverlay: CustomNoRowsOverlay }}
 				columnVisibilityModel={visibleColumns(RESOURCES)}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
 				paginationModel={{ ...paginationModel }}
 				onPaginationModelChange={(newPage) => getAllResourcesList(filterValues, newPage.page)}  
-				loading={loading}   
+				loading={loading}
+				sx={{ "--DataGrid-overlayHeight": "250px" }} 
 			/>
 		</Box>
 	);

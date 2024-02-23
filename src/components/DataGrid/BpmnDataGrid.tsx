@@ -1,5 +1,5 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
@@ -9,6 +9,7 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
+import { CustomNoRowsOverlay } from "./NoRows";
 
 export default function BpmnDataGrid() {
 
@@ -74,6 +75,7 @@ export default function BpmnDataGrid() {
 			</Box>
 			<Box mt={2}>
 				<CustomDataGrid
+					autoHeight
 					disableColumnFilter
 					disableColumnSelector
 					disableDensitySelector
@@ -85,7 +87,7 @@ export default function BpmnDataGrid() {
 					rowHeight={50}
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
-					// slots={{ noRowsOverlay: {} }}
+					slots={{ noRowsOverlay: CustomNoRowsOverlay }}
 					sortingMode="server"
 					columnVisibilityModel={{ ...columnVisibilityModel }}
 					paginationMode="server"
@@ -94,6 +96,7 @@ export default function BpmnDataGrid() {
 					paginationModel={{ ...paginationModel }}
 					onPaginationModelChange={(newPage) => getAllBpmnList(filterValues, newPage.page)}
 					loading={loading}
+					sx={{ "--DataGrid-overlayHeight": "250px" }}
 				/>
 			</Box>
 		</Box>
