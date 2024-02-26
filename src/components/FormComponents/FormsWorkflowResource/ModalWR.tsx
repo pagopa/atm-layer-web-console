@@ -103,9 +103,11 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 						break;
 					}
 					default: return;
-					}
-					
-				} 
+					}	
+				}
+				setTimeout(() => {
+					setOpenSnackBar(false);
+				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

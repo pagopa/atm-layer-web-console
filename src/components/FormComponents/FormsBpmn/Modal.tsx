@@ -61,7 +61,7 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 				setTimeout(() => {
 					setOpenSnackBar(false);
 					window.location.reload();
-				}, 4000);
+				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -93,7 +93,10 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {
 					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
-				} 
+				}
+				setTimeout(() => {
+					setOpenSnackBar(false);
+				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

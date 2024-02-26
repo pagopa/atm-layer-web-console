@@ -35,7 +35,10 @@ export const downloadFile = (doc:any, type :string, docName:string, extension: s
 };
 
 export const downloadStaticFile = (detail:any) => {
+	let success: boolean = false;
 	if(detail?.cdnUrl){
+		success = true;
 		window.open(detail?.cdnUrl, "_blank")?.focus();
 	}
+	return success;
 };

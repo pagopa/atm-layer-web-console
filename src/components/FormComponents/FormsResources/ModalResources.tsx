@@ -48,8 +48,16 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 			break;
 		}
 		case DOWNLOAD_RES: {
-			downloadStaticFile(detail);
+			const success = downloadStaticFile(detail);
 			setOpen(false);
+			if (success) {
+				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
+			} else {
+				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
+			}
+			setTimeout(() => {
+				setOpenSnackBar(false);
+			}, 3000);
 			break;
 		}
 		default: return;
