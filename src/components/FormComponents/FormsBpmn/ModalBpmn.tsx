@@ -20,7 +20,7 @@ type Props = {
 };
 
 
-const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
+const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
@@ -124,4 +124,4 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 	);
 };
 
-export default Modal;
+export default ModalBpmn;

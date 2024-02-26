@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TableColumn from "../DataGrid/TableColumn";
-import Modal from "../FormComponents/FormsBpmn/Modal";
+import ModalBpmn from "../FormComponents/FormsBpmn/ModalBpmn";
 import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
 import DetailPageTemplate from "../../pages/Layout/DetailPageTemplate";
 import BpmnDetailButtons from "./BpmnDetailButtons";
@@ -62,7 +62,7 @@ const DetailBpmn = ({
                     	visibleColumns={visibleColumns}
                     />
 			}
-			<Modal
+			<ModalBpmn
 				open={open}
 				setOpen={setOpen}
 				type={type}
