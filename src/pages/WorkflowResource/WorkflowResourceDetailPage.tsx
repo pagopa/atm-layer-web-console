@@ -1,7 +1,6 @@
 import formatValues from "../../utils/formatValues";
-import DetailPage from "../../components/Commons/DetailPage";
-import { WORKFLOW_RESOURCE } from "../../commons/constants";
 import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
+import DetailWr from "../../components/Commons/DetailWr";
 
 const WorkflowResourceDetailPage = () => {
 
@@ -17,11 +16,10 @@ const WorkflowResourceDetailPage = () => {
 	const detailTitle = "Dettaglio risorsa aggiuntiva per processo";
 
 	return (
-		<DetailPage 
+		<DetailWr
 			detailFields={fields}
 			detailTitle={detailTitle}
 			breadComponent={breadComponent}
-			detailButtonsComponentType={WORKFLOW_RESOURCE}
 		/>
 	);
 };

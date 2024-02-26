@@ -59,7 +59,7 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 				setTimeout(() => {
 					setOpenSnackBar(false);
 					window.location.reload();
-				}, 4000);
+				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
