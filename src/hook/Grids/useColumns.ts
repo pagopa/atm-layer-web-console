@@ -179,7 +179,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.definition_key),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				{
 					field: "description",
