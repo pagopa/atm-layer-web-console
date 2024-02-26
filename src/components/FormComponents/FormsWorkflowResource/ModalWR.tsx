@@ -55,11 +55,11 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 3000);
 				} 
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					window.location.reload();
-				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -88,7 +88,9 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				if (response?.success) {
-					
+					setTimeout(() => {
+						setOpenSnackBar(false);
+					}, 3000);
 					switch (recordParams.resourceS3Type) {
 					case PROCESS_RESOURCES: {
 						downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
@@ -105,9 +107,6 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 					default: return;
 					}	
 				}
-				setTimeout(() => {
-					setOpenSnackBar(false);
-				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

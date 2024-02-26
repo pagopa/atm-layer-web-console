@@ -55,13 +55,13 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 3000);
 				}
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					window.location.reload();
-				}, 3000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -93,10 +93,11 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {
 					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
+					setTimeout(() => {
+						setOpenSnackBar(false);
+					}, 3000);
 				}
-				setTimeout(() => {
-					setOpenSnackBar(false);
-				}, 3000);
+				
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

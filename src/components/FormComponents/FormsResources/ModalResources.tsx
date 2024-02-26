@@ -53,12 +53,12 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 			setLoading(false);
 			if (success) {
 				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
+				setTimeout(() => {
+					setOpenSnackBar(false);
+				}, 3000);
 			} else {
 				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
 			}
-			setTimeout(() => {
-				setOpenSnackBar(false);
-			}, 3000);
 			break;
 		}
 		default: return;
