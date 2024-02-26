@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { BPMN, DELETE, DELETE_ASSOCIATION, DELETE_RES, DELETE_WR, DEPLOY, DEPLOY_WR, DOWNLOAD, DOWNLOAD_RES, DOWNLOAD_WR, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY, DEPLOY_WR, DOWNLOAD, DOWNLOAD_RES, DOWNLOAD_WR, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -194,7 +194,7 @@ export function getTextModal(type:string):any {
 	case DEPLOY_WR: {
 		return {titleModal:"Rilascio risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler rilasciare questa risorsa aggiuntiva di processo?"};
 	}
-	case DELETE: {
+	case DELETE_BPMN: {
 		return {titleModal:"Cancellazione risorsa di processo", contentText:"Sei sicuro di voler cancellare questa risorsa di proccesso?"};
 	}
 	case DELETE_ASSOCIATION: {
