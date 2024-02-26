@@ -24,6 +24,12 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			<Typography
 				color={theme.palette.primary.contrastText}
 				variant="body2"
+				sx={{
+					display: "-webkit-box",
+					WebkitLineClamp: 2,
+					WebkitBoxOrient: "vertical" as const,
+					whiteSpace: "normal"
+				}}
 			>
 				{params.colDef.headerName}
 			</Typography>
