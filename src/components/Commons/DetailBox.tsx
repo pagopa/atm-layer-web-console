@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Tooltip, Typography, useTheme } from "@mui/material";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 
 type Prop = {
@@ -41,10 +41,11 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 							<Grid item xs={4} key={label}>
 								<Box display={"flex"}>
 									<Typography variant="body2" >{label}: &nbsp;</Typography>
-									<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{format ? format(detail[value]) : detail[value]}</Typography>
+									<Tooltip title={format ? format(detail[value]) : detail[value]}>
+										<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{format ? format(detail[value]) : detail[value]}</Typography>
+									</Tooltip>
 								</Box>
 							</Grid>
-
 						))}
 					</Grid>
 				</Box>
