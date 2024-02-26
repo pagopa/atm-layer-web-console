@@ -49,7 +49,7 @@ const DetailWr = ({
 				type={type}
 				setType={setType}
 				detail={detail}
-			/>;
+			/>
 
 			<ModalWR
 				open={open}
