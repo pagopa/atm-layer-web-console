@@ -1,5 +1,5 @@
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Box, Typography, styled } from "@mui/material";
+import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
@@ -10,7 +10,6 @@ import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
-import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 export default function BpmnDataGrid() {
 
@@ -23,6 +22,8 @@ export default function BpmnDataGrid() {
 		acquirerId: "",
 		status: ""
 	};
+
+	const emptyResponse = {page:0,limit:10,itemsFound:0,totalPages:0,results:[]};
 	const { abortController } = useContext(Ctx);
 	const [tableListBpmn, setTableListBpmn] = useState<any>([]);
 	const [statusError, setStatusError] = useState(0);
@@ -50,10 +51,10 @@ export default function BpmnDataGrid() {
 				setPaginationModel({ page, pageSize: limit });
 				setTotalItemsFound(itemsFound);
 			} else {
-				setTableListBpmn([]);
+				setTableListBpmn(emptyResponse);
 			}
 		} catch (error) {
-			setLoading(false);
+			setLoading(false);	
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -95,9 +96,8 @@ export default function BpmnDataGrid() {
 					rows={tableListBpmn}
 					rowCount={totalItemsFound}
 					slots={{
-						noRowsOverlay: CustomNoRowsOverlay,
-						noResultsOverlay: () => (
-							<CustomNoResultsOverlay
+						noRowsOverlay: () => (
+							<CustomNoRowsOverlay
 								message="Risorse di processo non presenti"
 								statusError={statusError}
 							/>

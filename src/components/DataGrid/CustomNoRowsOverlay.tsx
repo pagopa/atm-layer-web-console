@@ -1,4 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import ReportIcon from "@mui/icons-material/Report";
 
 const StyledGridOverlay = styled("div")(() => ({
@@ -9,13 +10,26 @@ const StyledGridOverlay = styled("div")(() => ({
 	height: "100%"
 }));
   
-export const CustomNoRowsOverlay: React.FC= () => (
+export const CustomNoRowsOverlay: React.FC<{ message: string; statusError: number }> = ({ message, statusError }) => (
 	<StyledGridOverlay>
-		<ReportIcon color="error" sx={{ fontSize: 60 }} />	
-		<Box sx={{ mt: 1 }}>
-			<Typography variant="body2">
-				Qualcosa è andato storto
-			</Typography>
-		</Box>
+		{ 
+			statusError !== 200 ?
+				<>
+					<ReportIcon color="error" sx={{ fontSize: 60 }} />
+					<Box sx={{ mt: 1 }}>
+						<Typography variant="body2">
+						Qualcosa è andato storto
+						</Typography>
+					</Box>
+				</>
+				: <>
+					<ReportProblemIcon color="warning" sx={{ fontSize: 60 }} />
+					<Box sx={{ mt: 1 }}>
+						<Typography variant="body2">
+							{message}
+						</Typography>
+					</Box>
+				</>
+		}
 	</StyledGridOverlay>
 );

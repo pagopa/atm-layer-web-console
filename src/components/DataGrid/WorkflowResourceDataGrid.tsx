@@ -10,7 +10,6 @@ import CustomDataGrid from "./CustomDataGrid";
 import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
 import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
-import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
 
 export const WorkflowResourceDataGrid = () => {
 
@@ -91,9 +90,8 @@ export const WorkflowResourceDataGrid = () => {
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(WORKFLOW_RESOURCE)}
 				slots={{
-					noRowsOverlay: CustomNoRowsOverlay,
-					noResultsOverlay: () => (
-						<CustomNoResultsOverlay
+					noRowsOverlay: () => (
+						<CustomNoRowsOverlay
 							message="Risorse aggiuntive per processi non presenti"
 							statusError={statusError}
 						/>
