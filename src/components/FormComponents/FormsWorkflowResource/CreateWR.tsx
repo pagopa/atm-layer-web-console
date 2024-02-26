@@ -56,7 +56,6 @@ export const CreateWR = () => {
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 		
 		if (validateForm()) {
 			const postData = new FormData();
@@ -65,6 +64,7 @@ export const CreateWR = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("resourceType", formData.resourceType);
 			}
+			setLoading(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoading(false);

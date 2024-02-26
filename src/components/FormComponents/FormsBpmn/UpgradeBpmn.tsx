@@ -57,7 +57,6 @@ export const UpgradeBpmn = () => {
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 
 		if (validateForm()) {
 
@@ -68,6 +67,7 @@ export const UpgradeBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType);
 			}
+			setLoading(true);
 
 			try {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();

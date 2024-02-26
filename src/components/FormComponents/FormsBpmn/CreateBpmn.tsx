@@ -62,7 +62,6 @@ export const CreateBpmn = () => {
 
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 		e.preventDefault();
 
 		if (validateForm()) {
@@ -72,6 +71,7 @@ export const CreateBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType.toUpperCase());
 			}
+			setLoading(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
 				setLoading(false);

@@ -58,7 +58,6 @@ export const CreateResources = () => {
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 		e.preventDefault();
 
 		if (validateForm()) {
@@ -69,6 +68,7 @@ export const CreateResources = () => {
 				postData.append("resourceType", formData.resourceType);
 				postData.append("path", formData.path ?? "");
 			}
+			setLoading(true);
 			
 			try {
 				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData:true })();

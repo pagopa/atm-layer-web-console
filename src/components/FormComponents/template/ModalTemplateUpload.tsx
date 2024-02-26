@@ -55,7 +55,6 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 	const [loading, setLoading] = useState(false);
 	
 	const handleSubmit = async () => {
-		setLoading(true);
 		if (validateForm()) {
 			const postData = new FormData();
 	
@@ -63,6 +62,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				postData.append("uuid", formData.uuid);
 				postData.append("file", formData.file);
 			}
+			setLoading(true);
 			switch (type) {
 			case UPDATE_WR:{
 				try {

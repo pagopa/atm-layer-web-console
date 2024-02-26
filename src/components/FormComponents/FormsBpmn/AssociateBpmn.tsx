@@ -49,8 +49,8 @@ const AssociateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 		if (validateForm()) {
+			setLoading(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
 				setLoading(false);
