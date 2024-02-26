@@ -21,6 +21,7 @@ const monospacedTypeface = ["\"DM Mono\"", "monospace"].join(", ");
 const colorTextPrimary = "#171717";
 const colorPrimary = "#00A1B0";
 const lightGrey = "#DFDFDF";
+const alertBorderWidth = "4px";
 const responsiveBreakpoint = "sm";
 const colorPrimaryContainedHover = "#EBFDFF"; // Not exposed by the theme object
 export const ringWidth = "4px";
@@ -60,35 +61,8 @@ declare module "@mui/material/styles" {
 		"caption-semibold"?: React.CSSProperties;
 	}
 
-	//   interface ThemeBox {
-	//     customBox?: {
-	//       border?: string;
-	//       borderLite?: string;
-	//     };
-	// colorVariant?: {
-	//   main?: string;
-	//   customBorderColor?: string;
-	// };
-	// cardStyle?: {
-	//   border?: string;
-	//   borderColor?: string;
-	// };
 }
-//   interface ThemeBoxOptions {
-//     customBox?: {
-//       border?: string;
-//       borderLite?: string;
-//     };
-// colorVariant?: {
-//   main?: string;
-//   customBorderColor?: string;
-// };
-// cardStyle?: {
-//   border?: string;
-//   borderColor?: string;
-// };
-//   }
-// }
+
 
 declare module "@mui/material/Typography" {
 	interface TypographyPropsVariantOverrides {
@@ -135,11 +109,6 @@ declare module "@mui/material/Button" {
 	}
 }
 
-// declare module "@mui/material/Card" {
-// 	interface CardPropsVariantOverrides {
-// 		homepage: true;
-// 	}
-// }
 
 const foundation: Theme = createTheme({
 	breakpoints: {
@@ -154,12 +123,6 @@ const foundation: Theme = createTheme({
 	mixins: {
 		toolbar: {
 			minHeight: 120,
-			// "@media (min-width:0px) and (orientation: landscape)": {
-			//   minHeight: 48
-			// },
-			// "@media (min-width:600px)": {
-			//   minHeight: 64
-			// }
 		},
 	},
 	palette: {
@@ -172,7 +135,7 @@ const foundation: Theme = createTheme({
 			main: colorPrimary,
 			light: "#EBFDFF",
 			dark: "#00707B",
-			contrastText: "#FFF",
+			contrastText: "#fff",
 		},
 		secondary: {
 			main: "#0073E6",
@@ -364,9 +327,9 @@ export const themeApp: Theme = createTheme(foundation, {
   }, */
 		},
 		body2: {
-			fontSize: pxToRem(16),
+			fontSize: pxToRem(18),
 			// lineHeight: 1.4 /* ~20px */, // TODO: tolto da quello del tema originale
-			fontWeight: foundation.typography.fontWeightRegular,
+			fontWeight: foundation.typography.fontWeightMedium,
 			letterSpacing: 0.15,
 		},
 		button: {
@@ -642,6 +605,118 @@ export const themeApp: Theme = createTheme(foundation, {
 				},
 			},
 		},
+		MuiDialogContentText: {
+			styleOverrides: {
+				root: {
+					color: foundation.palette.text.primary
+				},
+			},
+		},
+		/* START Alert */
+		MuiAlert: {
+			styleOverrides: {
+			  root: {
+					borderLeft: `${alertBorderWidth} solid`,
+					padding: foundation.spacing(1),
+					// color: "inherit",
+					alignItems: "center",
+					[foundation.breakpoints.up(responsiveBreakpoint)]: {
+				 		padding: foundation.spacing(2),
+					},
+			  },
+			  icon: {
+					opacity: 1,
+					padding: 0,
+					alignItems: "center",
+					marginRight: foundation.spacing(1),
+					[foundation.breakpoints.up(responsiveBreakpoint)]: {
+						marginRight: foundation.spacing(2),
+					},
+			  },
+			  message: {
+					padding: 0,
+					overflow: "inherit", // Fix overflow: auto bug introduced by MUI
+			  },
+			  action: {
+					marginRight: 0,
+					paddingTop: 0,
+			  },
+			  outlined: {
+					backgroundColor: foundation.palette.common.white,
+					boxShadow: foundation.shadows[4],
+					borderWidth: `0 0 0 ${alertBorderWidth}`,
+			  },
+
+			  standardSuccess: {
+					borderColor: foundation.palette.success.main,
+					"& .MuiAlertTitle-root":{
+						color:foundation.palette.success.main,
+						// fontSize: pxToRem(18),
+					}
+			  },
+			  outlinedSuccess: {
+					borderColor: foundation.palette.success.main,
+					"& .MuiAlert-icon": {
+				  		color: foundation.palette.success.main,
+					},
+			  },
+			  standardError: {
+					borderColor: foundation.palette.error.main,
+					"& .MuiAlertTitle-root":{
+						color:foundation.palette.error.main,
+						// fontSize: pxToRem(18),
+					}
+			  },
+			  outlinedError: {
+					borderColor: foundation.palette.error.main,
+					"& .MuiAlert-icon": {
+				  		color: foundation.palette.error.main,
+					},
+			  },
+			  standardInfo: {
+					borderColor: foundation.palette.info.main,
+					"& .MuiAlertTitle-root":{
+						color:foundation.palette.info.main,
+						// fontSize: pxToRem(18),
+					}
+			  },
+			  outlinedInfo: {
+					borderColor: foundation.palette.info.main,
+					"& .MuiAlert-icon": {
+				 		color: foundation.palette.info.main,
+					},
+			  },
+			  standardWarning: {
+					borderColor: foundation.palette.warning.main,
+					"& .MuiAlertTitle-root":{
+						color:foundation.palette.warning.main,
+						// fontSize: pxToRem(18),
+					}
+			  },
+			  outlinedWarning: {
+					borderColor: foundation.palette.warning.main,
+					"& .MuiAlert-icon": {
+				 		color: foundation.palette.warning.main,
+					},
+			  },
+			},
+		  },
+		  MuiAlertTitle: {
+			styleOverrides: {
+			  root: {
+					fontSize: pxToRem(18) +"!important",
+					fontWeight: foundation.typography.fontWeightMedium,
+					letterSpacing: 0.15,
+					margin: 0,
+					/* It inherits from `body1`, so I have to reset -_- */
+					[foundation.breakpoints.up(responsiveBreakpoint)]: {
+				 		fontSize: pxToRem(16),
+					},
+			  },
+			},
+		  }
+		  /* END Alert */
+	  
 
 	}
 	

@@ -3,14 +3,13 @@ import { Box, alpha } from "@mui/system";
 import { useEffect } from "react";
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
-import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";
 import IconBox from "../Commons/IconBox";
 
 type Props = {
     name: string;
     allowedType?: string;
-    file?: string;
+    file?: File;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
     error?: string;
@@ -60,7 +59,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                 <React.Fragment>
                     <Box>
                         <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
-                            {file.substring(file.lastIndexOf("\\") + 1)}
+                            {file.name}
                         </Typography>
                     </Box>
                     <Box ml={2}>

@@ -3,39 +3,49 @@ import { Grid, TextField } from "@mui/material";
 import { BpmnDto } from "../../../model/BpmnModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import fetchCreateBpmn from "../../../hook/fetch/Bpmn/fetchCreateBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
-import { deployableFilename, isValidDeployableFilename, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
+import checks from "../../../utils/checks";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import { CREATE_BPMN_API } from "../../../commons/endpoints";
+
 
 export const CreateBpmn = () => {
-	// const theme = useTheme();
 
+	const [loading, setLoading] = useState(false);
 	const { getFormOptions } = formOption();
+	const { isValidDeployableFilename } = checks();
 
-	const initialValues = {
-		file: "",
-		fileName: "",
+	const initialValues: BpmnDto = {
+		file: undefined,
+		filename: "",
 		functionType: "",
 	};
 
 	const [formData, setFormData] = useState(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
 	const { abortController } = useContext(Ctx);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
 
 
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
 		resetErrors(errors, setErrors, e.target.name);
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value
+		}));
 	};
-
 
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
+			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
 		};
 
@@ -45,53 +55,70 @@ export const CreateBpmn = () => {
 		return Object.values(newErrors).every((error) => !error);
 	};
 
+	const clearFile = () => {
+		setFormData({ ...formData, file: undefined });
+	};
+
+
+
 	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
 
 		if (validateForm()) {
+			const postData = new FormData();
+			if (formData.file && formData.filename && formData.functionType) {
+				postData.append("file", formData.file);
+				postData.append("filename", formData.filename.replace(/\s/g, ""));
+				postData.append("functionType", formData.functionType.toUpperCase());
+			}
+			setLoading(true);
 			try {
-				const data2Send = new URLSearchParams();
-				data2Send.set("file", formData.file);
-				data2Send.set("fileName", formData.fileName);
-				data2Send.set("functionType", formData.functionType);
-				const response = await fetchCreateBpmn({ abortController, body: data2Send})();
-
-				if (response?.success) {
-					console.log("Response positive: ", response.valuesObj);
-				}
+				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
+				setLoading(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
 			} catch (error) {
-				console.error("ERROR", error);
+				setLoading(false);
+				console.log("Response negative: ", error);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
+
 	};
 
 
-	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
-	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(CREATE_BPMN)}>
+		<FormTemplate 
+			setOpenSnackBar={setOpenSnackBar} 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(CREATE_BPMN)} 
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+			loading={loading}
+		>
 			<UploadField
 				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
-			/>
+				setFormData={setFormData}
+				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
-					id="fileName"
-					name="fileName"
+					id="filename"
+					name="filename"
 					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					placeholder={"Esempio_processo"}
 					size="small"
-					// value={deployableFilename(formData.file ?? "")}
-					value={formData.fileName}
+					value={formData.filename}
 					onChange={handleChange}
-					error={Boolean(errors.fileName)}
-					helperText={errors.fileName} />
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
 			</Grid>
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -99,15 +126,13 @@ export const CreateBpmn = () => {
 					id="functionType"
 					name="functionType"
 					label={"Funzionalità"}
-					placeholder={"Funzionalità"}
+					placeholder={"MENU"}
 					size="small"
 					value={formData.functionType}
 					onChange={handleChange}
 					error={Boolean(errors.functionType)}
-					helperText={errors.functionType}
-				/>
+					helperText={errors.functionType} />
 			</Grid>
-
 		</FormTemplate>
 	);
 };

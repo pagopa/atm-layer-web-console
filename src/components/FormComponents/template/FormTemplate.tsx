@@ -1,16 +1,25 @@
-import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
-import React from "react";
+import { Grid, Typography, Box, useTheme } from "@mui/material";
+import React, { SetStateAction } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
+import { ActionAlert } from "../../Commons/ActionAlert";
 
 type Props = {
 	handleSubmit: (e: React.FormEvent) => void;
+	setOpenSnackBar?: React.Dispatch<SetStateAction<boolean>>;
 	children?: any;
 	getFormOptions: any;
-
+	openSnackBar?: boolean;
+	severity?: any;
+	message?: string;
+	title?: string;
+	errorCode?: string;
+	handleSwitchAssociationFetch?: () => Promise<void>;
+	loading?: boolean;
 };
 
-export default function FormTemplate({ handleSubmit, children, getFormOptions }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch, loading }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -18,6 +27,8 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 		borderStyle: "solid",
 		borderColor: theme.palette.divider,
 	};
+
+	const disabledConfirmButton = () => openSnackBar ? true : false;
 
 	return (
 		<Box sx={{ maxWidth: "75%" }}>
@@ -40,10 +51,19 @@ export default function FormTemplate({ handleSubmit, children, getFormOptions }:
 							{children}
 						</Grid>
 						<Box display="flex" justifyContent="flex-end" mt={2}>
-							<Button variant="contained" onClick={handleSubmit}>
-								Submit
-							</Button>
+							<LoadingButton  loading={loading} variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
+								Conferma
+							</LoadingButton>
 						</Box>
+						<ActionAlert
+							setOpenSnackBar={setOpenSnackBar}
+							openSnackBar={openSnackBar}
+							severity={severity}
+							message={message}
+							title={title}
+							errorCode={errorCode}
+							handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+						/>
 					</Box>
 				</React.Fragment>
 			)

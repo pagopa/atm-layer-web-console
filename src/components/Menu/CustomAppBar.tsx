@@ -1,7 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { homePageCardItems } from "../../utils/HomePageCardItems";
+import { homePageCard } from "../../utils/homePageCard";
 import MenuButtons from "./MenuButtons";
 
 const CustomAppBar = () => (
@@ -9,7 +9,7 @@ const CustomAppBar = () => (
 		<AppBar position="static" >
 			<Toolbar variant="dense">
 
-				{homePageCardItems.map((e, i) => (
+				{homePageCard.map((e, i) => (
 					<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon}/>
 				))
 				}

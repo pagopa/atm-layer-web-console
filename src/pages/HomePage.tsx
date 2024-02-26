@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
-import { homePageCardItems } from "../utils/HomePageCardItems";
+import { homePageCard } from "../utils/homePageCard";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
@@ -18,7 +18,7 @@ export default function HomePage () {
 			<Box  my="8%">
 				<Grid container spacing={8} >
 					{
-						homePageCardItems.filter(el=> el.id!=="home").map((e, i) => (
+						homePageCard.filter(el=> el.id!=="home").map((e, i) => (
 							<Grid item xs={4} mx={"auto"} key={e.title}>
 								<HomeCardComponent
 									title={e.title}

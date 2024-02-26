@@ -1,6 +1,6 @@
 {
   "name": "web-console",
-  "version": "v1.0.0-dev.14",
+  "version": "v1.0.0-dev.24",
   "private": true,
   "homepage": "/webconsole",
   "dependencies": {
@@ -14,9 +14,6 @@
     "@mui/utils": "^5.14.18",
     "@mui/x-data-grid": "^6.19.1",
     "@pagopa/mui-italia": "^1.1.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.60",
     "@types/react": "^18.2.36",
@@ -37,6 +34,9 @@
     "start": "PORT=3005 react-scripts start",
     "start-win": "set PORT=3005 && react-scripts start",
     "build": "react-scripts build",
+    "build:dev": "env-cmd -f .env.development react-scripts build",
+    "build:uat": "env-cmd -f .env.test react-scripts build",
+    "build:prod": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "test:last-commit-coverage": "react-scripts test -i --coverage",
     "test:coverage": "react-scripts test --coverage",
@@ -67,6 +67,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint-config-prettier": "^9.0.0",

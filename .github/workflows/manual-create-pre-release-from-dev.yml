@@ -42,7 +42,7 @@ jobs:
       - name: Build app
         run: |
           npm install
-          npm run build
+          npm run build:dev
 
       - name: Commit with "${{ inputs.commit }}:" prefix
         run: |
@@ -94,6 +94,17 @@ jobs:
           git config user.email "action@github.com"
           git add package.json
           git commit -m "package.json updated with new version ${{ steps.semantic-release.outputs.new_release_version }}"
+          git push
+
+      - name: Update file .env.development with the new version
+        if: steps.semantic-release.outputs.new_release_published == 'true'
+        run: |
+          sed -i 's/^REACT_APP_VERSION=.*/REACT_APP_VERSION=v${{ steps.semantic-release.outputs.new_release_version }}/' .env.development
+          git pull
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add .env.development .env.test .env.production
+          git commit -m ".env.development updated with new version ${{ steps.semantic-release.outputs.new_release_version }}"
           git push
 
       - name: Configure AWS Credentials

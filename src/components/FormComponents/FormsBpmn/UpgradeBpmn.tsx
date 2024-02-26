@@ -1,41 +1,50 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
-import { isValidUUID, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
-import fetchUpgradeBpmn from "../../../hook/fetch/Bpmn/fetchUpgradeBpmn";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
+import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { UPGRADE_BPMN } from "../../../commons/constants";
+import checks from "../../../utils/checks";
+import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const UpgradeBpmn = () => {
-	// const theme = useTheme();
 
+	const [loading, setLoading] = useState(false);
 	const { getFormOptions } = formOption();
+	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const { isValidDeployableFilename } = checks();
 
 	const initialValues: UpgradeBpmnDto = {
-		uuid: undefined,
+		uuid: recordParams.bpmnId,
 		file: undefined,
-		fileName: undefined,
-		functionType: undefined,
+		filename: "",
+		functionType: recordParams.functionType,
 	};
 
-	const [formData, setFormData] = useState<UpgradeBpmnDto>(initialValues);
-	const [errors, setErrors] = useState(initialValues);
+	const [formData, setFormData] = useState(initialValues);
+	const [errors, setErrors] = useState<any>({
+		file: "",
+		filename: "",
+	});
 	const { abortController } = useContext(Ctx);
+	const [openSnackBar, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const [severity, setSeverity] = useState<"success" | "error">("success");
+	const [title, setTitle] = useState("");
 
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
 	const validateForm = () => {
 		const newErrors = {
-			uuid: formData.uuid ? isValidUUID(formData.uuid) ? "" : "uuid non valido" : "Campo obbligatorio",
 			file: formData.file ? "" : "Campo obbligatorio",
-			fileName: formData.fileName ? "" : "Campo obbligatorio",
-			functionType: formData.functionType ? "" : "Campo obbligatorio",
+			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
 		};
 
 		setErrors(newErrors);
@@ -44,97 +53,67 @@ export const UpgradeBpmn = () => {
 	};
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: "" });
+		setFormData({ ...formData, file: undefined });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
-		
+	const handleSubmit = async (e: React.FormEvent) => {
 
 		if (validateForm()) {
-			const upgradeBpmn = new Promise((resolve) => {
-				void fetchUpgradeBpmn({ abortController, body: formData })()
-					.then((response: any) => {
-						if (response) {
-							resolve({
-								data: response,
-								type: "SUCCESS"
-							});
-						} else {
-							resolve({ 
-								type: "ERROR"
-							});
-						}
-					})
-					.catch((err) => {
-						console.log("ERROR", err);
-					});
-			});
 
-			upgradeBpmn
-				.then((res) => {
-					console.log("UPGRADE BPMN RESPONSE", res);
-					return res;
-				})
-				.catch((err) => 
-					console.log("UPGRADE BPMN ERROR", err)
-				);
+			const postData = new FormData();
+			if (formData.uuid && formData.file && formData.filename && formData.functionType) {
+				postData.append("uuid", formData.uuid);
+				postData.append("file", formData.file);
+				postData.append("filename", formData.filename.replace(/\s/g, ""));
+				postData.append("functionType", formData.functionType);
+			}
+			setLoading(true);
+
+			try {
+				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
+				setLoading(false);
+				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				
+			} catch (error) {
+				setLoading(false);
+				console.error("ERROR", error);
+				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
 		}
 	};
 
 	return (
-		<FormTemplate handleSubmit={handleSubmit} getFormOptions={getFormOptions(UPGRADE_BPMN)}>
-			
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="uuid"
-					name="uuid"
-					label={"ID processo"}
-					placeholder={"Identificatore Univoco"}
-					size="small"
-					value={formData.uuid}
-					onChange={handleChange}
-					error={Boolean(errors.uuid)}
-					helperText={errors.uuid}
-				/>
-			</Grid>
-			<UploadField 
-				titleField="File BPMN del processo" 
+
+		<FormTemplate 
+			handleSubmit={handleSubmit} 
+			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
+			openSnackBar={openSnackBar} 
+			severity={severity} 
+			message={message} 
+			title={title}
+			loading={loading}
+		>
+			<UploadField
+				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
-				changeFile={handleChange}
 				clearFile={clearFile}
 				error={errors.file}
-			/>
+				setFormData={setFormData}
+				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
-					id="fileName"
-					name="fileName"
+					id="filename"
+					name="filename"
 					label={"Nome del file"}
-					placeholder={"Nome del file"}
+					placeholder={"Esempio_Processo"}
 					size="small"
-					value={formData.fileName}
+					value={formData.filename}
 					onChange={handleChange}
-					error={Boolean(errors.fileName)}
-					helperText={errors.fileName}
-				/>
+					error={Boolean(errors.filename)}
+					helperText={errors.filename} />
 			</Grid>
-			<Grid xs={12} item my={1}>
-				<TextField
-					fullWidth
-					id="functionType"
-					name="functionType"
-					label={"Funzionalità"}
-					placeholder={"Funzionalità"}
-					size="small"
-					value={formData.functionType}
-					onChange={handleChange}
-					error={Boolean(errors.functionType)}
-					helperText={errors.functionType}
-				/>
-			</Grid>
-			
 		</FormTemplate>
 	);
 };
