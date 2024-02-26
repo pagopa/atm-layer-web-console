@@ -1,7 +1,6 @@
-import { RESOURCES } from "../../commons/constants";
-import DetailPage from "../../components/Commons/DetailPage";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import formatValues from "../../utils/formatValues";
+import DetailStaticResources from "../../components/Commons/DetailStaticResources";
 
 
 const ResourcesDetailPage = () => {
@@ -16,11 +15,10 @@ const ResourcesDetailPage = () => {
 	const detailTitle = "Dettaglio risorsa statica";
 
 	return (
-		<DetailPage
+		<DetailStaticResources
 			detailFields={fields}
 			detailTitle={detailTitle}
 			breadComponent={breadComponent}
-			detailButtonsComponentType={RESOURCES}
 		/>
 	);
 };

@@ -1,7 +1,8 @@
-import { SetStateAction, useContext } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import { generatePath } from "react-router-dom";
+import React from "react";
 import { Ctx } from "../../../DataContext";
-import { handleSnackbar } from "../../../utils/Commons";
+import { getTextModal, handleSnackbar } from "../../Commons/Commons";
 import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
@@ -26,27 +27,38 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 
 	const { abortController } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	
-
+	const content=getTextModal(type);
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 		switch (type) {
 		case DELETE_RES: {
 			try {
 				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
-			
+				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
 		case DOWNLOAD_RES: {
-			downloadStaticFile(detail);
+			const success = downloadStaticFile(detail);
 			setOpen(false);
+			setLoading(false);
+			if (success) {
+				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
+				setTimeout(() => {
+					setOpenSnackBar(false);
+				}, 3000);
+			} else {
+				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
+			}
 			break;
 		}
 		default: return;
@@ -54,27 +66,12 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 	};
 
 	return (
-		<>
-			{type === DELETE_RES &&
-				<ModalTemplate
-					titleModal={"Cancellazione risorsa statica"}
-					contentText={"Sei sicuro di voler cancellare questa risorsa statica?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>}
-			{type === DOWNLOAD_RES &&
-				<ModalTemplate
-					titleModal={"Scarica risorsa statica"}
-					contentText={"Sei sicuro di voler scaricare questa risorsa statica?"}
-					open={open}
-					setOpen={setOpen}
-					handleSubmit={handleSubmit}
-				/>}
-			{type === UPDATE_RES &&
+		<React.Fragment>
+			
+			{type === UPDATE_RES ?
 				<ModalTemplateUpload
-					titleModal={"Update risorsa statica"}
-					contentText={"Carica il file aggiornato"}
+					titleModal={content?.titleModal}
+					contentText={content?.contentText}
 					open={open}
 					setOpen={setOpen}
 					recordParams={recordParams}
@@ -84,9 +81,19 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 					setSeverity={setSeverity}
 					setTitle={setTitle}
 					setOpenSnackBar={setOpenSnackBar}
-					type={UPDATE_RES}
-				/>}
-		</>
+					type={type}
+				/>
+				: 
+				<ModalTemplate
+					titleModal={content?.titleModal}
+					contentText={content?.contentText}
+					open={open}
+					setOpen={setOpen}
+					handleSubmit={handleSubmit}
+					loading={loading}
+				/>
+			}
+		</React.Fragment>
 	);
 };
 

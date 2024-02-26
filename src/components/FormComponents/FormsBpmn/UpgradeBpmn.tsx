@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
@@ -13,6 +13,7 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const UpgradeBpmn = () => {
 
+	const [loading, setLoading] = useState(false);
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const { isValidDeployableFilename } = checks();
@@ -66,12 +67,15 @@ export const UpgradeBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType);
 			}
+			setLoading(true);
 
 			try {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -87,6 +91,7 @@ export const UpgradeBpmn = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
+			loading={loading}
 		>
 			<UploadField
 				titleField="File BPMN del processo"

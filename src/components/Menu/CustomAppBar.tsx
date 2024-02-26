@@ -1,7 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { homePageCardItems } from "../../utils/HomePageCardItems";
+import { homePageCardItems } from "../../utils/homePageCardItems";
 import MenuButtons from "./MenuButtons";
 
 const CustomAppBar = () => (

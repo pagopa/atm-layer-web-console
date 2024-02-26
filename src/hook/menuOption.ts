@@ -1,10 +1,10 @@
-import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../commons/constants";
 
 const menuOption:any = () => {
   
 	const getMenuOptions:any = (driver: string) => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return [
 				{label: "BPMN GetAll", onClick: () => console.log("BPMN GetAll clicked!")},
 				{label: "BPMN Create", onClick: () => console.log("BPMN Create clicked!")},

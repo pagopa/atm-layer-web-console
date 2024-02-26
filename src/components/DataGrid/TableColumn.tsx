@@ -21,20 +21,18 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 	function showCustomHeader(params: GridColumnHeaderParams, overrideStyle: CSSProperties = {}) {
 		return (
-			<Box sx={{		
-				display: "-webkit-box",
-				WebkitLineClamp: 2,
-				WebkitBoxOrient: "vertical" as const,
-				// whiteSpace:"normal"
-			}}>
-				<Typography
-					color={theme.palette.primary.contrastText}
-					variant="body2"
-					
-				>
-					{params.colDef.headerName}
-				</Typography>
-			</Box>
+			<Typography
+				color={theme.palette.primary.contrastText}
+				variant="body2"
+				sx={{
+					display: "-webkit-box",
+					WebkitLineClamp: 2,
+					WebkitBoxOrient: "vertical" as const,
+					whiteSpace: "normal"
+				}}
+			>
+				{params.colDef.headerName}
+			</Typography>
 		);
 	};
 

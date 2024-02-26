@@ -6,7 +6,7 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_BPMN } from "../../../commons/constants";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_BPMN_API } from "../../../commons/endpoints";
@@ -14,6 +14,7 @@ import { CREATE_BPMN_API } from "../../../commons/endpoints";
 
 export const CreateBpmn = () => {
 
+	const [loading, setLoading] = useState(false);
 	const { getFormOptions } = formOption();
 	const { isValidDeployableFilename } = checks();
 
@@ -70,11 +71,14 @@ export const CreateBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType.toUpperCase());
 			}
+			setLoading(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -93,6 +97,7 @@ export const CreateBpmn = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
+			loading={loading}
 		>
 			<UploadField
 				titleField="File BPMN del processo"

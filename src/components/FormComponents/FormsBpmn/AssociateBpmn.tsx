@@ -4,7 +4,7 @@ import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { ASSOCIATE_BPMN } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import FormTemplate from "../template/FormTemplate";
 import { BPMN_ASSOCIATE_API, UPDATE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -13,6 +13,7 @@ const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const [loading, setLoading] = useState(false);
 
 	const initialValues = {
 		acquirerId: "",
@@ -49,13 +50,27 @@ const AssociateBpmn = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		if (validateForm()) {
+			setLoading(true);
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+				const response = await fetchRequest({
+					urlEndpoint: generatePath(BPMN_ASSOCIATE_API,
+						{
+							bpmnId: recordParams?.bpmnId,
+							modelVersion: recordParams?.modelVersion
+						}
+					),
+					method: "POST",
+					abortController,
+					body: formData,
+					headers: { "Content-Type": "application/json" }
+				})();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
-				}else { setErrorCode(undefined);}
+				} else { setErrorCode(undefined); }
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -65,7 +80,18 @@ const AssociateBpmn = () => {
 	const handleSwitchAssociationFetch = async () => {
 		setErrorCode(undefined);
 		try {
-			const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,{ bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "PUT", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+			const response = await fetchRequest({
+				urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,
+					{
+						bpmnId: recordParams?.bpmnId,
+						modelVersion: recordParams?.modelVersion
+					}
+				),
+				method: "PUT",
+				abortController,
+				body: formData,
+				headers: { "Content-Type": "application/json" }
+			})();
 			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 		} catch (error) {
 			console.error("ERROR", error);
@@ -84,8 +110,9 @@ const AssociateBpmn = () => {
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
 			setOpenSnackBar={setOpenSnackBar}
+			loading={loading}
 		>
-			<Grid xs={12} item my={1}>
+			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="acquirerId"
@@ -98,7 +125,14 @@ const AssociateBpmn = () => {
 					error={Boolean(errors.acquirerId)}
 					helperText={errors.acquirerId} />
 			</Grid>
-			<Grid xs={10} item pr={2} my={2}>
+			<Grid item
+				xs={12}
+				my={2}
+				display="flex"
+				flexDirection={"row"}
+				justifyContent={"flex-start"}
+				alignItems={"center"}
+			>
 				<TextField
 					fullWidth
 					id="branchId"
@@ -110,14 +144,26 @@ const AssociateBpmn = () => {
 					value={formData.branchId}
 					onChange={handleChange}
 				/>
-			</Grid>
-			<Grid xs={2} item my={2}>
-				<Stack direction="row" spacing={1} alignItems={"center"}>
-					<Typography>Tutti</Typography>
-					<Switch checked={branchChecked} onChange={() => { setBranchChecked(!branchChecked); setFormData({ ...formData, branchId: "" }); }} name="branchIdSwitch" />
+				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
+					<Typography >Tutti</Typography>
+					<Switch
+						checked={branchChecked}
+						onChange={() => {
+							setBranchChecked(!branchChecked);
+							setFormData({ ...formData, branchId: "" });
+						}}
+						name="branchIdSwitch"
+					/>
 				</Stack>
 			</Grid>
-			<Grid xs={10} item pr={2} my={1}>
+			<Grid item
+				xs={12}
+				my={1}
+				display="flex"
+				flexDirection={"row"}
+				justifyContent={"flex-start"}
+				alignItems={"center"}
+			>
 				<TextField
 					fullWidth
 					id="terminalId"
@@ -129,11 +175,17 @@ const AssociateBpmn = () => {
 					value={formData.terminalId}
 					onChange={handleChange}
 				/>
-			</Grid>
-			<Grid xs={2} item my={1}>
-				<Stack direction="row" spacing={1} alignItems={"center"}>
+				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>
-					<Switch checked={terminalChecked} disabled={branchChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
+					<Switch
+						checked={terminalChecked}
+						disabled={branchChecked}
+						onChange={() => {
+							setTerminalChecked(!terminalChecked);
+							setFormData({ ...formData, terminalId: "" });
+						}}
+						name="terminalIdSwitch"
+					/>
 				</Stack>
 			</Grid>
 		</FormTemplate>

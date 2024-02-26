@@ -1,9 +1,9 @@
-import React, { SetStateAction, useContext } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import React, { SetStateAction, useContext, useState } from "react";
+import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import { DELETE, DELETE_ASSOCIATION, DEPLOY, DOWNLOAD } from "../../../commons/constants";
-import { getQueryString, handleSnackbar } from "../../../utils/Commons";
+import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../commons/constants";
+import { getQueryString, getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -20,45 +20,50 @@ type Props = {
 };
 
 
-export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
+const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const navigate = useNavigate();
+	
+	const content=getTextModal(type);
+	const [loading, setLoading] = useState(false);
 	const handleSubmit = async (e: React.FormEvent) => {
+		setLoading(true);
 
 		switch (type) {
-		case DELETE: {
+		case DELETE_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
-		
+		        setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
-		case DEPLOY: {
+		case DEPLOY_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DEPLOY_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
-			
+			    setLoading(false);
 				if (response?.success) {
 					const deployedResponse = {
 						...response.valuesObj,
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
 					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 3000);
 				}
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					window.location.reload();
-				}, 4000);
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -72,6 +77,7 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 			
 			try {
 				const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, DELETE_ASSOCIATION),  method: "DELETE", abortController })();
+				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 			} catch (error) {
@@ -79,15 +85,21 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 			}
 			break;
 		}
-		case DOWNLOAD: {
+		case DOWNLOAD_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DOWNLOAD_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "GET", abortController })();
+				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {
 					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
-				} 
+					setTimeout(() => {
+						setOpenSnackBar(false);
+					}, 3000);
+				}
+				
 			} catch (error) {
+				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -99,43 +111,17 @@ export const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMe
 		}
 
 	};
-
-	const modalConfigs = {
-		DELETE: {
-			titleModal: "Cancellazione risorsa di processo",
-			contentText: "Sei sicuro di voler cancellare questa risorsa di proccesso?",
-		},
-		DEPLOY: {
-			titleModal: "Rilascio risorsa di processo",
-			contentText: "Sei sicuro di voler rilasciare questa risorsa di proccesso?",
-		},
-		DELETE_ASSOCIATION: {
-			titleModal: "Eliminazione Associazione",
-			contentText: "Sei sicuro di voler eliminare questa associazione?",
-		},
-		DOWNLOAD: {
-			titleModal: "Scarica risorsa di processo",
-			contentText: "Sei sicuro di voler scaricare questa risorsa?",
-		},
-	};
 	
 	return (
-		<>
-			{Object.keys(modalConfigs).map((key) => (
-				type === key && (
-					<ModalTemplate
-						key={key}
-						titleModal={modalConfigs[key as keyof typeof modalConfigs].titleModal}
-						contentText={modalConfigs[key as keyof typeof modalConfigs].contentText}
-						open={open}
-						setOpen={setOpen}
-						handleSubmit={handleSubmit}
-					/>
-				)
-			))}
-
-		</>
+		<ModalTemplate
+			titleModal={content?.titleModal}
+			contentText={content?.contentText}
+			open={open}
+			setOpen={setOpen}
+			handleSubmit={handleSubmit}
+			loading={loading}
+		/>
 	);
 };
 
-export default Modal;
+export default ModalBpmn;

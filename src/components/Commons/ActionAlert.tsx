@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
 import ROUTES from "../../routes";
-import { DELETE, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VALUES, DELETE_WR, DEPLOY_VALUES } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_VALUES } from "../../commons/constants";
 
 type Props = {
 	setOpenSnackBar?: React.Dispatch<React.SetStateAction<boolean>>;

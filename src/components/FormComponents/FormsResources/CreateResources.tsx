@@ -6,13 +6,15 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES } from "../../../commons/constants";
-import { handleSnackbar, resetErrors } from "../../../utils/Commons";
+import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { RESOURCES_CREATE } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 
 export const CreateResources = () => {
+
+	const [loading, setLoading] = useState(false);
 
 	const { getFormOptions } = formOption();
 	const { isValidResourcesFilename } = checks();
@@ -66,12 +68,15 @@ export const CreateResources = () => {
 				postData.append("resourceType", formData.resourceType);
 				postData.append("path", formData.path ?? "");
 			}
+			setLoading(true);
 			
 			try {
 				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData:true })();
+				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
+				setLoading(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -88,6 +93,7 @@ export const CreateResources = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
+			loading={loading}
 		 >
 			
 			<UploadField 

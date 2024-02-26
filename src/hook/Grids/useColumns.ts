@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN, BPMN_ASSOCIATED, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -122,21 +122,8 @@ const useColumns: any = () => {
 		});
 
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return [
-				// {
-				// 	field: "bpmnId",
-				// 	cellClassName: "justifyContentNormal",
-				// 	headerName: "ID risorsa di processo",
-				// 	align: "left",
-				// 	headerAlign: "left",
-				// 	editable: false,
-				// 	disableColumnMenu: true,
-				// 	renderHeader: showCustomHeader,
-				// 	renderCell: (params: any) => renderCell(params, params.row.bpmnId),
-				// 	sortable: false,
-				// 	flex: 2,
-				// },
 				functionTypeColumn,
 				fileNameColumn,
 				statusColumn,
@@ -220,7 +207,7 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				commonActionColumn(BPMN)
+				commonActionColumn(PROCESS_RESOURCES)
 			];
 		case BPMN_ASSOCIATED:
 			return [
@@ -339,18 +326,6 @@ const useColumns: any = () => {
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
-				// {
-				// 	field: "actions",
-				// 	cellClassName: "justifyContentNormalRight",
-				// 	headerName: "",
-				// 	align: "right",
-				// 	hideSortIcons: true,
-				// 	disableColumnMenu: true,
-				// 	editable: false,
-				// 	renderCell: (params: any) => actionColumn(params, RESOURCES),
-				// 	sortable: false,
-				// 	flex: 0.5
-				// },
 				commonActionColumn(RESOURCES)				
 			];
 		case WORKFLOW_RESOURCE:
@@ -395,7 +370,7 @@ const useColumns: any = () => {
 	};
 	const getVisibleColumns: any = (driver: string) => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return (
 				{
 					"enabled": false,
@@ -437,7 +412,7 @@ const useColumns: any = () => {
 	};
 	const getNavigationPaths: any = (driver: string, param: any) => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return generatePath(ROUTES.BPMN_DETAILS, { bpmnId: param.row.bpmnId, modelVersion: param.row.modelVersion });
 		case RESOURCES:
 		     return generatePath(ROUTES.RESOURCES_DETAILS, { resourceId: param.row.resourceId });

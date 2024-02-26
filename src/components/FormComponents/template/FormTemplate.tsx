@@ -1,5 +1,6 @@
-import { Grid, Typography, Button, Box, useTheme } from "@mui/material";
+import { Grid, Typography, Box, useTheme } from "@mui/material";
 import React, { SetStateAction } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
 import { ActionAlert } from "../../Commons/ActionAlert";
@@ -15,9 +16,10 @@ type Props = {
 	title?: string;
 	errorCode?: string;
 	handleSwitchAssociationFetch?: () => Promise<void>;
+	loading?: boolean;
 };
 
-export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch, loading }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -49,9 +51,9 @@ export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, 
 							{children}
 						</Grid>
 						<Box display="flex" justifyContent="flex-end" mt={2}>
-							<Button variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
+							<LoadingButton  loading={loading} variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
 								Conferma
-							</Button>
+							</LoadingButton>
 						</Box>
 						<ActionAlert
 							setOpenSnackBar={setOpenSnackBar}

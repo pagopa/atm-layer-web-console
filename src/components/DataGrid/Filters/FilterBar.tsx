@@ -1,5 +1,5 @@
-import React from "react";
-import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import React, { SetStateAction } from "react";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
@@ -13,13 +13,15 @@ type Props = {
 	getAllList: (filterValues?: any, pageIndex?: number) => void;
 	newFilterValues: any;
 	driver: string;
+	loading?: boolean;
+	setLoading: React.Dispatch<SetStateAction<boolean>>;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loading, setLoading }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
 			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
@@ -48,6 +50,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	const handleSubmit = () => {
+		setLoading(true);
 		if (Object.values(filterValues).some(value => value !== "")) {
 			getAllList(filterValues, 0);
 		}
@@ -60,7 +63,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const filterType = () => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case RESOURCES:
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
@@ -73,7 +76,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const filterRoutes = () => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return ROUTES.CREATE_BPMN;
 		case RESOURCES:
 			return ROUTES.CREATE_RESOURCE;
@@ -85,7 +88,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
+		<FilterTemplate loading={loading} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
 			{filterType()}
 		</FilterTemplate>
 	);

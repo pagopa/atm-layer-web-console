@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
-import { homePageCardItems } from "../utils/HomePageCardItems";
+import { homePageCardItems } from "../utils/homePageCardItems";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 

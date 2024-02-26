@@ -4,7 +4,7 @@ import WorkflowResourceDataGrid from "../../components/DataGrid/WorkflowResource
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BoxPageLayout from "../Layout/BoxPageLayout";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import { Ctx } from "../../DataContext";
 
 const WorkflowResourcePage = () => {

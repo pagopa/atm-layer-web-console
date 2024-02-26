@@ -1,7 +1,6 @@
-import { BPMN } from "../../commons/constants";
-import DetailPage from "../../components/Commons/DetailPage";
-import { breadCrumbLinkComponent, commonBreadRoot } from "../../utils/Commons";
+import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import formatValues from "../../utils/formatValues";
+import DetailBpmn from "../../components/Commons/DetailBpmn";
 
 const BpmnDetailPage = () => {
 
@@ -17,12 +16,12 @@ const BpmnDetailPage = () => {
 	];
 
 	return (
-		<DetailPage 
+		<DetailBpmn 
 			detailFields={fields}
 			detailTitle={"Dettaglio risorsa di processo"}
 			breadComponent={breadComponent}
-			detailButtonsComponentType={BPMN}
-			bpmnAssociateTable={true}/>
+			bpmnAssociateTable={true}
+		/>
 	);
 };
 

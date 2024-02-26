@@ -33,11 +33,14 @@ const StyledDataGrid = styled(DataGrid)({
 		borderBottom: "none" 
 	},
 	".MuiDataGrid-virtualScroller": {
-		minHeight:"100px",
+		minHeight:"150px",
 		overflowX: "hidden",
 		"&.Mui-hovered": {
 			backgroundColor: "inherit",
 		},
+		".MuiDataGrid-overlayWrapperInner":{
+			minHeight:"150px",
+		}
 	},
 
 	".justifyContentNormal": {

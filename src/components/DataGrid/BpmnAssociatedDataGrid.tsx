@@ -7,7 +7,7 @@ import { GET_ALL_BPMN_ASSOCIATED } from "../../commons/endpoints";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
-
+import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
 
 type Props = {
 	buildColumnDefs: (driver: string) => Array<GridColDef>;
@@ -17,7 +17,6 @@ type Props = {
 const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 
 	const [loading, setLoading] = useState(true);
-
 	const { abortController} = useContext(Ctx);
 	const { bpmnId, modelVersion } = useParams();
 	const [paginationModel, setPaginationModel] = useState({
@@ -25,7 +24,7 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 		pageSize: 5,
 	});
 	const [totalAssociationsFound, setTotalAssociationsFound] = useState(0);
-	
+	const [statusError, setStatusError] = useState(0);
 	const [tableListBpmnAssociated, setTableListBpmnAssociated] = useState<any>([]);
 
 	const getAllAssociatedBpmn = async (pageIndex?: number) => {
@@ -33,7 +32,7 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 		const paginatedUrl = `?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 		try {
 			const response = await fetchRequest({ urlEndpoint: baseUrl, queryString: paginatedUrl, method: "GET", abortController })();
-
+			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, totalPages } = response.valuesObj;
 				setTableListBpmnAssociated(response?.valuesObj?.results);
@@ -56,6 +55,7 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 	return (
 		<BoxPageLayout shadow={true} px={0} mx={4}>
 			<CustomDataGrid
+				autoHeight
 				disableColumnFilter
 				disableColumnSelector
 				disableDensitySelector
@@ -69,6 +69,14 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				rowCount={totalAssociationsFound}
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
+				slots={{
+					noRowsOverlay: () => (
+						<CustomNoRowsOverlay
+							message="Associazioni non presenti"
+							statusError={statusError}
+						/>
+					),
+				}}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[5]}
