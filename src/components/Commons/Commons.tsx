@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { BPMN, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY, DEPLOY_WR, DOWNLOAD, DOWNLOAD_RES, DOWNLOAD_WR, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -38,7 +38,7 @@ export const getQueryString = ( filterValues: any, driver: string, URL?: string)
 	}
 		
 	switch (driver) {
-	case BPMN:
+	case PROCESS_RESOURCES:
 		if (filterValues?.functionType) {
 			queryString = queryString.concat(`&functionType=${filterValues.functionType.toUpperCase()}`);
 		}
@@ -188,7 +188,7 @@ export function getTextModal(type:string):any {
 	case ROLLBACK_WR: {
 		return {titleModal:"Ripristino risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler ripristinare la versione precedente della risorsa?"};
 	}
-	case DEPLOY: {
+	case DEPLOY_BPMN: {
 		return {titleModal:"Rilascio risorsa di processo", contentText:"Sei sicuro di voler rilasciare questa risorsa di proccesso?"};
 	}
 	case DEPLOY_WR: {
@@ -206,7 +206,7 @@ export function getTextModal(type:string):any {
 	case DELETE_WR: {
 		return {titleModal:"Cancellazione risorsa aggiuntiva per processo", contentText:"Sei sicuro di voler cancellare questa risorsa aggiuntiva di processo?"};
 	}
-	case DOWNLOAD: {
+	case DOWNLOAD_BPMN: {
 		return {titleModal:"Scarica risorsa di processo", contentText:"Sei sicuro di voler scaricare questa risorsa?"};
 	}
 	case DOWNLOAD_RES: {

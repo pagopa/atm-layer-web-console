@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { BPMN } from "../../commons/constants";
+import { PROCESS_RESOURCES } from "../../commons/constants";
 import { GET_ALL_BPMN_FILTER } from "../../commons/endpoints";
 import { getQueryString } from "../Commons/Commons";
 import { Ctx } from "../../DataContext";
@@ -35,14 +35,14 @@ export default function BpmnDataGrid() {
 		pageSize: 10,
 	});
 	const { buildColumnDefs, visibleColumns } = TableColumn();
-	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
+	const columns: Array<GridColDef> = buildColumnDefs(PROCESS_RESOURCES);
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_BPMN_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 
 		try {
-			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, BPMN), method: "GET", abortController })();
+			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, PROCESS_RESOURCES), method: "GET", abortController })();
 			setButtonLoading(false);
 			setStatusError(response?.status);
 
@@ -77,7 +77,7 @@ export default function BpmnDataGrid() {
 					setTableList={setTableListBpmn}
 					getAllList={getAllBpmnList}
 					newFilterValues={initialValues}
-					driver={BPMN}
+					driver={PROCESS_RESOURCES}
 					loading={buttonLoading}
 					setLoading={setButtonLoading}
 				/>
@@ -105,7 +105,7 @@ export default function BpmnDataGrid() {
 						),
 					}}
 					sortingMode="server"
-					columnVisibilityModel={visibleColumns(BPMN)}
+					columnVisibilityModel={visibleColumns(PROCESS_RESOURCES)}
 					paginationMode="server"
 					pagination
 					pageSizeOptions={[10]}

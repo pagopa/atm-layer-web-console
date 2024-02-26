@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { BPMN, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
@@ -21,7 +21,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
 			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
 			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
@@ -63,7 +63,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const filterType = () => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case RESOURCES:
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
@@ -76,7 +76,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const filterRoutes = () => {
 		switch (driver) {
-		case BPMN:
+		case PROCESS_RESOURCES:
 			return ROUTES.CREATE_BPMN;
 		case RESOURCES:
 			return ROUTES.CREATE_RESOURCE;

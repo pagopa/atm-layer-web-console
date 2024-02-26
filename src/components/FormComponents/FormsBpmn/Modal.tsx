@@ -2,7 +2,7 @@ import React, { SetStateAction, useContext, useState } from "react";
 import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY, DOWNLOAD } from "../../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../commons/constants";
 import { getQueryString, getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";
@@ -45,7 +45,7 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 			}
 			break;
 		}
-		case DEPLOY: {
+		case DEPLOY_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DEPLOY_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
 			    setLoading(false);
@@ -85,7 +85,7 @@ const Modal = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, 
 			}
 			break;
 		}
-		case DOWNLOAD: {
+		case DOWNLOAD_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DOWNLOAD_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "GET", abortController })();
 				setLoading(false);
