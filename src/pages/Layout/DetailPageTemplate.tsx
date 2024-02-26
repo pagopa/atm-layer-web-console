@@ -9,14 +9,14 @@ type Props = {
 	detail:any;
     detailFields: any;
     detailTitle: string;
-    breadComponent: any;
-    children: React.ReactNode;
-	openSnackBar: boolean;
-	setOpenSnackBar:React.Dispatch<React.SetStateAction<boolean>>;
-	type:string;
-	message:string;
-	severity:string;
-	title:string;
+    breadComponent?: any;
+    children?: React.ReactNode;
+	openSnackBar?: boolean;
+	setOpenSnackBar?:React.Dispatch<React.SetStateAction<boolean>>;
+	type?:string;
+	message?:string;
+	severity?:string;
+	title?:string;
 
 };
 
