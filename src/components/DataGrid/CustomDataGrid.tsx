@@ -78,6 +78,9 @@ const StyledDataGrid = styled(DataGrid)({
 			color:"#00A1B0"
 		}
 	},
+	".MuiDataGrid-columnHeaderTitleContainer":{
+		whiteSpace:"normal"
+	}
 
 });
 
