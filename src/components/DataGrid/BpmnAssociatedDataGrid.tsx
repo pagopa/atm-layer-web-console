@@ -8,8 +8,6 @@ import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import CustomDataGrid from "./CustomDataGrid";
 import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
-import { CustomNoResultsOverlay } from "./CustomNoResultsOverlay";
-
 
 type Props = {
 	buildColumnDefs: (driver: string) => Array<GridColDef>;
@@ -72,9 +70,8 @@ const BpmnAssociatedDataGrid = ({ buildColumnDefs, visibleColumns }: Props) => {
 				sortingMode="server"
 				columnVisibilityModel={visibleColumns(BPMN_ASSOCIATED)}
 				slots={{
-					noRowsOverlay: CustomNoRowsOverlay,
-					noResultsOverlay: () => (
-						<CustomNoResultsOverlay
+					noRowsOverlay: () => (
+						<CustomNoRowsOverlay
 							message="Associazioni non presenti"
 							statusError={statusError}
 						/>
