@@ -1,6 +1,6 @@
 import routes from "../routes";
 
-export const homePageCardItems = [
+export const homePageCard = [
 	{
 		title: "Home",
 		id: "home",
