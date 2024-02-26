@@ -1,4 +1,4 @@
-import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { BPMN } from "../../commons/constants";
@@ -36,7 +36,6 @@ export default function BpmnDataGrid() {
 	});
 	const { buildColumnDefs, visibleColumns } = TableColumn();
 	const columns: Array<GridColDef> = buildColumnDefs(BPMN);
-	const [columnVisibilityModel] = useState<GridColumnVisibilityModel>(visibleColumns(BPMN));
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 	const getAllBpmnList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
@@ -106,7 +105,7 @@ export default function BpmnDataGrid() {
 						),
 					}}
 					sortingMode="server"
-					columnVisibilityModel={{ ...columnVisibilityModel }}
+					columnVisibilityModel={visibleColumns(BPMN)}
 					paginationMode="server"
 					pagination
 					pageSizeOptions={[10]}

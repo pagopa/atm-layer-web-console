@@ -52,12 +52,23 @@ const AssociateBpmn = () => {
 		if (validateForm()) {
 			setLoading(true);
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_ASSOCIATE_API, { bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "POST", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+				const response = await fetchRequest({
+					urlEndpoint: generatePath(BPMN_ASSOCIATE_API,
+						{
+							bpmnId: recordParams?.bpmnId,
+							modelVersion: recordParams?.modelVersion
+						}
+					),
+					method: "POST",
+					abortController,
+					body: formData,
+					headers: { "Content-Type": "application/json" }
+				})();
 				setLoading(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
-				}else { setErrorCode(undefined);}
+				} else { setErrorCode(undefined); }
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -69,7 +80,18 @@ const AssociateBpmn = () => {
 	const handleSwitchAssociationFetch = async () => {
 		setErrorCode(undefined);
 		try {
-			const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,{ bpmnId: recordParams?.bpmnId, modelVersion: recordParams?.modelVersion }), method: "PUT", abortController, body: formData, headers: { "Content-Type" : "application/json" } })();
+			const response = await fetchRequest({
+				urlEndpoint: generatePath(UPDATE_ASSOCIATE_BPMN,
+					{
+						bpmnId: recordParams?.bpmnId,
+						modelVersion: recordParams?.modelVersion
+					}
+				),
+				method: "PUT",
+				abortController,
+				body: formData,
+				headers: { "Content-Type": "application/json" }
+			})();
 			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 		} catch (error) {
 			console.error("ERROR", error);
@@ -90,7 +112,7 @@ const AssociateBpmn = () => {
 			setOpenSnackBar={setOpenSnackBar}
 			loading={loading}
 		>
-			<Grid xs={12} item my={1}>
+			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="acquirerId"
@@ -103,7 +125,14 @@ const AssociateBpmn = () => {
 					error={Boolean(errors.acquirerId)}
 					helperText={errors.acquirerId} />
 			</Grid>
-			<Grid xs={10} item pr={2} my={2}>
+			<Grid item
+				xs={12}
+				my={2}
+				display="flex"
+				flexDirection={"row"}
+				justifyContent={"flex-start"}
+				alignItems={"center"}
+			>
 				<TextField
 					fullWidth
 					id="branchId"
@@ -115,14 +144,26 @@ const AssociateBpmn = () => {
 					value={formData.branchId}
 					onChange={handleChange}
 				/>
-			</Grid>
-			<Grid xs={2} item my={2}>
-				<Stack direction="row" spacing={1} alignItems={"center"}>
-					<Typography>Tutti</Typography>
-					<Switch checked={branchChecked} onChange={() => { setBranchChecked(!branchChecked); setFormData({ ...formData, branchId: "" }); }} name="branchIdSwitch" />
+				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
+					<Typography >Tutti</Typography>
+					<Switch
+						checked={branchChecked}
+						onChange={() => {
+							setBranchChecked(!branchChecked);
+							setFormData({ ...formData, branchId: "" });
+						}}
+						name="branchIdSwitch"
+					/>
 				</Stack>
 			</Grid>
-			<Grid xs={10} item pr={2} my={1}>
+			<Grid item
+				xs={12}
+				my={1}
+				display="flex"
+				flexDirection={"row"}
+				justifyContent={"flex-start"}
+				alignItems={"center"}
+			>
 				<TextField
 					fullWidth
 					id="terminalId"
@@ -134,11 +175,17 @@ const AssociateBpmn = () => {
 					value={formData.terminalId}
 					onChange={handleChange}
 				/>
-			</Grid>
-			<Grid xs={2} item my={1}>
-				<Stack direction="row" spacing={1} alignItems={"center"}>
+				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>
-					<Switch checked={terminalChecked} disabled={branchChecked} onChange={() => { setTerminalChecked(!terminalChecked); setFormData({ ...formData, terminalId: "" }); }} name="terminalIdSwitch" />
+					<Switch
+						checked={terminalChecked}
+						disabled={branchChecked}
+						onChange={() => {
+							setTerminalChecked(!terminalChecked);
+							setFormData({ ...formData, terminalId: "" });
+						}}
+						name="terminalIdSwitch"
+					/>
 				</Stack>
 			</Grid>
 		</FormTemplate>
