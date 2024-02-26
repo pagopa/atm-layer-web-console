@@ -50,6 +50,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 		case DOWNLOAD_RES: {
 			const success = downloadStaticFile(detail);
 			setOpen(false);
+			setLoading(false);
 			if (success) {
 				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
 			} else {
