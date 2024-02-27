@@ -1,9 +1,10 @@
 import { FormControl, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
+import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 
 type Props = {
     filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;   
+    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
 };
 
 const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
@@ -37,6 +38,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					id="fileName"
 					name="fileName"
 					label="Nome file"

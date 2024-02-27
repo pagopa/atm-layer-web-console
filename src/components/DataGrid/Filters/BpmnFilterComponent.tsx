@@ -1,5 +1,6 @@
 import { Grid, TextField} from "@mui/material";
 import React from "react";
+import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
@@ -12,6 +13,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="functionType"
 				name="functionType"
 				label="Tipo Funzione"
@@ -24,6 +26,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="fileName"
 				name="fileName"
 				label="Nome File"
@@ -48,6 +51,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="acquirerId"
 				name="acquirerId"
 				label="Banca"
