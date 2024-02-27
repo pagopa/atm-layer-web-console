@@ -50,7 +50,7 @@ jobs:
       - name: Unzip tag = ${{ inputs.release }}
         run: |
           cd ${{ inputs.release }}
-          unzip atm-layer-${{ inputs.release }}.zip
+          unzip ${{ inputs.release }}.zip
 
       - name: Build app
         run: |
