@@ -40,6 +40,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Cut $github.repository string
+        id: cut_repository
+        run: |
+          repository="${{ github.repository }}"
+          cut_repository=${repository#*/}
+          echo "Cut repository: $cut_repository"
+          echo "::set-output name=cut_repository::$cut_repository"
+    
       - uses: robinraju/release-downloader@v1.8
         with:
           repository: "${{ github.repository }}"
@@ -50,7 +58,7 @@ jobs:
       - name: Unzip tag = ${{ inputs.release }}
         run: |
           cd ${{ inputs.release }}
-          unzip ${{ inputs.release }}.zip
+          unzip ${{ steps.cut_repository.outputs.cut_repository }}-${{ inputs.release }}.zip
 
       - name: Build app
         run: |
