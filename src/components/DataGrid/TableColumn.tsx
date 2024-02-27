@@ -1,61 +1,54 @@
-import { Typography, Grid, Box, IconButton } from "@mui/material";
+import { Typography, Box, IconButton, useTheme, Tooltip } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { ReactNode, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
-import React from "react";
-import { BPMN } from "../../commons/constants";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { CSSProperties, ReactNode } from "react";
+import { DELETE_ASSOCIATION } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
-import { Ctx } from "../../DataContext";
 
-const TableColumn = () => {
 
-	const { getColumnsGrid, getVisibleColumns, getNavigationPaths, getRecordParams } = useColumns();
+const TableColumn = (setOpen?: any, setType?: any) => {
+
+	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, showBpmnId, actionColumn);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
 	const navigate = useNavigate();
-	const { setRecordParams } = useContext(Ctx);
-	const actionColumn = (param: any) => {
-		const path = getNavigationPaths(BPMN, param);
-		return (
-			<Box
-				display="flex"
-				justifyContent="flex-end"
-				width="100%"
-				sx={{ cursor: "pointer" }}
-			>
-				<IconButton
-					onClick={() => {navigate(path); setRecordParams(getRecordParams(param.row));}}
-					sx={{
-						width: "100%",
-						"&:hover": { backgroundColor: "transparent !important" },
-					}}
-				>
-					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
-				</IconButton>
-			</Box>
+	const theme = useTheme();
 
+	function showCustomHeader(params: GridColumnHeaderParams, overrideStyle: CSSProperties = {}) {
+		return (
+			<Typography
+				color={theme.palette.primary.contrastText}
+				variant="body2"
+				sx={{
+					display: "-webkit-box",
+					WebkitLineClamp: 2,
+					WebkitBoxOrient: "vertical" as const,
+					whiteSpace: "normal"
+				}}
+			>
+				{params.colDef.headerName}
+			</Typography>
 		);
 	};
 
 	function renderCell(
 		params: GridRenderCellParams,
 		value: ReactNode = params.value,
+		overrideStyle: CSSProperties = {}
 	) {
 		return (
 			<Box
-				key={`${value}`}
+				px={1.5}
+				width= "100%"
+				height= "100%"
 				sx={{
-					width: "100%",
-					height: "100%",
-					paddingRight: "18px",
-					paddingLeft: "18px",
-					paddingTop: "-16px",
-					paddingBottom: "-16px",
 					WebkitBoxOrient: "vertical" as const,
+					...overrideStyle,
 				}}
 			>
 				<Box
@@ -65,62 +58,81 @@ const TableColumn = () => {
 						display: "-webkit-box",
 						WebkitLineClamp: 2,
 						WebkitBoxOrient: "vertical" as const,
-						width: "100%",
-						color: params.row.status === "SUSPENDED" ? "text.disabled" : undefined,
-						fontSize: "14px",
+						width: "100%"					
 					}}
 				>
-					{value}
+					<Tooltip 
+						placement="bottom-start"
+						title={<span> {value}</span>}
+					>
+						<Typography variant="body1">
+							{value}
+						</Typography>
+					</Tooltip>
 				</Box>
 			</Box>
 		);
 	}
 
-	function showCustomHeader(params: GridColumnHeaderParams) {
+	const actionColumn = (param: any, dataType: string) => {
+		const path = getNavigationPaths(dataType, param);
 		return (
-			<Typography
-				color="colorTextPrimary"
-				variant="body2"
-				sx={{ fontWeight: "fontWeightBold", outline: "none", paddingLeft: 1, color: "#ffffff" }}
+			<Box
+				display="flex"
+				justifyContent="flex-end"
+				width="30%"
+				sx={{ cursor: "pointer" }}
 			>
-				{params.colDef.headerName}
-			</Typography>
+				<IconButton
+					onClick={() => {
+						navigate(path);
+						localStorage.setItem("recordParams", JSON.stringify(param.row));
+					}}
+					sx={{
+						width: "100%",
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+				>
+					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
+				</IconButton>
+			</Box>
 		);
 	};
 
-	function showBpmnId(params: GridRenderCellParams) {
+	const deleteColumn = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(DELETE_ASSOCIATION);
+			localStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
+		};
+
 		return (
-			<>
-				{renderCell(
-					params,
-					<Grid container sx={{ width: "100%" }}>
-						<Grid item xs={12} sx={{ width: "100%" }}>
-							<Typography
-								variant="body2"
-								sx={{
-									// fontWeight: "fontWeightMedium",
-									overflow: "hidden",
-									textOverflow: "ellipsis",
-									display: "-webkit-box",
-									WebkitLineClamp: 2,
-									WebkitBoxOrient: "vertical" as const,
-								}}
-							>
-								{params.row.bpmnId}
-							</Typography>
-						</Grid>
-					</Grid>
-				)}
-			</>
+			<Box
+				width="100%"
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={actions}
+					sx={{
+						width: "100%",
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+				>
+					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+				</IconButton>
+			</Box>
 		);
 	};
+
+
 	return {
 		buildColumnDefs,
 		actionColumn,
 		renderCell,
 		showCustomHeader,
-		showBpmnId,
-		visibleColumns
+		visibleColumns,
+		deleteColumn
 	};
 };
 

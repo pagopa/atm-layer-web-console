@@ -1,16 +1,14 @@
-"use client";
-
 import React from "react";
-import { Container, Button, Stack } from "@mui/material";
+import { Container, Button, Stack, Typography } from "@mui/material";
+
 
 /* Icons */
 
-import { AccountDropdown, ButtonNaked } from "@pagopa/mui-italia";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import { Box } from "@mui/system";
 
 export type JwtUser = {
-    id: string;
-    name?: string;
-    surname?: string;
+	id?:string;
     email?: string;
 };
 
@@ -23,29 +21,21 @@ export type UserAction = {
 
 export type RootLinkType = {
     element: JSX.Element;
-    href: string;
+    href?: string;
     ariaLabel: string;
     title: string;
 };
 
 type HeaderAccountProps = {
     rootLink: RootLinkType;
-    loggedUser?: JwtUser | false;
-    onLogin?: () => void;
+    loggedUser?: boolean;
     onLogout?: () => void;
-    userActions?: Array<UserAction>;
-    enableDropdown?: boolean;
-    enableLogin?: boolean;
 };
 
 export const HeaderAccountCustom = ({
 	rootLink,
 	loggedUser,
-	userActions,
-	onLogout,
-	onLogin,
-	enableDropdown = false,
-	enableLogin = true
+	onLogout
 }: HeaderAccountProps) => (
 	<Stack
 		component="div"
@@ -64,18 +54,9 @@ export const HeaderAccountCustom = ({
 				justifyContent="space-between"
 				alignItems="center"
 			>
-				<ButtonNaked
-					component="a"
-					size="small"
-					aria-label={rootLink?.ariaLabel}
-					href={rootLink?.href}
-					target="_blank"
-					rel="noreferrer"
-					title={rootLink?.title}
-					sx={{ fontWeight: "bold", pl: 3 }}
-				>
+				<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
 					{rootLink?.element}
-				</ButtonNaked>
+				</Box>
 
 				<Stack
 					direction="row"
@@ -85,28 +66,25 @@ export const HeaderAccountCustom = ({
 					{/* DIFFERENT COMBINATIONS */}
 
 					{/* 1. Logged User with Dropdown */}
-					{enableLogin && loggedUser && enableDropdown && (
-						<AccountDropdown user={loggedUser} userActions={userActions} />
+					{loggedUser && (
+						// <AccountDropdown user={loggedUser} />
+						<Box display={"flex"} >
+							<Box mr={1}>
+								<AccountCircleRoundedIcon />
+							</Box>
+							<Typography>
+								{"Benvenuto utente"}
+							</Typography>
+						</Box>
 					)}
 
-					{/* 2. Logged User with Logout CTA */}
-					{enableLogin && loggedUser && !enableDropdown && (
-						<Button variant="text" size="small" onClick={onLogout} title="Esci">
+					{/* 2. Logged User */}
+					{loggedUser && (
+						<Button variant="outlined" onClick={onLogout} title="Esci">
                             Esci
 						</Button>
 					)}
 
-					{/* 3. User not logged with Login CTA */}
-					{enableLogin && !loggedUser && (
-						<Button
-							variant="contained"
-							size="small"
-							onClick={onLogin}
-							title="Accedi"
-						>
-                            Accedi
-						</Button>
-					)}
 				</Stack>
 			</Stack>
 		</Container>

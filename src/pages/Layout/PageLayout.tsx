@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
-// import { LoadingPage } from "../LoadingPage";
 import { Header } from "../../components/HeaderComponents/Header";
 import CustomAppBar from "../../components/Menu/CustomAppBar";
 
@@ -11,7 +10,7 @@ type Prop= {
 };
 
 export default function PageLayout({ children }: Readonly<Prop>) {
-	// const { loading } = useContext(Ctx);
+	const { logged } = useContext(Ctx);
 
 	return (
 		<Ctx.Consumer>
@@ -23,10 +22,10 @@ export default function PageLayout({ children }: Readonly<Prop>) {
 				>
 					<Box gridArea="header" sx={{ position: "sticky", top: 0, zIndex: "100" }}>
 						<Header  data-testid="header-id" />
-						<CustomAppBar data-testid="customAppBar-id" />
+						{logged===true&&<CustomAppBar data-testid="customAppBar-id" />}
 					</Box>
 					<Box sx={{maxHeight:"calc(100vh - 110px)", overflowY:"auto", width:"100%"}}>
-						{/* loading ? <LoadingPage /> :  */children}
+						{children}
 					</Box>
 				</Box>
 			)}

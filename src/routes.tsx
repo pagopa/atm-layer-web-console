@@ -1,22 +1,21 @@
 
 const ROUTES = {
-	HOME: "/home",
+	HOME: "/",
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
 	BPMN: "/bpmn",
 	RESOURCES: "/resources",
 	WORKFLOW_RESOURCES: "/workflow_resources",
 	BPMN_DETAILS: "/bpmnId/:bpmnId/modelVersion/:modelVersion",
+	WORKFLOW_RESOURCE_DETAILS: "/workflowResourceId/:workflowResourceId",
+	RESOURCES_DETAILS: "/resourceId/:resourceId",
 	CREATE_BPMN: "/bpmn/create",
-	LOGIN:"/login",
-	LOGIN_BACK:"/login/callback"
+	ASSOCIATE_BPMN: "/bpmn/associate",
+	CREATE_RESOURCE: "/resources/create",
+	UPGRADE_BPMN: "/bpmn/upgrade",
+	CREATE_WR: "/workflow_resources/create",
+	LOGIN: "/login",
+	LOGIN_BACK:"/login/callback",
 };
-// const ROUTES = {
-// 	HOME: "home",
-// 	WARNING_CODE: "warning-code",
-// 	ERROR_PAGE: "error",
-// 	BPMN: "bpmn",
-// 	RESOURCES: "resources",
-// 	WORKFLOW_RESOURCES: "workflow_resources",
 
 export default ROUTES;
