@@ -1,6 +1,6 @@
 import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import formatValues from "../../utils/formatValues";
-import DetailBpmn from "../../components/Commons/DetailBpmn";
+import DetailBpmn from "../../components/Detail/DetailBpmn";
 
 const BpmnDetailPage = () => {
 

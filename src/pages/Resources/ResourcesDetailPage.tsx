@@ -1,6 +1,6 @@
 import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import formatValues from "../../utils/formatValues";
-import DetailStaticResources from "../../components/Commons/DetailStaticResources";
+import DetailStaticResources from "../../components/Detail/DetailStaticResources";
 
 
 const ResourcesDetailPage = () => {

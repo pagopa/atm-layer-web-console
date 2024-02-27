@@ -5,9 +5,10 @@ import StatusFilter from "./StatusFilter";
 type Props = {
     filterValues: any;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	handleChangeNumberOnly: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
+const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnly }: Props) => (
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
@@ -38,9 +39,8 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				name="modelVersion"
 				label="Versione"
 				value={filterValues.modelVersion}
-				type="number"
 				InputProps={{ inputProps: { min: 1 } }}
-				onChange={(e) => handleChange(e)}
+				onChange={(e) => handleChangeNumberOnly(e)}
 				variant="outlined"
 				fullWidth
 				size="small" 

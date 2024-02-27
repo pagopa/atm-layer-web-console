@@ -1,6 +1,7 @@
 import React, { SetStateAction } from "react";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
+import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
@@ -19,34 +20,57 @@ type Props = {
 
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loading, setLoading }: Props) {
 
+	const { regexTestField } = checks();
+
+	const filterBpmnWithoutStatus = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const withoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+		if (event.target.name === "status" && event.target.value === "" && !(withoutStatus.some((value => value[1] !== "")))) {
+			getAllList(undefined, 0);
+		}
+	};
+
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = event.target;
+		const updatedFilterValues = { ...filterValues, [name]: value };
+	
 		switch (driver) {
 		case PROCESS_RESOURCES:
-			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
-			const filterBpmnWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			if ( event.target.name === "status" && event.target.value === "" && !(filterBpmnWithoutStatus.some((value => value[1] !== "")))	) {
-				getAllList(undefined, 0);
-			}
+			filterBpmnWithoutStatus(event);
 			break;
 		case RESOURCES:
-			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
-			const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
-			if (event.target.name === "noDeployableResourceType" && event.target.value === "" && !(filterWithoutResourceType.some((value => value[1] !== "")))) {
-				getAllList(undefined, 0);
+			if (name === "noDeployableResourceType" && value === "") {
+				const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
+				if (!(filterWithoutResourceType.some((value => value[1] !== "")))) {
+					getAllList(undefined, 0);
+				}
 			}
 			break;
 		case WORKFLOW_RESOURCE:
-			setFilterValues({ ...filterValues, [event.target.name]: event.target.value });
-			const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-			const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
-
-			const statusCondition = (event.target.name === "status" && event.target.value === "" && !(filterWfResWithoutStatus.some((value => value[1] !== ""))));
-			const wrResourceCondition = (event.target.name === "resourceType" && event.target.value === "" && !(filterWithoutWRResourceType.some((value => value[1] !== ""))));
-			if (statusCondition || wrResourceCondition) {
-				getAllList(undefined, 0);
+			if ((name === "status" && value === "") || (name === "resourceType" && value === "")) {
+				const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
+				const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
+		
+				if ((name === "status" && value === "") && !(filterWfResWithoutStatus.some((value => value[1] !== "")))) {
+					getAllList(undefined, 0);
+				}
+		
+				if ((name === "resourceType" && value === "") && !(filterWithoutWRResourceType.some((value => value[1] !== "")))) {
+					getAllList(undefined, 0);
+				}
 			}
 			break;
 		}
+	
+		setFilterValues(updatedFilterValues);
+	};
+
+	const handleChangeNumberOnly = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		if (e.target.value === "" || regexTestField(e.target.value, "int1toInfinity")) {
+			setFilterValues({ ...filterValues, [e.target.name]: e.target.value });
+		}
+		filterBpmnWithoutStatus(e);
 	};
 
 	const handleSubmit = () => {
@@ -64,7 +88,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	const filterType = () => {
 		switch (driver) {
 		case PROCESS_RESOURCES:
-			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+			return <BpmnFilterComponent filterValues={filterValues} handleChange={handleChange} handleChangeNumberOnly={handleChangeNumberOnly} />;
 		case RESOURCES:
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
