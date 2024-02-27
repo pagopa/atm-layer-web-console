@@ -13,11 +13,11 @@ type Props = {
 	getAllList: (filterValues?: any, pageIndex?: number) => void;
 	newFilterValues: any;
 	driver: string;
-	loading?: boolean;
-	setLoading: React.Dispatch<SetStateAction<boolean>>;
+	loadingButton?: boolean;
+	setLoadingButton: React.Dispatch<SetStateAction<boolean>>;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loading, setLoading }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton }: Props) {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		switch (driver) {
@@ -50,7 +50,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	const handleSubmit = () => {
-		setLoading(true);
+		setLoadingButton(true);
 		if (Object.values(filterValues).some(value => value !== "")) {
 			getAllList(filterValues, 0);
 		}
@@ -88,7 +88,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loading={loading} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
 			{filterType()}
 		</FilterTemplate>
 	);

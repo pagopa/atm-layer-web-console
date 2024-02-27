@@ -14,7 +14,7 @@ import { CREATE_WR_API } from "../../../commons/endpoints";
 export const CreateWR = () => {
 	const { abortController } = useContext(Ctx);
 	const { isValidDeployableFilename } = checks();
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const { getFormOptions } = formOption();
 
@@ -64,14 +64,14 @@ export const CreateWR = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("resourceType", formData.resourceType);
 			}
-			setLoading(true);
+			setLoadingButton(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "POST", abortController, body: postData, isFormData: true })();
-				setLoading(false);
+				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			 } catch (error) {
-				setLoading(false);
+				setLoadingButton(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -88,7 +88,7 @@ export const CreateWR = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
-			loading={loading}
+			loadingButton={loadingButton}
 		>
 			
 			<UploadField 
