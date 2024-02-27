@@ -159,7 +159,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					<Box>
 
 						<Button variant={"contained"} onClick={handleSubmit} disabled={showAlert}>
-							{loadingButton ? <Loading size={20} thickness={5} marginTop={"10px"} /> : "Conferma"}
+							{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} color={"white"} /> : "Conferma"}
 						</Button>
 
 					</Box>

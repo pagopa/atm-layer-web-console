@@ -57,7 +57,7 @@ const FilterTemplate = ({
 							</Button>
 
 							<Button variant="contained" disabled={disabledButtons()} onClick={handleSubmit}>
-								{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} /> : "Filtra"}
+								{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} color={"white"} /> : "Filtra"}
 							</Button>
 
 						</Box>
