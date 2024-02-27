@@ -5,7 +5,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { CREATE_BPMN } from "../../../commons/constants";
+import { CREATE_BPMN, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -109,6 +109,7 @@ export const CreateBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"
@@ -122,6 +123,7 @@ export const CreateBpmn = () => {
 			</Grid>
 			<Grid xs={12} item my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="functionType"
 					name="functionType"

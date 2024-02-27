@@ -4,7 +4,7 @@ import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import { Ctx } from "../../../DataContext";
-import { CREATE_WR } from "../../../commons/constants";
+import { CREATE_WR, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
@@ -102,6 +102,7 @@ export const CreateWR = () => {
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"

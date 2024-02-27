@@ -1,16 +1,19 @@
 import { Grid, TextField} from "@mui/material";
 import React from "react";
+import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
     filterValues: any;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	handleChangeNumberOnly: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
+const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnly }: Props) => (
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="functionType"
 				name="functionType"
 				label="Tipo Funzione"
@@ -23,6 +26,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="fileName"
 				name="fileName"
 				label="Nome File"
@@ -38,9 +42,8 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				name="modelVersion"
 				label="Versione"
 				value={filterValues.modelVersion}
-				type="number"
 				InputProps={{ inputProps: { min: 1 } }}
-				onChange={(e) => handleChange(e)}
+				onChange={(e) => handleChangeNumberOnly(e)}
 				variant="outlined"
 				fullWidth
 				size="small" 
@@ -48,6 +51,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={ MAX_LENGHT_LARGE }
 				id="acquirerId"
 				name="acquirerId"
 				label="Banca"

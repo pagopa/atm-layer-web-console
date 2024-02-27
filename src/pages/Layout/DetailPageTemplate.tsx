@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
-import DetailBox from "../../components/Commons/DetailBox";
+import DetailBox from "../../components/Detail/DetailBox";
 import BoxPageLayout from "./BoxPageLayout";
 
 type Props = {

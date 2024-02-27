@@ -2,7 +2,7 @@ import { Grid, Stack, Switch, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { ASSOCIATE_BPMN } from "../../../commons/constants";
+import { ACQUIRER_ID_LENGTH, ASSOCIATE_BPMN, TERMINAL_BRANCH_LENGTH } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import FormTemplate from "../template/FormTemplate";
@@ -114,11 +114,12 @@ const AssociateBpmn = () => {
 		>
 			<Grid item xs={12} my={1}>
 				<TextField
+					inputProps={ ACQUIRER_ID_LENGTH }
 					fullWidth
 					id="acquirerId"
 					name="acquirerId"
 					label={"ID Banca"}
-					placeholder={"01234"}
+					placeholder={"01234567890"}
 					size="small"
 					value={formData.acquirerId}
 					onChange={handleChange}
@@ -134,11 +135,12 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
+					inputProps={ TERMINAL_BRANCH_LENGTH }     
 					fullWidth
 					id="branchId"
 					name="branchId"
 					label={"ID Filiale"}
-					placeholder={"098"}
+					placeholder={"01234567"}
 					size="small"
 					disabled={branchChecked}
 					value={formData.branchId}
@@ -165,11 +167,12 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
+					inputProps={ TERMINAL_BRANCH_LENGTH }
 					fullWidth
 					id="terminalId"
 					name="terminalId"
 					label={"ID Terminale"}
-					placeholder={"56"}
+					placeholder={"01234567"}
 					size="small"
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}

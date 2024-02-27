@@ -7,7 +7,7 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
-import { UPGRADE_BPMN } from "../../../commons/constants";
+import { MAX_LENGHT_LARGE, UPGRADE_BPMN } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
@@ -103,6 +103,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"
