@@ -1,12 +1,12 @@
 import React, { useState }  from "react";
 import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
 import { generatePath } from "react-router";
-import { LoadingButton } from "@mui/lab";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
 import { UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import { Loading } from "../../Commons/Loading";
 
 type Props = {
 	type: string;
@@ -52,7 +52,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 
 	const [formData, setFormData] = useState<WRUpdateDto>(initialValues);
 
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 	
 	const handleSubmit = async () => {
 		if (validateForm()) {
@@ -62,18 +62,18 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				postData.append("uuid", formData.uuid);
 				postData.append("file", formData.file);
 			}
-			setLoading(true);
+			setLoadingButton(true);
 			switch (type) {
 			case UPDATE_WR:{
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
-					setLoading(false);
+					setLoadingButton(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					setFormData(initialValues);
 					
 				} catch (error) {
-					setLoading(false);
+					setLoadingButton(false);
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} finally {
@@ -90,17 +90,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				
 					if (uploadedFileExtension !== localStorageFileExtension) {
 					  setShowAlert(true);
-					  setLoading(false);
+					  setLoadingButton(false);
 					  return;
 					}
 				  }
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
-					setLoading(false);
+					setLoadingButton(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				} catch (error) {
-					setLoading(false);
+					setLoadingButton(false);
 					console.error("ERROR", error);
 					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} finally {
@@ -157,7 +157,11 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						<Button  variant={"outlined"}  onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
-						<LoadingButton loading={loading} variant={"contained"} onClick={handleSubmit} disabled={showAlert}>Conferma</LoadingButton>
+
+						<Button variant={"contained"} onClick={handleSubmit} disabled={showAlert}>
+							{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} color={"white"} /> : "Conferma"}
+						</Button>
+
 					</Box>
 				</Box>
 			</DialogActions>

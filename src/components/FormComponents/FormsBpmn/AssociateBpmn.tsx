@@ -13,7 +13,7 @@ const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
 		acquirerId: "",
@@ -50,7 +50,7 @@ const AssociateBpmn = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		if (validateForm()) {
-			setLoading(true);
+			setLoadingButton(true);
 			try {
 				const response = await fetchRequest({
 					urlEndpoint: generatePath(BPMN_ASSOCIATE_API,
@@ -64,13 +64,13 @@ const AssociateBpmn = () => {
 					body: formData,
 					headers: { "Content-Type": "application/json" }
 				})();
-				setLoading(false);
+				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
 				} else { setErrorCode(undefined); }
 			} catch (error) {
-				setLoading(false);
+				setLoadingButton(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -110,7 +110,7 @@ const AssociateBpmn = () => {
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
 			setOpenSnackBar={setOpenSnackBar}
-			loading={loading}
+			loadingButton={loadingButton}
 		>
 			<Grid item xs={12} my={1}>
 				<TextField

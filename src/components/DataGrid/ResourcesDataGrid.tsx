@@ -15,7 +15,7 @@ import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
 export const ResourcesDataGrid = () => {
 
 	const [loading, setLoading] = useState(true);
-	const [buttonLoading, setButtonLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
 		noDeployableResourceType: "",
@@ -39,7 +39,7 @@ export const ResourcesDataGrid = () => {
 
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, RESOURCES), method: "GET", abortController })();
-			setButtonLoading(false);
+			setLoadingButton(false);
 			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -50,7 +50,7 @@ export const ResourcesDataGrid = () => {
 				setTableListResources([]);
 			}
 		} catch (error) {
-			setButtonLoading(false);
+			setLoadingButton(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -72,8 +72,8 @@ export const ResourcesDataGrid = () => {
 				getAllList={getAllResourcesList}
 				newFilterValues={initialValues}
 				driver={RESOURCES}
-				loading={buttonLoading}
-				setLoading={setButtonLoading}
+				loadingButton={loadingButton}
+				setLoadingButton={setLoadingButton}
 			/>
 			<CustomDataGrid
 				disableColumnFilter
