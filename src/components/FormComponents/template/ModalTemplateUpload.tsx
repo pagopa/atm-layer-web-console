@@ -90,6 +90,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				
 					if (uploadedFileExtension !== localStorageFileExtension) {
 					  setShowAlert(true);
+					  setLoading(false);
 					  return;
 					}
 				  }
@@ -156,7 +157,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						<Button  variant={"outlined"}  onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
 					</Box>
 					<Box>
-						<LoadingButton loading={loading} variant={"contained"} onClick={handleSubmit}>Conferma</LoadingButton>
+						<LoadingButton loading={loading} variant={"contained"} onClick={handleSubmit} disabled={showAlert}>Conferma</LoadingButton>
 					</Box>
 				</Box>
 			</DialogActions>
