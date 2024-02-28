@@ -5,12 +5,13 @@ import DetailStaticResources from "../../components/Detail/DetailStaticResources
 
 const ResourcesDetailPage = () => {
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isStatic:true}, false), "Dettaglio risorsa statica");
-	const { formatDateToString } = formatValues();
+	const { formatDateToString, extractExtension } = formatValues();
 	const fields = [
 		{ label: "Tipo risorsa", value: "noDeployableResourceType" },
 		{ label: "Nome file", value: "fileName" },
 		{ label: "Data creazione", value: "createdAt", format: formatDateToString},
 		{ label: "Data ultima modifica", value: "lastUpdatedAt", format: formatDateToString},
+		{ label: "Estensione file", value: "cdnUrl", format: extractExtension},
 	];
 	const detailTitle = "Dettaglio risorsa statica";
 

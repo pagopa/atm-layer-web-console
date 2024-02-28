@@ -127,6 +127,13 @@ const formatValues = () => {
 		}
 	};
 
+	const extractExtension = (str: string) => {
+		if(str) {
+			// eslint-disable-next-line functional/immutable-data
+			return "." + str.split(".").pop();
+		}
+	};
+
 	
 	return {
 		checkValue,
@@ -147,6 +154,7 @@ const formatValues = () => {
 		formattaImporto,
 		creaData,
 		formatDateString,
+		extractExtension,
 	};
 };
 
