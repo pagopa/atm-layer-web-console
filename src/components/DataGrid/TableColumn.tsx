@@ -37,7 +37,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	};
 
 	function renderCell(
-		params: GridRenderCellParams,
+		params: any,
 		value: ReactNode = params.value,
 		overrideStyle: CSSProperties = {}
 	) {
@@ -92,6 +92,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="action-column-test"
 				>
 					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
 				</IconButton>
@@ -118,6 +119,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="delete-column-test"
 				>
 					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
 				</IconButton>

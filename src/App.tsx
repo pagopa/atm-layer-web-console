@@ -58,7 +58,7 @@ function App() {
 	const temp= localStorage.getItem("tempLog");
 	const jwt= localStorage.getItem("jwt");
 	const debugOn=localStorage.getItem("debugOn");
-	const [logged, setLogged] = useState(temp||jwt?true:false);
+	const [logged, setLogged] = useState(temp || jwt?true:false);
 	const abortController = new AbortController();
 	const navigate = useNavigate();
 

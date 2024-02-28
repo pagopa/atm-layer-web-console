@@ -1,5 +1,4 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { Ctx } from "../DataContext";
 import BoxPageLayout from "./Layout/BoxPageLayout";
