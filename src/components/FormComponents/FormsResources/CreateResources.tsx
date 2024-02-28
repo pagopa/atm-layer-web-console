@@ -130,8 +130,8 @@ export const CreateResources = () => {
 					size="small"
 					value={formData.resourceType}
 					onChange={handleChange}
-					error={Boolean(errors.filename)}
-					helperText={errors.filename}
+					error={Boolean(errors.resourceType)}
+					helperText={errors.resourceType}
 				>
 					{optionFormMenu?.map((el)=>(
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
