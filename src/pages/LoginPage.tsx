@@ -43,6 +43,7 @@ const LoginPage = () => {
 							onClick={handleLogin}
 							title="Accedi"
 							fullWidth
+							data-testid="accedi-button-test"
 						>
 									Accedi
 						</Button>
