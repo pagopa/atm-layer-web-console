@@ -83,11 +83,11 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-
 		<FormTemplate 
 			handleSubmit={handleSubmit} 
 			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
 			openSnackBar={openSnackBar} 
+			setOpenSnackBar={setOpenSnackBar} 
 			severity={severity} 
 			message={message} 
 			title={title}
