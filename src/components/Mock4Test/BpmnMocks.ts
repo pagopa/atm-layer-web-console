@@ -1,5 +1,5 @@
 
-export const tableMocked = {
+export const bpmnTableMocked = {
 	page: 0,
 	limit: 10,
 	itemsFound: 11,
@@ -310,6 +310,75 @@ export const tableMocked = {
 			deploymentId: "b1ef585e-d565-11ee-8cf4-263fc9d7ebb7",
 			createdAt: "2024-02-27T11:45:15.681+00:00",
 			lastUpdatedAt: "2024-02-27T11:45:25.023+00:00",
+			createdBy: null,
+			lastUpdatedBy: null
+		}
+	]
+};
+
+export const bpmnAssociationTableMocked = {
+	page: 0,
+	limit: 5,
+	itemsFound: 6,
+	totalPages: 2,
+	results: [
+		{
+			bpmnId: "949e19cf-fe2f-41e9-ac80-cbe66ac2dabc",
+			bpmnModelVersion: 1,
+			acquirerId: "1",
+			branchId: "ALL",
+			terminalId: "ALL",
+			functionType: "TEST_22_02",
+			createdAt: "2024-02-22T08:33:40.606+00:00",
+			lastUpdatedAt: "2024-02-22T08:33:40.606+00:00",
+			createdBy: null,
+			lastUpdatedBy: null
+		},
+		{
+			bpmnId: "949e19cf-fe2f-41e9-ac80-cbe66ac2dabc",
+			bpmnModelVersion: 1,
+			acquirerId: "prova",
+			branchId: "prova filiale",
+			terminalId: "ALL",
+			functionType: "TEST_22_02",
+			createdAt: "2024-02-28T09:52:42.187+00:00",
+			lastUpdatedAt: "2024-02-28T09:52:42.187+00:00",
+			createdBy: null,
+			lastUpdatedBy: null
+		},
+		{
+			bpmnId: "949e19cf-fe2f-41e9-ac80-cbe66ac2dabc",
+			bpmnModelVersion: 1,
+			acquirerId: "banca",
+			branchId: "filiale",
+			terminalId: "branch",
+			functionType: "TEST_22_02",
+			createdAt: "2024-02-28T09:53:03.345+00:00",
+			lastUpdatedAt: "2024-02-28T09:53:03.345+00:00",
+			createdBy: null,
+			lastUpdatedBy: null
+		},
+		{
+			bpmnId: "949e19cf-fe2f-41e9-ac80-cbe66ac2dabc",
+			bpmnModelVersion: 1,
+			acquirerId: "33",
+			branchId: "44",
+			terminalId: "ALL",
+			functionType: "TEST_22_02",
+			createdAt: "2024-02-28T09:52:13.005+00:00",
+			lastUpdatedAt: "2024-02-28T09:52:13.005+00:00",
+			createdBy: null,
+			lastUpdatedBy: null
+		},
+		{
+			bpmnId: "949e19cf-fe2f-41e9-ac80-cbe66ac2dabc",
+			bpmnModelVersion: 1,
+			acquirerId: "666",
+			branchId: "6666",
+			terminalId: "66666",
+			functionType: "TEST_22_02",
+			createdAt: "2024-02-28T09:52:26.930+00:00",
+			lastUpdatedAt: "2024-02-28T09:52:26.930+00:00",
 			createdBy: null,
 			lastUpdatedBy: null
 		}

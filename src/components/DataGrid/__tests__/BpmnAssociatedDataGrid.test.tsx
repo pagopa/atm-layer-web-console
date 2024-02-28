@@ -1,8 +1,9 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import BpmnDataGrid from "../BpmnDataGrid";
 import { Ctx } from "../../../DataContext";
-import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
+import { bpmnAssociationTableMocked } from "../../Mock4Test/BpmnMocks";
+import BpmnAssociatedDataGrid from "../BpmnAssociatedDataGrid";
+import useColumns from "../../../hook/Grids/useColumns";
 
 const originalFetch = global.fetch;
 
@@ -15,18 +16,20 @@ afterEach(() => {
     global.fetch = originalFetch;
 })
 
-describe("BpmnDataGrid test", () => {
+describe("BpmnAssociatedDataGrid test", () => {
+
+    const { getColumnsGrid, getVisibleColumns } = useColumns();
 
     const abortController = new AbortController();
 
 
-    test("BpmnDataGrid Test", async () => {
+    test("BpmnAssociatedDataGrid Test with next page click", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 status: 200,
                 success: true,
-                valuesObj: { ...bpmnTableMocked },
+                valuesObj: { ...bpmnAssociationTableMocked },
             }),
         });
 
@@ -34,18 +37,20 @@ describe("BpmnDataGrid test", () => {
             render(
                 <Ctx.Provider value={{ abortController }}>
                     <BrowserRouter>
-                        <BpmnDataGrid />
+                        <BpmnAssociatedDataGrid
+                            buildColumnDefs={() => getColumnsGrid("BPMN_ASSOCIATED")}
+                            visibleColumns={() => getVisibleColumns("BPMN_ASSOCIATED")}
+                        />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
         });
 
         fireEvent.click(screen.getByTestId("KeyboardArrowRightIcon"));
-
     });
 
 
-    test("BpmnDatgrid Test with empty table", async () => {
+    test("BpmnAssociatedDataGrid Test with empty table", async () => {
         global.fetch = jest.fn().mockResolvedValue({
             json: () => Promise.resolve({
                 status: 200,
@@ -57,15 +62,18 @@ describe("BpmnDataGrid test", () => {
             render(
                 <Ctx.Provider value={{ abortController }}>
                     <BrowserRouter>
-                        <BpmnDataGrid />
+                        <BpmnAssociatedDataGrid
+                            buildColumnDefs={() => getColumnsGrid("BPMN_ASSOCIATED")}
+                            visibleColumns={() => getVisibleColumns("BPMN_ASSOCIATED")}
+                        />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
         });
-        await waitFor(() => expect(screen.queryByText("Risorse di processo non presenti")).toBeInTheDocument());
+        await waitFor(() => expect(screen.queryByText("Associazioni non presenti")).toBeInTheDocument());
     });
 
-    test("BpmnDaGrid Test without response", async () => {
+    test("BpmnAssociatedDataGrid Test without response", async () => {
         global.fetch = jest.fn().mockResolvedValue({
             json: () => Promise.resolve({
                 status: 403,
@@ -77,7 +85,10 @@ describe("BpmnDataGrid test", () => {
             render(
                 <Ctx.Provider value={{ abortController }}>
                     <BrowserRouter>
-                        <BpmnDataGrid />
+                        <BpmnAssociatedDataGrid
+                            buildColumnDefs={() => getColumnsGrid("BPMN_ASSOCIATED")}
+                            visibleColumns={() => getVisibleColumns("BPMN_ASSOCIATED")}
+                        />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
@@ -85,7 +96,7 @@ describe("BpmnDataGrid test", () => {
         await waitFor(() => expect(screen.queryByText("Qualcosa è andato storto")).toBeInTheDocument());
     });
 
-    test("BpmnDaGrid Test with fetch error", async () => {
+    test("BpmnAssociatedDataGrid Test with fetch error", async () => {
         global.fetch = jest.fn().mockImplementation(() => {
             throw new Error("Fetch error");
         });
@@ -93,11 +104,14 @@ describe("BpmnDataGrid test", () => {
             render(
                 <Ctx.Provider value={{ abortController }}>
                     <BrowserRouter>
-                        <BpmnDataGrid />
+                        <BpmnAssociatedDataGrid
+                            buildColumnDefs={() => getColumnsGrid("BPMN_ASSOCIATED")}
+                            visibleColumns={() => getVisibleColumns("BPMN_ASSOCIATED")}
+                        />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
-        })
+        });
     });
 
 });
