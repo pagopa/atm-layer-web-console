@@ -123,12 +123,17 @@ const AssociateBpmn = () => {
 					value={formData.acquirerId}
 					onChange={handleChange}
 					error={Boolean(errors.acquirerId)}
-					helperText={errors.acquirerId} />
+					helperText={errors.acquirerId}
+					inputProps={{ 
+						"data-testId":"acquirer-id-test"
+					}}
+				/>
 			</Grid>
 			<Grid item
 				xs={12}
 				my={2}
 				display="flex"
+				
 				flexDirection={"row"}
 				justifyContent={"flex-start"}
 				alignItems={"center"}
@@ -143,6 +148,9 @@ const AssociateBpmn = () => {
 					disabled={branchChecked}
 					value={formData.branchId}
 					onChange={handleChange}
+					inputProps={{ 
+						"data-testId":"branch-id-test"
+					}}
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography >Tutti</Typography>
@@ -153,6 +161,7 @@ const AssociateBpmn = () => {
 							setFormData({ ...formData, branchId: "" });
 						}}
 						name="branchIdSwitch"
+						data-testid="branch-id-switch-test"
 					/>
 				</Stack>
 			</Grid>
@@ -174,6 +183,10 @@ const AssociateBpmn = () => {
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
+					inputProps={{ 
+						"data-testId":"terminal-id-test"
+					}}
+					
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>
@@ -185,6 +198,7 @@ const AssociateBpmn = () => {
 							setFormData({ ...formData, terminalId: "" });
 						}}
 						name="terminalIdSwitch"
+						data-testid="terminal-id-switch-test"
 					/>
 				</Stack>
 			</Grid>
