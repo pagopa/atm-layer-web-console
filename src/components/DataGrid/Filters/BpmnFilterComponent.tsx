@@ -1,14 +1,14 @@
-import { Grid, TextField} from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import React from "react";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
-    filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	filterValues: any;
+	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
 const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
-	<React.Fragment>
+	<React.Fragment data-testid="bpmn-filter">
 		<Grid item xs={4}>
 			<TextField
 				id="functionType"
@@ -18,7 +18,10 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.functionType}
 				onChange={(e) => handleChange(e)}
 				size="small"
-				fullWidth 
+				fullWidth
+				inputProps={{
+					"data-testid": "function-type-test"
+				}}
 			/>
 		</Grid>
 		<Grid item xs={4}>
@@ -30,6 +33,9 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				onChange={(e) => handleChange(e)}
 				variant="outlined"
 				size="small"
+				inputProps={{
+					"data-testid": "file-name-test"
+				}}
 				fullWidth />
 		</Grid>
 		<Grid item xs={4}>
@@ -39,11 +45,11 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				label="Versione"
 				value={filterValues.modelVersion}
 				type="number"
-				InputProps={{ inputProps: { min: 1 } }}
+				InputProps={{ inputProps: { min: 1, "data-testid": "model-version-test" } }}
 				onChange={(e) => handleChange(e)}
 				variant="outlined"
 				fullWidth
-				size="small" 
+				size="small"
 			/>
 		</Grid>
 		<Grid item xs={4}>
@@ -56,7 +62,10 @@ const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
 				onChange={(e) => handleChange(e)}
 				variant="outlined"
 				fullWidth
-				size="small" 
+				inputProps={{
+					"data-testid": "acquirer-id-test"
+				}}
+				size="small"
 			/>
 		</Grid>
 		<Grid item xs={4}>
