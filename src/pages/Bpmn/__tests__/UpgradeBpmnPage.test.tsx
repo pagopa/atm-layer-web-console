@@ -12,9 +12,7 @@ beforeEach(() => {
 
 describe("UpgradeBpmnPage", () => {
     const abortController = new AbortController();
-
-    test("First render", () => {
-        
+    test("First render", () => {    
         render(
             <Ctx.Provider value={{ abortController }}>
                 <BrowserRouter>
@@ -24,4 +22,19 @@ describe("UpgradeBpmnPage", () => {
         );
         expect(screen.getAllByText("Aggiornamento risorsa di processo")[0]).toBeInTheDocument();
     })
-  })
+
+    test("Render with localStorage item 'recordParams' being null", () => {
+      Storage.prototype.getItem = jest.fn(() => null);
+      try {
+          render(
+              <Ctx.Provider value={{ abortController }}>
+                  <BrowserRouter>
+                      <UpgradeBpmnPage />
+                  </BrowserRouter>
+              </Ctx.Provider>
+          );
+      } catch (error) {
+          expect(error).toBeInstanceOf(SyntaxError);
+      }
+  });
+ });
