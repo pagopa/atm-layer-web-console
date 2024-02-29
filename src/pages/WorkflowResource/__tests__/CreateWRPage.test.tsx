@@ -3,7 +3,7 @@ import { Ctx } from "../../../DataContext";
 import { BrowserRouter } from "react-router-dom";
 import CreateWRPage from "../CreateWRPage";
 
-describe("CreateBpmnPage", () => {
+describe("CreateWRPage", () => {
 
     const abortController = new AbortController();
 
