@@ -23,15 +23,18 @@ describe("AssociateBpmnPage", () => {
         expect(screen.getAllByText("Associazione risorsa di processo")[0]).toBeInTheDocument();
     })
 
-    // test(" getItem empty string case", () => {
-    //     Storage.prototype.getItem = jest.fn(() => JSON.stringify({"bpmnId":"","modelVersion":"","deployedFileName":"","definitionKey":"","functionType":"","status":"","sha256":"","enabled":"","definitionVersionCamunda":"","camundaDefinitionId":"","description":"","resourceId":"","resourceType":"","storageKey":"","fileName":"","extension":"","resourceCreatedAt":"","resourceLastUpdatedAt":"","resourceCreatedBy":"","resourceLastUpdatedBy":"","resource":"","deploymentId":"","createdAt":"","lastUpdatedAt":"","createdBy":"","lastUpdatedBy":""}));
-    //     render(
-    //         <Ctx.Provider value={{ abortController }}>
-    //             <BrowserRouter>
-    //                 <AssociateBpmnPage />
-    //             </BrowserRouter>
-    //           </Ctx.Provider> 
-    //     );
-    //     expect(screen.getAllByText("Associazione risorsa di processo")[0]).toBeInTheDocument();
-    // })
+    test("Render with localStorage item 'recordParams' being null", () => {
+      Storage.prototype.getItem = jest.fn(() => null);
+      try {
+          render(
+              <Ctx.Provider value={{ abortController }}>
+                  <BrowserRouter>
+                      <AssociateBpmnPage />
+                  </BrowserRouter>
+              </Ctx.Provider>
+          );
+      } catch (error) {
+          expect(error).toBeInstanceOf(SyntaxError);
+      }
+  });
   })
