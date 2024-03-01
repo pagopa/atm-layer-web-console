@@ -44,8 +44,8 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		return (
 			<Box
 				px={1.5}
-				width= "100%"
-				height= "100%"
+				width="100%"
+				height="100%"
 				sx={{
 					WebkitBoxOrient: "vertical" as const,
 					...overrideStyle,
@@ -58,10 +58,10 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 						display: "-webkit-box",
 						WebkitLineClamp: 2,
 						WebkitBoxOrient: "vertical" as const,
-						width: "100%"					
+						width: "100%"
 					}}
 				>
-					<Tooltip 
+					<Tooltip
 						placement="bottom-start"
 						title={<span> {value}</span>}
 					>
@@ -110,12 +110,14 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		return (
 			<Box
 				width="100%"
+				display="flex"
+				justifyContent={"center"}
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
 					onClick={actions}
 					sx={{
-						width: "100%",
+
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
 				>

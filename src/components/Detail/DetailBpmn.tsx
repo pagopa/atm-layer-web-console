@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import TableColumn from "../DataGrid/TableColumn";
-import ModalBpmn from "../FormComponents/FormsBpmn/ModalBpmn";
-import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
-import DetailPageTemplate from "../../pages/Layout/DetailPageTemplate";
-import BpmnDetailButtons from "./BpmnDetailButtons";
+import { PROCESS_RESOURCES } from "../../commons/constants";
+import DetailBody from "./DetailBody";
 
 
 type Props = {
@@ -20,14 +17,7 @@ const DetailBpmn = ({
 	bpmnAssociateTable,
 }: Props) => {
 	const [detail, setDetail] = useState({});
-	const [open, setOpen] = useState(false);
-	const [type, setType] = useState("");
-	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
-	const [openSnackBar, setOpenSnackBar] = useState(false);
-	const [message, setMessage] = useState("");
-	const [severity, setSeverity] = useState<"success" | "error">("success");
-	const [title, setTitle] = useState("");
-
+	
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
 		if (storedRecordParams) {
@@ -35,44 +25,15 @@ const DetailBpmn = ({
 		}
 	}, []);
 
-	
 	return (
-		<DetailPageTemplate 
-			detail={detail} 
-			detailFields={detailFields} 
-			detailTitle={detailTitle} 
-			breadComponent={breadComponent} 
-			openSnackBar={openSnackBar} 
-			setOpenSnackBar={setOpenSnackBar} 
-			type={type} 
-			message={message} 
-			severity={severity} 
-			title={title}
-		>
-			<BpmnDetailButtons
-				openDialog={() => setOpen(true)}
-				type={type}
-				setType={setType}
-				detail={detail}
-			/>
-
-			{bpmnAssociateTable &&
-                    <BpmnAssociatedDataGrid
-                    	buildColumnDefs={buildColumnDefs}
-                    	visibleColumns={visibleColumns}
-                    />
-			}
-			<ModalBpmn
-				open={open}
-				setOpen={setOpen}
-				type={type}
-				setOpenSnackBar={setOpenSnackBar}
-				setSeverity={setSeverity}
-				setMessage={setMessage}
-				setTitle={setTitle}
-			/>
-		
-		</DetailPageTemplate>
+		<DetailBody 
+			detail={detail}
+			driver={PROCESS_RESOURCES}
+			detailFields={detailFields}
+			detailTitle={detailTitle}
+			breadComponent={breadComponent}
+			bpmnAssociateTable={bpmnAssociateTable}
+		/>
 	);
 };
 

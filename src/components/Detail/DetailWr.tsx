@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import ModalWR from "../FormComponents/FormsWorkflowResource/ModalWR";
-import DetailPageTemplate from "../../pages/Layout/DetailPageTemplate";
-import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";
+import { WORKFLOW_RESOURCE } from "../../commons/constants";
+import DetailBody from "./DetailBody";
 
 
 type Props = {
@@ -16,12 +15,6 @@ const DetailWr = ({
 	breadComponent
 }: Props) => {
 	const [detail, setDetail] = useState({});
-	const [open, setOpen] = useState(false);
-	const [type, setType] = useState("");
-	const [openSnackBar, setOpenSnackBar] = useState(false);
-	const [message, setMessage] = useState("");
-	const [severity, setSeverity] = useState<"success" | "error">("success");
-	const [title, setTitle] = useState("");
 
 	useEffect(() => {
 		const storedRecordParams = localStorage.getItem("recordParams");
@@ -32,35 +25,13 @@ const DetailWr = ({
 
 	
 	return (
-		<DetailPageTemplate 
-			detail={detail} 
-			detailFields={detailFields} 
-			detailTitle={detailTitle} 
-			breadComponent={breadComponent} 
-			openSnackBar={openSnackBar} 
-			setOpenSnackBar={setOpenSnackBar} 
-			type={type} 
-			message={message} 
-			severity={severity} 
-			title={title}
-		>	
-			<WorkflowResourcesDetailButtons
-				openDialog={() => setOpen(true)}
-				type={type}
-				setType={setType}
-				detail={detail}
-			/>
-
-			<ModalWR
-				open={open}
-				setOpen={setOpen}
-				type={type}
-				setOpenSnackBar={setOpenSnackBar}
-				setSeverity={setSeverity}
-				setMessage={setMessage}
-				setTitle={setTitle}
-			/>
-		</DetailPageTemplate>
+		<DetailBody 
+			detail={detail}
+			driver={WORKFLOW_RESOURCE}
+			detailFields={detailFields}
+			detailTitle={detailTitle}
+			breadComponent={breadComponent}
+		/>
 	);
 };
 
