@@ -1,7 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import UploadFileWithButton from '../UploadFileWithButton';
-import { toBeInTheDocument } from '@testing-library/jest-dom/matchers';
-import { useTheme } from '@mui/material';
 
 describe("UploadFileWithButton", () => {
     
