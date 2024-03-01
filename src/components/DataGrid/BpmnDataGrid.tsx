@@ -14,7 +14,7 @@ import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
 export default function BpmnDataGrid() {
 
 	const [loading, setLoading] = useState(true);
-	const [buttonLoading, setButtonLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 	
 
 	const initialValues = {
@@ -43,7 +43,7 @@ export default function BpmnDataGrid() {
 
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, PROCESS_RESOURCES), method: "GET", abortController })();
-			setButtonLoading(false);
+			setLoadingButton(false);
 			setStatusError(response?.status);
 
 			if (response?.success) {
@@ -55,7 +55,7 @@ export default function BpmnDataGrid() {
 				setTableListBpmn(emptyResponse);
 			}
 		} catch (error) {
-			setButtonLoading(false);
+			setLoadingButton(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -78,8 +78,8 @@ export default function BpmnDataGrid() {
 					getAllList={getAllBpmnList}
 					newFilterValues={initialValues}
 					driver={PROCESS_RESOURCES}
-					loading={buttonLoading}
-					setLoading={setButtonLoading}
+					loadingButton={loadingButton}
+					setLoadingButton={setLoadingButton}
 				/>
 			</Box>
 			<Box mt={2}>

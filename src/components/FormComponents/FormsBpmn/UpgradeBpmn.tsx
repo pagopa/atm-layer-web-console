@@ -7,13 +7,13 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
-import { UPGRADE_BPMN } from "../../../commons/constants";
+import { MAX_LENGHT_LARGE, UPGRADE_BPMN } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const UpgradeBpmn = () => {
 
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
 	const { isValidDeployableFilename } = checks();
@@ -67,15 +67,15 @@ export const UpgradeBpmn = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("functionType", formData.functionType);
 			}
-			setLoading(true);
+			setLoadingButton(true);
 
 			try {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
-				setLoading(false);
+				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			} catch (error) {
-				setLoading(false);
+				setLoadingButton(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -83,15 +83,15 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-
 		<FormTemplate 
 			handleSubmit={handleSubmit} 
 			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
 			openSnackBar={openSnackBar} 
+			setOpenSnackBar={setOpenSnackBar} 
 			severity={severity} 
 			message={message} 
 			title={title}
-			loading={loading}
+			loadingButton={loadingButton}
 		>
 			<UploadField
 				titleField="File BPMN del processo"
@@ -103,6 +103,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"
