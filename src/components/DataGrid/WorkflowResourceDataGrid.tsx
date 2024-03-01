@@ -18,7 +18,7 @@ export const WorkflowResourceDataGrid = () => {
 
 	const initialValues = {
 		resourceType: "",
-		filename: "",
+		fileName: "",
 		status: ""
 	};
 	const { abortController } = useContext(Ctx);
