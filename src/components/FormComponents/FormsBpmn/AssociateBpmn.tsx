@@ -2,7 +2,7 @@ import { Grid, Stack, Switch, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { ASSOCIATE_BPMN } from "../../../commons/constants";
+import { ACQUIRER_ID_LENGTH, ASSOCIATE_BPMN, TERMINAL_BRANCH_LENGTH } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import FormTemplate from "../template/FormTemplate";
@@ -13,7 +13,7 @@ const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
 	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
 		acquirerId: "",
@@ -50,7 +50,7 @@ const AssociateBpmn = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		if (validateForm()) {
-			setLoading(true);
+			setLoadingButton(true);
 			try {
 				const response = await fetchRequest({
 					urlEndpoint: generatePath(BPMN_ASSOCIATE_API,
@@ -64,13 +64,13 @@ const AssociateBpmn = () => {
 					body: formData,
 					headers: { "Content-Type": "application/json" }
 				})();
-				setLoading(false);
+				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
 				} else { setErrorCode(undefined); }
 			} catch (error) {
-				setLoading(false);
+				setLoadingButton(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -110,15 +110,16 @@ const AssociateBpmn = () => {
 			errorCode={errorCode}
 			handleSwitchAssociationFetch={handleSwitchAssociationFetch}
 			setOpenSnackBar={setOpenSnackBar}
-			loading={loading}
+			loadingButton={loadingButton}
 		>
 			<Grid item xs={12} my={1}>
 				<TextField
+					inputProps={ ACQUIRER_ID_LENGTH }
 					fullWidth
 					id="acquirerId"
 					name="acquirerId"
 					label={"ID Banca"}
-					placeholder={"01234"}
+					placeholder={"01234567890"}
 					size="small"
 					value={formData.acquirerId}
 					onChange={handleChange}
@@ -134,11 +135,12 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
+					inputProps={ TERMINAL_BRANCH_LENGTH }     
 					fullWidth
 					id="branchId"
 					name="branchId"
 					label={"ID Filiale"}
-					placeholder={"098"}
+					placeholder={"01234567"}
 					size="small"
 					disabled={branchChecked}
 					value={formData.branchId}
@@ -165,11 +167,12 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
+					inputProps={ TERMINAL_BRANCH_LENGTH }
 					fullWidth
 					id="terminalId"
 					name="terminalId"
 					label={"ID Terminale"}
-					placeholder={"56"}
+					placeholder={"01234567"}
 					size="small"
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}

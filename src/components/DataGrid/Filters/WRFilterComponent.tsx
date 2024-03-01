@@ -1,5 +1,6 @@
 import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
 import React from "react";
+import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
@@ -39,6 +40,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					id="fileName"
 					name="fileName"
 					label="Nome file"

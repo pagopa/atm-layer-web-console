@@ -23,6 +23,7 @@ import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import ROUTES from "./routes";
+import { JwtUser } from "./model/UserModel";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -59,6 +60,7 @@ function App() {
 	const jwt= localStorage.getItem("jwt");
 	const debugOn=localStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
+	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
 	const abortController = new AbortController();
 	const navigate = useNavigate();
 
@@ -94,9 +96,11 @@ function App() {
 		setTokenExpired,
 		logged, 
 		setLogged,
+		userEmail,
+		setUserEmail,
 		abortController,
 		debugOn,
-		clearStorage
+		clearStorage,
 	};
 
 	useEffect(() => {

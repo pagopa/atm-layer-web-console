@@ -1,9 +1,9 @@
-import { Grid, Typography, Box, useTheme } from "@mui/material";
+import { Grid, Typography, Box, useTheme, Button } from "@mui/material";
 import React, { SetStateAction } from "react";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { TitleComponent } from "../../TitleComponents/TitleComponent";
 import IconBox from "../../Commons/IconBox";
 import { ActionAlert } from "../../Commons/ActionAlert";
+import { Loading } from "../../Commons/Loading";
 
 type Props = {
 	handleSubmit: (e: React.FormEvent) => void;
@@ -16,10 +16,10 @@ type Props = {
 	title?: string;
 	errorCode?: string;
 	handleSwitchAssociationFetch?: () => Promise<void>;
-	loading?: boolean;
+	loadingButton?: boolean;
 };
 
-export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch, loading }: Readonly<Props>) {
+export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, getFormOptions, openSnackBar, severity, message, title, errorCode, handleSwitchAssociationFetch, loadingButton }: Readonly<Props>) {
 	const theme = useTheme();
 
 	const inputGroupStyle = {
@@ -51,9 +51,11 @@ export default function FormTemplate({ handleSubmit, setOpenSnackBar, children, 
 							{children}
 						</Grid>
 						<Box display="flex" justifyContent="flex-end" mt={2}>
-							<LoadingButton  loading={loading} variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
-								Conferma
-							</LoadingButton>
+
+							<Button variant="contained" onClick={handleSubmit} disabled={disabledConfirmButton()}>
+								{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} color={"white"} /> : "Conferma"}
+							</Button>
+							
 						</Box>
 						<ActionAlert
 							setOpenSnackBar={setOpenSnackBar}

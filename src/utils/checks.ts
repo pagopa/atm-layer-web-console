@@ -8,6 +8,7 @@ const checks = () => {
 	const regFloat0_01to99_99 = /^(?!0{1,2}\.0(?![1-9]))\d{1,2}(?:\.\d{1,2})?$/;
 	const regInt1to100 = /^[1-9][0-9]?$|^100$/;
 	const int1to99 = /^[1-9][0-9]?$/;
+	const int1toInfinity = /^[1-9][0-9]*$/;
 	
 	const stringWithoutSpaces = /^[^\s]*$/; // verifica la presenza di spazi all'interno della stringa
 	const stringNotEmptyNotSpaces = /^[^\s]+$/; // verifica se la stringa è composta da almeno un carattere e che non contenga spazi
@@ -43,7 +44,9 @@ const checks = () => {
 		case "int1to99":
 			regex = int1to99;
 			break;
-		
+		case "int1toInfinity":
+			regex = int1toInfinity;
+			break;
 		case "stringWithoutSpaces":
 			regex = stringWithoutSpaces;
 			break;

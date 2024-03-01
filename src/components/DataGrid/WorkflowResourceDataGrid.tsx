@@ -14,11 +14,11 @@ import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
 export const WorkflowResourceDataGrid = () => {
 
 	const [loading, setLoading] = useState(true);
-	const [buttonLoading, setButtonLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
 		resourceType: "",
-		filename: "",
+		fileName: "",
 		status: ""
 	};
 	const { abortController } = useContext(Ctx);
@@ -38,7 +38,7 @@ export const WorkflowResourceDataGrid = () => {
 		
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, WORKFLOW_RESOURCE),  method: "GET", abortController })();
-			setButtonLoading(false);
+			setLoadingButton(false);
 			setStatusError(response?.status);
 			if (response?.success) {
 				const { page, limit, results, itemsFound } = response.valuesObj;
@@ -49,7 +49,7 @@ export const WorkflowResourceDataGrid = () => {
 				setTableListWfResources([]);
 			}
 		} catch (error) {
-			setButtonLoading(false);
+			setLoadingButton(false);
 			console.error("ERROR", error);
 		} finally {
 			setLoading(false);
@@ -72,8 +72,8 @@ export const WorkflowResourceDataGrid = () => {
 				getAllList={getAllWfResourcesList}
 				newFilterValues={initialValues}
 				driver={WORKFLOW_RESOURCE}
-				loading={buttonLoading}
-				setLoading={setButtonLoading}
+				loadingButton={loadingButton}
+				setLoadingButton={setLoadingButton}
 			/>
 			<CustomDataGrid
 				disableColumnFilter

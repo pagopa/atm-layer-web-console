@@ -4,7 +4,7 @@ import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import { Ctx } from "../../../DataContext";
-import { CREATE_WR } from "../../../commons/constants";
+import { CREATE_WR, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
@@ -14,7 +14,7 @@ import { CREATE_WR_API } from "../../../commons/endpoints";
 export const CreateWR = () => {
 	const { abortController } = useContext(Ctx);
 	const { isValidDeployableFilename } = checks();
-	const [loading, setLoading] = useState(false);
+	const [loadingButton, setLoadingButton] = useState(false);
 
 	const { getFormOptions } = formOption();
 
@@ -64,14 +64,14 @@ export const CreateWR = () => {
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
 				postData.append("resourceType", formData.resourceType);
 			}
-			setLoading(true);
+			setLoadingButton(true);
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "POST", abortController, body: postData, isFormData: true })();
-				setLoading(false);
+				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				
 			 } catch (error) {
-				setLoading(false);
+				setLoadingButton(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
@@ -88,7 +88,7 @@ export const CreateWR = () => {
 			severity={severity} 
 			message={message} 
 			title={title}
-			loading={loading}
+			loadingButton={loadingButton}
 		>
 			
 			<UploadField 
@@ -102,6 +102,7 @@ export const CreateWR = () => {
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
+					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"
@@ -125,8 +126,8 @@ export const CreateWR = () => {
 					size="small"
 					value={formData.resourceType}
 					onChange={handleChange}
-					error={Boolean(errors.filename)}
-					helperText={errors.filename}
+					error={Boolean(errors.resourceType)}
+					helperText={errors.resourceType}
 				>
 					{optionFormMenu?.map((el)=>(
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
