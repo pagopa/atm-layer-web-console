@@ -1,6 +1,6 @@
 import { Grid, TextField} from "@mui/material";
 import React from "react";
-import { MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { ACQUIRER_ID_LENGTH, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
@@ -51,11 +51,11 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={ MAX_LENGHT_LARGE }
+				inputProps={ ACQUIRER_ID_LENGTH }
 				id="acquirerId"
 				name="acquirerId"
 				label="Banca"
-				placeholder="12345"
+				placeholder="01234567890"
 				value={filterValues.acquirerId}
 				onChange={(e) => handleChange(e)}
 				variant="outlined"
