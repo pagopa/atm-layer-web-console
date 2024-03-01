@@ -49,7 +49,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 					size="small"
 					fullWidth
 					inputProps={{
-						"data-testId":"file-name-test"
+						"data-testid":"file-name-test"
 					}}
 				/>
 			</Grid>

@@ -79,7 +79,6 @@ export const CreateBpmn = () => {
 				
 			} catch (error) {
 				setLoading(false);
-				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
@@ -118,7 +117,11 @@ export const CreateBpmn = () => {
 					value={formData.filename}
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
-					helperText={errors.filename} />
+					helperText={errors.filename} 
+					inputProps={{
+						"data-testid" : "file-name-test"
+					}}
+				/>
 			</Grid>
 			<Grid xs={12} item my={1}>
 				<TextField
@@ -131,7 +134,11 @@ export const CreateBpmn = () => {
 					value={formData.functionType}
 					onChange={handleChange}
 					error={Boolean(errors.functionType)}
-					helperText={errors.functionType} />
+					helperText={errors.functionType}
+					inputProps={{
+						"data-testid" : "function-type-test"
+					}}
+				/>
 			</Grid>
 		</FormTemplate>
 	);

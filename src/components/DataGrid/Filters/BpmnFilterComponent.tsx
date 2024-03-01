@@ -8,7 +8,7 @@ type Props = {
 };
 
 const BpmnFilterComponent = ({ filterValues, handleChange }: Props) => (
-	<React.Fragment data-testid="bpmn-filter">
+	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
 				id="functionType"

@@ -125,7 +125,7 @@ const AssociateBpmn = () => {
 					error={Boolean(errors.acquirerId)}
 					helperText={errors.acquirerId}
 					inputProps={{ 
-						"data-testId":"acquirer-id-test"
+						"data-testid":"acquirer-id-test"
 					}}
 				/>
 			</Grid>
@@ -149,7 +149,7 @@ const AssociateBpmn = () => {
 					value={formData.branchId}
 					onChange={handleChange}
 					inputProps={{ 
-						"data-testId":"branch-id-test"
+						"data-testid":"branch-id-test"
 					}}
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
@@ -161,7 +161,6 @@ const AssociateBpmn = () => {
 							setFormData({ ...formData, branchId: "" });
 						}}
 						name="branchIdSwitch"
-						data-testid="branch-id-switch-test"
 					/>
 				</Stack>
 			</Grid>
@@ -184,7 +183,7 @@ const AssociateBpmn = () => {
 					value={formData.terminalId}
 					onChange={handleChange}
 					inputProps={{ 
-						"data-testId":"terminal-id-test"
+						"data-testid":"terminal-id-test"
 					}}
 					
 				/>
@@ -198,7 +197,6 @@ const AssociateBpmn = () => {
 							setFormData({ ...formData, terminalId: "" });
 						}}
 						name="terminalIdSwitch"
-						data-testid="terminal-id-switch-test"
 					/>
 				</Stack>
 			</Grid>

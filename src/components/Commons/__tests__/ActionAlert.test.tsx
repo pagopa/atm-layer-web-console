@@ -30,7 +30,7 @@ describe("ActionAlert", () => {
 
     expect(screen.getByText("Errore")).toBeInTheDocument();
     expect(screen.getByText("Errore, vuoi sostiuire l'associazione per questa banca?")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Sotituisci"));
+    fireEvent.click(screen.getByText("Sostituisci"));
     expect(handleSwitchAssociationFetch).toHaveBeenCalled();
   });
 

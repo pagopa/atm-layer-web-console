@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import AssociateBpmn from "../AssociateBpmn";
 import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
 import { BrowserRouter } from "react-router-dom";
@@ -18,6 +18,16 @@ afterEach(() => {
 describe("AssociateBpmn", () => {
 
     const abortController = new AbortController();
+
+    const renderAssociateBpmn = () => {
+        return render(
+            <Ctx.Provider value={abortController}>
+                <BrowserRouter>
+                    <AssociateBpmn />
+                </BrowserRouter>
+            </Ctx.Provider>
+        );
+    }
 
     test("Test AssociateBpmn With only acquirerId positive case", () => {
         localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
@@ -41,13 +51,7 @@ describe("AssociateBpmn", () => {
             }),
         });
 
-        render(
-            <Ctx.Provider value={abortController}>
-                <BrowserRouter>
-                    <AssociateBpmn />
-                </BrowserRouter>
-            </Ctx.Provider>
-        );
+
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
 
@@ -73,13 +77,7 @@ describe("AssociateBpmn", () => {
             }),
         });
 
-        render(
-            <Ctx.Provider value={abortController}>
-                <BrowserRouter>
-                    <AssociateBpmn />
-                </BrowserRouter>
-            </Ctx.Provider>
-        );
+        renderAssociateBpmn()
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
 
@@ -87,36 +85,28 @@ describe("AssociateBpmn", () => {
         expect(acquirerId.value).toBe("12345");
 
         fireEvent.click(screen.getByText("Conferma"));
-
-        screen.debug(undefined, 999999)
     });
 
     test("Test AssociateBpmn on switch of branchId", () => {
         localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
-        render(
-            <Ctx.Provider value={abortController}>
-                <BrowserRouter>
-                    <AssociateBpmn />
-                </BrowserRouter>
-            </Ctx.Provider>
-        );
+        renderAssociateBpmn()
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
         const branchId = screen.getByTestId("branch-id-test") as HTMLInputElement;
         const terminalId = screen.getByTestId("terminal-id-test") as HTMLInputElement;
-        const switchBranchId = screen.getByTestId("branch-id-switch-test");
-        const switchTerminalId = screen.getByTestId("terminal-id-switch-test");
+        const switchBranchId = screen.getAllByRole("checkbox");
+        const switchTerminalId = screen.getAllByRole("checkbox");
 
         fireEvent.change(acquirerId, { target: { value: "12345" } });
         expect(acquirerId.value).toBe("12345");
 
-        fireEvent.change(switchBranchId.querySelector('input') ?? switchBranchId, { target: { checked: true } });
-        fireEvent.change(switchTerminalId.querySelector('input') ?? switchTerminalId, { target: { checked: false } });
+        fireEvent.click(switchBranchId[0]);
+        fireEvent.click(switchTerminalId[1]);
 
         expect(branchId.value).toBe("");
         expect(terminalId.value).toBe("");
-    
+
         fireEvent.change(branchId, { target: { value: "098" } });
         expect(branchId.value).toBe("098");
 
@@ -124,7 +114,25 @@ describe("AssociateBpmn", () => {
         expect(terminalId.value).toBe("56");
 
         fireEvent.click(screen.getByText("Conferma"));
-
-        screen.debug(undefined, 999999);
     })
+
+    test("Test AssociateBpmn fetch failed", async () => {
+        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 400,
+                success: false,
+                valuesObj: {
+                    type: "CANNOT_ASSOCIATE",
+                    errorCode: "ATMLM_4000047",
+                    message: "La banca/filiale/terminale indicata è già associata al processo con ID: 4a381447-4dfb-4fb6-9171-a36130b46c57 , versione: 196",
+                    statusCode: 400
+                },
+            }),
+        });
+
+        renderAssociateBpmn()
+
+    });
 });
