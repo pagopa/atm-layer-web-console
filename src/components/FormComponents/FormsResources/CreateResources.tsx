@@ -176,7 +176,7 @@ export const CreateResources = () => {
 					helperText={errors.description}
 					inputProps={{
 						"data-testid" : "description-test"
-					}}>>
+					}}>
 				</TextField>
 			</Grid>
 			
