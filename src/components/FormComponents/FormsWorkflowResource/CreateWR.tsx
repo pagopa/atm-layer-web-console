@@ -112,6 +112,9 @@ export const CreateWR = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
+					inputProps={{
+						"data-testid" : "file-name-test"
+					}}
 				/>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -127,6 +130,9 @@ export const CreateWR = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
+					inputProps={{
+						"data-testid" : "resource-type-test"
+					}}
 				>
 					{optionFormMenu?.map((el)=>(
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
