@@ -1,5 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import UpgradeBpmn from "../UpgradeBpmn";
@@ -44,7 +43,7 @@ describe("UpgradeBpmn", () => {
         );
     }
 
-    test("Test UpgradeBpmn", () => {
+    test("Submit form with valid input", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -93,13 +92,41 @@ describe("UpgradeBpmn", () => {
 
         fireEvent.click(screen.getByText("Conferma"));
 
-        fireEvent.click(screen.getByTestId("CloseIcon"));
-
-        screen.debug(undefined, 9999999);
+        await waitFor(() => {
+            expect(global.fetch).toHaveBeenCalled();
+        });
     });
 
     test("Test UpgradeBpmn fetch failed", async () => {
-        
+      global.fetch = jest.fn().mockResolvedValueOnce({
+          json: () => Promise.resolve({
+              status: 400,
+              success: false,
+              valuesObj: {
+                  type: "NOT_UPGRADABLE",
+                  errorCode: "ATMLM_4000011",
+                  message: "Definition keys differ, BPMN upgrade refused",
+                  statusCode: 400
+              },
+          }),
+      });
+  
+      renderUpgradeBpmn();
+  
+      const fileInput = screen.getByTestId("hidden-input");
+      fireEvent.change(fileInput, { target: { files: [mockFormData.file] } }); 
+  
+      const fileName = screen.getByTestId("file-name-test");
+      fireEvent.change(fileName, { target: { value: "prova" } });
+  
+      fireEvent.click(screen.getByText("Conferma"));
+
+      await waitFor(() => {
+          expect(screen.getByText("Definition keys differ, BPMN upgrade refused")).toBeInTheDocument();
+      });
+  });
+
+    test("Submit form with invalid input", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 status: 400,
@@ -115,5 +142,16 @@ describe("UpgradeBpmn", () => {
 
         renderUpgradeBpmn();
 
+        const fileInput = screen.getByTestId("hidden-input");
+        fireEvent.change(fileInput, { target: { files: [mockFormData.file] } }); 
+
+        const fileName = screen.getByTestId("file-name-test");
+        fireEvent.change(fileName, { target: { value: "" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await waitFor(() => {
+            expect(global.fetch).not.toHaveBeenCalled();
+        });
     });
+
 });
