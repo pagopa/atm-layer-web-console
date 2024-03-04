@@ -63,7 +63,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                         </Typography>
                     </Box>
                     <Box ml={2}>
-                        <IconButton onClick={onClick} disableRipple>
+                        <IconButton onClick={onClick} disableRipple data-testid="clear-upload-button">
                             <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"} />
                         </IconButton>
                     </Box>
@@ -81,7 +81,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                     // startIcon={<FileUploadIcon color={ error ? "error" : "primary" }/>}
                 >
                     Carica un file dal tuo computer
-                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} />
+                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input"/>
                 </Button>
             }
         </Box>);

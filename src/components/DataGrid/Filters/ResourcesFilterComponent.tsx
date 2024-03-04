@@ -27,6 +27,9 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
+						inputProps={{
+							"data-testid": "no-deploy-rsc-type-test"
+						}}
 					>
 						{resourceTypes.map((item: any) => (
 							<MenuItem key={item.value} value={item.value}>
@@ -47,6 +50,9 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
 					fullWidth
+					inputProps={{
+						"data-testid":"file-name-test"
+					}}
 				/>
 			</Grid>
 			<Grid item xs={4} />

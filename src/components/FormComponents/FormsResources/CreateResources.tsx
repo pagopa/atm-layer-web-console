@@ -117,6 +117,9 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
+					inputProps={{
+						"data-testid" : "file-name-test"
+					}}
 				/>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -132,6 +135,9 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.resourceType)}
 					helperText={errors.resourceType}
+					inputProps={{
+						"data-testid" : "resource-type-test"
+					}}
 				>
 					{optionFormMenu?.map((el)=>(
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
@@ -150,7 +156,10 @@ export const CreateResources = () => {
 					value={formData.path}
 					onChange={handleChange}
 					error={Boolean(errors.path)}
-					helperText={errors.path}>
+					helperText={errors.path}
+					inputProps={{
+						"data-testid" : "path-test"
+					}}>
 				</TextField>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -164,7 +173,10 @@ export const CreateResources = () => {
 					value={formData.description}
 					onChange={handleChange}
 					error={Boolean(errors.description)}
-					helperText={errors.description}>
+					helperText={errors.description}
+					inputProps={{
+						"data-testid" : "description-test"
+					}}>
 				</TextField>
 			</Grid>
 			

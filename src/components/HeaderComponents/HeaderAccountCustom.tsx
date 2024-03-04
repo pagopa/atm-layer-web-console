@@ -63,8 +63,8 @@ export const HeaderAccountCustom = ({
 
 						{/* 2. Logged User */}
 						{loggedUser && (
-							<Button variant="outlined" onClick={onLogout} title="Esci">
-								Esci
+							<Button variant="outlined" onClick={onLogout} title="Esci" data-testid="exit-button-test">
+                            Esci
 							</Button>
 						)}
 

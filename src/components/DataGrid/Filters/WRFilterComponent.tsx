@@ -29,6 +29,9 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
+						inputProps={{
+							"data-testid": "resource-type-test"
+						}}
 					>
 						{resourceItems.map((item: any) => (
 							<MenuItem key={item.value} value={item.value}>
@@ -48,6 +51,9 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 					value={filterValues.fileName}
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
+					inputProps={{
+						"data-testid": "file-name-test"
+					}}
 					fullWidth
 				/>
 			</Grid>

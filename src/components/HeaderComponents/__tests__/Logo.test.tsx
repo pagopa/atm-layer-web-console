@@ -1,7 +1,7 @@
-import { getByRole, render, screen } from "@testing-library/react";
-import { Router } from "react-router";
+import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Logo from "../Logo";
+import { HeaderAccountCustom } from "../HeaderAccountCustom";
+import { LogoPagoPACompany } from "@pagopa/mui-italia";
 
 
 beforeEach(() => {
@@ -9,11 +9,17 @@ beforeEach(() => {
 	jest.spyOn(console, "warn").mockImplementation(() => {});
 });
 
-describe("Logo test", () => {
+describe("HeaderAccountCustom test", () => {
 	test("First render", () => {
 		render(
 			<BrowserRouter>
-				<Logo />
+				<HeaderAccountCustom 
+				rootLink={{
+					element: <LogoPagoPACompany color="default" variant="default" />,
+					href: undefined,
+					ariaLabel: "",
+					title: ""
+				}} />
 			</BrowserRouter>
 		);
 	});

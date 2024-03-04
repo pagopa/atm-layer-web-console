@@ -124,12 +124,17 @@ const AssociateBpmn = () => {
 					value={formData.acquirerId}
 					onChange={handleChange}
 					error={Boolean(errors.acquirerId)}
-					helperText={errors.acquirerId} />
+					helperText={errors.acquirerId}
+					inputProps={{ 
+						"data-testid":"acquirer-id-test"
+					}}
+				/>
 			</Grid>
 			<Grid item
 				xs={12}
 				my={2}
 				display="flex"
+				
 				flexDirection={"row"}
 				justifyContent={"flex-start"}
 				alignItems={"center"}
@@ -145,6 +150,9 @@ const AssociateBpmn = () => {
 					disabled={branchChecked}
 					value={formData.branchId}
 					onChange={handleChange}
+					inputProps={{ 
+						"data-testid":"branch-id-test"
+					}}
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography >Tutti</Typography>
@@ -177,6 +185,10 @@ const AssociateBpmn = () => {
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
+					inputProps={{ 
+						"data-testid":"terminal-id-test"
+					}}
+					
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>
