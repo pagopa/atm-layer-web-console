@@ -26,9 +26,7 @@ const StatusFilter = ({ filterValues, handleChange }: Prop) => {
 				select
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{
-					"data-testid": "status-test"
-				}}
+				InputProps={{ inputProps: { "data-testid": "status-test" } }}
 			>
 				{menuItems.map((item: any) => (
 					<MenuItem key={item.value} value={item.value}>

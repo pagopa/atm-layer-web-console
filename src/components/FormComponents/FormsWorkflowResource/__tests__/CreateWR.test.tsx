@@ -27,7 +27,7 @@ describe("CreateWR Test", () => {
 
     const renderCreateWR = () => {
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{ abortController }}>
                 <BrowserRouter>
                     <CreateWR />
                 </BrowserRouter>

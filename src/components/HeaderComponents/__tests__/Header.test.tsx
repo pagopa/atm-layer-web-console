@@ -11,7 +11,7 @@ beforeEach(() => {
 describe("Header test", () => {
 	test("Test render Header component with login false", () => {
 		render(
-			<Ctx.Provider value={{ logged: false }}>
+			<Ctx.Provider value={{ logged: false, userEmail: "" }}>
 				<BrowserRouter>
 					<Header />
 				</BrowserRouter>
@@ -24,7 +24,7 @@ describe("Header test", () => {
 		const onLogoutMocked = jest.fn();
 
 		render(
-			<Ctx.Provider value={{ logged: true, clearAll: () => onLogoutMocked() }}>
+			<Ctx.Provider value={{ logged: true, clearAll: () => onLogoutMocked(), userEmail: "utente@prova.it" }}>
 				<BrowserRouter>
 					<Header />
 				</BrowserRouter>

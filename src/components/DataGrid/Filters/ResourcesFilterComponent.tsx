@@ -3,8 +3,8 @@ import React from "react";
 import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 
 type Props = {
-    filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
+	filterValues: any;
+	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
 };
 
 const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
@@ -27,9 +27,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
-						inputProps={{
-							"data-testid": "no-deploy-rsc-type-test"
-						}}
+						InputProps={{ inputProps: { "data-testid": "no-deploy-rsc-type-test" } }}
 					>
 						{resourceTypes.map((item: any) => (
 							<MenuItem key={item.value} value={item.value}>
@@ -41,7 +39,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
+					InputProps={{ inputProps: { MAX_LENGHT_LARGE, "data-testid": "file-name-test" } }}
 					id="fileName"
 					name="fileName"
 					label="Nome file"
@@ -50,9 +48,6 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
 					fullWidth
-					inputProps={{
-						"data-testid":"file-name-test"
-					}}
 				/>
 			</Grid>
 			<Grid item xs={4} />

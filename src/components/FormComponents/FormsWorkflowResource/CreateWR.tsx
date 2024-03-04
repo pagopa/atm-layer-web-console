@@ -102,7 +102,7 @@ export const CreateWR = () => {
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
-					inputProps={[MAX_LENGHT_LARGE, { "data-testid": "file-name-test" }]}
+					InputProps={{ inputProps: { MAX_LENGHT_LARGE, "data-testid": "file-name-test" } }}
 					fullWidth
 					id="filename"
 					name="filename"
@@ -128,9 +128,7 @@ export const CreateWR = () => {
 					onChange={handleChange}
 					error={Boolean(errors.resourceType)}
 					helperText={errors.resourceType}
-					inputProps={{
-						"data-testid": "resource-type-test"
-					}}
+					InputProps={{ inputProps: { "data-testid": "resource-type-test" } }}
 				>
 					{optionFormMenu?.map((el) => (
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>

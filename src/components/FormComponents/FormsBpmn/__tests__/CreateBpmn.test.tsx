@@ -27,7 +27,7 @@ describe("CreateBpmn Test", () => {
 
     const renderCreateBpmn = () => {
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{ abortController }}>
                 <BrowserRouter>
                     <CreateBpmn />
                 </BrowserRouter>

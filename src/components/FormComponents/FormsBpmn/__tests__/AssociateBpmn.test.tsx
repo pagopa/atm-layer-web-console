@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import AssociateBpmn from "../AssociateBpmn";
 import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
 import { BrowserRouter } from "react-router-dom";
@@ -51,7 +51,7 @@ describe("AssociateBpmn", () => {
             }),
         });
 
-
+        renderAssociateBpmn();
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
 
@@ -77,7 +77,7 @@ describe("AssociateBpmn", () => {
             }),
         });
 
-        renderAssociateBpmn()
+        renderAssociateBpmn();
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
 
@@ -90,7 +90,7 @@ describe("AssociateBpmn", () => {
     test("Test AssociateBpmn on switch of branchId", () => {
         localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
-        renderAssociateBpmn()
+        renderAssociateBpmn();
 
         const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
         const branchId = screen.getByTestId("branch-id-test") as HTMLInputElement;
@@ -132,7 +132,7 @@ describe("AssociateBpmn", () => {
             }),
         });
 
-        renderAssociateBpmn()
+        renderAssociateBpmn();
 
     });
 });

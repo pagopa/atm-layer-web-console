@@ -114,7 +114,7 @@ const AssociateBpmn = () => {
 		>
 			<Grid item xs={12} my={1}>
 				<TextField
-					inputProps={ ACQUIRER_ID_LENGTH }
+					InputProps={{ inputProps: { ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" } }}
 					fullWidth
 					id="acquirerId"
 					name="acquirerId"
@@ -125,22 +125,19 @@ const AssociateBpmn = () => {
 					onChange={handleChange}
 					error={Boolean(errors.acquirerId)}
 					helperText={errors.acquirerId}
-					inputProps={{ 
-						"data-testid":"acquirer-id-test"
-					}}
 				/>
 			</Grid>
 			<Grid item
 				xs={12}
 				my={2}
 				display="flex"
-				
+
 				flexDirection={"row"}
 				justifyContent={"flex-start"}
 				alignItems={"center"}
 			>
 				<TextField
-					inputProps={ TERMINAL_BRANCH_LENGTH }     
+					InputProps={{ inputProps: { TERMINAL_BRANCH_LENGTH, "data-testid": "branch-id-test" } }}
 					fullWidth
 					id="branchId"
 					name="branchId"
@@ -150,9 +147,6 @@ const AssociateBpmn = () => {
 					disabled={branchChecked}
 					value={formData.branchId}
 					onChange={handleChange}
-					inputProps={{ 
-						"data-testid":"branch-id-test"
-					}}
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography >Tutti</Typography>
@@ -175,7 +169,7 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
-					inputProps={ TERMINAL_BRANCH_LENGTH }
+					InputProps={{ inputProps: { TERMINAL_BRANCH_LENGTH, "data-testid": "terminal-id-test" } }}
 					fullWidth
 					id="terminalId"
 					name="terminalId"
@@ -185,10 +179,7 @@ const AssociateBpmn = () => {
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
-					inputProps={{ 
-						"data-testid":"terminal-id-test"
-					}}
-					
+
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>

@@ -1,8 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import DetailButtons from "../DetailButtons";
-import { BrowserRouter, NavigateFunction, useNavigate } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import React from "react";
+import DetailButtons from "../../Detail/DetailButtons";
 
 describe("DetailButtons", () => {
   const setType = jest.fn();

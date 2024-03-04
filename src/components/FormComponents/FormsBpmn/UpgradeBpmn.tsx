@@ -73,7 +73,7 @@ export const UpgradeBpmn = () => {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				
+
 			} catch (error) {
 				setLoadingButton(false);
 				console.error("ERROR", error);
@@ -83,13 +83,13 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<FormTemplate 
-			handleSubmit={handleSubmit} 
-			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
-			openSnackBar={openSnackBar} 
-			setOpenSnackBar={setOpenSnackBar} 
-			severity={severity} 
-			message={message} 
+		<FormTemplate
+			handleSubmit={handleSubmit}
+			getFormOptions={getFormOptions(UPGRADE_BPMN)}
+			openSnackBar={openSnackBar}
+			setOpenSnackBar={setOpenSnackBar}
+			severity={severity}
+			message={message}
 			title={title}
 			loadingButton={loadingButton}
 		>
@@ -103,7 +103,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
+					InputProps={{ inputProps: { MAX_LENGHT_LARGE } }}
 					fullWidth
 					id="filename"
 					name="filename"

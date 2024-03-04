@@ -4,8 +4,8 @@ import FilterBar from "../FilterBar";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../../commons/constants";
 
 beforeEach(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => { });
-    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    jest.spyOn(console, "error").mockImplementation(() => { });
+    jest.spyOn(console, "warn").mockImplementation(() => { });
 });
 
 describe("FilterBar test", () => {
@@ -22,8 +22,8 @@ describe("FilterBar test", () => {
                     getAllList={mockGetAllList}
                     newFilterValues={newFilterValues}
                     driver={driver}
-                    loading={loading}
-                    setLoading={mockSetLoading}
+                    loadingButton={loading}
+                    setLoadingButton={mockSetLoading}
                     setTableList={mocksetTableList}
                 >
                 
@@ -73,11 +73,11 @@ describe("FilterBar test", () => {
 
         renderComponent(PROCESS_RESOURCES, false, emptyFilterValues, emptyFilterValues);
 
-        const functionType = screen.getByTestId('function-type-test') as HTMLInputElement;
-        const fileName = screen.getByTestId('file-name-test') as HTMLInputElement;
-        const modelVersion = screen.getByTestId('model-version-test') as HTMLInputElement;
-        const acquirerId = screen.getByTestId('acquirer-id-test') as HTMLInputElement;
-        const status = screen.getByTestId('status-test') as HTMLInputElement;
+        const functionType = screen.getByTestId("function-type-test") as HTMLInputElement;
+        const fileName = screen.getByTestId("file-name-test") as HTMLInputElement;
+        const modelVersion = screen.getByTestId("model-version-test") as HTMLInputElement;
+        const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
+        const status = screen.getByTestId("status-test") as HTMLInputElement;
 
         fireEvent.change(functionType, { target: { value: "funzione" } });
 
@@ -103,7 +103,7 @@ describe("FilterBar test", () => {
 
         renderComponent(PROCESS_RESOURCES, false, emptyFilterValues, emptyFilterValues);
 
-        const status = screen.getByTestId('status-test') as HTMLInputElement;
+        const status = screen.getByTestId("status-test") as HTMLInputElement;
         fireEvent.change(status, { target: { value: "" } });
 
         fireEvent.change(status, { target: { value: "CREATED" } });
@@ -133,7 +133,7 @@ describe("FilterBar test", () => {
 
         renderComponent(RESOURCES, false, emptyFilterValues, emptyFilterValues);
 
-        const fileName = screen.getByTestId('file-name-test') as HTMLInputElement;
+        const fileName = screen.getByTestId("file-name-test") as HTMLInputElement;
         fireEvent.change(fileName, { target: { value: "prova" } });
     });
 
@@ -146,7 +146,7 @@ describe("FilterBar test", () => {
 
         renderComponent(RESOURCES, false, emptyFilterValues, emptyFilterValues);
 
-        const fileName = screen.getByTestId('no-deploy-rsc-type-test') as HTMLInputElement;
+        const fileName = screen.getByTestId("no-deploy-rsc-type-test") as HTMLInputElement;
         fireEvent.change(fileName, { target: { value: "" } });
     });
 
@@ -174,7 +174,7 @@ describe("FilterBar test", () => {
 
         renderComponent(WORKFLOW_RESOURCE, false, emptyFilterValues, emptyFilterValues);
 
-        const fileName = screen.getByTestId('file-name-test') as HTMLInputElement;
+        const fileName = screen.getByTestId("file-name-test") as HTMLInputElement;
         fireEvent.change(fileName, { target: { value: "prova" } });
     });
 
@@ -188,7 +188,7 @@ describe("FilterBar test", () => {
 
         renderComponent(WORKFLOW_RESOURCE, false, emptyFilterValues, emptyFilterValues);
 
-        const resourceType = screen.getByTestId('resource-type-test') as HTMLInputElement;
+        const resourceType = screen.getByTestId("resource-type-test") as HTMLInputElement;
         fireEvent.change(resourceType, { target: { value: "" } });
     });
 
@@ -202,7 +202,7 @@ describe("FilterBar test", () => {
 
         renderComponent(WORKFLOW_RESOURCE, false, emptyFilterValues, emptyFilterValues);
 
-        const status = screen.getByTestId('status-test') as HTMLInputElement;
+        const status = screen.getByTestId("status-test") as HTMLInputElement;
         fireEvent.change(status, { target: { value: "" } });
     });
 });
