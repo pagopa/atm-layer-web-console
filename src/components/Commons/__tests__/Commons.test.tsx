@@ -226,7 +226,7 @@ describe("resetErrors", () => {
       expect(getTextModal(DOWNLOAD_BPMN)).toEqual({ titleModal: "Scarica risorsa di processo", contentText: "Sei sicuro di voler scaricare questa risorsa?" });
       expect(getTextModal(DOWNLOAD_RES)).toEqual({ titleModal: "Scarica risorsa statica", contentText: "Sei sicuro di voler scaricare questa risorsa statica?" });
       expect(getTextModal(DOWNLOAD_WR)).toEqual({ titleModal: "Scarica risorsa aggiuntiva di processo", contentText: "Sei sicuro di voler scaricare questa risorsa aggiuntiva di processo?" });
-      expect(getTextModal(UPDATE_WR)).toEqual({ titleModal: "Update risorsa aggiuntiva per processo", contentText: "Carica il file aggiornato:" });
+      expect(getTextModal(UPDATE_WR)).toEqual({ titleModal: "Update risorsa aggiuntiva per processo", contentText: "Carica il file aggiornato*:" });
       expect(getTextModal(UPDATE_RES)).toEqual({ titleModal: "Update risorsa statica", contentText: "Carica il file aggiornato" });
     });
   
