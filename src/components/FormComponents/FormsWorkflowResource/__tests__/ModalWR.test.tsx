@@ -174,5 +174,36 @@ describe("ModalResources Test", () => {
     });
 
 
+    test("Test Error during ROLLBACK", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalWR(ROLLBACK_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DEPLOY", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalWR(DEPLOY_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DELETE", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalWR(DELETE_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DOWNLOAD", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalWR(DOWNLOAD_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
 
 });

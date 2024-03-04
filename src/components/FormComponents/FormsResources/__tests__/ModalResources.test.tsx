@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import ModalResources from "../ModalResources";
 import { useState } from "react";
+import { DELETE_RES, DOWNLOAD_RES } from "../../../../commons/constants";
 
 const originalFetch = global.fetch;
 
@@ -59,7 +60,7 @@ describe("ModalResources Test", () => {
             }),
         });
 
-        renderModalResources("deleteResources");
+        renderModalResources(DELETE_RES);
 
         fireEvent.click(screen.getByText("Conferma"));
 
@@ -76,11 +77,29 @@ describe("ModalResources Test", () => {
             }),
         });
 
-        renderModalResources("downloadResources");
+        renderModalResources(DOWNLOAD_RES);
 
         fireEvent.click(screen.getByText("Conferma"));
         expect(setOpen).toHaveBeenCalled();
         screen.debug(undefined, 9999999);
+    });
+
+
+    test("Test Error during DELETE", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalResources(DELETE_RES);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+
+    test("Test Error during DOWNLOAD", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalResources(DOWNLOAD_RES);
+        fireEvent.click(screen.getByText("Conferma"));
     });
 
 });

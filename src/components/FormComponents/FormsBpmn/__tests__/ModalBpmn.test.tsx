@@ -128,8 +128,6 @@ describe("ModalBpmn Test", () => {
 
         renderModalBpmn(DELETE_ASSOCIATION);
         fireEvent.click(screen.getByText("Conferma"));
-
-        screen.debug(undefined, 9999999);
     });
 
 
@@ -147,9 +145,39 @@ describe("ModalBpmn Test", () => {
 
         renderModalBpmn(DOWNLOAD_BPMN);
         fireEvent.click(screen.getByText("Conferma"));
-
-        screen.debug(undefined, 9999999);
     });
 
+
+    test("Test Error during DELETE", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalBpmn(DELETE_BPMN);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DEPLOY", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalBpmn(DEPLOY_BPMN);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DELETE ASSOCIATION", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalBpmn(DELETE_ASSOCIATION);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test Error during DOWNLOAD", () => {
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("An error occured");
+        });
+        renderModalBpmn(DOWNLOAD_BPMN);
+        fireEvent.click(screen.getByText("Conferma"));
+    });   
 
 });
