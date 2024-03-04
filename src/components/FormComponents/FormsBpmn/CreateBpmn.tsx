@@ -119,7 +119,8 @@ export const CreateBpmn = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
-					InputProps={{ inputProps: { MAX_LENGHT_LARGE, "data-testid": "file-name-test" } }}
+					inputProps={MAX_LENGHT_LARGE}
+					InputProps={{ inputProps: { "data-testid": "file-name-test" } }}
 				/>
 			</Grid>
 			<Grid xs={12} item my={1}>
@@ -134,7 +135,8 @@ export const CreateBpmn = () => {
 					onChange={handleChange}
 					error={Boolean(errors.functionType)}
 					helperText={errors.functionType}
-					InputProps={{ inputProps: { MAX_LENGHT_LARGE, "data-testid": "function-type-test" } }}
+					inputProps={MAX_LENGHT_LARGE}
+					InputProps={{ inputProps: { "data-testid": "function-type-test" } }}
 				/>
 			</Grid>
 		</FormTemplate>

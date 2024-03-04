@@ -102,7 +102,8 @@ export const CreateWR = () => {
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
-					InputProps={{ inputProps: { MAX_LENGHT_LARGE, "data-testid": "file-name-test" } }}
+					inputProps={ MAX_LENGHT_LARGE }
+					InputProps={{ inputProps: { "data-testid": "file-name-test" } }}
 					fullWidth
 					id="filename"
 					name="filename"

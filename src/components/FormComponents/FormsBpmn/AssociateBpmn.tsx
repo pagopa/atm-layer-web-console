@@ -114,7 +114,8 @@ const AssociateBpmn = () => {
 		>
 			<Grid item xs={12} my={1}>
 				<TextField
-					InputProps={{ inputProps: { ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" } }}
+					inputProps={ACQUIRER_ID_LENGTH}
+					InputProps={{ inputProps: { "data-testid": "acquirer-id-test" } }}
 					fullWidth
 					id="acquirerId"
 					name="acquirerId"
@@ -137,7 +138,8 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
-					InputProps={{ inputProps: { TERMINAL_BRANCH_LENGTH, "data-testid": "branch-id-test" } }}
+					inputProps={TERMINAL_BRANCH_LENGTH}
+					InputProps={{ inputProps: { "data-testid": "branch-id-test" } }}
 					fullWidth
 					id="branchId"
 					name="branchId"
@@ -169,7 +171,8 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
-					InputProps={{ inputProps: { TERMINAL_BRANCH_LENGTH, "data-testid": "terminal-id-test" } }}
+					inputProps={TERMINAL_BRANCH_LENGTH}
+					InputProps={{ inputProps: { "data-testid": "terminal-id-test" } }}
 					fullWidth
 					id="terminalId"
 					name="terminalId"
