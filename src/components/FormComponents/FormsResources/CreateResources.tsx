@@ -5,7 +5,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { CREATE_RES } from "../../../commons/constants";
+import { CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { RESOURCES_CREATE } from "../../../commons/endpoints";
@@ -117,7 +117,7 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
-					InputProps={{ inputProps: { "data-testid": "file-name-test" } }}
+					inputProps={{ ...MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 				/>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -133,7 +133,7 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.resourceType)}
 					helperText={errors.resourceType}
-					InputProps={{ inputProps: { "data-testid": "resource-type-test" } }}
+					inputProps={{ "data-testid": "resource-type-test" }}
 				>
 					{optionFormMenu?.map((el) => (
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
@@ -153,7 +153,7 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.path)}
 					helperText={errors.path}
-					InputProps={{ inputProps: { "data-testid": "path-test" } }}
+					inputProps={{ "data-testid": "path-test" }}
 				>
 				</TextField>
 			</Grid>
@@ -169,12 +169,12 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.description)}
 					helperText={errors.description}
-					InputProps={{ inputProps: { "data-testid": "description-test" } }}
+					inputProps={{ "data-testid": "description-test" }}
 				>
 				</TextField>
 			</Grid>
 
-		</FormTemplate>
+		</FormTemplate >
 	);
 };
 

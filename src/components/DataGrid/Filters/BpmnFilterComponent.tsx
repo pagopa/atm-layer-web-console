@@ -13,8 +13,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={MAX_LENGHT_LARGE}
-				InputProps={{ inputProps: { "data-testid": "function-type-test" } }}
+				inputProps={{ ...MAX_LENGHT_LARGE, "data-testid": "function-type-test" }}
 				id="functionType"
 				name="functionType"
 				label="Tipo Funzione"
@@ -27,8 +26,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={MAX_LENGHT_LARGE}
-				InputProps={{ inputProps: { "data-testid": "file-name-test" } }}
+				inputProps={{ ...MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 				id="fileName"
 				name="fileName"
 				label="Nome File"
@@ -53,8 +51,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={ACQUIRER_ID_LENGTH}
-				InputProps={{ inputProps: {"data-testid": "acquirer-id-test" } }}
+				inputProps={{ ...ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" }}
 				id="acquirerId"
 				name="acquirerId"
 				label="Banca"

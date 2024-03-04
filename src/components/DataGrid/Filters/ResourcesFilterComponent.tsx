@@ -39,8 +39,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
-					inputProps={MAX_LENGHT_LARGE}
-					InputProps={{ inputProps: { "data-testid": "file-name-test" } }}
+					inputProps={{ ...MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 					id="fileName"
 					name="fileName"
 					label="Nome file"
