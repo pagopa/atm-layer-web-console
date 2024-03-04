@@ -30,6 +30,6 @@ export const RESOURCES="staticResources";
 export const BPMN_ASSOCIATED = "bpmnAssociated";
 
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
-export const MAX_LENGHT_LARGE = { maxLength: 30 };
-export const ACQUIRER_ID_LENGTH = {maxLength: 11};
-export const TERMINAL_BRANCH_LENGTH = {maxLength: 8};
+export const MAX_LENGHT_LARGE = 30 ;
+export const ACQUIRER_ID_LENGTH = 11;
+export const TERMINAL_BRANCH_LENGTH = 8;

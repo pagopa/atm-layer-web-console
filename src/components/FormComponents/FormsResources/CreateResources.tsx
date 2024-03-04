@@ -117,7 +117,7 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
 					helperText={errors.filename}
-					inputProps={{ maxLength: MAX_LENGHT_LARGE.maxLength, "data-testid": "file-name-test" }}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 				/>
 			</Grid>
 			<Grid item xs={12} my={1}>

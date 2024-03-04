@@ -216,7 +216,7 @@ export function getTextModal(type:string):any {
 		return {titleModal:"Scarica risorsa aggiuntiva di processo", contentText:"Sei sicuro di voler scaricare questa risorsa aggiuntiva di processo?"};
 	}
 	case UPDATE_WR: {
-		return {titleModal:"Update risorsa aggiuntiva per processo", contentText:"Carica il file aggiornato:"};
+		return {titleModal:"Update risorsa aggiuntiva per processo", contentText:"Carica il file aggiornato*:"};
 	}
 	case UPDATE_RES: {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Grid, TextField } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Grid, TextField, Typography } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
@@ -24,6 +24,14 @@ export const UpgradeBpmn = () => {
 		filename: "",
 		functionType: recordParams.functionType,
 	};
+
+	const [definitionKeyValue, setDefinitionKeyValue] = useState("");
+	useEffect(() => {
+		const value = recordParams.definitionKey;
+		if (value) {
+			setDefinitionKeyValue(value);
+		}
+	  }, []);
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>({
@@ -94,7 +102,7 @@ export const UpgradeBpmn = () => {
 			loadingButton={loadingButton}
 		>
 			<UploadField
-				titleField="File BPMN del processo"
+				titleField="File BPMN del processo*"
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
@@ -103,7 +111,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={{ maxLength: MAX_LENGHT_LARGE.maxLength, "data-testid": "file-name-test" }}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 					fullWidth
 					id="filename"
 					name="filename"
@@ -115,6 +123,7 @@ export const UpgradeBpmn = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename} />
 			</Grid>
+			<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>
 		</FormTemplate>
 	);
 };
