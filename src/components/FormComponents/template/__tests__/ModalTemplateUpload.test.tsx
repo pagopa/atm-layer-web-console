@@ -5,10 +5,26 @@ import ModalTemplateUpload from '../ModalTemplateUpload';
 import { UPDATE_RES, UPDATE_WR } from '../../../../commons/constants';
 
 const originalFetch = global.fetch;
+const recordParams = {
+  uuid: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  workflowResourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  resourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  cdnUrl: 'https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn',
+  definitionKey: 'definitionKey',
+};
+const initialRecordParams = {
+  uuid: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  workflowResourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  resourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
+  cdnUrl: 'https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn',
+  definitionKey: 'definitionKey',
+};
+
 
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
   jest.spyOn(console, 'warn').mockImplementation(() => {});
+  localStorage.setItem('recordParams', JSON.stringify(initialRecordParams));
 });
 
 afterEach(() => {
@@ -17,18 +33,12 @@ afterEach(() => {
 
 describe('ModalTemplateUpload Test', () => {
   const mockFormData = {
-    file: new File(['file contents'], 'provaprova.bpmn', {
-      type: 'application/xml',
-    }),
+    file: new File(["file contents"], "test.bpmn", {
+      type: "application/xml",
+  })
   };
 
-  const recordParams = {
-    uuid: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
-    workflowResourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
-    resourceId: '47d07cc0-ddc8-41f7-985c-772c5fb0ecfe',
-    cdnUrl: 'https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn',
-    definitionKey: 'definitionKey',
-  };
+  
   const abortController = new AbortController();
   const setOpen = jest.fn();
   const setOpenSnackBar = jest.fn();
@@ -36,7 +46,6 @@ describe('ModalTemplateUpload Test', () => {
   const setMessage = jest.fn();
   const setTitle = jest.fn();
   const mockHandleSnackbar = jest.fn();
-  localStorage.setItem('recordParams', JSON.stringify(recordParams));
 
   const renderModalTemplateUpload = (modalType: string) => {
     render(
@@ -44,8 +53,8 @@ describe('ModalTemplateUpload Test', () => {
         <BrowserRouter>
           <ModalTemplateUpload
             type={modalType}
-            titleModal="Test Modal"
-            contentText="This is a test modal"
+            titleModal="Test Title"
+            contentText="Test Content Text"
             open={true}
             setOpen={setOpen}
             recordParams={recordParams}
@@ -101,10 +110,23 @@ describe('ModalTemplateUpload Test', () => {
 
     const fileInput = screen.getByTestId('hidden-input');
     fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
-    fireEvent.click(screen.getByTestId('clear-upload-button'));
-    fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
-
     fireEvent.click(screen.getByText('Conferma'));
+  });
+
+
+  test("Test clear button in UPDATE_WR", () => {
+    renderModalTemplateUpload(UPDATE_WR);
+    const fileInput = screen.getByTestId('hidden-input');
+    fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
+    fireEvent.click(screen.getByTestId('clear-upload-button'));
+  });
+
+
+  test("Update with different file extensions should fail", () => {
+    recordParams.cdnUrl = "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.dmn";
+    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    renderModalTemplateUpload(UPDATE_RES);
+    fireEvent.click(screen.getByText("Conferma"));
   });
 
   test('Test ModalTemplateUpload case UPDATE_RES', () => {
@@ -139,7 +161,7 @@ describe('ModalTemplateUpload Test', () => {
 
     const fileInput = screen.getByTestId('hidden-input');
     fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
-
     fireEvent.click(screen.getByText('Conferma'));
   });
+
 });
