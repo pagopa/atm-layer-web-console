@@ -17,7 +17,9 @@ afterEach(() => {
 
 describe("ModalResources Test", () => {
 
-    const recordParams = '{ "resourceId":"47d07cc0-ddc8-41f7-985c-772c5fb0ecfe", "cdnUrl":"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn"}';
+    const recordParams = {
+        resourceId:"47d07cc0-ddc8-41f7-985c-772c5fb0ecfe",
+        cdnUrl:"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn"};
     const setOpen = jest.fn();
     const setOpenSnackBar = jest.fn();
     const setSeverity = jest.fn();
