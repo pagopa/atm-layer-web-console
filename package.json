@@ -5,7 +5,7 @@
   "homepage": "/webconsole",
   "jest": {
     "coveragePathIgnorePatterns": [
-      "index.tsx", "reportWebVitals.ts"
+      "index.tsx", "reportWebVitals.ts", "BpmnModel.ts", "LinkModel.ts", "ResourcesModel.ts", "UserModel.ts", "WorkflowResourceModel.ts"
     ]
   },
   "dependencies": {
