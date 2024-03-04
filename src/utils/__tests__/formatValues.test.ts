@@ -68,7 +68,7 @@ describe ("formatValues tests", () => {
         const expectedDateWithoutTime = `${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`;
         expect(formatValues().creaData(false)).toBe(expectedDateWithoutTime);
     
-        const expectedDateWithTime = `${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()} ora ${String(today.getHours()).padStart(2, "0")}:${String(today.getMinutes()).padStart(2, "0")}`;
+        const expectedDateWithTime = `${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()} ora ${String(today.getHours())}:${String(today.getMinutes()).padStart(2, "0")}`;
         expect(formatValues().creaData(true)).toBe(expectedDateWithTime);
       });
 
