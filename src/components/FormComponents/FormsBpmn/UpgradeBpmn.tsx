@@ -103,7 +103,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={{ ...MAX_LENGHT_LARGE }}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE.maxLength }}
 					fullWidth
 					id="filename"
 					name="filename"

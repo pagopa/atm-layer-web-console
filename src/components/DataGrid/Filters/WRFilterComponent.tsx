@@ -48,7 +48,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 					value={filterValues.fileName}
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
-					inputProps={{ ...MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE.maxLength, "data-testid": "file-name-test" }}
 					fullWidth
 				/>
 			</Grid>
