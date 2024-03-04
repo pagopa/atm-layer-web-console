@@ -5,10 +5,16 @@ import { Ctx } from "../../../../DataContext";
 import UpgradeBpmn from "../UpgradeBpmn";
 
 const originalFetch = global.fetch;
+const recordParams = {
+    bpmnId: "fda9832c-a101-400b-8a04-8fb31c1cb214",
+    modelVersion: "1",
+    fileName: "testFile"
+};
 
 beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
     jest.spyOn(console, 'warn').mockImplementation(() => { });
+    localStorage.setItem("recordParams", JSON.stringify(recordParams));
 });
 
 afterEach(() => {
@@ -20,11 +26,11 @@ describe("UpgradeBpmn", () => {
     const abortController = new AbortController();
     const mockFormData = {
         uuid: "fda9832c-a101-400b-8a04-8fb31c1cb215",
-        file: new File(["file contents"], "test.bpmn", {
+        file: new File(["file contents"], "prova_per_test.bpmn", {
             type: "application/xml",
         }),
-        filename: "test.bpmn",
-        functionType: "MENU",
+        filename: "prova_per_test.bpmn",
+        functionType: "TEST",
     };
 
 
@@ -84,9 +90,6 @@ describe("UpgradeBpmn", () => {
 
         const fileName = screen.getByTestId("file-name-test");
         fireEvent.change(fileName, { target: { value: "prova" } });
-
-        const functionType = screen.getByTestId("function-type-test");
-        fireEvent.change(functionType, { target: { value: "prova" } });
 
         fireEvent.click(screen.getByText("Conferma"));
 
