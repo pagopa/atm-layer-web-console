@@ -16,6 +16,12 @@ afterEach(() => {
     global.fetch = originalFetch;
 })
 
+const inputDetail = {
+    cdnUrl:"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.jpg"
+}
+
+const failDetail = {}
+
 describe("ModalResources Test", () => {
 
     const recordParams = {
@@ -28,6 +34,7 @@ describe("ModalResources Test", () => {
     const setTitle = jest.fn();
     localStorage.setItem("recordParams", JSON.stringify(recordParams));
        
+
    
     const renderModalResources = (modalType : string) => {
         render(
@@ -41,7 +48,7 @@ describe("ModalResources Test", () => {
                         setSeverity = {setSeverity}
                         setMessage={setMessage}
                         setTitle={setTitle}
-                        detail='"cdnUrl":"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.jpg"'
+                        detail = {inputDetail}
                     />
                 </BrowserRouter>
             </Ctx.Provider>
@@ -96,11 +103,22 @@ describe("ModalResources Test", () => {
 
 
     test("Test Error during DOWNLOAD", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-        throw new Error("An error occured");
-        });
-        
-        renderModalResources(DOWNLOAD_RES);
+        render(
+            <Ctx.Provider value={{}}>
+                <BrowserRouter>
+                    <ModalResources 
+                        type = {DOWNLOAD_RES}
+                        open = {true}
+                        setOpen={setOpen}
+                        setOpenSnackBar={setOpenSnackBar}
+                        setSeverity = {setSeverity}
+                        setMessage={setMessage}
+                        setTitle={setTitle}
+                        detail = {failDetail}
+                    />
+                </BrowserRouter>
+            </Ctx.Provider>
+        );
         fireEvent.click(screen.getByText("Conferma"));
     });
 
