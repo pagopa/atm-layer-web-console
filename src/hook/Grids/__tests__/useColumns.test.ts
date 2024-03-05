@@ -1,4 +1,5 @@
 import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { bpmnTableMocked } from "../../../components/Mock4Test/BpmnMocks";
 import useColumns from "../useColumns";
 
 describe("useColumns", () => {
@@ -58,45 +59,156 @@ describe("useColumns", () => {
   test("should return correct columns for PROCESS_RESOURCES", () => {
     const { getColumnsGrid } = useColumns();
 
-    const columns = getColumnsGrid(PROCESS_RESOURCES);
+    const mockRenderCell = jest.fn();
+
+    const columns = getColumnsGrid(PROCESS_RESOURCES, jest.fn(), mockRenderCell, jest.fn());
+    const rowData = { functionType: "someValue", resourceFile: { resource: "someValue" } }; // Fornisci i dati del row necessari per il test
+
+    // Chiama renderCell per ogni colonna e verifica che sia chiamata correttamente con i parametri corretti
+    columns.forEach((column: any) => {
+      // Verifica se la colonna ha una funzione renderCell
+      if (column.renderCell) {
+
+        column.renderCell({
+          row: rowData,
+          value: "Value", // Aggiungi eventuali parametri necessari per la chiamata
+        }, mockRenderCell);
+
+        expect(mockRenderCell).toHaveBeenCalledWith(
+          expect.objectContaining({
+            row: rowData,
+            value: "Value", // Assicura che i parametri passati a renderCell siano corretti
+          }),
+          // Assicura che la funzione mock sia passata come parametro a renderCell
+          expect.any(String)
+        );
+      }
+    });
 
     expect(columns).toHaveLength(12);
     expect(columns[0]).toHaveProperty("field", "functionType");
     expect(columns[1]).toHaveProperty("field", "fileName");
-    // Aggiungi altre asserzioni per verificare che le colonne corrette siano presenti
+    expect(columns[2]).toHaveProperty("field", "status");
+    expect(columns[3]).toHaveProperty("field", "modelVersion");
+    expect(columns[4]).toHaveProperty("field", "createdAt");
+    expect(columns[5]).toHaveProperty("field", "lastUpdatedAt");
+    expect(columns[6]).toHaveProperty("field", "enabled");
+    expect(columns[7]).toHaveProperty("field", "deployment_id");
+    expect(columns[8]).toHaveProperty("field", "definition_key");
+    expect(columns[9]).toHaveProperty("field", "description");
+    expect(columns[10]).toHaveProperty("field", "resource");
+    expect(columns[11]).toHaveProperty("field", "actions");
   });
 
   test("should return correct columns for BPMN_ASSOCIATED", () => {
     const { getColumnsGrid } = useColumns();
 
-    const columns = getColumnsGrid(BPMN_ASSOCIATED);
+    const mockRenderCell = jest.fn();
+
+    const columns = getColumnsGrid(BPMN_ASSOCIATED, jest.fn(), mockRenderCell, jest.fn(), jest.fn());
+    const rowData = bpmnTableMocked.results[0]
+
+    // Chiama renderCell per ogni colonna e verifica che sia chiamata correttamente con i parametri corretti
+    columns.forEach((column: any) => {
+      // Verifica se la colonna ha una funzione renderCell
+      if (column.renderCell) {// Inserisci qui i dati del row necessari per il test
+
+        column.renderCell({
+          row: rowData,
+          value: "Value", // Aggiungi eventuali parametri necessari per la chiamata
+        }, mockRenderCell);
+
+        expect(mockRenderCell).toHaveBeenCalledWith(
+          expect.objectContaining({
+            row: rowData,
+            value: "Value", // Assicura che i parametri passati a renderCell siano corretti
+          }),
+          // Assicura che la funzione mock sia passata come parametro a renderCell
+          expect.any(String)
+        );
+      }
+    });
 
     expect(columns).toHaveLength(11);
     expect(columns[0]).toHaveProperty("field", "bpmnId");
     expect(columns[1]).toHaveProperty("field", "bpmnModelVersion");
-    // Aggiungi altre asserzioni per verificare che le colonne corrette siano presenti
+    expect(columns[2]).toHaveProperty("field", "acquirerId");
+    expect(columns[3]).toHaveProperty("field", "branchId");
+    expect(columns[4]).toHaveProperty("field", "terminalId");
+    expect(columns[5]).toHaveProperty("field", "functionType");
+    expect(columns[6]).toHaveProperty("field", "createdAt");
+    expect(columns[7]).toHaveProperty("field", "lastUpdatedAt");
+    expect(columns[8]).toHaveProperty("field", "createdBy");
+    expect(columns[9]).toHaveProperty("field", "lastUpdatedBy");
+    expect(columns[10]).toHaveProperty("field", "actions");
   });
 
   test("should return correct columns for RESOURCES", () => {
     const { getColumnsGrid } = useColumns();
 
-    const columns = getColumnsGrid(RESOURCES);
+    const mockRenderCell = jest.fn();
+
+    const columns = getColumnsGrid(RESOURCES, jest.fn(), mockRenderCell, jest.fn(), jest.fn());
+    const rowData = bpmnTableMocked.results[0]
+
+    // Chiama renderCell per ogni colonna e verifica che sia chiamata correttamente con i parametri corretti
+    columns.forEach((column: any) => {
+      // Verifica se la colonna ha una funzione renderCell
+      if (column.renderCell) {// Inserisci qui i dati del row necessari per il test
+
+        column.renderCell({
+          row: rowData,
+          value: "Value", // Aggiungi eventuali parametri necessari per la chiamata
+        }, mockRenderCell);
+
+        expect(mockRenderCell).toHaveBeenCalledWith(
+          expect.objectContaining({
+            row: rowData,
+            value: "Value", // Assicura che i parametri passati a renderCell siano corretti
+          }),
+          // Assicura che la funzione mock sia passata come parametro a renderCell
+          expect.any(String)
+        );
+      }
+    });
 
     expect(columns).toHaveLength(6);
-    expect(columns[0]).toHaveProperty("field", "resourceId"); 
+    expect(columns[0]).toHaveProperty("field", "resourceId");
     expect(columns[1]).toHaveProperty("field", "fileName");
-    // Aggiungi altre asserzioni per verificare che le colonne corrette siano presenti
+    expect(columns[2]).toHaveProperty("field", "resourceType");
+    expect(columns[3]).toHaveProperty("field", "createdAt");
+    expect(columns[4]).toHaveProperty("field", "lastUpdatedAt");
+    expect(columns[5]).toHaveProperty("field", "actions");
   });
 
   test("should return correct columns for WORKFLOW_RESOURCE", () => {
     const { getColumnsGrid } = useColumns();
+    const mockRenderCell = jest.fn();
 
-    const columns = getColumnsGrid(WORKFLOW_RESOURCE);
+    const columns = getColumnsGrid(WORKFLOW_RESOURCE, jest.fn(), mockRenderCell, jest.fn(), jest.fn());
+    const rowData = bpmnTableMocked.results[0];
+
+    // Chiama renderCell per ogni colonna e verifica che sia chiamata correttamente con i parametri corretti
+    columns.forEach((column: any) => {
+      if (column.renderCell) {
+
+        column.renderCell({
+          row: rowData,
+          value: "Value", // Aggiungi eventuali parametri necessari per la chiamata
+        }, mockRenderCell);
+      }
+    });
 
     expect(columns).toHaveLength(9);
     expect(columns[0]).toHaveProperty("field", "workflowResourceId");
     expect(columns[1]).toHaveProperty("field", "fileName");
-    // Aggiungi altre asserzioni per verificare che le colonne corrette siano presenti
+    expect(columns[2]).toHaveProperty("field", "resourceType");
+    expect(columns[3]).toHaveProperty("field", "status");
+    expect(columns[4]).toHaveProperty("field", "createdAt");
+    expect(columns[5]).toHaveProperty("field", "lastUpdatedAt");
+    expect(columns[6]).toHaveProperty("field", "createdBy");
+    expect(columns[7]).toHaveProperty("field", "lastUpdatedBy");
+    expect(columns[8]).toHaveProperty("field", "actions");
   });
 
   test("should return correct visible columns for PROCESS_RESOURCES", () => {

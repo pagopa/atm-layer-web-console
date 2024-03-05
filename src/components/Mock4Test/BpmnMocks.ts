@@ -30,8 +30,8 @@ export const bpmnTableMocked = {
 			deploymentId: null,
 			createdAt: "2024-02-27T14:48:52.969+00:00",
 			lastUpdatedAt: "2024-02-27T17:14:36.083+00:00",
-			createdBy: null,
-			lastUpdatedBy: null
+			createdBy: "Value",
+			lastUpdatedBy: "Value"
 		},
 		{
 			bpmnId: "4a381447-4dfb-4fb6-9171-a36130b46c57",
