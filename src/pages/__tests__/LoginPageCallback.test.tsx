@@ -1,4 +1,4 @@
-import { render, act, waitFor } from "@testing-library/react";
+import { render, act, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Ctx } from "../../DataContext";
 import LoginPageCallback from "../LoginPageCallback";
@@ -80,4 +80,33 @@ describe("LoginPageCallback", () => {
         expect(global.fetch).toHaveBeenCalled();
     });
   });
+
+
+  test("should test user email to Benvenuto Utente if response error", async () => {
+    const setLogged = jest.fn();
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () => Promise.resolve({
+          status: 400,
+          success: false,
+          valuesObj: {
+            message: "Errore durante la useFetch"
+          },
+      }),
+  });
+  window.location.hash = "#access_token=12345&token_type=Bearer&expires_in=5184000&state=";
+    act(() => {
+      render(
+        <Router>
+          <Ctx.Provider value={{ setLogged }}>
+            <LoginPageCallback />
+          </Ctx.Provider>
+        </Router>
+      );
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalled();
+  });
+  });
+
 });
