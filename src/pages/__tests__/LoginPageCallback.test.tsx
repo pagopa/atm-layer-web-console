@@ -64,6 +64,8 @@ describe("LoginPageCallback", () => {
         }),
     });
 
+    window.location.hash = "#access_token=12345&token_type=Bearer&expires_in=5184000&state=";
+
     act(() => {
       render(
         <Router>
