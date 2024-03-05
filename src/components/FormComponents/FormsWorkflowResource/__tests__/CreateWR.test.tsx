@@ -87,7 +87,5 @@ describe("CreateWR Test", () => {
         fireEvent.click(screen.getByText("Conferma"));
 
         fireEvent.click(screen.getByTestId("CloseIcon"));
-
-        screen.debug(undefined, 9999999);
     });
 });

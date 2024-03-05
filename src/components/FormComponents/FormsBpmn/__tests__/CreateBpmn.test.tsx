@@ -89,6 +89,5 @@ describe("CreateBpmn Test", () => {
 
         fireEvent.click(screen.getByTestId("CloseIcon"));
 
-        screen.debug(undefined, 9999999);
     });
 });
