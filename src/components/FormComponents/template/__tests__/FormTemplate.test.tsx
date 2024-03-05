@@ -59,7 +59,7 @@ describe("Test FormTemplate", () => {
                         message={"La banca/filiale/terminale indicata è già associata al processo con ID: 4a381447-4dfb-4fb6-9171-a36130b46c57 , versione: 196"}
                         errorCode={"ATMLM_4000047"}
                         handleSwitchAssociationFetch={handleSwitchAssociationFetch}
-                        loading={false}
+                        loadingButton={false}
                     />
                 </BrowserRouter>
             </Ctx.Provider>
