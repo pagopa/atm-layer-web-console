@@ -3,13 +3,14 @@ import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import { useState } from "react";
 import ModalWR from "../ModalWR";
-import { DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, PROCESS_RESOURCES, ROLLBACK_WR } from "../../../../commons/constants";
+import { BPMN, DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, PROCESS_RESOURCES, ROLLBACK_WR } from "../../../../commons/constants";
 
 const originalFetch = global.fetch;
-const recordParams = {
+let recordParams = {
     workflowResourceId: "47d07cc0-ddc8-41f7-985c-772c5fb0ecfe",
-    cdnUrl: "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn",
-    resourceS3Type: DMN
+    cdnUrl: "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.dmn",
+    resourceType: DMN,
+    filename: "test"
 };
 
 beforeEach(() => {
@@ -24,7 +25,7 @@ afterEach(() => {
 
 describe("ModalResources Test", () => {
 
-    const setOpen = jest.fn();
+    let setOpen = jest.fn();
     const setOpenSnackBar = jest.fn();
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
@@ -92,6 +93,21 @@ describe("ModalResources Test", () => {
         fireEvent.click(screen.getByText("Conferma"));
     });
 
+    test("Test Catch Error during ROLLBACK", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {},
+            }),
+        });
+        setOpen = jest.fn(() => {throw new Error()});
+        renderModalWR(ROLLBACK_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+
     test("Test ModalWR with DEPLOY", () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
@@ -135,6 +151,21 @@ describe("ModalResources Test", () => {
     });
 
 
+    test("Test Catch Error during DEPLOY", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {},
+            }),
+        });
+        setOpen = jest.fn(() => {throw new Error()});
+        renderModalWR(DEPLOY_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+
     test("Test ModalWR with DELETE", () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
@@ -144,13 +175,27 @@ describe("ModalResources Test", () => {
                 valuesObj: {},
             }),
         });
-
         renderModalWR(DELETE_WR);
         fireEvent.click(screen.getByText("Conferma"));
     });
 
 
-    test("Test ModalWR with DOWNLOAD", () => {
+    test("Test Catch Error during DELETE", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 204,
+                success: true,
+                valuesObj: {},
+            }),
+        });
+        setOpen = jest.fn(() => {throw new Error()});
+        renderModalWR(DELETE_WR);
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+
+    test("Test ModalWR with DOWNLOAD DMN", () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -164,44 +209,55 @@ describe("ModalResources Test", () => {
 
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
-        recordParams.resourceS3Type=PROCESS_RESOURCES;
+    });
+
+    test("Test ModalWR with DOWNLOAD BPMN", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {
+                    fileContent: "ewogICJjb21wb25lbnRzIjogWwogICAgewogICAgICAibGFiZWwiOiAiTnVtYmVyIiwKICAgICAgInR5cGUiOiAibnVtYmVyIiwKICAgICAgImxheW91dCI6IHsKICAgICAgICAicm93IjogIlJvd18xcmh4NXl2IiwKICAgICAgICAiY29sdW1ucyI6IG51bGwKICAgICAgfSwKICAgICAgImlkIjogIkZpZWxkXzEwYXpuNm0iLAogICAgICAia2V5IjogImZpZWxkXzBsd2VrcTYiCiAgICB9CiAgXSwKICAidHlwZSI6ICJkZWZhdWx0IiwKICAiaWQiOiAiRm9ybTFqYW4iLAogICJleHBvcnRlciI6IHsKICAgICJuYW1lIjogIkNhbXVuZGEgTW9kZWxlciIsCiAgICAidmVyc2lvbiI6ICI1LjE1LjIiCiAgfSwKICAiZXhlY3V0aW9uUGxhdGZvcm0iOiAiQ2FtdW5kYSBQbGF0Zm9ybSIsCiAgImV4ZWN1dGlvblBsYXRmb3JtVmVyc2lvbiI6ICI3LjE5LjAiLAogICJzY2hlbWFWZXJzaW9uIjogMTAKfQ=="
+                },
+            }),
+        });
+
+        recordParams.resourceType=BPMN;
         localStorage.setItem("recordParams", JSON.stringify(recordParams));
+        renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
+    });
 
-        recordParams.resourceS3Type=FORM;
+    test("Test ModalWR with DOWNLOAD FORM", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {
+                    fileContent: "ewogICJjb21wb25lbnRzIjogWwogICAgewogICAgICAibGFiZWwiOiAiTnVtYmVyIiwKICAgICAgInR5cGUiOiAibnVtYmVyIiwKICAgICAgImxheW91dCI6IHsKICAgICAgICAicm93IjogIlJvd18xcmh4NXl2IiwKICAgICAgICAiY29sdW1ucyI6IG51bGwKICAgICAgfSwKICAgICAgImlkIjogIkZpZWxkXzEwYXpuNm0iLAogICAgICAia2V5IjogImZpZWxkXzBsd2VrcTYiCiAgICB9CiAgXSwKICAidHlwZSI6ICJkZWZhdWx0IiwKICAiaWQiOiAiRm9ybTFqYW4iLAogICJleHBvcnRlciI6IHsKICAgICJuYW1lIjogIkNhbXVuZGEgTW9kZWxlciIsCiAgICAidmVyc2lvbiI6ICI1LjE1LjIiCiAgfSwKICAiZXhlY3V0aW9uUGxhdGZvcm0iOiAiQ2FtdW5kYSBQbGF0Zm9ybSIsCiAgImV4ZWN1dGlvblBsYXRmb3JtVmVyc2lvbiI6ICI3LjE5LjAiLAogICJzY2hlbWFWZXJzaW9uIjogMTAKfQ=="
+                },
+            }),
+        });
+        recordParams.resourceType=FORM;
         localStorage.setItem("recordParams", JSON.stringify(recordParams));
+        renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
     });
 
 
-    test("Test Error during ROLLBACK", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
-        });
-        renderModalWR(ROLLBACK_WR);
-        fireEvent.click(screen.getByText("Conferma"));
-    });
+    test("Test Catch Error during DOWNLOAD", () => {
 
-    test("Test Error during DEPLOY", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {},
+            }),
         });
-        renderModalWR(DEPLOY_WR);
-        fireEvent.click(screen.getByText("Conferma"));
-    });
 
-    test("Test Error during DELETE", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
-        });
-        renderModalWR(DELETE_WR);
-        fireEvent.click(screen.getByText("Conferma"));
-    });
-
-    test("Test Error during DOWNLOAD", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
-        });
+        setOpen = jest.fn(() => {throw new Error()});
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
     });

@@ -20,8 +20,8 @@ describe("ModalResources Test", () => {
 
     const recordParams = {
         resourceId:"47d07cc0-ddc8-41f7-985c-772c5fb0ecfe",
-        cdnUrl:"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn"};
-    const setOpen = jest.fn();
+        cdnUrl:"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.jpg"};
+    let setOpen = jest.fn();
     const setOpenSnackBar = jest.fn();
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
@@ -30,26 +30,24 @@ describe("ModalResources Test", () => {
        
    
     const renderModalResources = (modalType : string) => {
-
-
         render(
             <Ctx.Provider value={{}}>
                 <BrowserRouter>
                     <ModalResources 
-                    type = {modalType}
-                    open = {true}
-                    setOpen={setOpen}
-                    setOpenSnackBar={setOpenSnackBar}
-                    setSeverity = {setSeverity}
-                    setMessage={setMessage}
-                    setTitle={setTitle}
-                    detail='"cdnUrl":"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.bpmn"'
+                        type = {modalType}
+                        open = {true}
+                        setOpen={setOpen}
+                        setOpenSnackBar={setOpenSnackBar}
+                        setSeverity = {setSeverity}
+                        setMessage={setMessage}
+                        setTitle={setTitle}
+                        detail='"cdnUrl":"https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.jpg"'
                     />
                 </BrowserRouter>
             </Ctx.Provider>
         );
     };
-
+    
     test("Test ModalResources with DELETE", () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
@@ -63,8 +61,6 @@ describe("ModalResources Test", () => {
         renderModalResources(DELETE_RES);
 
         fireEvent.click(screen.getByText("Conferma"));
-
-        screen.debug(undefined, 9999999);
     });
 
     test("Test ModalResources with DOWNLOAD", () => {
@@ -81,25 +77,33 @@ describe("ModalResources Test", () => {
 
         fireEvent.click(screen.getByText("Conferma"));
         expect(setOpen).toHaveBeenCalled();
-        screen.debug(undefined, 9999999);
     });
 
+    test("Test Catch Error during DELETE", () => {
 
-    test("Test Error during DELETE", () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 500,
+                success: false,
+                valuesObj: {},
+            }),
         });
+        setOpen = jest.fn(() => {throw new Error()});
         renderModalResources(DELETE_RES);
         fireEvent.click(screen.getByText("Conferma"));
     });
 
 
+
     test("Test Error during DOWNLOAD", () => {
         global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("An error occured");
+        throw new Error("An error occured");
         });
+        
         renderModalResources(DOWNLOAD_RES);
         fireEvent.click(screen.getByText("Conferma"));
     });
 
-});
+   
+
+   });
