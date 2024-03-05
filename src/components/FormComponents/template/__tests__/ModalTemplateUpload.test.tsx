@@ -114,6 +114,21 @@ describe('ModalTemplateUpload Test', () => {
   });
 
 
+  test('Test Check Error when UPDATE_WR', () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () =>
+        Promise.resolve({}),
+    });
+
+    setOpen = jest.fn(() => {throw new Error()}); 
+    renderModalTemplateUpload(UPDATE_WR);
+
+    const fileInput = screen.getByTestId('hidden-input');
+    fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
+    fireEvent.click(screen.getByText('Conferma'));
+  });
+
+
   test("Test clear button in UPDATE_WR", () => {
     renderModalTemplateUpload(UPDATE_WR);
     const fileInput = screen.getByTestId('hidden-input');
@@ -122,12 +137,7 @@ describe('ModalTemplateUpload Test', () => {
   });
 
 
-  test("Update with different file extensions should fail", () => {
-    recordParams.cdnUrl = "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.dmn";
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
-    renderModalTemplateUpload(UPDATE_RES);
-    fireEvent.click(screen.getByText("Conferma"));
-  });
+
 
   test('Test ModalTemplateUpload case UPDATE_RES', () => {
     global.fetch = jest.fn().mockResolvedValueOnce({
@@ -208,8 +218,30 @@ describe('ModalTemplateUpload Test', () => {
     });
   
     renderModalTemplateUpload(UPDATE_RES);
-
+    const fileInput = screen.getByTestId('hidden-input');
+    fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
     fireEvent.click(screen.getByText('Conferma'));
+  });
+
+
+  test('Test Check Error when UPDATE_RES', async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () =>
+        Promise.resolve({}),
+    });
+
+    setOpen = jest.fn(() => {throw new Error()});  
+    renderModalTemplateUpload(UPDATE_RES);
+    const fileInput = screen.getByTestId('hidden-input');
+    fireEvent.change(fileInput, { target: { files: [mockFormData.file] } });
+    fireEvent.click(screen.getByText('Conferma'));
+  });
+
+  test("Update with different file extensions should fail", () => {
+    recordParams.cdnUrl = "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.dmn";
+    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    renderModalTemplateUpload(UPDATE_RES);
+    fireEvent.click(screen.getByText("Conferma"));
   });
 
   });
