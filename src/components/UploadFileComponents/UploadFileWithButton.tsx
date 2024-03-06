@@ -30,12 +30,6 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
         // width: 1,
     });
 
-  
-
-    useEffect(() => {
-        console.log("FILE:", file);
-    }, [file]);;
-
     return (
         <Box
             p={2}

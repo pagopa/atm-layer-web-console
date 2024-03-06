@@ -12,7 +12,8 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
-	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {

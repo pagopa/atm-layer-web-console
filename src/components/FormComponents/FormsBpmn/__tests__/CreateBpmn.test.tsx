@@ -90,4 +90,27 @@ describe("CreateBpmn Test", () => {
         fireEvent.click(screen.getByTestId("CloseIcon"));
 
     });
+
+    test("Test CreateBpmn fetch error", () => {
+
+        global.fetch = jest.fn().mockImplementation(() => {
+            throw new Error("errore");
+        });
+
+        renderCreateBpmn();
+
+        const fileInput = screen.getByTestId("hidden-input");
+        fireEvent.change(fileInput, { target: { files: [mockFormData.file] } }); 
+
+        const fileName = screen.getByTestId("file-name-test");
+        fireEvent.change(fileName, { target: { value: "prova" } });
+
+        const functionType = screen.getByTestId("function-type-test");
+        fireEvent.change(functionType, { target: { value: "prova" } });
+
+        fireEvent.click(screen.getByText("Conferma"));
+
+        fireEvent.click(screen.getByTestId("CloseIcon"));
+
+    });
 });

@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import UpgradeBpmn from "../UpgradeBpmn";
+import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
 
 const originalFetch = global.fetch;
 const recordParams = {
@@ -152,6 +153,51 @@ describe("UpgradeBpmn", () => {
         await waitFor(() => {
             expect(global.fetch).not.toHaveBeenCalled();
         });
+    });
+
+    test("Test UpgradeBpmn delete uploaded file", async () => {
+
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: bpmnTableMocked.results[0]
+            }),
+        });
+
+        renderUpgradeBpmn();
+
+        const fileInput = screen.getByTestId("hidden-input");
+        fireEvent.change(fileInput, { target: { files: [mockFormData.file] } }); 
+
+        const fileName = screen.getByTestId("file-name-test");
+        fireEvent.change(fileName, { target: { value: "prova" } });
+
+        fireEvent.click(screen.getByText("Conferma"));
+
+        fireEvent.click(screen.getByTestId("CloseIcon"))
+    });
+
+    test("Test UpgradeBpmn fetch error", async () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: "error"
+            }),
+        });
+
+        renderUpgradeBpmn();
+
+        const fileInput = screen.getByTestId("hidden-input");
+        fireEvent.change(fileInput, { target: { files: [mockFormData.file] } }); 
+
+        const fileName = screen.getByTestId("file-name-test");
+        fireEvent.change(fileName, { target: { value: "prova" } });
+
+        fireEvent.click(screen.getByText("Conferma"));
     });
 
 });

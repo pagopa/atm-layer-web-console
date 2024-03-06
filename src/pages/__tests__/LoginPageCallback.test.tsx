@@ -31,7 +31,7 @@ describe("LoginPageCallback", () => {
     });
 
     expect(setLogged).toHaveBeenCalledWith(true);
-    expect(localStorage.getItem("jwt")).toBe("Bearer");
+    expect(sessionStorage.getItem("jwt")).toBe("Bearer");
     expect(window.location.pathname).toBe("/");
   });
 

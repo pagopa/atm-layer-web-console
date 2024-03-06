@@ -116,7 +116,7 @@ export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: 
 	// "Home",
 	...arrLinks.map((e, i) =>
 		<Link
-			key="link"
+			key={"link"+e.rootName}
 			href={process.env.REACT_APP_HOME_PATH+ e.rootValue}
 			color="inherit"
 			underline="hover"

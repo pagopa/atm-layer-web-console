@@ -65,14 +65,14 @@ function App() {
 	const navigate = useNavigate();
 
 	function clearAll(){
-		if(localStorage.getItem("jwt")){
+		if(sessionStorage.getItem("jwt")){
 			setTokenExpired();
 		}
 		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("jwt");
+		sessionStorage.removeItem("jwt");
 		setLogged(false);
 		navigate(ROUTES.LOGIN);
 	}

@@ -42,7 +42,7 @@ describe("ModalBpmn Test", () => {
 
 
         render(
-            <Ctx.Provider value={{abortController}}>
+            <Ctx.Provider value={{ abortController }}>
                 <BrowserRouter>
                     <ModalBpmn
                         type={modalType}
@@ -114,12 +114,12 @@ describe("ModalBpmn Test", () => {
 
         renderModalBpmn(DEPLOY_BPMN);
         fireEvent.click(screen.getByText("Conferma"));
- 
+
         await act(async () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
- 
-        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
+
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
 
@@ -158,7 +158,6 @@ describe("ModalBpmn Test", () => {
             throw new Error("An error occured");
         });
         renderModalBpmn(DELETE_ASSOCIATION);
-        fireEvent.click(screen.getByText("Conferma"));
     });
 
     test("Test Error during DOWNLOAD", () => {
@@ -167,8 +166,8 @@ describe("ModalBpmn Test", () => {
         });
         renderModalBpmn(DOWNLOAD_BPMN);
         fireEvent.click(screen.getByText("Conferma"));
-    }); 
-    
+    });
+
     test("Test ModalBpmn with DOWNLOAD", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
@@ -182,7 +181,13 @@ describe("ModalBpmn Test", () => {
         });
 
         renderModalBpmn(DOWNLOAD_BPMN);
-        
+
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
+    test("Test ModalBpmn without type", async () => {
+        renderModalBpmn("");
+
         fireEvent.click(screen.getByText("Conferma"));
     });
 

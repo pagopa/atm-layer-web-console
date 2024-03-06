@@ -6,7 +6,6 @@ import { GridColumnHeaderParams } from "@mui/x-data-grid";
 import { GridStateColDef } from "@mui/x-data-grid/internals";
 import { BrowserRouter } from "react-router-dom";
 import { themeApp } from "../../../assets/jss/themeApp";
-import { Ctx } from "../../../DataContext";
 import { ThemeProvider } from "@mui/material/styles";
 import { BPMN } from "../../../commons/constants";
 import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
@@ -52,13 +51,11 @@ describe("TableColumn test", () => {
         };
 
         render(
-            <Ctx.Provider value={{}}>
-                <BrowserRouter>
-                    <ThemeProvider theme={themeApp}>
-                        {showCustomHeader(headerMocked)}
-                    </ThemeProvider>
-                </BrowserRouter>
-            </Ctx.Provider>
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {showCustomHeader(headerMocked)}
+                </ThemeProvider>
+            </BrowserRouter>
         );
 
         expect(screen.getByText("Tipo funzione")).toBeInTheDocument();
@@ -71,13 +68,11 @@ describe("TableColumn test", () => {
         const params = { value: bpmnTableMocked.results[0].bpmnId };
 
         render(
-            <Ctx.Provider value={{}}>
-                <BrowserRouter>
-                    <ThemeProvider theme={themeApp}>
-                        {renderCell(params)}
-                    </ThemeProvider>
-                </BrowserRouter>
-            </Ctx.Provider>
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {renderCell(params)}
+                </ThemeProvider>
+            </BrowserRouter>
         );
 
         expect(screen.getByText(bpmnTableMocked.results[0].bpmnId)).toBeInTheDocument();
@@ -90,13 +85,11 @@ describe("TableColumn test", () => {
         const params = { ...bpmnTableMocked.results[0] };
 
         render(
-            <Ctx.Provider value={{}}>
-                <BrowserRouter>
-                    <ThemeProvider theme={themeApp}>
-                        {actionColumn(params, BPMN)}
-                    </ThemeProvider>
-                </BrowserRouter>
-            </Ctx.Provider>
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {actionColumn(params, BPMN)}
+                </ThemeProvider>
+            </BrowserRouter>
         );
 
         fireEvent.click(screen.getByTestId("action-column-test"));
@@ -112,13 +105,11 @@ describe("TableColumn test", () => {
         const param = { ...bpmnTableMocked.results[0] };
 
         render(
-            <Ctx.Provider value={{}}>
-                <BrowserRouter>
-                    <ThemeProvider theme={themeApp}>
-                        {deleteColumn(param)}
-                    </ThemeProvider>
-                </BrowserRouter>
-            </Ctx.Provider>
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumn(param)}
+                </ThemeProvider>
+            </BrowserRouter>
         );
 
         fireEvent.click(screen.getByTestId("delete-column-test"));

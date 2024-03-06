@@ -200,7 +200,7 @@ describe("FilterBar test", () => {
             status: "CREATED"
         };
 
-        renderComponent(WORKFLOW_RESOURCE, false, emptyFilterValues, emptyFilterValues);
+        renderComponent(WORKFLOW_RESOURCE, true, emptyFilterValues, emptyFilterValues);
 
         const status = screen.getByTestId("status-test") as HTMLInputElement;
         fireEvent.change(status, { target: { value: "" } });

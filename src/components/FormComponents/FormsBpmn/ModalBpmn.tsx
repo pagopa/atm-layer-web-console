@@ -23,9 +23,10 @@ type Props = {
 const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
-	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
-	
-	const content=getTextModal(type);
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
+
+	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
 	const handleSubmit = async (e: React.FormEvent) => {
 		setLoading(true);
@@ -34,10 +35,10 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		case DELETE_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
-		        setLoading(false);
+				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				
+
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -48,7 +49,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		case DEPLOY_BPMN: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DEPLOY_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
-			    setLoading(false);
+				setLoading(false);
 				if (response?.success) {
 					const deployedResponse = {
 						...response.valuesObj,
@@ -74,9 +75,9 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			const baseUrl = generatePath(DELETE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
 			const URL = `${baseUrl}?acquirerId=${recordParamsAssociated.acquirerId}`;
 			const filterValues = { branchId: recordParamsAssociated.branchId, terminalId: recordParamsAssociated.terminalId };
-			
+
 			try {
-				const response = await fetchRequest({ urlEndpoint: URL, queryString:getQueryString(filterValues, DELETE_ASSOCIATION),  method: "DELETE", abortController })();
+				const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, DELETE_ASSOCIATION), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
@@ -92,12 +93,12 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {
-					downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
+					downloadFile(response.valuesObj.fileContent, "application/xml", recordParams.fileName, "bpmn");
 					setTimeout(() => {
 						setOpenSnackBar(false);
 					}, 3000);
 				}
-				
+
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -107,11 +108,11 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 
 		}
 
-		default: return;
+		default: { return null; }
 		}
 
 	};
-	
+
 	return (
 		<ModalTemplate
 			titleModal={content?.titleModal}

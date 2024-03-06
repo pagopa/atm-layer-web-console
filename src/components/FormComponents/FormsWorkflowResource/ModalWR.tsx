@@ -22,7 +22,8 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 	
 	const { abortController } = useContext(Ctx);
 	const content=getTextModal(type);
-	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const [loading, setLoading] = useState(false);
 	
