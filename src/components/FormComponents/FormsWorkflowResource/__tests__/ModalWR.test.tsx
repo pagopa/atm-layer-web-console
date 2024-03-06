@@ -30,12 +30,13 @@ describe("ModalResources Test", () => {
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
     const setTitle = jest.fn();
+    const abortController = new AbortController();
     
     const renderModalWR = (modalType: string) => {
 
 
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{abortController}}>
                 <BrowserRouter>
                     <ModalWR
                         type={modalType}

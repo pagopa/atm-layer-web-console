@@ -32,13 +32,14 @@ describe("ModalResources Test", () => {
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
     const setTitle = jest.fn();
+    const abortController = new AbortController();
     localStorage.setItem("recordParams", JSON.stringify(recordParams));
        
 
    
     const renderModalResources = (modalType : string) => {
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{abortController}}>
                 <BrowserRouter>
                     <ModalResources 
                         type = {modalType}
@@ -104,7 +105,7 @@ describe("ModalResources Test", () => {
 
     test("Test Error during DOWNLOAD", () => {
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{abortController}}>
                 <BrowserRouter>
                     <ModalResources 
                         type = {DOWNLOAD_RES}

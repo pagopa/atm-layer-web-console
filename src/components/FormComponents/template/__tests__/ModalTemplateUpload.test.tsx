@@ -49,7 +49,6 @@ describe('ModalTemplateUpload Test', () => {
 
   const renderModalTemplateUpload = (modalType: string) => {
     render(
-      <Ctx.Provider value={{}}>
         <BrowserRouter>
           <ModalTemplateUpload
             type={modalType}
@@ -66,7 +65,6 @@ describe('ModalTemplateUpload Test', () => {
             setOpenSnackBar={setOpenSnackBar}
           />
         </BrowserRouter>
-      </Ctx.Provider>
     );
   };
 

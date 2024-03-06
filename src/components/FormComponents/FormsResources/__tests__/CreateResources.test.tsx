@@ -29,7 +29,7 @@ describe("CreateResources Test", () => {
 
     const renderCreateResources = () => {
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{abortController}}>
                 <BrowserRouter>
                     <CreateResources />
                 </BrowserRouter>

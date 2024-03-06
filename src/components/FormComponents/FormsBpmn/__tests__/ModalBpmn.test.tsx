@@ -6,6 +6,7 @@ import ModalBpmn from "../ModalBpmn";
 import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../../commons/constants";
 
 const originalFetch = global.fetch;
+const abortController = new AbortController();
 
 beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
@@ -41,7 +42,7 @@ describe("ModalBpmn Test", () => {
 
 
         render(
-            <Ctx.Provider value={{}}>
+            <Ctx.Provider value={{abortController}}>
                 <BrowserRouter>
                     <ModalBpmn
                         type={modalType}
