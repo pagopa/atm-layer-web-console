@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import { useState } from "react";
@@ -73,7 +73,7 @@ describe("ModalBpmn Test", () => {
     });
 
 
-    test("Test ModalBpmn with DEPLOY", () => {
+    test("Test ModalBpmn with DEPLOY", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -114,6 +114,12 @@ describe("ModalBpmn Test", () => {
 
         renderModalBpmn(DEPLOY_BPMN);
         fireEvent.click(screen.getByText("Conferma"));
+ 
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
     });
 
 
@@ -130,24 +136,6 @@ describe("ModalBpmn Test", () => {
         renderModalBpmn(DELETE_ASSOCIATION);
         fireEvent.click(screen.getByText("Conferma"));
     });
-
-
-    test("Test ModalBpmn with DOWNLOAD", () => {
-
-        global.fetch = jest.fn().mockResolvedValueOnce({
-            json: () => Promise.resolve({
-                status: 200,
-                success: true,
-                valuesObj: {
-                    fileContent: "ewogICJjb21wb25lbnRzIjogWwogICAgewogICAgICAibGFiZWwiOiAiTnVtYmVyIiwKICAgICAgInR5cGUiOiAibnVtYmVyIiwKICAgICAgImxheW91dCI6IHsKICAgICAgICAicm93IjogIlJvd18xcmh4NXl2IiwKICAgICAgICAiY29sdW1ucyI6IG51bGwKICAgICAgfSwKICAgICAgImlkIjogIkZpZWxkXzEwYXpuNm0iLAogICAgICAia2V5IjogImZpZWxkXzBsd2VrcTYiCiAgICB9CiAgXSwKICAidHlwZSI6ICJkZWZhdWx0IiwKICAiaWQiOiAiRm9ybTFqYW4iLAogICJleHBvcnRlciI6IHsKICAgICJuYW1lIjogIkNhbXVuZGEgTW9kZWxlciIsCiAgICAidmVyc2lvbiI6ICI1LjE1LjIiCiAgfSwKICAiZXhlY3V0aW9uUGxhdGZvcm0iOiAiQ2FtdW5kYSBQbGF0Zm9ybSIsCiAgImV4ZWN1dGlvblBsYXRmb3JtVmVyc2lvbiI6ICI3LjE5LjAiLAogICJzY2hlbWFWZXJzaW9uIjogMTAKfQ=="
-                },
-            }),
-        });
-
-        renderModalBpmn(DOWNLOAD_BPMN);
-        fireEvent.click(screen.getByText("Conferma"));
-    });
-
 
     test("Test Error during DELETE", () => {
         global.fetch = jest.fn().mockImplementation(() => {
@@ -179,6 +167,23 @@ describe("ModalBpmn Test", () => {
         });
         renderModalBpmn(DOWNLOAD_BPMN);
         fireEvent.click(screen.getByText("Conferma"));
-    });   
+    }); 
+    
+    test("Test ModalBpmn with DOWNLOAD", async () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: {
+                    fileContent: "ewogICJjb21wb25lbnRzIjogWwogICAgewogICAgICAibGFiZWwiOiAiTnVtYmVyIiwKICAgICAgInR5cGUiOiAibnVtYmVyIiwKICAgICAgImxheW91dCI6IHsKICAgICAgICAicm93IjogIlJvd18xcmh4NXl2IiwKICAgICAgICAiY29sdW1ucyI6IG51bGwKICAgICAgfSwKICAgICAgImlkIjogIkZpZWxkXzEwYXpuNm0iLAogICAgICAia2V5IjogImZpZWxkXzBsd2VrcTYiCiAgICB9CiAgXSwKICAidHlwZSI6ICJkZWZhdWx0IiwKICAiaWQiOiAiRm9ybTFqYW4iLAogICJleHBvcnRlciI6IHsKICAgICJuYW1lIjogIkNhbXVuZGEgTW9kZWxlciIsCiAgICAidmVyc2lvbiI6ICI1LjE1LjIiCiAgfSwKICAiZXhlY3V0aW9uUGxhdGZvcm0iOiAiQ2FtdW5kYSBQbGF0Zm9ybSIsCiAgImV4ZWN1dGlvblBsYXRmb3JtVmVyc2lvbiI6ICI3LjE5LjAiLAogICJzY2hlbWFWZXJzaW9uIjogMTAKfQ=="
+                },
+            }),
+        });
+
+        renderModalBpmn(DOWNLOAD_BPMN);
+        
+        fireEvent.click(screen.getByText("Conferma"));
+    });
 
 });

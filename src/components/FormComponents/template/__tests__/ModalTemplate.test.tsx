@@ -35,9 +35,4 @@ describe("ModalTemplate test", () => {
         expect(mockHandleSubmit).toHaveBeenCalled();
     });
 
-    // test("should call setOpen with false when clicking outside the dialog", () => {
-    //     fireEvent.click(document);
-    //     expect(mockSetOpen).toHaveBeenCalledWith(false);
-    // });
-
  });

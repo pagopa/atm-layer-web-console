@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import ModalResources from "../ModalResources";
@@ -71,7 +71,7 @@ describe("ModalResources Test", () => {
         fireEvent.click(screen.getByText("Conferma"));
     });
 
-    test("Test ModalResources with DOWNLOAD", () => {
+    test("Test ModalResources with DOWNLOAD", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -84,6 +84,11 @@ describe("ModalResources Test", () => {
         renderModalResources(DOWNLOAD_RES);
 
         fireEvent.click(screen.getByText("Conferma"));
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
         expect(setOpen).toHaveBeenCalled();
     });
 

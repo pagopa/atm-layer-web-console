@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import { useState } from "react";
@@ -109,7 +109,7 @@ describe("ModalResources Test", () => {
     });
 
 
-    test("Test ModalWR with DEPLOY", () => {
+    test("Test ModalWR with DEPLOY", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -149,6 +149,11 @@ describe("ModalResources Test", () => {
 
         renderModalWR(DEPLOY_WR);
         fireEvent.click(screen.getByText("Conferma"));
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
     });
 
 
@@ -196,7 +201,7 @@ describe("ModalResources Test", () => {
     });
 
 
-    test("Test ModalWR with DOWNLOAD DMN", () => {
+    test("Test ModalWR with DOWNLOAD DMN", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -210,9 +215,14 @@ describe("ModalResources Test", () => {
 
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
     });
 
-    test("Test ModalWR with DOWNLOAD BPMN", () => {
+    test("Test ModalWR with DOWNLOAD BPMN", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -228,9 +238,14 @@ describe("ModalResources Test", () => {
         localStorage.setItem("recordParams", JSON.stringify(recordParams));
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
     });
 
-    test("Test ModalWR with DOWNLOAD FORM", () => {
+    test("Test ModalWR with DOWNLOAD FORM", async () => {
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -245,6 +260,11 @@ describe("ModalResources Test", () => {
         localStorage.setItem("recordParams", JSON.stringify(recordParams));
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+ 
+        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
     });
 
 
