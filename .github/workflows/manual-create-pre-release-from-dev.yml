@@ -120,4 +120,4 @@ jobs:
       - name: Push pre-release on S3
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
-          aws s3 cp v${{ steps.semantic-release.outputs.new_release_version }}.zip s3://${{ vars.BUCKET_NAME_ARTIFACTS }}/webconsole
+          aws s3 cp v${{ steps.semantic-release.outputs.new_release_version }}.zip s3://${{ vars.BUCKET_NAME_ARTIFACTS }}/webconsole/
