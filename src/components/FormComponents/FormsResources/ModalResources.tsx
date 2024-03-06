@@ -26,7 +26,7 @@ type Props = {
 export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle, detail }: Props) => {
 
 	const { abortController } = useContext(Ctx);
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
 	const content=getTextModal(type);
 	const [loading, setLoading] = useState(false);
 

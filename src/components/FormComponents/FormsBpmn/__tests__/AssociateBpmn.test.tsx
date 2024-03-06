@@ -33,7 +33,7 @@ describe("AssociateBpmn", () => {
     }
 
     test("Test AssociateBpmn With only acquirerId positive case", () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -65,7 +65,7 @@ describe("AssociateBpmn", () => {
     })
 
     test("Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN", () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -91,7 +91,7 @@ describe("AssociateBpmn", () => {
     });
 
     test("Test AssociateBpmn on switch of branchId", () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         renderAssociateBpmn();
 
@@ -120,7 +120,7 @@ describe("AssociateBpmn", () => {
     })
 
     test("Test AssociateBpmn fetch failed", async () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -140,7 +140,7 @@ describe("AssociateBpmn", () => {
     });
 
     test("Test AssociateBpmn con errore di rete", async () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
     
         global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network Error"));
     
@@ -153,7 +153,7 @@ describe("AssociateBpmn", () => {
     });
 
     test("Test handleSwitchAssociationFetch indirectly by simulating button click", async () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({

@@ -86,7 +86,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				<IconButton
 					onClick={() => {
 						navigate(path);
-						localStorage.setItem("recordParams", JSON.stringify(param.row));
+						sessionStorage.setItem("recordParams", JSON.stringify(param.row));
 					}}
 					sx={{
 						width: "100%",
@@ -105,7 +105,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		const actions = () => {
 			setOpen(true);
 			setType(DELETE_ASSOCIATION);
-			localStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
+			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
 
 		return (

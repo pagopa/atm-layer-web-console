@@ -12,7 +12,7 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
 	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {

@@ -13,7 +13,7 @@ const recordParams = {
 beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
     jest.spyOn(console, 'warn').mockImplementation(() => { });
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
 });
 
 afterEach(() => {

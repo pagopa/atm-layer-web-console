@@ -16,7 +16,7 @@ const LoginPage = () => {
 		window.open(urlLogin, "_self");
 	};
 
-	// pulisco il localStorage all'ingresso in pagina
+	// pulisco il sessionStorage all'ingresso in pagina
 	useEffect(() => {
 		clearAll();
 	}, []);

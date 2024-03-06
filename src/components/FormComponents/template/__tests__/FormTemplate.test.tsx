@@ -24,7 +24,7 @@ describe("Test FormTemplate", () => {
     const { getFormOptions } = formOption();
 
     test("Test FormTemplate with children AssociateBpmn", () => {
-        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({

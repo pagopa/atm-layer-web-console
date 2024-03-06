@@ -33,7 +33,7 @@ describe("ModalResources Test", () => {
     const setMessage = jest.fn();
     const setTitle = jest.fn();
     const abortController = new AbortController();
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
        
 
    

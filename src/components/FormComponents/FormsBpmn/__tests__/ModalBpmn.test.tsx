@@ -34,8 +34,8 @@ describe("ModalBpmn Test", () => {
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
     const setTitle = jest.fn();
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
-    localStorage.setItem("recordParamsAssociated", JSON.stringify(recordParamsAssociated));
+    sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
+    sessionStorage.setItem("recordParamsAssociated", JSON.stringify(recordParamsAssociated));
 
 
     const renderModalBpmn = (modalType: string) => {

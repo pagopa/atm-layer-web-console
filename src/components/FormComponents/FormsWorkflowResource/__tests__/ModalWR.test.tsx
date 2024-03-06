@@ -16,7 +16,7 @@ let recordParams = {
 beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
     jest.spyOn(console, 'warn').mockImplementation(() => { });
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
 });
 
 afterEach(() => {
@@ -235,7 +235,7 @@ describe("ModalResources Test", () => {
         });
 
         recordParams.resourceType=BPMN;
-        localStorage.setItem("recordParams", JSON.stringify(recordParams));
+        sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
         await act(async () => {
@@ -257,7 +257,7 @@ describe("ModalResources Test", () => {
             }),
         });
         recordParams.resourceType=FORM;
-        localStorage.setItem("recordParams", JSON.stringify(recordParams));
+        sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
         renderModalWR(DOWNLOAD_WR);
         fireEvent.click(screen.getByText("Conferma"));
         await act(async () => {

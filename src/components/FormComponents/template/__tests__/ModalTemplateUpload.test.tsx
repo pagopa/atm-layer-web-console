@@ -24,7 +24,7 @@ const initialRecordParams = {
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
   jest.spyOn(console, 'warn').mockImplementation(() => {});
-  localStorage.setItem('recordParams', JSON.stringify(initialRecordParams));
+  sessionStorage.setItem('recordParams', JSON.stringify(initialRecordParams));
 });
 
 afterEach(() => {
@@ -237,7 +237,7 @@ describe('ModalTemplateUpload Test', () => {
 
   test("Update with different file extensions should fail", () => {
     recordParams.cdnUrl = "https://d2xduy7tbgu2d3.cloudfront.net/files/OTHER/test.dmn";
-    localStorage.setItem("recordParams", JSON.stringify(recordParams));
+    sessionStorage.setItem("recordParams", JSON.stringify(recordParams));
     renderModalTemplateUpload(UPDATE_RES);
     fireEvent.click(screen.getByText("Conferma"));
   });

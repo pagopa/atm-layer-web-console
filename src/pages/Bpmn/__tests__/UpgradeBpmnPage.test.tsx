@@ -23,7 +23,7 @@ describe("UpgradeBpmnPage", () => {
         expect(screen.getAllByText("Aggiornamento risorsa di processo")[0]).toBeInTheDocument();
     })
 
-    test("Render with localStorage item 'recordParams' being null", () => {
+    test("Render with sessionStorage item 'recordParams' being null", () => {
       Storage.prototype.getItem = jest.fn(() => null);
       try {
           render(

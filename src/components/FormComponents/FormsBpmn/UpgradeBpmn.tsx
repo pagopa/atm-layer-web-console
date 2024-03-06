@@ -15,7 +15,7 @@ export const UpgradeBpmn = () => {
 
 	const [loadingButton, setLoadingButton] = useState(false);
 	const { getFormOptions } = formOption();
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
 	const { isValidDeployableFilename } = checks();
 
 	const initialValues: UpgradeBpmnDto = {

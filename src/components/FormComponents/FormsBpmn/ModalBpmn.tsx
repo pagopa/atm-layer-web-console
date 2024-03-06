@@ -23,7 +23,7 @@ type Props = {
 const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController, debugOn } = useContext(Ctx);
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParams = JSON.parse(sessionStorage.getItem("recordParams") ?? "");
 	
 	const content=getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 						...response.valuesObj,
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
-					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					sessionStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 					setTimeout(() => {
 						setOpenSnackBar(false);
 						window.location.reload();
@@ -70,7 +70,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			break;
 		}
 		case DELETE_ASSOCIATION: {
-			const recordParamsAssociated = JSON.parse(localStorage.getItem("recordParamsAssociated") ?? "");
+			const recordParamsAssociated = JSON.parse(sessionStorage.getItem("recordParamsAssociated") ?? "");
 			const baseUrl = generatePath(DELETE_ASSOCIATE_BPMN, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion });
 			const URL = `${baseUrl}?acquirerId=${recordParamsAssociated.acquirerId}`;
 			const filterValues = { branchId: recordParamsAssociated.branchId, terminalId: recordParamsAssociated.terminalId };

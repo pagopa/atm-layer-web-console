@@ -58,7 +58,7 @@ function App() {
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
 	const jwt= localStorage.getItem("jwt");
-	const debugOn=localStorage.getItem("debugOn");
+	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
 	const abortController = new AbortController();
@@ -78,11 +78,11 @@ function App() {
 	}
 
 	function clearStorage(){
-		if(localStorage.getItem("recordParams")){
-			localStorage.removeItem("recordParams");		
+		if(sessionStorage.getItem("recordParams")){
+			sessionStorage.removeItem("recordParams");		
 		}
-		if(localStorage.getItem("recordParamsAssociated")){
-			localStorage.removeItem("recordParamsAssociated");
+		if(sessionStorage.getItem("recordParamsAssociated")){
+			sessionStorage.removeItem("recordParamsAssociated");
 		}
 	}
 

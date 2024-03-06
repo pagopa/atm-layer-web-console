@@ -4,9 +4,9 @@ import App from "./App";
 import { Ctx } from "./DataContext";
 import { bpmnAssociationTableMocked, bpmnTableMocked } from "./components/Mock4Test/BpmnMocks";
 
-test("Test App without jwt in localStorage", () => {
-	localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
-	localStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));
+test("Test App without jwt in sessionStorage", () => {
+	sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+	sessionStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));
 
 	render(
 		// eslint-disable-next-line react/jsx-no-undef
@@ -29,8 +29,8 @@ test("Test App without jwt in localStorage", () => {
 });
 
 test("Test App with jwt in localStorage", () => {
-	localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
-	localStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));
+	sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+	sessionStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));
 	localStorage.setItem("jwt", "prova");
 	localStorage.setItem("debugOn", "prova");
 

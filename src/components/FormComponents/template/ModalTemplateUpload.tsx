@@ -93,9 +93,9 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					// eslint-disable-next-line functional/immutable-data
 					const uploadedFileExtension = formData.file.name.split(".").pop()?.toLowerCase();
 
-					const localStorageFileExtension = recordParams.cdnUrl.split(".").pop()?.toLowerCase();
+					const sessionStorageFileExtension = recordParams.cdnUrl.split(".").pop()?.toLowerCase();
 				
-					if (uploadedFileExtension !== localStorageFileExtension) {
+					if (uploadedFileExtension !== sessionStorageFileExtension) {
 					  setShowAlert(true);
 					  setLoadingButton(false);
 					  return;

@@ -17,7 +17,7 @@ const DetailWr = ({
 	const [detail, setDetail] = useState({});
 
 	useEffect(() => {
-		const storedRecordParams = localStorage.getItem("recordParams");
+		const storedRecordParams = sessionStorage.getItem("recordParams");
 		if (storedRecordParams) {
 			setDetail(JSON.parse(storedRecordParams));
 		}
