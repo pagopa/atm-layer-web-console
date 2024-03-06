@@ -1,8 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import AssociateBpmn from "../AssociateBpmn";
 import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
+import { handleSnackbar } from "../../../Commons/Commons";
+
+jest.mock("../../../Commons/Commons");
 
 const originalFetch = global.fetch;
 
@@ -135,4 +138,41 @@ describe("AssociateBpmn", () => {
         renderAssociateBpmn();
 
     });
+
+    test("Test AssociateBpmn con errore di rete", async () => {
+        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+    
+        global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network Error"));
+    
+        renderAssociateBpmn();
+    
+        await waitFor(() => expect(handleSnackbar).toHaveBeenCalled());
+
+        expect(handleSnackbar).toHaveBeenCalledWith(false, expect.any(Function), expect.any(Function), expect.any(Function), expect.any(Function));
+
+    });
+
+    test("Test handleSwitchAssociationFetch indirectly by simulating button click", async () => {
+        localStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 400,
+                success: false,
+                valuesObj: {
+                    type: "CANNOT_ASSOCIATE",
+                    errorCode: "ATMLM_4000047",
+                    message: "La banca/filiale/terminale indicata è già associata al processo con ID: 4a381447-4dfb-4fb6-9171-a36130b46c57 , versione: 196",
+                    statusCode: 400
+                },
+            }),
+        });
+
+        renderAssociateBpmn();
+
+        fireEvent.click(screen.getByText("Conferma"));
+
+        const actionAlert = await screen.findByTestId("action-alert");
+        expect(actionAlert).toBeInTheDocument(); 
+    });   
 });
