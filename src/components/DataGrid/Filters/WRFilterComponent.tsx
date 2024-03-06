@@ -29,6 +29,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
+						InputProps={{ inputProps: { "data-testid": "resource-type-test" } }}
 					>
 						{resourceItems.map((item: any) => (
 							<MenuItem key={item.value} value={item.value}>
@@ -40,7 +41,6 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
 					id="fileName"
 					name="fileName"
 					label="Nome file"
@@ -48,6 +48,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 					value={filterValues.fileName}
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 					fullWidth
 				/>
 			</Grid>

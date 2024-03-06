@@ -39,7 +39,7 @@ const DetailPageTemplate = ({
 			{breadComponent&&<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />}
 		</Box>
 		<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
-			<Box width={"65%"}>
+			<Box width={severity==="error"?"65%":"35%"} >
 				<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 			</Box>
 		</Box>

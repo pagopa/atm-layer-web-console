@@ -17,10 +17,8 @@ const LoginPageCallback = () => {
 
 			if (response?.success) {
 				setUserEmail(response?.valuesObj.email);
-				console.log("response succes: ", response?.valuesObj);
 			} else {
 				setUserEmail("Benvenuto utente");
-				console.log("response error: ", response?.valuesObj.message);
 			}
 		} catch (error) {
 			console.error("ERROR", error);
@@ -32,7 +30,7 @@ const LoginPageCallback = () => {
 		if(token) {
 			setLogged(true);
 			void getTokenEmail(token);
-			localStorage.setItem("jwt", token);
+			sessionStorage.setItem("jwt", token);
 			navigate(routes.HOME);
 		}else{
 			navigate(routes.LOGIN);

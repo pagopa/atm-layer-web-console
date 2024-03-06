@@ -73,10 +73,10 @@ export const CreateBpmn = () => {
 			}
 			setLoadingButton(true);
 			try {
-				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData:true })();
+				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				
+
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
@@ -89,13 +89,13 @@ export const CreateBpmn = () => {
 
 
 	return (
-		<FormTemplate 
-			setOpenSnackBar={setOpenSnackBar} 
-			handleSubmit={handleSubmit} 
-			getFormOptions={getFormOptions(CREATE_BPMN)} 
-			openSnackBar={openSnackBar} 
-			severity={severity} 
-			message={message} 
+		<FormTemplate
+			setOpenSnackBar={setOpenSnackBar}
+			handleSubmit={handleSubmit}
+			getFormOptions={getFormOptions(CREATE_BPMN)}
+			openSnackBar={openSnackBar}
+			severity={severity}
+			message={message}
 			title={title}
 			loadingButton={loadingButton}
 		>
@@ -109,7 +109,6 @@ export const CreateBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="filename"
 					name="filename"
@@ -119,11 +118,12 @@ export const CreateBpmn = () => {
 					value={formData.filename}
 					onChange={handleChange}
 					error={Boolean(errors.filename)}
-					helperText={errors.filename} />
+					helperText={errors.filename}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
+				/>
 			</Grid>
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
 					fullWidth
 					id="functionType"
 					name="functionType"
@@ -133,7 +133,9 @@ export const CreateBpmn = () => {
 					value={formData.functionType}
 					onChange={handleChange}
 					error={Boolean(errors.functionType)}
-					helperText={errors.functionType} />
+					helperText={errors.functionType}
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "function-type-test" }}
+				/>
 			</Grid>
 		</FormTemplate>
 	);

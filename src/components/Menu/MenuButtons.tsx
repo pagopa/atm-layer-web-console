@@ -25,7 +25,7 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 		<React.Fragment>
 			<Button
 				startIcon={iconButton&& <IconBox id={"iconMenu_"+name} icon={iconButton} color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
-				id="toolbar-button"
+				id={"toolbar-button_"+name}
 				aria-controls={open ? "toolbar-menu" : undefined}
 				aria-haspopup="true"
 				aria-expanded={open ? "true" : undefined}

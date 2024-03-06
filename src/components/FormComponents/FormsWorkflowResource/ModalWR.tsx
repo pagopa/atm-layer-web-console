@@ -22,7 +22,8 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 	
 	const { abortController } = useContext(Ctx);
 	const content=getTextModal(type);
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const [loading, setLoading] = useState(false);
 	
@@ -54,7 +55,7 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 						...response.valuesObj,
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
-					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					sessionStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 					setTimeout(() => {
 						setOpenSnackBar(false);
 						window.location.reload();

@@ -37,7 +37,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	};
 
 	function renderCell(
-		params: GridRenderCellParams,
+		params: any,
 		value: ReactNode = params.value,
 		overrideStyle: CSSProperties = {}
 	) {
@@ -86,12 +86,13 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				<IconButton
 					onClick={() => {
 						navigate(path);
-						localStorage.setItem("recordParams", JSON.stringify(param.row));
+						sessionStorage.setItem("recordParams", JSON.stringify(param.row));
 					}}
 					sx={{
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="action-column-test"
 				>
 					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
 				</IconButton>
@@ -104,7 +105,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		const actions = () => {
 			setOpen(true);
 			setType(DELETE_ASSOCIATION);
-			localStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
+			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
 
 		return (
@@ -120,6 +121,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="delete-column-test"
 				>
 					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
 				</IconButton>

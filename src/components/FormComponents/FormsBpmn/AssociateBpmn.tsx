@@ -12,7 +12,8 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 const AssociateBpmn = () => {
 
 	const { getFormOptions } = formOption();
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
@@ -114,7 +115,7 @@ const AssociateBpmn = () => {
 		>
 			<Grid item xs={12} my={1}>
 				<TextField
-					inputProps={ ACQUIRER_ID_LENGTH }
+					inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" }}
 					fullWidth
 					id="acquirerId"
 					name="acquirerId"
@@ -124,18 +125,20 @@ const AssociateBpmn = () => {
 					value={formData.acquirerId}
 					onChange={handleChange}
 					error={Boolean(errors.acquirerId)}
-					helperText={errors.acquirerId} />
+					helperText={errors.acquirerId}
+				/>
 			</Grid>
 			<Grid item
 				xs={12}
 				my={2}
 				display="flex"
+
 				flexDirection={"row"}
 				justifyContent={"flex-start"}
 				alignItems={"center"}
 			>
 				<TextField
-					inputProps={ TERMINAL_BRANCH_LENGTH }     
+					inputProps={{ maxLength: TERMINAL_BRANCH_LENGTH, "data-testid": "branch-id-test" }}
 					fullWidth
 					id="branchId"
 					name="branchId"
@@ -167,7 +170,7 @@ const AssociateBpmn = () => {
 				alignItems={"center"}
 			>
 				<TextField
-					inputProps={ TERMINAL_BRANCH_LENGTH }
+					inputProps={{ maxLength: TERMINAL_BRANCH_LENGTH, "data-testid": "terminal-id-test" }}
 					fullWidth
 					id="terminalId"
 					name="terminalId"
@@ -177,6 +180,7 @@ const AssociateBpmn = () => {
 					disabled={terminalChecked || branchChecked}
 					value={formData.terminalId}
 					onChange={handleChange}
+
 				/>
 				<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
 					<Typography>Tutti</Typography>

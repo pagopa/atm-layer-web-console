@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Grid, TextField } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Grid, TextField, Typography } from "@mui/material";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
@@ -15,7 +15,8 @@ export const UpgradeBpmn = () => {
 
 	const [loadingButton, setLoadingButton] = useState(false);
 	const { getFormOptions } = formOption();
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const { isValidDeployableFilename } = checks();
 
 	const initialValues: UpgradeBpmnDto = {
@@ -24,6 +25,14 @@ export const UpgradeBpmn = () => {
 		filename: "",
 		functionType: recordParams.functionType,
 	};
+
+	const [definitionKeyValue, setDefinitionKeyValue] = useState("");
+	useEffect(() => {
+		const value = recordParams.definitionKey;
+		if (value) {
+			setDefinitionKeyValue(value);
+		}
+	  }, []);
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>({
@@ -73,7 +82,7 @@ export const UpgradeBpmn = () => {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				
+
 			} catch (error) {
 				setLoadingButton(false);
 				console.error("ERROR", error);
@@ -83,18 +92,18 @@ export const UpgradeBpmn = () => {
 	};
 
 	return (
-		<FormTemplate 
-			handleSubmit={handleSubmit} 
-			getFormOptions={getFormOptions(UPGRADE_BPMN)} 
-			openSnackBar={openSnackBar} 
-			setOpenSnackBar={setOpenSnackBar} 
-			severity={severity} 
-			message={message} 
+		<FormTemplate
+			handleSubmit={handleSubmit}
+			getFormOptions={getFormOptions(UPGRADE_BPMN)}
+			openSnackBar={openSnackBar}
+			setOpenSnackBar={setOpenSnackBar}
+			severity={severity}
+			message={message}
 			title={title}
 			loadingButton={loadingButton}
 		>
 			<UploadField
-				titleField="File BPMN del processo"
+				titleField="File BPMN del processo*"
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
@@ -103,7 +112,7 @@ export const UpgradeBpmn = () => {
 				formData={formData} />
 			<Grid xs={12} item my={1}>
 				<TextField
-					inputProps={ MAX_LENGHT_LARGE }
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 					fullWidth
 					id="filename"
 					name="filename"
@@ -115,6 +124,7 @@ export const UpgradeBpmn = () => {
 					error={Boolean(errors.filename)}
 					helperText={errors.filename} />
 			</Grid>
+			<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>
 		</FormTemplate>
 	);
 };

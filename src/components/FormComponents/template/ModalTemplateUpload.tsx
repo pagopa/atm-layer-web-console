@@ -1,5 +1,5 @@
-import React, { useState }  from "react";
-import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
+import React, { useEffect, useState }  from "react";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography } from "@mui/material";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
@@ -42,6 +42,13 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 
 		return Object.values(newErrors).every((error) => !error);
 	};
+	const [definitionKeyValue, setDefinitionKeyValue] = useState("");
+	useEffect(() => {
+		const value = recordParams.definitionKey;
+		if (value) {
+			setDefinitionKeyValue(value);
+		}
+	  }, []);
 
 	const initialValues: WRUpdateDto = {
 		uuid: recordParams.workflowResourceId,
@@ -86,9 +93,9 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					// eslint-disable-next-line functional/immutable-data
 					const uploadedFileExtension = formData.file.name.split(".").pop()?.toLowerCase();
 
-					const localStorageFileExtension = recordParams.cdnUrl.split(".").pop()?.toLowerCase();
+					const sessionStorageFileExtension = recordParams.cdnUrl.split(".").pop()?.toLowerCase();
 				
-					if (uploadedFileExtension !== localStorageFileExtension) {
+					if (uploadedFileExtension !== sessionStorageFileExtension) {
 					  setShowAlert(true);
 					  setLoadingButton(false);
 					  return;
@@ -144,6 +151,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 							setFormData={setFormData}
 							formData={formData} 
 						/>
+						{definitionKeyValue &&
+						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}
 						{showAlert && 
 						<Alert severity="error">
 							Il file che hai caricato ha un estensione diversa da quello che stai cercando di aggiornare.

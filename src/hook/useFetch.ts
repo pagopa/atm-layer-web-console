@@ -1,8 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import ROUTES from "../routes";
-import { Ctx } from "../DataContext";
-
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni

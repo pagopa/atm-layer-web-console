@@ -1,11 +1,11 @@
-import { Grid, TextField} from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import React from "react";
 import { ACQUIRER_ID_LENGTH, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
-    filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	filterValues: any;
+	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	handleChangeNumberOnly: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
@@ -13,7 +13,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={ MAX_LENGHT_LARGE }
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "function-type-test" }}
 				id="functionType"
 				name="functionType"
 				label="Tipo Funzione"
@@ -21,12 +21,12 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 				value={filterValues.functionType}
 				onChange={(e) => handleChange(e)}
 				size="small"
-				fullWidth 
+				fullWidth
 			/>
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={ MAX_LENGHT_LARGE }
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 				id="fileName"
 				name="fileName"
 				label="Nome File"
@@ -42,16 +42,16 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 				name="modelVersion"
 				label="Versione"
 				value={filterValues.modelVersion}
-				InputProps={{ inputProps: { min: 1 } }}
+				inputProps={{ min: 1, "data-testid": "model-version-test" }}
 				onChange={(e) => handleChangeNumberOnly(e)}
 				variant="outlined"
 				fullWidth
-				size="small" 
+				size="small"
 			/>
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={ ACQUIRER_ID_LENGTH }
+				inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" }}
 				id="acquirerId"
 				name="acquirerId"
 				label="Banca"
@@ -60,7 +60,7 @@ const BpmnFilterComponent = ({ filterValues, handleChange, handleChangeNumberOnl
 				onChange={(e) => handleChange(e)}
 				variant="outlined"
 				fullWidth
-				size="small" 
+				size="small"
 			/>
 		</Grid>
 		<Grid item xs={4}>
