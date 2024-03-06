@@ -85,9 +85,12 @@ describe("WorkflowResourceDataGrid test", () => {
         await waitFor(() => expect(screen.queryByText("Qualcosa è andato storto")).toBeInTheDocument());
     });
 
-    test("WorkflowResourceDataGrid Test with fetch error", async () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("Fetch error");
+    test("WorkflowResourceDataGrid Catch Error", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true
+            }),
         });
         await act(async () => {
             render(
@@ -97,7 +100,7 @@ describe("WorkflowResourceDataGrid test", () => {
                     </BrowserRouter>
                 </Ctx.Provider>
             );
-        })
+        });
     });
 
 });

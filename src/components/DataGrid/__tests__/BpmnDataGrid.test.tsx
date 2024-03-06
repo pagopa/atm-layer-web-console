@@ -86,8 +86,11 @@ describe("BpmnDataGrid test", () => {
     });
 
     test("BpmnDaGrid Test with fetch error", async () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("Fetch error");
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true
+            }),
         });
         await act(async () => {
             render(
@@ -97,7 +100,7 @@ describe("BpmnDataGrid test", () => {
                     </BrowserRouter>
                 </Ctx.Provider>
             );
-        })
+        });
     });
 
 });

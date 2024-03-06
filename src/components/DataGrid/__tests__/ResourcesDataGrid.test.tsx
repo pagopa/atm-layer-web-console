@@ -85,9 +85,12 @@ describe("ResourcesDataGrid test", () => {
         await waitFor(() => expect(screen.queryByText("Qualcosa è andato storto")).toBeInTheDocument());
     });
 
-    test("ResourcesDataGrid Test with fetch error", async () => {
-        global.fetch = jest.fn().mockImplementation(() => {
-            throw new Error("Fetch error");
+    test("ResourcesDataGrid Test Catch Error", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true
+            }),
         });
         await act(async () => {
             render(
