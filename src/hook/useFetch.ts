@@ -1,3 +1,5 @@
+import ROUTES from "../routes";
+
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
@@ -75,12 +77,24 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
-			if (!response || status === 401) {
+			if (!response) {
 				// window.location.reload();
 				data = {
 					valuesObj: { message: "Errore durante la chiamata all'api", status },
 					success: false,
 				};
+			}
+			if (status === 401) {
+				data = {
+					valuesObj: { message: "Token scaduto"},
+					status,
+					success: false
+				};
+				// window.location.replace("http://www.w3schools.com");
+				// console.log("Location: "+window.location.toString());
+				window.setTimeout( function(){
+					window.location.assign(ROUTES.LOGIN);
+				}, 1000 );
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
