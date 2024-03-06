@@ -1,12 +1,12 @@
 {
   "name": "web-console",
-  "version": "v1.0.0-dev.26",
+  "version": "v1.0.0-dev.27",
   "private": true,
   "homepage": "/webconsole",
   "jest": {
     "coveragePathIgnorePatterns": [
       "index.tsx",
-      "reportWebVitals.ts", 
+      "reportWebVitals.ts",
       "model"
     ]
   },
