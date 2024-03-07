@@ -61,6 +61,7 @@ function App() {
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
+	const [inLoginPage, setInLoginPage] = useState(false);
 	const abortController = new AbortController();
 	const navigate = useNavigate();
 
@@ -74,7 +75,6 @@ function App() {
 	function setTokenExpired(){
 		localStorage.removeItem("jwt_console");
 		setLogged(false);
-		navigate(ROUTES.LOGIN);
 	}
 
 	function clearStorage(){
@@ -98,6 +98,8 @@ function App() {
 		setLogged,
 		userEmail,
 		setUserEmail,
+		inLoginPage,
+		setInLoginPage,
 		abortController,
 		debugOn,
 		clearStorage,
