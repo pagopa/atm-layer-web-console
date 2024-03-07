@@ -113,9 +113,9 @@ const formatValues = () => {
 	const formatDateString = (str: string) => {
 		if(str) {
 			if(!/^(\d){8}$/.test(str)) {return "";}
-			const y = parseInt(str.substr(0,4), 10);
-			const m = parseInt(str.substr(4,2), 10)-1;
-			const d = parseInt(str.substr(6,2), 10);
+			const y = parseInt(str.slice(0,4), 10);
+			const m = parseInt(str.slice(4,6), 10)-1;
+			const d = parseInt(str.slice(6,8), 10);
 			return new Date(y,m,d).toLocaleDateString("en-GB");
 		}
 	};
