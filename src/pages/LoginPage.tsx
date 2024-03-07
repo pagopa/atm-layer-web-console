@@ -19,7 +19,7 @@ const LoginPage = () => {
 	// pulisco il sessionStorage all'ingresso in pagina
 	useEffect(() => {
 		clearAll();
-		console.log("logged state after clearAll: "+logged);
+		console.log("logged state after clearAll: ", logged);
 	}, []);
 	
 

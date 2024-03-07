@@ -4,8 +4,9 @@ import ROUTES from "../routes";
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
 
-	const SERVER_API_ORIGIN = endPoint&& endPoint!=="" ? endPoint : process.env.REACT_APP_BACKEND_URL;
-	const CODE_SUCCESS = [200, 201, 202, 203] ;
+	const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : process.env.REACT_APP_BACKEND_URL;
+	const CODE_SUCCESS = [200, 201, 202, 203];
+	const token = localStorage.getItem("jwt");
 
 	const fetchFromServer = async ({
 		urlEndpoint,
@@ -18,17 +19,17 @@ export default function useFetch(endPoint?: string | undefined) {
 		let data;
 		let status;
 		let response;
-		
 
-		let headerRequest = {};
+
+		let headerRequest = {
+			"Authorization": token ? `Bearer ${token}` : "",
+			"Accept": "application/json",
+		};
+
 		if (headers) {
 			headerRequest = {
-				"Accept": "application/json",
+				...headerRequest,
 				...headers
-			};
-		} else {
-			headerRequest = { 
-				"Accept": "application/json",
 			};
 		}
 
@@ -39,12 +40,12 @@ export default function useFetch(endPoint?: string | undefined) {
 				// credentials: "include",
 				signal: abortController?.current?.signal,
 				// cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-				headers: {...headerRequest},
+				headers: { ...headerRequest },
 				// redirect: "follow", // manual, *follow, error
 				// referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				body, // body data type must match "Content-Type" header
-		  }
-			: 	(method === "POST" || method === "PUT")
+			}
+			: (method === "POST" || method === "PUT")
 				? {
 					method, // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
@@ -85,7 +86,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				};
 			}
 			if (status === 401) {
-				window.location.replace(process.env.REACT_APP_HOME_PATH+ROUTES.LOGIN);
+				window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
 				return;
 			}
 			if (status === 204) {
