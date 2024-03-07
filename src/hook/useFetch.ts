@@ -85,16 +85,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				};
 			}
 			if (status === 401) {
-				data = {
-					valuesObj: { message: "Token scaduto"},
-					status,
-					success: false
-				};
-				// window.location.replace("http://www.w3schools.com");
-				// console.log("Location: "+window.location.toString());
-				window.setTimeout( function(){
-					window.location.assign(ROUTES.LOGIN);
-				}, 1000 );
+				window.location.assign(process.env.REACT_APP_HOME_PATH+ROUTES.LOGIN);
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
