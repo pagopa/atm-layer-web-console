@@ -30,7 +30,7 @@ const LoginPageCallback = () => {
 		if(token) {
 			setLogged(true);
 			void getTokenEmail(token);
-			sessionStorage.setItem("jwt", token);
+			localStorage.setItem("jwt", token);
 			navigate(routes.HOME);
 		}else{
 			navigate(routes.LOGIN);
