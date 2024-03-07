@@ -22,7 +22,7 @@ export default function useFetch(endPoint?: string | undefined) {
 
 
 		let headerRequest = {
-			"Authorization": token ? `Bearer ${token}` : "",
+			"Authorization": token ? token : "",
 			"Accept": "application/json",
 		};
 
@@ -86,8 +86,8 @@ export default function useFetch(endPoint?: string | undefined) {
 				};
 			}
 			if (status === 401) {
-				window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
-				return;
+				// window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
+				// return;
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
