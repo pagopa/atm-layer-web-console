@@ -5,7 +5,8 @@ export default function EmulatorButton() {
 	const openEmulator = () => {
 		const jwt = localStorage.getItem("jwt_console");
 		const emulatorUrl = process.env.REACT_APP_EMULATOR_URL;
-		window.open(emulatorUrl?.concat(`#jwt_console=${jwt}`), "_blank");
+		const url = jwt && emulatorUrl ? emulatorUrl.concat(`#jwt_console=${jwt}`) : emulatorUrl;
+		window.open(url, "_blank");
 	};
 	const theme = useTheme();
 
