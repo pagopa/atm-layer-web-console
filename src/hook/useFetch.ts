@@ -85,7 +85,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				};
 			}
 			if (status === 401) {
-				window.location.assign(process.env.REACT_APP_HOME_PATH+ROUTES.LOGIN);
+				window.location.replace(process.env.REACT_APP_HOME_PATH+ROUTES.LOGIN);
 				return;
 			}
 			if (status === 204) {
