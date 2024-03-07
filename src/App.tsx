@@ -57,7 +57,7 @@ function App() {
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
-	const jwt= localStorage.getItem("jwt");
+	const jwt= localStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
@@ -65,14 +65,14 @@ function App() {
 	const navigate = useNavigate();
 
 	function clearAll(){
-		if(localStorage.getItem("jwt")){
+		if(localStorage.getItem("jwt_console")){
 			setTokenExpired();
 		}
 		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("jwt");
+		localStorage.removeItem("jwt_console");
 		setLogged(false);
 		navigate(ROUTES.LOGIN);
 	}

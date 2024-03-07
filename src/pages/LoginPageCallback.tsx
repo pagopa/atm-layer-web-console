@@ -15,7 +15,7 @@ const LoginPageCallback = () => {
 		const token = window?.location?.hash?.split("&")[1]?.split("=")[1];
 		if (token) {
 			setLogged(true);
-			localStorage.setItem("jwt", token);
+			localStorage.setItem("jwt_console", token);
 			void getTokenEmail();
 			navigate(routes.HOME);
 		} else {
