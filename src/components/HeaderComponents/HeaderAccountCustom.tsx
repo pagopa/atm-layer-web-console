@@ -40,11 +40,11 @@ export const HeaderAccountCustom = ({
 				>
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						{loggedUser && (
+						{/* {loggedUser && (
 							<Box ml={6}>
 								<EmulatorButton />
 							</Box>
-						)}
+						)} */}
 					</Box>
 
 					<Stack
