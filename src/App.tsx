@@ -22,7 +22,6 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
-import ROUTES from "./routes";
 import { JwtUser } from "./model/UserModel";
 
 const LocalRoutes = () => (
@@ -55,7 +54,6 @@ function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
 	const jwt= localStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
@@ -63,7 +61,6 @@ function App() {
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
 	const [inLoginPage, setInLoginPage] = useState(false);
 	const abortController = new AbortController();
-	const navigate = useNavigate();
 
 	function clearAll(){
 		if(localStorage.getItem("jwt_console")){
@@ -90,8 +87,6 @@ function App() {
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
-		// loading,
-		// setLoading,
 		clearAll,
 		setTokenExpired,
 		logged, 
