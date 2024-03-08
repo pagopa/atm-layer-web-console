@@ -24,6 +24,7 @@ import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import { JwtUser } from "./model/UserModel";
 
+
 const LocalRoutes = () => (
 	<Routes>
 		<Route element={<PrivateRoute />}>
