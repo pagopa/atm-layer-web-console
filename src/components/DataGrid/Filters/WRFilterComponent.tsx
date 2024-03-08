@@ -1,5 +1,6 @@
 import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
 import React from "react";
+import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
@@ -28,6 +29,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 						select
 						onChange={(e) => handleChange(e, e.target.name)}
 						size="small"
+						InputProps={{ inputProps: { "data-testid": "resource-type-test" } }}
 					>
 						{resourceItems.map((item: any) => (
 							<MenuItem key={item.value} value={item.value}>
@@ -46,6 +48,7 @@ const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 					value={filterValues.fileName}
 					onChange={(e) => handleChange(e, e.target.name)}
 					size="small"
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 					fullWidth
 				/>
 			</Grid>

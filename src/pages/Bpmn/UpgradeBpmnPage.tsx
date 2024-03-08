@@ -7,7 +7,8 @@ import FormPageTemplate from "../Layout/FormPageTemplate";
 
 const UpgradeBpmnPage = () => {
 	
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:true}, true, recordParams), "Aggiornamento risorsa di processo");
 
 	return(

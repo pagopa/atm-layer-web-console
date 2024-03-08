@@ -1,8 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import ROUTES from "../routes";
-import { Ctx } from "../DataContext";
-
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni
@@ -80,8 +75,12 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
-			if (!response || response.status === 401) {
-				window.location.reload();
+			if (!response || status === 401) {
+				// window.location.reload();
+				data = {
+					valuesObj: { message: "Errore durante la chiamata all'api", status },
+					success: false,
+				};
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore
@@ -95,7 +94,7 @@ export default function useFetch(endPoint?: string | undefined) {
 			}
 		} catch (error) {
 			data = {
-				valuesObj: { message: `Errore durante la useFetch${error}` }, // aluesObj conterrà il messaggio di errore
+				valuesObj: { message: `Errore durante la useFetch${error}` }, // valuesObj conterrà il messaggio di errore
 				success: false,
 			};
 		}
