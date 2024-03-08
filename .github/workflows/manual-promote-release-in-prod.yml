@@ -68,4 +68,4 @@ jobs:
 
       - name: Push pre-release on S3
         run: |
-          aws s3 cp ${{ inputs.release }}.zip s3://${{ vars.BUCKET_NAME_ARTIFACTS }}/
+          aws s3 cp ${{ inputs.release }}.zip s3://${{ vars.BUCKET_NAME_ARTIFACTS }}/webconsole/
