@@ -1,4 +1,5 @@
-import ROUTES from "../routes";
+
+
 
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
@@ -78,7 +79,9 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
+
 			if (!response) {
+
 				// window.location.reload();
 				data = {
 					valuesObj: { message: "Errore durante la chiamata all'api", status },
@@ -88,6 +91,7 @@ export default function useFetch(endPoint?: string | undefined) {
 			if (status === 401) {
 				window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
 				return;
+
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore

@@ -6,6 +6,7 @@ import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 
+
 type HeaderAccountProps = {
     rootLink: RootLinkType;
     loggedUser?: boolean;
@@ -38,6 +39,7 @@ export const HeaderAccountCustom = ({
 					justifyContent="space-between"
 					alignItems="center"
 				>
+
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
 						{/* {loggedUser && (
@@ -45,6 +47,7 @@ export const HeaderAccountCustom = ({
 								<EmulatorButton />
 							</Box>
 						)} */}
+
 					</Box>
 
 					<Stack

@@ -11,12 +11,27 @@ const LoginPageCallback = () => {
 	const { setLogged, abortController, setUserEmail } = useContext(Ctx);
 	const navigate = useNavigate();
 
+	const getTokenEmail = async (token: string) => {
+		try {
+			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController, headers: { "Authorization": `Bearer ${token}` } })();
+
+			if (response?.success) {
+				setUserEmail(response?.valuesObj.email);
+			} else {
+				setUserEmail("Benvenuto utente");
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
+
 	useEffect(() => {
 		const token = window?.location?.hash?.split("&")[1]?.split("=")[1];
 		if (token) {
 			setLogged(true);
 			localStorage.setItem("jwt_console", token);
 			void getTokenEmail();
+
 			navigate(routes.HOME);
 		} else {
 			navigate(routes.LOGIN);

@@ -11,10 +11,12 @@ beforeEach(() => {
 describe("LoginPage", () => {
   test("renders without crashing", () => {
     const clearAll = jest.fn();
+
     const setInLoginPage = jest.fn();
     const debugOn = true;
     render(
       <Ctx.Provider value={{ clearAll, debugOn, setInLoginPage }}>
+
         <BrowserRouter>
           <LoginPage />
         </BrowserRouter>
@@ -32,10 +34,12 @@ describe("LoginPage", () => {
     const clearAll = jest.fn();
     const debugOn = false;
     const mockWindowOpen = jest.fn();
+
     const setInLoginPage = jest.fn();
     global.window.open = mockWindowOpen;
     render(
       <Ctx.Provider value={{ clearAll, debugOn, setInLoginPage }}>
+
         <BrowserRouter>
           <LoginPage />
         </BrowserRouter>
@@ -52,10 +56,12 @@ describe("LoginPage", () => {
     const clearAll = jest.fn();
     const debugOn = true;
     const mockWindowOpen = jest.fn();
+
     const setInLoginPage = jest.fn();
     global.window.open = mockWindowOpen;
     render(
       <Ctx.Provider value={{ clearAll, debugOn, setInLoginPage }}>
+
         <BrowserRouter>
           <LoginPage />
         </BrowserRouter>
