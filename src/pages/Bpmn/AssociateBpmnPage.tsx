@@ -6,7 +6,8 @@ import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commo
 import FormPageTemplate from "../Layout/FormPageTemplate";
 
 const AssociateBpmnPage = () => {
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:true}, true, recordParams), "Associazione risorsa di processo");
 
 	return (

@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMapper";
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
-import DetailBox from "../../components/Commons/DetailBox";
+import DetailBox from "../../components/Detail/DetailBox";
 import BoxPageLayout from "./BoxPageLayout";
 
 type Props = {
@@ -37,7 +37,9 @@ const DetailPageTemplate = ({
 	<BoxPageLayout px={10}>
 		<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
 			{breadComponent&&<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />}
-			<Box width={"25%"}>
+		</Box>
+		<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
+			<Box width={severity==="error"?"65%":"35%"} >
 				<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 			</Box>
 		</Box>

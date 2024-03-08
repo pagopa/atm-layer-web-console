@@ -16,5 +16,7 @@ describe("HomePage test", () => {
 		);
 		const titleElement=screen.getByText("Console management");
 		expect(titleElement).toBeInTheDocument();
+		const subTitleElement=screen.getByText("Console per la gestione delle risorse");
+		expect(subTitleElement).toBeInTheDocument();
 	});
 });

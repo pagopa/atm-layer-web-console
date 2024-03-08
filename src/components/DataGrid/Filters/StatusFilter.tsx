@@ -2,8 +2,8 @@
 import { FormControl, TextField, MenuItem } from "@mui/material";
 
 type Prop = {
-    filterValues: any;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
+	filterValues: any;
+	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, fieldName: string) => void;
 };
 
 const StatusFilter = ({ filterValues, handleChange }: Prop) => {
@@ -15,7 +15,7 @@ const StatusFilter = ({ filterValues, handleChange }: Prop) => {
 		{ label: "DEPLOYED", value: "DEPLOYED" },
 		{ label: "DEPLOY_ERROR", value: "DEPLOY_ERROR" },
 	];
-    
+
 	return (
 		<FormControl fullWidth>
 			<TextField
@@ -26,6 +26,7 @@ const StatusFilter = ({ filterValues, handleChange }: Prop) => {
 				select
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
+				inputProps={{ "data-testid": "status-test" }}
 			>
 				{menuItems.map((item: any) => (
 					<MenuItem key={item.value} value={item.value}>
