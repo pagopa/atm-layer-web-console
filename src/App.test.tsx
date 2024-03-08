@@ -31,7 +31,9 @@ test("Test App without jwt in sessionStorage", () => {
 test("Test App with jwt in localStorage", () => {
 	sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 	sessionStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));
-	localStorage.setItem("jwt", "prova");
+
+	localStorage.setItem("jwt_console", "prova");
+
 	localStorage.setItem("debugOn", "prova");
 
 	render(

@@ -4,6 +4,8 @@ import { Box } from "@mui/system";
 import { useContext } from "react";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
+import EmulatorButton from "../NavigationComponents/EmulatorButton";
+
 
 type HeaderAccountProps = {
     rootLink: RootLinkType;
@@ -37,8 +39,15 @@ export const HeaderAccountCustom = ({
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title}>
+
+					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
+						{/* {loggedUser && (
+							<Box ml={6}>
+								<EmulatorButton />
+							</Box>
+						)} */}
+
 					</Box>
 
 					<Stack
