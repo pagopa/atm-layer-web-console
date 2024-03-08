@@ -1,7 +1,5 @@
 import ROUTES from "../routes";
 
-
-
 /* eslint-disable functional/no-let */
 export default function useFetch(endPoint?: string | undefined) {
 	// endpoint per test di ingrazione interni

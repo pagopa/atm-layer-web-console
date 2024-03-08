@@ -34,7 +34,6 @@ describe("LoginPage", () => {
     const clearAll = jest.fn();
     const debugOn = false;
     const mockWindowOpen = jest.fn();
-
     const setInLoginPage = jest.fn();
     global.window.open = mockWindowOpen;
     render(

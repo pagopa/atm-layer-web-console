@@ -55,28 +55,23 @@ function App() {
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
 	const temp= localStorage.getItem("tempLog");
-
 	const jwt= localStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
 	const [inLoginPage, setInLoginPage] = useState(false);
-
 	const abortController = new AbortController();
 
 	function clearAll(){
 
 		if(localStorage.getItem("jwt_console")){
-
 			setTokenExpired();
 		}
 		clearStorage();
 	}
 
 	function setTokenExpired(){
-
 		localStorage.removeItem("jwt_console");
-
 		setLogged(false);
 	}
 
@@ -101,7 +96,6 @@ function App() {
 		setUserEmail,
 		inLoginPage,
 		setInLoginPage,
-
 		abortController,
 		debugOn,
 		clearStorage,
