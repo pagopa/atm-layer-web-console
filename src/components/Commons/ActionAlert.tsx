@@ -36,17 +36,21 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 
 	return (
 
-		<Box my={2}>
+		<Box my={2} data-testid="action-alert">
 			{openSnackBar === true &&
 				<Alert severity={severity} onClose={conditionalReload}>
 					<AlertTitle>
 						{title}
 					</AlertTitle>
 					{errorCode && errorCode === "ATMLM_4000047" ?
-						<Typography variant="body1">
-							{message + ", vuoi sostiuire l'associazione per questa banca?"}
-							{<p><Button  variant="outlined" onClick={handleSwitchAssociationFetch} color="error">Sotituisci</Button></p>}
-						</Typography>
+						<>
+							<Typography variant="body1">
+								{message + ", vuoi sostiuire l'associazione per questa banca?"}
+							</Typography>
+							<Button variant="outlined" onClick={handleSwitchAssociationFetch} color="error" sx={{ mt: 1.5 }}>
+								Sostituisci
+							</Button>
+						</>
 						: <Typography variant="body1">{message}</Typography>
 					}
 				</Alert>

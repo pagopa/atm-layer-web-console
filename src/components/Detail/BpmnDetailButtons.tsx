@@ -13,7 +13,7 @@ const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 	const buttonConfigs = [
 	  { text: "Aggiorna", action: UPGRADE_BPMN, navigate: ROUTES.UPGRADE_BPMN },
 	  { text: "Rilascia", action: DEPLOY_BPMN, disabledCondition: () => detail.status === "DEPLOYED" },
-	  { text: "Associa", action: ASSOCIATE_BPMN, navigate: ROUTES.ASSOCIATE_BPMN },
+	  { text: "Associa", action: ASSOCIATE_BPMN, disabledCondition: () => detail.status !== "DEPLOYED", navigate: ROUTES.ASSOCIATE_BPMN },
 	  { text: "Cancella", action: DELETE_BPMN },
 	  { text: "Scarica", action: DOWNLOAD_BPMN }
 	];

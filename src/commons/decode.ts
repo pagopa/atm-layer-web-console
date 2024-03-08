@@ -3,13 +3,11 @@
 /* eslint-disable functional/no-let */
 export function base64_decode(base64: string) {  
 	const decoded= atob(base64);
-	console.log(decoded);
 	return decoded;
 }
 
 export function base64_encode(htmlText: string) {  
 	const encoded= btoa(htmlText);
-	console.log(encoded);
 	return encoded;
 }
 

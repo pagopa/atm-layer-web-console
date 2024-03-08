@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "@emotion/react";
 import PageLayout from "../PageLayout";
 import { Ctx } from "../../../DataContext";
 import { themeApp } from "../../../assets/jss/themeApp";
+import { ThemeProvider } from "@mui/material";
 
 
 beforeEach(() => {

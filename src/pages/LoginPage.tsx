@@ -1,5 +1,4 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { Ctx } from "../DataContext";
 import BoxPageLayout from "./Layout/BoxPageLayout";
@@ -17,7 +16,7 @@ const LoginPage = () => {
 		window.open(urlLogin, "_self");
 	};
 
-	// pulisco il localStorage all'ingresso in pagina
+	// pulisco il sessionStorage all'ingresso in pagina
 	useEffect(() => {
 		clearAll();
 	}, []);
@@ -44,6 +43,7 @@ const LoginPage = () => {
 							onClick={handleLogin}
 							title="Accedi"
 							fullWidth
+							data-testid="accedi-button-test"
 						>
 									Accedi
 						</Button>

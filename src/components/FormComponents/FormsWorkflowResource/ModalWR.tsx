@@ -4,7 +4,7 @@ import { Ctx } from "../../../DataContext";
 import { WR_DELETE, WR_DEPLOY, WR_DOWNLOAD, WR_ROLLBACK } from "../../../commons/endpoints";
 import { getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
-import { DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, PROCESS_RESOURCES, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
+import { BPMN, DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE_WR } from "../../../commons/constants";
 import { downloadFile } from "../../../commons/decode";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -22,7 +22,8 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 	
 	const { abortController } = useContext(Ctx);
 	const content=getTextModal(type);
-	const recordParams = JSON.parse(localStorage.getItem("recordParams") ?? "");
+	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const [loading, setLoading] = useState(false);
 	
@@ -54,7 +55,7 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 						...response.valuesObj,
 						fileName: response.valuesObj?.resourceFile?.fileName
 					};
-					localStorage.setItem("recordParams", JSON.stringify(deployedResponse));
+					sessionStorage.setItem("recordParams", JSON.stringify(deployedResponse));
 					setTimeout(() => {
 						setOpenSnackBar(false);
 						window.location.reload();
@@ -91,8 +92,8 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 					setTimeout(() => {
 						setOpenSnackBar(false);
 					}, 3000);
-					switch (recordParams.resourceS3Type) {
-					case PROCESS_RESOURCES: {
+					switch (recordParams.resourceType) {
+					case BPMN: {
 						downloadFile(response.valuesObj.fileContent,"application/xml",recordParams.fileName, "bpmn");
 						break;
 					} 

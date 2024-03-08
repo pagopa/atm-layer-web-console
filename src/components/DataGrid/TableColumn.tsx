@@ -37,15 +37,15 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	};
 
 	function renderCell(
-		params: GridRenderCellParams,
+		params: any,
 		value: ReactNode = params.value,
 		overrideStyle: CSSProperties = {}
 	) {
 		return (
 			<Box
 				px={1.5}
-				width= "100%"
-				height= "100%"
+				width="100%"
+				height="100%"
 				sx={{
 					WebkitBoxOrient: "vertical" as const,
 					...overrideStyle,
@@ -58,10 +58,10 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 						display: "-webkit-box",
 						WebkitLineClamp: 2,
 						WebkitBoxOrient: "vertical" as const,
-						width: "100%"					
+						width: "100%"
 					}}
 				>
-					<Tooltip 
+					<Tooltip
 						placement="bottom-start"
 						title={<span> {value}</span>}
 					>
@@ -86,12 +86,13 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				<IconButton
 					onClick={() => {
 						navigate(path);
-						localStorage.setItem("recordParams", JSON.stringify(param.row));
+						sessionStorage.setItem("recordParams", JSON.stringify(param.row));
 					}}
 					sx={{
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="action-column-test"
 				>
 					<ArrowForwardIos sx={{ color: "primary.main", fontSize: "24px" }} />
 				</IconButton>
@@ -104,20 +105,23 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		const actions = () => {
 			setOpen(true);
 			setType(DELETE_ASSOCIATION);
-			localStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
+			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
 
 		return (
 			<Box
 				width="100%"
+				display="flex"
+				justifyContent={"center"}
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
 					onClick={actions}
 					sx={{
-						width: "100%",
+
 						"&:hover": { backgroundColor: "transparent !important" },
 					}}
+					data-testid="delete-column-test"
 				>
 					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
 				</IconButton>

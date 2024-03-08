@@ -21,7 +21,7 @@ const WorkflowResourcePage = () => {
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />
 			</Box>
 			<BoxPageLayout shadow={true} px={0} mx={5}>
-				<WorkflowResourceDataGrid />
+				<WorkflowResourceDataGrid/>
 			</BoxPageLayout>
 		</React.Fragment>
 	);
