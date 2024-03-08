@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { themeApp } from "./assets/jss/themeApp";
 import { Ctx } from "./DataContext.js";
 import PageLayout from "./pages/Layout/PageLayout";
@@ -22,8 +22,8 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
-import ROUTES from "./routes";
 import { JwtUser } from "./model/UserModel";
+
 
 const LocalRoutes = () => (
 	<Routes>
@@ -55,26 +55,24 @@ function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	// const [loading, setLoading] = useState(false);
 	const temp= localStorage.getItem("tempLog");
-	const jwt= localStorage.getItem("jwt");
+	const jwt= localStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
+	const [inLoginPage, setInLoginPage] = useState(false);
 	const abortController = new AbortController();
-	const navigate = useNavigate();
 
 	function clearAll(){
-		if(sessionStorage.getItem("jwt")){
+		if(localStorage.getItem("jwt_console")){
 			setTokenExpired();
 		}
 		clearStorage();
 	}
 
 	function setTokenExpired(){
-		sessionStorage.removeItem("jwt");
+		localStorage.removeItem("jwt_console");
 		setLogged(false);
-		navigate(ROUTES.LOGIN);
 	}
 
 	function clearStorage(){
@@ -90,14 +88,14 @@ function App() {
 	const values = {
 		warningCodeValue,
 		setWarningCodeValue,
-		// loading,
-		// setLoading,
 		clearAll,
 		setTokenExpired,
 		logged, 
 		setLogged,
 		userEmail,
 		setUserEmail,
+		inLoginPage,
+		setInLoginPage,
 		abortController,
 		debugOn,
 		clearStorage,

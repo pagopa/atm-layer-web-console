@@ -5,7 +5,7 @@ import BoxPageLayout from "./Layout/BoxPageLayout";
 
 
 const LoginPage = () => {
-	const { clearAll, debugOn } = useContext(Ctx);
+	const { clearAll, debugOn, setInLoginPage } = useContext(Ctx);
 	const theme=useTheme();
 
 	const handleLogin=()=>{
@@ -18,6 +18,7 @@ const LoginPage = () => {
 
 	// pulisco il sessionStorage all'ingresso in pagina
 	useEffect(() => {
+		setInLoginPage(true);
 		clearAll();
 	}, []);
 	
