@@ -28,3 +28,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: "npm run test:full-coverage"
           threshold: 90
+          annotations: none
