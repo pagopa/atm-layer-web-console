@@ -34,12 +34,13 @@ jobs:
           npm install
           npm run test:full-coverage
 
-      - name: JEST Report
-        uses: RedaktionsNetzwerk-Deutschland/action-jest-reporter@v1.0.0
+      - name: Create annotations
+        uses: IgnusG/jest-report-action@v2.3.3
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          json-glob: coverage/coverage-final.json
-  
+          check-name: Jest Report Analysis
+          access-token: ${{ github.token }}
+          junit-file: coverage/clover.xml
+
       - name: Build app
         run: |
           npm run build:dev
