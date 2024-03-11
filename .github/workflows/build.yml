@@ -45,7 +45,7 @@ jobs:
         uses: phoenix-actions/test-reporting@v12
         with:
           name: JEST Tests            # Name of the check run which will be created
-          path: "*/coverage/clover.xml"    # Path to test results
+          path: coverage/clover.xml    # Path to test results
           reporter: jest-junit        # Format of test results
 
       - name: Build app
