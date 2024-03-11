@@ -25,6 +25,7 @@ jobs:
           npm install
 
       - name: Jest report
-        uses: ArtiomTr/jest-coverage-report-action@v2
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: "npm run test:full-coverage"
