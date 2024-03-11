@@ -28,7 +28,7 @@ const LoginPageCallback = () => {
 			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
 
 			if (response?.success) {
-				setUserEmail(response?.valuesObj.email);
+				setUserEmail({ email: response?.valuesObj.email });
 			} else {
 				setUserEmail("Benvenuto utente");
 			}
