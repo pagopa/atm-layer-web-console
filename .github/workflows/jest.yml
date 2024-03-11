@@ -1,0 +1,30 @@
+name: Coverage on PR
+
+on:
+  pull_request:
+
+jobs:
+  pr_scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.9.0
+
+      - name: Build app
+        run: |
+          npm install
+
+      - name: Checkout code
+        uses: willcaul/jest-github-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   test-command: "yarn test"
