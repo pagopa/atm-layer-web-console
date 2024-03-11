@@ -26,7 +26,6 @@ jobs:
 
       - name: Jest report
         uses: willcaul/jest-github-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           test-command: "npm run test:full-coverage"
