@@ -3,6 +3,8 @@ name: Coverage on PR
 on:
   pull_request:
 
+permissions: write-all
+
 jobs:
   pr_scan:
     runs-on: ubuntu-latest
@@ -22,7 +24,7 @@ jobs:
         run: |
           npm install
 
-      - name: Checkout code
+      - name: Jest report
         uses: willcaul/jest-github-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
