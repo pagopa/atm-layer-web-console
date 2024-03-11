@@ -54,6 +54,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 		uuid: recordParams.workflowResourceId,
 		file: undefined,
 	};
+
+	const wrongExtensionMessage = "Il file che hai caricato ha un' estensione diversa da quello che stai cercando di aggiornare.";
 	
 	const [errors, setErrors] = useState<any>(initialValues);
 
@@ -155,7 +157,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}
 						{showAlert && 
 						<Alert severity="error">
-							Il file che hai caricato ha un estensione diversa da quello che stai cercando di aggiornare.
+							{wrongExtensionMessage}
 						</Alert>}
 					</Box>
 				</DialogContent>

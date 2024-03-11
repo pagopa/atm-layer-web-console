@@ -42,10 +42,24 @@ export const CreateResources = () => {
 	};
 
 	const validateForm = () => {
+		// eslint-disable-next-line functional/immutable-data
+		const fileExtension = formData.file?.name.split(".").pop()?.toLowerCase();
+
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? isValidResourcesFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
-			resourceType: formData.resourceType ? "" : "Campo obbligatorio"
+			filename:
+				isValidResourcesFilename(formData.filename) ?
+					// eslint-disable-next-line functional/immutable-data
+					fileExtension && fileExtension === formData.filename.split(".").pop()?.toLowerCase() ?
+						"" :
+						"L'estensione del file non corrisponde con quello caricato"
+					: "Campo obbligatorio",
+			resourceType: formData.resourceType ?
+				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
+				formData.resourceType  === "OTHER" && fileExtension ?
+					""
+					: "L'estensione del file non corrisponde con quella selezionata"
+				: "Campo obbligatorio"
 		};
 
 		setErrors(newErrors);
@@ -62,6 +76,7 @@ export const CreateResources = () => {
 
 		if (validateForm()) {
 			const postData = new FormData();
+
 			if (formData.file && formData.filename && formData.resourceType) {
 				postData.append("file", formData.file);
 				postData.append("filename", formData.filename.replace(/\s/g, ""));
