@@ -26,5 +26,5 @@ jobs:
         uses: willcaul/jest-github-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # with:
-        #   test-command: "yarn test"
+        with:
+          test-command: "npm run test:full-coverage"

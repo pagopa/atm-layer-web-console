@@ -29,10 +29,10 @@ jobs:
         with:
           node-version: 20.9.0
 
-      - name: Build app
+      - name: Run test
         run: |
           npm install
-          npm test
+          npm run test:full-coverage
 
       - name: Build app
         run: |
