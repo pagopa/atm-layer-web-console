@@ -20,7 +20,7 @@ jobs:
 
       - name: Installation of npm
         run: |
-          npm install --save-dev jest
+          npm install
 
       - name: Jest report
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6

@@ -32,7 +32,14 @@ jobs:
       - name: Run test
         run: |
           npm install
-          npm run test:full-coverage
+
+      - name: Jest report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-script: "npm run test:full-coverage"
+          threshold: 90
+          annotations: none
 
       - name: Build app
         run: |
