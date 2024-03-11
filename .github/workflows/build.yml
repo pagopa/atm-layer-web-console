@@ -48,7 +48,7 @@ jobs:
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95
         with:
-          filename: coverage/clover.xml
+          filename: coverage/coverage-final.json
           badge: true
           format: 'markdown'
           output: 'both'
