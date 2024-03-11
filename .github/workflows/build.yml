@@ -35,11 +35,13 @@ jobs:
 
       - name: Jest report
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        id: coverage
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: "npm run test:full-coverage"
           threshold: 90
           annotations: none
+          base-coverage-file: coverage/coverage-final.json
 
       - name: Build app
         run: |
