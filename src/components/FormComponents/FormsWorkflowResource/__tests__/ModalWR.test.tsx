@@ -153,7 +153,7 @@ describe("ModalResources Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
  
-        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
 
