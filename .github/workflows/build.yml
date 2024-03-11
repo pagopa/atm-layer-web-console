@@ -34,24 +34,16 @@ jobs:
           npm install
           npm run test:full-coverage
 
-      # - name: Jest report
-      #   uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
-      #   id: coverage
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     test-script: "npm run test:full-coverage"
-      #     threshold: 90
-      #     annotations: none
-      #     base-coverage-file: coverage/coverage-final.json
-      #     output: report-markdown
-
-      - name: Code Coverage Summary Report
-        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95
+      - name: Jest report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        id: coverage
         with:
-          filename: coverage/coverage-final.json
-          badge: true
-          format: 'markdown'
-          output: 'both'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-script: "npm run test:full-coverage"
+          threshold: 90
+          annotations: none
+          base-coverage-file: coverage/coverage-final.json
+          output: report-markdown
 
       - name: Build app
         run: |
