@@ -34,16 +34,12 @@ jobs:
           npm install
           npm run test:full-coverage
 
-      - name: Jest report
-        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
-        id: coverage
+      - name: Test Report
+        uses: dorny/test-reporter@v1.8.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          test-script: "npm run test:full-coverage"
-          threshold: 90
-          annotations: none
-          base-coverage-file: coverage/coverage-final.json
-          output: report-markdown
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: jest-junit        # Format of test results
 
       - name: Build app
         run: |
