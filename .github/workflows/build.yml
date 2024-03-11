@@ -34,12 +34,26 @@ jobs:
           npm install
           npm run test:full-coverage
 
-      - name: JEST Report
-        id: coverageComment
-        uses: MishaKav/jest-coverage-comment@main
+      - name: Test Report
+        uses: dorny/test-reporter@v1
         with:
-          hide-comment: true
-          coverage-summary-path: coverage/coverage-final.json
+          name: JEST Tests            # Name of the check run which will be created
+          path: coverage/clover.xml    # Path to test results
+          reporter: jest-junit        # Format of test results
+
+      # - name: JEST Report
+      #   id: coverageComment
+      #   uses: MishaKav/jest-coverage-comment@main
+      #   with:
+      #     hide-comment: true
+      #     coverage-summary-path: coverage/coverage-final.json
+      #     title: Jest Coverage Comment
+      #     summary-title: My Summary Title
+      #     badge-title: Coverage
+      #     junitxml-title: My JUnit Title
+      #     junitxml-path: coverage/clover.xml
+      #     coverage-title: My Coverage Title
+      #     coverage-path: ./coverage.txt
 
       - name: Build app
         run: |
