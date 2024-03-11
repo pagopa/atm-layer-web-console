@@ -34,20 +34,6 @@ jobs:
           npm install
           npm run test:full-coverage
 
-      # - name: Test Report
-      #   uses: dorny/test-reporter@v1
-      #   with:
-      #     name: JEST Tests            # Name of the check run which will be created
-      #     path: coverage/clover.xml    # Path to test results
-      #     reporter: jest-junit        # Format of test results
-
-      - name: Test Report
-        uses: phoenix-actions/test-reporting@v12
-        with:
-          name: JEST Tests            # Name of the check run which will be created
-          path: coverage/clover.xml    # Path to test results
-          reporter: java-junit        # Format of test results
-
       - name: Build app
         run: |
           npm run build:dev
