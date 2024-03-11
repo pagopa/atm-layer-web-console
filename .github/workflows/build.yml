@@ -34,6 +34,11 @@ jobs:
           npm install
           npm run test:full-coverage
 
+      - name: JEST Report
+        uses: RedaktionsNetzwerk-Deutschland/action-jest-reporter@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - name: Build app
         run: |
           npm run build:dev
