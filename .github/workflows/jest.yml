@@ -3,8 +3,6 @@ name: Coverage on PR
 on:
   pull_request:
 
-permissions: write-all
-
 jobs:
   pr_scan:
     runs-on: ubuntu-latest
@@ -22,10 +20,11 @@ jobs:
 
       - name: Installation of npm
         run: |
-          npm install
+          npm install --save-dev jest
 
       - name: Jest report
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: "npm run test:full-coverage"
+          threshold: 90
