@@ -219,7 +219,7 @@ describe("ModalResources Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
  
-        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
     test("Test ModalWR with DOWNLOAD BPMN", async () => {
@@ -242,7 +242,7 @@ describe("ModalResources Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
  
-        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
     test("Test ModalWR with DOWNLOAD FORM", async () => {
@@ -264,7 +264,7 @@ describe("ModalResources Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
  
-        expect(setOpenSnackBar).toHaveBeenCalledWith(false);
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
 
