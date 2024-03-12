@@ -177,7 +177,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						{definitionKeyValue &&
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}
 						{showAlert && 
-						<Alert severity="error">
+						<Alert severity="error" sx={{fontWeight: "normal"}}>
 							{wrongExtensionMessage}
 						</Alert>}
 					</Box>
