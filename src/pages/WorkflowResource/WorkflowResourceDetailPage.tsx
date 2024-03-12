@@ -15,6 +15,7 @@ const WorkflowResourceDetailPage = () => {
 	];
 	const detailTitle = "Dettaglio risorsa aggiuntiva per processo";
 
+	
 	return (
 		<DetailWr
 			detailFields={fields}
