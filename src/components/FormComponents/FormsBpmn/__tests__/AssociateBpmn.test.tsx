@@ -200,19 +200,19 @@ describe("AssociateBpmn", () => {
         fireEvent.click(screen.getByText("Conferma"));
     });
 
-    // test("Test AssociateBpmn con errore di rete", async () => {
-    //     sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
+    test("Test AssociateBpmn con errore di rete", async () => {
+        sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
-    //     global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network Error"));
+        global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network Error"));
 
-    //     renderAssociateBpmn();
+        renderAssociateBpmn();
 
-    //     // CHECK_TEST: handleSnackBar is never called
-    //     // await waitFor(() => expect(handleSnackbar).toHaveBeenCalled());
+        // CHECK_TEST: handleSnackBar is never called
+        await waitFor(() => expect(handleSnackbar).toHaveBeenCalled());
 
-    //     // expect(handleSnackbar).toHaveBeenCalledWith(false, expect.any(Function), expect.any(Function), expect.any(Function), expect.any(Function));
+        expect(handleSnackbar).toHaveBeenCalledWith(false, expect.any(Function), expect.any(Function), expect.any(Function), expect.any(Function));
 
-    // });
+    });
 
     test("Test handleSwitchAssociationFetch indirectly by simulating button click", async () => {
         sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
