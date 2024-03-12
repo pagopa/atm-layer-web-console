@@ -80,7 +80,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					setFormData(initialValues);
-					
+					if (response?.success) {
+						const updatedResponse = {
+							...response.valuesObj,
+							fileName: response.valuesObj?.resourceFile?.fileName
+						};
+						sessionStorage.setItem("recordParams", JSON.stringify(updatedResponse));
+						setTimeout(() => {
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					} 
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
@@ -108,6 +118,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					setLoadingButton(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					if (response?.success) {
+						const updatedResponse = {
+							...response.valuesObj,
+							fileName: response.valuesObj?.resourceFile?.fileName
+						};
+						sessionStorage.setItem("recordParams", JSON.stringify(updatedResponse));
+						setTimeout(() => {
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					}
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
@@ -156,7 +177,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						{definitionKeyValue &&
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}
 						{showAlert && 
-						<Alert severity="error">
+						<Alert severity="error" sx={{fontWeight: "normal"}}>
 							{wrongExtensionMessage}
 						</Alert>}
 					</Box>
