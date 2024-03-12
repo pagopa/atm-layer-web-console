@@ -22,8 +22,6 @@ export const HeaderAccountCustom = ({
 
 	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
 
-	const token = localStorage.getItem("jwt_console");
-
 	const getTokenEmail = async () => {
 		try {
 			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
@@ -37,10 +35,12 @@ export const HeaderAccountCustom = ({
 	};
 
 	useEffect(() => {
-		if(!userEmail.email && token){
+		if(!userEmail.email){
 			void getTokenEmail();
 		}
 	}, []);
+
+
 		
 	return (
 		<Stack
@@ -84,7 +84,7 @@ export const HeaderAccountCustom = ({
 									<AccountCircleRoundedIcon />
 								</Box>
 								<Typography>
-									{userEmail.email ?? "Benvenuto utente"}
+									{userEmail.email}
 								</Typography>
 							</Box>
 						)}
