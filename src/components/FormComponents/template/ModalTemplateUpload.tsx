@@ -186,7 +186,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button  variant={"outlined"}  onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
+						<Button  variant={"outlined"}  onClick={() => { setOpen(false); setFormData(initialValues); setShowAlert(false); }}>Annulla</Button>
 					</Box>
 					<Box>
 
