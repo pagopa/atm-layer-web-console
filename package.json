@@ -1,6 +1,6 @@
 {
   "name": "web-console",
-  "version": "v1.1.0-dev.2",
+  "version": "v1.1.0-dev.3",
   "private": true,
   "homepage": "/webconsole",
   "jest": {
@@ -95,7 +95,7 @@
     "prettier-eslint": "^16.1.2",
     "react-router-dom": "^6.20.1"
   },
-  "jest-junit":{
+  "jest-junit": {
     "outputDirectory": "reports",
     "outputName": "jest-junit.xml",
     "ancestorSeparator": " > ",
