@@ -5,9 +5,9 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.002">
+    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.023">
     </testcase>
@@ -19,7 +19,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
     </testcase>
@@ -27,7 +27,7 @@
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
     </testcase>
@@ -41,11 +41,11 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
+    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0.001">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
@@ -59,7 +59,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
@@ -97,9 +97,9 @@
   <testsuite name="src/utils/__tests__/checks.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:16" time="0.332" tests="25">
     <testcase classname="checks tests" name="checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" time="0.002">
     </testcase>
-    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0">
+    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="regexTestField restituisce true se un campo corrisponde alla regex specificata" time="0.001">
     </testcase>
@@ -109,11 +109,11 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0">
+    <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0">
+    <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" time="0.001">
     </testcase>
@@ -125,13 +125,13 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per un UUID" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.001">
+    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" time="0">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.001">
+    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0">
     </testcase>
-    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0">
+    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.006">
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
@@ -173,7 +173,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.008">
     </testcase>
-    <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.012">
+    <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.011">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.014">
     </testcase>
@@ -227,7 +227,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
     </testcase>
@@ -251,7 +251,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
@@ -259,15 +259,15 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:20" time="0.723" tests="7">
     <testcase classname="DetailButtons" name="renders buttons with correct text" time="0.039">
     </testcase>
-    <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.013">
+    <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.017">
     </testcase>
-    <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.009">
+    <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.008">
     </testcase>
     <testcase classname="DetailButtons" name="disables button when disabledCondition is true" time="0.005">
     </testcase>
@@ -327,7 +327,7 @@
   <testsuite name="src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:22" time="4.029" tests="4">
     <testcase classname="ModalResources Test" name="Test ModalResources with DELETE" time="0.123">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.027">
+    <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.024">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.026">
     </testcase>
@@ -367,7 +367,7 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD FORM" time="3.036">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DOWNLOAD" time="0.042">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DOWNLOAD" time="0.047">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:26" time="2.254" tests="4">
@@ -425,7 +425,7 @@
     </testcase>
     <testcase classname="decode file test" name="download a file successfully" time="0.005">
     </testcase>
-    <testcase classname="decode file test" name="download file doc null" time="0.001">
+    <testcase classname="decode file test" name="download file doc null" time="0">
     </testcase>
     <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
     </testcase>
@@ -433,7 +433,7 @@
   <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:31" time="0.978" tests="4">
     <testcase classname="UploadFileWithButton" name="Clear Uploaded File" time="0.045">
     </testcase>
-    <testcase classname="UploadFileWithButton" name="Upload Allowed File" time="0.023">
+    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage without sessionStorage" time="0.045">
     </testcase>
     <testcase classname="UploadFileWithButton" name="Uploaded File With Error" time="0.045">
     </testcase>
@@ -449,7 +449,7 @@
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:32" time="0.927" tests="2">
     <testcase classname="LoginPageCallback" name="should navigate to HOME if token exists" time="0.042">
     </testcase>
-    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.008">
+    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.007">
     </testcase>
   </testsuite>
   <testsuite name="src/App.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-13T17:08:31" time="2.183" tests="2">

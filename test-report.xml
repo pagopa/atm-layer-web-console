@@ -58,9 +58,9 @@
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" duration="0"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" duration="1"/>
-    <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" duration="1"/>
-    <testCase name="checks tests Restituisce true per un campo che non contiene spazi" duration="0"/>
-    <testCase name="checks tests Restituisce true per una stringa non vuota e senza spazi" duration="0"/>
+    <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" duration="0"/>
+    <testCase name="checks tests Restituisce true per un campo che non contiene spazi" duration="1"/>
+    <testCase name="checks tests Restituisce true per una stringa non vuota e senza spazi" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri decimali con separatore" duration="1"/>
     <testCase name="checks tests Restituisce false per un input qualsiasi quando il regType non è riconosciuto" duration="0"/>
@@ -165,6 +165,12 @@
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="88"/>
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="83"/>
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="66"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx">
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with next page click" duration="269"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="90"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="62"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="51"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx">
     <testCase name="CreateBpmn Test Test CreateBpmn" duration="243"/>
@@ -303,7 +309,7 @@
     <testCase name="CreateWRPage render" duration="174"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/fetch/__tests__/fetchRequest.test.ts">
-    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="2"/>
+    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="3"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/CardComponents/__tests__/HomeCardComponent.test.tsx">
     <testCase name="HomeCardComponent test First render" duration="92"/>
@@ -317,8 +323,8 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
     <testCase name="ActionIcon test First render" duration="47"/>
   </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
-    <testCase name="HomePageTitle Check for HomePageTitle" duration="35"/>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
+    <testCase name="ActionIcon test First render" duration="45"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/TitleComponent.test.tsx">
     <testCase name="HomePageTitle Check for HomePageTitle" duration="20"/>
