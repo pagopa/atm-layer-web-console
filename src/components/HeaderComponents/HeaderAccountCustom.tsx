@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import { useContext, useEffect } from "react";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
-import EmulatorButton from "../NavigationComponents/EmulatorButton";
+// import EmulatorButton from "../NavigationComponents/EmulatorButton";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_EMAIL } from "../../commons/endpoints";
 
