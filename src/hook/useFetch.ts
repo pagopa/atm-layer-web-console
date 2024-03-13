@@ -6,7 +6,7 @@ export default function useFetch(endPoint?: string | undefined) {
 
 	const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : process.env.REACT_APP_BACKEND_URL;
 	const CODE_SUCCESS = [200, 201, 202, 203];
-	const token = localStorage.getItem("jwt_console");
+	const token = sessionStorage.getItem("jwt_console");
 
 	const fetchFromServer = async ({
 		urlEndpoint,

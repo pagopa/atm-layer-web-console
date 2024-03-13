@@ -22,7 +22,7 @@ export const HeaderAccountCustom = ({
 
 	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
 
-	const token = localStorage.getItem("jwt_console");
+	const token = sessionStorage.getItem("jwt_console");
 
 	const getTokenEmail = async () => {
 		try {
