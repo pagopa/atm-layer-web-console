@@ -23,7 +23,7 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 	const conditionalReload = () => {
 		if (type === DELETE_ASSOCIATION || (type && DEPLOY_VALUES.includes(type))) {
 			window.location.reload();
-		} else if (type && type === DELETE_BPMN) {
+		} else if (type && type === DELETE_BPMN && severity !== "error") {
 			navigate(ROUTES.BPMN);
 		} else if (type && type === DELETE_RES) {
 			navigate(ROUTES.RESOURCES);

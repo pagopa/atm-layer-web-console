@@ -81,6 +81,12 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				if(response?.success){
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 1000);
+				}
 			} catch (error) {
 				console.error("ERROR", error);
 			}
