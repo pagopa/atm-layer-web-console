@@ -56,7 +56,7 @@ export const CreateResources = () => {
 					: "Campo obbligatorio",
 			resourceType: formData.resourceType ?
 				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
-				formData.resourceType  === "OTHER" && fileExtension ?
+				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
 					""
 					: "L'estensione del file non corrisponde con quella selezionata"
 				: "Campo obbligatorio"
