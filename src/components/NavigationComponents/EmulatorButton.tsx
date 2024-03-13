@@ -3,7 +3,7 @@ import IconBox from "../Commons/IconBox";
 
 export default function EmulatorButton() {
 	const openEmulator = () => {
-		const jwt = localStorage.getItem("jwt_console");
+		const jwt = sessionStorage.getItem("jwt_console");
 		const emulatorUrl = process.env.REACT_APP_EMULATOR_URL;
 		const url = jwt && emulatorUrl ? emulatorUrl.concat(`#jwt_console=${jwt}`) : emulatorUrl;
 		window.open(url, "_blank");
@@ -17,16 +17,16 @@ export default function EmulatorButton() {
 			size="large"
 			onClick={openEmulator}
 			sx={{
-				padding: "0px 0px 0px 16px",
+				padding: "0px 0px 0px 8px",
+				color: theme.palette.text.primary,
 				"&:hover": {
-					color: theme.palette.primary.main,
 					backgroundColor: "transparent",
 					textDecoration:"underline"
 				},
 			}}
 		>
-Emulator
-			<IconBox icon={"Launch"} color={theme.palette.primary.main} pad={1} size={"1em"} marg={"5px 0px 0px 0px"} />
+		Emulator
+			<IconBox icon={"Launch"} color={theme.palette.text.primary} pad={0.5} size={"1em"} marg={"8px 0px 0px 0px"} />
 		</Button>
 	);
 }

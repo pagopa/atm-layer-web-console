@@ -143,13 +143,12 @@ describe("ActionAlert", () => {
     // expect(window.location.href).toBe(currentUrl);
   });
 
-  test("navigate to BPMN when type is DELETE_BPMN", () => {
+  test("navigate to BPMN when type is DELETE_BPMN with success", () => {
     const { container } = render(
       <BrowserRouter>
         <ActionAlert
           setOpenSnackBar={setOpenSnackBar}
           openSnackBar={true}
-          severity="error"
           message="Errore"
           title="Errore"
           type="deleteBpmn"
