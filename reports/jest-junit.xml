@@ -15,7 +15,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.002">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0">
     </testcase>
@@ -23,7 +23,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
@@ -47,7 +47,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring driver not present" time="0">
+    <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.003">
     </testcase>
@@ -91,7 +91,7 @@
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_RES" time="0.056">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Update with different file extensions should fail" time="0.026">
+    <testcase classname="ModalTemplateUpload Test" name="Update with different file extensions should fail" time="0.031">
     </testcase>
   </testsuite>
   <testsuite name="src/utils/__tests__/checks.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-03-14T13:37:06" time="0.335" tests="25">
@@ -133,11 +133,11 @@
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
+    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce il nome del file da un percorso valido con un nome file valido" time="0">
+    <testcase classname="checks tests" name="Restituisce il nome del file da un percorso valido con un nome file valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0.001">
     </testcase>
@@ -167,7 +167,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="render with warning" time="0.009">
     </testcase>
-    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.003">
+    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.002">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.013">
     </testcase>
@@ -177,11 +177,11 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.012">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR" time="0.011">
+    <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR" time="0.012">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES" time="0.011">
     </testcase>
-    <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.008">
+    <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.009">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/Filters/__tests__/FilterBar.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-14T13:37:06" time="1.384" tests="11">
@@ -197,7 +197,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with fileName" time="0.028">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.023">
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.034">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.037">
     </testcase>
@@ -229,7 +229,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.001">
     </testcase>
@@ -239,21 +239,21 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0.001">
     </testcase>
@@ -275,7 +275,7 @@
     </testcase>
     <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.004">
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.007">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.006">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-14T13:37:10" time="1.329" tests="4">
