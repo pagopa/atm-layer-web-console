@@ -54,7 +54,7 @@ function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	const temp= localStorage.getItem("tempLog");
+	const temp= sessionStorage.getItem("tempLog");
 	const jwt= sessionStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(temp||jwt?true:false);
