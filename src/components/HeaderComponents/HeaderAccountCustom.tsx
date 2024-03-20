@@ -4,9 +4,9 @@ import { Box } from "@mui/system";
 import { useContext, useEffect } from "react";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
-// import EmulatorButton from "../NavigationComponents/EmulatorButton";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_EMAIL } from "../../commons/endpoints";
+import EmulatorButton from "../NavigationComponents/EmulatorButton";
 
 type HeaderAccountProps = {
     rootLink: RootLinkType;
@@ -23,6 +23,7 @@ export const HeaderAccountCustom = ({
 	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
 
 	const token = sessionStorage.getItem("jwt_console");
+	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
 
 	const getTokenEmail = async () => {
 		try {
@@ -62,11 +63,11 @@ export const HeaderAccountCustom = ({
 				>
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						{/* {loggedUser && (
+						{loggedUser && isProd===false && ( 
 							<Box ml={6}>
 								<EmulatorButton />
 							</Box>
-						)} */}
+						)}
 					</Box>
 
 					<Stack
@@ -78,7 +79,6 @@ export const HeaderAccountCustom = ({
 
 						{/* 1. Logged User with Dropdown */}
 						{loggedUser && (
-							// <AccountDropdown user={loggedUser} />
 							<Box display={"flex"} >
 								<Box mr={1}>
 									<AccountCircleRoundedIcon />
