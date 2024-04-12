@@ -322,7 +322,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, ((params.row.storageKey).toString()).replace(/^(?:[^/]*\/){2}\s*/, "")),
 					sortable: false,
-					flex: 1
+					flex: 1.7
 				},
 				{
 					field: "resourceType",
