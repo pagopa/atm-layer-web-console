@@ -308,9 +308,22 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.resourceId),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				fileNameColumn,
+				{
+					field: "storageKey",
+					cellClassName: "justifyContentNormal",
+					headerName: "Percorso file",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, ((params.row.storageKey).toString()).replace(/^(?:[^/]*\/){2}\s*/, "")),
+					sortable: false,
+					flex: 1
+				},
 				{
 					field: "resourceType",
 					cellClassName: "justifyContentNormal",
