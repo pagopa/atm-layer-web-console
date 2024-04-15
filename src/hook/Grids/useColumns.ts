@@ -5,7 +5,7 @@ import formatValues from "../../utils/formatValues";
 
 const useColumns: any = () => {
 
-	const { formatDateToString } = formatValues();
+	const { formatDateToString, extractRelativeCdnPath } = formatValues();
 
 	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
 
@@ -320,7 +320,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, ((params.row.storageKey).toString()).replace(/^(?:[^/]*\/){2}\s*/, "")),
+					renderCell: (params: any) => renderCell(params, extractRelativeCdnPath((params.row.storageKey).toString())),
 					sortable: false,
 					flex: 1.7
 				},

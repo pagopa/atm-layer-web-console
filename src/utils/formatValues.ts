@@ -127,6 +127,12 @@ const formatValues = () => {
 		}
 	};
 
+	const extractRelativeCdnPath = (str:string) => {
+		if(str) {
+			return str.replace(/^(?:[^/]*\/){2}\s*/, "");
+		}
+	};
+
 	
 	return {
 		checkValue,
@@ -147,6 +153,7 @@ const formatValues = () => {
 		creaData,
 		formatDateString,
 		extractExtension,
+		extractRelativeCdnPath,
 	};
 };
 
