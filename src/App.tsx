@@ -58,7 +58,6 @@ function App() {
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
-	const [inLoginPage, setInLoginPage] = useState(false);
 	const abortController = new AbortController();
 
 	function clearAll(){
@@ -92,8 +91,6 @@ function App() {
 		setLogged,
 		userEmail,
 		setUserEmail,
-		inLoginPage,
-		setInLoginPage,
 		abortController,
 		debugOn,
 		clearStorage,
