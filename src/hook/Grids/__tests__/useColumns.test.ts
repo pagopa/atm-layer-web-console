@@ -172,13 +172,14 @@ describe("useColumns", () => {
       }
     });
 
-    expect(columns).toHaveLength(6);
+    expect(columns).toHaveLength(7);
     expect(columns[0]).toHaveProperty("field", "resourceId");
     expect(columns[1]).toHaveProperty("field", "fileName");
-    expect(columns[2]).toHaveProperty("field", "resourceType");
-    expect(columns[3]).toHaveProperty("field", "createdAt");
-    expect(columns[4]).toHaveProperty("field", "lastUpdatedAt");
-    expect(columns[5]).toHaveProperty("field", "actions");
+    expect(columns[2]).toHaveProperty("field", "storageKey");
+    expect(columns[3]).toHaveProperty("field", "resourceType");
+    expect(columns[4]).toHaveProperty("field", "createdAt");
+    expect(columns[5]).toHaveProperty("field", "lastUpdatedAt");
+    expect(columns[6]).toHaveProperty("field", "actions");
   });
 
   test("should return correct columns for WORKFLOW_RESOURCE", () => {
