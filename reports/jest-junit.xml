@@ -7,7 +7,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
+    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.002">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.011">
     </testcase>
@@ -41,15 +41,15 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.004">
     </testcase>
     <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0.001">
+    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0">
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.002">
+    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.003">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.002">
     </testcase>
@@ -107,13 +107,13 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" time="0.001">
     </testcase>
@@ -121,7 +121,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce false per un input qualsiasi quando il regType non è riconosciuto" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" time="0.004">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per un UUID" time="0.001">
     </testcase>
@@ -165,7 +165,7 @@
   <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-04-18T14:27:36" time="0.949" tests="10">
     <testcase classname="ActionAlert" name="render with error" time="0.063">
     </testcase>
-    <testcase classname="ActionAlert" name="render with warning" time="0.01">
+    <testcase classname="ActionAlert" name="render with warning" time="0.009">
     </testcase>
     <testcase classname="ActionAlert" name="render without openSnackBar" time="0.007">
     </testcase>
@@ -202,9 +202,9 @@
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.043">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.028">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.037">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" time="0.029">
-    </testcase>
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.04">
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.031">
     </testcase>
   </testsuite>
@@ -233,9 +233,9 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.002">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0">
     </testcase>
@@ -249,13 +249,13 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
@@ -421,7 +421,7 @@
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0.001">
     </testcase>
-    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
+    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0.012">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-04-18T14:27:48" time="1.571" tests="2">
@@ -443,7 +443,11 @@
   <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-04-18T14:27:49" time="1.659" tests="2">
     <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.058">
     </testcase>
-    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.012">
+    <testcase classname="UploadFileWithButton" name="Upload Allowed File" time="0.031">
+    </testcase>
+    <testcase classname="UploadFileWithButton" name="Uploaded File With Error" time="0.041">
+    </testcase>
+    <testcase classname="UploadFileWithButton" name="No File Uploaded With Error" time="0.007">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-04-18T14:27:50" time="1.195" tests="2">
@@ -556,6 +560,10 @@
   </testsuite>
   <testsuite name="src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-04-18T14:27:59" time="0.837" tests="1">
     <testcase classname="BreadCrumb Component" name="renders the correct breadcrumbs" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/pages/__tests__/ErrorPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-03-14T13:37:29" time="0.772" tests="1">
+    <testcase classname="ErrorPage" name="render" time="0.022">
     </testcase>
   </testsuite>
 </testsuites>

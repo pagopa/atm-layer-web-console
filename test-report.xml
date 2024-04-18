@@ -135,8 +135,8 @@
     <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della valuta" duration="0"/>
-    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="0"/>
+    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo senza valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della data" duration="0"/>
   </file>
@@ -153,6 +153,12 @@
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with next page click" duration="227"/>
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="60"/>
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="50"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="43"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx">
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with next page click" duration="232"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="62"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="55"/>
     <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="43"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx">
@@ -235,7 +241,11 @@
     <testCase name="decode file test Test base64_encode function" duration="0"/>
     <testCase name="decode file test download a file successfully" duration="3"/>
     <testCase name="decode file test download file doc null" duration="1"/>
-    <testCase name="decode file test Test downloadStaticFile function" duration="0"/>
+    <testCase name="decode file test Test downloadStaticFile function" duration="12"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="307"/>
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="41"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
     <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="264"/>
