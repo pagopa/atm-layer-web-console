@@ -172,7 +172,7 @@ export const CreateResources = () => {
 				>
 				</TextField>
 			</Grid>
-			<Grid item xs={12} my={1}>
+			{/* <Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="description"
@@ -187,7 +187,7 @@ export const CreateResources = () => {
 					inputProps={{ "data-testid": "description-test" }}
 				>
 				</TextField>
-			</Grid>
+			</Grid> */}
 
 		</FormTemplate >
 	);
