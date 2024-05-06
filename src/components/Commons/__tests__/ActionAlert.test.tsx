@@ -8,8 +8,6 @@ let handleSwitchAssociationFetch: any;
 beforeEach(() => {
   setOpenSnackBar = jest.fn();
   handleSwitchAssociationFetch = jest.fn();
-  // jest.spyOn(console, 'error').mockImplementation(() => { });
-  // jest.spyOn(console, 'warn').mockImplementation(() => { });
 });
 
 describe("ActionAlert", () => {
@@ -132,15 +130,6 @@ describe("ActionAlert", () => {
         />
       </BrowserRouter>
     );
-
-    // const currentUrl = window.location.href;
-
-    // const buttonElement = container.querySelector('button');
-    // if (buttonElement) {
-    //   fireEvent.click(buttonElement);
-    // }
-
-    // expect(window.location.href).toBe(currentUrl);
   });
 
   test("navigate to BPMN when type is DELETE_BPMN with success", () => {
