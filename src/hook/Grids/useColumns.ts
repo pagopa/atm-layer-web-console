@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN_ASSOCIATED, CAMUNDA_VARIABLES, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -7,7 +7,7 @@ const useColumns: any = () => {
 
 	const { formatDateToString, extractRelativeCdnPath } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any, deleteColumnVariables: any, editColumnVariables: any) => {
 
 		const functionTypeColumn = {
 			field: "functionType",
@@ -376,6 +376,59 @@ const useColumns: any = () => {
 				createdByColumn,
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
+			];
+		case CAMUNDA_VARIABLES:
+			return [
+				{
+					field: "name",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome valiabile",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.name),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "value",
+					cellClassName: "justifyContentNormal",
+					headerName: "Valore Variabile",
+					align: "left",
+					headerAlign: "left",
+					editable: true,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.value),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "action1",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => editColumnVariables(params),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "action2",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => deleteColumnVariables(params),
+					sortable: false,
+					flex: 1
+				}
 			];
 		default:
 			return [];

@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CAMUNDA_VARIABLES, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VARIABLE, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_VARIABLE, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -30,6 +30,7 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
+// eslint-disable-next-line complexity
 export const getQueryString = ( filterValues: any, driver: string, URL?: string) => {
 	
 	let queryString="";
@@ -89,6 +90,15 @@ export const getQueryString = ( filterValues: any, driver: string, URL?: string)
 
 		if (filterValues?.terminalId) {
 			queryString = queryString.concat(`&terminalId=${filterValues.terminalId}`);
+		}
+		break;
+	case CAMUNDA_VARIABLES: 
+		if (filterValues?.name) {
+			queryString = queryString.concat(`&name=${filterValues.name}`);
+		}
+
+		if (filterValues?.value) {
+			queryString = queryString.concat(`&value=${filterValues.value}`);
 		}
 		break;
 	default:
@@ -220,6 +230,12 @@ export function getTextModal(type:string):any {
 	}
 	case UPDATE_RES: {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
+	}
+	case DELETE_VARIABLE: {
+		return {titleModal:"Cancellazione variabile di processo", contentText:"Sei sicuro di voler cancellare questa variabile di processo?"};
+	}
+	case UPDATE_VARIABLE: {
+		return {titleModal:"Update variabile di processo", contentText:"Sei sicuro di voler aggiornare il valore della variabile di processo?"};
 	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};

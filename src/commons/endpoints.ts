@@ -22,4 +22,9 @@ export const RESOURCES_UPDATE = "/resources/:resourceId";
 export const RESOURCES_CREATE = "/resources";
 export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
+export const GET_ALL_VARIABLES_FILTER = "/variables/filter";
+export const DELETE_VARIABLES = "/variables/disable/:name";
+export const CREATE_VARIABLES = "/variables";
+export const UPDATE_VARIABLES = "/variables/:name/value/:value";
+
 export const USER_EMAIL = "/info/email";

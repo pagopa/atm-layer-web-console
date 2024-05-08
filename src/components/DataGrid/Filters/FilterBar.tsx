@@ -1,11 +1,12 @@
 import React, { SetStateAction } from "react";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { CAMUNDA_VARIABLES, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
+import VariablesFilterComponent from "./VariablesFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -16,9 +17,10 @@ type Props = {
 	driver: string;
 	loadingButton?: boolean;
 	setLoadingButton: React.Dispatch<SetStateAction<boolean>>;
+	createIcon?: boolean;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton, createIcon }: Props) {
 
 	const { regexTestField } = checks();
 
@@ -58,7 +60,6 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 					getAllList(undefined, 0);
 				}
 			}
-			break;
 		}
 	
 		setFilterValues(updatedFilterValues);
@@ -93,6 +94,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case CAMUNDA_VARIABLES:
+			return <VariablesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}
@@ -112,7 +115,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon}>
 			{filterType()}
 		</FilterTemplate>
 	);

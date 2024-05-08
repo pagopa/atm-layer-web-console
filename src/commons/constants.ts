@@ -29,6 +29,10 @@ export const WORKFLOW_RESOURCE="workFlowResource";
 export const RESOURCES="staticResources";
 export const BPMN_ASSOCIATED = "bpmnAssociated";
 
+export const CAMUNDA_VARIABLES = "camundaVariables";
+export const DELETE_VARIABLE = "deleteVariable";
+export const UPDATE_VARIABLE = "updateVariable";
+
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
 export const MAX_LENGHT_LARGE = 30 ;
 export const ACQUIRER_ID_LENGTH = 11;

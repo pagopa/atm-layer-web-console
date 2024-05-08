@@ -1,4 +1,3 @@
-
 const ROUTES = {
 	HOME: "/",
 	WARNING_CODE: "/warning-code",
@@ -14,6 +13,7 @@ const ROUTES = {
 	CREATE_RESOURCE: "/resources/create",
 	UPGRADE_BPMN: "/bpmn/upgrade",
 	CREATE_WR: "/workflow_resources/create",
+	CAMUNDA_VARIABLES: "/variables",
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
 };
