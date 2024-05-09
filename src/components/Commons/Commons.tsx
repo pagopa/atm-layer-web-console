@@ -3,7 +3,9 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CAMUNDA_VARIABLES, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VARIABLE, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_VARIABLE, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import React from "react";
+import { GridRowId, GridRowModes, GridRowModesModel } from "@mui/x-data-grid";
+import { CAMUNDA_VARIABLES, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VARIABLE, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESTORE_VARIABLE, ROLLBACK_WR, SAVE_VARIABLE, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -234,12 +236,13 @@ export function getTextModal(type:string):any {
 	case DELETE_VARIABLE: {
 		return {titleModal:"Cancellazione variabile di processo", contentText:"Sei sicuro di voler cancellare questa variabile di processo?"};
 	}
-	case UPDATE_VARIABLE: {
-		return {titleModal:"Update variabile di processo", contentText:"Sei sicuro di voler aggiornare il valore della variabile di processo?"};
-	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
 	}
 	}
 	
+};
+
+export const handleEditClick = (id: GridRowId, setRowModesModel: typeof React.useState<GridRowModesModel>, rowModesModel:typeof React.useState<GridRowModesModel>) => () => {
+	setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
 };

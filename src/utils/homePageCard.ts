@@ -28,5 +28,12 @@ export const homePageCard = [
 		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
 		pageLink: routes.WORKFLOW_RESOURCES
+	},
+	{
+		title: "Variabili per processi",
+		id: "variables",
+		description:"Le variabili verranno impostate sui processi deployati influenzando il flusso operativo",
+		icon:"EditNote",
+		pageLink: routes.CAMUNDA_VARIABLES
 	}
 ];

@@ -5,7 +5,7 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION, DELETE_VARIABLE, UPDATE_VARIABLE } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_VARIABLE, EDIT_VARIABLE } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 
 
@@ -163,7 +163,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 		const actions = () => {
 			setOpen(true);
-			setType(UPDATE_VARIABLE);
+			setType(EDIT_VARIABLE);
 			sessionStorage.setItem("recordParamsVariable", JSON.stringify(param.row));
 		};
 

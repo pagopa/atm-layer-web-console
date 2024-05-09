@@ -6,7 +6,7 @@ type Props = {
 	icon: string;
 	color?: string; 
 	size?: string; 
-	action?: React.MouseEvent;
+	action?: any;
 	pad?: number; 
 	border?: boolean; 
 	borderRadius?: string;

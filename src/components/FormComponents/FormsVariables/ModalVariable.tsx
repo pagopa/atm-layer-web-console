@@ -6,8 +6,8 @@ import { getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import ROUTES from "../../../routes";
-import { DELETE_VARIABLES, UPDATE_VARIABLES } from "../../../commons/endpoints";
-import { DELETE_VARIABLE, UPDATE_VARIABLE } from "../../../commons/constants";
+import { DELETE_VARIABLES } from "../../../commons/endpoints";
+import { DELETE_VARIABLE } from "../../../commons/constants";
 
 type Props = {
 	type: string;
@@ -33,20 +33,6 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 		case DELETE_VARIABLE: {
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_VARIABLES, { name: recordParams.name }), method: "DELETE", abortController })();
-				setLoading(false);
-				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				window.location.reload();
-			} catch (error) {
-				setLoading(false);
-				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
-			break;
-		}
-		case UPDATE_VARIABLE: {
-			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_VARIABLES, { name: recordParams.name, value: recordParams.value }), method: "PUT", abortController })();
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
