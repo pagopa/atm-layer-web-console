@@ -69,10 +69,11 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 		switch (type) {
 		case DELETE_VARIABLE: {
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_VARIABLES), method: "DELETE", abortController })();
+				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_VARIABLES, { name: recordParams.name}), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				window.location.reload();
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
