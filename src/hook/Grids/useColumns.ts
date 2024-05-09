@@ -398,7 +398,7 @@ const useColumns: any = () => {
 					headerName: "Valore Variabile",
 					align: "left",
 					headerAlign: "left",
-					editable: true,
+					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.value),

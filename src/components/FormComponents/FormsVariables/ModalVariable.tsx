@@ -6,9 +6,8 @@ import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_VARIABLES, DELETE_VARIABLES } from "../../../commons/endpoints";
-import { CREATE_VARIABLE, DELETE_VARIABLE, MAX_LENGHT_LARGE } from "../../../commons/constants";
-
+import { CREATE_VARIABLES, DELETE_VARIABLES, UPDATE_VARIABLES } from "../../../commons/endpoints";
+import { CREATE_VARIABLE, DELETE_VARIABLE, MAX_LENGHT_LARGE, UPDATE_VARIABLE } from "../../../commons/constants";
 
 type Props = {
 	type: string;
@@ -43,16 +42,20 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 		}));
 	};
 
-	const validateForm = () => {
-		const newErrors = {
+	const validateForm = (isCreate: boolean) => {
+		const newErrors = isCreate ? {
 			name: formData.name ? "" : "Campo obbligatorio",
 			value: formData.value ? "" : "Campo obbligatorio",
+		} : {
+			value: formData.value ? "" : "Campo obbligatorio",
 		};
-
+	
 		setErrors(newErrors);
-
+	
 		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
+
+		
 	};
 
 	useEffect(() => {
@@ -79,13 +82,35 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 			break;
 		}
 		case CREATE_VARIABLE: {
-			if (validateForm()) {
+			if (validateForm(true)) {
 				const postData = {
 					name: formData.name,
 					value: formData.value,
 				};
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(CREATE_VARIABLES, { name: recordParams.name }), method: "POST", abortController, body: postData })();
+					setLoading(false);
+					setOpen(false);
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					window.location.reload();
+				} catch (error) {
+					setLoading(false);
+					console.error("ERROR", error);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				}
+			} else {
+				setLoading(false);
+			}
+			break;
+		}
+		case UPDATE_VARIABLE: {
+			if (validateForm(false)) {
+				// const postData = {
+				// 	name: recordParams.name,
+				// 	value: formData.value,
+				// };
+				try {
+					const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_VARIABLES, { name: recordParams.name, value: formData.value }), method: "PUT", abortController })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
@@ -129,6 +154,40 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 						error={Boolean(errors.name)}
 						helperText={errors.name}
 						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-name-test" }}
+					/>
+				</Grid>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="value"
+						name="value"
+						label={"Valore"}
+						placeholder={"valore"}
+						size="small"
+						value={formData.value}
+						onChange={handleChange}
+						error={Boolean(errors.value)}
+						helperText={errors.value}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-value-test" }}
+					/>
+				</Grid>
+			</Grid>
+			}
+			{type === UPDATE_VARIABLE &&
+			<Grid sx={{px: 2}}>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="name"
+						name="name"
+						label={"Nome"}
+						placeholder={"nome"}
+						size="small"
+						value={recordParams.name}
+						onChange={handleChange}
+						error={Boolean(errors.name)}
+						helperText={errors.name}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-name-test", readOnly: true }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>

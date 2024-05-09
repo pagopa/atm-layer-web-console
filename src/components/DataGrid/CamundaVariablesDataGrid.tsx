@@ -1,9 +1,9 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import { GridCellEditStopParams, GridCellEditStopReasons, GridColDef, MuiEvent } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import { GridColDef } from "@mui/x-data-grid";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
-import { CAMUNDA_VARIABLES, CREATE_VARIABLE, DELETE_VARIABLE } from "../../commons/constants";
+import { CAMUNDA_VARIABLES, CREATE_VARIABLE, DELETE_VARIABLE, UPDATE_VARIABLE } from "../../commons/constants";
 import { GET_ALL_VARIABLES_FILTER } from "../../commons/endpoints";
 import { getQueryString } from "../Commons/Commons";
 import ModalVariable from "../FormComponents/FormsVariables/ModalVariable";
@@ -46,7 +46,6 @@ export default function CamundaVariablesDataGrid ({ type, setType, open, setOpen
 	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
 	const columns: Array<GridColDef> = buildColumnDefs(CAMUNDA_VARIABLES);
 	const [totalCamundaVariablesFound, setTotalCamundaVariablesFound] = useState(0);
-	
 	const getAllVariablesList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
 		const URL = `${GET_ALL_VARIABLES_FILTER}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 

@@ -5,7 +5,7 @@ import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
 import React from "react";
 import { GridRowId, GridRowModes, GridRowModesModel } from "@mui/x-data-grid";
-import { CAMUNDA_VARIABLES, CREATE_VARIABLE, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VARIABLE, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESTORE_VARIABLE, ROLLBACK_WR, SAVE_VARIABLE, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CAMUNDA_VARIABLES, CREATE_VARIABLE, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_VARIABLE, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESTORE_VARIABLE, ROLLBACK_WR, SAVE_VARIABLE, UPDATE_RES, UPDATE_VARIABLE, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -238,6 +238,9 @@ export function getTextModal(type:string):any {
 	}
 	case CREATE_VARIABLE: {
 		return {titleModal:"Creazione variabile di processo", contentText:"Indica chiave e valore della nuova variabile"};
+	}
+	case UPDATE_VARIABLE: {
+		return {titleModal:"Update Variabile di processo", contentText:"Sei sicuro di voler modificare il valore di questa variabile di processo?"};
 	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};

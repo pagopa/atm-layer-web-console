@@ -31,7 +31,7 @@ export const BPMN_ASSOCIATED = "bpmnAssociated";
 
 export const CAMUNDA_VARIABLES = "camundaVariables";
 export const DELETE_VARIABLE = "deleteVariable";
-export const EDIT_VARIABLE = "editVariable";
+export const UPDATE_VARIABLE = "editVariable";
 export const RESTORE_VARIABLE ="restoreVariable";
 export const SAVE_VARIABLE="saveVariable";
 export const CREATE_VARIABLE= "createVariable";
