@@ -473,7 +473,7 @@ const useColumns: any = () => {
 				}
 			);
 		default:
-			return [];
+			return {};
 		}
 	};
 	const getNavigationPaths: any = (driver: string, param: any) => {

@@ -40,7 +40,7 @@ export default function CamundaVariablesDataGrid ({ type, setType, open, setOpen
 	const [filterValues, setFilterValues] = useState(initialValues);
 	const [paginationModel, setPaginationModel] = useState({
 		page: 0,
-		pageSize: 5,
+		pageSize: 10,
 	});
 	
 	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
@@ -116,7 +116,7 @@ export default function CamundaVariablesDataGrid ({ type, setType, open, setOpen
 						/>
 					),
 				}}
-				columnVisibilityModel={visibleColumns(CAMUNDA_VARIABLES)}
+				columnVisibilityModel={visibleColumns("")}
 				paginationMode="server"
 				pagination
 				pageSizeOptions={[10]}
