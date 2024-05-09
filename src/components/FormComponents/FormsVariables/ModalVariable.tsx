@@ -1,13 +1,14 @@
-import { SetStateAction, useContext, useState } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { SetStateAction, useContext, useEffect, useState } from "react";
+import { generatePath } from "react-router-dom";
+import { Grid, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
-import { getTextModal, handleSnackbar } from "../../Commons/Commons";
+import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import ROUTES from "../../../routes";
-import { DELETE_VARIABLES } from "../../../commons/endpoints";
-import { DELETE_VARIABLE } from "../../../commons/constants";
+import { CREATE_VARIABLES, DELETE_VARIABLES } from "../../../commons/endpoints";
+import { CREATE_VARIABLE, DELETE_VARIABLE, MAX_LENGHT_LARGE } from "../../../commons/constants";
+
 
 type Props = {
 	type: string;
@@ -25,6 +26,40 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 	const recordParamsString = sessionStorage.getItem("recordParamsVariable");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
+	const initialValues = {
+		name: "",
+		value: "",
+	};
+
+	const [formData, setFormData] = useState(initialValues);
+	const [errors, setErrors] = useState<any>(initialValues);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		resetErrors(errors, setErrors, e.target.name);
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value
+		}));
+	};
+
+	const validateForm = () => {
+		const newErrors = {
+			name: formData.name ? "" : "Campo obbligatorio",
+			value: formData.value ? "" : "Campo obbligatorio",
+		};
+
+		setErrors(newErrors);
+
+		// Determines whether all the members of the array satisfy the conditions "!error".
+		return Object.values(newErrors).every((error) => !error);
+	};
+
+	useEffect(() => {
+		setFormData(initialValues);
+	  }, []);
+
+
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -32,15 +67,36 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 		switch (type) {
 		case DELETE_VARIABLE: {
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_VARIABLES, { name: recordParams.name }), method: "DELETE", abortController })();
+				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_VARIABLES), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				window.location.reload();
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			}
+			break;
+		}
+		case CREATE_VARIABLE: {
+			if (validateForm()) {
+				const postData = {
+					name: formData.name,
+					value: formData.value,
+				};
+				try {
+					const response = await fetchRequest({ urlEndpoint: generatePath(CREATE_VARIABLES, { name: recordParams.name }), method: "POST", abortController, body: postData })();
+					setLoading(false);
+					setOpen(false);
+					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					window.location.reload();
+				} catch (error) {
+					setLoading(false);
+					console.error("ERROR", error);
+					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				}
+			} else {
+				setLoading(false);
 			}
 			break;
 		}
@@ -57,7 +113,42 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 			setOpen={setOpen}
 			handleSubmit={handleSubmit}
 			loading={loading}
-		/>
+		>
+			{type === CREATE_VARIABLE &&
+			<Grid sx={{px: 2}}>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="name"
+						name="name"
+						label={"Nome"}
+						placeholder={"nome"}
+						size="small"
+						value={formData.name}
+						onChange={handleChange}
+						error={Boolean(errors.name)}
+						helperText={errors.name}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-name-test" }}
+					/>
+				</Grid>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="value"
+						name="value"
+						label={"Valore"}
+						placeholder={"valore"}
+						size="small"
+						value={formData.value}
+						onChange={handleChange}
+						error={Boolean(errors.value)}
+						helperText={errors.value}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-value-test" }}
+					/>
+				</Grid>
+			</Grid>
+			}			
+		</ModalTemplate>
 	);
 };
 

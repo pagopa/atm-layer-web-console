@@ -10,6 +10,7 @@ type Props = {
   children?: any;
   loadingButton?: boolean;
   createIcon?: boolean;
+  handleClick?: any;
 };
 
 const FilterTemplate = ({
@@ -20,6 +21,7 @@ const FilterTemplate = ({
 	children,
 	loadingButton,
 	createIcon,
+	handleClick,
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ const FilterTemplate = ({
 					>
 						{createIcon ?
 							 <Box my={1}>
-							 <Button variant="contained" onClick={() => navigate(filterRoutes)}>
+							 <Button variant="contained" onClick={() => handleClick()}>
 				 Crea Variabile
 							 </Button>
 						 </Box>

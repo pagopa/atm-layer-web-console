@@ -3,7 +3,7 @@ import { GridCellEditStopParams, GridCellEditStopReasons, GridColDef, MuiEvent }
 import { Box } from "@mui/material";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
-import { CAMUNDA_VARIABLES, DELETE_VARIABLE } from "../../commons/constants";
+import { CAMUNDA_VARIABLES, CREATE_VARIABLE, DELETE_VARIABLE } from "../../commons/constants";
 import { GET_ALL_VARIABLES_FILTER } from "../../commons/endpoints";
 import { getQueryString } from "../Commons/Commons";
 import ModalVariable from "../FormComponents/FormsVariables/ModalVariable";
@@ -76,6 +76,11 @@ export default function CamundaVariablesDataGrid ({ type, setType, open, setOpen
 		}
 	}, []);
 
+	const handleModalClick= () => {
+		setOpen(true);
+		setType(CREATE_VARIABLE);
+	};
+
 	return (
 		<Box p={2}>
 			<FilterBar
@@ -88,6 +93,7 @@ export default function CamundaVariablesDataGrid ({ type, setType, open, setOpen
 				loadingButton={loadingButton}
 				setLoadingButton={setLoadingButton}
 				createIcon={true}
+				handleClick={handleModalClick}
 			/>
 			<CustomDataGrid
 				disableColumnFilter

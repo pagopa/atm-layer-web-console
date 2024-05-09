@@ -18,9 +18,10 @@ type Props = {
 	loadingButton?: boolean;
 	setLoadingButton: React.Dispatch<SetStateAction<boolean>>;
 	createIcon?: boolean;
+	handleClick?: any;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton, createIcon }: Props) {
+export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton, createIcon, handleClick }: Props) {
 
 	const { regexTestField } = checks();
 
@@ -115,7 +116,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon}>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={ handleClick }>
 			{filterType()}
 		</FilterTemplate>
 	);

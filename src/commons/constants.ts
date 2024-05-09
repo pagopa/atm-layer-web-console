@@ -34,6 +34,7 @@ export const DELETE_VARIABLE = "deleteVariable";
 export const EDIT_VARIABLE = "editVariable";
 export const RESTORE_VARIABLE ="restoreVariable";
 export const SAVE_VARIABLE="saveVariable";
+export const CREATE_VARIABLE= "createVariable";
 
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
 export const MAX_LENGHT_LARGE = 30 ;
