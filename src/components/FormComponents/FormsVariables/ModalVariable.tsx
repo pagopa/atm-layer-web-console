@@ -60,8 +60,7 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 
 	useEffect(() => {
 		setFormData(initialValues);
-	  }, []);
-
+	}, []);
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -138,6 +137,8 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 			setOpen={setOpen}
 			handleSubmit={handleSubmit}
 			loading={loading}
+			setFormData={setFormData}
+			initialValues={initialValues}
 		>
 			{type === CREATE_VARIABLE &&
 			<Grid sx={{px: 2}}>
