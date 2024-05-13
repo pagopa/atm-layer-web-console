@@ -42,6 +42,13 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 		}));
 	};
 
+	const handleClose = () => {
+		setOpen(false);
+		// Reset errors when modal is closed
+		setErrors(initialValues);
+	};
+
+
 	const validateForm = (isCreate: boolean) => {
 		const newErrors = isCreate ? {
 			name: formData.name ? "" : "Campo obbligatorio",
@@ -137,9 +144,8 @@ const ModalVariable = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setM
 			open={open}
 			setOpen={setOpen}
 			handleSubmit={handleSubmit}
+			handleClose={handleClose}
 			loading={loading}
-			setFormData={setFormData}
-			initialValues={initialValues}
 		>
 			{type === CREATE_VARIABLE &&
 			<Grid sx={{px: 2}}>
