@@ -6,7 +6,7 @@ export default function useFetch(endPoint?: string | undefined) {
 
 	const SERVER_API_ORIGIN = endPoint && endPoint !== "" ? endPoint : process.env.REACT_APP_BACKEND_URL;
 	const CODE_SUCCESS = [200, 201, 202, 203];
-	const token = localStorage.getItem("jwt_console");
+	const token = sessionStorage.getItem("jwt_console");
 
 	const fetchFromServer = async ({
 		urlEndpoint,
@@ -80,7 +80,6 @@ export default function useFetch(endPoint?: string | undefined) {
 			// TOKEN SCADUTO
 
 			if (!response) {
-
 				// window.location.reload();
 				data = {
 					valuesObj: { message: "Errore durante la chiamata all'api", status },
@@ -90,7 +89,6 @@ export default function useFetch(endPoint?: string | undefined) {
 			if (status === 401) {
 				window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
 				return;
-
 			}
 			if (status === 204) {
 				data = { valuesObj: { message: "Dati vuoti" }, status, success: true }; // valuesObj conterrà il messaggio di errore

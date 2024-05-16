@@ -12,9 +12,7 @@ defaults:
   run:
     shell: bash
 
-permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: write    # This is required for actions/checkout
+permissions: write-all
 
 jobs:
   manual-promote-release-in-prod:
@@ -50,10 +48,21 @@ jobs:
         run: |
           cd ${{ inputs.release }}
           unzip ${{ steps.cut_repository.outputs.cut_repository }}-${{ inputs.release }}.zip
-  
-      - name: Build app
+
+      - name: Run test
         run: |
           npm install
+          npm run test:full-coverage
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1.8.0
+        with:
+          name: JEST Tests prod            # Name of the check run which will be created
+          path: reports/jest-*.xml         # Path to test results
+          reporter: jest-junit             # Format of test results
+
+      - name: Build app
+        run: |
           npm run build:prod
 
       - name: Configure AWS Credentials

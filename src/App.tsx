@@ -54,24 +54,22 @@ function App() {
 	const RELEASE_VERSION = process.env.REACT_APP_VERSION;
 
 	const [warningCodeValue, setWarningCodeValue] = useState("");
-	const temp= localStorage.getItem("tempLog");
-	const jwt= localStorage.getItem("jwt_console");
+	const jwt= sessionStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
-	const [logged, setLogged] = useState(temp||jwt?true:false);
+	const [logged, setLogged] = useState(jwt?true:false);
 	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
-	const [inLoginPage, setInLoginPage] = useState(false);
 	const abortController = new AbortController();
 
 	function clearAll(){
-
-		if(localStorage.getItem("jwt_console")){
+		if(sessionStorage.getItem("jwt_console")){
 			setTokenExpired();
 		}
 		clearStorage();
 	}
 
 	function setTokenExpired(){
-		localStorage.removeItem("jwt_console");
+
+		sessionStorage.removeItem("jwt_console");
 		setLogged(false);
 	}
 
@@ -94,8 +92,6 @@ function App() {
 		setLogged,
 		userEmail,
 		setUserEmail,
-		inLoginPage,
-		setInLoginPage,
 		abortController,
 		debugOn,
 		clearStorage,

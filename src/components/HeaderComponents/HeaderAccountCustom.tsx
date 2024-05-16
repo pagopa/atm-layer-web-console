@@ -1,9 +1,11 @@
 import { Container, Button, Stack, Typography } from "@mui/material";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { Box } from "@mui/system";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
+import { USER_EMAIL } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 
 
@@ -19,7 +21,29 @@ export const HeaderAccountCustom = ({
 	onLogout
 }: HeaderAccountProps) => {
 
-	const { userEmail } = useContext(Ctx);
+
+	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
+
+	const token = sessionStorage.getItem("jwt_console");
+	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
+
+	const getTokenEmail = async () => {
+		try {
+			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
+
+			if (response?.success) {
+				setUserEmail({ email: response?.valuesObj.email });
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
+
+	useEffect(() => {
+		if(!userEmail.email && token){
+			void getTokenEmail();
+		}
+	}, []);
 		
 	return (
 		<Stack
@@ -39,15 +63,13 @@ export const HeaderAccountCustom = ({
 					justifyContent="space-between"
 					alignItems="center"
 				>
-
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						{/* {loggedUser && (
+						{loggedUser && isProd===false && ( 
 							<Box ml={6}>
 								<EmulatorButton />
 							</Box>
-						)} */}
-
+						)}
 					</Box>
 
 					<Stack
@@ -59,7 +81,6 @@ export const HeaderAccountCustom = ({
 
 						{/* 1. Logged User with Dropdown */}
 						{loggedUser && (
-							// <AccountDropdown user={loggedUser} />
 							<Box display={"flex"} >
 								<Box mr={1}>
 									<AccountCircleRoundedIcon />

@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext, useState } from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { WR_DELETE, WR_DEPLOY, WR_DOWNLOAD, WR_ROLLBACK } from "../../../commons/endpoints";
 import { getTextModal, handleSnackbar } from "../../Commons/Commons";
@@ -8,6 +8,7 @@ import { BPMN, DELETE_WR, DEPLOY_WR, DMN, DOWNLOAD_WR, FORM, ROLLBACK_WR, UPDATE
 import { downloadFile } from "../../../commons/decode";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import ROUTES from "../../../routes";
 
 type Props = {
 	type: string;
@@ -24,6 +25,8 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 	const content=getTextModal(type);
 	const recordParamsString = sessionStorage.getItem("recordParams");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
+	const navigate = useNavigate();
+
 
 	const [loading, setLoading] = useState(false);
 	
@@ -74,7 +77,10 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					navigate(ROUTES.WORKFLOW_RESOURCES);
+				}, 1000);				
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

@@ -54,6 +54,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 		uuid: recordParams.workflowResourceId,
 		file: undefined,
 	};
+
+	const wrongExtensionMessage = "Il file che hai caricato ha un' estensione diversa da quello che stai cercando di aggiornare.";
 	
 	const [errors, setErrors] = useState<any>(initialValues);
 
@@ -78,7 +80,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					setFormData(initialValues);
-					
+					if (response?.success) {
+						const updatedResponse = {
+							...response.valuesObj,
+							fileName: response.valuesObj?.resourceFile?.fileName
+						};
+						sessionStorage.setItem("recordParams", JSON.stringify(updatedResponse));
+						setTimeout(() => {
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					} 
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
@@ -106,6 +118,17 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					setLoadingButton(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					if (response?.success) {
+						const updatedResponse = {
+							...response.valuesObj,
+							fileName: response.valuesObj?.resourceFile?.fileName
+						};
+						sessionStorage.setItem("recordParams", JSON.stringify(updatedResponse));
+						setTimeout(() => {
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					}
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
@@ -154,8 +177,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 						{definitionKeyValue &&
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}
 						{showAlert && 
-						<Alert severity="error">
-							Il file che hai caricato ha un estensione diversa da quello che stai cercando di aggiornare.
+						<Alert severity="error" sx={{fontWeight: "normal"}}>
+							{wrongExtensionMessage}
 						</Alert>}
 					</Box>
 				</DialogContent>
@@ -163,7 +186,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button  variant={"outlined"}  onClick={() => {setOpen(false); setFormData(initialValues);}}>Annulla</Button>
+						<Button  variant={"outlined"}  onClick={() => { setOpen(false); setFormData(initialValues); setShowAlert(false); }}>Annulla</Button>
 					</Box>
 					<Box>
 

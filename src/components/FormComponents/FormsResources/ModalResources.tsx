@@ -1,5 +1,5 @@
 import { SetStateAction, useContext, useState } from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import React from "react";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar } from "../../Commons/Commons";
@@ -9,6 +9,7 @@ import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadStaticFile } from "../../../commons/decode";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import ROUTES from "../../../routes";
 
 
 type Props = {
@@ -30,6 +31,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const content=getTextModal(type);
 	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		setLoading(true);
@@ -40,7 +42,10 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					navigate(ROUTES.RESOURCES);
+				}, 1000);				
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);

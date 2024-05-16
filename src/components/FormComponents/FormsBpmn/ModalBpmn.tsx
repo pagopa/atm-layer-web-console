@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext, useState } from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
 import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../commons/constants";
@@ -7,6 +7,7 @@ import { getQueryString, getTextModal, handleSnackbar } from "../../Commons/Comm
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import ROUTES from "../../../routes";
 
 
 type Props = {
@@ -22,9 +23,10 @@ type Props = {
 
 const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
-	const { abortController, debugOn } = useContext(Ctx);
+	const { abortController } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParams");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
+	const navigate = useNavigate();
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -38,7 +40,10 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					navigate(ROUTES.BPMN);
+				}, 1000);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -81,6 +86,12 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				if(response?.success){
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 1000);
+				}
 			} catch (error) {
 				console.error("ERROR", error);
 			}

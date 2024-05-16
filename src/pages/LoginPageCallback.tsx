@@ -15,28 +15,12 @@ const LoginPageCallback = () => {
 		const token = window?.location?.hash?.split("&")[1]?.split("=")[1];
 		if (token) {
 			setLogged(true);
-			localStorage.setItem("jwt_console", token);
-			void getTokenEmail();
-
+			sessionStorage.setItem("jwt_console", token);
 			navigate(routes.HOME);
 		} else {
 			navigate(routes.LOGIN);
 		}
 	}, []);
-
-	const getTokenEmail = async () => {
-		try {
-			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
-
-			if (response?.success) {
-				setUserEmail(response?.valuesObj.email);
-			} else {
-				setUserEmail("Benvenuto utente");
-			}
-		} catch (error) {
-			console.error("ERROR", error);
-		}
-	};
 
 	return (
 		<Loading />
