@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <testsuites name="jest tests" tests="226" failures="0" errors="0" time="31.172">
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:26" time="2.019" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.003">
+
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
+
+    <testcase classname="useColumns" name="should return correct record BPMN params" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.01">
+    <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.003">
     </testcase>
+
     <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.033">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.001">
+
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
@@ -34,44 +39,63 @@
     <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0">
     </testcase>
   </testsuite>
+
   <testsuite name="src/components/Commons/__tests__/Commons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:26" time="3.269" tests="18">
     <testcase classname="resetErrors" name="reset specific error" time="0.003">
+
     </testcase>
-    <testcase classname="resetErrors" name="should not reset a specific field error if it does not exist" time="0">
+    <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.009">
     </testcase>
-    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
+    <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.005">
     </testcase>
+
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
+
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.003">
     </testcase>
+
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.002">
+
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.001">
+  </testsuite>
+  <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:05" time="0.991" tests="10">
+    <testcase classname="ActionAlert" name="render with error" time="0.04">
     </testcase>
+
     <testcase classname="getQueryString &gt; breadCrumbLinkComponent" name="render link and message" time="0.045">
+
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0">
+
+    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.002">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
+    <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.004">
+
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.007">
     </testcase>
+
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
+
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
+
+    <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.008">
+
     </testcase>
+
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0.001">
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
+
     </testcase>
-    <testcase classname="getTextModal" name="check error in default case" time="0">
+    <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.003">
     </testcase>
   </testsuite>
+
   <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:29" time="1.627" tests="10">
     <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_WR" time="0.241">
     </testcase>
@@ -98,53 +122,83 @@
     <testcase classname="checks tests" name="checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" time="0.002">
     </testcase>
     <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
+
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.037">
     </testcase>
+
     <testcase classname="checks tests" name="regexTestField restituisce true se un campo corrisponde alla regex specificata" time="0.001">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" time="0.001">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test Catch Error" time="0.032">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" time="0">
+
+  </testsuite>
+  <testsuite name="src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:08" time="0.454" tests="4">
+    <testcase classname="BpmnDataGrid test" name="BpmnDataGrid Test" time="0.129">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0.001">
+    <testcase classname="BpmnDataGrid test" name="BpmnDatgrid Test with empty table" time="0.045">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0.001">
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.04">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0">
+
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test with fetch error" time="0.038">
+
     </testcase>
+
     <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0.001">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" time="0.001">
+  </testsuite>
+  <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:09" time="0.191" tests="4">
+    <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.003">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali con separatore" time="0.001">
+    <testcase classname="TableColumn test" name="Test renderCell" time="0.003">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce false per un input qualsiasi quando il regType non è riconosciuto" time="0">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.004">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" time="0">
+
+    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.002">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per un UUID" time="0.001">
+  </testsuite>
+  <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourceDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:09" time="0.415" tests="2">
+    <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage with sessionStorage" time="0.056">
     </testcase>
+
     <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.006">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" time="0.001">
+  </testsuite>
+  <testsuite name="src/components/FormComponents/template/__tests__/FormTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:09" time="0.201" tests="1">
+    <testcase classname="Test FormTemplate" name="Test FormTemplate with children AssociateBpmn" time="0.038">
     </testcase>
-    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0">
+  </testsuite>
+  <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:09" time="0.309" tests="2">
+    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage with sessionStorage" time="0.09">
     </testcase>
+
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0.001">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce il nome del file da un percorso valido con un nome file valido" time="0">
+
+    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.009">
+
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0.001">
+    <testcase classname="ModalResources Test" name="Test Error during DOWNLOAD" time="0.007">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
+  </testsuite>
+  <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:10" time="0.174" tests="4">
+    <testcase classname="UploadFileWithButton" name="Clear Uploaded File" time="0.006">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0">
+    <testcase classname="UploadFileWithButton" name="Upload Allowed File" time="0.005">
     </testcase>
+
   </testsuite>
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:28" time="3.387" tests="7">
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn with invalid form" time="0.228">
@@ -164,19 +218,24 @@
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:31" time="1.057" tests="10">
     <testcase classname="ActionAlert" name="render with error" time="0.073">
+
     </testcase>
-    <testcase classname="ActionAlert" name="render with warning" time="0.009">
+    <testcase classname="LoginPage" name="Test render and click Accedi no debug" time="0.003">
     </testcase>
-    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.003">
+
+    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.004">
     </testcase>
+
     <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.009">
     </testcase>
     <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.007">
+
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.011">
+    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.001">
     </testcase>
+
     <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES" time="0.009">
@@ -204,10 +263,14 @@
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.029">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" time="0.031">
-    </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.03">
+
     </testcase>
   </testsuite>
+  <testsuite name="src/components/HeaderComponents/__tests__/Logo.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:11" time="0.181" tests="1">
+    <testcase classname="HeaderAccountCustom test" name="First render" time="0.007">
+    </testcase>
+  </testsuite>
+
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:33" time="1.154" tests="5">
     <testcase classname="UpgradeBpmn" name="Submit form with valid input" time="0.146">
     </testcase>
@@ -222,18 +285,21 @@
   </testsuite>
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:34" time="0.178" tests="20">
     <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.002">
+
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0">
+
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.008">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
+
     </testcase>
     <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
@@ -257,11 +323,12 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
     </testcase>
   </testsuite>
+
   <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:35" time="0.745" tests="7">
     <testcase classname="DetailButtons" name="renders buttons with correct text" time="0.04">
     </testcase>
@@ -270,11 +337,19 @@
     <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.008">
     </testcase>
     <testcase classname="DetailButtons" name="disables button when disabledCondition is true" time="0.005">
+
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.005">
+
+  </testsuite>
+  <testsuite name="src/components/CardComponents/__tests__/HomeCardComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:12" time="0.188" tests="1">
+    <testcase classname="HomeCardComponent test" name="First render" time="0.013">
+
     </testcase>
-    <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.004">
+  </testsuite>
+  <testsuite name="src/components/Commons/__tests__/IconBox.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:24:12" time="0.177" tests="1">
+    <testcase classname="ActionIcon test" name="First render" time="0.003">
     </testcase>
+
     <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.009">
     </testcase>
   </testsuite>
@@ -330,10 +405,12 @@
     <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.033">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.026">
+
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Error during DOWNLOAD" time="0.014">
+    <testcase classname="ModalTemplateUpload Test" name="Update with different file extensions should fail" time="0.01">
     </testcase>
   </testsuite>
+
   <testsuite name="src/components/DataGrid/__tests__/ResourcesDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:40" time="1.513" tests="4">
     <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test" time="0.388">
     </testcase>
@@ -386,9 +463,11 @@
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:43" time="1.159" tests="4">
     <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.04">
+
     </testcase>
-    <testcase classname="TableColumn test" name="Test renderCell" time="0.021">
+    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
     </testcase>
+
     <testcase classname="TableColumn test" name="Test actionColumn" time="0.038">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumn" time="0.034">
@@ -422,9 +501,12 @@
     <testcase classname="decode file test" name="download a file successfully" time="0.005">
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0">
+
     </testcase>
-    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
+
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Click on Cancella Filtri and Crea Risorsa " time="0.011">
     </testcase>
+
   </testsuite>
   <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:44" time="1.731" tests="2">
     <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage with sessionStorage" time="0.32">
@@ -436,15 +518,19 @@
     <testcase classname="LoginPage" name="renders without crashing" time="0.063">
     </testcase>
     <testcase classname="LoginPage" name="Test render and click Accedi no debug" time="0.015">
+
     </testcase>
-    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.016">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.015">
     </testcase>
   </testsuite>
+
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:46" time="0.988" tests="2">
     <testcase classname="LoginPageCallback" name="should navigate to HOME if token exists" time="0.045">
+
     </testcase>
-    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.008">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
     </testcase>
+
   </testsuite>
   <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:46" time="1.547" tests="2">
     <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.046">
@@ -556,6 +642,7 @@
   </testsuite>
   <testsuite name="src/pages/__tests__/ErrorPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-16T07:41:56" time="0.699" tests="1">
     <testcase classname="ErrorPage" name="render" time="0.023">
+
     </testcase>
   </testsuite>
 </testsuites>
