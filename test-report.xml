@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+
   <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/hook/Grids/__tests__/useColumns.test.ts">
     <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="0"/>
@@ -8,12 +9,13 @@
     <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="3"/>
     <testCase name="useColumns should return correct columns for BPMN_ASSOCIATED" duration="13"/>
     <testCase name="useColumns should return correct columns for RESOURCES" duration="0"/>
+
     <testCase name="useColumns should return correct columns for WORKFLOW_RESOURCE" duration="1"/>
-    <testCase name="useColumns should return correct visible columns for PROCESS_RESOURCES" duration="0"/>
+    <testCase name="useColumns should return correct visible columns for PROCESS_RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct visible columns for BPMN_ASSOCIATED" duration="0"/>
-    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="0"/>
-    <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="1"/>
-    <testCase name="useColumns should generate correct path for invalid driver" duration="0"/>
+    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="1"/>
+    <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="0"/>
+    <testCase name="useColumns should generate correct path for invalid driver" duration="1"/>
     <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="0"/>
     <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="0"/>
     <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
@@ -154,6 +156,7 @@
   <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesPage.test.tsx">
     <testCase name="ResourcesPage test First render" duration="77"/>
   </file>
+
   <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnPage.test.tsx">
     <testCase name="BpmnPage test First render" duration="120"/>
   </file>
@@ -256,19 +259,23 @@
     <testCase name="getQueryString querystring RESOURCES" duration="0"/>
     <testCase name="getQueryString querystring WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="getQueryString querystring DELETE_ASSOCIATION" duration="0"/>
+
     <testCase name="getQueryString querystring driver not present" duration="0"/>
     <testCase name="getQueryString handleSnackbar success" duration="1"/>
     <testCase name="getQueryString handleSnackbar error" duration="1"/>
+
     <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="18"/>
+
     <testCase name="commonBreadRoot generate link for BPMN" duration="0"/>
     <testCase name="commonBreadRoot generate link for BPMN detail page" duration="1"/>
     <testCase name="commonBreadRoot generate link for Static Resource" duration="0"/>
-    <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="0"/>
+    <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="1"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="0"/>
     <testCase name="getTextModal check for title and message in cases" duration="1"/>
     <testCase name="getTextModal check error in default case" duration="0"/>
   </file>
+
   <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx">
     <testCase name="ModalResources Test Test ModalWR with ROLLBACK" duration="83"/>
     <testCase name="ModalResources Test Test Catch Error during ROLLBACK" duration="15"/>
@@ -310,17 +317,21 @@
     <testCase name="checks tests Restituisce false per un input qualsiasi quando il regType non è riconosciuto" duration="0"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per un UUID" duration="0"/>
+
     <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="0"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" duration="0"/>
     <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="0"/>
     <testCase name="checks tests isValidNumber restituisce true se una stringa rappresenta un numero intero valido" duration="0"/>
+
     <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="0"/>
+
     <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="0"/>
     <testCase name="checks tests Restituisce il nome del file da un percorso valido con un nome file valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
   </file>
+
   <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx">
     <testCase name="ModalBpmn Test Test ModalBpmn with DELETE" duration="79"/>
     <testCase name="ModalBpmn Test Test ModalBpmn with DEPLOY" duration="3035"/>
@@ -331,5 +342,6 @@
     <testCase name="ModalBpmn Test Test Error during DOWNLOAD" duration="8"/>
     <testCase name="ModalBpmn Test Test ModalBpmn with DOWNLOAD" duration="8"/>
     <testCase name="ModalBpmn Test Test ModalBpmn without type" duration="9"/>
+
   </file>
 </testExecutions>
