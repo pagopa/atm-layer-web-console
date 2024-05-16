@@ -6,10 +6,10 @@ import { Ctx } from "../../DataContext";
 
 const PrivateRoutes = () => {
 	const navigate = useNavigate();
-	const { logged } = useContext(Ctx);
+	const { logged, inLoginPage } = useContext(Ctx);
   
 	useEffect(() => {
-		if (logged===false) {
+		if (logged===false && !inLoginPage) {
 			navigate(routes.LOGIN);
 		}
 	}, [logged, navigate]);

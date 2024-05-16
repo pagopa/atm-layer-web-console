@@ -27,6 +27,7 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const navigate = useNavigate();
 
+
 	const [loading, setLoading] = useState(false);
 	
 	const handleSubmit = async (e: React.FormEvent) => {

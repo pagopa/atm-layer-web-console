@@ -8,6 +8,7 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_EMAIL } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 
+
 type HeaderAccountProps = {
     rootLink: RootLinkType;
     loggedUser?: boolean;
@@ -19,6 +20,7 @@ export const HeaderAccountCustom = ({
 	loggedUser,
 	onLogout
 }: HeaderAccountProps) => {
+
 
 	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
 

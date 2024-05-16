@@ -127,6 +127,7 @@ const formatValues = () => {
 		}
 	};
 
+
 	const extractRelativeCdnPath = (str:string) => {
 		if(str) {
 			return str.replace(/^(?:[^/]*\/){2}\s*/, "");

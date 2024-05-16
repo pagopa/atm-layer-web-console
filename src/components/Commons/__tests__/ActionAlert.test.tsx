@@ -143,6 +143,7 @@ describe("ActionAlert", () => {
     // expect(window.location.href).toBe(currentUrl);
   });
 
+
   test("navigate to BPMN when type is DELETE_BPMN with success", () => {
     const { container } = render(
       <BrowserRouter>
