@@ -26,12 +26,12 @@
     <testCase name="getQueryString querystring WORKFLOW_RESOURCE" duration="1"/>
     <testCase name="getQueryString querystring DELETE_ASSOCIATION" duration="0"/>
     <testCase name="getQueryString querystring driver not present" duration="1"/>
-    <testCase name="getQueryString handleSnackbar success" duration="2"/>
+    <testCase name="getQueryString handleSnackbar success" duration="1"/>
     <testCase name="getQueryString handleSnackbar error" duration="1"/>
     <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="51"/>
     <testCase name="commonBreadRoot generate link for BPMN" duration="0"/>
     <testCase name="commonBreadRoot generate link for BPMN detail page" duration="1"/>
-    <testCase name="commonBreadRoot generate link for Static Resource" duration="0"/>
+    <testCase name="commonBreadRoot generate link for Static Resource" duration="1"/>
     <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="0"/>
@@ -119,9 +119,9 @@
     <testCase name="UpgradeBpmn Test UpgradeBpmn fetch error" duration="38"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/formatValues.test.ts">
-    <testCase name="formatValues tests Verifica la formattazione di un valore vuoto" duration="2"/>
-    <testCase name="formatValues tests Verifica la formattazione di due valori" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione di una percentuale e di una valuta" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione di un valore vuoto" duration="1"/>
+    <testCase name="formatValues tests Verifica la formattazione di due valori" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione di una percentuale e di una valuta" duration="1"/>
     <testCase name="formatValues tests Verifica la conversione di una stringa con separatore decimale da , a . in float" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" duration="0"/>
@@ -132,11 +132,11 @@
     <testCase name="formatValues tests Verifica la creazione della data" duration="4"/>
     <testCase name="formatValues tests Verifica la formattazione di una stringa di data" duration="1"/>
     <testCase name="formatValues tests Verifica la funzione checkValue" duration="0"/>
-    <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="0"/>
+    <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione della valuta" duration="0"/>
-    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="0"/>
+    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo senza valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della data" duration="0"/>
   </file>
@@ -276,7 +276,7 @@
     <testCase name="Header test Test render Header component with login true" duration="62"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/__tests__/formOption.test.tsx">
-    <testCase name="formOption Test test get values" duration="2"/>
+    <testCase name="formOption Test test get values" duration="3"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx">
     <testCase name="AssociateBpmnPage  getItem recordParams case" duration="124"/>
@@ -315,7 +315,10 @@
     <testCase name="WorkflowResourcePage render" duration="485"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
-    <testCase name="ActionIcon test First render" duration="45"/>
+    <testCase name="ActionIcon test First render" duration="31"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/WorkflowResourcePage.test.tsx">
+    <testCase name="WorkflowResourcePage render" duration="399"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
     <testCase name="HomePageTitle Check for HomePageTitle" duration="35"/>
