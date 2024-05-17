@@ -17,7 +17,7 @@ export const CreateResources = () => {
 	const [loadingButton, setLoadingButton] = useState(false);
 
 	const { getFormOptions } = formOption();
-	const { isValidResourcesFilename } = checks();
+	const { isValidResourcesFilename, isValidPath } = checks();
 	const initialValues: ResourcesDto = {
 		file: undefined,
 		filename: "",
@@ -59,7 +59,9 @@ export const CreateResources = () => {
 				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
 					""
 					: "L'estensione del file non corrisponde con quella selezionata"
-				: "Campo obbligatorio"
+				: "Campo obbligatorio",
+			path: formData.path ? 
+				(isValidPath(formData.path) ? "" : "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali, va indicato solo il precorso e non il nome del file") : ""
 		};
 
 		setErrors(newErrors);

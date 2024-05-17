@@ -134,6 +134,11 @@ const checks = () => {
 		}
 	};
 
+	const isValidPath = (path: string) => {
+		const pathRegex = /^(?!\/)([a-zA-Z0-9]+\/)*[a-zA-Z0-9]+(?<!\/)$/;
+		return pathRegex.test(path);
+	};
+
 
 	return {
 		checkIsEmptyString,
@@ -145,7 +150,8 @@ const checks = () => {
 		copyArrayObject,
 		isValidResourcesFilename,
 		isValidDeployableFilename,
-		deployableFilename
+		deployableFilename,
+		isValidPath
 	};
 };
 
