@@ -52,5 +52,4 @@ describe("LoginPageCallback", () => {
     expect(window.location.pathname).toBe("/login");
   });
 
-
 });

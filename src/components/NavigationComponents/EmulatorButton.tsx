@@ -3,6 +3,7 @@ import IconBox from "../Commons/IconBox";
 
 export default function EmulatorButton() {
 	const openEmulator = () => {
+
 		const jwt = sessionStorage.getItem("jwt_console");
 		const emulatorUrl = process.env.REACT_APP_EMULATOR_URL;
 		const url = jwt && emulatorUrl ? emulatorUrl.concat(`#jwt_console=${jwt}`) : emulatorUrl;

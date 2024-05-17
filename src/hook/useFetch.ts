@@ -79,6 +79,7 @@ export default function useFetch(endPoint?: string | undefined) {
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
+
 			if (!response) {
 				// window.location.reload();
 				data = {

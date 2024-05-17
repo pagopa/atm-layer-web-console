@@ -68,6 +68,7 @@ function App() {
 	}
 
 	function setTokenExpired(){
+
 		sessionStorage.removeItem("jwt_console");
 		setLogged(false);
 	}

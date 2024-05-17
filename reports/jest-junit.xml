@@ -235,11 +235,11 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
     </testcase>
@@ -247,13 +247,13 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0.001">
     </testcase>

@@ -11,6 +11,7 @@ beforeEach(() => {
 describe("LoginPage", () => {
   test("renders without crashing", () => {
     const clearAll = jest.fn();
+
     const debugOn = true;
     render(
       <Ctx.Provider value={{ clearAll, debugOn }}>

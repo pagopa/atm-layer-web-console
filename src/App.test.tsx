@@ -28,6 +28,7 @@ test("Test App without jwt in sessionStorage", () => {
 	);
 });
 
+
 test("Test App with jwt in sessionStorage", () => {
 	sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 	sessionStorage.setItem("recordParamsAssociated", JSON.stringify(bpmnAssociationTableMocked.results[0]));

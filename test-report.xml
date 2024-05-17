@@ -54,7 +54,8 @@
     <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="3"/>
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="1"/>
     <testCase name="checks tests copyObject restituisce una copia profonda dell&apos;oggetto" duration="1"/>
-    <testCase name="checks tests regexTestField restituisce true se un campo corrisponde alla regex specificata" duration="0"/>
+    <testCase name="checks tests regexTestField restituisce true se un campo corrisponde alla regex specificata" duration="1"/>
+
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" duration="1"/>
     <testCase name="checks tests Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" duration="0"/>

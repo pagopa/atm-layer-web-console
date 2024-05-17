@@ -200,6 +200,7 @@ describe("AssociateBpmn", () => {
         fireEvent.click(screen.getByText("Conferma"));
     });
 
+
     // test("Test AssociateBpmn con errore di rete", async () => {
     //     sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
 
@@ -213,6 +214,7 @@ describe("AssociateBpmn", () => {
     //     expect(handleSnackbar).toHaveBeenCalledWith(false, expect.any(Function), expect.any(Function), expect.any(Function), expect.any(Function));
 
     // });
+
 
     test("Test handleSwitchAssociationFetch indirectly by simulating button click", async () => {
         sessionStorage.setItem("recordParams", JSON.stringify(bpmnTableMocked.results[0]));
