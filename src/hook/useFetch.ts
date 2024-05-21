@@ -75,6 +75,7 @@ export default function useFetch(endPoint?: string | undefined) {
 				options
 			).catch((e) => {
 				console.error(e);
+				window.location.replace(process.env.REACT_APP_HOME_PATH + ROUTES.LOGIN);
 			});
 			status = response?.status;
 			// TOKEN SCADUTO
