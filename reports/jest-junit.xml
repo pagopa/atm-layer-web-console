@@ -3,7 +3,7 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-21T10:41:22" time="2.126" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.003">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
     </testcase>
@@ -19,13 +19,13 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
@@ -43,13 +43,13 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
+    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.001">
+    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.002">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.001">
     </testcase>
@@ -59,7 +59,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
@@ -69,7 +69,7 @@
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
     </testcase>
-    <testcase classname="getTextModal" name="check error in default case" time="0">
+    <testcase classname="getTextModal" name="check error in default case" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-21T10:41:25" time="1.919" tests="10">
@@ -103,13 +103,13 @@
     </testcase>
     <testcase classname="checks tests" name="regexTestField restituisce true se un campo corrisponde alla regex specificata" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0.004">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0">
     </testcase>
@@ -131,7 +131,7 @@
     </testcase>
     <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.002">
     </testcase>
-    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
+    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
@@ -273,7 +273,7 @@
     </testcase>
     <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.005">
     </testcase>
-    <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.005">
+    <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.004">
     </testcase>
     <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.006">
     </testcase>
@@ -319,7 +319,7 @@
     </testcase>
     <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid.test Test with empty table" time="0.125">
     </testcase>
-    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Test without response" time="0.108">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Test without response" time="0.098">
     </testcase>
     <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Catch Error" time="0.096">
     </testcase>
@@ -353,9 +353,9 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.042">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.041">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.067">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.034">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.032">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.039">
     </testcase>

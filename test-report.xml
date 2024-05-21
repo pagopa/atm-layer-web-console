@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/Grids/__tests__/useColumns.test.ts">
-    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="3"/>
-    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="0"/>
+    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="18"/>
+    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct navigation paths for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should return correct record BPMN params" duration="2"/>
     <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="17"/>
@@ -19,11 +19,11 @@
     <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/Commons.test.tsx">
-    <testCase name="resetErrors reset specific error" duration="3"/>
+    <testCase name="resetErrors reset specific error" duration="5"/>
     <testCase name="resetErrors should not reset a specific field error if it does not exist" duration="0"/>
     <testCase name="getQueryString querystring PROCESS_RESOURCES" duration="1"/>
     <testCase name="getQueryString querystring RESOURCES" duration="0"/>
-    <testCase name="getQueryString querystring WORKFLOW_RESOURCE" duration="0"/>
+    <testCase name="getQueryString querystring WORKFLOW_RESOURCE" duration="1"/>
     <testCase name="getQueryString querystring DELETE_ASSOCIATION" duration="0"/>
     <testCase name="getQueryString querystring driver not present" duration="1"/>
     <testCase name="getQueryString handleSnackbar success" duration="1"/>
