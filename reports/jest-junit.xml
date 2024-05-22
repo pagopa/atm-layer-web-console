@@ -7,7 +7,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
+    <testcase classname="useColumns" name="should return correct record BPMN params" time="0.002">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.021">
     </testcase>
@@ -27,11 +27,11 @@
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0.001">
+    <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/Commons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:27" time="3.199" tests="18">
@@ -65,7 +65,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0.001">
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.007">
     </testcase>
@@ -99,19 +99,19 @@
     </testcase>
     <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0">
     </testcase>
     <testcase classname="checks tests" name="regexTestField restituisce true se un campo corrisponde alla regex specificata" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 50" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per i numeri float da 0 a 100" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 100" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri interi da 1 a 99" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che non contiene spazi" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0">
     </testcase>
@@ -119,15 +119,15 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali con separatore" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce false per un input qualsiasi quando il regType non è riconosciuto" time="0">
+    <testcase classname="checks tests" name="Restituisce false per un input qualsiasi quando il regType non è riconosciuto" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per una data nel formato AAAA-MM-GG" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per un UUID" time="0">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per un UUID" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" time="0">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali da 0.01 a 99.99" time="0.006">
     </testcase>
     <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0">
     </testcase>
@@ -211,7 +211,7 @@
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:34" time="1.152" tests="5">
     <testcase classname="UpgradeBpmn" name="Submit form with valid input" time="0.145">
     </testcase>
-    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch failed" time="0.074">
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch failed" time="0.073">
     </testcase>
     <testcase classname="UpgradeBpmn" name="Submit form with invalid input" time="0.036">
     </testcase>
@@ -223,9 +223,9 @@
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:35" time="0.173" tests="20">
     <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.002">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0">
     </testcase>
@@ -253,7 +253,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
@@ -337,7 +337,7 @@
   <testsuite name="src/components/DataGrid/__tests__/ResourcesDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:40" time="1.477" tests="4">
     <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test" time="0.372">
     </testcase>
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.095">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.101">
     </testcase>
     <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.088">
     </testcase>
@@ -351,7 +351,7 @@
   <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:27" time="16.305" tests="10">
     <testcase classname="ModalResources Test" name="Test ModalWR with ROLLBACK" time="0.234">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.044">
+    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.042">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.046">
     </testcase>
@@ -389,7 +389,7 @@
     </testcase>
     <testcase classname="TableColumn test" name="Test renderCell" time="0.02">
     </testcase>
-    <testcase classname="TableColumn test" name="Test actionColumn" time="0.028">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.025">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumn" time="0.013">
     </testcase>
@@ -423,7 +423,7 @@
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0">
     </testcase>
-    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0.001">
+    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:45" time="1.875" tests="2">

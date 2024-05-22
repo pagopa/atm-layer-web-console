@@ -146,7 +146,7 @@
     <testCase name="DetailButtons navigates to correct route when navigate property is provided" duration="8"/>
     <testCase name="DetailButtons disables button when disabledCondition is true" duration="5"/>
     <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" duration="5"/>
-    <testCase name="DetailButtons does not navigate when navigate property is not provided" duration="4"/>
+    <testCase name="DetailButtons does not navigate when navigate property is not provided" duration="5"/>
     <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" duration="6"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx">
@@ -276,13 +276,13 @@
     <testCase name="BpmnDetailPage Test BpmnDetailPage without sessionStorage" duration="93"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/__tests__/formOption.test.tsx">
-    <testCase name="formOption Test test get values" duration="3"/>
+    <testCase name="formOption Test test get values" duration="2"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx">
     <testCase name="AssociateBpmnPage  getItem recordParams case" duration="218"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/HeaderComponents/__tests__/Logo.test.tsx">
-    <testCase name="HeaderAccountCustom test First render" duration="40"/>
+    <testCase name="HeaderAccountCustom test First render" duration="27"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesPage.test.tsx">
     <testCase name="ResourcesPage test First render" duration="372"/>
@@ -302,8 +302,8 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx">
     <testCase name="CreateWRPage render" duration="184"/>
   </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/fetch/__tests__/fetchRequest.test.ts">
-    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="3"/>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx">
+    <testCase name="CreateWRPage render" duration="188"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/CardComponents/__tests__/HomeCardComponent.test.tsx">
     <testCase name="HomeCardComponent test First render" duration="89"/>
