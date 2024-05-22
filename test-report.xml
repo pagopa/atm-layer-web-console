@@ -75,7 +75,7 @@
     <testCase name="checks tests Restituisce il nome del file da un percorso valido con un nome file valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
+    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx">
     <testCase name="AssociateBpmn Test AssociateBpmn with invalid form" duration="208"/>
@@ -129,14 +129,14 @@
     <testCase name="formatValues tests Verifica estrazione anno da una stringa di data" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione di un importo" duration="1"/>
-    <testCase name="formatValues tests Verifica la creazione della data" duration="0"/>
+    <testCase name="formatValues tests Verifica la creazione della data" duration="5"/>
     <testCase name="formatValues tests Verifica la formattazione di una stringa di data" duration="1"/>
     <testCase name="formatValues tests Verifica la funzione checkValue" duration="0"/>
     <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della valuta" duration="0"/>
-    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="0"/>
+    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo senza valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della data" duration="1"/>
   </file>
@@ -144,7 +144,7 @@
     <testCase name="DetailButtons renders buttons with correct text" duration="39"/>
     <testCase name="DetailButtons calls setType and openDialog when button is clicked" duration="16"/>
     <testCase name="DetailButtons navigates to correct route when navigate property is provided" duration="8"/>
-    <testCase name="DetailButtons disables button when disabledCondition is true" duration="5"/>
+    <testCase name="DetailButtons disables button when disabledCondition is true" duration="9"/>
     <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" duration="5"/>
     <testCase name="DetailButtons does not navigate when navigate property is not provided" duration="5"/>
     <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" duration="6"/>

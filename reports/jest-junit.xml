@@ -3,9 +3,9 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:27" time="2.023" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct record BPMN params" time="0.002">
     </testcase>
@@ -21,11 +21,11 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
@@ -197,7 +197,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with fileName" time="0.027">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.028">
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.026">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.037">
     </testcase>
@@ -217,7 +217,7 @@
     </testcase>
     <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.07">
     </testcase>
-    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.038">
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.042">
     </testcase>
   </testsuite>
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:35" time="0.173" tests="20">
@@ -227,7 +227,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0">
+    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.005">
     </testcase>
@@ -241,7 +241,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.005">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
@@ -255,7 +255,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
@@ -449,7 +449,7 @@
   <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:47" time="1.56" tests="2">
     <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.053">
     </testcase>
-    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.01">
+    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.008">
     </testcase>
   </testsuite>
   <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-22T07:21:48" time="1.203" tests="3">
