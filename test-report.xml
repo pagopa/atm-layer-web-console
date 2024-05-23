@@ -16,7 +16,7 @@
     <testCase name="useColumns should generate correct path for invalid driver" duration="0"/>
     <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="1"/>
     <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="0"/>
-    <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
+    <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/Commons.test.tsx">
     <testCase name="resetErrors reset specific error" duration="7"/>

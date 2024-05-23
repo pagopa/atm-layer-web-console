@@ -39,7 +39,7 @@
     </testcase>
     <testcase classname="resetErrors" name="should not reset a specific field error if it does not exist" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
     </testcase>
@@ -51,7 +51,7 @@
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.003">
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.001">
+    <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0">
     </testcase>
     <testcase classname="getQueryString &gt; breadCrumbLinkComponent" name="render link and message" time="0.049">
     </testcase>
@@ -115,7 +115,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per una stringa non vuota e senza spazi" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" time="0.001">
+    <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per ore e minuti nel formato HH:mm" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce true per un campo che corrisponde alla regex per numeri decimali con separatore" time="0.001">
     </testcase>
@@ -135,7 +135,7 @@
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0.001">
+    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce il nome del file da un percorso valido con un nome file valido" time="0">
     </testcase>
@@ -259,7 +259,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-23T08:44:19" time="0.735" tests="7">
@@ -329,7 +329,7 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.024">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.032">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.026">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Error during DOWNLOAD" time="0.019">
     </testcase>
@@ -421,7 +421,7 @@
     </testcase>
     <testcase classname="decode file test" name="download a file successfully" time="0.004">
     </testcase>
-    <testcase classname="decode file test" name="download file doc null" time="0.001">
+    <testcase classname="decode file test" name="download file doc null" time="0">
     </testcase>
     <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
     </testcase>
