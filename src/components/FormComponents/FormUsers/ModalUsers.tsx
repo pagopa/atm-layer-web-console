@@ -1,6 +1,6 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
-import { Grid, TextField } from "@mui/material";
+import { Grid, Select, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
@@ -8,6 +8,7 @@ import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
+import MultiSelect from "../MultiSelect";
 
 type Props = {
 	type: string;
@@ -26,8 +27,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const initialValues = {
-		name: "",
-		value: "",
+		userId: "",
+		profileIds: "",
 	};
 
 	const [formData, setFormData] = useState(initialValues);
@@ -51,10 +52,10 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const validateForm = (isCreate: boolean) => {
 		const newErrors = isCreate ? {
-			name: formData.name ? "" : "Campo obbligatorio",
-			value: formData.value ? "" : "Campo obbligatorio",
+			name: formData.userId ? "" : "Campo obbligatorio",
+			value: formData.profileIds ? "" : "Campo obbligatorio",
 		} : {
-			value: formData.value ? "" : "Campo obbligatorio",
+			value: formData.profileIds ? "" : "Campo obbligatorio",
 		};
 	
 		setErrors(newErrors);
@@ -91,8 +92,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		case CREATE_USER: {
 			if (validateForm(true)) {
 				const postData = {
-					name: formData.name,
-					value: formData.value,
+					name: formData.userId,
+					value: formData.profileIds,
 				};
 				try {
 					const response = await fetchRequest({ urlEndpoint: generatePath(CREATE_USERS, { name: recordParams.name }), method: "POST", abortController, body: postData })();
@@ -117,7 +118,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				// 	value: formData.value,
 				// };
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_USERS, { name: recordParams.name, value: formData.value }), method: "PUT", abortController })();
+					const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_USERS, { name: recordParams.name, value: formData.profileIds }), method: "PUT", abortController })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
@@ -152,31 +153,20 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				<Grid xs={5} item my={1}>
 					<TextField
 						fullWidth
-						id="name"
-						name="name"
-						label={"Nome"}
-						placeholder={"nome"}
+						id="userId"
+						name="userId"
+						label={"Email utente"}
+						placeholder={"utente@pagopa.com"}
 						size="small"
-						value={formData.name}
+						value={formData.userId}
 						onChange={handleChange}
 						error={Boolean(errors.name)}
 						helperText={errors.name}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-name-test" }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
-					<TextField
-						fullWidth
-						id="value"
-						name="value"
-						label={"Valore"}
-						placeholder={"valore"}
-						size="small"
-						value={formData.value}
-						onChange={handleChange}
-						error={Boolean(errors.value)}
-						helperText={errors.value}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-value-test" }}
+					<MultiSelect
 					/>
 				</Grid>
 			</Grid>
@@ -206,7 +196,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						label={"Valore"}
 						placeholder={"valore"}
 						size="small"
-						value={formData.value}
+						value={formData.profileIds}
 						onChange={handleChange}
 						error={Boolean(errors.value)}
 						helperText={errors.value}

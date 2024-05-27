@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import { USERS } from "../../commons/constants";
+import { CREATE_USER, USERS } from "../../commons/constants";
 import { GET_ALL_USERS } from "../../commons/endpoints";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
@@ -74,7 +74,7 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 
 	const handleModalClick= () => {
 		setOpen(true);
-		setType(USERS);
+		setType(CREATE_USER);
 	};
 
 	useEffect(() => {
