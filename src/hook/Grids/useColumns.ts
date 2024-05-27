@@ -7,7 +7,7 @@ const useColumns: any = () => {
 
 	const { formatDateToString, extractRelativeCdnPath, extractDescriptions } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any, deleteColumnUsers: any, editColumnUsers: any) => {
 
 		const functionTypeColumn = {
 			field: "functionType",
@@ -407,30 +407,30 @@ const useColumns: any = () => {
 				},
 				createdAtColumn,
 				lastUpdatedAtColumn,
-				// {
-				//  field: "action1",
-				//  cellClassName: "justifyContentNormal",
-				//  headerName: "",
-				//  align: "right",
-				//  hideSortIcons: true,
-				//  disableColumnMenu: true,
-				//  editable: false,
-				//  renderCell: (params: any) => editColumnVariables(params),
-				//  sortable: false,
-				//  flex: 1
-				// },
-				// {
-				//  field: "action2",
-				//  cellClassName: "justifyContentNormal",
-				//  headerName: "",
-				//  align: "right",
-				//  hideSortIcons: true,
-				//  disableColumnMenu: true,
-				//  editable: false,
-				//  renderCell: (params: any) => deleteColumnVariables(params),
-				//  sortable: false,
-				//  flex: 1
-				// }
+				{
+				 field: "action1",
+				 cellClassName: "justifyContentNormal",
+				 headerName: "",
+				 align: "right",
+				 hideSortIcons: true,
+				 disableColumnMenu: true,
+				 editable: false,
+				 renderCell: (params: any) => editColumnUsers(params),
+				 sortable: false,
+				 flex: 1
+				},
+				{
+				 field: "action2",
+				 cellClassName: "justifyContentNormal",
+				 headerName: "",
+				 align: "right",
+				 hideSortIcons: true,
+				 disableColumnMenu: true,
+				 editable: false,
+				 renderCell: (params: any) => deleteColumnUsers(params),
+				 sortable: false,
+				 flex: 1
+				}
 			];
 		default:
 			return [];

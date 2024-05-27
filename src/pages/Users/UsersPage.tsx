@@ -6,7 +6,7 @@ import UsersDataGrid from "../../components/DataGrid/UsersDataGrid";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
 
 const UsersPage = () => {
-	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:false}, false), "Risorse di processo");
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:false}, false), "Utenti e autorizzazioni");
 
 	const [type, setType] = useState("");
 	const [open, setOpen] = useState(false);
