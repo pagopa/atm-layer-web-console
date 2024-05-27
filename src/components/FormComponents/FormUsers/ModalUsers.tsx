@@ -22,7 +22,7 @@ type Props = {
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController } = useContext(Ctx);
-	const recordParamsString = sessionStorage.getItem("recordParamsVariable");
+	const recordParamsString = sessionStorage.getItem("recordParamsUser");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const initialValues = {
