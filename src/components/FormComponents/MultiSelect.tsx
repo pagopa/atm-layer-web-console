@@ -1,24 +1,27 @@
 import { TextField, Autocomplete, Checkbox } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { PROFILE_DESCRIPTIONS } from "../../commons/constants";
 
 type Props = {
     handleChange: (event: SyntheticEvent<Element, Event>, value: Array<string>) => void;
     errors:any;
+	previousValues?: Array<string>;
 };
 
 const names = PROFILE_DESCRIPTIONS;
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function MultiSelect({handleChange, errors}:Props) {
+export default function MultiSelect({handleChange, errors, previousValues }:Props) {
+	
 	return (
 		<Autocomplete
 			multiple
 			options={names}
 			getOptionLabel={(option) => option}
+			defaultValue={previousValues}
 			disableCloseOnSelect
 			renderOption={(props, option, { selected }) => (
 				<li {...props}>

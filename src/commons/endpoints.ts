@@ -26,5 +26,5 @@ export const USER_EMAIL = "/info/email";
 
 export const GET_ALL_USERS = "/user";
 export const CREATE_USERS = "/user";
-export const UPDATE_USERS = "";
+export const UPDATE_USERS = "/user/update/:userId";
 export const DELETE_USERS = "/delete/userId/:userId";

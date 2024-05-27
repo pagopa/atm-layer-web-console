@@ -5,7 +5,7 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_USER, UPDATE_USER } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 
 
@@ -134,7 +134,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 		const actions = () => {
 			setOpen(true);
-			// setType(DELETE_USER);
+			setType(DELETE_USER);
 			sessionStorage.setItem("recordParamsUser", JSON.stringify(param.row));
 		};
 
@@ -163,7 +163,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 		const actions = () => {
 			setOpen(true);
-			// setType(UPDATE_USERS);
+			setType(UPDATE_USER);
 			sessionStorage.setItem("recordParamsUser", JSON.stringify(param.row));
 		};
 

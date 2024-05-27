@@ -44,7 +44,7 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 		page: 0,
 		pageSize: 10,
 	});
-	const { buildColumnDefs, visibleColumns } = TableColumn();
+	const { buildColumnDefs, visibleColumns } = TableColumn(setOpen, setType);
 	const columns: Array<GridColDef> = buildColumnDefs(USERS);
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
 

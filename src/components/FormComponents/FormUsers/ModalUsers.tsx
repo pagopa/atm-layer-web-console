@@ -1,6 +1,6 @@
 import { SetStateAction, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
-import { Grid, Select, TextField } from "@mui/material";
+import { Grid, Input, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
@@ -9,6 +9,7 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
+import formatValues from "../../../utils/formatValues";
 
 type Props = {
 	type: string;
@@ -21,7 +22,7 @@ type Props = {
 };
 
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
-
+	const { extractDescriptionsAsArray } = formatValues();
 	const { abortController } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsUser");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
@@ -60,7 +61,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const validateForm = (isCreate: boolean) => {
 		const newErrors = isCreate ? {
-			name: formData.userId ? "" : "Campo obbligatorio",
+			userId: formData.userId ? "" : "Campo obbligatorio",
 			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
 		} : {
 			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
@@ -76,6 +77,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	useEffect(() => {
 		setFormData(initialValues);
+		setErrors(initialValues);
 	}, []);
 
 	const content = getTextModal(type);
@@ -120,13 +122,17 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			break;
 		}
 		case UPDATE_USER: {
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				profileIds: extractDescriptionsAsArray(recordParams.profiles)
+			}));
 			if (validateForm(false)) {
-				// const postData = {
-				// 	name: recordParams.name,
-				// 	value: formData.value,
-				// };
+				const postData = {
+					profileIds: formData.profileIds,
+				};
+				console.log(formData, postData);
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_USERS, { name: recordParams.name, value: formData.profileIds }), method: "PUT", abortController })();
+					const response = await fetchRequest({ urlEndpoint:generatePath(UPDATE_USERS, { userId: recordParams.userId}), method: "PUT", abortController, body: postData })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
@@ -186,35 +192,26 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				<Grid xs={5} item my={1}>
 					<TextField
 						fullWidth
-						id="name"
-						name="name"
-						label={"Nome"}
-						placeholder={"nome"}
+						id="userId"
+						name="userId"
+						label={"Email utente"}
+						placeholder={"utente@pagopa.com"}
 						size="small"
-						value={recordParams.name}
+						value={recordParams.userId}
 						onChange={handleChange}
-						error={Boolean(errors.name)}
+						error={Boolean(errors.userId)}
 						helperText={errors.name}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-name-test", readOnly: true }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: true }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
-					<TextField
-						fullWidth
-						id="value"
-						name="value"
-						label={"Valore"}
-						placeholder={"valore"}
-						size="small"
-						value={formData.profileIds}
-						onChange={handleChange}
-						error={Boolean(errors.value)}
-						helperText={errors.value}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-value-test" }}
+					<MultiSelect handleChange={handleMultiSelectChange}
+						errors={errors}		
+						previousValues={extractDescriptionsAsArray(recordParams.profiles)}			
 					/>
 				</Grid>
 			</Grid>
-			}			
+			}	
 		</ModalTemplate>
 	);
 };

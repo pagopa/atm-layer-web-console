@@ -134,7 +134,9 @@ const formatValues = () => {
 		}
 	};
 
-	const extractDescriptions = (profiles:Array<any>) => {
+	const extractDescriptions = (profiles: Array<any>): string => profiles.map(profile => profile.description).join(", ");
+
+	const extractDescriptionsAsArray = (profiles:Array<any>) => {
 		const descriptions :Array<string> = [];
 		// eslint-disable-next-line functional/immutable-data
 		profiles.map(profile => descriptions.push(profile.description));
@@ -163,6 +165,7 @@ const formatValues = () => {
 		extractExtension,
 		extractRelativeCdnPath,
 		extractDescriptions,
+		extractDescriptionsAsArray,
 	};
 };
 

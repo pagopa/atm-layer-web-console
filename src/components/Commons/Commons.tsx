@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -223,6 +223,12 @@ export function getTextModal(type:string):any {
 	}
 	case CREATE_USER: {
 		return {titleModal:"Creazione nuovo utente", contentText:"Indica email e permessi del nuovo utente"};
+	}
+	case DELETE_USER: {
+		return {titleModal:"Cancellazione utente", contentText:"Sei sicuro di voler cancellare questo utente?"};
+	}
+	case UPDATE_USER: {
+		return {titleModal:"Update utente", contentText:"Modifica le autorizzazioni di questo utente"};
 	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
