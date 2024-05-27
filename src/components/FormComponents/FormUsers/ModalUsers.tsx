@@ -1,4 +1,4 @@
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { SetStateAction, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
 import { Grid, Select, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
@@ -28,18 +28,26 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const initialValues = {
 		userId: "",
-		profileIds: "",
+		profileIds: [""],
 	};
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = e.target;
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			[name]: value
+			userId: e.target.value
+		}));
+	};
+
+	const handleMultiSelectChange = (event: SyntheticEvent<Element, Event>, value: Array<string>) => {
+		resetErrors(errors, setErrors, "profileIds");
+		console.log("newValue: "+ value.toString());
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			profileIds: value
 		}));
 	};
 
@@ -53,9 +61,9 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	const validateForm = (isCreate: boolean) => {
 		const newErrors = isCreate ? {
 			name: formData.userId ? "" : "Campo obbligatorio",
-			value: formData.profileIds ? "" : "Campo obbligatorio",
+			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
 		} : {
-			value: formData.profileIds ? "" : "Campo obbligatorio",
+			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
 		};
 	
 		setErrors(newErrors);
@@ -92,11 +100,11 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		case CREATE_USER: {
 			if (validateForm(true)) {
 				const postData = {
-					name: formData.userId,
-					value: formData.profileIds,
+					userId: formData.userId,
+					profileIds: formData.profileIds,
 				};
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(CREATE_USERS, { name: recordParams.name }), method: "POST", abortController, body: postData })();
+					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
@@ -160,13 +168,15 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						size="small"
 						value={formData.userId}
 						onChange={handleChange}
-						error={Boolean(errors.name)}
-						helperText={errors.name}
+						error={Boolean(errors.userId)}
+						helperText={errors.userId}
 						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
 					<MultiSelect
+						handleChange={handleMultiSelectChange}
+						errors={errors}
 					/>
 				</Grid>
 			</Grid>
