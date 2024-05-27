@@ -1,18 +1,30 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import { USERS } from "../../commons/constants";
 import { GET_ALL_USERS } from "../../commons/endpoints";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { getQueryString } from "../Commons/Commons";
+import ModalUsers from "../FormComponents/FormUsers/ModalUsers";
 import CustomDataGrid from "./CustomDataGrid";
 import TableColumn from "./TableColumn";
 import FilterBar from "./Filters/FilterBar";
 import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
 
+type Props = {
+    type: string;
+    setType: React.Dispatch<React.SetStateAction<string>>;
+    open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
+	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+	setMessage: React.Dispatch<SetStateAction<string>>;
+	setTitle: React.Dispatch<SetStateAction<string>>;
+};
 
-export default function UsersDataGrid() {
+
+export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle } : Props) {
 
 	const [loading, setLoading] = useState(true);
 	const [loadingButton, setLoadingButton] = useState(false);
@@ -60,6 +72,11 @@ export default function UsersDataGrid() {
 		}
 	};
 
+	const handleModalClick= () => {
+		setOpen(true);
+		setType(USERS);
+	};
+
 	useEffect(() => {
 		if (!Object.values(filterValues).some(value => value !== "")) {
 			void getAllUsersList();
@@ -78,6 +95,8 @@ export default function UsersDataGrid() {
 					driver={USERS}
 					loadingButton={loadingButton}
 					setLoadingButton={setLoadingButton}
+					createIcon={true}
+					handleClick={handleModalClick}
 				/>
 			</Box>
 			<Box mt={2}>
@@ -110,6 +129,15 @@ export default function UsersDataGrid() {
 					paginationModel={{ ...paginationModel }}
 					onPaginationModelChange={(newPage) => getAllUsersList(filterValues, newPage.page)}
 					loading={loading}
+				/>
+				<ModalUsers
+					open={open}
+					setOpen={setOpen}
+					type={type}
+					setOpenSnackBar={setOpenSnackBar}
+					setSeverity={setSeverity}
+					setMessage={setMessage}
+					setTitle={setTitle}
 				/>
 			</Box>
 		</Box>

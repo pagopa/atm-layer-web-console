@@ -20,6 +20,10 @@ export const UPDATE_WR= "updateWR";
 export const DELETE_WR= "deleteWR";
 export const DOWNLOAD_WR= "downloadWR";
 
+export const CREATE_USER = "createUser";
+export const UPDATE_USER = "updateUser";
+export const DELETE_USER = "deleteUser";
+
 export const BPMN="BPMN";
 export const DMN = "DMN";
 export const FORM = "FORM";

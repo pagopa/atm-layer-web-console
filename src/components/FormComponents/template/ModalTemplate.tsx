@@ -10,9 +10,10 @@ type Props = {
 	handleSubmit: any;
 	children?:React.ReactNode;
 	loading?: boolean;
+	handleClose?: any;
 };
 
-export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit, children, loading }: Props) {
+export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit, children, loading, handleClose }: Props) {
 	return (
 		<Dialog
 			open={open}
@@ -35,7 +36,7 @@ export default function ModalTemplate({ titleModal, contentText, open, setOpen, 
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
 					<Box mr={2}>
-						<Button variant={"outlined"} onClick={() => setOpen(false)}>Annulla</Button>
+						<Button variant={"outlined"} onClick={handleClose}>Annulla</Button>
 					</Box>
 					<Box>
 						<LoadingButton loading={loading} variant={"contained"} onClick={handleSubmit}>Conferma</LoadingButton>

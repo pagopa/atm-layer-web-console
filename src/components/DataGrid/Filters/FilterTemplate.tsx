@@ -9,6 +9,8 @@ type Props = {
   filterRoutes: string;
   children?: any;
   loadingButton?: boolean;
+  createIcon?: boolean;
+  handleClick?: any;
 };
 
 const FilterTemplate = ({
@@ -17,7 +19,9 @@ const FilterTemplate = ({
 	filterValues,
 	filterRoutes,
 	children,
-	loadingButton
+	loadingButton,
+	createIcon,
+	handleClick,
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
@@ -40,12 +44,19 @@ const FilterTemplate = ({
 						alignItems={"center"}
 						justifyContent={"space-between"}
 					>
-						<Box my={1}>
-							<Button variant="contained" onClick={() => navigate(filterRoutes)}>
+						{createIcon ?
+							 <Box my={1}>
+							 <Button variant="contained" onClick={() => handleClick()}>
+				 Crea Nuovo
+							 </Button>
+						 </Box>
+						 :
+							<Box my={1}>
+								<Button variant="contained" onClick={() => navigate(filterRoutes)}>
                 Crea Risorsa
-							</Button>
-						</Box>
-
+								</Button>
+							</Box>
+						}
 						<Box>
 							<Button
 								sx={{ marginRight: 2 }}
