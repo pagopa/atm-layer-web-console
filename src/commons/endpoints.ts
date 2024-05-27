@@ -23,3 +23,5 @@ export const RESOURCES_CREATE = "/resources";
 export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
 export const USER_EMAIL = "/info/email";
+
+export const GET_ALL_USERS = "/user";

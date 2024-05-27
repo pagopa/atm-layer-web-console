@@ -23,6 +23,7 @@ import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import { JwtUser } from "./model/UserModel";
+import UsersPage from "./pages/Users/UsersPage";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -42,6 +43,8 @@ const LocalRoutes = () => (
 			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
 			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
 			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+
+			<Route path={routes.USERS} element={<PageLayout><UsersPage /></PageLayout>} />
 		</Route>
 		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
 		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />

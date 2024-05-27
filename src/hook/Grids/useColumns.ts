@@ -1,11 +1,11 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
 const useColumns: any = () => {
 
-	const { formatDateToString, extractRelativeCdnPath } = formatValues();
+	const { formatDateToString, extractRelativeCdnPath, extractDescriptions } = formatValues();
 
 	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
 
@@ -376,6 +376,61 @@ const useColumns: any = () => {
 				createdByColumn,
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
+			];
+		case USERS:
+			return [
+				{
+					field: "userId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Utente",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.userId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "profileIds",
+					cellClassName: "justifyContentNormal",
+					headerName: "Ruoli assegnati",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, extractDescriptions(params.row.profiles)),
+					sortable: false,
+					flex: 1
+				},
+				createdAtColumn,
+				lastUpdatedAtColumn,
+				// {
+				//  field: "action1",
+				//  cellClassName: "justifyContentNormal",
+				//  headerName: "",
+				//  align: "right",
+				//  hideSortIcons: true,
+				//  disableColumnMenu: true,
+				//  editable: false,
+				//  renderCell: (params: any) => editColumnVariables(params),
+				//  sortable: false,
+				//  flex: 1
+				// },
+				// {
+				//  field: "action2",
+				//  cellClassName: "justifyContentNormal",
+				//  headerName: "",
+				//  align: "right",
+				//  hideSortIcons: true,
+				//  disableColumnMenu: true,
+				//  editable: false,
+				//  renderCell: (params: any) => deleteColumnVariables(params),
+				//  sortable: false,
+				//  flex: 1
+				// }
 			];
 		default:
 			return [];

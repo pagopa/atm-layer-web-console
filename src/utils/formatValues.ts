@@ -134,6 +134,13 @@ const formatValues = () => {
 		}
 	};
 
+	const extractDescriptions = (profiles:Array<any>) => {
+		const descriptions :Array<string> = [];
+		// eslint-disable-next-line functional/immutable-data
+		profiles.map(profile => descriptions.push(profile.description));
+		return descriptions;
+	};
+
 	
 	return {
 		checkValue,
@@ -155,6 +162,7 @@ const formatValues = () => {
 		formatDateString,
 		extractExtension,
 		extractRelativeCdnPath,
+		extractDescriptions,
 	};
 };
 
