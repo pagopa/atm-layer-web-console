@@ -39,7 +39,7 @@ export default function MultiSelect({handleChange, errors, previousValues }:Prop
 					{...params}
 					variant="outlined"
 					label="Ruoli assegnati"
-					error={Boolean(errors.profileIds)}
+					error={Boolean(errors.profileIds.length>0)}
 					helperText={errors.profileIds}
 				/>
 			)}
