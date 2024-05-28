@@ -80,9 +80,18 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	};
 
 	useEffect(() => {
-		setFormData(initialValues);
-		setErrors(initialValues);
-	}, []);
+		if (open && type === UPDATE_USER) {
+			if (recordParams.profiles) {
+				setFormData({
+					userId: recordParams.userId,
+					profileIds: extractDescriptionsAsArray(recordParams.profiles),
+				});
+			} else {
+				setFormData(initialValues);
+			}
+			setErrors(initialValues);
+		}
+	}, [open, type, recordParams, extractDescriptionsAsArray]);
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -126,13 +135,13 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			break;
 		}
 		case UPDATE_USER: {
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				profileIds: extractDescriptionsAsArray(recordParams.profiles)
-			}));
+			const updatedFormData = {
+				userId: recordParams.userId,
+				profileIds: extractDescriptionsAsArray(recordParams.profiles),
+			};
 			if (validateForm(false)) {
 				const postData = {
-					profileIds: formData.profileIds,
+					profileIds: updatedFormData.profileIds,
 				};
 				console.log(formData, postData);
 				try {
