@@ -1,6 +1,6 @@
 import { SetStateAction, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
-import { Grid, Input, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
@@ -12,13 +12,13 @@ import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
 
 type Props = {
-	type: string;
-	open: boolean;
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-	setMessage: React.Dispatch<SetStateAction<string>>;
-	setTitle: React.Dispatch<SetStateAction<string>>;
+    type: string;
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
+    setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+    setMessage: React.Dispatch<SetStateAction<string>>;
+    setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
@@ -39,66 +39,55 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			userId: e.target.value
+			userId: e.target.value,
 		}));
 	};
 
 	const handleMultiSelectChange = (event: SyntheticEvent<Element, Event>, value: Array<string>) => {
-		setErrors((prevErrors: { [x: string]: any }) => {
-			// eslint-disable-next-line functional/immutable-data
-			prevErrors.profileIds = [] as Array<string>;
-			return { ...prevErrors };
-		});
-		console.log("newValue: "+ value.toString());
+		resetErrors(errors, setErrors, "profileIds");
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			profileIds: value
+			profileIds: value,
 		}));
 	};
 
-	
-
 	const handleClose = () => {
 		setOpen(false);
-		setFormData(initialValues);
-		// Reset errors when modal is closed
 		setErrors(initialValues);
+		setFormData(initialValues);
 	};
 
-
 	const validateForm = (isCreate: boolean) => {
-		const newErrors = isCreate ? {
-			userId: formData.userId ? "" : "Campo obbligatorio",
-			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
-		} : {
-			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
-		};
-	
-		setErrors(newErrors);
-	
-		// Determines whether all the members of the array satisfy the conditions "!error".
-		return Object.values(newErrors).every((error) => !error);
+		const newErrors = isCreate
+			? {
+				userId: formData.userId ? "" : "Campo obbligatorio",
+				profileIds: formData.profileIds.length > 0 ? "" : "Campo obbligatorio",
+			}
+			: {
+				profileIds: formData.profileIds.length > 0 ? "" : "Campo obbligatorio",
+			};
 
-		
+		setErrors(newErrors);
+
+		return Object.values(newErrors).every((error) => !error);
 	};
 
 	useEffect(() => {
 		if (open && type === UPDATE_USER) {
-			if (recordParams.profiles) {
-				setFormData({
-					userId: recordParams.userId,
-					profileIds: extractDescriptionsAsArray(recordParams.profiles),
-				});
-			} else {
-				setFormData(initialValues);
-			}
+			setFormData({
+				userId: recordParams.userId,
+				profileIds: extractDescriptionsAsArray(recordParams.profiles),
+			});
+			setErrors(initialValues);
+		} else if (open && type === CREATE_USER) {
+			setFormData(initialValues);
 			setErrors(initialValues);
 		}
-	}, [open, type, recordParams, extractDescriptionsAsArray]);
-
+	}, [open]);
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		setLoading(true);
 		switch (type) {
@@ -196,6 +185,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					<MultiSelect
 						handleChange={handleMultiSelectChange}
 						errors={errors}
+						value={formData.profileIds}
 					/>
 				</Grid>
 			</Grid>
@@ -220,7 +210,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				<Grid xs={5} item my={1}>
 					<MultiSelect handleChange={handleMultiSelectChange}
 						errors={errors}		
-						previousValues={extractDescriptionsAsArray(recordParams.profiles)}			
+						value={formData.profileIds}	
 					/>
 				</Grid>
 			</Grid>

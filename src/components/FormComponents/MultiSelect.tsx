@@ -1,27 +1,27 @@
 import { TextField, Autocomplete, Checkbox } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent } from "react";
 import { PROFILE_DESCRIPTIONS } from "../../commons/constants";
 
 type Props = {
     handleChange: (event: SyntheticEvent<Element, Event>, value: Array<string>) => void;
-    errors:any;
-	previousValues?: Array<string>;
+    errors: any;
+    value: Array<string>;
 };
 
 const names = PROFILE_DESCRIPTIONS;
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function MultiSelect({handleChange, errors, previousValues }:Props) {
-	
+export default function MultiSelect({ handleChange, errors, value }: Props) {
 	return (
 		<Autocomplete
 			multiple
 			options={names}
 			getOptionLabel={(option) => option}
-			defaultValue={previousValues}
+			value={value}
+			isOptionEqualToValue={(option, value) => option === value}
 			disableCloseOnSelect
 			renderOption={(props, option, { selected }) => (
 				<li {...props}>
@@ -39,11 +39,11 @@ export default function MultiSelect({handleChange, errors, previousValues }:Prop
 					{...params}
 					variant="outlined"
 					label="Ruoli assegnati"
-					error={Boolean(errors.profileIds.length>0)}
+					error={Boolean(errors.profileIds)}
 					helperText={errors.profileIds}
 				/>
 			)}
-			onChange={handleChange}
+			onChange={(_, newValue) => handleChange(_, newValue)}
 		/>
 	);
 }
