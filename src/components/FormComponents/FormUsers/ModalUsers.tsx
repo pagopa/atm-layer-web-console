@@ -34,8 +34,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
-	// eslint-disable-next-line functional/no-let
-	let updatedFormData:any;
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -56,10 +54,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			...prevFormData,
 			profileIds: value
 		}));
-		updatedFormData = {
-			profileIds: "sono stato aggiornato"
-		};
-		console.log("variabile dentro il metodo: "+updatedFormData);
 	};
 
 	
@@ -77,7 +71,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			userId: formData.userId ? "" : "Campo obbligatorio",
 			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
 		} : {
-			profileIds: updatedFormData.profileIds[0] ? "" : "Campo obbligatorio",
+			profileIds: formData.profileIds[0] ? "" : "Campo obbligatorio",
 		};
 	
 		setErrors(newErrors);
@@ -102,9 +96,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		}
 	}, [open, type, recordParams, extractDescriptionsAsArray]);
 
-	// useEffect(() => {
-	// 	updatedFormData = formData;
-	// }, [formData]);
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -148,10 +139,9 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			break;
 		}
 		case UPDATE_USER: {
-			console.log("variabile fuori dal metodo: "+updatedFormData);
 			if (validateForm(false)) {
 				const postData = {
-					profileIds: updatedFormData.profileIds,
+					profileIds: formData.profileIds,
 				};
 				console.log(formData, postData);
 				try {
