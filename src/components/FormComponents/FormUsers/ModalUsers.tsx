@@ -44,7 +44,11 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	};
 
 	const handleMultiSelectChange = (event: SyntheticEvent<Element, Event>, value: Array<string>) => {
-		resetErrors(errors, setErrors, "profileIds");
+		setErrors((prevErrors: { [x: string]: any }) => {
+			// eslint-disable-next-line functional/immutable-data
+			prevErrors.profileIds = [] as Array<string>;
+			return { ...prevErrors };
+		});
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			profileIds: value,
