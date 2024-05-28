@@ -380,9 +380,35 @@ const useColumns: any = () => {
 		case USERS:
 			return [
 				{
+					field: "userName",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.name),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "userSurname",
+					cellClassName: "justifyContentNormal",
+					headerName: "Cognome",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.surname),
+					sortable: false,
+					flex: 1
+				},
+				{
 					field: "userId",
 					cellClassName: "justifyContentNormal",
-					headerName: "ID Utente",
+					headerName: "Email",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -406,7 +432,6 @@ const useColumns: any = () => {
 					flex: 1
 				},
 				createdAtColumn,
-				lastUpdatedAtColumn,
 				{
 				 field: "action1",
 				 cellClassName: "justifyContentNormal",
@@ -417,7 +442,7 @@ const useColumns: any = () => {
 				 editable: false,
 				 renderCell: (params: any) => editColumnUsers(params),
 				 sortable: false,
-				 flex: 1
+				 flex: 0.5
 				},
 				{
 				 field: "action2",
@@ -429,7 +454,7 @@ const useColumns: any = () => {
 				 editable: false,
 				 renderCell: (params: any) => deleteColumnUsers(params),
 				 sortable: false,
-				 flex: 1
+				 flex: 0.5
 				}
 			];
 		default:
