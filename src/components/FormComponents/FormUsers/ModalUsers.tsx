@@ -2,7 +2,7 @@ import { SetStateAction, SyntheticEvent, useContext, useEffect, useState } from 
 import { generatePath } from "react-router-dom";
 import { Grid, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
-import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
+import { getIdByDescription, getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -113,7 +113,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			if (validateForm(true)) {
 				const postData = {
 					userId: formData.userId,
-					profileIds: formData.profileIds,
+					profileIds: formData.profileIds.map(profileId => getIdByDescription(profileId)),
 				};
 				try {
 					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData })();
@@ -134,7 +134,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		case UPDATE_USER: {
 			if (validateForm(false)) {
 				const postData = {
-					profileIds: formData.profileIds,
+					profileIds: formData.profileIds.map(profileId => getIdByDescription(profileId)),
 				};
 				console.log(formData, postData);
 				try {
