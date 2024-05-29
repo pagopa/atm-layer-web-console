@@ -2,12 +2,14 @@ import { Container, Button, Stack, Typography } from "@mui/material";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { Box } from "@mui/system";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 import { getRoleIdsByUser } from "../Commons/Commons";
+import ROUTES from "../../routes";
 
 
 type HeaderAccountProps = {
@@ -27,14 +29,19 @@ export const HeaderAccountCustom = ({
 
 	const token = sessionStorage.getItem("jwt_console");
 	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
+	const navigate = useNavigate();
 
 	const getTokenEmail = async () => {
 		try {
-			// const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
 			const response = await fetchRequest({ urlEndpoint: USER_INFO, method: "GET", abortController })();
 
 			if (response?.success) {
 				setLoggedUserInfo(response.valuesObj);
+				if (response.valuesObj.profiles.length < 1) {
+					navigate(ROUTES.UNAUTHORIZED_PAGE);
+				}
+			} else {
+				navigate(ROUTES.LOGIN);
 			}
 		} catch (error) {
 			console.error("ERROR", error);

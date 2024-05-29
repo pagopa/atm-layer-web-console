@@ -15,7 +15,11 @@ const CustomAppBar = () => {
 
 	const isCardVisible = (cardId: string) => {
 		const visibilityRules: { [key: string]: Array<number> } = {
-		  users: [5],
+			home: [1,2,3,4,5],
+			process: [1,2,3],
+			static: [1,2],
+			workflow: [1,2,3],
+		 	users: [5],
 		};
 
 		if (!visibilityRules[cardId]) {
