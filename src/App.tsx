@@ -25,13 +25,14 @@ import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import { Profile, User } from "./model/UserModel";
 import UsersPage from "./pages/Users/UsersPage";
 import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
+import { LETTURA, SCRITTURA, UTENTI } from "./commons/constants";
 
 const LocalRoutes = () => (
 	<Routes>
 		<Route element={<PrivateRoute />}>
 			<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
 
-			<Route element={<ProtectedRoute profileRequired="Gestione flussi in lettura"/>}>	
+			<Route element={<ProtectedRoute profileRequired={LETTURA}/>}>	
 				<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
 				<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
 				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
@@ -40,7 +41,7 @@ const LocalRoutes = () => (
 				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
 			</Route>
 			
-			<Route element={<ProtectedRoute profileRequired="Gestione flussi in scrittura"/>}>
+			<Route element={<ProtectedRoute profileRequired={SCRITTURA}/>}>
 				<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
 				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
 				<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
@@ -48,7 +49,7 @@ const LocalRoutes = () => (
 				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
 			</Route>
 
-			<Route element={<ProtectedRoute profileRequired="Gestione utenti"/>}>
+			<Route element={<ProtectedRoute profileRequired={UTENTI}/>}>
 				<Route path={routes.USERS} element={<PageLayout><UsersPage /></PageLayout>} />
 			</Route>
 
