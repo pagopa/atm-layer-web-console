@@ -8,8 +8,9 @@ import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
-import { getRoleIdsByUser } from "../Commons/Commons";
+import { getRoleDescriptionsByUser } from "../Commons/Commons";
 import ROUTES from "../../routes";
+import { EMULATOR } from "../../commons/constants";
 
 
 type HeaderAccountProps = {
@@ -51,7 +52,6 @@ export const HeaderAccountCustom = ({
 	useEffect(() => {
 		if(!loggedUserInfo.userId && token){
 			void getTokenEmail();
-			console.log(loggedUserInfo);
 		}
 	}, []);
 		
@@ -75,7 +75,7 @@ export const HeaderAccountCustom = ({
 				>
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						{loggedUser && isProd===false && getRoleIdsByUser(loggedUserInfo).includes(4) && ( 
+						{loggedUser && isProd===false && getRoleDescriptionsByUser(loggedUserInfo).includes(EMULATOR) && ( 
 							<Box ml={6}>
 								<EmulatorButton />
 							</Box>

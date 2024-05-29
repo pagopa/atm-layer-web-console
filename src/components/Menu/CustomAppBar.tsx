@@ -4,29 +4,30 @@ import Toolbar from "@mui/material/Toolbar";
 import { useContext } from "react";
 import { homePageCard } from "../../utils/homePageCard";
 import { Ctx } from "../../DataContext";
-import { getRoleIdsByUser } from "../Commons/Commons";
+import { getRoleDescriptionsByUser } from "../Commons/Commons";
+import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, USERS, UTENTI } from "../../commons/constants";
 import MenuButtons from "./MenuButtons";
 
 const CustomAppBar = () => {
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileIds = getRoleIdsByUser(loggedUserInfo);
+	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 
 	const isCardVisible = (cardId: string) => {
-		const visibilityRules: { [key: string]: Array<number> } = {
-			home: [1,2,3,4,5],
-			process: [1,2,3],
-			static: [1,2],
-			workflow: [1,2,3],
-		 	users: [5],
+		const visibilityRules: { [key: string]: Array<string> } = {
+			home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,USERS],
+			process: [LETTURA,SCRITTURA,RILASCIO],
+			static: [LETTURA,SCRITTURA],
+			workflow: [LETTURA,SCRITTURA,RILASCIO],
+		 	users: [UTENTI],
 		};
 
 		if (!visibilityRules[cardId]) {
 		  return true;
 		}
 	
-		return visibilityRules[cardId].some((profileId) => userProfileIds.includes(profileId));
+		return visibilityRules[cardId].some((profileDescription) => userProfileDescriptions.includes(profileDescription));
 	  };
 
 	return (

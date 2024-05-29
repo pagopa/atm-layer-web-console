@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, ROLLBACK_WR, UPDATE_WR } from "../../commons/constants";
+import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, LETTURA, RILASCIO, ROLLBACK_WR, SCRITTURA, UPDATE_WR } from "../../commons/constants";
 import { Ctx } from "../../DataContext";
-import { getFilteredButtonConfig, getRoleIdsByUser } from "../Commons/Commons";
+import { getFilteredButtonConfig, getRoleDescriptionsByUser } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
 
 type Props = {
@@ -15,14 +15,14 @@ const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: P
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileIds = getRoleIdsByUser(loggedUserInfo);
+	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 
 	const buttonConfigs = [
-	  { text: "Aggiorna", action: UPDATE_WR, visibleCondition: () => userProfileIds.includes(2)},
-	  { text: "Rilascia", action: DEPLOY_WR, disabledCondition: () => detail.status === "DEPLOYED", visibleCondition: () => userProfileIds.includes(3) },
-	  { text: "Ripristina", action: ROLLBACK_WR, visibleCondition: () => userProfileIds.includes(2) },
-	  { text: "Cancella", action: DELETE_WR, visibleCondition: () => userProfileIds.includes(2) },
-	  { text: "Scarica", action: DOWNLOAD_WR, visibleCondition: () => userProfileIds.includes(1) }
+	  { text: "Aggiorna", action: UPDATE_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA)},
+	  { text: "Rilascia", action: DEPLOY_WR, disabledCondition: () => detail.status === "DEPLOYED", visibleCondition: () => userProfileDescriptions.includes(RILASCIO) },
+	  { text: "Ripristina", action: ROLLBACK_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA) },
+	  { text: "Cancella", action: DELETE_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA) },
+	  { text: "Scarica", action: DOWNLOAD_WR, visibleCondition: () => userProfileDescriptions.includes(LETTURA) }
 	];
   
 	const filteredButtonConfigs = getFilteredButtonConfig(buttonConfigs);

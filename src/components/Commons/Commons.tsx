@@ -250,8 +250,8 @@ export function getProfileDescriptions (user: User) {
 	}
 };
 
-export function getRoleIdsByUser (loggedUserInfo: User):any {
-	return loggedUserInfo.profiles.map((e: { profileId: any }) => e.profileId);
+export function getRoleDescriptionsByUser (loggedUserInfo: User):any {
+	return loggedUserInfo.profiles.map((e: { description: any }) => e.description);
 };
 
 export function getFilteredButtonConfig (buttonConfigs: any):any {

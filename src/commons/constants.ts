@@ -46,3 +46,9 @@ export const PROFILE_DESCRIPTIONS = [
 	"Emulator",
 	"Gestione utenti"
 ];
+
+export const LETTURA = "Gestione flussi in lettura";
+export const SCRITTURA = "Gestione flussi in scrittura";
+export const RILASCIO = "Rilascio BPM";
+export const EMULATOR = "Emulator";
+export const UTENTI = "Gestione utenti";

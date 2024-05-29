@@ -4,7 +4,8 @@ import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
 import { homePageCard } from "../utils/homePageCard";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
 import { Ctx } from "../DataContext";
-import { getRoleIdsByUser } from "../components/Commons/Commons";
+import { getRoleDescriptionsByUser } from "../components/Commons/Commons";
+import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, USERS, UTENTI } from "../commons/constants";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
 
@@ -13,22 +14,22 @@ export default function HomePage () {
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileIds = getRoleIdsByUser(loggedUserInfo);
+	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 
 	const isCardVisible = (cardId: string) => {
-		const visibilityRules: { [key: string]: Array<number> } = {
-		  	home: [1,2,3,4,5],
-			process: [1,2,3],
-			static: [1,2],
-			workflow: [1,2,3],
-		 	users: [5],
+		const visibilityRules: { [key: string]: Array<string> } = {
+		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,USERS],
+			process: [LETTURA,SCRITTURA,RILASCIO],
+			static: [LETTURA,SCRITTURA],
+			workflow: [LETTURA,SCRITTURA,RILASCIO],
+		 	users: [UTENTI],
 		};
 
 		if (!visibilityRules[cardId]) {
 		  return true;
 		}
 	
-		return visibilityRules[cardId].some((profileId) => userProfileIds.includes(profileId));
+		return visibilityRules[cardId].some((profileDescription) => userProfileDescriptions.includes(profileDescription));
 	};
 
 	const visibleCards = homePageCard.filter(el => el.id !== "home" && isCardVisible(el.id));
