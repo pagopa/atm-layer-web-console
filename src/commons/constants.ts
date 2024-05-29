@@ -40,10 +40,8 @@ export const ACQUIRER_ID_LENGTH = 11;
 export const TERMINAL_BRANCH_LENGTH = 8;
 
 export const PROFILE_DESCRIPTIONS = [
-	"Crea",
-	"Aggiorna",
-	"Rilascia",
-	"Associa",
-	"Scarica",
-	"Elimina"
+	"Gestione flussi in lettura",
+	"Gestione flussi in scrittura",
+	"Rilascio BPM",
+	"Emulator"
 ];

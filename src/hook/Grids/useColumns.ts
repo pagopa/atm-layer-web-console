@@ -390,7 +390,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.name),
 					sortable: false,
-					flex: 1
+					flex: 0.7
 				},
 				{
 					field: "userSurname",
@@ -403,7 +403,7 @@ const useColumns: any = () => {
 					renderHeader: showCustomHeader,
 					renderCell: (params: any) => renderCell(params, params.row.surname),
 					sortable: false,
-					flex: 1
+					flex: 0.7
 				},
 				{
 					field: "userId",
