@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import { RootLinkType } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
-import { USER_EMAIL } from "../../commons/endpoints";
+import { USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 
 
@@ -22,17 +22,18 @@ export const HeaderAccountCustom = ({
 }: HeaderAccountProps) => {
 
 
-	const { userEmail, setUserEmail, abortController } = useContext(Ctx);
+	const { abortController, loggedUserInfo, setLoggedUserInfo } = useContext(Ctx);
 
 	const token = sessionStorage.getItem("jwt_console");
 	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
 
 	const getTokenEmail = async () => {
 		try {
-			const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
+			// const response = await fetchRequest({ urlEndpoint: USER_EMAIL, method: "GET", abortController })();
+			const response = await fetchRequest({ urlEndpoint: USER_INFO, method: "GET", abortController })();
 
 			if (response?.success) {
-				setUserEmail({ email: response?.valuesObj.email });
+				setLoggedUserInfo(response.valuesObj);
 			}
 		} catch (error) {
 			console.error("ERROR", error);
@@ -40,8 +41,9 @@ export const HeaderAccountCustom = ({
 	};
 
 	useEffect(() => {
-		if(!userEmail.email && token){
+		if(!loggedUserInfo.userId && token){
 			void getTokenEmail();
+			console.log(loggedUserInfo);
 		}
 	}, []);
 		
@@ -86,7 +88,7 @@ export const HeaderAccountCustom = ({
 									<AccountCircleRoundedIcon />
 								</Box>
 								<Typography>
-									{userEmail.email ?? "Benvenuto utente"}
+									{`${loggedUserInfo.name} ${loggedUserInfo.surname}` ?? "Benvenuto utente"}
 								</Typography>
 							</Box>
 						)}

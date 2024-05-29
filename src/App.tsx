@@ -22,7 +22,7 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
-import { JwtUser } from "./model/UserModel";
+import { JwtUser, Profile, User } from "./model/UserModel";
 import UsersPage from "./pages/Users/UsersPage";
 
 const LocalRoutes = () => (
@@ -60,8 +60,15 @@ function App() {
 	const jwt= sessionStorage.getItem("jwt_console");
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(jwt?true:false);
-	const [userEmail, setUserEmail] = useState<JwtUser>({ email: undefined });
 	const abortController = new AbortController();
+	const [loggedUserInfo, setLoggedUserInfo] = useState<User>({
+		userId: "",
+		name:"",
+		surname:"",
+		createdAt: "",
+		lastUpdatedAt: "",
+		profiles: [] as Array<Profile>
+	});
 
 	function clearAll(){
 		if(sessionStorage.getItem("jwt_console")){
@@ -93,11 +100,11 @@ function App() {
 		setTokenExpired,
 		logged, 
 		setLogged,
-		userEmail,
-		setUserEmail,
 		abortController,
 		debugOn,
 		clearStorage,
+		loggedUserInfo,
+		setLoggedUserInfo
 	};
 
 	useEffect(() => {
