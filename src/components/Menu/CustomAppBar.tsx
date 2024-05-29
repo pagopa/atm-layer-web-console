@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { homePageCard } from "../../utils/homePageCard";
 import { Ctx } from "../../DataContext";
 import { getRoleDescriptionsByUser } from "../Commons/Commons";
-import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, USERS, UTENTI } from "../../commons/constants";
+import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../../commons/constants";
 import MenuButtons from "./MenuButtons";
 
 const CustomAppBar = () => {
@@ -16,7 +16,7 @@ const CustomAppBar = () => {
 
 	const isCardVisible = (cardId: string) => {
 		const visibilityRules: { [key: string]: Array<string> } = {
-			home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,USERS],
+			home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
 			process: [LETTURA,SCRITTURA,RILASCIO],
 			static: [LETTURA,SCRITTURA],
 			workflow: [LETTURA,SCRITTURA,RILASCIO],
