@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import DetailPageTemplate from "../../pages/Layout/DetailPageTemplate";
 import ModalResources from "../FormComponents/FormsResources/ModalResources";
@@ -40,7 +41,7 @@ const DetailBody = ({
 		switch (driver) {
 		case PROCESS_RESOURCES:
 			return (
-				<>
+				<React.Fragment>
 					<BpmnDetailButtons
 						openDialog={() => setOpen(true)}
 						type={type}
@@ -65,11 +66,11 @@ const DetailBody = ({
 						setMessage={setMessage}
 						setTitle={setTitle}
 					/>
-				</>
+				</React.Fragment>
 			);
 		case RESOURCES:
 			return (
-				<>
+				<React.Fragment>
 					<ResourcesDetailButtons
 						openDialog={() => setOpen(true)}
 						type={type}
@@ -86,11 +87,11 @@ const DetailBody = ({
 						setTitle={setTitle}
 						detail={detail}
 					/>
-				</>
+				</React.Fragment>
 			);
 		case WORKFLOW_RESOURCE:
 			return (
-				<>
+				<React.Fragment>
 					<WorkflowResourcesDetailButtons
 						openDialog={() => setOpen(true)}
 						type={type}
@@ -106,7 +107,7 @@ const DetailBody = ({
 						setMessage={setMessage}
 						setTitle={setTitle}
 					/>
-				</>
+				</React.Fragment>
 			);
 		}
 	};

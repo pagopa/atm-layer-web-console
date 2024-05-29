@@ -249,3 +249,11 @@ export function getProfileDescriptions (user: User) {
 		return user.profiles.map(profile => profile.description);
 	}
 };
+
+export function getRoleIdsByUser (loggedUserInfo: User):any {
+	return loggedUserInfo.profiles.map((e: { profileId: any }) => e.profileId);
+};
+
+export function getFilteredButtonConfig (buttonConfigs: any):any {
+	return buttonConfigs.filter((config: { visibleCondition: () => any }) => config.visibleCondition());
+};

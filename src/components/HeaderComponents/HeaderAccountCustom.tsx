@@ -7,6 +7,7 @@ import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
+import { getRoleIdsByUser } from "../Commons/Commons";
 
 
 type HeaderAccountProps = {
@@ -67,7 +68,7 @@ export const HeaderAccountCustom = ({
 				>
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						{loggedUser && isProd===false && ( 
+						{loggedUser && isProd===false && getRoleIdsByUser(loggedUserInfo).includes(4) && ( 
 							<Box ml={6}>
 								<EmulatorButton />
 							</Box>
