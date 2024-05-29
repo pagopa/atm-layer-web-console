@@ -127,6 +127,12 @@ function App() {
 		}
 	}, [logged]);
 
+	useEffect(() => {
+		if (loggedUserInfo.userId) {
+			sessionStorage.setItem("loggedUserInfo", JSON.stringify(loggedUserInfo));
+		}
+	}, [loggedUserInfo]);
+
 	return (
 		<ThemeProvider theme={themeApp}>
 			<Ctx.Provider value={values}>

@@ -13,7 +13,7 @@ const ProtectedRoute = ({profileRequired}:Props) => {
 	const { loggedUserInfo } = useContext(Ctx);
   
 	useEffect(() => {
-		if (getProfileDescriptions(loggedUserInfo)?.includes(profileRequired)===false) {
+		if (loggedUserInfo.userId && !getProfileDescriptions(loggedUserInfo)?.includes(profileRequired)) {
 			navigate(routes.UNAUTHORIZED_PAGE);
 		}
 	}, [loggedUserInfo, navigate]);
