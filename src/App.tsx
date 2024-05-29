@@ -22,33 +22,40 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
-import { JwtUser, Profile, User } from "./model/UserModel";
+import { Profile, User } from "./model/UserModel";
 import UsersPage from "./pages/Users/UsersPage";
+import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
 
 const LocalRoutes = () => (
 	<Routes>
 		<Route element={<PrivateRoute />}>
 			<Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
-				
-			<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
-			<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
-			<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
-			<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
-			<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
 
-			<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
-			<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
-			<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
+			<Route element={<ProtectedRoute profileRequired="Gestione flussi in lettura"/>}>	
+				<Route path={routes.BPMN} element={<PageLayout><BpmnPage /></PageLayout>} />
+				<Route path={routes.BPMN_DETAILS} element={<PageLayout><BpmnDetailPage /></PageLayout>} />
+				<Route path={routes.WORKFLOW_RESOURCES} element={<PageLayout><WorkflowResourcePage /></PageLayout>} />
+				<Route path={routes.WORKFLOW_RESOURCE_DETAILS} element={<PageLayout><WorkflowResourceDetailPage /></PageLayout>} />
+				<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
+				<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
+			</Route>
+			
+			<Route element={<ProtectedRoute profileRequired="Gestione flussi in scrittura"/>}>
+				<Route path={routes.CREATE_BPMN} element={<PageLayout><CreateBpmnPage /></PageLayout>} />
+				<Route path={routes.ASSOCIATE_BPMN} element={<PageLayout><AssociateBpmnPage /></PageLayout>} />
+				<Route path={routes.UPGRADE_BPMN} element={<PageLayout><UpgradeBpmnPage /></PageLayout>} />
+				<Route path={routes.CREATE_WR} element={<PageLayout><CreateWRPage /></PageLayout>} />
+				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+			</Route>
 
-			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
-			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
-			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+			<Route element={<ProtectedRoute profileRequired="Gestione utenti"/>}>
+				<Route path={routes.USERS} element={<PageLayout><UsersPage /></PageLayout>} />
+			</Route>
 
-			<Route path={routes.USERS} element={<PageLayout><UsersPage /></PageLayout>} />
+			<Route path={routes.UNAUTHORIZED_PAGE} element={<PageLayout><ErrorPage /></PageLayout>} />
 		</Route>
 		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
 		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />
-		<Route path="*" element={<ErrorPage />} />
 		
 	</Routes>
 );

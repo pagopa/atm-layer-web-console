@@ -6,6 +6,7 @@ import { generatePath } from "react-router-dom";
 import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_DESCRIPTIONS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
+import { User } from "../../model/UserModel";
 
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
@@ -240,5 +241,11 @@ export function getTextModal(type:string):any {
 export function getIdByDescription (description: string):any {
 	if(PROFILE_DESCRIPTIONS.includes(description)) {
 		return PROFILE_DESCRIPTIONS.indexOf(description)+1;
+	}
+};
+
+export function getProfileDescriptions (user: User) {
+	if(user.profiles) {
+		return user.profiles.map(profile => profile.description);
 	}
 };

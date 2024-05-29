@@ -43,5 +43,6 @@ export const PROFILE_DESCRIPTIONS = [
 	"Gestione flussi in lettura",
 	"Gestione flussi in scrittura",
 	"Rilascio BPM",
-	"Emulator"
+	"Emulator",
+	"Gestione utenti"
 ];

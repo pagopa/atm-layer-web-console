@@ -3,6 +3,7 @@ const ROUTES = {
 	HOME: "/",
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
+	UNAUTHORIZED_PAGE: "/unauthorized",
 	BPMN: "/bpmn",
 	RESOURCES: "/resources",
 	WORKFLOW_RESOURCES: "/workflow_resources",
