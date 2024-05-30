@@ -275,8 +275,8 @@ export function addDependentProfiles (selectedProfiles : Array<string>) {
 		const completeProfile = PROFILE_DESCRIPTIONS.find((element) => element.description === profile);
 		if (completeProfile) {
 			return selectedAndDefaultProfiles = [
-				...selectedAndDefaultProfiles,
-				...completeProfile.defaultProfiles
+				...completeProfile.defaultProfiles,
+				...selectedAndDefaultProfiles				
 			];
 		}
 		return selectedAndDefaultProfiles;
