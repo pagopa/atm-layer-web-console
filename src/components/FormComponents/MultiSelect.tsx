@@ -1,8 +1,8 @@
-import { TextField, Autocomplete, Checkbox } from "@mui/material";
+import { TextField, Autocomplete, Checkbox, Chip } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { SyntheticEvent } from "react";
-import { PROFILE_DESCRIPTIONS } from "../../commons/constants";
+import { addDependentProfiles, getDescriptionsArray } from "../Commons/Commons";
 
 type Props = {
     handleChange: (event: SyntheticEvent<Element, Event>, value: Array<string>) => void;
@@ -10,7 +10,7 @@ type Props = {
     value: Array<string>;
 };
 
-const names = PROFILE_DESCRIPTIONS;
+const names = getDescriptionsArray();
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -34,6 +34,11 @@ export default function MultiSelect({ handleChange, errors, value }: Props) {
 					{option}
 				</li>
 			)}
+			renderTags={(value) =>
+				value.map((option, index) => (
+				  <Chip key={index} variant="outlined" label={option} />
+				))
+			  }
 			renderInput={(params) => (
 				<TextField
 					{...params}
@@ -43,7 +48,10 @@ export default function MultiSelect({ handleChange, errors, value }: Props) {
 					helperText={errors.profileIds}
 				/>
 			)}
-			onChange={(_, newValue) => handleChange(_, newValue)}
+			onChange={(_, newValue) => {
+				const completeProfiles = addDependentProfiles(newValue);
+				handleChange(_, completeProfiles);
+			}}
 		/>
 	);
 }

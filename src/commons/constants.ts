@@ -39,16 +39,32 @@ export const MAX_LENGHT_LARGE = 50 ;
 export const ACQUIRER_ID_LENGTH = 11;
 export const TERMINAL_BRANCH_LENGTH = 8;
 
-export const PROFILE_DESCRIPTIONS = [
-	"Gestione flussi in lettura",
-	"Gestione flussi in scrittura",
-	"Rilascio BPM",
-	"Emulator",
-	"Gestione utenti"
-];
-
 export const LETTURA = "Gestione flussi in lettura";
 export const SCRITTURA = "Gestione flussi in scrittura";
 export const RILASCIO = "Rilascio BPM";
 export const EMULATOR = "Emulator";
 export const UTENTI = "Gestione utenti";
+
+export const PROFILE_DESCRIPTIONS = [
+	{
+		description: LETTURA,
+		defaultProfiles: []
+	},
+	{
+		description: SCRITTURA,
+		defaultProfiles: [LETTURA]
+	},
+	{
+		description: RILASCIO,
+		defaultProfiles: [LETTURA,SCRITTURA]
+	},
+	{
+		description: EMULATOR,
+		defaultProfiles: []
+	},
+	{
+		description: UTENTI,
+		defaultProfiles: []
+	}
+];
+

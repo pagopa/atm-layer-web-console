@@ -238,9 +238,14 @@ export function getTextModal(type:string):any {
 	
 };
 
+export function getDescriptionsArray(){
+	return PROFILE_DESCRIPTIONS.map(profile => profile.description);
+}
+
 export function getIdByDescription (description: string):any {
-	if(PROFILE_DESCRIPTIONS.includes(description)) {
-		return PROFILE_DESCRIPTIONS.indexOf(description)+1;
+	const descriptions = getDescriptionsArray();
+	if(descriptions.includes(description)) {
+		return descriptions.indexOf(description)+1;
 	}
 };
 
@@ -256,4 +261,25 @@ export function getRoleDescriptionsByUser (loggedUserInfo: User):any {
 
 export function getFilteredButtonConfig (buttonConfigs: any):any {
 	return buttonConfigs.filter((config: { visibleCondition: () => any }) => config.visibleCondition());
+};
+
+export function addDependentProfiles (selectedProfiles : Array<string>) {
+
+	function onlyUnique(value:string, index:number, array:Array<string>) {
+		return array.indexOf(value) === index;
+	  }
+
+	// eslint-disable-next-line functional/no-let
+	let selectedAndDefaultProfiles = [...selectedProfiles];
+	selectedAndDefaultProfiles.map(profile => {
+		const completeProfile = PROFILE_DESCRIPTIONS.find((element) => element.description === profile);
+		if (completeProfile) {
+			return selectedAndDefaultProfiles = [
+				...selectedAndDefaultProfiles,
+				...completeProfile.defaultProfiles
+			];
+		}
+		return selectedAndDefaultProfiles;
+	});
+	return selectedAndDefaultProfiles.filter(onlyUnique);
 };
