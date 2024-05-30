@@ -5,7 +5,7 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION, DELETE_USER, UPDATE_USER } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_USER, SCRITTURA, UPDATE_USER } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 
 
@@ -108,26 +108,27 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			setType(DELETE_ASSOCIATION);
 			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
-
-		return (
-			<Box
-				width="100%"
-				display="flex"
-				justifyContent={"center"}
-				sx={{ cursor: "pointer" }}
-			>
-				<IconButton
-					onClick={actions}
-					sx={{
-
-						"&:hover": { backgroundColor: "transparent !important" },
-					}}
-					data-testid="delete-column-test"
+		if(sessionStorage.getItem("loggedUserInfo")?.includes(SCRITTURA)) {
+			return (
+				<Box
+					width="100%"
+					display="flex"
+					justifyContent={"center"}
+					sx={{ cursor: "pointer" }}
 				>
-					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
-				</IconButton>
-			</Box>
-		);
+					<IconButton
+						onClick={actions}
+						sx={{
+	
+							"&:hover": { backgroundColor: "transparent !important" },
+						}}
+						data-testid="delete-column-test"
+					>
+						<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+					</IconButton>
+				</Box>
+			);
+		}
 	};
 
 	const deleteColumnUsers = (param: any) => {
