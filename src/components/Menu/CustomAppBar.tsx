@@ -1,16 +1,14 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext } from "react";
 import { homePageCard } from "../../utils/homePageCard";
-import { Ctx } from "../../DataContext";
 import { getRoleDescriptionsByUser } from "../Commons/Commons";
 import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../../commons/constants";
 import MenuButtons from "./MenuButtons";
 
 const CustomAppBar = () => {
 
-	const { loggedUserInfo } = useContext(Ctx);
+	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
 
 	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 

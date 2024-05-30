@@ -22,7 +22,6 @@ import WorkflowResourceDetailPage from "./pages/WorkflowResource/WorkflowResourc
 import ErrorPage from "./pages/ErrorPage";
 import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
-import { Profile, User } from "./model/UserModel";
 import UsersPage from "./pages/Users/UsersPage";
 import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
 import { LETTURA, SCRITTURA, UTENTI } from "./commons/constants";
@@ -69,14 +68,6 @@ function App() {
 	const debugOn=sessionStorage.getItem("debugOn");
 	const [logged, setLogged] = useState(jwt?true:false);
 	const abortController = new AbortController();
-	const [loggedUserInfo, setLoggedUserInfo] = useState<User>({
-		userId: "",
-		name:"",
-		surname:"",
-		createdAt: "",
-		lastUpdatedAt: "",
-		profiles: [] as Array<Profile>
-	});
 
 	function clearAll(){
 		if(sessionStorage.getItem("jwt_console")){
@@ -98,6 +89,9 @@ function App() {
 		if(sessionStorage.getItem("recordParamsAssociated")){
 			sessionStorage.removeItem("recordParamsAssociated");
 		}
+		if(sessionStorage.getItem("recordParamsUser")){
+			sessionStorage.removeItem("recordParamsUser");
+		}
 	}
 
 
@@ -111,8 +105,6 @@ function App() {
 		abortController,
 		debugOn,
 		clearStorage,
-		loggedUserInfo,
-		setLoggedUserInfo
 	};
 
 	useEffect(() => {
@@ -126,12 +118,6 @@ function App() {
 			console.log("login utente", logged);
 		}
 	}, [logged]);
-
-	useEffect(() => {
-		if (loggedUserInfo.userId) {
-			sessionStorage.setItem("loggedUserInfo", JSON.stringify(loggedUserInfo));
-		}
-	}, [loggedUserInfo]);
 
 	return (
 		<ThemeProvider theme={themeApp}>

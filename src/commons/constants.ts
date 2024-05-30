@@ -41,7 +41,7 @@ export const TERMINAL_BRANCH_LENGTH = 8;
 
 export const LETTURA = "Gestione flussi in lettura";
 export const SCRITTURA = "Gestione flussi in scrittura";
-export const RILASCIO = "Rilascio BPM";
+export const RILASCIO = "Rilascio BPMN";
 export const EMULATOR = "Emulator";
 export const UTENTI = "Gestione utenti";
 

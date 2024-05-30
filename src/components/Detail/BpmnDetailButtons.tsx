@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import ROUTES from "../../routes";
 import { ASSOCIATE_BPMN, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN, LETTURA, RILASCIO, SCRITTURA, UPGRADE_BPMN } from "../../commons/constants";
-import { Ctx } from "../../DataContext";
 import { getFilteredButtonConfig, getRoleDescriptionsByUser } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
 
@@ -14,7 +12,7 @@ type Props = {
 
 const BpmnDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 
-	const { loggedUserInfo } = useContext(Ctx);
+	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
 
 	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 	

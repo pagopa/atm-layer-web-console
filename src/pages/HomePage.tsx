@@ -1,9 +1,7 @@
 import { Box, Grid } from "@mui/material";
-import { useContext } from "react";
 import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
 import { homePageCard } from "../utils/homePageCard";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
-import { Ctx } from "../DataContext";
 import { getRoleDescriptionsByUser } from "../components/Commons/Commons";
 import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, USERS, UTENTI } from "../commons/constants";
 import BoxPageLayout from "./Layout/BoxPageLayout";
@@ -12,7 +10,7 @@ import BoxPageLayout from "./Layout/BoxPageLayout";
 
 export default function HomePage () {
 
-	const { loggedUserInfo } = useContext(Ctx);
+	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
 
 	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 

@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, LETTURA, RILASCIO, ROLLBACK_WR, SCRITTURA, UPDATE_WR } from "../../commons/constants";
-import { Ctx } from "../../DataContext";
 import { getFilteredButtonConfig, getRoleDescriptionsByUser } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
 
@@ -13,7 +11,7 @@ type Props = {
 
 const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 
-	const { loggedUserInfo } = useContext(Ctx);
+	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
 
 	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 

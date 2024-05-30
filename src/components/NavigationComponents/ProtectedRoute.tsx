@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import routes from "../../routes";
-import { Ctx } from "../../DataContext";
 import { getProfileDescriptions } from "../Commons/Commons";
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 
 const ProtectedRoute = ({profileRequired}:Props) => {
 	const navigate = useNavigate();
-	const { loggedUserInfo } = useContext(Ctx);
+	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
   
 	useEffect(() => {
 		if (loggedUserInfo.userId && !getProfileDescriptions(loggedUserInfo)?.includes(profileRequired)) {
