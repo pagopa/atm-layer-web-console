@@ -27,7 +27,7 @@
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
     </testcase>
@@ -43,7 +43,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
+    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.006">
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
@@ -113,7 +113,7 @@
   <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:14" time="1.055" tests="10">
     <testcase classname="ActionAlert" name="render with error" time="0.071">
     </testcase>
-    <testcase classname="ActionAlert" name="render with warning" time="0.014">
+    <testcase classname="ActionAlert" name="render with warning" time="0.011">
     </testcase>
     <testcase classname="ActionAlert" name="render without openSnackBar" time="0.008">
     </testcase>
@@ -171,7 +171,7 @@
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:17" time="0.172" tests="19">
     <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.002">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0.001">
     </testcase>
@@ -203,7 +203,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
     </testcase>
@@ -217,11 +217,11 @@
     </testcase>
     <testcase classname="DetailButtons" name="disables button when disabledCondition is true" time="0.009">
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.005">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.006">
     </testcase>
     <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.004">
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.006">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.009">
     </testcase>
   </testsuite>
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:15" time="4.357" tests="9">
@@ -389,7 +389,7 @@
     </testcase>
     <testcase classname="UploadFileWithButton" name="Uploaded File With Error" time="0.039">
     </testcase>
-    <testcase classname="UploadFileWithButton" name="No File Uploaded With Error" time="0.008">
+    <testcase classname="UploadFileWithButton" name="No File Uploaded With Error" time="0.021">
     </testcase>
   </testsuite>
   <testsuite name="src/commons/__tests__/decode.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:28" time="0.202" tests="5">
@@ -409,7 +409,7 @@
     </testcase>
     <testcase classname="LoginPage" name="Test render and click Accedi no debug" time="0.015">
     </testcase>
-    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.014">
+    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.039">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:29" time="0.822" tests="2">
