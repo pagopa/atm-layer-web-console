@@ -2,12 +2,15 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 const checks = () => {
+	const numeroIntero = /^\d+$/;
 	const int1toInfinity = /^[1-9][0-9]*$/;
 
 	const regexTestField = (field: string, regType: string) => {
 		let regex;
 		if (regType === "int1toInfinity") {
 			regex = int1toInfinity;
+		} else if (regType === "numeroIntero") {
+			regex = numeroIntero;
 		}
 		return regex?.test(field);
 	};
