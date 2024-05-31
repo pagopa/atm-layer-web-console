@@ -55,12 +55,6 @@ describe ("formatValues tests", () => {
         expect(formatValues().formatDateGbToUs("01/01/2022")).toBe("01/01/2022");
         expect(formatValues().formatDateGbToUs("")).toBe("");
       });
-
-      test('Verifica la formattazione di un importo', () => {
-        expect(formatValues().formattaImporto({toString: () => "1234.56"})).toBe("1.234,56");
-        expect(formatValues().formattaImporto({toString: () => "1000"})).toBe("1.000,00");
-        expect(formatValues().formattaImporto({toString: () => "0.5"})).toBe("0,50");
-      });
     
       test('Verifica la creazione della data', () => {
 

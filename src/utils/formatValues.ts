@@ -76,22 +76,6 @@ const formatValues = () => {
 		} else {return "";}
 	};
 
-	const formattaImporto= (importo: { toString: () => any })=>{
-		// la funzione formatta gli importi con il '.' come separatore delle migliaia e la ',' per i decimali
-		// inoltre si assicura che le cifre decimali siano almeno 2    
-		const stringa= importo.toString();
-		const splittata= stringa.split(".");
-		const parteInt= splittata[0];
-		const parteDec= splittata[1];
-		let decimali= "";
-		if(!parteDec) {decimali="00";}
-		else if( parteDec.length===1) {decimali = parteDec+"0";}
-		else {decimali= parteDec;}
-		const parteIntFormat= parteInt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-		const result= parteIntFormat+","+decimali;
-		return result;
-	};
-
 	const creaData = (getHours: any) => {
 		const today = new Date();
 		const dd = String(today.getDate()).padStart(2, "0");
@@ -150,7 +134,6 @@ const formatValues = () => {
 		formatDateForPicker,
 		formatDateGbToUs,
 		getYearFromString,
-		formattaImporto,
 		creaData,
 		formatDateString,
 		extractExtension,
