@@ -57,8 +57,29 @@ const checks = () => {
 	};
 
 	const isValidResourcesFilename = (filename: string) => {
-		const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
-		return resourcesFileNameRegex.test(filename);
+		const validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+		const parts = filename.split(".");
+
+		if (parts.length !== 2 || parts[0].length === 0 || parts[1].length === 0) {
+			return false;
+		}
+
+		const [name, extension] = parts;
+
+		for (let i = 0; i < name.length; i++) {
+			if (!validCharacters.includes(name[i])) {
+				return false;
+			}
+		}
+
+		for (let i = 0; i < extension.length; i++) {
+			const charCode = extension.charCodeAt(i);
+			if (!(charCode >= 65 && charCode <= 90) && !(charCode >= 97 && charCode <= 122)) {
+				return false;
+			}
+		}
+
+		return true;
 	};
 
 	const isValidDeployableFilename = (filename: string) => {
@@ -75,8 +96,27 @@ const checks = () => {
 	};
 
 	const isValidPath = (path: string) => {
-		const pathRegex = /^(?!\/)([a-zA-Z0-9]+\/)*[a-zA-Z0-9]+(?<!\/)$/;
-		return pathRegex.test(path);
+		if (path.startsWith("/") || path.endsWith("/")) {
+			return false;
+		}
+	
+		const validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	
+		const parts = path.split("/");
+	
+		for (let part of parts) {
+			if (part.length === 0) {
+				return false;
+			}
+	
+			for (let i = 0; i < part.length; i++) {
+				if (!validCharacters.includes(part[i])) {
+					return false;
+				}
+			}
+		}
+	
+		return true;
 	};
 
 

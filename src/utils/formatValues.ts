@@ -113,9 +113,24 @@ const formatValues = () => {
 
 
 	const extractRelativeCdnPath = (str:string) => {
-		if(str) {
-			return str.replace(/^(?:[^/]*\/){2}\s*/, "");
+		if (str) {
+			let slashCount = 0;
+			let index = 0;
+	
+			while (index < str.length && slashCount < 2) {
+				if (str[index] === "/") {
+					slashCount++;
+				}
+				index++;
+			}
+	
+			if (slashCount < 2) {
+				return str;
+			}
+	
+			return str.substring(index).trim();
 		}
+		return "";
 	};
 
 	
