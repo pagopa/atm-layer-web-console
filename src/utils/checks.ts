@@ -2,75 +2,15 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 const checks = () => {
-	const alphaNumeric = /^[a-z0-9 ]+$/i; 
-	const regFloat0to100 = /^(\d{0,2}(\.\d{1,2})?|100(\.00?)?)$/;
-	const regInt1to50 = /^[1-4][0-9]?$|^50$|^5$/;
-	const regFloat0_01to99_99 = /^(?!0{1,2}\.0(?![1-9]))\d{1,2}(?:\.\d{1,2})?$/;
-	const regInt1to100 = /^[1-9][0-9]?$|^100$/;
-	const int1to99 = /^[1-9][0-9]?$/;
-	const int1toInfinity = /^[1-9][0-9]*$/;
-	
-	const stringWithoutSpaces = /^[^\s]*$/; // verifica la presenza di spazi all'interno della stringa
-	const stringNotEmptyNotSpaces = /^[^\s]+$/; // verifica se la stringa è composta da almeno un carattere e che non contenga spazi
-	const oreMinuti =
-		/^((?!(00:00)$)(([0-1]?[0-9]|2[0-3]):[0-5][0-9])|24:00)$/; /* /^(([0-1]?[0-9]|2[0-3]):[0-5][0-9])|24:00$/; */
-
 	const numeroIntero = /^\d+$/;
-	const numeDecimaleConSeparatore = /^(-)?\d{1,3}(\.?\d{3})*(,\d{2})?$/; // numero con , per parte decimale (2 cifre) e . per separatore migliaia
-
-	const date_aaaammgg = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/;
-	const uuid=/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+	const int1toInfinity = /^[1-9][0-9]*$/;
 
 	const regexTestField = (field: string, regType: string) => {
 		let regex;
-		switch (regType) {
-		
-		case "int1to50":
-			regex = regInt1to50;
-			break;
-		case "regFloat0_01to99_99":
-			regex = regFloat0_01to99_99;
-			break;
-		case "regFloat0to100":
-			regex = regFloat0to100;
-			break;
-		case "alphaNumeric":
-			regex = alphaNumeric;
-			break;
-
-		case "int1to100":
-			regex = regInt1to100;
-			break;
-		case "int1to99":
-			regex = int1to99;
-			break;
-		case "int1toInfinity":
+		if (regType === "int1toInfinity") {
 			regex = int1toInfinity;
-			break;
-		case "stringWithoutSpaces":
-			regex = stringWithoutSpaces;
-			break;
-		case "stringNotEmptyNotSpaces":
-			regex = stringNotEmptyNotSpaces;
-			break;
-		case "oreMinuti":
-			regex = oreMinuti;
-			break;
-
-		case "numeroIntero":
+		} else if (regType === "numeroIntero") {
 			regex = numeroIntero;
-			break;
-		case "numeDecimaleConSeparatore":
-			regex = numeDecimaleConSeparatore;
-			break;
-		case "date_aaaammgg":
-			regex = date_aaaammgg;
-			break;
-		case "uuid":
-			regex = uuid;
-			break;
-		default:
-			break;
 		}
 		return regex?.test(field);
 	};
@@ -117,8 +57,29 @@ const checks = () => {
 	};
 
 	const isValidResourcesFilename = (filename: string) => {
-		const resourcesFileNameRegex = /^[a-zA-Z0-9_-]+\.[a-zA-Z]+$/;
-		return resourcesFileNameRegex.test(filename);
+		const validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+		const parts = filename.split(".");
+
+		if (parts.length !== 2 || parts[0].length === 0 || parts[1].length === 0) {
+			return false;
+		}
+
+		const [name, extension] = parts;
+
+		for (let i = 0; i < name.length; i++) {
+			if (!validCharacters.includes(name[i])) {
+				return false;
+			}
+		}
+
+		for (let i = 0; i < extension.length; i++) {
+			const charCode = extension.charCodeAt(i);
+			if (!(charCode >= 65 && charCode <= 90) && !(charCode >= 97 && charCode <= 122)) {
+				return false;
+			}
+		}
+
+		return true;
 	};
 
 	const isValidDeployableFilename = (filename: string) => {
@@ -135,8 +96,27 @@ const checks = () => {
 	};
 
 	const isValidPath = (path: string) => {
-		const pathRegex = /^(?!\/)([a-zA-Z0-9]+\/)*[a-zA-Z0-9]+(?<!\/)$/;
-		return pathRegex.test(path);
+		if (path.startsWith("/") || path.endsWith("/")) {
+			return false;
+		}
+	
+		const validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	
+		const parts = path.split("/");
+	
+		for (let part of parts) {
+			if (part.length === 0) {
+				return false;
+			}
+	
+			for (let i = 0; i < part.length; i++) {
+				if (!validCharacters.includes(part[i])) {
+					return false;
+				}
+			}
+		}
+	
+		return true;
 	};
 
 
