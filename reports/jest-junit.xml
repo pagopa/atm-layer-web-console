@@ -273,7 +273,7 @@
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
+    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
