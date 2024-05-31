@@ -53,7 +53,7 @@ export const CreateResources = () => {
 					fileExtension && fileExtension === formData.filename.split(".").pop()?.toLowerCase() ?
 						"" :
 						"L'estensione del file non corrisponde con quello caricato"
-					: "Campo obbligatorio",
+					: "In nome del file deve essere nel formato nome.estensione gli unici caratteri speciali ammessi sono _ e - ",
 			resourceType: formData.resourceType ?
 				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
 				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
