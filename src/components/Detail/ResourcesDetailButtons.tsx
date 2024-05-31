@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { Ctx } from "../../DataContext";
 import { DELETE_RES, DOWNLOAD_RES, LETTURA, SCRITTURA, UPDATE_RES } from "../../commons/constants";
 import { getFilteredButtonConfig, getRoleDescriptionsByUser } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
@@ -12,7 +14,7 @@ type Props = {
 
 const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 
-	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
+	const { loggedUserInfo } = useContext(Ctx);
 
 	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
 	

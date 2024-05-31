@@ -26,8 +26,7 @@ export const HeaderAccountCustom = ({
 }: HeaderAccountProps) => {
 
 
-	const { abortController } = useContext(Ctx);
-	const loggedUserInfo = JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
+	const { abortController, loggedUserInfo, setLoggedUserInfo } = useContext(Ctx);
 	const token = sessionStorage.getItem("jwt_console");
 	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
 	const navigate = useNavigate();
@@ -37,7 +36,7 @@ export const HeaderAccountCustom = ({
 			const response = await fetchRequest({ urlEndpoint: USER_INFO, method: "GET", abortController })();
 
 			if (response?.success) {
-				sessionStorage.setItem("loggedUserInfo", JSON.stringify(response.valuesObj));
+				setLoggedUserInfo(response.valuesObj);
 				if (response.valuesObj.profiles.length < 1) {
 					navigate(ROUTES.UNAUTHORIZED_PAGE);
 				}
