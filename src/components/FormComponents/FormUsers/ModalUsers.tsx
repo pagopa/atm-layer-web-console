@@ -29,6 +29,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const initialValues = {
 		userId: "",
+		name: "",
+		surname: "",
 		profileIds: [] as Array<string>,
 	};
 
@@ -36,10 +38,11 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	const [errors, setErrors] = useState<any>(initialValues);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
 		resetErrors(errors, setErrors, e.target.name);
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			userId: e.target.value,
+			[name]: value
 		}));
 	};
 
@@ -65,9 +68,13 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		const newErrors = isCreate
 			? {
 				userId: formData.userId ? "" : "Campo obbligatorio",
+				name: formData.name ? "" : "Campo obbligatorio",
+				surname: formData.surname ? "" : "Campo obbligatorio",
 				profileIds: formData.profileIds.length > 0 ? "" : "Campo obbligatorio",
 			}
 			: {
+				name: formData.name ? "" : "Campo obbligatorio",
+				surname: formData.surname ? "" : "Campo obbligatorio",
 				profileIds: formData.profileIds.length > 0 ? "" : "Campo obbligatorio",
 			};
 
@@ -80,6 +87,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		if (open && type === UPDATE_USER) {
 			setFormData({
 				userId: recordParams.userId,
+				name: recordParams.name,
+				surname: recordParams.surname,
 				profileIds: extractDescriptionsAsArray(recordParams.profiles),
 			});
 			setErrors(initialValues);
@@ -113,6 +122,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			if (validateForm(true)) {
 				const postData = {
 					userId: formData.userId,
+					name: formData.name,
+					surname: formData.surname,
 					profileIds: formData.profileIds.map(profileId => getIdByDescription(profileId)),
 				};
 				try {
@@ -168,7 +179,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			handleClose={handleClose}
 			loading={loading}
 		>
-			{type === CREATE_USER &&
 			<Grid sx={{px: 2}}>
 				<Grid xs={5} item my={1}>
 					<TextField
@@ -182,7 +192,37 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.userId)}
 						helperText={errors.userId}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
+					/>
+				</Grid>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="name"
+						name="name"
+						label={"Nome"}
+						placeholder={"nome"}
+						size="small"
+						value={formData.name}
+						onChange={handleChange}
+						error={Boolean(errors.name)}
+						helperText={errors.name}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
+					/>
+				</Grid>
+				<Grid xs={5} item my={1}>
+					<TextField
+						fullWidth
+						id="surname"
+						name="surname"
+						label={"Cognome"}
+						placeholder={"cognome"}
+						size="small"
+						value={formData.surname}
+						onChange={handleChange}
+						error={Boolean(errors.surname)}
+						helperText={errors.surname}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
@@ -192,33 +232,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						value={formData.profileIds}
 					/>
 				</Grid>
-			</Grid>
-			}
-			{type === UPDATE_USER &&
-			<Grid sx={{px: 2}}>
-				<Grid xs={5} item my={1}>
-					<TextField
-						fullWidth
-						id="userId"
-						name="userId"
-						label={"Email utente"}
-						placeholder={"utente@pagopa.com"}
-						size="small"
-						value={recordParams.userId}
-						onChange={handleChange}
-						error={Boolean(errors.userId)}
-						helperText={errors.name}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: true }}
-					/>
-				</Grid>
-				<Grid xs={5} item my={1}>
-					<MultiSelect handleChange={handleMultiSelectChange}
-						errors={errors}		
-						value={formData.profileIds}	
-					/>
-				</Grid>
-			</Grid>
-			}	
+			</Grid>	
 		</ModalTemplate>
 	);
 };
