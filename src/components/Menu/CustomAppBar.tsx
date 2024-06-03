@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { useContext } from "react";
 import { homePageCard } from "../../utils/homePageCard";
-import { getRoleDescriptionsByUser } from "../Commons/Commons";
+import { getProfileDescriptionFromStorage, getProfileIdsArray, getRoleDescriptionsByUser } from "../Commons/Commons";
 import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../../commons/constants";
 import { Ctx } from "../../DataContext";
 import MenuButtons from "./MenuButtons";
@@ -12,11 +12,11 @@ const CustomAppBar = () => {
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
+	const userProfileIds = getProfileIdsArray(loggedUserInfo);
 
 	const isCardVisible = (cardId: string) => {
-		const visibilityRules: { [key: string]: Array<string> } = {
-			home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
+		const visibilityRules: { [key: string]: Array<number> } = {
+		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
 			process: [LETTURA,SCRITTURA,RILASCIO],
 			static: [LETTURA,SCRITTURA],
 			workflow: [LETTURA,SCRITTURA,RILASCIO],
@@ -27,8 +27,8 @@ const CustomAppBar = () => {
 		  return true;
 		}
 	
-		return visibilityRules[cardId].some((profileDescription) => userProfileDescriptions.includes(profileDescription));
-	  };
+		return visibilityRules[cardId].some((profileDescription) => userProfileIds?.includes(profileDescription));
+	};
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>

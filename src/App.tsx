@@ -26,6 +26,8 @@ import UsersPage from "./pages/Users/UsersPage";
 import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
 import { LETTURA, SCRITTURA, UTENTI } from "./commons/constants";
 import { Profile, User } from "./model/UserModel";
+import { fetchRequest } from "./hook/fetch/fetchRequest";
+import { PROFILE } from "./commons/endpoints";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -77,6 +79,12 @@ function App() {
 		lastUpdatedAt: "",
 		profiles: [] as Array<Profile>
 	});
+	const [profilesAvailable, setProfilesAvailable] = useState<Array<Profile>>([{
+		description: "",
+		profileId: 0,
+		createdAt: "",
+		lastUpdatedAt: "",
+	}]);
 
 	function clearAll(){
 		if(sessionStorage.getItem("jwt_console")){
@@ -115,7 +123,9 @@ function App() {
 		debugOn,
 		clearStorage,
 		loggedUserInfo,
-		setLoggedUserInfo
+		setLoggedUserInfo,
+		profilesAvailable,
+		setProfilesAvailable
 	};
 
 	useEffect(() => {

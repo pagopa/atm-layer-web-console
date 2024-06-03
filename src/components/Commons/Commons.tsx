@@ -3,10 +3,10 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_DESCRIPTIONS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
-import { User } from "../../model/UserModel";
+import { Profile, User } from "../../model/UserModel";
 
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
@@ -238,21 +238,30 @@ export function getTextModal(type:string):any {
 	
 };
 
-export function getDescriptionsArray(){
-	return PROFILE_DESCRIPTIONS.map(profile => profile.description);
-}
+// export function getDescriptionsArray(){
+// 	return PROFILE_DESCRIPTIONS.map(profile => profile.description);
+// }
 
-export function getIdByDescription (description: string):any {
-	const descriptions = getDescriptionsArray();
-	if(descriptions.includes(description)) {
-		return descriptions.indexOf(description)+1;
-	}
+// export function getIdByDescription (description: string):any {
+// 	const descriptions = getDescriptionsArray();
+// 	if(descriptions.includes(description)) {
+// 		return descriptions.indexOf(description)+1;
+// 	}
+// };
+
+
+export function getProfileIdsArray(user: User){
+	return user.profiles.map(profile => profile.profileId);
 };
 
 export function getProfileDescriptions (user: User) {
 	if(user.profiles) {
 		return user.profiles.map(profile => profile.description);
 	}
+};
+
+export function getProfileDescriptionByProfileArray (profiles: Array<Profile>): Array<string> {
+	return profiles.map(profile => profile.description);
 };
 
 export function getRoleDescriptionsByUser (loggedUserInfo: User):any {
@@ -263,16 +272,18 @@ export function getFilteredButtonConfig (buttonConfigs: any):any {
 	return buttonConfigs.filter((config: { visibleCondition: () => any }) => config.visibleCondition());
 };
 
-export function addDependentProfiles (selectedProfiles : Array<string>) {
+export function addDependentProfiles (selectedProfilesDescriptions : Array<string>, profiles: Array<Profile>) {
 
-	function onlyUnique(value:string, index:number, array:Array<string>) {
+	function onlyUnique(value:number, index:number, array:Array<number>) {
 		return array.indexOf(value) === index;
-	  }
+	}
+
+	const selectedProfileIds = convertStringToProfiles(selectedProfilesDescriptions, profiles);
 
 	// eslint-disable-next-line functional/no-let
-	let selectedAndDefaultProfiles = [...selectedProfiles];
+	let selectedAndDefaultProfiles = [...selectedProfileIds];
 	selectedAndDefaultProfiles.map(profile => {
-		const completeProfile = PROFILE_DESCRIPTIONS.find((element) => element.description === profile);
+		const completeProfile = PROFILE_IDS.find((element) => element.id === profile);
 		if (completeProfile) {
 			return selectedAndDefaultProfiles = [
 				...completeProfile.defaultProfiles,
@@ -281,5 +292,22 @@ export function addDependentProfiles (selectedProfiles : Array<string>) {
 		}
 		return selectedAndDefaultProfiles;
 	});
-	return selectedAndDefaultProfiles.filter(onlyUnique);
+	return convertProfileToString(selectedAndDefaultProfiles.filter(onlyUnique), profiles);
 };
+
+export function getProfileDescriptionFromStorage (userInfo: any): any {
+	const userInfoObject = JSON.parse(userInfo);
+	return getProfileIdsArray(userInfoObject);
+};
+
+export function convertStringToProfiles(profileDescriptions: Array<string>, profiles: Array<Profile>): Array<number> {
+	return profileDescriptions
+		.map(description => profiles.find(profile => profile.description === description)?.profileId)
+		.filter((id): id is number => id !== undefined);  // Filter out undefined values
+}
+
+export function convertProfileToString(profileIds: Array<number>, profiles: Array<Profile>): Array<string> {
+	return profileIds
+		.map(profileId => profiles.find(profile => profile.profileId === profileId)?.description)
+		.filter((description): description is string => description !== undefined);  // Filter out undefined values
+}

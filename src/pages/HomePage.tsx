@@ -3,8 +3,8 @@ import { useContext } from "react";
 import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
 import { homePageCard } from "../utils/homePageCard";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
-import { getRoleDescriptionsByUser } from "../components/Commons/Commons";
-import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, USERS, UTENTI } from "../commons/constants";
+import { getProfileDescriptionFromStorage, getProfileIdsArray, getRoleDescriptionsByUser } from "../components/Commons/Commons";
+import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../commons/constants";
 import { Ctx } from "../DataContext";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
@@ -14,11 +14,11 @@ export default function HomePage () {
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
+	const userProfileIds = getProfileIdsArray(loggedUserInfo);
 
 	const isCardVisible = (cardId: string) => {
-		const visibilityRules: { [key: string]: Array<string> } = {
-		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,USERS],
+		const visibilityRules: { [key: string]: Array<number> } = {
+		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
 			process: [LETTURA,SCRITTURA,RILASCIO],
 			static: [LETTURA,SCRITTURA],
 			workflow: [LETTURA,SCRITTURA,RILASCIO],
@@ -29,7 +29,7 @@ export default function HomePage () {
 		  return true;
 		}
 	
-		return visibilityRules[cardId].some((profileDescription) => userProfileDescriptions.includes(profileDescription));
+		return visibilityRules[cardId].some((profileDescription) => userProfileIds?.includes(profileDescription));
 	};
 
 	const visibleCards = homePageCard.filter(el => el.id !== "home" && isCardVisible(el.id));

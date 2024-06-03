@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { RootLinkType, User } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
-import { USER_INFO } from "../../commons/endpoints";
+import { PROFILE, USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
 import { getRoleDescriptionsByUser } from "../Commons/Commons";
 import ROUTES from "../../routes";
@@ -26,7 +26,7 @@ export const HeaderAccountCustom = ({
 }: HeaderAccountProps) => {
 
 
-	const { abortController, loggedUserInfo, setLoggedUserInfo } = useContext(Ctx);
+	const { abortController, loggedUserInfo, setLoggedUserInfo, profilesAvailable, setProfilesAvailable } = useContext(Ctx);
 	const token = sessionStorage.getItem("jwt_console");
 	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
 	const navigate = useNavigate();
@@ -48,9 +48,27 @@ export const HeaderAccountCustom = ({
 		}
 	};
 
+	const getAllProfilesList = async () => {
+
+		try {
+			const response = await fetchRequest({ urlEndpoint: PROFILE, method: "GET", abortController })();
+
+			if (response?.success) {
+				setProfilesAvailable(response.valuesObj?.profiles);
+				console.log("DAJE");
+			} else {
+				setProfilesAvailable([]);
+				console.log(":(");
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
+
 	useEffect(() => {
 		if(!loggedUserInfo.userId && token){
 			void getTokenEmail();
+			void getAllProfilesList();
 		}
 	}, []);
 		

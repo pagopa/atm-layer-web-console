@@ -2,14 +2,15 @@ import { SetStateAction, SyntheticEvent, useContext, useEffect, useState } from 
 import { generatePath } from "react-router-dom";
 import { Grid, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
-import { getIdByDescription, getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
+import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_USER } from "../../../commons/constants";
-import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
+import { CREATE_USERS, DELETE_USERS, PROFILE, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
+// import { Profile } from "../../../model/UserModel";
 
 type Props = {
     type: string;
@@ -23,7 +24,7 @@ type Props = {
 
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 	const { extractDescriptionsAsArray } = formatValues();
-	const { abortController } = useContext(Ctx);
+	const { abortController, profilesAvailable } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsUser");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
@@ -36,6 +37,12 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
+	// const [profiles, setProfiles] = useState<Array<Profile>>([{
+	// 	description: "",
+	// 	profileId: 0,
+	// 	createdAt: "",
+	// 	lastUpdatedAt: "",
+	// }]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
@@ -83,7 +90,21 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		return Object.values(newErrors).every((error) => !error);
 	};
 
+	// const getAllProfilesList = async (): Promise<void> => {
+
+	// 	try {
+	// 		const response = await fetchRequest({ urlEndpoint: PROFILE, method: "GET", abortController })();
+
+	// 		if (response?.success) {
+	// 			setProfiles(response.valuesObj);
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("ERROR", error);
+	// 	}
+	// };
+
 	useEffect(() => {
+		// void getAllProfilesList();
 		if (open && type === UPDATE_USER) {
 			setFormData({
 				userId: recordParams.userId,
@@ -124,7 +145,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					userId: formData.userId,
 					name: formData.name,
 					surname: formData.surname,
-					profileIds: formData.profileIds.map(profileId => getIdByDescription(profileId)),
+					profileIds: convertStringToProfiles(formData.profileIds, profilesAvailable),
 				};
 				try {
 					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData })();
@@ -145,7 +166,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		case UPDATE_USER: {
 			if (validateForm(false)) {
 				const postData = {
-					profileIds: formData.profileIds.map(profileId => getIdByDescription(profileId)),
+					profileIds: convertStringToProfiles(formData.profileIds, profilesAvailable),
 				};
 				console.log(formData, postData);
 				try {
@@ -230,6 +251,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						handleChange={handleMultiSelectChange}
 						errors={errors}
 						value={formData.profileIds}
+						names={getProfileDescriptionByProfileArray(profilesAvailable)}
 					/>
 				</Grid>
 			</Grid>	

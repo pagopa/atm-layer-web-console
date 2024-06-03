@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
 import { DELETE_ASSOCIATION, DELETE_USER, SCRITTURA, UPDATE_USER } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
+import { getProfileDescriptionFromStorage, getProfileIdsArray } from "../Commons/Commons";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
@@ -108,7 +109,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			setType(DELETE_ASSOCIATION);
 			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
-		if(sessionStorage.getItem("loggedUserInfo")?.includes(SCRITTURA)) {
+		if(getProfileDescriptionFromStorage(sessionStorage.getItem("loggedUserInfo"))?.includes(SCRITTURA)) {
 			return (
 				<Box
 					width="100%"

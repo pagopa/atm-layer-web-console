@@ -1,24 +1,28 @@
 import { TextField, Autocomplete, Checkbox, Chip } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { SyntheticEvent } from "react";
-import { addDependentProfiles, getDescriptionsArray } from "../Commons/Commons";
+import { SyntheticEvent, useContext } from "react";
+import { addDependentProfiles } from "../Commons/Commons";
+import { Profile } from "../../model/UserModel";
+import { Ctx } from "../../DataContext";
 
 type Props = {
     handleChange: (event: SyntheticEvent<Element, Event>, value: Array<string>) => void;
     errors: any;
     value: Array<string>;
+    names: Array<string>;
 };
 
-const names = getDescriptionsArray();
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function MultiSelect({ handleChange, errors, value }: Props) {
+export default function MultiSelect({ handleChange, errors, value, names }: Props) {
+	const { profilesAvailable } = useContext(Ctx);
 	return (
 		<Autocomplete
 			multiple
-			options={names}
+			options={names ?? []}
 			getOptionLabel={(option) => option}
 			value={value}
 			isOptionEqualToValue={(option, value) => option === value}
@@ -36,20 +40,20 @@ export default function MultiSelect({ handleChange, errors, value }: Props) {
 			)}
 			renderTags={(value) =>
 				value.map((option, index) => (
-				  <Chip key={index} variant="outlined" label={option} />
+					<Chip key={index} variant="outlined" label={option} />
 				))
-			  }
+			}
 			renderInput={(params) => (
 				<TextField
 					{...params}
 					variant="outlined"
 					label="Ruoli assegnati"
-					error={Boolean(errors.profileIds.length>0)}
+					error={Boolean(errors.profileIds.length > 0)}
 					helperText={errors.profileIds}
 				/>
 			)}
 			onChange={(_, newValue) => {
-				const completeProfiles = addDependentProfiles(newValue);
+				const completeProfiles = addDependentProfiles(newValue, profilesAvailable);
 				handleChange(_, completeProfiles);
 			}}
 		/>
