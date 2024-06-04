@@ -15,11 +15,11 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.003">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.002">
+    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.005">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
@@ -31,7 +31,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0">
+    <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/Commons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:44" time="3.029" tests="18">
@@ -65,7 +65,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
     </testcase>
@@ -115,11 +115,11 @@
     </testcase>
     <testcase classname="ActionAlert" name="render with warning" time="0.015">
     </testcase>
-    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.003">
+    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.008">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.01">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.011">
+    <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.008">
     </testcase>
@@ -149,7 +149,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.033">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.028">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.03">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" time="0.025">
     </testcase>
@@ -165,7 +165,7 @@
     </testcase>
     <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.068">
     </testcase>
-    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.04">
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.037">
     </testcase>
   </testsuite>
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:53" time="0.167" tests="19">
@@ -177,11 +177,11 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.002">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
@@ -191,7 +191,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.006">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
@@ -205,13 +205,13 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:53" time="0.735" tests="7">
     <testcase classname="DetailButtons" name="renders buttons with correct text" time="0.038">
     </testcase>
-    <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.013">
+    <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.012">
     </testcase>
     <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.008">
     </testcase>
@@ -299,7 +299,7 @@
   <testsuite name="src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:55" time="4.021" tests="4">
     <testcase classname="ModalResources Test" name="Test ModalResources with DELETE" time="0.1">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.024">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
@@ -333,7 +333,7 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.02">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD DMN" time="3.038">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.049">
     </testcase>
@@ -373,7 +373,7 @@
   <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourceDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:02" time="1.837" tests="2">
     <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage with sessionStorage" time="0.271">
     </testcase>
-    <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage without sessionStorage" time="0.043">
+    <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage without sessionStorage" time="0.05">
     </testcase>
   </testsuite>
   <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:03" time="1.159" tests="4">
@@ -395,7 +395,7 @@
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0.001">
     </testcase>
-    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
+    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:02" time="1.889" tests="2">
