@@ -19,7 +19,8 @@ export const ResourcesDataGrid = () => {
 
 	const initialValues = {
 		noDeployableResourceType: "",
-		fileName: ""
+		fileName: "",
+		storageKey:""
 	};
 
 	const { abortController } = useContext(Ctx);
