@@ -50,6 +50,19 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 					fullWidth
 				/>
 			</Grid>
+			<Grid item xs={4}>
+				<TextField
+					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "storageKey-test" }}
+					id="storageKey"
+					name="storageKey"
+					label="Percorso file"
+					variant="outlined"
+					value={filterValues.storageKey}
+					onChange={(e) => handleChange(e, e.target.name)}
+					size="small"
+					fullWidth
+				/>
+			</Grid>
 			<Grid item xs={4} />
 		</>
 	);

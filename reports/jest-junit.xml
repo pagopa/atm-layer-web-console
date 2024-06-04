@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="212" failures="0" errors="0" time="30.857">
-  <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:09" time="2.061" tests="16">
-    <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.003">
+<testsuites name="jest tests" tests="212" failures="0" errors="0" time="30.768">
+  <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:44" time="2.184" tests="16">
+    <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.004">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
+    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.011">
+    <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.015">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.018">
+    <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.049">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.003">
     </testcase>
@@ -21,155 +21,155 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
+    <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getRecordBpmnParams" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/Commons/__tests__/Commons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:09" time="3.273" tests="18">
+  <testsuite name="src/components/Commons/__tests__/Commons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:44" time="3.029" tests="18">
     <testcase classname="resetErrors" name="reset specific error" time="0.005">
     </testcase>
     <testcase classname="resetErrors" name="should not reset a specific field error if it does not exist" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.006">
+    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.002">
+    <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.001">
     </testcase>
-    <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.01">
+    <testcase classname="getQueryString &gt; handleSnackbar" name="error" time="0.001">
     </testcase>
-    <testcase classname="getQueryString &gt; breadCrumbLinkComponent" name="render link and message" time="0.05">
+    <testcase classname="getQueryString &gt; breadCrumbLinkComponent" name="render link and message" time="0.034">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
     </testcase>
-    <testcase classname="getTextModal" name="check for title and message in cases" time="0.006">
+    <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
     </testcase>
     <testcase classname="getTextModal" name="check error in default case" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:12" time="1.705" tests="10">
-    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_WR" time="0.259">
+  <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:47" time="1.897" tests="10">
+    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_WR" time="0.277">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_WR" time="0.072">
+    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_WR" time="0.065">
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test clear button in UPDATE_WR" time="0.055">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="0.053">
+    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="0.048">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.038">
+    <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.044">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.03">
+    <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.045">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test form validation" time="0.049">
+    <testcase classname="ModalTemplateUpload Test" name="Test form validation" time="0.043">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="0.051">
+    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="0.041">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_RES" time="0.049">
+    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_RES" time="0.039">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Update with different file extensions should fail" time="0.037">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:11" time="3.339" tests="7">
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn with invalid form" time="0.223">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId positive case" time="0.136">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.082">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN catch case" time="0.058">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn on switch of branchId" time="0.335">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn fetch failed" time="0.052">
-    </testcase>
-    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.045">
+    <testcase classname="ModalTemplateUpload Test" name="Update with different file extensions should fail" time="0.024">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:14" time="1.055" tests="10">
-    <testcase classname="ActionAlert" name="render with error" time="0.071">
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:47" time="3.38" tests="7">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn with invalid form" time="0.239">
     </testcase>
-    <testcase classname="ActionAlert" name="render with warning" time="0.011">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId positive case" time="0.131">
+    </testcase>
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.076">
+    </testcase>
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN catch case" time="0.066">
+    </testcase>
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn on switch of branchId" time="0.281">
+    </testcase>
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn fetch failed" time="0.054">
+    </testcase>
+    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.041">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:49" time="0.923" tests="10">
+    <testcase classname="ActionAlert" name="render with error" time="0.061">
+    </testcase>
+    <testcase classname="ActionAlert" name="render with warning" time="0.015">
     </testcase>
     <testcase classname="ActionAlert" name="render without openSnackBar" time="0.008">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.016">
+    <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WORKFLOW_RESOURCES when type is DELETE_WR" time="0.01">
     </testcase>
-    <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.016">
+    <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.008">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.028">
+    <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.013">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR" time="0.014">
+    <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES" time="0.013">
     </testcase>
-    <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.009">
+    <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.011">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/Filters/__tests__/FilterBar.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:14" time="1.629" tests="11">
-    <testcase classname="FilterBar test" name="Test FilterBar without driver" time="0.066">
+  <testsuite name="src/components/DataGrid/Filters/__tests__/FilterBar.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:50" time="1.471" tests="11">
+    <testcase classname="FilterBar test" name="Test FilterBar without driver" time="0.071">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Click on Cancella Filtri and Crea Risorsa " time="0.11">
+    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Click on Cancella Filtri and Crea Risorsa " time="0.096">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Filter with all the filters" time="0.062">
+    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Filter with all the filters" time="0.041">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Filter with status" time="0.063">
+    <testcase classname="FilterBar test" name="Test FilterBar with PROCESS_RESOURCES and Filter with status" time="0.048">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Click on Cancella Filtri and Crea Risorsa " time="0.029">
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Click on Cancella Filtri and Crea Risorsa " time="0.033">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with fileName" time="0.023">
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with fileName" time="0.028">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.03">
+    <testcase classname="FilterBar test" name="Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" time="0.033">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.048">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" time="0.033">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" time="0.03">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" time="0.03">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" time="0.025">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.037">
+    <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.033">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:16" time="1.113" tests="5">
-    <testcase classname="UpgradeBpmn" name="Submit form with valid input" time="0.143">
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:52" time="1.113" tests="5">
+    <testcase classname="UpgradeBpmn" name="Submit form with valid input" time="0.139">
     </testcase>
     <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch failed" time="0.073">
     </testcase>
-    <testcase classname="UpgradeBpmn" name="Submit form with invalid input" time="0.037">
+    <testcase classname="UpgradeBpmn" name="Submit form with invalid input" time="0.049">
     </testcase>
-    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.058">
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.068">
     </testcase>
     <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.037">
     </testcase>
   </testsuite>
-  <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:17" time="0.172" tests="19">
-    <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.002">
+  <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:53" time="0.167" tests="19">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0">
     </testcase>
@@ -183,97 +183,97 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.002">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.006">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.005">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:17" time="0.738" tests="7">
+  <testsuite name="src/components/Commons/__tests__/DetailButtons.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:53" time="0.735" tests="7">
     <testcase classname="DetailButtons" name="renders buttons with correct text" time="0.038">
     </testcase>
     <testcase classname="DetailButtons" name="calls setType and openDialog when button is clicked" time="0.012">
     </testcase>
     <testcase classname="DetailButtons" name="navigates to correct route when navigate property is provided" time="0.008">
     </testcase>
-    <testcase classname="DetailButtons" name="disables button when disabledCondition is true" time="0.009">
+    <testcase classname="DetailButtons" name="disables button when disabledCondition is true" time="0.008">
     </testcase>
     <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" time="0.006">
     </testcase>
-    <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.004">
+    <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.003">
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.009">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:15" time="4.357" tests="9">
-    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE" time="0.129">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DEPLOY" time="3.042">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE ASSOCIATION" time="0.031">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test Error during DELETE" time="0.032">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test Error during DEPLOY" time="0.045">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test Error during DELETE ASSOCIATION" time="0.021">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test Error during DOWNLOAD" time="0.022">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DOWNLOAD" time="0.027">
-    </testcase>
-    <testcase classname="ModalBpmn Test" name="Test ModalBpmn without type" time="0.018">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.006">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:18" time="1.534" tests="4">
-    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with next page click" time="0.348">
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:50" time="4.378" tests="9">
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE" time="0.134">
     </testcase>
-    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with empty table" time="0.1">
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DEPLOY" time="3.037">
     </testcase>
-    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test without response" time="0.063">
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE ASSOCIATION" time="0.022">
     </testcase>
-    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with fetch error" time="0.058">
+    <testcase classname="ModalBpmn Test" name="Test Error during DELETE" time="0.028">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DEPLOY" time="0.036">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DELETE ASSOCIATION" time="0.028">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DOWNLOAD" time="0.024">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DOWNLOAD" time="0.026">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn without type" time="0.023">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:19" time="1.098" tests="2">
-    <testcase classname="CreateBpmn Test" name="Test CreateBpmn" time="0.211">
+  <testsuite name="src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:54" time="1.469" tests="4">
+    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with next page click" time="0.293">
     </testcase>
-    <testcase classname="CreateBpmn Test" name="Test CreateBpmn fetch error" time="0.091">
+    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with empty table" time="0.073">
+    </testcase>
+    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test without response" time="0.068">
+    </testcase>
+    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with fetch error" time="0.073">
     </testcase>
   </testsuite>
-  <testsuite name="src/utils/__tests__/checks.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:20" time="0.18" tests="12">
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:55" time="1.104" tests="2">
+    <testcase classname="CreateBpmn Test" name="Test CreateBpmn" time="0.227">
+    </testcase>
+    <testcase classname="CreateBpmn Test" name="Test CreateBpmn fetch error" time="0.094">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/utils/__tests__/checks.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:56" time="0.181" tests="12">
     <testcase classname="checks tests" name="checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" time="0.002">
     </testcase>
-    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.082">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.007">
+    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.005">
     </testcase>
-    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.002">
+    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
+    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
@@ -281,252 +281,252 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:20" time="1.707" tests="4">
-    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid.test Test" time="0.415">
+  <testsuite name="src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:56" time="1.75" tests="4">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid.test Test" time="0.421">
     </testcase>
-    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid.test Test with empty table" time="0.119">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid.test Test with empty table" time="0.13">
     </testcase>
-    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Test without response" time="0.101">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Test without response" time="0.111">
     </testcase>
-    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Catch Error" time="0.095">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Catch Error" time="0.096">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:19" time="4.015" tests="4">
-    <testcase classname="ModalResources Test" name="Test ModalResources with DELETE" time="0.111">
+  <testsuite name="src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:55" time="4.021" tests="4">
+    <testcase classname="ModalResources Test" name="Test ModalResources with DELETE" time="0.1">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalResources with DOWNLOAD" time="3.032">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Error during DOWNLOAD" time="0.016">
+    <testcase classname="ModalResources Test" name="Test Error during DOWNLOAD" time="0.017">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/__tests__/ResourcesDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:22" time="1.461" tests="4">
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test" time="0.382">
+  <testsuite name="src/components/DataGrid/__tests__/ResourcesDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:58" time="1.553" tests="4">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test" time="0.412">
     </testcase>
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.091">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.113">
     </testcase>
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.092">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.097">
     </testcase>
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test Catch Error" time="0.079">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/FormComponents/FormsResources/__tests__/CreateResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:24" time="1.019" tests="1">
-    <testcase classname="CreateResources Test" name="Test CreateResources" time="0.261">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test Catch Error" time="0.091">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:09" time="16.431" tests="10">
-    <testcase classname="ModalResources Test" name="Test ModalWR with ROLLBACK" time="0.224">
+  <testsuite name="src/components/FormComponents/FormsResources/__tests__/CreateResources.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:59" time="1.238" tests="1">
+    <testcase classname="CreateResources Test" name="Test CreateResources" time="0.424">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.048">
+  </testsuite>
+  <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:44" time="16.688" tests="10">
+    <testcase classname="ModalResources Test" name="Test ModalWR with ROLLBACK" time="0.279">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.047">
+    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.051">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.034">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.053">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.021">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.025">
+    </testcase>
+    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.023">
+    </testcase>
+    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.02">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD DMN" time="3.035">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.049">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.06">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD FORM" time="3.037">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD FORM" time="3.033">
-    </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DOWNLOAD" time="0.032">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DOWNLOAD" time="0.046">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:24" time="1.86" tests="4">
-    <testcase classname="BpmnDataGrid test" name="BpmnDataGrid Test" time="0.504">
-    </testcase>
-    <testcase classname="BpmnDataGrid test" name="BpmnDatgrid Test with empty table" time="0.156">
-    </testcase>
-    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.161">
-    </testcase>
-    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test with fetch error" time="0.135">
+  <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/CreateWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:00" time="1.154" tests="1">
+    <testcase classname="CreateWR Test" name="Test CreateWR" time="0.313">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/CreateWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:25" time="1.347" tests="1">
-    <testcase classname="CreateWR Test" name="Test CreateWR" time="0.321">
+  <testsuite name="src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:16:59" time="2.177" tests="4">
+    <testcase classname="BpmnDataGrid test" name="BpmnDataGrid Test" time="0.481">
+    </testcase>
+    <testcase classname="BpmnDataGrid test" name="BpmnDatgrid Test with empty table" time="0.157">
+    </testcase>
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.21">
+    </testcase>
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test with fetch error" time="0.173">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:25" time="1.197" tests="4">
-    <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.036">
+  <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:01" time="1.212" tests="4">
+    <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.038">
     </testcase>
-    <testcase classname="TableColumn test" name="Test renderCell" time="0.021">
+    <testcase classname="TableColumn test" name="Test renderCell" time="0.015">
     </testcase>
-    <testcase classname="TableColumn test" name="Test actionColumn" time="0.03">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.025">
     </testcase>
-    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.016">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/FormComponents/template/__tests__/FormTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:26" time="1.167" tests="1">
-    <testcase classname="Test FormTemplate" name="Test FormTemplate with children AssociateBpmn" time="0.191">
+    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.015">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourceDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:26" time="1.889" tests="2">
-    <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage with sessionStorage" time="0.253">
+  <testsuite name="src/components/FormComponents/template/__tests__/FormTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:02" time="1.036" tests="1">
+    <testcase classname="Test FormTemplate" name="Test FormTemplate with children AssociateBpmn" time="0.192">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourceDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:02" time="1.837" tests="2">
+    <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage with sessionStorage" time="0.271">
     </testcase>
     <testcase classname="Test WorkflowResourceDetailPage" name="Test WorkflowResourceDetailPage without sessionStorage" time="0.05">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:26" time="1.857" tests="2">
-    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage with sessionStorage" time="0.454">
+  <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:03" time="1.159" tests="4">
+    <testcase classname="UploadFileWithButton" name="Clear Uploaded File" time="0.076">
     </testcase>
-    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage without sessionStorage" time="0.039">
+    <testcase classname="UploadFileWithButton" name="Upload Allowed File" time="0.021">
     </testcase>
-  </testsuite>
-  <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:27" time="1.26" tests="4">
-    <testcase classname="UploadFileWithButton" name="Clear Uploaded File" time="0.069">
+    <testcase classname="UploadFileWithButton" name="Uploaded File With Error" time="0.038">
     </testcase>
-    <testcase classname="UploadFileWithButton" name="Upload Allowed File" time="0.017">
-    </testcase>
-    <testcase classname="UploadFileWithButton" name="Uploaded File With Error" time="0.039">
-    </testcase>
-    <testcase classname="UploadFileWithButton" name="No File Uploaded With Error" time="0.021">
+    <testcase classname="UploadFileWithButton" name="No File Uploaded With Error" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="src/commons/__tests__/decode.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:28" time="0.202" tests="5">
-    <testcase classname="decode file test" name="Test base64_decode function" time="0.003">
+  <testsuite name="src/commons/__tests__/decode.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:04" time="0.203" tests="5">
+    <testcase classname="decode file test" name="Test base64_decode function" time="0.002">
     </testcase>
-    <testcase classname="decode file test" name="Test base64_encode function" time="0.001">
+    <testcase classname="decode file test" name="Test base64_encode function" time="0">
     </testcase>
-    <testcase classname="decode file test" name="download a file successfully" time="0.005">
+    <testcase classname="decode file test" name="download a file successfully" time="0.003">
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0.001">
     </testcase>
     <testcase classname="decode file test" name="Test downloadStaticFile function" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/__tests__/LoginPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:27" time="1.208" tests="3">
-    <testcase classname="LoginPage" name="renders without crashing" time="0.044">
+  <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:02" time="1.889" tests="2">
+    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage with sessionStorage" time="0.312">
+    </testcase>
+    <testcase classname="ResourcesDetailPage test" name="Test ResourcesDetailPage without sessionStorage" time="0.036">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/pages/__tests__/LoginPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:03" time="1.096" tests="3">
+    <testcase classname="LoginPage" name="renders without crashing" time="0.062">
     </testcase>
     <testcase classname="LoginPage" name="Test render and click Accedi no debug" time="0.015">
     </testcase>
-    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.039">
+    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.016">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:29" time="0.822" tests="2">
-    <testcase classname="LoginPageCallback" name="should navigate to HOME if token exists" time="0.032">
+  <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:04" time="1.373" tests="2">
+    <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.034">
     </testcase>
-    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:28" time="1.438" tests="2">
-    <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.045">
-    </testcase>
-    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.011">
+    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.01">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:30" time="1.074" tests="3">
-    <testcase classname="ModalTemplate test" name="should display the modal with title and content text when open" time="0.113">
+  <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:05" time="1.014" tests="2">
+    <testcase classname="LoginPageCallback" name="should navigate to HOME if token exists" time="0.045">
     </testcase>
-    <testcase classname="ModalTemplate test" name="should call setOpen with false when Annulla button is clicked" time="0.025">
-    </testcase>
-    <testcase classname="ModalTemplate test" name="should call handleSubmit when Conferma button is clicked" time="0.02">
+    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.011">
     </testcase>
   </testsuite>
-  <testsuite name="src/App.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:29" time="2.261" tests="2">
-    <testcase classname="" name="Test App without jwt in sessionStorage" time="0.161">
+  <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplate.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:05" time="1.028" tests="3">
+    <testcase classname="ModalTemplate test" name="should display the modal with title and content text when open" time="0.118">
     </testcase>
-    <testcase classname="" name="Test App with jwt in sessionStorage" time="0.143">
+    <testcase classname="ModalTemplate test" name="should call setOpen with false when Annulla button is clicked" time="0.026">
     </testcase>
-  </testsuite>
-  <testsuite name="src/pages/Bpmn/__tests__/UpgradeBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:31" time="1.281" tests="1">
-    <testcase classname="UpgradeBpmnPage" name="Test UpgradeBpmnPage" time="0.27">
+    <testcase classname="ModalTemplate test" name="should call handleSubmit when Conferma button is clicked" time="0.021">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Bpmn/__tests__/BpmnDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:30" time="2.139" tests="2">
-    <testcase classname="BpmnDetailPage" name="Test BpmnDetailPage with sessionStorage" time="0.635">
+  <testsuite name="src/App.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:04" time="2.189" tests="2">
+    <testcase classname="" name="Test App without jwt in sessionStorage" time="0.166">
     </testcase>
-    <testcase classname="BpmnDetailPage" name="Test BpmnDetailPage without sessionStorage" time="0.16">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/HeaderComponents/__tests__/Header.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:31" time="1.271" tests="2">
-    <testcase classname="Header test" name="Test render Header component with login false" time="0.051">
-    </testcase>
-    <testcase classname="Header test" name="Test render Header component with login true" time="0.062">
+    <testcase classname="" name="Test App with jwt in sessionStorage" time="0.109">
     </testcase>
   </testsuite>
-  <testsuite name="src/hook/__tests__/formOption.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:32" time="0.195" tests="1">
-    <testcase classname="formOption Test" name="test get values" time="0.002">
+  <testsuite name="src/pages/Bpmn/__tests__/UpgradeBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:07" time="1.03" tests="1">
+    <testcase classname="UpgradeBpmnPage" name="Test UpgradeBpmnPage" time="0.161">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:32" time="1.108" tests="1">
-    <testcase classname="AssociateBpmnPage" name=" getItem recordParams case" time="0.178">
+  <testsuite name="src/pages/Bpmn/__tests__/BpmnDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:06" time="1.963" tests="2">
+    <testcase classname="BpmnDetailPage" name="Test BpmnDetailPage with sessionStorage" time="0.567">
+    </testcase>
+    <testcase classname="BpmnDetailPage" name="Test BpmnDetailPage without sessionStorage" time="0.125">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/HeaderComponents/__tests__/Logo.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:32" time="1.035" tests="1">
-    <testcase classname="HeaderAccountCustom test" name="First render" time="0.032">
+  <testsuite name="src/components/HeaderComponents/__tests__/Header.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:07" time="1.129" tests="2">
+    <testcase classname="Header test" name="Test render Header component with login false" time="0.041">
+    </testcase>
+    <testcase classname="Header test" name="Test render Header component with login true" time="0.052">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Resources/__tests__/ResourcesPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:32" time="1.501" tests="1">
-    <testcase classname="ResourcesPage test" name="First render" time="0.407">
+  <testsuite name="src/hook/__tests__/formOption.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:08" time="0.161" tests="1">
+    <testcase classname="formOption Test" name="test get values" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Resources/__tests__/CreateResourcesPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:33" time="1.09" tests="1">
-    <testcase classname="CreateResourcesPage test" name="First render" time="0.161">
+  <testsuite name="src/components/HeaderComponents/__tests__/Logo.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:08" time="1.02" tests="1">
+    <testcase classname="HeaderAccountCustom test" name="First render" time="0.028">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Bpmn/__tests__/BpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:33" time="1.534" tests="1">
-    <testcase classname="BpmnPage test" name="First render" time="0.442">
+  <testsuite name="src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:08" time="1.069" tests="1">
+    <testcase classname="AssociateBpmnPage" name=" getItem recordParams case" time="0.16">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/__tests__/HomePage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:34" time="0.979" tests="1">
-    <testcase classname="HomePage test" name="First render" time="0.155">
+  <testsuite name="src/pages/Resources/__tests__/ResourcesPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:08" time="1.607" tests="1">
+    <testcase classname="ResourcesPage test" name="First render" time="0.608">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/Bpmn/__tests__/CreateBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:34" time="0.989" tests="1">
-    <testcase classname="CreateBpmnPage" name="render" time="0.104">
+  <testsuite name="src/pages/Resources/__tests__/CreateResourcesPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:09" time="1.241" tests="1">
+    <testcase classname="CreateResourcesPage test" name="First render" time="0.173">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:35" time="1.035" tests="1">
-    <testcase classname="CreateWRPage" name="render" time="0.157">
+  <testsuite name="src/pages/Bpmn/__tests__/BpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:09" time="1.702" tests="1">
+    <testcase classname="BpmnPage test" name="First render" time="0.4">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/CardComponents/__tests__/HomeCardComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:35" time="0.968" tests="1">
-    <testcase classname="HomeCardComponent test" name="First render" time="0.11">
+  <testsuite name="src/pages/__tests__/HomePage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:10" time="1.078" tests="1">
+    <testcase classname="HomePage test" name="First render" time="0.144">
     </testcase>
   </testsuite>
-  <testsuite name="src/hook/fetch/__tests__/fetchRequest.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:36" time="0.201" tests="1">
+  <testsuite name="src/pages/Bpmn/__tests__/CreateBpmnPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:10" time="0.967" tests="1">
+    <testcase classname="CreateBpmnPage" name="render" time="0.162">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:10" time="1.048" tests="1">
+    <testcase classname="CreateWRPage" name="render" time="0.165">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/components/CardComponents/__tests__/HomeCardComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:11" time="0.971" tests="1">
+    <testcase classname="HomeCardComponent test" name="First render" time="0.117">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/hook/fetch/__tests__/fetchRequest.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:11" time="0.222" tests="1">
     <testcase classname="formOption Test" name="Verifica la presenza dei dati in valueObject" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourcePage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:35" time="1.507" tests="1">
-    <testcase classname="WorkflowResourcePage" name="render" time="0.435">
+  <testsuite name="src/pages/WorkflowResource/__tests__/WorkflowResourcePage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:11" time="1.437" tests="1">
+    <testcase classname="WorkflowResourcePage" name="render" time="0.432">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/Commons/__tests__/ActionIcon.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:36" time="0.826" tests="1">
+  <testsuite name="src/components/Commons/__tests__/IconBox.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:12" time="0.814" tests="1">
     <testcase classname="ActionIcon test" name="First render" time="0.037">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/Commons/__tests__/IconBox.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:36" time="0.899" tests="1">
-    <testcase classname="ActionIcon test" name="First render" time="0.029">
+  <testsuite name="src/components/Commons/__tests__/ActionIcon.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:12" time="0.857" tests="1">
+    <testcase classname="ActionIcon test" name="First render" time="0.044">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:37" time="0.835" tests="1">
-    <testcase classname="BreadcrumbComponent" name="Check for breadcrumbs" time="0.032">
+  <testsuite name="src/components/TitleComponents/__tests__/TitleComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:13" time="0.762" tests="1">
+    <testcase classname="HomePageTitle" name="Check for HomePageTitle" time="0.022">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/TitleComponents/__tests__/TitleComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:37" time="0.901" tests="1">
-    <testcase classname="HomePageTitle" name="Check for HomePageTitle" time="0.028">
-    </testcase>
-  </testsuite>
-  <testsuite name="src/components/TitleComponents/__tests__/HomePageTitle.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:37" time="0.969" tests="1">
+  <testsuite name="src/components/TitleComponents/__tests__/HomePageTitle.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:12" time="0.898" tests="1">
     <testcase classname="HomePageTitle" name="Check for HomePageTitle" time="0.034">
     </testcase>
   </testsuite>
-  <testsuite name="src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:38" time="0.792" tests="1">
+  <testsuite name="src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:13" time="0.921" tests="1">
+    <testcase classname="BreadcrumbComponent" name="Check for breadcrumbs" time="0.035">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:13" time="0.699" tests="1">
     <testcase classname="BreadCrumb Component" name="renders the correct breadcrumbs" time="0.022">
     </testcase>
   </testsuite>
-  <testsuite name="src/pages/__tests__/ErrorPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-05-31T13:22:38" time="0.788" tests="1">
+  <testsuite name="src/pages/__tests__/ErrorPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-06-04T10:17:13" time="0.757" tests="1">
     <testcase classname="ErrorPage" name="render" time="0.023">
     </testcase>
   </testsuite>
