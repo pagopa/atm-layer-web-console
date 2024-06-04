@@ -10,6 +10,7 @@ import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_BPMN_API } from "../../../commons/endpoints";
+import MultiUploadField from "../MultiUploadField";
 
 
 export const CreateBpmn = () => {
@@ -99,14 +100,16 @@ export const CreateBpmn = () => {
 			title={title}
 			loadingButton={loadingButton}
 		>
-			<UploadField
+			{/* <UploadField
 				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
 				error={errors.file}
 				setFormData={setFormData}
-				formData={formData} />
+				formData={formData} /> */}
+			
+			<MultiUploadField />
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth

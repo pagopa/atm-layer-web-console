@@ -75,7 +75,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                     // startIcon={<FileUploadIcon color={ error ? "error" : "primary" }/>}
                 >
                     Carica un file dal tuo computer
-                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input"/>
+                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input" multiple={true}/>
                 </Button>
             }
         </Box>);
