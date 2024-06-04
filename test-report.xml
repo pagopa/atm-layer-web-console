@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/Grids/__tests__/useColumns.test.ts">
-    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="3"/>
-    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="1"/>
-    <testCase name="useColumns should return correct navigation paths for WORKFLOW_RESOURCE" duration="0"/>
+    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="4"/>
+    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="0"/>
+    <testCase name="useColumns should return correct navigation paths for WORKFLOW_RESOURCE" duration="1"/>
     <testCase name="useColumns should return correct record BPMN params" duration="1"/>
-    <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="12"/>
-    <testCase name="useColumns should return correct columns for BPMN_ASSOCIATED" duration="31"/>
-    <testCase name="useColumns should return correct columns for RESOURCES" duration="12"/>
+    <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="15"/>
+    <testCase name="useColumns should return correct columns for BPMN_ASSOCIATED" duration="49"/>
+    <testCase name="useColumns should return correct columns for RESOURCES" duration="3"/>
     <testCase name="useColumns should return correct columns for WORKFLOW_RESOURCE" duration="2"/>
-    <testCase name="useColumns should return correct visible columns for PROCESS_RESOURCES" duration="0"/>
+    <testCase name="useColumns should return correct visible columns for PROCESS_RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct visible columns for BPMN_ASSOCIATED" duration="0"/>
-    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="0"/>
+    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should generate correct path for invalid driver" duration="1"/>
     <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="0"/>
-    <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="0"/>
-    <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="1"/>
+    <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="1"/>
+    <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/Commons.test.tsx">
-    <testCase name="resetErrors reset specific error" duration="3"/>
+    <testCase name="resetErrors reset specific error" duration="5"/>
     <testCase name="resetErrors should not reset a specific field error if it does not exist" duration="0"/>
     <testCase name="getQueryString querystring PROCESS_RESOURCES" duration="1"/>
     <testCase name="getQueryString querystring RESOURCES" duration="0"/>
@@ -28,71 +28,71 @@
     <testCase name="getQueryString querystring driver not present" duration="1"/>
     <testCase name="getQueryString handleSnackbar success" duration="1"/>
     <testCase name="getQueryString handleSnackbar error" duration="1"/>
-    <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="49"/>
-    <testCase name="commonBreadRoot generate link for BPMN" duration="1"/>
+    <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="34"/>
+    <testCase name="commonBreadRoot generate link for BPMN" duration="0"/>
     <testCase name="commonBreadRoot generate link for BPMN detail page" duration="1"/>
-    <testCase name="commonBreadRoot generate link for Static Resource" duration="0"/>
+    <testCase name="commonBreadRoot generate link for Static Resource" duration="1"/>
     <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="0"/>
-    <testCase name="commonBreadRoot generate link for Workflow Resource" duration="1"/>
-    <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="0"/>
+    <testCase name="commonBreadRoot generate link for Workflow Resource" duration="0"/>
+    <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="1"/>
     <testCase name="getTextModal check for title and message in cases" duration="1"/>
     <testCase name="getTextModal check error in default case" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx">
-    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_WR" duration="266"/>
-    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_WR" duration="53"/>
-    <testCase name="ModalTemplateUpload Test Test clear button in UPDATE_WR" duration="56"/>
-    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="67"/>
-    <testCase name="ModalTemplateUpload Test Test dialog close" duration="35"/>
-    <testCase name="ModalTemplateUpload Test Test dialog close" duration="35"/>
-    <testCase name="ModalTemplateUpload Test Test form validation" duration="49"/>
-    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="47"/>
-    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_RES" duration="40"/>
-    <testCase name="ModalTemplateUpload Test Update with different file extensions should fail" duration="34"/>
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_WR" duration="277"/>
+    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_WR" duration="65"/>
+    <testCase name="ModalTemplateUpload Test Test clear button in UPDATE_WR" duration="55"/>
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="48"/>
+    <testCase name="ModalTemplateUpload Test Test dialog close" duration="44"/>
+    <testCase name="ModalTemplateUpload Test Test dialog close" duration="45"/>
+    <testCase name="ModalTemplateUpload Test Test form validation" duration="43"/>
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="41"/>
+    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_RES" duration="39"/>
+    <testCase name="ModalTemplateUpload Test Update with different file extensions should fail" duration="24"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx">
-    <testCase name="AssociateBpmn Test AssociateBpmn with invalid form" duration="213"/>
-    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId positive case" duration="143"/>
-    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" duration="70"/>
-    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN catch case" duration="61"/>
-    <testCase name="AssociateBpmn Test AssociateBpmn on switch of branchId" duration="280"/>
-    <testCase name="AssociateBpmn Test AssociateBpmn fetch failed" duration="56"/>
-    <testCase name="AssociateBpmn Test handleSwitchAssociationFetch indirectly by simulating button click" duration="91"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn with invalid form" duration="239"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId positive case" duration="131"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" duration="76"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN catch case" duration="66"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn on switch of branchId" duration="281"/>
+    <testCase name="AssociateBpmn Test AssociateBpmn fetch failed" duration="54"/>
+    <testCase name="AssociateBpmn Test handleSwitchAssociationFetch indirectly by simulating button click" duration="41"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionAlert.test.tsx">
-    <testCase name="ActionAlert render with error" duration="67"/>
-    <testCase name="ActionAlert render with warning" duration="19"/>
+    <testCase name="ActionAlert render with error" duration="61"/>
+    <testCase name="ActionAlert render with warning" duration="15"/>
     <testCase name="ActionAlert render without openSnackBar" duration="3"/>
-    <testCase name="ActionAlert navigate to RESOURCES when type is DELETE_RES" duration="12"/>
-    <testCase name="ActionAlert navigate to WORKFLOW_RESOURCES when type is DELETE_WR" duration="10"/>
-    <testCase name="ActionAlert reload page when type is included in DEPLOY_VALUES" duration="10"/>
-    <testCase name="ActionAlert navigate to BPMN when type is DELETE_BPMN with success" duration="16"/>
-    <testCase name="ActionAlert navigate to WR when type is DELETE_WR" duration="11"/>
-    <testCase name="ActionAlert navigate to Resources when type is DELETE_RES" duration="11"/>
-    <testCase name="ActionAlert setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" duration="9"/>
+    <testCase name="ActionAlert navigate to RESOURCES when type is DELETE_RES" duration="10"/>
+    <testCase name="ActionAlert navigate to WORKFLOW_RESOURCES when type is DELETE_WR" duration="11"/>
+    <testCase name="ActionAlert reload page when type is included in DEPLOY_VALUES" duration="8"/>
+    <testCase name="ActionAlert navigate to BPMN when type is DELETE_BPMN with success" duration="13"/>
+    <testCase name="ActionAlert navigate to WR when type is DELETE_WR" duration="10"/>
+    <testCase name="ActionAlert navigate to Resources when type is DELETE_RES" duration="13"/>
+    <testCase name="ActionAlert setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" duration="11"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/Filters/__tests__/FilterBar.test.tsx">
-    <testCase name="FilterBar test Test FilterBar without driver" duration="78"/>
-    <testCase name="FilterBar test Test FilterBar with PROCESS_RESOURCES and Click on Cancella Filtri and Crea Risorsa " duration="101"/>
-    <testCase name="FilterBar test Test FilterBar with PROCESS_RESOURCES and Filter with all the filters" duration="47"/>
+    <testCase name="FilterBar test Test FilterBar without driver" duration="71"/>
+    <testCase name="FilterBar test Test FilterBar with PROCESS_RESOURCES and Click on Cancella Filtri and Crea Risorsa " duration="96"/>
+    <testCase name="FilterBar test Test FilterBar with PROCESS_RESOURCES and Filter with all the filters" duration="41"/>
     <testCase name="FilterBar test Test FilterBar with PROCESS_RESOURCES and Filter with status" duration="48"/>
-    <testCase name="FilterBar test Test FilterBar with RESOURCES and Click on Cancella Filtri and Crea Risorsa " duration="34"/>
-    <testCase name="FilterBar test Test FilterBar with RESOURCES and Filter with fileName" duration="37"/>
-    <testCase name="FilterBar test Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" duration="38"/>
-    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" duration="48"/>
-    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" duration="46"/>
-    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" duration="39"/>
-    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" duration="41"/>
+    <testCase name="FilterBar test Test FilterBar with RESOURCES and Click on Cancella Filtri and Crea Risorsa " duration="33"/>
+    <testCase name="FilterBar test Test FilterBar with RESOURCES and Filter with fileName" duration="28"/>
+    <testCase name="FilterBar test Test FilterBar with RESOURCES and Filter with noDeployableResourceType from some value to empty" duration="33"/>
+    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and click on Crea Risorsa and Cancella Filtri" duration="33"/>
+    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName" duration="28"/>
+    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with noDeployableResourceType from some value to empty" duration="25"/>
+    <testCase name="FilterBar test Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" duration="33"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx">
-    <testCase name="UpgradeBpmn Submit form with valid input" duration="142"/>
-    <testCase name="UpgradeBpmn Test UpgradeBpmn fetch failed" duration="75"/>
-    <testCase name="UpgradeBpmn Submit form with invalid input" duration="50"/>
-    <testCase name="UpgradeBpmn Test UpgradeBpmn delete uploaded file" duration="62"/>
-    <testCase name="UpgradeBpmn Test UpgradeBpmn fetch error" duration="37"/>
+    <testCase name="UpgradeBpmn Submit form with valid input" duration="139"/>
+    <testCase name="UpgradeBpmn Test UpgradeBpmn fetch failed" duration="73"/>
+    <testCase name="UpgradeBpmn Submit form with invalid input" duration="49"/>
+    <testCase name="UpgradeBpmn Test UpgradeBpmn delete uploaded file" duration="68"/>
+    <testCase name="UpgradeBpmn Test UpgradeBpmn fetch error" duration="40"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/formatValues.test.ts">
-    <testCase name="formatValues tests Verifica la formattazione di un valore vuoto" duration="2"/>
+    <testCase name="formatValues tests Verifica la formattazione di un valore vuoto" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione di due valori" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione di una percentuale e di una valuta" duration="1"/>
     <testCase name="formatValues tests Verifica la conversione di una stringa con separatore decimale da , a . in float" duration="1"/>
@@ -100,222 +100,222 @@
     <testCase name="formatValues tests Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione di una data per un picker" duration="1"/>
     <testCase name="formatValues tests Verifica estrazione anno da una stringa di data" duration="1"/>
-    <testCase name="formatValues tests Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" duration="1"/>
+    <testCase name="formatValues tests Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" duration="0"/>
     <testCase name="formatValues tests Verifica la creazione della data" duration="0"/>
-    <testCase name="formatValues tests Verifica la formattazione di una stringa di data" duration="1"/>
-    <testCase name="formatValues tests Verifica la funzione checkValue" duration="1"/>
-    <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="0"/>
-    <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="1"/>
+    <testCase name="formatValues tests Verifica la formattazione di una stringa di data" duration="6"/>
+    <testCase name="formatValues tests Verifica la funzione checkValue" duration="0"/>
+    <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="1"/>
+    <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della valuta" duration="0"/>
-    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="0"/>
-    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="1"/>
+    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="1"/>
+    <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo senza valore" duration="0"/>
-    <testCase name="formatValues tests Verifica la formattazione della data" duration="0"/>
+    <testCase name="formatValues tests Verifica la formattazione della data" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/DetailButtons.test.tsx">
-    <testCase name="DetailButtons renders buttons with correct text" duration="39"/>
+    <testCase name="DetailButtons renders buttons with correct text" duration="38"/>
     <testCase name="DetailButtons calls setType and openDialog when button is clicked" duration="13"/>
     <testCase name="DetailButtons navigates to correct route when navigate property is provided" duration="8"/>
-    <testCase name="DetailButtons disables button when disabledCondition is true" duration="5"/>
+    <testCase name="DetailButtons disables button when disabledCondition is true" duration="8"/>
     <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is true" duration="6"/>
     <testCase name="DetailButtons does not navigate when navigate property is not provided" duration="3"/>
-    <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" duration="10"/>
+    <testCase name="DetailButtons does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" duration="6"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx">
-    <testCase name="ModalBpmn Test Test ModalBpmn with DELETE" duration="175"/>
-    <testCase name="ModalBpmn Test Test ModalBpmn with DEPLOY" duration="3045"/>
-    <testCase name="ModalBpmn Test Test ModalBpmn with DELETE ASSOCIATION" duration="21"/>
-    <testCase name="ModalBpmn Test Test Error during DELETE" duration="25"/>
-    <testCase name="ModalBpmn Test Test Error during DEPLOY" duration="30"/>
-    <testCase name="ModalBpmn Test Test Error during DELETE ASSOCIATION" duration="17"/>
-    <testCase name="ModalBpmn Test Test Error during DOWNLOAD" duration="27"/>
-    <testCase name="ModalBpmn Test Test ModalBpmn with DOWNLOAD" duration="28"/>
-    <testCase name="ModalBpmn Test Test ModalBpmn without type" duration="27"/>
+    <testCase name="ModalBpmn Test Test ModalBpmn with DELETE" duration="134"/>
+    <testCase name="ModalBpmn Test Test ModalBpmn with DEPLOY" duration="3037"/>
+    <testCase name="ModalBpmn Test Test ModalBpmn with DELETE ASSOCIATION" duration="22"/>
+    <testCase name="ModalBpmn Test Test Error during DELETE" duration="28"/>
+    <testCase name="ModalBpmn Test Test Error during DEPLOY" duration="36"/>
+    <testCase name="ModalBpmn Test Test Error during DELETE ASSOCIATION" duration="28"/>
+    <testCase name="ModalBpmn Test Test Error during DOWNLOAD" duration="24"/>
+    <testCase name="ModalBpmn Test Test ModalBpmn with DOWNLOAD" duration="26"/>
+    <testCase name="ModalBpmn Test Test ModalBpmn without type" duration="23"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnAssociatedDataGrid.test.tsx">
-    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with next page click" duration="322"/>
-    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="66"/>
-    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="64"/>
-    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="52"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with next page click" duration="293"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with empty table" duration="73"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test without response" duration="68"/>
+    <testCase name="BpmnAssociatedDataGrid test BpmnAssociatedDataGrid Test with fetch error" duration="73"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx">
-    <testCase name="CreateBpmn Test Test CreateBpmn" duration="213"/>
-    <testCase name="CreateBpmn Test Test CreateBpmn fetch error" duration="87"/>
+    <testCase name="CreateBpmn Test Test CreateBpmn" duration="227"/>
+    <testCase name="CreateBpmn Test Test CreateBpmn fetch error" duration="94"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/checks.test.ts">
-    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="7"/>
+    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="2"/>
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="0"/>
     <testCase name="checks tests copyObject restituisce una copia profonda dell&apos;oggetto" duration="1"/>
-    <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="1"/>
+    <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="5"/>
     <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="1"/>
     <testCase name="checks tests isValidNumber restituisce true se una stringa rappresenta un numero intero valido" duration="1"/>
     <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="1"/>
     <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="0"/>
     <testCase name="checks tests Restituisce il nome del file da un percorso valido con un nome file valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="1"/>
+    <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="1"/>
+    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx">
-    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid.test Test" duration="425"/>
-    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid.test Test with empty table" duration="122"/>
+    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid.test Test" duration="421"/>
+    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid.test Test with empty table" duration="130"/>
     <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid Test without response" duration="111"/>
-    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid Catch Error" duration="93"/>
+    <testCase name="WorkflowResourceDataGrid test WorkflowResourceDataGrid Catch Error" duration="96"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx">
-    <testCase name="ModalResources Test Test ModalResources with DELETE" duration="118"/>
-    <testCase name="ModalResources Test Test ModalResources with DOWNLOAD" duration="3023"/>
-    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="26"/>
-    <testCase name="ModalResources Test Test Error during DOWNLOAD" duration="14"/>
+    <testCase name="ModalResources Test Test ModalResources with DELETE" duration="100"/>
+    <testCase name="ModalResources Test Test ModalResources with DOWNLOAD" duration="3024"/>
+    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="24"/>
+    <testCase name="ModalResources Test Test Error during DOWNLOAD" duration="17"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/ResourcesDataGrid.test.tsx">
-    <testCase name="ResourcesDataGrid test ResourcesDataGrid.test Test" duration="405"/>
-    <testCase name="ResourcesDataGrid test ResourcesDataGrid.test Test with empty table" duration="140"/>
-    <testCase name="ResourcesDataGrid test ResourcesDataGrid Test without response" duration="119"/>
-    <testCase name="ResourcesDataGrid test ResourcesDataGrid Test Catch Error" duration="116"/>
+    <testCase name="ResourcesDataGrid test ResourcesDataGrid.test Test" duration="412"/>
+    <testCase name="ResourcesDataGrid test ResourcesDataGrid.test Test with empty table" duration="113"/>
+    <testCase name="ResourcesDataGrid test ResourcesDataGrid Test without response" duration="97"/>
+    <testCase name="ResourcesDataGrid test ResourcesDataGrid Test Catch Error" duration="91"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsResources/__tests__/CreateResources.test.tsx">
-    <testCase name="CreateResources Test Test CreateResources" duration="351"/>
+    <testCase name="CreateResources Test Test CreateResources" duration="424"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx">
-    <testCase name="ModalResources Test Test ModalWR with ROLLBACK" duration="219"/>
-    <testCase name="ModalResources Test Test Catch Error during ROLLBACK" duration="37"/>
-    <testCase name="ModalResources Test Test ModalWR with DEPLOY" duration="3041"/>
-    <testCase name="ModalResources Test Test Catch Error during DEPLOY" duration="34"/>
-    <testCase name="ModalResources Test Test ModalWR with DELETE" duration="28"/>
-    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="23"/>
-    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD DMN" duration="3033"/>
-    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD BPMN" duration="3043"/>
-    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD FORM" duration="3041"/>
-    <testCase name="ModalResources Test Test Catch Error during DOWNLOAD" duration="48"/>
+    <testCase name="ModalResources Test Test ModalWR with ROLLBACK" duration="279"/>
+    <testCase name="ModalResources Test Test Catch Error during ROLLBACK" duration="51"/>
+    <testCase name="ModalResources Test Test ModalWR with DEPLOY" duration="3053"/>
+    <testCase name="ModalResources Test Test Catch Error during DEPLOY" duration="25"/>
+    <testCase name="ModalResources Test Test ModalWR with DELETE" duration="23"/>
+    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="20"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD DMN" duration="3038"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD BPMN" duration="3049"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD FORM" duration="3037"/>
+    <testCase name="ModalResources Test Test Catch Error during DOWNLOAD" duration="46"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/CreateWR.test.tsx">
-    <testCase name="CreateWR Test Test CreateWR" duration="298"/>
+    <testCase name="CreateWR Test Test CreateWR" duration="313"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx">
-    <testCase name="BpmnDataGrid test BpmnDataGrid Test" duration="632"/>
-    <testCase name="BpmnDataGrid test BpmnDatgrid Test with empty table" duration="212"/>
-    <testCase name="BpmnDataGrid test BpmnDaGrid Test without response" duration="177"/>
-    <testCase name="BpmnDataGrid test BpmnDaGrid Test with fetch error" duration="220"/>
+    <testCase name="BpmnDataGrid test BpmnDataGrid Test" duration="481"/>
+    <testCase name="BpmnDataGrid test BpmnDatgrid Test with empty table" duration="157"/>
+    <testCase name="BpmnDataGrid test BpmnDaGrid Test without response" duration="210"/>
+    <testCase name="BpmnDataGrid test BpmnDaGrid Test with fetch error" duration="173"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/TableColumn.test.tsx">
-    <testCase name="TableColumn test Test showCustomHeader" duration="44"/>
-    <testCase name="TableColumn test Test renderCell" duration="21"/>
-    <testCase name="TableColumn test Test actionColumn" duration="31"/>
-    <testCase name="TableColumn test Test deleteColumn" duration="13"/>
+    <testCase name="TableColumn test Test showCustomHeader" duration="38"/>
+    <testCase name="TableColumn test Test renderCell" duration="15"/>
+    <testCase name="TableColumn test Test actionColumn" duration="25"/>
+    <testCase name="TableColumn test Test deleteColumn" duration="15"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/template/__tests__/FormTemplate.test.tsx">
-    <testCase name="Test FormTemplate Test FormTemplate with children AssociateBpmn" duration="421"/>
+    <testCase name="Test FormTemplate Test FormTemplate with children AssociateBpmn" duration="192"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/WorkflowResourceDetailPage.test.tsx">
-    <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage with sessionStorage" duration="220"/>
-    <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage without sessionStorage" duration="42"/>
+    <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage with sessionStorage" duration="271"/>
+    <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage without sessionStorage" duration="43"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx">
-    <testCase name="UploadFileWithButton Clear Uploaded File" duration="39"/>
-    <testCase name="UploadFileWithButton Upload Allowed File" duration="17"/>
-    <testCase name="UploadFileWithButton Uploaded File With Error" duration="40"/>
-    <testCase name="UploadFileWithButton No File Uploaded With Error" duration="6"/>
-  </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
-    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="389"/>
-    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="54"/>
+    <testCase name="UploadFileWithButton Clear Uploaded File" duration="76"/>
+    <testCase name="UploadFileWithButton Upload Allowed File" duration="21"/>
+    <testCase name="UploadFileWithButton Uploaded File With Error" duration="38"/>
+    <testCase name="UploadFileWithButton No File Uploaded With Error" duration="8"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/commons/__tests__/decode.test.ts">
     <testCase name="decode file test Test base64_decode function" duration="2"/>
     <testCase name="decode file test Test base64_encode function" duration="0"/>
-    <testCase name="decode file test download a file successfully" duration="4"/>
-    <testCase name="decode file test download file doc null" duration="0"/>
-    <testCase name="decode file test Test downloadStaticFile function" duration="1"/>
+    <testCase name="decode file test download a file successfully" duration="3"/>
+    <testCase name="decode file test download file doc null" duration="1"/>
+    <testCase name="decode file test Test downloadStaticFile function" duration="0"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="312"/>
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="36"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/LoginPage.test.tsx">
-    <testCase name="LoginPage renders without crashing" duration="63"/>
-    <testCase name="LoginPage Test render and click Accedi no debug" duration="30"/>
-    <testCase name="LoginPage Test render and click Accedi with debug" duration="28"/>
+    <testCase name="LoginPage renders without crashing" duration="62"/>
+    <testCase name="LoginPage Test render and click Accedi no debug" duration="15"/>
+    <testCase name="LoginPage Test render and click Accedi with debug" duration="16"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Layout/__tests__/PageLayout.test.tsx">
-    <testCase name="PageLayout test Test render PageLayout component with loading false and no userEmail nor token" duration="56"/>
-    <testCase name="PageLayout test Test render PageLayout component with loading true and no userEmail with token" duration="12"/>
+    <testCase name="PageLayout test Test render PageLayout component with loading false and no userEmail nor token" duration="34"/>
+    <testCase name="PageLayout test Test render PageLayout component with loading true and no userEmail with token" duration="10"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/LoginPageCallback.test.tsx">
-    <testCase name="LoginPageCallback should navigate to HOME if token exists" duration="39"/>
-    <testCase name="LoginPageCallback should navigate to LOGIN if token does not exist" duration="5"/>
+    <testCase name="LoginPageCallback should navigate to HOME if token exists" duration="45"/>
+    <testCase name="LoginPageCallback should navigate to LOGIN if token does not exist" duration="11"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/template/__tests__/ModalTemplate.test.tsx">
+    <testCase name="ModalTemplate test should display the modal with title and content text when open" duration="118"/>
+    <testCase name="ModalTemplate test should call setOpen with false when Annulla button is clicked" duration="26"/>
+    <testCase name="ModalTemplate test should call handleSubmit when Conferma button is clicked" duration="21"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/App.test.tsx">
     <testCase name="Test App without jwt in sessionStorage" duration="166"/>
-    <testCase name="Test App with jwt in sessionStorage" duration="133"/>
-  </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/template/__tests__/ModalTemplate.test.tsx">
-    <testCase name="ModalTemplate test should display the modal with title and content text when open" duration="121"/>
-    <testCase name="ModalTemplate test should call setOpen with false when Annulla button is clicked" duration="20"/>
-    <testCase name="ModalTemplate test should call handleSubmit when Conferma button is clicked" duration="23"/>
-  </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnDetailPage.test.tsx">
-    <testCase name="BpmnDetailPage Test BpmnDetailPage with sessionStorage" duration="638"/>
-    <testCase name="BpmnDetailPage Test BpmnDetailPage without sessionStorage" duration="130"/>
+    <testCase name="Test App with jwt in sessionStorage" duration="109"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/UpgradeBpmnPage.test.tsx">
-    <testCase name="UpgradeBpmnPage Test UpgradeBpmnPage" duration="167"/>
+    <testCase name="UpgradeBpmnPage Test UpgradeBpmnPage" duration="161"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnDetailPage.test.tsx">
+    <testCase name="BpmnDetailPage Test BpmnDetailPage with sessionStorage" duration="567"/>
+    <testCase name="BpmnDetailPage Test BpmnDetailPage without sessionStorage" duration="125"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/HeaderComponents/__tests__/Header.test.tsx">
-    <testCase name="Header test Test render Header component with login false" duration="39"/>
-    <testCase name="Header test Test render Header component with login true" duration="62"/>
+    <testCase name="Header test Test render Header component with login false" duration="41"/>
+    <testCase name="Header test Test render Header component with login true" duration="52"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/__tests__/formOption.test.tsx">
-    <testCase name="formOption Test test get values" duration="2"/>
+    <testCase name="formOption Test test get values" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/HeaderComponents/__tests__/Logo.test.tsx">
-    <testCase name="HeaderAccountCustom test First render" duration="40"/>
+    <testCase name="HeaderAccountCustom test First render" duration="28"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx">
-    <testCase name="AssociateBpmnPage  getItem recordParams case" duration="151"/>
+    <testCase name="AssociateBpmnPage  getItem recordParams case" duration="160"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesPage.test.tsx">
-    <testCase name="ResourcesPage test First render" duration="533"/>
+    <testCase name="ResourcesPage test First render" duration="608"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/CreateResourcesPage.test.tsx">
-    <testCase name="CreateResourcesPage test First render" duration="136"/>
+    <testCase name="CreateResourcesPage test First render" duration="173"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnPage.test.tsx">
-    <testCase name="BpmnPage test First render" duration="490"/>
+    <testCase name="BpmnPage test First render" duration="400"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/HomePage.test.tsx">
-    <testCase name="HomePage test First render" duration="125"/>
+    <testCase name="HomePage test First render" duration="144"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/CreateBpmnPage.test.tsx">
-    <testCase name="CreateBpmnPage render" duration="175"/>
+    <testCase name="CreateBpmnPage render" duration="162"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx">
-    <testCase name="CreateWRPage render" duration="195"/>
-  </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/fetch/__tests__/fetchRequest.test.ts">
-    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="3"/>
+    <testCase name="CreateWRPage render" duration="165"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/CardComponents/__tests__/HomeCardComponent.test.tsx">
-    <testCase name="HomeCardComponent test First render" duration="75"/>
+    <testCase name="HomeCardComponent test First render" duration="117"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/fetch/__tests__/fetchRequest.test.ts">
+    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="2"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/WorkflowResourcePage.test.tsx">
-    <testCase name="WorkflowResourcePage render" duration="328"/>
+    <testCase name="WorkflowResourcePage render" duration="432"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/IconBox.test.tsx">
-    <testCase name="ActionIcon test First render" duration="19"/>
+    <testCase name="ActionIcon test First render" duration="37"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
-    <testCase name="ActionIcon test First render" duration="40"/>
-  </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
-    <testCase name="HomePageTitle Check for HomePageTitle" duration="23"/>
+    <testCase name="ActionIcon test First render" duration="44"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/TitleComponent.test.tsx">
-    <testCase name="HomePageTitle Check for HomePageTitle" duration="31"/>
+    <testCase name="HomePageTitle Check for HomePageTitle" duration="22"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
+    <testCase name="HomePageTitle Check for HomePageTitle" duration="34"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx">
-    <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="26"/>
+    <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="35"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
-    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="20"/>
+    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="22"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
-    <testCase name="ErrorPage render" duration="28"/>
+    <testCase name="ErrorPage render" duration="23"/>
   </file>
 </testExecutions>
