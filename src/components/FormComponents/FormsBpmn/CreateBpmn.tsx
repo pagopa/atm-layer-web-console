@@ -45,7 +45,7 @@ export const CreateBpmn = () => {
 	const validateForm = () => {
 		const newErrors = {
 			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
+			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "Il nome del file deve essere privo di estensione, gli unici caratteri speciali ammessi sono _ e - " : "Campo obbligatorio",
 			functionType: formData.functionType ? "" : "Campo obbligatorio",
 		};
 
@@ -56,7 +56,7 @@ export const CreateBpmn = () => {
 	};
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: undefined });
+		setFormData({ ...formData, file: undefined, filename: "" });
 	};
 
 
