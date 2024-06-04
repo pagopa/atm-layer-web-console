@@ -40,10 +40,12 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					navigate(ROUTES.BPMN);
-				}, 1000);
+				if(response.status === 204) {
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						navigate(ROUTES.BPMN);
+					}, 1000);
+				}
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
