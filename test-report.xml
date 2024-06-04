@@ -195,6 +195,12 @@
     <testCase name="BpmnDataGrid test BpmnDaGrid Test without response" duration="161"/>
     <testCase name="BpmnDataGrid test BpmnDaGrid Test with fetch error" duration="135"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx">
+    <testCase name="BpmnDataGrid test BpmnDataGrid Test" duration="504"/>
+    <testCase name="BpmnDataGrid test BpmnDatgrid Test with empty table" duration="156"/>
+    <testCase name="BpmnDataGrid test BpmnDaGrid Test without response" duration="161"/>
+    <testCase name="BpmnDataGrid test BpmnDaGrid Test with fetch error" duration="135"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/CreateWR.test.tsx">
     <testCase name="CreateWR Test Test CreateWR" duration="313"/>
   </file>

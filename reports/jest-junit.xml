@@ -265,7 +265,7 @@
     </testcase>
     <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.082">
     </testcase>
     <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.005">
     </testcase>
