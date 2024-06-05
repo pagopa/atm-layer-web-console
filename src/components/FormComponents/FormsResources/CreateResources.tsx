@@ -1,11 +1,11 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
-import { useState, useContext } from "react";
-import { ResourcesDto } from "../../../model/ResourcesModel";
+import React, { useState, useContext } from "react";
+import { ResourceDto, ResourcesDto, ResourcesListDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { CREATE_RES } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { RESOURCES_CREATE } from "../../../commons/endpoints";
@@ -18,9 +18,10 @@ export const CreateResources = () => {
 
 	const { getFormOptions } = formOption();
 	const { isValidResourcesFilename, isValidPath } = checks();
+
 	const initialValues: ResourcesDto = {
-		file: undefined,
-		filename: "",
+		fileArray: [] as Array<File>,
+		filenames: [] as Array<string>,
 		resourceType: "",
 		path: "",
 		description: ""
@@ -41,64 +42,76 @@ export const CreateResources = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	const validateForm = () => {
-		// eslint-disable-next-line functional/immutable-data
-		const fileExtension = formData.file?.name.split(".").pop()?.toLowerCase();
+	// const validateForm = () => {
+	// 	// eslint-disable-next-line functional/immutable-data
+	// 	const fileExtensions = formData.filenames.map(name => name.split(".").pop()?.toLowerCase());
 
-		const newErrors = {
-			file: formData.file ? "" : "Campo obbligatorio",
-			filename:
-				isValidResourcesFilename(formData.filename) ?
-					// eslint-disable-next-line functional/immutable-data
-					fileExtension && fileExtension === formData.filename.split(".").pop()?.toLowerCase() ?
-						"" :
-						"L'estensione del file non corrisponde con quello caricato"
-					: "Il nome del file deve essere nel formato nome.estensione gli unici caratteri speciali ammessi sono _ e - ",
-			resourceType: formData.resourceType ?
-				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
-				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
-					""
-					: "L'estensione del file non corrisponde con quella selezionata"
-				: "Campo obbligatorio",
-			path: formData.path ? 
-				(isValidPath(formData.path) ? "" : "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali, va indicato solo il precorso e non il nome del file") : ""
-		};
+	// 	const newErrors = {
+	// 		file: formData.fileArray ? "" : "Campo obbligatorio",
+	// 		filename:
+	// 			isValidResourcesFilename(formData.filenames) ?
+	// 				// eslint-disable-next-line functional/immutable-data
+	// 				fileExtensions && fileExtensions === formData.filenames.split(".").pop()?.toLowerCase() ?
+	// 					"" :
+	// 					"L'estensione del file non corrisponde con quello caricato"
+	// 				: "Il nome del file deve essere nel formato nome.estensione gli unici caratteri speciali ammessi sono _ e - ",
+	// 		resourceType: formData.resourceType ?
+	// 			formData.resourceType  === "HTML" && fileExtensions && fileExtensions === "html" || 
+	// 			formData.resourceType  === "OTHER" && fileExtensions && fileExtensions !== "html" ?
+	// 				""
+	// 				: "L'estensione del file non corrisponde con quella selezionata"
+	// 			: "Campo obbligatorio",
+	// 		path: formData.path ? 
+	// 			(isValidPath(formData.path) ? "" : "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali, va indicato solo il precorso e non il nome del file") : ""
+	// 	};
 
-		setErrors(newErrors);
+	// 	setErrors(newErrors);
 
-		return Object.values(newErrors).every((error) => !error);
-	};
+	// 	return Object.values(newErrors).every((error) => !error);
+	// };
 
-	const clearFile = () => {
-		setFormData({ ...formData, file: undefined, filename: "" });
+	const clearSingleFile = () => {
+		setFormData({ ...formData, fileArray: [], filenames: [] });
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (validateForm()) {
-			const postData = new FormData();
+		// if (validateForm()) {
+		const bodyRequest = [] as Array<FormData>;
 
-			if (formData.file && formData.filename && formData.resourceType) {
-				postData.append("file", formData.file);
-				postData.append("filename", formData.filename.replace(/\s/g, ""));
-				postData.append("resourceType", formData.resourceType);
-				postData.append("path", formData.path ?? "");
+		if (formData.fileArray && formData.filenames && formData.resourceType) {
+			// formData.fileArray.map(file => postData.append("file[]", file));
+			// formData.filenames.map(name => postData.append("filename[]", name.replace(/\s/g, "")));
+			// postData.append("resourceType", formData.resourceType);
+			// postData.append("path", formData.path ?? "");
+
+			// eslint-disable-next-line functional/no-let
+			for (let index = 0; index < formData.fileArray.length; index++) {
+				const postDataResource = new FormData();
+				postDataResource.append("file", formData.fileArray[index]);
+				postDataResource.append("filename", formData.filenames[index]);
+				postDataResource.append("resourceType", formData.resourceType);
+				postDataResource.append("path", formData.path ?? "");
+				// eslint-disable-next-line functional/immutable-data
+				bodyRequest.push(postDataResource);
 			}
-			setLoadingButton(true);
-
-			try {
-				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData: true })();
-				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-
-			} catch (error) {
-				setLoadingButton(false);
-				console.log("Response negative: ", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
-			}
-
 		}
+
+		setLoadingButton(true);
+
+		try {
+			const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: bodyRequest, isFormData: true })();
+			setLoadingButton(false);
+			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+
+		} catch (error) {
+			setLoadingButton(false);
+			console.log("Response negative: ", error);
+			handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+		}
+
+		// }
 	};
 
 	return (
@@ -116,14 +129,15 @@ export const CreateResources = () => {
 			<UploadField
 				titleField="File della risorsa statica"
 				name={"file"}
-				file={formData.file}
-				clearFile={clearFile}
+				files={formData.fileArray}
+				clearFile={clearSingleFile}
 				error={errors.file}
 				setFormData={setFormData}
 				formData={formData}
 				keepExtension={true}
+				multiple={true}
 			/>
-			<Grid item xs={12} my={1}>
+			{/* <Grid item xs={12} my={1}>
 				<TextField
 					fullWidth
 					id="filename"
@@ -137,7 +151,7 @@ export const CreateResources = () => {
 					helperText={errors.filename}
 					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
 				/>
-			</Grid>
+			</Grid> */}
 			<Grid item xs={12} my={1}>
 				<TextField
 					fullWidth

@@ -8,13 +8,13 @@ import IconBox from "../Commons/IconBox";
 type Props = {
     name: string;
     allowedType?: string;
-    file?: File;
+    files?: Array<File>;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: () => void;
     error?: string;
 };
 
-const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error, }: Props) => {
+const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick, error }: Props) => {
     const theme = useTheme();
 
     const VisuallyHiddenInput = styled("input")({
@@ -48,19 +48,21 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                 }
             }}
      >
-            {file  ?
-                <React.Fragment>
+            {files && files?.length > 0  ?
+                files.map((file, key) => 
+                <React.Fragment key={key}>
                     <Box>
                         <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
                             {file.name}
                         </Typography>
                     </Box>
                     <Box ml={2}>
-                        <IconButton onClick={onClick} disableRipple data-testid="clear-upload-button">
-                            <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"} />
+                        <IconButton onClick={onClick} disableRipple data-testid="clear-upload-button" key={key}>
+                            <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
                         </IconButton>
                     </Box>
                 </React.Fragment> 
+                )
                     :
                 <Button
                     component="label"
@@ -74,10 +76,10 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                     // startIcon={<FileUploadIcon color={ error ? "error" : "primary" }/>}
                 >
                     Carica un file dal tuo computer
-                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input"/>
+                    <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input" multiple={true}/>
                 </Button>
             }
         </Box>);
 };
 
-export default UploadFileWithButton;
+export default UploadMultipleWithButton;

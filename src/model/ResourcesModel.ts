@@ -1,5 +1,17 @@
+export type ResourcesListDto = {
+    resources: Array<ResourcesDto>;
+};
+
 export type ResourcesDto = {
-    file?: File;
+    fileArray?: Array<File>;
+    filenames: Array<string>;
+    resourceType: string;
+    path?: string;
+    description?: string;
+};
+
+export type ResourceDto = {
+    file: File;
     filename: string;
     resourceType: string;
     path?: string;

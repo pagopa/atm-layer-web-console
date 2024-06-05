@@ -100,16 +100,16 @@ export const CreateBpmn = () => {
 			title={title}
 			loadingButton={loadingButton}
 		>
-			{/* <UploadField
+			<UploadField
 				titleField="File BPMN del processo"
 				name={"file"}
 				file={formData.file}
 				clearFile={clearFile}
 				error={errors.file}
 				setFormData={setFormData}
-				formData={formData} /> */}
+				formData={formData} />
 			
-			<MultiUploadField />
+			{/* <MultiUploadField /> */}
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
