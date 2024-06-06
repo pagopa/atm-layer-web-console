@@ -1,6 +1,6 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
 import React, { useState, useContext } from "react";
-import { ResourceDto, ResourcesDto, ResourcesListDto } from "../../../model/ResourcesModel";
+import { ResourcesDto } from "../../../model/ResourcesModel";
 import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
@@ -77,31 +77,18 @@ export const CreateResources = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// if (validateForm()) {
-		const bodyRequest = [] as Array<FormData>;
-
+		const postData = new FormData();
 		if (formData.fileArray && formData.filenames && formData.resourceType) {
-			// formData.fileArray.map(file => postData.append("file[]", file));
-			// formData.filenames.map(name => postData.append("filename[]", name.replace(/\s/g, "")));
-			// postData.append("resourceType", formData.resourceType);
-			// postData.append("path", formData.path ?? "");
-
-			// eslint-disable-next-line functional/no-let
-			for (let index = 0; index < formData.fileArray.length; index++) {
-				const postDataResource = new FormData();
-				postDataResource.append("file", formData.fileArray[index]);
-				postDataResource.append("filename", formData.filenames[index]);
-				postDataResource.append("resourceType", formData.resourceType);
-				postDataResource.append("path", formData.path ?? "");
-				// eslint-disable-next-line functional/immutable-data
-				bodyRequest.push(postDataResource);
-			}
+			formData.fileArray.map(file => postData.append("file", file));
+			formData.filenames.map(name => postData.append("filename", name.replace(/\s/g, "")));
+			postData.append("resourceType", formData.resourceType);
+			postData.append("path", formData.path ?? "");
 		}
 
 		setLoadingButton(true);
 
 		try {
-			const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: bodyRequest, isFormData: true })();
+			const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData: true })();
 			setLoadingButton(false);
 			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
@@ -189,25 +176,6 @@ export const CreateResources = () => {
 				>
 				</TextField>
 			</Grid>
-
-			{/* <Grid item xs={12} my={1}>
-				<TextField
-					fullWidth
-					id="description"
-					name="description"
-					label={"Descrizione (Opzionale)"}
-					placeholder={""}
-					size="small"
-					value={formData.description}
-					onChange={handleChange}
-					error={Boolean(errors.description)}
-					helperText={errors.description}
-					inputProps={{ "data-testid": "description-test" }}
-				>
-				</TextField>
-
-			</Grid> */}
-
 		</FormTemplate >
 	);
 };
