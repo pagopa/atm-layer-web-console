@@ -4,7 +4,7 @@ export type ResourcesListDto = {
 
 export type ResourcesDto = {
     fileArray?: Array<File>;
-    filenames: Array<string>;
+    filenames?: Array<string>;
     resourceType: string;
     path?: string;
     description?: string;

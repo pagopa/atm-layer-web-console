@@ -42,9 +42,10 @@ export const CreateResources = () => {
 	};
 
 	const validateForm = () => {
-		// eslint-disable-next-line functional/immutable-data
-		const fileExtensions = formData.filenames.map(name => name.split(".").pop()?.toLowerCase());
-		if(formData.fileArray) {
+	
+		if(formData.fileArray && formData.filenames) {
+			// eslint-disable-next-line functional/immutable-data
+			const fileExtensions = formData.filenames.map(name => name.split(".").pop()?.toLowerCase());
 			const newErrors = {
 				fileArray: formData.fileArray.length > 0 ? "" : "Campo obbligatorio",
 				filenames: formData.filenames.map(name =>
@@ -74,10 +75,25 @@ export const CreateResources = () => {
 			);
 		}
 	};
+			
+	function removeArrayItem(index:number, arr?:Array<any>) {
+		if (arr){
+			// eslint-disable-next-line functional/immutable-data
+			arr.splice(index,1);
+			return arr;
+		}
+	}
 
-	const clearSingleFile = () => {
-		setFormData({ ...formData, fileArray: [], filenames: [] });
-		setErrors({...errors, fileArray: "", filenames: []});	
+	const clearSingleFile = (e:React.MouseEvent<HTMLElement>) => {
+		// console.log("indice del file cliccato: ",e.currentTarget.dataset.testid);
+		if (e.currentTarget.dataset.testid){
+			const index: number = +e.currentTarget.dataset.testid;
+			const updatedFileArray = removeArrayItem(index,formData?.fileArray);
+			const updatedFileNames = removeArrayItem(index,formData?.filenames);
+			setFormData({ ...formData, fileArray:updatedFileArray, filenames: updatedFileNames });
+			setErrors({...errors, fileArray: "", filenames: []});
+		}
+		
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {

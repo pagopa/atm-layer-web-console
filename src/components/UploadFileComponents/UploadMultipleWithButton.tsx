@@ -30,6 +30,7 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
     });
 
     return (
+        <React.Fragment>
         <Box
             p={2}
             display="flex"
@@ -48,22 +49,6 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
                 }
             }}
      >
-            {files && files?.length > 0  ?
-                files.map((file, key) => 
-                <React.Fragment key={key}>
-                    <Box>
-                        <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
-                            {file.name}
-                        </Typography>
-                    </Box>
-                    <Box ml={2}>
-                        <IconButton onClick={onClick} disableRipple data-testid="clear-upload-button" key={key}>
-                            <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
-                        </IconButton>
-                    </Box>
-                </React.Fragment> 
-                )
-                    :
                 <Button
                     component="label"
                     variant="naked"
@@ -75,11 +60,36 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
 
                     // startIcon={<FileUploadIcon color={ error ? "error" : "primary" }/>}
                 >
-                    Carica un file dal tuo computer
+                    Carica file dal tuo computer
                     <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input" multiple={true}/>
                 </Button>
-            }
-        </Box>);
+            
+        </Box>
+        {files && files?.length > 0  ?
+        files.map((file, key) => 
+            <Box
+            key = {key}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            height={"40px"}
+            paddingLeft={"5%"}
+            paddingRight={"5%"}>
+                <Box>
+                    <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>
+                    {file.name}
+                    </Typography>
+                </Box>
+                <Box ml={2}>
+                    <IconButton onClick={onClick} disableRipple data-testid={key}>
+                    <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
+                    </IconButton>
+                </Box>
+            </Box>
+        )
+        :
+        <></>}
+        </ React.Fragment>);
 };
 
 export default UploadMultipleWithButton;
