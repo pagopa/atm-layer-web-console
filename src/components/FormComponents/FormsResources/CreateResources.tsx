@@ -13,9 +13,7 @@ import { RESOURCES_CREATE } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import formatValues from "../../../utils/formatValues";
 
-
 export const CreateResources = () => {
-
 	const [loadingButton, setLoadingButton] = useState(false);
 	const theme = useTheme();
 	const { getFormOptions } = formOption();
@@ -30,14 +28,13 @@ export const CreateResources = () => {
 	};
 
 	const [formData, setFormData] = useState<ResourcesDto>(initialValues);
-	const [errors, setErrors] = useState<any>(initialValues);
+	const [errors, setErrors] = useState<any>({});
 	const { abortController } = useContext(Ctx);
 	const [openSnackBar, setOpenSnackBar] = useState(false);
 	const [message, setMessage] = useState("");
 	const [severity, setSeverity] = useState<"success" | "error">("success");
 	const [title, setTitle] = useState("");
-	const optionFormMenu = [{ key: "HTML", value: "HTML", }, { key: "OTHER", value: "OTHER" }];
-
+	const optionFormMenu = [{ key: "HTML", value: "HTML" }, { key: "OTHER", value: "OTHER" }];
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		resetErrors(errors, setErrors, e.target.name);
@@ -49,44 +46,48 @@ export const CreateResources = () => {
 		const fileExtensions = formData.filenames.map(name => name.split(".").pop()?.toLowerCase());
 		if(formData.fileArray) {
 			const newErrors = {
-				fileArray: formData.fileArray.length > 1 ? "" : "Campo obbligatorio",
-				filenames:
-					formData.filenames.map(name => isValidResourcesFilename(name) ?
-						// eslint-disable-next-line functional/immutable-data
-						extractExtensionFromFileName(name) === name.split(".").pop()?.toLowerCase() ?
-							"" :
-							"L'estensione del file non corrisponde con quello caricato"
-						: "Il nome del file deve essere nel formato nome.estensione gli unici caratteri speciali ammessi sono _ e - "),
-				resourceType: formData.resourceType ?
-					formData.resourceType  === "HTML" && fileExtensions && fileExtensions.every(el => el === "html") || 
-					formData.resourceType  === "OTHER" && fileExtensions && !fileExtensions.includes("html") ?
-						""
+				fileArray: formData.fileArray.length > 0 ? "" : "Campo obbligatorio",
+				filenames: formData.filenames.map(name =>
+					isValidResourcesFilename(name)
+						? ""
+						: "Il nome del file deve essere nel formato nome.estensione; gli unici caratteri speciali ammessi sono _ e -"
+				),
+				resourceType: formData.resourceType
+					? formData.resourceType === "HTML" && fileExtensions.every(el => el === "html")
+						|| formData.resourceType === "OTHER" && !fileExtensions.includes("html")
+						? ""
 						: "L'estensione del file non corrisponde con quella selezionata"
 					: "Campo obbligatorio",
-				path: formData.path ? 
-					(isValidPath(formData.path) ? "" : "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali, va indicato solo il precorso e non il nome del file") : ""
+				path: formData.path
+					? isValidPath(formData.path)
+						? ""
+						: "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali; va indicato solo il percorso e non il nome del file"
+					: ""
 			};
+	
 			setErrors(newErrors);
-
-			return Object.values(newErrors).every((error) => !error);
-		};
-		return false;
-		
+	
+			console.log("Errors:", newErrors);
+	
+			return Object.values(newErrors).every((error) =>
+				Array.isArray(error) ? error.every(e => !e) : !error
+			);
+		}
 	};
 
 	const clearSingleFile = () => {
 		setFormData({ ...formData, fileArray: [], filenames: [] });
+		setErrors({...errors, fileArray: "", filenames: []});	
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if(validateForm()) {
-
+		if (validateForm()) {
 			const postData = new FormData();
 			if (formData.fileArray && formData.filenames && formData.resourceType) {
-				formData.fileArray.map(file => postData.append("file", file));
-				formData.filenames.map(name => postData.append("filename", name.replace(/\s/g, "")));
+				formData.fileArray.forEach(file => postData.append("file", file));
+				formData.filenames.forEach(name => postData.append("filename", name.replace(/\s/g, "")));
 				postData.append("resourceType", formData.resourceType);
 				postData.append("path", formData.path ?? "");
 			}
@@ -97,16 +98,14 @@ export const CreateResources = () => {
 				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
 				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
-
 		}
 	};
-	console.log(theme.palette);
+
 	return (
 		<FormTemplate
 			setOpenSnackBar={setOpenSnackBar}
@@ -118,13 +117,12 @@ export const CreateResources = () => {
 			title={title}
 			loadingButton={loadingButton}
 		>
-
 			<UploadField
 				titleField="File della risorsa statica"
 				name={"file"}
 				files={formData.fileArray}
 				clearFile={clearSingleFile}
-				error={errors.file}
+				error={errors.fileArray}
 				setFormData={setFormData}
 				formData={formData}
 				keepExtension={true}
@@ -135,7 +133,7 @@ export const CreateResources = () => {
 					<FormHelperText error>
 						{errors.filenames.find((error: any) => error)}
 					</FormHelperText>
-				</Box>	
+				</Box>
 			)}
 			{/* <Grid item xs={12} my={1}>
 				<TextField
@@ -170,8 +168,7 @@ export const CreateResources = () => {
 				>
 					{optionFormMenu?.map((el) => (
 						<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
-					)
-					)}
+					))}
 				</TextField>
 			</Grid>
 			<Grid item xs={12} my={1}>
@@ -190,7 +187,7 @@ export const CreateResources = () => {
 				>
 				</TextField>
 			</Grid>
-		</FormTemplate >
+		</FormTemplate>
 	);
 };
 
