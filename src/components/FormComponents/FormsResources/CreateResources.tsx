@@ -221,7 +221,7 @@ export const CreateResources = () => {
 			loadingButton={loadingButton}
 		>
 			<Stack direction="row" alignItems={"center"} sx={{ pl: "12px" }}>
-				<Typography >Vuoi caricare più file?</Typography>
+				<Typography >Caricamento multiplo</Typography>
 				<Switch
 					checked={multiple}
 					onChange={() => {
