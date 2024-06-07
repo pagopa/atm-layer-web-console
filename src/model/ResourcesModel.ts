@@ -11,7 +11,7 @@ export type ResourcesDto = {
 };
 
 export type ResourceDto = {
-    file: File;
+    file?: File;
     filename: string;
     resourceType: string;
     path?: string;
