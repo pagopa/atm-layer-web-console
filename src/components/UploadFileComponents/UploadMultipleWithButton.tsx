@@ -10,11 +10,12 @@ type Props = {
     allowedType?: string;
     files?: Array<File>;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onClick: () => void;
+    onClickSingle: () => void;
+    onClickMultiple: () => void;
     error?: string;
 };
 
-const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick, error }: Props) => {
+const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClickSingle, onClickMultiple, error }: Props) => {
     const theme = useTheme();
 
     const VisuallyHiddenInput = styled("input")({
@@ -66,6 +67,28 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
             
         </Box>
         {files && files?.length > 0  ?
+        <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            height={"40px"}
+            paddingLeft={"5%"}
+            paddingRight={"5%"}
+            >
+                <Box>
+                    <Typography variant="body1" fontSize={theme.typography.body2.fontSize} fontWeight={theme.typography.body2.fontWeight} color={theme.palette.error.dark}>
+                        Elimina tutti i file caricati
+                    </Typography>
+                </Box>
+                <Box ml={2}>
+                <IconButton onClick={onClickMultiple} disableRipple data-testid="clear-upload-button">
+                    <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.error.dark} size={"0.8em"} marg={"5px 0 0 0"} />
+                </IconButton>
+            </Box>
+        </Box> 
+        :
+        <></>}
+        {files && files?.length > 0  ?
         files.map((file, key) => 
             <Box
             key = {key}
@@ -81,7 +104,7 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
                     </Typography>
                 </Box>
                 <Box ml={2}>
-                    <IconButton onClick={onClick} disableRipple data-key={key}>
+                    <IconButton onClick={onClickSingle} disableRipple data-key={key}>
                     <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
                     </IconButton>
                 </Box>

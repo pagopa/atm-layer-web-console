@@ -94,32 +94,29 @@ export const CreateResources = () => {
 	};
 
 	const validateForm = () => {
+		// eslint-disable-next-line functional/immutable-data
+		const fileExtension = formData.file?.name.split(".").pop()?.toLowerCase();
 
-		if(formData.file) {
-			// eslint-disable-next-line functional/immutable-data
-			const fileExtension = formData.file?.name.split(".").pop()?.toLowerCase();
-
-			const newErrors = {
-				file: formData.file ? "" : "Campo obbligatorio",
-				filename:
+		const newErrors = {
+			file: formData.file ? "" : "Campo obbligatorio",
+			filename:
 				isValidResourcesFilename(formData.filename) ?
 					// eslint-disable-next-line functional/immutable-data
 					fileExtension && fileExtension === formData.filename.split(".").pop()?.toLowerCase() ?
 						"" :
 						"L'estensione del file non corrisponde con quello caricato"
 					: "Campo obbligatorio",
-				resourceType: formData.resourceType ?
-					formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
+			resourceType: formData.resourceType ?
+				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
 				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
-						""
-						: "L'estensione del file non corrisponde con quella selezionata"
-					: "Campo obbligatorio"
-			};
+					""
+					: "L'estensione del file non corrisponde con quella selezionata"
+				: "Campo obbligatorio"
+		};
 
-			setErrors(newErrors);
+		setErrors(newErrors);
 
-			return Object.values(newErrors).every((error) => !error);
-		}
+		return Object.values(newErrors).every((error) => !error);
 	};
 
 
@@ -135,14 +132,19 @@ export const CreateResources = () => {
 		}
 	};
 
+	const clearAllFiles = () => {
+		setFormDataMultiple({ ...formDataMultiple, fileArray:[], filenames: [] });
+		setErrorsMultiple({...errorsMultiple, fileArray: "", filenames: []});
+	};
+
 	const clearFile = () => {
-		setFormData({ ...formData, file: undefined });
+		setFormData({ ...formData, file: undefined, filename: "" });
 	};
 
 	const resetForm = () => {
 		if (multiple) {
 			setFormDataMultiple(initialValuesMultiple);
-			setErrorsMultiple(initialValuesMultiple);
+			setErrorsMultiple({});
 		} else {
 			setFormData(initialValues);
 			setErrors(initialValues);
@@ -236,11 +238,13 @@ export const CreateResources = () => {
 						name={"file"}
 						files={formDataMultiple.fileArray}
 						clearFile={clearSingleFile}
+						clearMultipleFile={clearAllFiles}
 						error={errorsMultiple.fileArray}
 						setFormData={setFormDataMultiple}
 						formData={formDataMultiple}
 						keepExtension={true}
 						multiple={true}
+						setErrorsMultiple={setErrorsMultiple}
 					/>
 					{errorsMultiple.filenames && errorsMultiple.filenames.some((error: any) => error) && (
 						<Box mx={"10px"} mb={1}>

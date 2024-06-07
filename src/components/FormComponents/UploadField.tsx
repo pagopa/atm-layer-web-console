@@ -10,17 +10,20 @@ type Props = {
     file?: File;
 	files?: Array<File>;
     clearFile: any;
+	clearMultipleFile?: any;
     error?: string;
 	setFormData: React.Dispatch<React.SetStateAction<any>>;
 	formData: any;
 	keepExtension?: boolean;
 	multiple?: boolean;
+	setErrorsMultiple?: any;
 };
 
 
-export default function UploadField({titleField, file, files, clearFile, error, name, setFormData, formData, keepExtension, multiple}:Props) {
+export default function UploadField({titleField, file, files, clearFile, clearMultipleFile, error, name, setFormData, formData, keepExtension, multiple, setErrorsMultiple}:Props) {
 
 	const handleMultipleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setErrorsMultiple({});
 		const files = Array.from(e.target.files || []);
 		if (files && files.length > 0) {
 			// eslint-disable-next-line functional/no-let
@@ -77,7 +80,8 @@ export default function UploadField({titleField, file, files, clearFile, error, 
 							name={name}
 							files={files}
 							onChange={handleMultipleChangeFile}
-							onClick={clearFile}
+							onClickSingle={clearFile}
+							onClickMultiple={clearMultipleFile}
 							error={error}
 							allowedType="*"
 						/>
