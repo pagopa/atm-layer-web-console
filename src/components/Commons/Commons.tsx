@@ -231,3 +231,21 @@ export function getTextModal(type:string):any {
 	}
 	
 };
+
+
+export function removeArrayItem(index:number, arr?:Array<any>) {
+	if (arr){
+		// eslint-disable-next-line functional/immutable-data
+		arr.splice(index,1);
+		return arr;
+	}
+}
+
+export function removeArrayItems(indexes:Array<number|undefined>, arr?:Array<any>){
+	if(arr){
+		indexes.filter(x => x || x===0);
+		indexes.sort((a,b)=> (a || a===0) && (b || b===0) ? b-a : 0);
+		indexes.map(index => index || index===0 ? arr.splice(index,1):index);
+		return arr;
+	}
+}

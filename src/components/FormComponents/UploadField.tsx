@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import UploadFileWithButton from "../UploadFileComponents/UploadFileWithButton";
 import UploadMultipleWithButton from "../UploadFileComponents/UploadMultipleWithButton";
+import { removeArrayItems } from "../Commons/Commons";
 
 type Props = {
     name: string;
@@ -19,19 +20,25 @@ type Props = {
 
 export default function UploadField({titleField, file, files, clearFile, error, name, setFormData, formData, keepExtension, multiple}:Props) {
 
-	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleMultipleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = Array.from(e.target.files || []);
 		if (files && files.length > 0) {
 			// eslint-disable-next-line functional/no-let
 			let uploadedFilenames = files.map(file => file.name);
+
+			const duplicateIndexes = (uploadedFilenames.map((name: any, index:number)=> formData.filenames.includes(name) ? index : undefined)).filter(e =>e || e === 0);
+			if (duplicateIndexes.length>0){
+				const duplicatedNames = duplicateIndexes.map(index => index || index===0 ? uploadedFilenames[index] : "");
+				removeArrayItems(duplicateIndexes,files);
+				removeArrayItems(duplicateIndexes,uploadedFilenames);		
+				alert(("Uno o più file selezionati sono già stati caricati nel form: "+ duplicatedNames.join("\n")));
+			};
+
 			if (!keepExtension){
 				uploadedFilenames = uploadedFilenames.map(file => file.substring(0, uploadedFilenames.lastIndexOf(".")));
 			}
-			setFormData({ ...formData, fileArray: files, filenames: uploadedFilenames});
-			console.log(uploadedFilenames);
+			setFormData({ ...formData, fileArray: [...formData.fileArray, ...files], filenames: [...formData.filenames, ...uploadedFilenames]});
 		}
-		console.log(files);
-
 	};
 
 	const handleSingleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +76,7 @@ export default function UploadField({titleField, file, files, clearFile, error, 
 						<UploadMultipleWithButton
 							name={name}
 							files={files}
-							onChange={handleChangeFile}
+							onChange={handleMultipleChangeFile}
 							onClick={clearFile}
 							error={error}
 							allowedType="*"

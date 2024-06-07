@@ -81,7 +81,7 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClick,
                     </Typography>
                 </Box>
                 <Box ml={2}>
-                    <IconButton onClick={onClick} disableRipple data-testid={key}>
+                    <IconButton onClick={onClick} disableRipple data-key={key}>
                     <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
                     </IconButton>
                 </Box>

@@ -7,7 +7,7 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
-import { handleSnackbar, resetErrors } from "../../Commons/Commons";
+import { handleSnackbar, removeArrayItem, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { RESOURCES_CREATE } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -122,26 +122,17 @@ export const CreateResources = () => {
 		}
 	};
 
-	
-			
-	function removeArrayItem(index:number, arr?:Array<any>) {
-		if (arr){
-			// eslint-disable-next-line functional/immutable-data
-			arr.splice(index,1);
-			return arr;
-		}
-	}
+
 
 	const clearSingleFile = (e:React.MouseEvent<HTMLElement>) => {
 		// console.log("indice del file cliccato: ",e.currentTarget.dataset.testid);
-		if (e.currentTarget.dataset.testid){
-			const index: number = +e.currentTarget.dataset.testid;
+		if (e.currentTarget.dataset.key){
+			const index: number = +e.currentTarget.dataset.key;
 			const updatedFileArray = removeArrayItem(index,formDataMultiple?.fileArray);
 			const updatedFileNames = removeArrayItem(index,formDataMultiple?.filenames);
 			setFormDataMultiple({ ...formDataMultiple, fileArray:updatedFileArray, filenames: updatedFileNames });
 			setErrorsMultiple({...errorsMultiple, fileArray: "", filenames: []});
 		}
-		
 	};
 
 	const clearFile = () => {
