@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import UploadFileWithButton from "../UploadFileComponents/UploadFileWithButton";
 import UploadMultipleWithButton from "../UploadFileComponents/UploadMultipleWithButton";
-import { removeArrayItems } from "../Commons/Commons";
+import { removeArrayItems, resetErrors } from "../Commons/Commons";
 
 type Props = {
     name: string;
@@ -16,20 +16,21 @@ type Props = {
 	formData: any;
 	keepExtension?: boolean;
 	multiple?: boolean;
-	setErrorsMultiple?: any;
+	errors?:any;
+	setErrors?: any;
 };
 
 
-export default function UploadField({titleField, file, files, clearFile, clearMultipleFile, error, name, setFormData, formData, keepExtension, multiple, setErrorsMultiple}:Props) {
+export default function UploadField({titleField, file, files, clearFile, clearMultipleFile, error, name, setFormData, formData, keepExtension, multiple, errors, setErrors}:Props) {
 
 	const handleMultipleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setErrorsMultiple({});
+		setErrors({});
 		const files = Array.from(e.target.files || []);
 		if (files && files.length > 0) {
 			// eslint-disable-next-line functional/no-let
 			let uploadedFilenames = files.map(file => file.name);
 
-			const duplicateIndexes = (uploadedFilenames.map((name: any, index:number)=> formData.filenames.includes(name) ? index : undefined)).filter(e =>e || e === 0);
+			const duplicateIndexes = (uploadedFilenames.map((name: any, index:number)=> formData?.filenames?.includes(name) ? index : undefined)).filter(e =>e || e === 0);
 			if (duplicateIndexes.length>0){
 				const duplicatedNames = duplicateIndexes.map(index => index || index===0 ? uploadedFilenames[index] : "");
 				removeArrayItems(duplicateIndexes,files);
@@ -45,6 +46,7 @@ export default function UploadField({titleField, file, files, clearFile, clearMu
 	};
 
 	const handleSingleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setErrors({});
 		const files = e.target.files;
 		if (files && files.length > 0) {
 			const selectedFile = files[0];
