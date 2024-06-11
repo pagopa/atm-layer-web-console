@@ -104,7 +104,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	// };
 
 	useEffect(() => {
-		if (open && (type === UPDATE_USER || UPDATE_FIRST_USER)) {
+		if (open && (type === UPDATE_USER || type === UPDATE_FIRST_USER)) {
 			setFormData({
 				userId: recordParams.userId,
 				name: recordParams.name,
@@ -214,7 +214,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.userId)}
 						helperText={errors.userId}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER || UPDATE_FIRST_USER}}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER || type === UPDATE_FIRST_USER}}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
