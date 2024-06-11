@@ -8,9 +8,9 @@ import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { PROFILE, USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
-import { getRoleDescriptionsByUser } from "../Commons/Commons";
+import { getProfilesIds, getRoleDescriptionsByUser } from "../Commons/Commons";
 import ROUTES from "../../routes";
-import { EMULATOR } from "../../commons/constants";
+import { EMULATOR, USERS, UTENTI } from "../../commons/constants";
 
 
 type HeaderAccountProps = {
@@ -26,18 +26,22 @@ export const HeaderAccountCustom = ({
 }: HeaderAccountProps) => {
 
 
-	const { abortController, loggedUserInfo, setLoggedUserInfo, profilesAvailable, setProfilesAvailable } = useContext(Ctx);
+	const { abortController, loggedUserInfo, setLoggedUserInfo, setProfilesAvailable } = useContext(Ctx);
 	const token = sessionStorage.getItem("jwt_console");
 	const isProd: boolean= process.env.REACT_APP_ENV==="PROD";
 	const navigate = useNavigate();
 
-	const getTokenEmail = async () => {
+	const getUserInfo = async () => {
 		try {
-			const response = await fetchRequest({ urlEndpoint: USER_INFO, method: "GET", abortController })();
+			const response = await fetchRequest({ urlEndpoint: USER_INFO, method: "POST", abortController })();
 
 			if (response?.success) {
 				setLoggedUserInfo(response.valuesObj);
-				if (response.valuesObj.profiles.length < 1) {
+				if (!response.valuesObj.name && !response.valuesObj.surname && getProfilesIds(response.valuesObj).includes(5)) {
+					sessionStorage.setItem("loggedUserInfo", response.valuesObj);
+					navigate(ROUTES.USERS);
+				}
+				else if (response.valuesObj.name && response.valuesObj.surname && response.valuesObj.profiles.length < 1) {
 					navigate(ROUTES.UNAUTHORIZED_PAGE);
 				}
 			} else {
@@ -67,8 +71,7 @@ export const HeaderAccountCustom = ({
 
 	useEffect(() => {
 		if(!loggedUserInfo.userId && token){
-			void getTokenEmail();
-			void getAllProfilesList();
+			void getUserInfo();
 		}
 	}, []);
 		

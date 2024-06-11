@@ -6,8 +6,8 @@ import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextMo
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_USER } from "../../../commons/constants";
-import { CREATE_USERS, DELETE_USERS, PROFILE, UPDATE_USERS } from "../../../commons/endpoints";
+import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
+import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
 // import { Profile } from "../../../model/UserModel";
@@ -104,8 +104,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	// };
 
 	useEffect(() => {
-		// void getAllProfilesList();
-		if (open && type === UPDATE_USER) {
+		if (open && (type === UPDATE_USER || UPDATE_FIRST_USER)) {
 			setFormData({
 				userId: recordParams.userId,
 				name: recordParams.name,
@@ -163,7 +162,8 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			}
 			break;
 		}
-		case UPDATE_USER: {
+		case UPDATE_USER:
+		case UPDATE_FIRST_USER: {
 			if (validateForm(false)) {
 				const postData = {
 					profileIds: convertStringToProfiles(formData.profileIds, profilesAvailable),
@@ -199,6 +199,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			handleSubmit={handleSubmit}
 			handleClose={handleClose}
 			loading={loading}
+			canOnlyConfirm={type===UPDATE_FIRST_USER ? true : false}
 		>
 			<Grid sx={{px: 2}}>
 				<Grid xs={5} item my={1}>
@@ -213,7 +214,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.userId)}
 						helperText={errors.userId}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER || UPDATE_FIRST_USER}}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>

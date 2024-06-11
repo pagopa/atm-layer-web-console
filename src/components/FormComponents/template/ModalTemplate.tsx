@@ -11,9 +11,10 @@ type Props = {
 	children?:React.ReactNode;
 	loading?: boolean;
 	handleClose?: any;
+	canOnlyConfirm?:boolean;
 };
 
-export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit, children, loading, handleClose }: Props) {
+export default function ModalTemplate({ titleModal, contentText, open, setOpen, handleSubmit, children, loading, handleClose, canOnlyConfirm }: Props) {
 	return (
 		<Dialog
 			open={open}
@@ -35,7 +36,7 @@ export default function ModalTemplate({ titleModal, contentText, open, setOpen, 
 			{children}
 			<DialogActions >
 				<Box display={"flex"} flexDirection={"row"} p={2}>
-					<Box mr={2}>
+					<Box mr={2} sx = {{display: canOnlyConfirm?"none":null}}>
 						<Button variant={"outlined"} onClick={handleClose}>Annulla</Button>
 					</Box>
 					<Box>
