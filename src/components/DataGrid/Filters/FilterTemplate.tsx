@@ -1,6 +1,10 @@
 import { Grid, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { Loading } from "../../Commons/Loading";
+import { Ctx } from "../../../DataContext";
+import { getProfileIdsArray } from "../../Commons/Commons";
+import { SCRITTURA } from "../../../commons/constants";
 
 type Props = {
   handleSubmit: () => void;
@@ -25,6 +29,10 @@ const FilterTemplate = ({
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
+	const {loggedUserInfo} = useContext(Ctx);
+	const loggedUserProfiles = getProfileIdsArray(loggedUserInfo);
+	const canCreate = loggedUserProfiles.includes(SCRITTURA);
+
 	const disabledButtons = () => {
 		if (!Object.values(filterValues).some((value) => value !== "")) {
 			return true;
@@ -46,13 +54,13 @@ const FilterTemplate = ({
 					>
 						{createIcon ?
 							 <Box my={1}>
-							 <Button variant="contained" onClick={() => handleClick()}>
+							 <Button variant="contained" onClick={() => handleClick()} disabled={canCreate ? false : true}>
 				 Crea Nuovo
 							 </Button>
 						 </Box>
 						 :
 							<Box my={1}>
-								<Button variant="contained" onClick={() => navigate(filterRoutes)}>
+								<Button variant="contained" onClick={() => navigate(filterRoutes)} disabled={canCreate ? false : true}>
                 Crea Risorsa
 								</Button>
 							</Box>
