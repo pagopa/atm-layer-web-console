@@ -10,7 +10,6 @@ import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_U
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
-// import { Profile } from "../../../model/UserModel";
 
 type Props = {
     type: string;
@@ -37,12 +36,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 	const [formData, setFormData] = useState(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
-	// const [profiles, setProfiles] = useState<Array<Profile>>([{
-	// 	description: "",
-	// 	profileId: 0,
-	// 	createdAt: "",
-	// 	lastUpdatedAt: "",
-	// }]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
@@ -89,19 +82,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 
 		return Object.values(newErrors).every((error) => !error);
 	};
-
-	// const getAllProfilesList = async (): Promise<void> => {
-
-	// 	try {
-	// 		const response = await fetchRequest({ urlEndpoint: PROFILE, method: "GET", abortController })();
-
-	// 		if (response?.success) {
-	// 			setProfiles(response.valuesObj);
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("ERROR", error);
-	// 	}
-	// };
 
 	useEffect(() => {
 		if (open && (type === UPDATE_USER || type === UPDATE_FIRST_USER)) {

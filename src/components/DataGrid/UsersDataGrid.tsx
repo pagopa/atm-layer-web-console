@@ -29,7 +29,6 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 	const [loading, setLoading] = useState(true);
 	const [loadingButton, setLoadingButton] = useState(false);
 	
-
 	const initialValues = {
 		userId: "",
 		profileIds: "",

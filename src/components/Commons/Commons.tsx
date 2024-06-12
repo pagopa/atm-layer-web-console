@@ -241,17 +241,6 @@ export function getTextModal(type:string):any {
 	
 };
 
-// export function getDescriptionsArray(){
-// 	return PROFILE_DESCRIPTIONS.map(profile => profile.description);
-// }
-
-// export function getIdByDescription (description: string):any {
-// 	const descriptions = getDescriptionsArray();
-// 	if(descriptions.includes(description)) {
-// 		return descriptions.indexOf(description)+1;
-// 	}
-// };
-
 export function getProfilesIds(user: User){
 	return user.profiles.map(profile => profile.profileId);
 }

@@ -83,9 +83,6 @@ describe("CreateResources Test", () => {
         const path = screen.getByTestId("path-test");
         fireEvent.change(path, { target: { value: "prova" } });
 
-        // const description = screen.getByTestId("description-test");
-        // fireEvent.change(description, { target: { value: "prova" } });
-
         fireEvent.click(screen.getByText("Conferma"));
 
         fireEvent.click(screen.getByTestId("CloseIcon"));

@@ -5,8 +5,7 @@ import CommonPage from "../CommonPage";
 import UsersDataGrid from "../../components/DataGrid/UsersDataGrid";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
 import { Ctx } from "../../DataContext";
-import { UPDATE_FIRST_USER, UPDATE_USER } from "../../commons/constants";
-import { User } from "../../model/UserModel";
+import { UPDATE_FIRST_USER } from "../../commons/constants";
 
 const UsersPage = () => {
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:false}, false), "Utenti e autorizzazioni");
@@ -19,7 +18,6 @@ const UsersPage = () => {
 	const [title, setTitle] = useState("");
 
 	const { loggedUserInfo } = useContext(Ctx);
-	// const loggedUserInfo : User= JSON.parse(sessionStorage.getItem("loggedUserInfo") ?? "");
 
 	useEffect(() => {
 		if (!loggedUserInfo.name && !loggedUserInfo.surname && getProfilesIds(loggedUserInfo).includes(5)){
