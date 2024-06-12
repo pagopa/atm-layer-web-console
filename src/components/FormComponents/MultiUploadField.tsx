@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
-import UploadFileWithButton from "../UploadFileComponents/UploadFileWithButton";
+import React, { useState } from "react";
 
 const MAX_COUNT = 5;
 

@@ -50,7 +50,6 @@ const FilterTemplate = ({
 							<Button
 								sx={{ marginRight: 2 }}
 								variant="outlined"
-								// disabled={disabledButtons()}
 								onClick={() => cleanFilter()}
 							>
                 Cancella Filtri

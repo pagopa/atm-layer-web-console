@@ -117,7 +117,6 @@ export const handleSnackbar = (
 };
 
 export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: string) => [
-	// "Home",
 	...arrLinks.map((e, i) =>
 		<Link
 			key={"link"+e.rootName}

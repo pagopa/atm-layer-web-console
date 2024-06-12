@@ -21,13 +21,11 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClickS
     const VisuallyHiddenInput = styled("input")({
         clip: "rect(0 0 0 0)",
         clipPath: "inset(50%)",
-        // height: 1,
         overflow: "hidden",
         position: "absolute",
         bottom: 0,
         left: 0,
         whiteSpace: "nowrap",
-        // width: 1,
     });
 
     return (
@@ -58,8 +56,6 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClickS
                     sx={{ padding: "10px"}}
                     disableRipple
                     startIcon={<IconBox id={"iconUploadFile"} icon={"FileUpload"} color={error ? theme.palette.error.main :theme.palette.primary.main} size={"1.2em"} marg={"5px 0 0 0"}/>}
-
-                    // startIcon={<FileUploadIcon color={ error ? "error" : "primary" }/>}
                 >
                     Carica file dal tuo computer
                     <VisuallyHiddenInput type="file" name={name} accept={allowedType} onChange={onChange} data-testid="hidden-input" multiple={true}/>

@@ -22,23 +22,20 @@ const MenuButtons = ({ name, route, iconButton }: Props) => {
 	};
 
 	return (
-		<React.Fragment>
-			<Button
-				startIcon={iconButton&& <IconBox id={"iconMenu_"+name} icon={iconButton} color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
-				id={"toolbar-button_"+name}
-				aria-controls={open ? "toolbar-menu" : undefined}
-				aria-haspopup="true"
-				aria-expanded={open ? "true" : undefined}
-				onClick={handleClick}
-				color="negative"
-				size="large"
-				disableElevation
-				variant="text"
-				// endIcon={name !== "Home" && <IconBox id={"iconMenu_"+name} icon="ExpandMore" color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
-			>
-				{name}
-			</Button>
-		</React.Fragment>
+		<Button
+			startIcon={iconButton&& <IconBox id={"iconMenu_"+name} icon={iconButton} color={theme.palette.primary.contrastText} size={"1em"} marg={"5px 0 0 0"}/>}
+			id={"toolbar-button_"+name}
+			aria-controls={open ? "toolbar-menu" : undefined}
+			aria-haspopup="true"
+			aria-expanded={open ? "true" : undefined}
+			onClick={handleClick}
+			color="negative"
+			size="large"
+			disableElevation
+			variant="text"
+		>
+			{name}
+		</Button>
 	);
 };
 

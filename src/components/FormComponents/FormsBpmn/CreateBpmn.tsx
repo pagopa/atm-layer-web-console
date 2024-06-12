@@ -10,7 +10,6 @@ import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_BPMN_API } from "../../../commons/endpoints";
-import MultiUploadField from "../MultiUploadField";
 
 
 export const CreateBpmn = () => {
