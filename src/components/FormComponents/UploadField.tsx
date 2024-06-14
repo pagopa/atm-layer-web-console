@@ -16,12 +16,12 @@ type Props = {
 	formData: any;
 	keepExtension?: boolean;
 	multiple?: boolean;
-	errors?:any;
-	setErrors?: any;
+	setErrors: any;
+	customAlert?: any;
 };
 
 
-export default function UploadField({titleField, file, files, clearFile, clearMultipleFile, error, name, setFormData, formData, keepExtension, multiple, errors, setErrors}:Props) {
+export default function UploadField({titleField, file, files, clearFile, clearMultipleFile, error, name, setFormData, formData, keepExtension, multiple, setErrors, customAlert}:Props) {
 
 	const handleMultipleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setErrors({});
@@ -34,8 +34,8 @@ export default function UploadField({titleField, file, files, clearFile, clearMu
 			if (duplicateIndexes.length>0){
 				const duplicatedNames = duplicateIndexes.map(index => index || index===0 ? uploadedFilenames[index] : "");
 				removeArrayItems(duplicateIndexes,files);
-				removeArrayItems(duplicateIndexes,uploadedFilenames);		
-				alert(("Uno o più file selezionati sono già stati caricati nel form: "+ duplicatedNames.join("\n")));
+				removeArrayItems(duplicateIndexes,uploadedFilenames);
+				customAlert("Uno o più file selezionati sono già caricati nel form: "+ duplicatedNames.join("\n"));	
 			};
 
 			if (!keepExtension){

@@ -3,7 +3,7 @@ import { generatePath, useNavigate } from "react-router-dom";
 import React from "react";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar } from "../../Commons/Commons";
-import { DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_RES, DOWNLOAD_RES, UPDATE_RES } from "../../../commons/constants";
 import { RESOURCES_DELETE } from "../../../commons/endpoints";
 import ModalTemplateUpload from "../template/ModalTemplateUpload";
 import ModalTemplate from "../template/ModalTemplate";
@@ -41,7 +41,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				setTimeout(() => {
 					setOpenSnackBar(false);
 					navigate(ROUTES.RESOURCES);
@@ -49,7 +49,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -58,12 +58,12 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 			setOpen(false);
 			setLoading(false);
 			if (success) {
-				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
+				handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
 				setTimeout(() => {
 					setOpenSnackBar(false);
 				}, 3000);
 			} else {
-				handleSnackbar(success, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
+				handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
 			}
 			break;
 		}

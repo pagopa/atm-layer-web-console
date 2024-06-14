@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -103,16 +103,16 @@ export const getQueryString = ( filterValues: any, driver: string, URL?: string)
 };
 
 export const handleSnackbar = (
-	success: boolean,
+	severity: string,
 	setMessage: React.Dispatch<React.SetStateAction<any>>,
 	setSeverity: React.Dispatch<React.SetStateAction<any>>,
 	setTitle: React.Dispatch<React.SetStateAction<any>>,
 	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
 	valueMessage?: string
 ) => {
-	setSeverity(success ? "success" : "error");
-	setMessage(success ? "" : valueMessage ? valueMessage : "Operazione fallita");
-	setTitle(success ? "Successo" : "Errore");
+	setSeverity(severity);
+	setMessage(severity===ALERT_SUCCESS ? "" : valueMessage ? valueMessage : "Operazione fallita");
+	setTitle(severity===ALERT_SUCCESS? "Successo":severity===ALERT_ERROR?"Errore":"Info");
 	setOpenSnackBar(true);
 };
 

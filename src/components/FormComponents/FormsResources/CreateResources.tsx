@@ -6,10 +6,10 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_INFO, ALERT_SUCCESS, CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import { handleSnackbar, removeArrayItem, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
-import { RESOURCES_CREATE } from "../../../commons/endpoints";
+import { RESOURCES_CREATE, RESOURCES_CREATE_MULTIPLE } from "../../../commons/endpoints";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
 export const CreateResources = () => {
@@ -115,6 +115,10 @@ export const CreateResources = () => {
 		setErrors(multiple? {} : initialValues);
 	};
 
+	const customAlert = (message:string) => {
+		handleSnackbar(ALERT_INFO, setMessage, setSeverity, setTitle, setOpenSnackBar, message);
+	};
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (validateForm()) {
@@ -132,14 +136,15 @@ export const CreateResources = () => {
 			setLoadingButton(true);
 
 			try {
-				const response = await fetchRequest({ urlEndpoint: RESOURCES_CREATE, method: "POST", abortController, body: postData, isFormData: true })();
+				const createEndpoint = multiple? RESOURCES_CREATE_MULTIPLE : RESOURCES_CREATE;
+				const response = await fetchRequest({ urlEndpoint: createEndpoint, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 
 		}
@@ -165,6 +170,7 @@ export const CreateResources = () => {
 					onChange={() => {
 						setMultiple(!multiple);
 						resetForm(!multiple);
+						setOpenSnackBar(false);
 					}}
 					name="branchIdSwitch"
 				/>
@@ -183,6 +189,7 @@ export const CreateResources = () => {
 						keepExtension={true}
 						multiple={true}
 						setErrors={setErrors}
+						customAlert={customAlert}
 					/>
 					{errors.filenames && errors.filenames.some((error: any) => error) && (
 						<Box mx={"10px"} mb={1}>
@@ -206,7 +213,6 @@ export const CreateResources = () => {
 							setFormData={setFormData}
 							formData={formData}
 							keepExtension={true}
-							errors={errors}
 							setErrors={setErrors}
 						/>
 						<Grid item xs={12} my={1}>

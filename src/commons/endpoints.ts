@@ -20,6 +20,7 @@ export const WR_DELETE = "/workflow-resource/disable/:workflowResourceId";
 export const GET_ALL_RESOURCES_FILTER = "/resources/filter";
 export const RESOURCES_UPDATE = "/resources/:resourceId";
 export const RESOURCES_CREATE = "/resources";
+export const RESOURCES_CREATE_MULTIPLE = "/resources/multiple";
 export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
 export const USER_EMAIL = "/info/email";

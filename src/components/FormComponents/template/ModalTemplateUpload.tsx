@@ -173,7 +173,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 							clearFile={clearFile}
 							error={errors.file}
 							setFormData={setFormData}
-							formData={formData} 
+							formData={formData}
+							setErrors={setErrors}
 						/>
 						{definitionKeyValue &&
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}

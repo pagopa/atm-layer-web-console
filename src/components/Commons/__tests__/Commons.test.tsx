@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
 import { breadCrumbLinkComponent, commonBreadRoot, getQueryString, getTextModal, handleSnackbar, resetErrors } from "../Commons";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
 import ROUTES from "../../../routes";
@@ -87,7 +87,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+      handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar);
 
       expect(setSeverity).toHaveBeenCalledWith("success");
       expect(setMessage).toHaveBeenCalledWith("");
@@ -101,7 +101,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
+      handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
 
       expect(setSeverity).toHaveBeenCalledWith("error");
       expect(setMessage).toHaveBeenCalledWith("Errore specifico");

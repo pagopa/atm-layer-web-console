@@ -3,7 +3,6 @@ import AssociateBpmn from "../AssociateBpmn";
 import { bpmnTableMocked } from "../../../Mock4Test/BpmnMocks";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
-import { handleSnackbar } from "../../../Commons/Commons";
 
 jest.mock("../../../Commons/Commons");
 
