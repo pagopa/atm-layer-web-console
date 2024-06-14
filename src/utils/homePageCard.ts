@@ -28,5 +28,12 @@ export const homePageCard = [
 		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
 		pageLink: routes.WORKFLOW_RESOURCES
+	},
+	{
+		title: "Transazioni",
+		id: "transactions",
+		description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
+		icon:"AssignmentOutlined",
+		pageLink: routes.TRANSACTIONS
 	}
 ];

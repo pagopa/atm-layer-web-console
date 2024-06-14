@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, TRANSACTIONS, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -376,6 +376,75 @@ const useColumns: any = () => {
 				createdByColumn,
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
+			];
+		case TRANSACTIONS:
+			return [
+				{
+					field: "transactionId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Transazione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.transactionId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "transactionStatus",
+					cellClassName: "justifyContentNormal",
+					headerName: "Stato",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.transactionStatus),
+					sortable: false,
+					flex: 1
+				},
+				functionTypeColumn,
+				{
+					field: "acquirerId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Banca",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.acquirerId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "branchId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Filiale",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.branchId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "terminalId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Terminale",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.terminalId),
+					sortable: false,
+					flex: 0.5
+				},
 			];
 		default:
 			return [];
