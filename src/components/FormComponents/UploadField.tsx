@@ -27,7 +27,7 @@ export default function UploadField({titleField, file, files, clearFile, clearMu
 		setErrors({});
 		const files = Array.from(e.target.files || []);
 		if (files && files.length > 0) {
-			// eslint-disable-next-line functional/no-let
+			// eslint-disable-next-line functional/no-let, prefer-const
 			let uploadedFilenames = files.map(file => file.name);
 
 			const duplicateIndexes = (uploadedFilenames.map((name: any, index:number)=> formData?.filenames?.includes(name) ? index : undefined)).filter(e =>e || e === 0);
@@ -37,10 +37,6 @@ export default function UploadField({titleField, file, files, clearFile, clearMu
 				removeArrayItems(duplicateIndexes,uploadedFilenames);
 				customAlert("Uno o più file selezionati sono già caricati nel form: "+ duplicatedNames.join("\n"));	
 			};
-
-			if (!keepExtension){
-				uploadedFilenames = uploadedFilenames.map(file => file.substring(0, uploadedFilenames.lastIndexOf(".")));
-			}
 			setFormData({ ...formData, fileArray: [...formData.fileArray, ...files], filenames: [...formData.filenames, ...uploadedFilenames]});
 		}
 	};

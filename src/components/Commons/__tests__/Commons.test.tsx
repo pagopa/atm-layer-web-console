@@ -1,5 +1,5 @@
 import { act } from "react-dom/test-utils";
-import { breadCrumbLinkComponent, commonBreadRoot, getQueryString, getTextModal, handleSnackbar, resetErrors } from "../Commons";
+import { breadCrumbLinkComponent, commonBreadRoot, getQueryString, getTextModal, handleSnackbar, removeArrayItem, removeArrayItems, resetErrors } from "../Commons";
 import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
@@ -233,4 +233,27 @@ describe("getTextModal", () => {
   test("check error in default case", () => {
     expect(getTextModal("TIPO_NON_GESTITO")).toEqual({ titleModal: "Errore", contentText: "Qualcosa è andato storto" });
   });
+});
+
+
+describe("Test removeArrayItems", () => {
+  test("method removes undefined indexes, orders them, removes corresponding items from array", () => {
+    const indexes = [5,undefined,1,0];
+    const arrayToTrim = [0,1,2,3,4,5,6,7,8,9];
+    const expectedArray = [2,3,4,6,7,8,9];
+    const trimmedArray = removeArrayItems(indexes, arrayToTrim);
+    expect(trimmedArray).toEqual(expectedArray);
+  });
+
+});
+
+describe("Test removeArrayItem", () => {
+  test("remove item from array defined", () => {
+    const arrayToTrim = [0,1,2];
+    const trimmedArray = removeArrayItem(1,arrayToTrim);
+    const expectedArray = [0,2];
+    expect(trimmedArray).toEqual(expectedArray);
+    const noResult = removeArrayItem(1, undefined);
+    expect(noResult).toBeUndefined();
+  })
 });

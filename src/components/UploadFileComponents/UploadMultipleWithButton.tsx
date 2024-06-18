@@ -77,7 +77,7 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClickS
                     </Typography>
                 </Box>
                 <Box ml={2}>
-                <IconButton onClick={onClickMultiple} disableRipple data-testid="clear-upload-button">
+                <IconButton onClick={onClickMultiple} disableRipple data-testid="clear-all-upload-button">
                     <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.error.dark} size={"0.8em"} marg={"5px 0 0 0"} />
                 </IconButton>
             </Box>
@@ -100,7 +100,7 @@ const UploadMultipleWithButton = ({ name, allowedType, files, onChange, onClickS
                     </Typography>
                 </Box>
                 <Box ml={2}>
-                    <IconButton onClick={onClickSingle} disableRipple data-key={key}>
+                    <IconButton onClick={onClickSingle} disableRipple data-key={key} data-testid="clear-single-upload-button">
                     <IconBox id={"iconClearFile"} icon={"Close"} color={theme.palette.primary.main} size={"0.8em"} marg={"5px 0 0 0"}/>
                     </IconButton>
                 </Box>

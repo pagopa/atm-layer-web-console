@@ -166,6 +166,7 @@ export const CreateResources = () => {
 			<Stack display="flex" flexDirection="row" position="relative" sx={{marginLeft:"auto", alignItems: "center"}}>
 				<Typography >Caricamento multiplo</Typography>
 				<Switch
+					data-testid="switch-form"
 					checked={multiple}
 					onChange={() => {
 						setMultiple(!multiple);

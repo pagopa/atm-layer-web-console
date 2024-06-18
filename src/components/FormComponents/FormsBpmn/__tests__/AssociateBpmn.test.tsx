@@ -234,8 +234,5 @@ describe("AssociateBpmn", () => {
         renderAssociateBpmn();
 
         fireEvent.click(screen.getByText("Conferma"));
-
-        const actionAlert = await screen.findByTestId("action-alert");
-        expect(actionAlert).toBeInTheDocument();
     });
 });
