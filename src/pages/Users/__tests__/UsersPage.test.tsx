@@ -1,12 +1,10 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import HomePage from "../HomePage";
-import { Ctx } from "../../DataContext";
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import UsersPage from '../UsersPage';
+import { Ctx } from '../../../DataContext';
 
-beforeEach(() => {
-	jest.spyOn(console, "error").mockImplementation(() => {});
-	jest.spyOn(console, "warn").mockImplementation(() => {});
-});
+const clearStorage = jest.fn();
 
 const mockContextValue = {
     loggedUserInfo: {
@@ -48,21 +46,29 @@ const mockContextValue = {
             }
         ]
     },
-    abortController: new AbortController()
+    abortController: new AbortController(),
+    clearStorage
 };
 
-describe("HomePage test", () => {
-	test("First render", () => {
-		render(
-			<Ctx.Provider value={ mockContextValue }>
-				<BrowserRouter>
-					<HomePage />
-				</BrowserRouter>
-			</Ctx.Provider>
-		);
-		const titleElement=screen.getByText("Console management");
-		expect(titleElement).toBeInTheDocument();
-		const subTitleElement=screen.getByText("Console per la gestione delle risorse");
-		expect(subTitleElement).toBeInTheDocument();
-	});
+
+describe('UsersPage test', () => {
+    const renderComponent = () => {
+        return render(
+            <Ctx.Provider value={ mockContextValue }>
+                <BrowserRouter>
+                    <UsersPage />
+                </BrowserRouter>
+            </Ctx.Provider>
+        );
+    };
+
+    test('renders UsersPage and checks initial state', async () => {
+        renderComponent();
+
+        // Verify that the breadcrumb is rendered
+        expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
+
+        // Verify that ActionAlert is initially not visible
+        expect(screen.queryByText("Update primo utente")).toBeNull();
+    });
 });

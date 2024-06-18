@@ -286,7 +286,7 @@ describe("useColumns", () => {
 
     const visibleColumns = getVisibleColumns("INVALID_DRIVER");
 
-    expect(visibleColumns).toEqual([]);
+    expect(visibleColumns).toEqual({});
   });
 
   test("should return empty object for invalid driver in getRecordBpmnParams", () => {

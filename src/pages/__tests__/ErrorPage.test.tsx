@@ -3,10 +3,10 @@ import ErrorPage from "../ErrorPage";
 
 describe("ErrorPage", () => {
   test("render", () => {
-    render(
-    <ErrorPage />
-    );
+    render(<ErrorPage />);
     
-    expect(screen.getByText("404 - Qualcosa è andato storto")).toBeInTheDocument();
+    expect(screen.getByText("Non sei autorizzato ad accedere a questa sezione")).toBeInTheDocument();
+    expect(screen.getByText("Contatta l'amministratore di utenze e permessi")).toBeInTheDocument();
+    expect(screen.getByTestId("ReportIcon")).toBeInTheDocument();
   });
 });

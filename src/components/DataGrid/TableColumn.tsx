@@ -7,7 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
 import { DELETE_ASSOCIATION, DELETE_USER, SCRITTURA, UPDATE_USER } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
-import { getProfileDescriptionFromStorage, getProfileIdsArray } from "../Commons/Commons";
+import { getProfileDescriptionFromStorage } from "../Commons/Commons";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {

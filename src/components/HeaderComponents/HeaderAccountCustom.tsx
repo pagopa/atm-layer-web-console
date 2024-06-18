@@ -8,9 +8,9 @@ import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { PROFILE, USER_INFO } from "../../commons/endpoints";
 import EmulatorButton from "../NavigationComponents/EmulatorButton";
-import { getProfilesIds, getRoleDescriptionsByUser } from "../Commons/Commons";
+import { getProfilesIds } from "../Commons/Commons";
 import ROUTES from "../../routes";
-import { EMULATOR, USERS, UTENTI } from "../../commons/constants";
+
 
 
 type HeaderAccountProps = {
@@ -59,10 +59,8 @@ export const HeaderAccountCustom = ({
 
 			if (response?.success) {
 				setProfilesAvailable(response.valuesObj?.profiles);
-				console.log("DAJE");
 			} else {
 				setProfilesAvailable([]);
-				console.log(":(");
 			}
 		} catch (error) {
 			console.error("ERROR", error);

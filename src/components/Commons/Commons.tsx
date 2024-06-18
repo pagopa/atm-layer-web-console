@@ -256,7 +256,7 @@ export function getProfileDescriptions (user: User) {
 	}
 };
 
-export function getProfileDescriptionByProfileArray (profiles: Array<Profile>): Array<string> {
+export function getProfileDescriptionByProfileArray (profiles: Array<Profile> = []): Array<string> {
 	return profiles.map(profile => profile.description);
 };
 

@@ -18,7 +18,7 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.name}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-name-test" }}
 				fullWidth
 			/>
 		</Grid>
@@ -31,7 +31,7 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.surname}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-surname-test" }}
 				fullWidth
 			/>
 		</Grid>
@@ -44,7 +44,7 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.userId}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-userid-test" }}
 				fullWidth
 			/>
 		</Grid>
@@ -57,7 +57,7 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.profileIds}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "variable-value-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-profile-test" }}
 				fullWidth
 			/>
 		</Grid>
