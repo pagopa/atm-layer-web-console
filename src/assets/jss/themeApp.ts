@@ -1,4 +1,4 @@
-import { createTheme, Theme, alpha } from "@mui/material/styles";
+import { createTheme, Theme, alpha, PaletteColor } from "@mui/material/styles";
 import { indigo } from "@mui/material/colors";
 
 /* Typefaces */
@@ -169,7 +169,7 @@ const foundation: Theme = createTheme({
 			light: "#EBFDFF",
 			dark: "#00707B",
 			contrastText: colorPrimary,
-		},
+		} as PaletteColor,
 		text: {
 			primary: colorTextPrimary,
 			secondary: colorPrimary,
