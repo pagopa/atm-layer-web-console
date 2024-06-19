@@ -93,6 +93,10 @@ declare module "@mui/material/styles/createPalette" {
 	}
 
 	interface PaletteColor {
+		light: string;
+  		main: string;
+  		dark: string;
+  		contrastText: string;
 		extraLight?: string;
 	}
 }
