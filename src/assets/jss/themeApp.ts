@@ -93,8 +93,8 @@ declare module "@mui/material/styles" {
 	}
 
 	interface PaletteColor {
-		shade100?: string;
-		shade850?: string;
+		100?: string;
+		850?: string;
 		extraLight?: string;
 	}
 }
@@ -170,8 +170,6 @@ const foundation: Theme = createTheme({
 			contrastText: colorPrimary,
 			light: "#EBFDFF",
 			dark: "#00707B",
-			shade100: "#EBFDFF",
-			shade850: "#00707B",
 		},
 		text: {
 			primary: colorTextPrimary,
