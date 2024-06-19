@@ -74,7 +74,7 @@ declare module "@mui/material/Typography" {
 }
 
 /* Custom Palette */
-declare module "@mui/material/styles" {
+declare module "@mui/material/styles/createPalette" {
 	interface Palette {
 		pagoPA: Palette["primary"];
 		europeanUnion: Palette["primary"];
@@ -90,6 +90,12 @@ declare module "@mui/material/styles" {
 		extraLight?: PaletteOptions["warning"];
 		primaryAction: PaletteOptions["action"];
 		normal: Palette["primary"];
+	}
+
+	interface PaletteColor {
+		100?: string;
+		850?: string;
+		extraLight?: string;
 	}
 
 }
