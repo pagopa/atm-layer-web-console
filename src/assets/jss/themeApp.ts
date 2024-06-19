@@ -165,9 +165,9 @@ const foundation: Theme = createTheme({
 		},
 		normal: {
 			main: colorPrimary,
-			contrastText: colorPrimary,
 			light: "#EBFDFF",
 			dark: "#00707B",
+			contrastText: colorPrimary,
 		},
 		text: {
 			primary: colorTextPrimary,
