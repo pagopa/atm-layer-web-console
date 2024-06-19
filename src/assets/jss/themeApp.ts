@@ -74,7 +74,7 @@ declare module "@mui/material/Typography" {
 }
 
 /* Custom Palette */
-declare module "@mui/material/styles" {
+declare module "@mui/material/styles/createPalette" {
 	interface Palette {
 		pagoPA: Palette["primary"];
 		europeanUnion: Palette["primary"];
