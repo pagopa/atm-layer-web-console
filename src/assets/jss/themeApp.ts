@@ -93,8 +93,6 @@ declare module "@mui/material/styles" {
 	}
 
 	interface PaletteColor {
-		100?: string;
-    	850?: string;
 		extraLight?: string;
 	}
 }
