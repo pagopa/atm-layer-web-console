@@ -6,7 +6,7 @@ import { Ctx } from '../../../DataContext';
 
 const clearStorage = jest.fn();
 
-const mockContextValue = {
+const mockContextValueWithValues = {
     loggedUserInfo: {
         userId: 'mario.rossi@pagopa.com',
         name: 'Mario',
@@ -50,25 +50,56 @@ const mockContextValue = {
     clearStorage
 };
 
+const mockContextValueWithoutValues = {
+    loggedUserInfo: {
+        userId: 'mario.rossi@pagopa.com',
+        name: '',
+        surname: '',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    },
+    abortController: new AbortController(),
+    clearStorage
+};
+
+
 
 describe('UsersPage test', () => {
-    const renderComponent = () => {
-        return render(
-            <Ctx.Provider value={ mockContextValue }>
+
+    test('renders UsersPage and checks initial state', async () => {
+        render(
+            <Ctx.Provider value={ mockContextValueWithValues }>
                 <BrowserRouter>
                     <UsersPage />
                 </BrowserRouter>
             </Ctx.Provider>
         );
-    };
 
-    test('renders UsersPage and checks initial state', async () => {
-        renderComponent();
-
-        // Verify that the breadcrumb is rendered
         expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
 
-        // Verify that ActionAlert is initially not visible
         expect(screen.queryByText("Update primo utente")).toBeNull();
+    });
+
+    test('renders UsersPage and open first user modal', async () => {
+        render(
+            <Ctx.Provider value={ mockContextValueWithoutValues }>
+                <BrowserRouter>
+                    <UsersPage />
+                </BrowserRouter>
+            </Ctx.Provider>
+        );
+
+        expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
+
+        expect(screen.getByText("Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi")).toBeInTheDocument();
+
     });
 });
