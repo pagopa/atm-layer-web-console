@@ -3,7 +3,6 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { SyntheticEvent, useContext } from "react";
 import { addDependentProfiles } from "../Commons/Commons";
-import { Profile } from "../../model/UserModel";
 import { Ctx } from "../../DataContext";
 
 type Props = {

@@ -6,6 +6,10 @@ import { Ctx } from "./DataContext";
 import { bpmnAssociationTableMocked, bpmnTableMocked } from "./components/Mock4Test/BpmnMocks";
 import { Profile, User } from "./model/UserModel";
 
+beforeAll(() => {
+	jest.spyOn(global.console, "log").mockImplementation(() => {});
+});
+
 const mockUser: User = {
 	userId: "user1",
 	name: "Mario",
@@ -37,7 +41,7 @@ const mockContextValue = {
 	logged: true,
 	setLogged: jest.fn(),
 	abortController: new AbortController(),
-	debugOn: "debugOn",
+	debugOn: true,
 	clearStorage: jest.fn(),
 	loggedUserInfo: mockUser,
 	setLoggedUserInfo: jest.fn(),
@@ -46,9 +50,14 @@ const mockContextValue = {
 };
 
 describe("App component", () => {
+	afterAll(() => {
+		jest.restoreAllMocks();
+	});
+
 	beforeEach(() => {
 		sessionStorage.clear();
 		localStorage.clear();
+		jest.clearAllMocks();
 	});
 
 	test("Test App without jwt in sessionStorage", () => {
@@ -77,5 +86,19 @@ describe("App component", () => {
 				</BrowserRouter>
 			</Ctx.Provider>
 		);
+	});
+
+	test("clearStorage function removes recordParamsUser from sessionStorage", () => {
+		render(
+			<Ctx.Provider value={mockContextValue}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</Ctx.Provider>
+		);
+
+		mockContextValue.clearStorage();
+
+		expect(sessionStorage.getItem("recordParamsUser")).toBeNull();
 	});
 });
