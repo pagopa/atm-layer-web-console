@@ -233,6 +233,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						errors={errors}
 						value={formData.profileIds}
 						names={getProfileDescriptionByProfileArray(profilesAvailable)}
+						isFirstUser={type === UPDATE_FIRST_USER ? true : false}
 					/>
 				</Grid>
 			</Grid>	
