@@ -1,11 +1,12 @@
 import React, { SetStateAction } from "react";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
+import BanksFilterComponent from "./BanksFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -93,6 +94,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case BANKS:
+			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}

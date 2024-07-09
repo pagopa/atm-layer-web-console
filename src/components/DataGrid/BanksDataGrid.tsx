@@ -81,18 +81,16 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 
 	return (
 		<Box p={2}>
-			{/* <FilterBar
+			<FilterBar
 				filterValues={filterValues}
 				setFilterValues={setFilterValues}
-				setTableList={tableListCamundaVariables}
-				getAllList={getAllVariablesList}
+				setTableList={tableListBanks}
+				getAllList={getAllBanksList}
 				newFilterValues={initialValues}
-				driver={CAMUNDA_VARIABLES}
+				driver={BANKS}
 				loadingButton={loadingButton}
 				setLoadingButton={setLoadingButton}
-				createIcon={true}
-				handleClick={handleModalClick}
-			/> */}
+			/>
 			<CustomDataGrid
 				disableColumnFilter
 				disableColumnSelector
