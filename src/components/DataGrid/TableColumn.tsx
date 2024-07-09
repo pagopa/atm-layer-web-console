@@ -135,7 +135,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		const actions = () => {
 			setOpen(true);
 			setType(DELETE_BANK);
-			sessionStorage.setItem("recordParamsVariable", JSON.stringify(param.row));
+			sessionStorage.setItem("recordParamsBank", JSON.stringify(param.row));
 		};
 
 		return (
