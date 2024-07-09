@@ -382,7 +382,7 @@ const useColumns: any = () => {
 				{
 					field: "acquirerId",
 					cellClassName: "justifyContentNormal",
-					headerName: "Nome Banca",
+					headerName: "Id Banca",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -395,7 +395,7 @@ const useColumns: any = () => {
 				{
 					field: "description",
 					cellClassName: "justifyContentNormal",
-					headerName: "Descrizione",
+					headerName: "Nome Banca",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
