@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BANKS, BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -7,7 +7,7 @@ const useColumns: any = () => {
 
 	const { formatDateToString, extractRelativeCdnPath } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any,  deleteColumnBanks: any, editColumnBanks: any) => {
 
 		const functionTypeColumn = {
 			field: "functionType",
@@ -377,6 +377,98 @@ const useColumns: any = () => {
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
 			];
+		case BANKS:
+			return [
+				{
+					field: "acquirerId",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome Banca",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.acquirerId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "description",
+					cellClassName: "justifyContentNormal",
+					headerName: "Descrizione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.description),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "clientId",
+					cellClassName: "justifyContentNormal",
+					headerName: "Client Id",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.clientId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "clientSecret",
+					cellClassName: "justifyContentNormal",
+					headerName: "Client Secret",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.clientSecret),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "rateLimit",
+					cellClassName: "justifyContentNormal",
+					headerName: "Limite Richieste",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.rateLimit),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "action1",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => editColumnBanks(params),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "action2",
+					cellClassName: "justifyContentNormal",
+					headerName: "",
+					align: "right",
+					hideSortIcons: true,
+					disableColumnMenu: true,
+					editable: false,
+					renderCell: (params: any) => deleteColumnBanks(params),
+					sortable: false,
+					flex: 1
+				}
+			];
 		default:
 			return [];
 		}
@@ -420,7 +512,7 @@ const useColumns: any = () => {
 				}
 			);
 		default:
-			return [];
+			return {};
 		}
 	};
 	const getNavigationPaths: any = (driver: string, param: any) => {

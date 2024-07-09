@@ -3,8 +3,9 @@ import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 
 
@@ -12,7 +13,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnBank, editColumnBank);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
@@ -124,6 +125,64 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 					data-testid="delete-column-test"
 				>
 					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+				</IconButton>
+			</Box>
+		);
+	};
+
+	const deleteColumnBank = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(DELETE_BANK);
+			sessionStorage.setItem("recordParamsVariable", JSON.stringify(param.row));
+		};
+
+		return (
+			<Box
+				width="100%"
+				display="flex"
+				justifyContent={"center"}
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={actions}
+					sx={{
+
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+					data-testid="delete-column-test"
+				>
+					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+				</IconButton>
+			</Box>
+		);
+	};
+
+	const editColumnBank = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(UPDATE_BANK);
+			sessionStorage.setItem("recordParamsBank", JSON.stringify(param.row));
+		};
+
+		return (
+			<Box
+				width="100%"
+				display="flex"
+				justifyContent={"center"}
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={actions}
+					sx={{
+
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+					data-testid="edit-column-test"
+				>
+					<EditIcon sx={{ color: theme.palette.primary.main, fontSize: "24px" }} />
 				</IconButton>
 			</Box>
 		);
