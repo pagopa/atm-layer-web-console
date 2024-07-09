@@ -393,7 +393,7 @@ const useColumns: any = () => {
 					flex: 1
 				},
 				{
-					field: "description",
+					field: "denomination",
 					cellClassName: "justifyContentNormal",
 					headerName: "Nome Banca",
 					align: "left",
@@ -401,7 +401,7 @@ const useColumns: any = () => {
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.description),
+					renderCell: (params: any) => renderCell(params, params.row.denomination),
 					sortable: false,
 					flex: 1
 				},
@@ -434,7 +434,7 @@ const useColumns: any = () => {
 				{
 					field: "rateLimit",
 					cellClassName: "justifyContentNormal",
-					headerName: "Limite Richieste",
+					headerName: "Limite Rate",
 					align: "left",
 					headerAlign: "left",
 					editable: false,

@@ -1,4 +1,4 @@
-import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
+import { Grid, TextField, FormControl, MenuItem, Typography, InputAdornment, Box } from "@mui/material";
 import React from "react";
 import { MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
@@ -25,14 +25,14 @@ const BanksFilterComponent = ({ filterValues, handleChange }: Props) => (
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				id="description"
-				name="description"
+				id="denomination"
+				name="denomination"
 				label="Nome Banca"
 				variant="outlined"
 				value={filterValues.description}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-description-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-denomination-test" }}
 				fullWidth
 			/>
 		</Grid>
@@ -48,7 +48,7 @@ const BanksFilterComponent = ({ filterValues, handleChange }: Props) => (
 				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-clientId-test" }}
 				fullWidth			/>
 		</Grid>
-		<Grid item xs={4}>
+		<Grid item xs={4} display="flex" alignItems="center">
 			<TextField
 				id="rateMin"
 				name="rateMin"
@@ -57,11 +57,16 @@ const BanksFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.rateMin}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-rateMin-test" }}
+				type="number"
+				inputProps={{ 
+					maxLength: MAX_LENGHT_LARGE, 
+					"data-testid": "bank-rateMin-test" 
+				}}
 				fullWidth
 			/>
-		</Grid>
-		<Grid item xs={4}>
+			<Box mx={1}>
+				<Typography variant="body1">-</Typography>
+			</Box>
 			<TextField
 				id="rateMax"
 				name="rateMax"
@@ -70,7 +75,11 @@ const BanksFilterComponent = ({ filterValues, handleChange }: Props) => (
 				value={filterValues.rateMax}
 				onChange={(e) => handleChange(e, e.target.name)}
 				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-rateMax-test" }}
+				type="number"
+				inputProps={{ 
+					maxLength: MAX_LENGHT_LARGE, 
+					"data-testid": "bank-rateMax-test" 
+				}}
 				fullWidth
 			/>
 		</Grid>
