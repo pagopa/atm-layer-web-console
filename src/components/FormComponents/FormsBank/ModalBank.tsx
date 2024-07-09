@@ -7,7 +7,7 @@ import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
-import { BANKS_CREATE, BANKS_DELETE } from "../../../commons/endpoints";
+import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 
 type Props = {
 	type: string;
@@ -45,8 +45,8 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 
 	const handleClose = () => {
 		setOpen(false);
-		// Reset errors when modal is closed
 		setErrors(initialValues);
+		setFormData(initialValues);
 	};
 
 
@@ -66,8 +66,18 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 	};
 
 	useEffect(() => {
-		setFormData(initialValues);
-	}, []);
+		if (open && type === UPDATE_BANK) {
+			setFormData({
+				acquirerId: recordParams.acquirerId,
+				denomination: recordParams.denomination,
+				rateLimit: recordParams.rateLimit,
+			});
+			setErrors(initialValues);
+		} else if (open && type === CREATE_BANK) {
+			setFormData(initialValues);
+			setErrors(initialValues);
+		}
+	}, [open]);
 
 	const content = getTextModal(type);
 	const [loading, setLoading] = useState(false);
@@ -76,6 +86,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		switch (type) {
 		case DELETE_BANK: {
 			try {
+				console.log("generated path: ",generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}));
 				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
@@ -100,7 +111,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					// window.location.reload();
+					window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -113,8 +124,12 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		}
 		case UPDATE_BANK: {
 			if (validateForm(false)) {
+				const putData = {
+					denomination: formData.denomination,
+					rateLimit: formData.rateLimit
+				};
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(UPDATE_BANK, { acquirerId: recordParams.acquirerId }), method: "PUT", abortController })();
+					const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_UPDATE, { acquirerId: recordParams.acquirerId }), method: "PUT", abortController, body: putData })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
@@ -156,7 +171,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			label={"ID Banca"}
                 			placeholder={"ID"}
                 			size="small"
-                			value={type === UPDATE_BANK ? recordParams.acquirerId : formData.acquirerId}
+                			value={ formData.acquirerId }
                 			onChange={handleChange}
                 			error={Boolean(errors.acquirerId)}
                 			helperText={errors.acquirerId}
@@ -169,7 +184,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			label={"Nome Banca"}
                 			placeholder={"nome"}
                 			size="small"
-                			value={ type === UPDATE_BANK ? recordParams.denomination : formData.denomination }
+                			value={ formData.denomination }
                 			onChange={handleChange}
                 			error={Boolean(errors.denomination)}
                 			helperText={errors.denomination}
