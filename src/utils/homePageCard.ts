@@ -28,5 +28,12 @@ export const homePageCard = [
 		description:"File BPMN, DMN o FORM possono essere deployati e inclusi in più di un processo contemporaneamente, a supporto del porcesso stesso.",
 		icon:"Widgets",
 		pageLink: routes.WORKFLOW_RESOURCES
+	},
+	{
+		title: "Banche",
+		id: "banks",
+		description:"Gestione Acquirer e parametri associati",
+		icon:"AccountBalanceIcon",
+		pageLink: routes.BANK
 	}
 ];
