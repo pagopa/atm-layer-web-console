@@ -226,13 +226,13 @@ export function getTextModal(type:string):any {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
 	}
 	case CREATE_BANK: {
-		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi una nuova banca aderente, inserendo il suo ID e limite di chiamate mensili (?); usa il campo descrizione per salvare un alias/nome comune"};
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente, inserendo il suo ID e limite di chiamate mensili (?); usa il campo Nome Banca per salvare un alias/nome comune"};
 	}
 	case UPDATE_BANK: {
-		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questa?"};
+		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
 	}
 	case DELETE_BANK: {
-		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questa banca dal registro delle aderenti?"};
+		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questo istituto bancario dal registro degli aderenti?"};
 	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
