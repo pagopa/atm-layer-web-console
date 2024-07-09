@@ -6,10 +6,11 @@ import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { getQueryString } from "../Commons/Commons";
 import { BANKS, CREATE_BANK } from "../../commons/constants";
 import { GET_ALL_BANKS_FILTER } from "../../commons/endpoints";
+import ModalBank from "../FormComponents/FormsBank/ModalBank";
 import CustomDataGrid from "./CustomDataGrid";
 import { CustomNoRowsOverlay } from "./CustomNoRowsOverlay";
-import FilterBar from "./Filters/FilterBar";
 import TableColumn from "./TableColumn";
+import FilterBar from "./Filters/FilterBar";
 
 type Props = {
 	type: string;
@@ -90,6 +91,8 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 				driver={BANKS}
 				loadingButton={loadingButton}
 				setLoadingButton={setLoadingButton}
+				createIcon={true}
+				handleClick={handleModalClick}
 			/>
 			<CustomDataGrid
 				disableColumnFilter
@@ -121,7 +124,7 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 				onPaginationModelChange={(newPage) => getAllBanksList(filterValues, newPage.page)}
 				loading={loading}
 			/>
-			{/* <ModalVariable
+			<ModalBank
 				open={open}
 				setOpen={setOpen}
 				type={type}
@@ -129,7 +132,7 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 				setSeverity={setSeverity}
 				setMessage={setMessage}
 				setTitle={setTitle}
-			/> */}
+			/>
 		</Box>
 	);
 };

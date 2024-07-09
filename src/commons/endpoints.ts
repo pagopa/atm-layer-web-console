@@ -24,3 +24,6 @@ export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
 export const USER_EMAIL = "/info/email";
 export const GET_ALL_BANKS_FILTER="/banks/filter";
+export const BANKS_CREATE = "/banks";
+export const BANKS_UPDATE = "/banks/:acquirerId";
+export const BANKS_DELETE = "/banks";

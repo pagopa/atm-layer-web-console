@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CREATE_BANK, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_BANK, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -224,6 +224,15 @@ export function getTextModal(type:string):any {
 	}
 	case UPDATE_RES: {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
+	}
+	case CREATE_BANK: {
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi una nuova banca aderente, inserendo il suo ID e limite di chiamate mensili (?); usa il campo descrizione per salvare un alias/nome comune"};
+	}
+	case UPDATE_BANK: {
+		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questa?"};
+	}
+	case DELETE_BANK: {
+		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questa banca dal registro delle aderenti?"};
 	}
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
