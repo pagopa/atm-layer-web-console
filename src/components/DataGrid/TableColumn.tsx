@@ -195,7 +195,9 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		renderCell,
 		showCustomHeader,
 		visibleColumns,
-		deleteColumn
+		deleteColumn,
+		deleteColumnBank,
+		editColumnBank
 	};
 };
 
