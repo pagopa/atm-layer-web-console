@@ -86,7 +86,6 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		switch (type) {
 		case DELETE_BANK: {
 			try {
-				console.log("generated path: ",generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}));
 				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);

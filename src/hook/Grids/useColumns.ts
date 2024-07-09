@@ -454,7 +454,7 @@ const useColumns: any = () => {
 					editable: false,
 					renderCell: (params: any) => editColumnBanks(params),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				},
 				{
 					field: "action2",
@@ -466,7 +466,7 @@ const useColumns: any = () => {
 					editable: false,
 					renderCell: (params: any) => deleteColumnBanks(params),
 					sortable: false,
-					flex: 1
+					flex: 0.5
 				}
 			];
 		default:
