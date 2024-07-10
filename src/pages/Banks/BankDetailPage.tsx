@@ -4,11 +4,10 @@ import DetailBank from "../../components/Detail/DetailBank";
 
 const BankDetailPage = () => {
 
-	const { formatDateToString } = formatValues();
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBank:true}, false), "Dettaglio banca");
 	const fields = [
 		{ label: "Id Banca", value: "acquirerId" },
-		{ label: "Nome Banca", value: "denomination" },
+		// { label: "Nome Banca", value: "denomination" },
 		{ label: "Limite Rate", value: "rateLimit" },
 		{ label: "Client Id", value: "clientId" },
 		{ label: "Client Secret", value: "clientSecret" },

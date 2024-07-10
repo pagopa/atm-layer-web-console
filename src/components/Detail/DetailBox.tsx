@@ -30,7 +30,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 					<Grid item xs={12}>
 						<Box bgcolor={theme.palette?.primary?.main} py={1} px={2}>
 							<Typography variant="h6" fontWeight={"bold"} color={"white"}>
-								{detail.fileName}
+								{detail.fileName || detail.denomination}
 							</Typography>
 						</Box>
 					</Grid>
