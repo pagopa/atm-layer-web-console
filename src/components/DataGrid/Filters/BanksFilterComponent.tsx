@@ -40,8 +40,8 @@ const BanksFilterComponent = ({ filterValues, handleChange, handleRateChange, er
 		</Grid>
 		<Grid item xs={4}>
 			<FormControl fullWidth error={showErrors && (!!errors.rateMin || !!errors.rateMax)}>
-				<Grid container alignItems="center" spacing={2}>
-					<Grid item xs={5}>
+				<Grid container alignItems="center" spacing={1}>
+					<Grid item xs={5.5}>
 						<TextField
 							id="rateMin"
 							name="rateMin"
@@ -56,10 +56,10 @@ const BanksFilterComponent = ({ filterValues, handleChange, handleRateChange, er
 							fullWidth
 						/>
 					</Grid>
-					<Grid item xs={2} style={{ textAlign: "center" }}>
+					<Grid item xs={1} style={{ textAlign: "center" }}>
 						<Typography variant="body1">-</Typography>
 					</Grid>
-					<Grid item xs={5}>
+					<Grid item xs={5.5}>
 						<TextField
 							id="rateMax"
 							name="rateMax"
