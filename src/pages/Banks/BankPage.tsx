@@ -9,7 +9,7 @@ import { ActionAlert } from "../../components/Commons/ActionAlert";
 import BankDataGrid from "../../components/DataGrid/BanksDataGrid";
 
 const BankPage = () => {
-	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:false}, false), "Banche");
+	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isBpmn:false}, false), "Gestione banche");
 	const { clearStorage } = useContext(Ctx);
 
 	const [type, setType] = useState("");

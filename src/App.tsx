@@ -24,6 +24,7 @@ import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import { JwtUser } from "./model/UserModel";
 import BankPage from "./pages/Banks/BankPage";
+import BankDetailPage from "./pages/Banks/BankDetailPage";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -45,6 +46,7 @@ const LocalRoutes = () => (
 			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
 
 			<Route path={routes.BANK} element={<PageLayout><BankPage /></PageLayout>} />
+			<Route path={routes.BANK_DETAILS} element={<PageLayout><BankDetailPage /></PageLayout>} />
 		</Route>
 		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
 		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />

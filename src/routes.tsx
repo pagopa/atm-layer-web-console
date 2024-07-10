@@ -9,6 +9,7 @@ const ROUTES = {
 	BPMN_DETAILS: "/bpmnId/:bpmnId/modelVersion/:modelVersion",
 	WORKFLOW_RESOURCE_DETAILS: "/workflowResourceId/:workflowResourceId",
 	RESOURCES_DETAILS: "/resourceId/:resourceId",
+	BANK_DETAILS: "/bankId/:acquirerId",
 	CREATE_BPMN: "/bpmn/create",
 	ASSOCIATE_BPMN: "/bpmn/associate",
 	CREATE_RESOURCE: "/resources/create",

@@ -7,4 +7,5 @@ export type PageDto= {
 isBpmn?: boolean;
 isWR?: boolean;
 isStatic?: boolean;
+isBank?: boolean;
 };

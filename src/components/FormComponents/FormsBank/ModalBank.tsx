@@ -22,7 +22,7 @@ type Props = {
 const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController } = useContext(Ctx);
-	const recordParamsString = sessionStorage.getItem("recordParamsBank");
+	const recordParamsString = sessionStorage.getItem("recordParams");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const initialValues = {
@@ -90,7 +90,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				window.location.reload();
+				// window.location.reload();
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -110,7 +110,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					// window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -132,7 +132,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					// window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -203,30 +203,6 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-rate-test" }} />
                 	</Grid></>
                 
-				}
-				{
-					type === UPDATE_BANK && 
-                <><Grid xs={5} item my={1}>
-                	<TextField
-                		fullWidth
-                		id="clientId"
-                		name="clientId"
-                		label={"Client ID"}
-                		placeholder={"client ID"}
-                		size="small"
-                		value={recordParams.clientId}
-                		inputProps={{ readOnly: true }} />
-                </Grid><Grid xs={5} item my={1}>
-                	<TextField
-                		fullWidth
-                		id="clientSecret"
-                		name="clientSecret"
-                		label={"Client Secret"}
-                		placeholder={"client secret"}
-                		size="small"
-                		value={recordParams.clientSecret}
-                		inputProps={{ readOnly: true }} />
-                </Grid></>
 				}
 			</Grid>
 		</ModalTemplate>

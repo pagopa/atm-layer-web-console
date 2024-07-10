@@ -183,6 +183,18 @@ export const commonBreadRoot = (currentPage:PageDto, isDetail:boolean=false, rec
 
 		});
 	}
+	if(currentPage?.isBank){
+		links.push({
+			rootValue: ROUTES.BANK,
+			rootName: "Gestione banche"
+		});
+	}
+	if(currentPage?.isBank && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.BANK_DETAILS, { acquirerId: recordParams?.acquirerId }),
+			rootName: "Dettaglio banca"
+		});
+	}
 	return links;
 };
 
