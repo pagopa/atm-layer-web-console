@@ -7,7 +7,7 @@ const useColumns: any = () => {
 
 	const { formatDateToString, extractRelativeCdnPath } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any,  deleteColumnBanks: any, editColumnBanks: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
 
 		const functionTypeColumn = {
 			field: "functionType",
@@ -382,7 +382,7 @@ const useColumns: any = () => {
 				{
 					field: "acquirerId",
 					cellClassName: "justifyContentNormal",
-					headerName: "Id Banca",
+					headerName: "ID Banca",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -444,30 +444,7 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "action1",
-					cellClassName: "justifyContentNormal",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => editColumnBanks(params),
-					sortable: false,
-					flex: 0.5
-				},
-				{
-					field: "action2",
-					cellClassName: "justifyContentNormal",
-					headerName: "",
-					align: "right",
-					hideSortIcons: true,
-					disableColumnMenu: true,
-					editable: false,
-					renderCell: (params: any) => deleteColumnBanks(params),
-					sortable: false,
-					flex: 0.5
-				}
+				commonActionColumn(BANKS)
 			];
 		default:
 			return [];
@@ -511,6 +488,13 @@ const useColumns: any = () => {
 					"lastUpdatedBy": false
 				}
 			);
+		case BANKS:
+			return (
+				{
+					"clientId": false,
+					"clientSecret": false
+				}
+			);
 		default:
 			return {};
 		}
@@ -523,6 +507,8 @@ const useColumns: any = () => {
 		     return generatePath(ROUTES.RESOURCES_DETAILS, { resourceId: param.row.resourceId });
 		case WORKFLOW_RESOURCE:
 			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
+		case BANKS:
+			return generatePath(ROUTES.BANK, {acquirerId: param.row.acquirerId });
 		default:
 			return [];
 		}

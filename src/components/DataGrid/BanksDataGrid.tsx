@@ -1,6 +1,7 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
+import React from "react";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { getQueryString } from "../Commons/Commons";
@@ -29,8 +30,11 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 	const [loadingButton, setLoadingButton] = useState(false);
 
 	const initialValues = {
-		name: "",
-		value: ""
+		acquirerId: "",
+		denomination: "",
+		clientId: "",
+		rateMax: "",
+		rateMin: ""
 	};
 
 	const emptyResponse = {page:0,limit:10,itemsFound:0,totalPages:0,results:[]};
@@ -82,48 +86,52 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 
 	return (
 		<Box p={2}>
-			<FilterBar
-				filterValues={filterValues}
-				setFilterValues={setFilterValues}
-				setTableList={tableListBanks}
-				getAllList={getAllBanksList}
-				newFilterValues={initialValues}
-				driver={BANKS}
-				loadingButton={loadingButton}
-				setLoadingButton={setLoadingButton}
-				createIcon={true}
-				handleClick={handleModalClick}
-			/>
-			<CustomDataGrid
-				disableColumnFilter
-				disableColumnSelector
-				disableDensitySelector
-				disableRowSelectionOnClick
-				autoHeight
-				className="CustomDataGrid"
-				columns={columns}
-				getRowId={(r) => r.acquirerId}
-				hideFooterSelectedRowCount={true}
-				rowHeight={50}
-				rows={tableListBanks}
-				rowCount={totalBanksFound}
-				sortingMode="server"
-				slots={{
-					noRowsOverlay: () => (
-						<CustomNoRowsOverlay
-							message="Banche non presenti non presenti"
-							statusError={statusError}
-						/>
-					),
-				}}
-				columnVisibilityModel={visibleColumns("")}
-				paginationMode="server"
-				pagination
-				pageSizeOptions={[10]}
-				paginationModel={{ ...paginationModel }}
-				onPaginationModelChange={(newPage) => getAllBanksList(filterValues, newPage.page)}
-				loading={loading}
-			/>
+			<Box mt={-2}>
+				<FilterBar
+					filterValues={filterValues}
+					setFilterValues={setFilterValues}
+					setTableList={tableListBanks}
+					getAllList={getAllBanksList}
+					newFilterValues={initialValues}
+					driver={BANKS}
+					loadingButton={loadingButton}
+					setLoadingButton={setLoadingButton}
+					createIcon={true}
+					handleClick={handleModalClick}
+				/>
+			</Box>
+			<Box mt={2}>
+				<CustomDataGrid
+					disableColumnFilter
+					disableColumnSelector
+					disableDensitySelector
+					disableRowSelectionOnClick
+					autoHeight
+					className="CustomDataGrid"
+					columns={columns}
+					getRowId={(r) => r.acquirerId}
+					hideFooterSelectedRowCount={true}
+					rowHeight={50}
+					rows={tableListBanks}
+					rowCount={totalBanksFound}
+					sortingMode="server"
+					slots={{
+						noRowsOverlay: () => (
+							<CustomNoRowsOverlay
+								message="Banche non presenti non presenti"
+								statusError={statusError}
+							/>
+						),
+					}}
+					columnVisibilityModel={visibleColumns(BANKS)}
+					paginationMode="server"
+					pagination
+					pageSizeOptions={[10]}
+					paginationModel={{ ...paginationModel }}
+					onPaginationModelChange={(newPage) => getAllBanksList(filterValues, newPage.page)}
+					loading={loading}
+				/>
+			</Box>
 			<ModalBank
 				open={open}
 				setOpen={setOpen}
@@ -133,6 +141,7 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 				setMessage={setMessage}
 				setTitle={setTitle}
 			/>
+
 		</Box>
 	);
 };
