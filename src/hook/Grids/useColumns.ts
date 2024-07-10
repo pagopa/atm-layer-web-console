@@ -508,7 +508,7 @@ const useColumns: any = () => {
 		case WORKFLOW_RESOURCE:
 			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
 		case BANKS:
-			return generatePath(ROUTES.BANK, {acquirerId: param.row.acquirerId });
+			return generatePath(ROUTES.BANK_DETAILS, {acquirerId: param.row.acquirerId });
 		default:
 			return [];
 		}
