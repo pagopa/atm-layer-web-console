@@ -63,7 +63,7 @@ export default function BankDataGrid ({ type, setType, open, setOpen, setOpenSna
 				setPaginationModel({ page, pageSize: limit });
 				setTotalBanksFound(itemsFound);
 			} else {
-				setTableListBanks([]);
+				setTableListBanks(emptyResponse);
 			}
 		} catch (error) {
 			setLoadingButton(false);

@@ -4,7 +4,7 @@ import { Ctx } from "../../../DataContext";
 import BankPage from "../BankPage";
 
 
-describe("BpmnPage test", () => {
+describe("BankPage test", () => {
 	const clearStorage = jest.fn();
 	test("First render", () => {
 		render(
@@ -14,7 +14,7 @@ describe("BpmnPage test", () => {
 				</BrowserRouter>   
 			</Ctx.Provider>
 		);
-		expect(screen.getAllByText("Banche")[0]).toBeInTheDocument();
+		expect(screen.getAllByText("Gestione banche")[0]).toBeInTheDocument();
 		expect(clearStorage).toHaveBeenCalled();
 	});
 });

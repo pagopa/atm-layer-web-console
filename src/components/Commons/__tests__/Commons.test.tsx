@@ -77,7 +77,7 @@ describe("getQueryString", () => {
   test("querystring driver not present", () => {
     const driver = "DRIVER_NON_GESTITO";
     const result = getQueryString(filterValues, driver, URL);
-    expect(result).toEqual("");
+    expect(result).toEqual("www.example.com");
   });
 
   describe("handleSnackbar", () => {

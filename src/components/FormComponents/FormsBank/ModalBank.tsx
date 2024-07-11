@@ -86,7 +86,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		switch (type) {
 		case DELETE_BANK: {
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "DELETE", abortController })();
+				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "POST", abortController })();
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);

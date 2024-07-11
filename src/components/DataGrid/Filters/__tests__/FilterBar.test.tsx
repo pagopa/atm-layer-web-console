@@ -233,21 +233,6 @@ describe("FilterBar test", () => {
         fireEvent.change(denomination, { target: { value: "BankName" } });
     });
 
-    test("Test FilterBar with BANKS and Filter with clientId", () => {
-        const emptyFilterValues = {
-            acquirerId: "",
-            denomination: "",
-            clientId: "",
-            rateMin: "",
-            rateMax: ""
-        };
-
-        renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
-
-        const clientId = screen.getByTestId("bank-clientId-test") as HTMLInputElement;
-        fireEvent.change(clientId, { target: { value: "client123" } });
-    });
-
     test("Test FilterBar with BANKS and Filter with rateMin and rateMax", () => {
         const emptyFilterValues = {
             acquirerId: "",

@@ -4,7 +4,7 @@ import { Ctx } from "../../../../DataContext";
 import { generatePath } from "react-router-dom";
 import ModalBank from "../ModalBank";
 import { CREATE_BANK, DELETE_BANK, UPDATE_BANK } from "../../../../commons/constants";
-import { BANKS_DELETE, BANKS_UPDATE } from "../../../../commons/endpoints";
+import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../../commons/endpoints";
 
 jest.mock("../../../../hook/fetch/fetchRequest", () => ({
   fetchRequest: jest.fn(),
@@ -20,7 +20,7 @@ const mockSetTitle = jest.fn();
 
 const renderComponent = (type: string) => {
   return render(
-    <Ctx.Provider value={ abortController}>
+    <Ctx.Provider value={{ abortController }}>
       <ModalBank
         type={type}
         open={true}
@@ -35,11 +35,11 @@ const renderComponent = (type: string) => {
 };
 
 const setBankInSessionStorage = () => {
-    sessionStorage.setItem("recordParams", JSON.stringify({
-        acquirerId: "testAcquirerId",
-		denomination: "testDenomination",
-		rateLimit: "restRateLimit"
-    }));
+  sessionStorage.setItem("recordParams", JSON.stringify({
+    acquirerId: "testAcquirerId",
+    denomination: "testDenomination",
+    rateLimit: "testRateLimit"
+  }));
 };
 
 describe("ModalBank component", () => {
@@ -63,11 +63,14 @@ describe("ModalBank component", () => {
   test("renders correctly for UPDATE_BANK", () => {
     setBankInSessionStorage();
     renderComponent(UPDATE_BANK);
-    expect(screen.getByLabelText("Update istituto bancario")).toBeInTheDocument();
+
+    expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
+    expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
+    expect(screen.getByLabelText("Rate Limite")).toBeInTheDocument();
   });
 
-  test("renders correctly for DELETE_USER", () => {
-    setBankInSessionStorage();    
+  test("renders correctly for DELETE_BANK", () => {
+    setBankInSessionStorage();
     renderComponent(DELETE_BANK);
 
     expect(screen.getByText("Sei sicuro di voler cancellare questo istituto bancario dal registro degli aderenti?")).toBeInTheDocument();
@@ -84,51 +87,88 @@ describe("ModalBank component", () => {
     await waitFor(() => {
       expect(mockFetchRequest).toHaveBeenCalledWith({
         urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: "testAcquirerId" }),
-        method: "DELETE",
+        method: "POST",
+        abortController
       });
     });
   });
 
+  test("handles form submission for CREATE_BANK with valid data", async () => {
+    renderComponent(CREATE_BANK);
+    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "Bank created successfully" } });
 
-//   test("handles form submission for UPDATE_BANK", async () => {
-//     setBankInSessionStorage();
-//     renderComponent(UPDATE_BANK);
-//     mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+    fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
+    fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
+    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "newRateLimit" } });
+    fireEvent.click(screen.getByText("Conferma"));
 
-//     fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "nuovo nome" } });
-//     fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "nuovo rate" } });
-//     fireEvent.click(screen.getByText("Conferma"));
+    await waitFor(() => {
+      expect(mockFetchRequest).toHaveBeenCalledWith({
+        urlEndpoint: BANKS_CREATE,
+        method: "POST",
+        abortController,
+        body: {
+          acquirerId: "newAcquirerId",
+          denomination: "newDenomination",
+          rateLimit: "newRateLimit"
+        },
+      });
+    });
+  });
 
-//     await waitFor(() => {
-//       expect(mockFetchRequest).toHaveBeenCalledWith({
-//         urlEndpoint: generatePath(BANKS_UPDATE, { acquirerId: "testAcquirerId" }),
-//         method: "PUT",
-//         body: {
-//             denomination: "nuovo nome",
-//             rateLimit: "nuovo rate"
-//         },
-//       });
-//     });
-//   });
+  test("handles form submission for UPDATE_BANK with valid data", async () => {
+    setBankInSessionStorage();
+    renderComponent(UPDATE_BANK);
+    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "Bank updated successfully" } });
 
-//   test("handles close modal", () => {
-//     renderComponent(CREATE_BANK);
+    fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "updatedDenomination" } });
+    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "updatedRateLimit" } });
+    fireEvent.click(screen.getByText("Conferma"));
 
-//     fireEvent.click(screen.getByText("Annulla"));
+    await waitFor(() => {
+      expect(mockFetchRequest).toHaveBeenCalledWith({
+        urlEndpoint: generatePath(BANKS_UPDATE, { acquirerId: "testAcquirerId" }),
+        method: "PUT",
+        abortController,
+        body: {
+          denomination: "updatedDenomination",
+          rateLimit: "updatedRateLimit"
+        },
+      });
+    });
+  });
 
-//     expect(mockSetOpen).toHaveBeenCalledWith(false);
-//   });
+  test("handles close modal", () => {
+    renderComponent(CREATE_BANK);
 
-//   test("handles validation errors for UPDATE_USER", async () => {
-//     setBankInSessionStorage();
+    fireEvent.click(screen.getByText("Annulla"));
 
-//     renderComponent(UPDATE_BANK);
+    expect(mockSetOpen).toHaveBeenCalledWith(false);
+  });
 
-//     fireEvent.click(screen.getByText("Conferma"));
+  test("handles validation errors for CREATE_BANK", async () => {
+    renderComponent(CREATE_BANK);
 
-//     await waitFor(() => {
-//       expect(screen.getByText("Campo obbligatorio")).toBeInTheDocument();
-//       expect(mockFetchRequest).not.toHaveBeenCalled();
-//     });
-//   });
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(screen.getAllByText("Campo obbligatorio").length).toBe(3);
+      expect(mockFetchRequest).not.toHaveBeenCalled();
+    });
+  });
+
+  test("handles validation errors for UPDATE_BANK", async () => {
+    setBankInSessionStorage();
+
+    renderComponent(UPDATE_BANK);
+
+    fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "" } });
+    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "" } });
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(screen.getAllByText("Campo obbligatorio").length).toBe(2);
+      expect(mockFetchRequest).not.toHaveBeenCalled();
+    });
+  });
 });

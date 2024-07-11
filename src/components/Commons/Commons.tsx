@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CREATE_BANK, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_BANK, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BANKS, CREATE_BANK, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_BANK, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 
@@ -30,73 +30,55 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = ( filterValues: any, driver: string, URL?: string) => {
-	
-	let queryString="";
-	if(URL&& URL!=="") {
-	  queryString = queryString.concat(URL);
-	}
-		
-	switch (driver) {
-	case PROCESS_RESOURCES:
-		if (filterValues?.functionType) {
-			queryString = queryString.concat(`&functionType=${filterValues.functionType.toUpperCase()}`);
-		}
+type DriverType = 
+  | typeof PROCESS_RESOURCES
+  | typeof RESOURCES
+  | typeof WORKFLOW_RESOURCE
+  | typeof DELETE_ASSOCIATION
+  | typeof BANKS;
 
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
+export const getQueryString = (filterValues: any, driver: string, URL?: string) => {
+	let queryString = URL ? URL : "";
 
-		if (filterValues?.modelVersion) {
-			queryString = queryString.concat(`&modelVersion=${filterValues.modelVersion}`);
+	const addQueryParam = (param: string, value: any) => {
+		if (value) {
+			queryString = queryString.concat(`&${param}=${value}`);
 		}
+	};
 
-		if (filterValues?.acquirerId) {
-			queryString = queryString.concat(`&acquirerId=${filterValues.acquirerId}`);
+	const drivers: Record<DriverType, () => void> = {
+		[PROCESS_RESOURCES]: () => {
+			addQueryParam("functionType", filterValues?.functionType?.toUpperCase());
+			addQueryParam("fileName", filterValues?.fileName);
+			addQueryParam("modelVersion", filterValues?.modelVersion);
+			addQueryParam("acquirerId", filterValues?.acquirerId);
+			addQueryParam("status", filterValues?.status);
+		},
+		[RESOURCES]: () => {
+			addQueryParam("fileName", filterValues?.fileName);
+			addQueryParam("noDeployableResourceType", filterValues?.noDeployableResourceType);
+			addQueryParam("storageKey", filterValues?.storageKey);
+		},
+		[WORKFLOW_RESOURCE]: () => {
+			addQueryParam("resourceType", filterValues?.resourceType);
+			addQueryParam("fileName", filterValues?.fileName);
+			addQueryParam("status", filterValues?.status);
+		},
+		[DELETE_ASSOCIATION]: () => {
+			addQueryParam("branchId", filterValues?.branchId);
+			addQueryParam("terminalId", filterValues?.terminalId);
+		},
+		[BANKS]: () => {
+			addQueryParam("acquirerId", filterValues?.acquirerId);
+			addQueryParam("denomination", filterValues?.denomination);
+			addQueryParam("clientId", filterValues?.clientId);
+			addQueryParam("rateMin", filterValues?.rateMin);
+			addQueryParam("rateMax", filterValues?.rateMax);
 		}
+	};
 
-		if (filterValues?.status) {
-			queryString = queryString.concat(`&status=${filterValues.status}`);
-		}
-		break;
-	case RESOURCES:
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
-
-		if (filterValues?.noDeployableResourceType) {
-			queryString = queryString.concat(`&noDeployableResourceType=${filterValues.noDeployableResourceType}`);
-		}
-
-		if (filterValues?.storageKey) {
-			queryString = queryString.concat(`&storageKey=${RESOURCE_BASE_STORAGEKEY}${filterValues.storageKey}`);
-		}
-		break;
-	case WORKFLOW_RESOURCE:
-
-		if (filterValues?.resourceType) {
-			queryString = queryString.concat(`&resourceType=${filterValues.resourceType}`);
-		}
-
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
-
-		if (filterValues?.status) {
-			queryString = queryString.concat(`&status=${filterValues.status}`);
-		}
-		break;
-	case DELETE_ASSOCIATION:
-		if (filterValues?.branchId) {
-			queryString = queryString.concat(`&branchId=${filterValues.branchId}`);
-		}
-
-		if (filterValues?.terminalId) {
-			queryString = queryString.concat(`&terminalId=${filterValues.terminalId}`);
-		}
-		break;
-	default:
-		return "";
+	if (drivers[driver as DriverType]) {
+		drivers[driver as DriverType]();
 	}
 
 	return queryString;
