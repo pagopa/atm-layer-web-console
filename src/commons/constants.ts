@@ -69,3 +69,4 @@ export const PROFILE_IDS = [
 	}
 ];
 
+export const RESOURCE_BASE_STORAGEKEY = "RESOURCE/files/";

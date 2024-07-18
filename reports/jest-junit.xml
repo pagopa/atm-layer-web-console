@@ -357,7 +357,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring driver not present" time="0">
+    <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.001">
     </testcase>
@@ -369,7 +369,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
@@ -471,7 +471,7 @@
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
+    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0.004">
     </testcase>
@@ -485,7 +485,7 @@
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-06-20T12:51:52" time="0.057" tests="20">
     <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0">
+    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.051">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
@@ -497,9 +497,9 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.049">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD FORM" time="3.037">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di un importo" time="0">
     </testcase>

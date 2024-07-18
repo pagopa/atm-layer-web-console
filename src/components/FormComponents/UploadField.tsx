@@ -10,17 +10,22 @@ type Props = {
     error?: string;
 	setFormData: React.Dispatch<React.SetStateAction<any>>;
 	formData: any;
-	allowedFile?: string;
+	keepExtension?: boolean;
 };
 
 
-export default function UploadField({titleField, file, clearFile,error, name, setFormData, formData, allowedFile}:Props) {
+export default function UploadField({titleField, file, clearFile,error, name, setFormData, formData, keepExtension}:Props) {
 
 	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (files && files.length > 0) {
 			const selectedFile = files[0];
-			setFormData({ ...formData, file: selectedFile });
+			// eslint-disable-next-line functional/no-let
+			let uploadedFilename = selectedFile.name;
+			if (!keepExtension){
+				uploadedFilename = uploadedFilename.substring(0, uploadedFilename.lastIndexOf("."));
+			}
+			setFormData({ ...formData, file: selectedFile, filename: uploadedFilename});
 		}
 	};
 

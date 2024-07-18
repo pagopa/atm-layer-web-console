@@ -308,7 +308,7 @@
     <testCase name="formatValues tests Verifica la funzione checkEmpty" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione del percentuale" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della valuta" duration="0"/>
-    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="0"/>
+    <testCase name="formatValues tests Verifica la combinazione di due valori" duration="1"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo con valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione in minuscolo senza valore" duration="0"/>
     <testCase name="formatValues tests Verifica la formattazione della data" duration="0"/>

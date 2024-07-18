@@ -121,7 +121,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					if (response?.success) {
 						const updatedResponse = {
 							...response.valuesObj,
-							fileName: response.valuesObj?.resourceFile?.fileName
+							fileName: response.valuesObj?.resourceFile?.fileName,
+							storageKey: response.valuesObj?.resourceFile?.storageKey
 						};
 						sessionStorage.setItem("recordParams", JSON.stringify(updatedResponse));
 						setTimeout(() => {

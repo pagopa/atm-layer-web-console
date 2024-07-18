@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCE_BASE_STORAGEKEY, RESOURCES, ROLLBACK_WR, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 import { Profile, User } from "../../model/UserModel";
@@ -67,6 +67,10 @@ export const getQueryString = ( filterValues: any, driver: string, URL?: string)
 
 		if (filterValues?.noDeployableResourceType) {
 			queryString = queryString.concat(`&noDeployableResourceType=${filterValues.noDeployableResourceType}`);
+		}
+
+		if (filterValues?.storageKey) {
+			queryString = queryString.concat(`&storageKey=${RESOURCE_BASE_STORAGEKEY}${filterValues.storageKey}`);
 		}
 		break;
 	case WORKFLOW_RESOURCE:

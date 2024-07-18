@@ -53,7 +53,7 @@ export const CreateResources = () => {
 					fileExtension && fileExtension === formData.filename.split(".").pop()?.toLowerCase() ?
 						"" :
 						"L'estensione del file non corrisponde con quello caricato"
-					: "Campo obbligatorio",
+					: "Il nome del file deve essere nel formato nome.estensione gli unici caratteri speciali ammessi sono _ e - ",
 			resourceType: formData.resourceType ?
 				formData.resourceType  === "HTML" && fileExtension && fileExtension === "html" || 
 				formData.resourceType  === "OTHER" && fileExtension && fileExtension !== "html" ?
@@ -70,7 +70,7 @@ export const CreateResources = () => {
 	};
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: undefined });
+		setFormData({ ...formData, file: undefined, filename: "" });
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -121,6 +121,7 @@ export const CreateResources = () => {
 				error={errors.file}
 				setFormData={setFormData}
 				formData={formData}
+				keepExtension={true}
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField
