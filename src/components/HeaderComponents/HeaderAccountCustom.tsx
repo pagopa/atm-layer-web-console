@@ -45,7 +45,7 @@ export const HeaderAccountCustom = ({
 					navigate(ROUTES.UNAUTHORIZED_PAGE);
 				}
 			} else {
-				navigate(ROUTES.LOGIN);
+				// navigate(ROUTES.LOGIN);
 			}
 		} catch (error) {
 			console.error("ERROR", error);
