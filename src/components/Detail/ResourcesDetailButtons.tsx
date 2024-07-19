@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Ctx } from "../../DataContext";
 import { DELETE_RES, DOWNLOAD_RES, LETTURA, SCRITTURA, UPDATE_RES } from "../../commons/constants";
-import { getFilteredButtonConfig, getRoleDescriptionsByUser } from "../Commons/Commons";
+import { getFilteredButtonConfig, getProfileIdsArray } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
 
 
@@ -16,7 +16,7 @@ const ResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) =>
 
 	const { loggedUserInfo } = useContext(Ctx);
 
-	const userProfileDescriptions = getRoleDescriptionsByUser(loggedUserInfo);
+	const userProfileDescriptions = getProfileIdsArray(loggedUserInfo);
 	
 	const buttonConfigs = [
 	  { text: "Aggiorna", action: UPDATE_RES, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA) },
