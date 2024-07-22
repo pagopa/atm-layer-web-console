@@ -185,6 +185,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			loading={loading}
 			canOnlyConfirm={type===UPDATE_FIRST_USER ? true : false}
 		>
+			{ type !== DELETE_USER &&
 			<Grid sx={{px: 2}}>
 				<Grid xs={5} item my={1}>
 					<TextField
@@ -213,7 +214,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.name)}
 						helperText={errors.name}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
@@ -228,7 +229,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.surname)}
 						helperText={errors.surname}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER }}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test" }}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
@@ -240,7 +241,9 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						isFirstUser={type === UPDATE_FIRST_USER ? true : false}
 					/>
 				</Grid>
-			</Grid>	
+			</Grid>
+			}
+				
 		</ModalTemplate>
 	);
 };
