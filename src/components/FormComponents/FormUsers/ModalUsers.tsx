@@ -6,7 +6,7 @@ import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextMo
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, mockedProfiles, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
+import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
@@ -23,10 +23,9 @@ type Props = {
 
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 	const { extractDescriptionsAsArray } = formatValues();
-	const { abortController, loggedUserInfo } = useContext(Ctx);
+	const { abortController, profilesAvailable, loggedUserInfo } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsUser");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
-	const profilesAvailable = mockedProfiles;
 
 	const initialValues = {
 		userId: "",
@@ -132,7 +131,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					// window.location.reload();
+					window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);

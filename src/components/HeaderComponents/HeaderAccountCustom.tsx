@@ -52,23 +52,23 @@ export const HeaderAccountCustom = ({
 		}
 	};
 
-	// const getAllProfilesList = async () => {
+	const getAllProfilesList = async () => {
 
-	// 	try {
-	// 		const response = await fetchRequest({ urlEndpoint: PROFILE, method: "GET", abortController })();
+		try {
+			const response = await fetchRequest({ urlEndpoint: PROFILE, method: "GET", abortController })();
 
-	// 		if (response?.success) {
-	// 			setProfilesAvailable(response.valuesObj?.profiles);
-	// 		} else {
-	// 			setProfilesAvailable([]);
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("ERROR", error);
-	// 	}
-	// };
+			if (response?.success) {
+				setProfilesAvailable(response.valuesObj);
+			} else {
+				setProfilesAvailable([]);
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
 
 	useEffect(() => {
-		// void getAllProfilesList();
+		void getAllProfilesList();
 		if(!loggedUserInfo.userId && token){
 			void getUserInfo();
 		}
