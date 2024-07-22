@@ -24,7 +24,7 @@ import CreateResourcesPage from "./pages/Resources/CreateResourcesPage";
 import ResourcesDetailPage from "./pages/Resources/ResourcesDetailPage";
 import UsersPage from "./pages/Users/UsersPage";
 import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
-import { LETTURA, SCRITTURA, UTENTI } from "./commons/constants";
+import { LETTURA, mockedProfiles, SCRITTURA, UTENTI } from "./commons/constants";
 import { Profile, User } from "./model/UserModel";
 import { fetchRequest } from "./hook/fetch/fetchRequest";
 import { PROFILE } from "./commons/endpoints";
@@ -79,12 +79,14 @@ function App() {
 		lastUpdatedAt: "",
 		profiles: [] as Array<Profile>
 	});
-	const [profilesAvailable, setProfilesAvailable] = useState<Array<Profile>>([{
-		description: "",
-		profileId: 0,
-		createdAt: "",
-		lastUpdatedAt: "",
-	}]);
+	// const [profilesAvailable, setProfilesAvailable] = useState<Array<Profile>>([{
+	// 	description: "",
+	// 	profileId: 0,
+	// 	createdAt: "",
+	// 	lastUpdatedAt: "",
+	// }]);
+
+	const [profilesAvailable, setProfilesAvailable] = useState<Array<Profile>>(mockedProfiles);
 
 	function clearAll(){
 		if(sessionStorage.getItem("jwt_console")){

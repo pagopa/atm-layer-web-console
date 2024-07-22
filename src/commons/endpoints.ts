@@ -26,7 +26,7 @@ export const USER_EMAIL = "/info/email";
 export const USER_INFO = "/user/first-access";
 
 export const GET_ALL_USERS = "/user";
-export const CREATE_USERS = "/user";
-export const UPDATE_USERS = "/user/update/:userId";
+export const CREATE_USERS = "/user/insert-with-profiles";
+export const UPDATE_USERS = "/user/update-with-profiles";
 export const DELETE_USERS = "/user/delete/userId/:userId";
 export const PROFILE = "/profile";

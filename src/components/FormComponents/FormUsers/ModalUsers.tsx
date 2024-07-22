@@ -6,7 +6,7 @@ import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextMo
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
+import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, mockedProfiles, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
@@ -23,9 +23,10 @@ type Props = {
 
 const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 	const { extractDescriptionsAsArray } = formatValues();
-	const { abortController, profilesAvailable } = useContext(Ctx);
+	const { abortController, loggedUserInfo } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsUser");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
+	const profilesAvailable = mockedProfiles;
 
 	const initialValues = {
 		userId: "",
@@ -127,11 +128,11 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					profileIds: convertStringToProfiles(formData.profileIds, profilesAvailable),
 				};
 				try {
-					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData })();
+					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					// window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -146,11 +147,14 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		case UPDATE_FIRST_USER: {
 			if (validateForm(false)) {
 				const postData = {
+					userId: formData.userId,
+					name: formData.name,
+					surname: formData.surname,
 					profileIds: convertStringToProfiles(formData.profileIds, profilesAvailable),
 				};
 				console.log(formData, postData);
 				try {
-					const response = await fetchRequest({ urlEndpoint:generatePath(UPDATE_USERS, { userId: recordParams.userId}), method: "PUT", abortController, body: postData })();
+					const response = await fetchRequest({ urlEndpoint:UPDATE_USERS, method: "PUT", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
