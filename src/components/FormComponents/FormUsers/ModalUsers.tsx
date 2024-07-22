@@ -157,7 +157,13 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					if (response?.success){
+						window.location.reload();
+					} else {
+						setTimeout(() => {
+							window.location.reload();
+						}, 3000);
+					}
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);

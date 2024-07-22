@@ -50,7 +50,7 @@ export default function HomePage () {
 						homePageCard
 							.filter(el => el.id !== "home" && isCardVisible(el.id))
 							.map((e) => (
-						  <Grid item xs={xsValue} mx={"auto"} key={e.title}>
+								<Grid item xs={12} sm={12} md={6} lg={4} mx={"auto"} key={e.title}>
 									<HomeCardComponent
 							  title={e.title}
 							  description={e.description}
