@@ -147,7 +147,13 @@ describe("ModalUsers component", () => {
         urlEndpoint: generatePath(UPDATE_USERS, { userId: "user@example.com" }),
         method: "PUT",
         abortController: mockContextValue.abortController,
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: {
+          name: "Luigi",
+          surname: "Rossi",
+          userId: "user@example.com",
           profileIds: [2],
         },
       });

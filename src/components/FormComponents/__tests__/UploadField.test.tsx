@@ -30,6 +30,7 @@ describe("UploadField Component", () => {
     expect(mockSetFormData).toHaveBeenCalledWith({
       ...defaultProps.formData,
       file,
+      filename: "test-file"
     });
   });
 
