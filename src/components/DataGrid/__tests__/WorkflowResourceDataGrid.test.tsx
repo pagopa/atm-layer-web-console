@@ -15,6 +15,49 @@ afterEach(() => {
     global.fetch = originalFetch;
 })
 
+const mockContextValue = {
+    loggedUserInfo: {
+        userId: 'mario.rossi@pagopa.com',
+        name: 'Mario',
+        surname: 'Rossi',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+            {
+                description: "Gestione flussi in lettura",
+                profileId: 1,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione flussi in scrittura",
+                profileId: 2,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Rilascio BPMN",
+                profileId: 3,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Emulator",
+                profileId: 4,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    },
+    abortController: new AbortController()
+};
+
 describe("WorkflowResourceDataGrid test", () => {
 
     const abortController = new AbortController();
@@ -32,7 +75,7 @@ describe("WorkflowResourceDataGrid test", () => {
 
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={ mockContextValue }>
                     <BrowserRouter>
                         <WorkflowResourceDataGrid />
                     </BrowserRouter>
@@ -55,7 +98,7 @@ describe("WorkflowResourceDataGrid test", () => {
         });
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={ mockContextValue }>
                     <BrowserRouter>
                         <WorkflowResourceDataGrid />
                     </BrowserRouter>
@@ -75,7 +118,7 @@ describe("WorkflowResourceDataGrid test", () => {
         });
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={ mockContextValue }>
                     <BrowserRouter>
                         <WorkflowResourceDataGrid />
                     </BrowserRouter>
@@ -94,7 +137,7 @@ describe("WorkflowResourceDataGrid test", () => {
         });
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={ mockContextValue }>
                     <BrowserRouter>
                         <WorkflowResourceDataGrid />
                     </BrowserRouter>

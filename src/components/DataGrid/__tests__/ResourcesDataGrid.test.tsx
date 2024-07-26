@@ -13,15 +13,54 @@ beforeEach(() => {
 
 afterEach(() => {
     global.fetch = originalFetch;
-})
+});
+
+const mockContextValue = {
+    loggedUserInfo: {
+        userId: 'mario.rossi@pagopa.com',
+        name: 'Mario',
+        surname: 'Rossi',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+            {
+                description: "Gestione flussi in lettura",
+                profileId: 1,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione flussi in scrittura",
+                profileId: 2,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Rilascio BPMN",
+                profileId: 3,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Emulator",
+                profileId: 4,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    },
+    abortController: new AbortController()
+};
 
 describe("ResourcesDataGrid test", () => {
 
-    const abortController = new AbortController();
-
-
     test("ResourcesDataGrid.test Test", async () => {
-
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 status: 200,
@@ -32,7 +71,7 @@ describe("ResourcesDataGrid test", () => {
 
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={mockContextValue}>
                     <BrowserRouter>
                         <ResourcesDataGrid />
                     </BrowserRouter>
@@ -41,9 +80,7 @@ describe("ResourcesDataGrid test", () => {
         });
 
         fireEvent.click(screen.getByTestId("KeyboardArrowRightIcon"));
-
     });
-
 
     test("ResourcesDataGrid.test Test with empty table", async () => {
         global.fetch = jest.fn().mockResolvedValue({
@@ -53,15 +90,17 @@ describe("ResourcesDataGrid test", () => {
                 valuesObj: { page: 0, limit: 10, itemsFound: 0, totalPages: 0, results: [] },
             }),
         });
+        
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={mockContextValue}>
                     <BrowserRouter>
                         <ResourcesDataGrid />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
         });
+        
         await waitFor(() => expect(screen.queryByText("Risorse statiche non presenti")).toBeInTheDocument());
     });
 
@@ -73,15 +112,17 @@ describe("ResourcesDataGrid test", () => {
                 valuesObj: { message: "Missing Authentication Token" },
             }),
         });
+        
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={mockContextValue}>
                     <BrowserRouter>
                         <ResourcesDataGrid />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
         });
+        
         await waitFor(() => expect(screen.queryByText("Qualcosa è andato storto")).toBeInTheDocument());
     });
 
@@ -92,15 +133,16 @@ describe("ResourcesDataGrid test", () => {
                 success: true
             }),
         });
+        
         await act(async () => {
             render(
-                <Ctx.Provider value={{ abortController }}>
+                <Ctx.Provider value={mockContextValue}>
                     <BrowserRouter>
                         <ResourcesDataGrid />
                     </BrowserRouter>
                 </Ctx.Provider>
             );
-        })
+        });
     });
 
 });

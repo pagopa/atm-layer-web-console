@@ -1,13 +1,13 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
 const useColumns: any = () => {
 
-	const { formatDateToString, extractRelativeCdnPath } = formatValues();
+	const { formatDateToString, extractRelativeCdnPath, extractDescriptions } = formatValues();
 
-	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any) => {
+	const getColumnsGrid: any = (driver: string, showCustomHeader: any, renderCell: any, actionColumn: any, deleteColumn: any, deleteColumnUsers: any, editColumnUsers: any) => {
 
 		const functionTypeColumn = {
 			field: "functionType",
@@ -377,6 +377,86 @@ const useColumns: any = () => {
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
 			];
+		case USERS:
+			return [
+				{
+					field: "userName",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.name),
+					sortable: false,
+					flex: 0.7
+				},
+				{
+					field: "userSurname",
+					cellClassName: "justifyContentNormal",
+					headerName: "Cognome",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.surname),
+					sortable: false,
+					flex: 0.7
+				},
+				{
+					field: "userId",
+					cellClassName: "justifyContentNormal",
+					headerName: "Email",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.userId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "profileIds",
+					cellClassName: "justifyContentNormal",
+					headerName: "Ruoli assegnati",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, extractDescriptions(params.row.profiles)),
+					sortable: false,
+					flex: 1
+				},
+				createdAtColumn,
+				{
+				 field: "action1",
+				 cellClassName: "justifyContentNormal",
+				 headerName: "",
+				 align: "right",
+				 hideSortIcons: true,
+				 disableColumnMenu: true,
+				 editable: false,
+				 renderCell: (params: any) => editColumnUsers(params),
+				 sortable: false,
+				 flex: 0.5
+				},
+				{
+				 field: "action2",
+				 cellClassName: "justifyContentNormal",
+				 headerName: "",
+				 align: "right",
+				 hideSortIcons: true,
+				 disableColumnMenu: true,
+				 editable: false,
+				 renderCell: (params: any) => deleteColumnUsers(params),
+				 sortable: false,
+				 flex: 0.5
+				}
+			];
 		default:
 			return [];
 		}
@@ -420,7 +500,7 @@ const useColumns: any = () => {
 				}
 			);
 		default:
-			return [];
+			return {};
 		}
 	};
 	const getNavigationPaths: any = (driver: string, param: any) => {
