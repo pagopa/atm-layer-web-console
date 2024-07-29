@@ -20,6 +20,11 @@ export const UPDATE_WR= "updateWR";
 export const DELETE_WR= "deleteWR";
 export const DOWNLOAD_WR= "downloadWR";
 
+export const CREATE_USER = "createUser";
+export const UPDATE_USER = "updateUser";
+export const DELETE_USER = "deleteUser";
+export const UPDATE_FIRST_USER = "updateFirstUser";
+
 export const BPMN="BPMN";
 export const DMN = "DMN";
 export const FORM = "FORM";
@@ -28,6 +33,7 @@ export const PROCESS_RESOURCES="processResources";
 export const WORKFLOW_RESOURCE="workFlowResource";
 export const RESOURCES="staticResources";
 export const BPMN_ASSOCIATED = "bpmnAssociated";
+export const USERS = "users";
 
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
 export const MAX_LENGHT_LARGE = 50 ;
@@ -38,3 +44,32 @@ export const RESOURCE_BASE_STORAGEKEY = "RESOURCE/files/";
 export const ALERT_SUCCESS = "success";
 export const ALERT_ERROR = "error";
 export const ALERT_INFO = "info";
+
+export const LETTURA = 1;
+export const SCRITTURA = 2;
+export const RILASCIO = 3;
+export const EMULATOR = 4;
+export const UTENTI = 5;
+
+export const PROFILE_IDS = [
+	{
+		id: LETTURA,
+		defaultProfiles: []
+	},
+	{
+		id: SCRITTURA,
+		defaultProfiles: [LETTURA]
+	},
+	{
+		id: RILASCIO,
+		defaultProfiles: [LETTURA,SCRITTURA]
+	},
+	{
+		id: EMULATOR,
+		defaultProfiles: []
+	},
+	{
+		id: UTENTI,
+		defaultProfiles: []
+	}
+];

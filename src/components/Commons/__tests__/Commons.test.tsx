@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
-import { breadCrumbLinkComponent, commonBreadRoot, getQueryString, getTextModal, handleSnackbar, removeArrayItem, removeArrayItems, resetErrors } from "../Commons";
-import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { addDependentProfiles, breadCrumbLinkComponent, commonBreadRoot, convertProfileToString, convertStringToProfiles, getFilteredButtonConfig, getProfileDescriptionByProfileArray, getProfileDescriptionFromStorage, getProfileDescriptions, getProfileIdsArray, getQueryString, getRoleDescriptionsByUser, getTextModal, handleSnackbar, removeArrayItem, removeArrayItems, resetErrors } from "../Commons";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
 import ROUTES from "../../../routes";
@@ -257,3 +257,148 @@ describe("Test removeArrayItem", () => {
     expect(noResult).toBeUndefined();
   })
 });
+
+  describe("getProfileIdsArray", () => {
+    test("should return profile ids array", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getProfileIdsArray(user);
+      expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("getProfileDescriptions", () => {
+    test("should return profile descriptions array", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getProfileDescriptions(user);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getProfileDescriptionByProfileArray", () => {
+    test("should return profile descriptions by profile array", () => {
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = getProfileDescriptionByProfileArray(profiles);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getRoleDescriptionsByUser", () => {
+    test("should return role descriptions by user", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getRoleDescriptionsByUser(user);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getFilteredButtonConfig", () => {
+    test("should return filtered button configs", () => {
+      const buttonConfigs = [
+        { visibleCondition: () => true },
+        { visibleCondition: () => false },
+        { visibleCondition: () => true }
+      ];
+      const result = getFilteredButtonConfig(buttonConfigs);
+      expect(result).toEqual([buttonConfigs[0], buttonConfigs[2]]);
+    });
+  });
+
+  describe("addDependentProfiles", () => {
+    test("should return dependent profiles", () => {
+      const selectedProfilesDescriptions = ["desc1", "desc2"];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+
+      PROFILE_IDS.push({
+        id: 1,
+        defaultProfiles: [2]
+      });
+
+      const result = addDependentProfiles(selectedProfilesDescriptions, profiles);
+      expect(result).toEqual(["desc1", "desc2"]);
+    });
+  });
+
+  describe("getProfileDescriptionFromStorage", () => {
+    test("should return profile ids array from storage", () => {
+      const userInfo = JSON.stringify({
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      });
+      const result = getProfileDescriptionFromStorage(userInfo);
+      expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("convertStringToProfiles", () => {
+    test("should convert profile descriptions to profile ids", () => {
+      const profileDescriptions = ["desc1", "desc2"];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = convertStringToProfiles(profileDescriptions, profiles);
+      expect(result).toEqual([1, 2]);
+    });
+  });
+
+  describe("convertProfileToString", () => {
+    test("should convert profile ids to profile descriptions", () => {
+      const profileIds = [1, 2];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = convertProfileToString(profileIds, profiles);
+      expect(result).toEqual(["desc1", "desc2"]);
+    });
+  });

@@ -1,4 +1,3 @@
-import React from "react";
 import BpmnDataGrid from "../../components/DataGrid/BpmnDataGrid";
 import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import CommonPage from "../CommonPage";
