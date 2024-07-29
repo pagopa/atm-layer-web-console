@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
-import { addDependentProfiles, breadCrumbLinkComponent, commonBreadRoot, convertProfileToString, convertStringToProfiles, getFilteredButtonConfig, getProfileDescriptionByProfileArray, getProfileDescriptionFromStorage, getProfileDescriptions, getProfileIdsArray, getQueryString, getRoleDescriptionsByUser, getTextModal, handleSnackbar, resetErrors } from "../Commons";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { addDependentProfiles, breadCrumbLinkComponent, commonBreadRoot, convertProfileToString, convertStringToProfiles, getFilteredButtonConfig, getProfileDescriptionByProfileArray, getProfileDescriptionFromStorage, getProfileDescriptions, getProfileIdsArray, getQueryString, getRoleDescriptionsByUser, getTextModal, handleSnackbar, removeArrayItem, removeArrayItems, resetErrors } from "../Commons";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
 import ROUTES from "../../../routes";
@@ -87,7 +87,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+      handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar);
 
       expect(setSeverity).toHaveBeenCalledWith("success");
       expect(setMessage).toHaveBeenCalledWith("");
@@ -101,7 +101,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
+      handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
 
       expect(setSeverity).toHaveBeenCalledWith("error");
       expect(setMessage).toHaveBeenCalledWith("Errore specifico");
@@ -233,6 +233,30 @@ describe("getTextModal", () => {
   test("check error in default case", () => {
     expect(getTextModal("TIPO_NON_GESTITO")).toEqual({ titleModal: "Errore", contentText: "Qualcosa è andato storto" });
   });
+});
+
+
+describe("Test removeArrayItems", () => {
+  test("method removes undefined indexes, orders them, removes corresponding items from array", () => {
+    const indexes = [5,undefined,1,0];
+    const arrayToTrim = [0,1,2,3,4,5,6,7,8,9];
+    const expectedArray = [2,3,4,6,7,8,9];
+    const trimmedArray = removeArrayItems(indexes, arrayToTrim);
+    expect(trimmedArray).toEqual(expectedArray);
+  });
+
+});
+
+describe("Test removeArrayItem", () => {
+  test("remove item from array defined", () => {
+    const arrayToTrim = [0,1,2];
+    const trimmedArray = removeArrayItem(1,arrayToTrim);
+    const expectedArray = [0,2];
+    expect(trimmedArray).toEqual(expectedArray);
+    const noResult = removeArrayItem(1, undefined);
+    expect(noResult).toBeUndefined();
+  })
+});
 
   describe("getProfileIdsArray", () => {
     test("should return profile ids array", () => {
@@ -378,4 +402,3 @@ describe("getTextModal", () => {
       expect(result).toEqual(["desc1", "desc2"]);
     });
   });
-});

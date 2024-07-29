@@ -39,6 +39,11 @@ export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
 export const MAX_LENGHT_LARGE = 50 ;
 export const ACQUIRER_ID_LENGTH = 11;
 export const TERMINAL_BRANCH_LENGTH = 8;
+export const RESOURCE_BASE_STORAGEKEY = "RESOURCE/files/";
+
+export const ALERT_SUCCESS = "success";
+export const ALERT_ERROR = "error";
+export const ALERT_INFO = "info";
 
 export const LETTURA = 1;
 export const SCRITTURA = 2;
@@ -68,5 +73,3 @@ export const PROFILE_IDS = [
 		defaultProfiles: []
 	}
 ];
-
-export const RESOURCE_BASE_STORAGEKEY = "RESOURCE/files/";

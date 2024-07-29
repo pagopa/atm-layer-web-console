@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import { Box, alpha } from "@mui/system";
-import { useEffect } from "react";
 import { Button, IconButton, Typography, useTheme } from "@mui/material";
 import styled from "@emotion/styled";
 import React from "react";
@@ -15,7 +14,7 @@ type Props = {
     error?: string;
 };
 
-const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error }: Props) => {
+const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, error, }: Props) => {
     const theme = useTheme();
 
     const VisuallyHiddenInput = styled("input")({
@@ -47,7 +46,7 @@ const UploadFileWithButton = ({ name, allowedType, file, onChange, onClick, erro
                 }
             }}
      >
-            {file ?
+            {file  ?
                 <React.Fragment>
                     <Box>
                         <Typography variant="body1" fontWeight={theme.typography.body1.fontWeight} color={theme.palette.primary.main}>

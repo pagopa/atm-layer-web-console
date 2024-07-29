@@ -6,7 +6,7 @@ import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextMo
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
@@ -109,12 +109,12 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				const response = await fetchRequest({ urlEndpoint: generatePath(DELETE_USERS, { userId: recordParams.userId}), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				window.location.reload();
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -135,7 +135,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} else {
 				setLoading(false);
@@ -156,7 +156,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 					const response = await fetchRequest({ urlEndpoint:UPDATE_USERS, method: "PUT", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 					if (response?.success){
 						window.location.reload();
 					} else {
@@ -167,7 +167,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} else {
 				setLoading(false);

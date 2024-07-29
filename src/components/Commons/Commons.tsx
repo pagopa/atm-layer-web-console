@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCE_BASE_STORAGEKEY, RESOURCES, ROLLBACK_WR, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 import { Profile, User } from "../../model/UserModel";
@@ -104,21 +104,20 @@ export const getQueryString = ( filterValues: any, driver: string, URL?: string)
 };
 
 export const handleSnackbar = (
-	success: boolean,
+	severity: string,
 	setMessage: React.Dispatch<React.SetStateAction<any>>,
 	setSeverity: React.Dispatch<React.SetStateAction<any>>,
 	setTitle: React.Dispatch<React.SetStateAction<any>>,
 	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
 	valueMessage?: string
 ) => {
-	setSeverity(success ? "success" : "error");
-	setMessage(success ? "" : valueMessage ? valueMessage : "Operazione fallita");
-	setTitle(success ? "Successo" : "Errore");
+	setSeverity(severity);
+	setMessage(severity===ALERT_SUCCESS ? "" : valueMessage ? valueMessage : "Operazione fallita");
+	setTitle(severity===ALERT_SUCCESS? "Successo":severity===ALERT_ERROR?"Errore":"Info");
 	setOpenSnackBar(true);
 };
 
 export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: string) => [
-	// "Home",
 	...arrLinks.map((e, i) =>
 		<Link
 			key={"link"+e.rootName}
@@ -245,6 +244,24 @@ export function getTextModal(type:string):any {
 	
 };
 
+
+export function removeArrayItem(index:number, arr?:Array<any>) {
+	if (arr){
+		// eslint-disable-next-line functional/immutable-data
+		arr.splice(index,1);
+		return arr;
+	}
+}
+
+export function removeArrayItems(indexes:Array<number|undefined>, arr?:Array<any>){
+	if(arr){
+		indexes.filter(x => x || x===0);
+		indexes.sort((a,b)=> (a || a===0) && (b || b===0) ? b-a : 0);
+		indexes.map(index => index || index===0 ? arr.splice(index,1):index);
+		return arr;
+	}
+};
+
 export function getProfilesIds(user: User){
 	return user.profiles.map(profile => profile.profileId);
 }
@@ -304,10 +321,10 @@ export function convertStringToProfiles(profileDescriptions: Array<string>, prof
 	return profileDescriptions
 		.map(description => profiles.find(profile => profile.description === description)?.profileId)
 		.filter((id): id is number => id !== undefined);  // Filter out undefined values
-}
+};
 
 export function convertProfileToString(profileIds: Array<number>, profiles: Array<Profile>): Array<string> {
 	return profileIds
 		.map(profileId => profiles.find(profile => profile.profileId === profileId)?.description)
 		.filter((description): description is string => description !== undefined);  // Filter out undefined values
-}
+};

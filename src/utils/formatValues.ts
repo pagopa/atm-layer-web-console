@@ -111,6 +111,13 @@ const formatValues = () => {
 		}
 	};
 
+	const extractExtensionFromFileName = (str: string) => {
+		if(str) {
+			// eslint-disable-next-line functional/immutable-data
+			return str.split(".").pop()?.toLowerCase();
+		}
+	};
+
 
 	const extractRelativeCdnPath = (str:string) => {
 		if (str) {
@@ -161,6 +168,7 @@ const formatValues = () => {
 		creaData,
 		formatDateString,
 		extractExtension,
+		extractExtensionFromFileName,
 		extractRelativeCdnPath,
 		extractDescriptions,
 		extractDescriptionsAsArray,

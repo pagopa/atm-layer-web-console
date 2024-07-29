@@ -5,7 +5,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { CREATE_BPMN, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BPMN, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
@@ -75,12 +75,12 @@ export const CreateBpmn = () => {
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 
@@ -106,7 +106,9 @@ export const CreateBpmn = () => {
 				clearFile={clearFile}
 				error={errors.file}
 				setFormData={setFormData}
-				formData={formData} />
+				formData={formData}
+				setErrors={setErrors} />
+
 			<Grid xs={12} item my={1}>
 				<TextField
 					fullWidth
