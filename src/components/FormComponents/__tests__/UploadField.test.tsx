@@ -4,6 +4,7 @@ import UploadField from "../UploadField";
 
 const mockSetFormData = jest.fn();
 const mockClearFile = jest.fn();
+const setErrors = jest.fn();
 
 const defaultProps = {
   name: "test-file",
@@ -11,6 +12,7 @@ const defaultProps = {
   file: undefined,
   clearFile: mockClearFile,
   error: "",
+  setErrors: setErrors,
   setFormData: mockSetFormData,
   formData: {},
   allowedFile: "*",
