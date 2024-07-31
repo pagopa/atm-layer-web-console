@@ -1,12 +1,12 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
-import { Grid, TextField } from "@mui/material";
+import { Grid, MenuItem, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { ALERT_ERROR, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 
 type Props = {
@@ -28,10 +28,10 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 	const initialValues = {
 		acquirerId: "",
 		denomination: "",
-		limit:undefined,
+		limit: "",
 		period:"",
-		burstLimit:undefined,
-		rateLimit:undefined
+		burstLimit: "",
+		rateLimit: ""
 	};
 
 	const [formData, setFormData] = useState(initialValues);
@@ -57,7 +57,10 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		const newErrors = {
 			acquirerId: formData.acquirerId ? "" : "Campo obbligatorio",
 			denomination: formData.denomination ? "" : "Campo obbligatorio",
-			rateLimit: formData.rateLimit ? "" : "Campo obbligatorio"
+			limit: ((formData.limit && formData.period) || (!formData.limit && !formData.period)) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			period: ((formData.limit && formData.period) || (!formData.limit && !formData.period)) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			burstLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate",
+			rateLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
 		};
 	
 		setErrors(newErrors);
@@ -95,7 +98,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "POST", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				// window.location.reload();
 			} catch (error) {
 				setLoading(false);
@@ -115,11 +118,11 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					rateLimit: formData.rateLimit,
 				};
 				try {
-					const response = await fetchRequest({ urlEndpoint: BANKS_CREATE, method: "POST", abortController, body: postData })();
+					const response = await fetchRequest({ urlEndpoint: BANKS_CREATE, method: "POST", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					// window.location.reload();
+					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -133,14 +136,17 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		case UPDATE_BANK: {
 			if (validateForm(false)) {
 				const putData = {
-					denomination: formData.denomination,
-					rateLimit: formData.rateLimit
+					acquirerId: formData.acquirerId,
+					limit: formData.limit,
+					period: formData.period,
+					burstLimit: formData.burstLimit,
+					rateLimit: formData.rateLimit,
 				};
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_UPDATE, { acquirerId: recordParams.acquirerId }), method: "PUT", abortController, body: putData })();
+					const response = await fetchRequest({ urlEndpoint: BANKS_UPDATE, method: "PUT", abortController, body: putData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 					// window.location.reload();
 				} catch (error) {
 					setLoading(false);
@@ -156,6 +162,8 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		}
 
 	};
+
+	const quotaPeriodOptions = [{ key: "GIORNO", value: "DAY", }, { key: "SETTIMANA", value: "WEEK" }, { key: "MESE", value: "MONTH" }];
 
 	return (
 		<ModalTemplate
@@ -184,7 +192,8 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			error={Boolean(errors.acquirerId)}
                 			helperText={errors.acquirerId}
                 			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-id-test", readOnly: type === UPDATE_BANK }} />
-                	</Grid><Grid xs={5} item my={1}>
+                	</Grid>
+                	<Grid xs={5} item my={1}>
                 		<TextField
                 			fullWidth
                 			id="denomination"
@@ -197,12 +206,63 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			error={Boolean(errors.denomination)}
                 			helperText={errors.denomination}
                 			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-denomination-test" }} />
-                	</Grid><Grid xs={5} item my={1}>
+                	</Grid>
+                	<Grid item my={1} display={"flex"}>
+                		<Grid >
+                		<TextField
+                			fullWidth
+                			id="limit"
+                			name="limit"
+                			label={"Quota"}
+                			placeholder={"12345"}
+                			size="small"
+                			value={ formData.limit }
+                			onChange={handleChange}
+                			error={Boolean(errors.limit)}
+                			helperText={errors.limit}
+                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-limit-test" }} />
+                	</Grid>
+                	<Grid >
+                		<TextField
+                			fullWidth
+                			id="period"
+                			name="period"
+                			select
+                			// label={"Burst"}
+                			// placeholder={"MONTH"}
+                			size="small"
+                			defaultValue={"MONTH"}
+                			value={ formData.period }
+                			onChange={handleChange}
+                			error={Boolean(errors.period)}
+                			helperText={errors.period}
+                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-period-test" }}>
+                				{quotaPeriodOptions?.map((el) => (
+                					<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
+                				)
+                				)}
+                			</TextField>
+                	</Grid>
+                	</Grid>
+                	<TextField
+                			fullWidth
+                			id="burstLimit"
+                			name="burstLimit"
+                			label={"Burst"}
+                			placeholder={"12345"}
+                			size="small"
+                			value={ formData.burstLimit }
+                			onChange={handleChange}
+                			error={Boolean(errors.burstLimit)}
+                			helperText={errors.burstLimit}
+                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-burst-test" }} />
+                	
+                	<Grid xs={5} item my={1}>
                 		<TextField
                 			fullWidth
                 			id="rateLimit"
                 			name="rateLimit"
-                			label={"Rate Limite"}
+                			label={"Tasso"}
                 			placeholder={"12345"}
                 			size="small"
                 			value={formData.rateLimit}

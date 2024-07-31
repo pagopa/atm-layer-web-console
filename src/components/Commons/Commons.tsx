@@ -220,7 +220,7 @@ export function getTextModal(type:string):any {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
 	}
 	case CREATE_BANK: {
-		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente, inserendo il suo ID e limite di chiamate mensili (?); usa il campo Nome Banca per salvare un alias/nome comune"};
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (quota), il numero di chiamate simultanee (burst) e il numero di chiamate al secondo (tasso)"};
 	}
 	case UPDATE_BANK: {
 		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
