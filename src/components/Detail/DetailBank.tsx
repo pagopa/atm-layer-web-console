@@ -19,7 +19,7 @@ const DetailBank = ({
 	const [detail, setDetail] = useState({});
 	
 	useEffect(() => {
-		const storedRecordParams = sessionStorage.getItem("recordParams");
+		const storedRecordParams = sessionStorage.getItem("recordParamsBank");
 		if (storedRecordParams) {
 			setDetail(JSON.parse(storedRecordParams));
 		}

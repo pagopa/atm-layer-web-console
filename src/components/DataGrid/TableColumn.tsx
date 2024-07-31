@@ -1,20 +1,22 @@
 import { Typography, Box, IconButton, useTheme, Tooltip } from "@mui/material";
 import { GridColDef, GridColumnHeaderParams, GridRenderCellParams } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER, BANKS } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 import { getProfileDescriptionFromStorage } from "../Commons/Commons";
+import { fetchRequest } from "../../hook/fetch/fetchRequest";
+import { GET_BANK } from "../../commons/endpoints";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
 
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnUsers, editColumnBank, editColumnUsers);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnUsers, editColumnBank, editColumnUsers, detailColumnBank);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
@@ -77,7 +79,33 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 	}
 
 	const actionColumn = (param: any, dataType: string) => {
-		const path = getNavigationPaths(dataType, param);
+		const handleClick = async () => {
+			const path = getNavigationPaths(dataType, param);
+
+			if (dataType === BANKS) {
+				const acquirerId = param.row.acquirerId;
+
+				try {
+					const response = await fetchRequest({
+						urlEndpoint: generatePath(GET_BANK, { acquirerId }),
+						method: "GET",
+					})();
+
+					if (response.valuesObj) {
+						sessionStorage.setItem("recordParamsBank", JSON.stringify(response.valuesObj));
+						navigate(path);
+					} else {
+						console.error("No data found in response");
+					}
+				} catch (error) {
+					console.error("ERROR", error);
+				}
+			} else {
+				sessionStorage.setItem("recordParams", JSON.stringify(param.row));
+				navigate(path);
+			}
+		};
+
 		return (
 			<Box
 				display="flex"
@@ -86,10 +114,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				sx={{ cursor: "pointer" }}
 			>
 				<IconButton
-					onClick={() => {
-						navigate(path);
-						sessionStorage.setItem("recordParams", JSON.stringify(param.row));
-					}}
+					onClick={handleClick}
 					sx={{
 						width: "100%",
 						"&:hover": { backgroundColor: "transparent !important" },
@@ -247,6 +272,27 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			</Box>
 		);
 	};
+	
+	const detailColumnBank = async (param: any) => {
+		const acquirerId = param.row.acquirerId;
+		const path = getNavigationPaths(BANKS, param);
+
+		try {
+			const response = await fetchRequest({
+				urlEndpoint: generatePath(GET_BANK, { acquirerId }),
+				method: "GET",
+			})();
+
+			if (response) {
+				sessionStorage.setItem("recordParamsBank", JSON.stringify(response));
+				navigate(path);
+			} else {
+				console.error("No data found in response");
+			}
+		} catch (error) {
+			console.error("ERROR", error);
+		}
+	};
 
 	return {
 		buildColumnDefs,
@@ -258,7 +304,8 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		deleteColumnBank,
 		editColumnBank,
 		deleteColumnUsers,
-		editColumnUsers
+		editColumnUsers,
+		detailColumnBank
 	};
 };
 

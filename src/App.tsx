@@ -113,6 +113,9 @@ function App() {
 		if(sessionStorage.getItem("recordParamsUser")){
 			sessionStorage.removeItem("recordParamsUser");
 		}
+		if(sessionStorage.getItem("recordParamsBank")){
+			sessionStorage.removeItem("recordParamsBank");
+		}
 	}
 
 

@@ -27,6 +27,7 @@ export const USER_EMAIL = "/info/email";
 export const USER_INFO = "/user/first-access";
 
 export const GET_ALL_BANKS_FILTER="/banks/search";
+export const GET_BANK="/banks/:acquirerId";
 export const BANKS_CREATE = "/banks/insert";
 export const BANKS_UPDATE = "/banks/update";
 export const BANKS_DELETE = "/banks/disable/:acquirerId";
