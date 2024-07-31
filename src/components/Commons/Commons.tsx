@@ -31,75 +31,47 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-export const getQueryString = ( filterValues: any, driver: string, URL?: string) => {
-	
-	let queryString="";
-	if(URL&& URL!=="") {
-	  queryString = queryString.concat(URL);
+export const getQueryString = (filterValues: any, driver: string, URL?: string): string => {
+	let queryString = "";
+
+	if (URL && URL !== "") {
+		queryString = queryString.concat(URL);
 	}
-		
+
+	const appendQueryParam = (key: string, value: any) => {
+		if (value !== undefined && value !== null && value !== "") {
+			// Usa encodeURIComponent per codificare il valore
+			queryString = queryString.concat(`&${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+		}
+	};
+
 	switch (driver) {
 	case PROCESS_RESOURCES:
-		if (filterValues?.functionType) {
-			queryString = queryString.concat(`&functionType=${filterValues.functionType.toUpperCase()}`);
-		}
-
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
-
-		if (filterValues?.modelVersion) {
-			queryString = queryString.concat(`&modelVersion=${filterValues.modelVersion}`);
-		}
-
-		if (filterValues?.acquirerId) {
-			queryString = queryString.concat(`&acquirerId=${filterValues.acquirerId}`);
-		}
-
-		if (filterValues?.status) {
-			queryString = queryString.concat(`&status=${filterValues.status}`);
-		}
+		appendQueryParam("functionType", filterValues?.functionType?.toUpperCase());
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("modelVersion", filterValues?.modelVersion);
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("status", filterValues?.status);
 		break;
 	case RESOURCES:
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
-
-		if (filterValues?.noDeployableResourceType) {
-			queryString = queryString.concat(`&noDeployableResourceType=${filterValues.noDeployableResourceType}`);
-		}
-
-		if (filterValues?.storageKey) {
-			queryString = queryString.concat(`&storageKey=${RESOURCE_BASE_STORAGEKEY}${filterValues.storageKey}`);
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("noDeployableResourceType", filterValues?.noDeployableResourceType);
+		if(filterValues?.storageKey){
+			appendQueryParam("storageKey", RESOURCE_BASE_STORAGEKEY + filterValues?.storageKey);
 		}
 		break;
 	case WORKFLOW_RESOURCE:
-
-		if (filterValues?.resourceType) {
-			queryString = queryString.concat(`&resourceType=${filterValues.resourceType}`);
-		}
-
-		if (filterValues?.fileName) {
-			queryString = queryString.concat(`&fileName=${filterValues.fileName}`);
-		}
-
-		if (filterValues?.status) {
-			queryString = queryString.concat(`&status=${filterValues.status}`);
-		}
+		appendQueryParam("resourceType", filterValues?.resourceType);
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("status", filterValues?.status);
 		break;
 	case DELETE_ASSOCIATION:
-		if (filterValues?.branchId) {
-			queryString = queryString.concat(`&branchId=${filterValues.branchId}`);
-		}
-
-		if (filterValues?.terminalId) {
-			queryString = queryString.concat(`&terminalId=${filterValues.terminalId}`);
-		}
+		appendQueryParam("branchId", filterValues?.branchId);
+		appendQueryParam("terminalId", filterValues?.terminalId);
 		break;
 	default:
 		return "";
 	}
-
 	return queryString;
 };
 
