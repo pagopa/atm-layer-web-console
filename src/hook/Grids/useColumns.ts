@@ -408,7 +408,7 @@ const useColumns: any = () => {
 				{
 					field: "clientId",
 					cellClassName: "justifyContentNormal",
-					headerName: "Client Id",
+					headerName: "ID AppClient",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
@@ -421,26 +421,26 @@ const useColumns: any = () => {
 				{
 					field: "clientSecret",
 					cellClassName: "justifyContentNormal",
-					headerName: "Client Secret",
+					headerName: "ID ApiKey",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.clientSecret),
+					renderCell: (params: any) => renderCell(params, params.row.apiKeyId),
 					sortable: false,
 					flex: 1
 				},
 				{
 					field: "rateLimit",
 					cellClassName: "justifyContentNormal",
-					headerName: "Limite Rate",
+					headerName: "ID Usage Plan",
 					align: "left",
 					headerAlign: "left",
 					editable: false,
 					disableColumnMenu: true,
 					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.rateLimit),
+					renderCell: (params: any) => renderCell(params, params.row.usagePlanId),
 					sortable: false,
 					flex: 1
 				},
@@ -566,13 +566,6 @@ const useColumns: any = () => {
 					"workflowResourceId": false,
 					"createdBy": false,
 					"lastUpdatedBy": false
-				}
-			);
-		case BANKS:
-			return (
-				{
-					"clientId": false,
-					"clientSecret": false
 				}
 			);
 		default:

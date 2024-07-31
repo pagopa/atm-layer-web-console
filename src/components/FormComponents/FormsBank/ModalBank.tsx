@@ -28,7 +28,10 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 	const initialValues = {
 		acquirerId: "",
 		denomination: "",
-		rateLimit: ""
+		limit:undefined,
+		period:"",
+		burstLimit:undefined,
+		rateLimit:undefined
 	};
 
 	const [formData, setFormData] = useState(initialValues);
@@ -70,6 +73,9 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			setFormData({
 				acquirerId: recordParams.acquirerId,
 				denomination: recordParams.denomination,
+				limit: recordParams.limit,
+				period: recordParams.period,
+				burstLimit: recordParams.burstLimit,
 				rateLimit: recordParams.rateLimit,
 			});
 			setErrors(initialValues);
@@ -103,7 +109,10 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				const postData = {
 					acquirerId: formData.acquirerId,
 					denomination: formData.denomination,
-					rateLimit: formData.rateLimit
+					limit: formData.limit,
+					period: formData.period,
+					burstLimit: formData.burstLimit,
+					rateLimit: formData.rateLimit,
 				};
 				try {
 					const response = await fetchRequest({ urlEndpoint: BANKS_CREATE, method: "POST", abortController, body: postData })();
