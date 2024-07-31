@@ -1,4 +1,7 @@
-import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, ROLLBACK_WR, UPDATE_WR } from "../../commons/constants";
+import { useContext } from "react";
+import { Ctx } from "../../DataContext";
+import { DELETE_WR, DEPLOY_WR, DOWNLOAD_WR, LETTURA, RILASCIO, ROLLBACK_WR, SCRITTURA, UPDATE_WR } from "../../commons/constants";
+import { getFilteredButtonConfig, getProfileIdsArray } from "../Commons/Commons";
 import DetailButtons from "./DetailButtons";
 
 type Props = {
@@ -9,15 +12,22 @@ type Props = {
 };
 
 const WorkflowResourcesDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
+
+	const { loggedUserInfo } = useContext(Ctx);
+	
+	const userProfileDescriptions = getProfileIdsArray(loggedUserInfo);
+
 	const buttonConfigs = [
-	  { text: "Aggiorna", action: UPDATE_WR },
-	  { text: "Rilascia", action: DEPLOY_WR, disabledCondition: () => detail.status === "DEPLOYED" },
-	  { text: "Ripristina", action: ROLLBACK_WR },
-	  { text: "Cancella", action: DELETE_WR },
-	  { text: "Scarica", action: DOWNLOAD_WR }
+	  { text: "Aggiorna", action: UPDATE_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA)},
+	  { text: "Rilascia", action: DEPLOY_WR, disabledCondition: () => detail.status === "DEPLOYED", visibleCondition: () => userProfileDescriptions.includes(RILASCIO) },
+	  { text: "Ripristina", action: ROLLBACK_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA) },
+	  { text: "Cancella", action: DELETE_WR, visibleCondition: () => userProfileDescriptions.includes(SCRITTURA) },
+	  { text: "Scarica", action: DOWNLOAD_WR, visibleCondition: () => userProfileDescriptions.includes(LETTURA) }
 	];
   
-	return <DetailButtons type={type} setType={setType} openDialog={openDialog} detail={detail} buttonConfigs={buttonConfigs} />;
+	const filteredButtonConfigs = getFilteredButtonConfig(buttonConfigs);
+	
+	return <DetailButtons type={type} setType={setType} openDialog={openDialog} detail={detail} buttonConfigs={filteredButtonConfigs} />;
 };
   
 

@@ -116,5 +116,10 @@ describe ("formatValues tests", () => {
         expect(formatValues().checkFormatDate("2022-01-01")).toBe("2022/01/01");
         expect(formatValues().checkFormatDate("")).toBe("-");
       });
+
+      test('Estrai estensione file', () => {
+        const fileExtension = formatValues().extractExtensionFromFileName("filename.HTML");
+        expect(fileExtension).toBe("html");
+      });
       
 })

@@ -111,6 +111,13 @@ const formatValues = () => {
 		}
 	};
 
+	const extractExtensionFromFileName = (str: string) => {
+		if(str) {
+			// eslint-disable-next-line functional/immutable-data
+			return str.split(".").pop()?.toLowerCase();
+		}
+	};
+
 
 	const extractRelativeCdnPath = (str:string) => {
 		if (str) {
@@ -133,6 +140,15 @@ const formatValues = () => {
 		return "";
 	};
 
+	const extractDescriptions = (profiles: Array<any>): string => profiles.map(profile => profile.description).join(", ");
+
+	const extractDescriptionsAsArray = (profiles:Array<any>) => {
+		const descriptions :Array<string> = [];
+		// eslint-disable-next-line functional/immutable-data
+		profiles.map(profile => descriptions.push(profile.description));
+		return descriptions;
+	};
+
 	
 	return {
 		checkValue,
@@ -152,7 +168,10 @@ const formatValues = () => {
 		creaData,
 		formatDateString,
 		extractExtension,
+		extractExtensionFromFileName,
 		extractRelativeCdnPath,
+		extractDescriptions,
+		extractDescriptionsAsArray,
 	};
 };
 

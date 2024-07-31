@@ -17,12 +17,104 @@ afterEach(() => {
     global.fetch = originalFetch;
 })
 
+const userEmail = jest.fn();
+
+const mockContextValueLoadingFalseNoToken = {
+    loggedUserInfo: {
+        userId: 'mario.rossi@pagopa.com',
+        name: 'Mario',
+        surname: 'Rossi',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+            {
+                description: "Gestione flussi in lettura",
+                profileId: 1,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione flussi in scrittura",
+                profileId: 2,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Rilascio BPMN",
+                profileId: 3,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Emulator",
+                profileId: 4,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    },
+    loading: false,
+	userEmail
+};
+
+const setUserEmail = jest.fn();
+
+const mockContextValueLoadingTrueNoToken = {
+    loggedUserInfo: {
+        userId: 'mario.rossi@pagopa.com',
+        name: 'Mario',
+        surname: 'Rossi',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+            {
+                description: "Gestione flussi in lettura",
+                profileId: 1,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione flussi in scrittura",
+                profileId: 2,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Rilascio BPMN",
+                profileId: 3,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Emulator",
+                profileId: 4,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    },
+    loading: true,
+	setUserEmail
+};
+
 describe("PageLayout test", () => {
 
 	test("Test render PageLayout component with loading false and no userEmail nor token", () => {
-		const userEmail = jest.fn();
+		
 		render(
-			<Ctx.Provider value={{ loading: false, userEmail }}>
+			<Ctx.Provider value={ mockContextValueLoadingFalseNoToken }>
 				<BrowserRouter>
 					<ThemeProvider theme={themeApp}>
 						<PageLayout children={<React.Fragment />} />
@@ -34,7 +126,7 @@ describe("PageLayout test", () => {
 
 	test("Test render PageLayout component with loading true and no userEmail with token", () => {
 		const userEmail = { email: undefined };
-		const setUserEmail = jest.fn();
+		
 		sessionStorage.setItem("jwt_console", "token");
 		global.fetch = jest.fn().mockResolvedValue({
             json: () => Promise.resolve({
@@ -44,7 +136,7 @@ describe("PageLayout test", () => {
             }),
         });
 		render(
-			<Ctx.Provider value={{ loading: true, userEmail, setUserEmail }}>
+			<Ctx.Provider value={ mockContextValueLoadingTrueNoToken }>
 				<BrowserRouter>
 					<ThemeProvider theme={themeApp}>
 						<PageLayout children={<React.Fragment />} />

@@ -35,5 +35,12 @@ export const homePageCard = [
 		description:"Gestione Acquirer e parametri associati",
 		icon:"AccountBalanceIcon",
 		pageLink: routes.BANK
+	},
+	{
+		title: "Utenti e autorizzazioni",
+		id: "users",
+		description:"Gestione utenti e permessi",
+		icon:"PersonOutline",
+		pageLink: routes.USERS
 	}
 ];

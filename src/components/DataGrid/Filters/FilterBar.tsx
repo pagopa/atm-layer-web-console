@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 import React, { SetStateAction, useState } from "react";
-import { BANKS, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
@@ -10,6 +10,7 @@ import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
 import BanksFilterComponent from "./BanksFilterComponent";
+import UsersFilterComponent from "./UsersFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -153,6 +154,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case BANKS:
 			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} handleRateChange={handleRateChange} errors={errors} showErrors={submitted} />;
+		case USERS:
+			return <UsersFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}

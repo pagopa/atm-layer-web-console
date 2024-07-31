@@ -919,3 +919,107 @@ export const workFlowResourceTableMocked = {
 	  }
 	]
 };
+export const userTableMocked =  {
+	page: 0,
+	limit: 5,
+	itemsFound: 4,
+	totalPages: 1,
+	results:[
+		{
+	  userId: "mario.rossi@pagopa.com",
+	  name:"Mario",
+	  surname:"Rossi",
+	  createdAt: "2024-05-27",
+	  lastUpdatedAt: "2024-05-27",
+	  profiles: [
+				{
+					description: "Gestione flussi in lettura",
+					profileId: 1,
+					createdAt: "2024-05-27",
+					lastUpdatedAt: "2024-05-27"
+				},
+				{
+					description: "Gestione flussi in scrittura",
+					profileId: 2,
+					createdAt: "2024-05-27",
+					lastUpdatedAt: "2024-05-27"
+				}
+	  ]
+		},
+		{
+	  userId: "annapaola.verdi@pagopa.com",
+	  name:"Annapaola",
+	  surname:"Verdi",
+	  createdAt: "2024-05-27",
+	  lastUpdatedAt: "2024-05-27",
+	  profiles: [
+				{
+		  description: "Gestione flussi in lettura",
+		  profileId: 1,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				},
+				{
+		  description: "Rilascio BPM",
+		  profileId: 3,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				},
+				{
+		  description: "Emulator",
+		  profileId: 4,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				}
+	  ]
+		},
+		{
+	  userId: "dario.tornati@pagopa.com",
+	  name:"Dario",
+	  surname:"Tornati",
+	  createdAt: "2024-05-27",
+	  lastUpdatedAt: "2024-05-27",
+	  profiles: [
+				{
+		  description: "Gestione flussi in lettura",
+		  profileId: 1,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				}
+	  ]
+		},
+	  {
+	  userId: "ornella.bruni@pagopa.com",
+	  name:"Ornella",
+	  surname:"Bruni",
+	  createdAt: "2024-05-27",
+	  lastUpdatedAt: "2024-05-27",
+	  profiles: [
+				{
+		  description: "Gestione flussi in lettura",
+		  profileId: 1,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				},
+				{
+		  description: "Gestione flussi in scrittura",
+		  profileId: 2,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				},
+				{
+		  description: "Rilascio BPM",
+		  profileId: 3,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				},
+				{
+		  description: "Emulator",
+		  profileId: 4,
+		  createdAt: "2024-05-27",
+		  lastUpdatedAt: "2024-05-27"
+				}
+	  ]
+		}
+	]
+};

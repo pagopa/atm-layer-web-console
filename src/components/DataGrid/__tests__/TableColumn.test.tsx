@@ -5,7 +5,7 @@ import { GridStateColDef } from "@mui/x-data-grid/internals";
 import { BrowserRouter } from "react-router-dom";
 import { themeApp } from "../../../assets/jss/themeApp";
 import { ThemeProvider } from "@mui/material/styles";
-import { BANKS, BPMN, DELETE_BANK, UPDATE_BANK } from "../../../commons/constants";
+import { BANKS, BPMN, DELETE_BANK, UPDATE_BANK, DELETE_ASSOCIATION, DELETE_USER } from "../../../commons/constants";
 import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
 
 jest.mock("react-router-dom", () => ({
@@ -36,6 +36,50 @@ describe("TableColumn test", () => {
         type: 'string',
         headerName: 'Tipo funzione',
     };
+
+    const profileMock = {
+        userId: "mario.rossi@pagopa.com",
+        name: "Mario",
+        surname: "Rossi",
+        createdAt: "2024-05-27",
+        lastUpdatedAt: "2024-05-27",
+        profiles: [
+            {
+                description: "Gestione flussi in lettura",
+                profileId: 1,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione flussi in scrittura",
+                profileId: 2,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Rilascio BPMN",
+                profileId: 3,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Emulator",
+                profileId: 4,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            },
+            {
+                description: "Gestione utenti",
+                profileId: 5,
+                createdAt: "2024-05-27",
+                lastUpdatedAt: "2024-05-27"
+            }
+        ]
+    };
+
+    beforeEach(() => {
+        sessionStorage.setItem("loggedUserInfo", JSON.stringify(profileMock));
+    });
 
     test("Test showCustomHeader", () => {
         const { buildColumnDefs, showCustomHeader, visibleColumns } = TableColumn();
@@ -113,21 +157,18 @@ describe("TableColumn test", () => {
     test("Test deleteColumnBank", () => {
         const setOpen = jest.fn();
         const setType = jest.fn();
-
         const { deleteColumnBank } = TableColumn(setOpen, setType);
-
         const param = { ...bpmnTableMocked.results[0] };
 
         render(
             <BrowserRouter>
                 <ThemeProvider theme={themeApp}>
                     {deleteColumnBank(param)}
-                </ThemeProvider>
+                    </ThemeProvider>
             </BrowserRouter>
         );
 
         fireEvent.click(screen.getByTestId("delete-column-test"));
-
         expect(setOpen).toHaveBeenCalledWith(true);
         expect(setType).toHaveBeenCalledWith(DELETE_BANK);
     });
@@ -152,5 +193,24 @@ describe("TableColumn test", () => {
 
         expect(setOpen).toHaveBeenCalledWith(true);
         expect(setType).toHaveBeenCalledWith(UPDATE_BANK);
+    });
+
+    
+    test("Test deleteColumnUsers", () => {
+
+        const setOpen = jest.fn();
+        const setType = jest.fn();
+        const { deleteColumnUsers } = TableColumn(setOpen, setType);
+        const param = { ...bpmnTableMocked.results[0] };
+
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnUsers(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+
+        fireEvent.click(screen.getByTestId("delete-column-test"));
     });
 });

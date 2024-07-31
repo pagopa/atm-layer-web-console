@@ -3,6 +3,7 @@ const ROUTES = {
 	HOME: "/",
 	WARNING_CODE: "/warning-code",
 	ERROR_PAGE: "/error",
+	UNAUTHORIZED_PAGE: "/unauthorized",
 	BPMN: "/bpmn",
 	RESOURCES: "/resources",
 	WORKFLOW_RESOURCES: "/workflow_resources",
@@ -17,7 +18,8 @@ const ROUTES = {
 	CREATE_WR: "/workflow_resources/create",
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
-	BANK:"/bank"
+	BANK:"/bank",
+	USERS: "/users",
 };
 
 export default ROUTES;

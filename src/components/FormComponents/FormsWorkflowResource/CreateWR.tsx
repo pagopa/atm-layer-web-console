@@ -4,7 +4,7 @@ import { WorkflowResourceDto } from "../../../model/WorkflowResourceModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
 import { Ctx } from "../../../DataContext";
-import { CREATE_WR, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_WR, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
@@ -68,12 +68,12 @@ export const CreateWR = () => {
 			try {
 				const response = await fetchRequest({ urlEndpoint: CREATE_WR_API, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 
@@ -99,6 +99,7 @@ export const CreateWR = () => {
 				error={errors.file}
 				setFormData={setFormData}
 				formData={formData}
+				setErrors={setErrors}
 			/>
 			<Grid item xs={12} my={1}>
 				<TextField

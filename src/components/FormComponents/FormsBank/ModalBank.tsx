@@ -6,7 +6,7 @@ import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
+import { ALERT_ERROR, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 
 type Props = {
@@ -94,7 +94,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -114,7 +114,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} else {
 				setLoading(false);
@@ -136,7 +136,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				}
 			} else {
 				setLoading(false);

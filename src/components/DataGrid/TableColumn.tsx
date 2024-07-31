@@ -5,15 +5,16 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
+import { getProfileDescriptionFromStorage } from "../Commons/Commons";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
 
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
-		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnBank, editColumnBank);
+		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnUsers, editColumnBank, editColumnUsers);
 		return cols as Array<GridColDef>;
 	};
 	const visibleColumns = (driver: string) => getVisibleColumns(driver);
@@ -108,6 +109,36 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			setType(DELETE_ASSOCIATION);
 			sessionStorage.setItem("recordParamsAssociated", JSON.stringify(param.row));
 		};
+		if(getProfileDescriptionFromStorage(sessionStorage.getItem("loggedUserInfo"))?.includes(SCRITTURA)) {
+			return (
+				<Box
+					width="100%"
+					display="flex"
+					justifyContent={"center"}
+					sx={{ cursor: "pointer" }}
+				>
+					<IconButton
+						onClick={actions}
+						sx={{
+	
+							"&:hover": { backgroundColor: "transparent !important" },
+						}}
+						data-testid="delete-column-test"
+					>
+						<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
+					</IconButton>
+				</Box>
+			);
+		}
+	};
+
+	const deleteColumnUsers = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(DELETE_USER);
+			sessionStorage.setItem("recordParamsUser", JSON.stringify(param.row));
+		};
 
 		return (
 			<Box
@@ -188,6 +219,34 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		);
 	};
 
+	const editColumnUsers = (param: any) => {
+
+		const actions = () => {
+			setOpen(true);
+			setType(UPDATE_USER);
+			sessionStorage.setItem("recordParamsUser", JSON.stringify(param.row));
+		};
+
+		return (
+			<Box
+				width="100%"
+				display="flex"
+				justifyContent={"center"}
+				sx={{ cursor: "pointer" }}
+			>
+				<IconButton
+					onClick={actions}
+					sx={{
+
+						"&:hover": { backgroundColor: "transparent !important" },
+					}}
+					data-testid="edit-column-test"
+				>
+					<EditIcon sx={{ color: theme.palette.primary.main, fontSize: "24px" }} />
+				</IconButton>
+			</Box>
+		);
+	};
 
 	return {
 		buildColumnDefs,
@@ -197,7 +256,9 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		visibleColumns,
 		deleteColumn,
 		deleteColumnBank,
-		editColumnBank
+		editColumnBank,
+		deleteColumnUsers,
+		editColumnUsers
 	};
 };
 
