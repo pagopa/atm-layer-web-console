@@ -1,5 +1,5 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
 import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
@@ -8,6 +8,7 @@ import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
+import ROUTES from "../../../routes";
 
 type Props = {
 	type: string;
@@ -22,8 +23,9 @@ type Props = {
 const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController } = useContext(Ctx);
-	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParamsString = sessionStorage.getItem("recordParamsBank");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
+	const navigate = useNavigate();
 
 	const initialValues = {
 		acquirerId: "",
@@ -99,7 +101,12 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				setLoading(false);
 				setOpen(false);
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-				// window.location.reload();
+				if(response.status === 204) {
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						navigate(ROUTES.BANK);
+					}, 1000);
+				}
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
