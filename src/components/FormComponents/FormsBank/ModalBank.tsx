@@ -6,7 +6,7 @@ import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, UPDATE_BANK } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
 const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
 
 	const { abortController } = useContext(Ctx);
-	const recordParamsString = sessionStorage.getItem("recordParams");
+	const recordParamsString = sessionStorage.getItem("recordParamsBank");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 
 	const initialValues = {
@@ -137,6 +137,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			if (validateForm(false)) {
 				const putData = {
 					acquirerId: formData.acquirerId,
+					denomination: formData.denomination,
 					limit: formData.limit,
 					period: formData.period,
 					burstLimit: formData.burstLimit,
@@ -147,7 +148,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					// window.location.reload();
+					window.location.reload();
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -191,7 +192,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			onChange={handleChange}
                 			error={Boolean(errors.acquirerId)}
                 			helperText={errors.acquirerId}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-id-test", readOnly: type === UPDATE_BANK }} />
+                			inputProps={{ maxLength: MAX_LENGTH_SMALL, "data-testid": "bank-id-test", readOnly: type === UPDATE_BANK }} />
                 	</Grid>
                 	<Grid xs={5} item my={1}>
                 		<TextField
@@ -205,7 +206,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			onChange={handleChange}
                 			error={Boolean(errors.denomination)}
                 			helperText={errors.denomination}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-denomination-test" }} />
+                			inputProps={{ maxLength: MAX_LENGTH_MEDIUM, "data-testid": "bank-denomination-test" }} />
                 	</Grid>
                 	<Grid item my={1} display={"flex"}>
                 		<Grid >
@@ -216,11 +217,12 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			label={"Quota"}
                 			placeholder={"12345"}
                 			size="small"
+                			type="number"
                 			value={ formData.limit }
                 			onChange={handleChange}
                 			error={Boolean(errors.limit)}
                 			helperText={errors.limit}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-limit-test" }} />
+                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-limit-test" }} />
                 	</Grid>
                 	<Grid >
                 		<TextField
@@ -228,15 +230,13 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			id="period"
                 			name="period"
                 			select
-                			// label={"Burst"}
-                			// placeholder={"MONTH"}
                 			size="small"
                 			defaultValue={"MONTH"}
                 			value={ formData.period }
                 			onChange={handleChange}
                 			error={Boolean(errors.period)}
                 			helperText={errors.period}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-period-test" }}>
+                			inputProps={{ maxLength: MAX_LENGTH_MEDIUM, "data-testid": "bank-period-test" }}>
                 				{quotaPeriodOptions?.map((el) => (
                 					<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
                 				)
@@ -251,11 +251,12 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			label={"Burst"}
                 			placeholder={"12345"}
                 			size="small"
+                			type="number"
                 			value={ formData.burstLimit }
                 			onChange={handleChange}
                 			error={Boolean(errors.burstLimit)}
                 			helperText={errors.burstLimit}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-burst-test" }} />
+                			inputProps={{ max: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
                 	
                 	<Grid xs={5} item my={1}>
                 		<TextField
@@ -265,11 +266,12 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 			label={"Tasso"}
                 			placeholder={"12345"}
                 			size="small"
+                			type="number"
                 			value={formData.rateLimit}
                 			onChange={handleChange}
                 			error={Boolean(errors.rateLimit)}
                 			helperText={errors.rateLimit}
-                			inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "bank-rate-test" }} />
+                			inputProps={{ max: MAX_LENGTH_NUMERIC, "data-testid": "bank-rate-test" }} />
                 	</Grid></>
                 
 				}
