@@ -105,27 +105,9 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		filterBpmnWithoutStatus(e);
 	};
 
-	const handleRateChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = event.target;
-		const updatedFilterValues = { ...filterValues, [name]: value };
-		setFilterValues(updatedFilterValues);
-
-		if (submitted) {
-			const newErrors = clearErrorsIfCorrected(name, value, updatedFilterValues);
-			setErrors(newErrors);
-		}
-	};
-
 	const handleSubmit = () => {
 		setSubmitted(true);
 		let newErrors = { ...errors };
-
-		if (filterValues.rateMin && filterValues.rateMax) {
-			if (parseInt(filterValues.rateMin, 10) > parseInt(filterValues.rateMax, 10)) {
-				newErrors.rateMin = "Il Rate minimo deve essere inferiore al Rate massimo";
-				newErrors.rateMax = "Il Rate massimo deve essere superiore al Rate minimo";
-			}
-		}
 
 		setErrors(newErrors);
 
@@ -153,7 +135,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case BANKS:
-			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} handleRateChange={handleRateChange} errors={errors} showErrors={submitted} />;
+			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
 		case USERS:
 			return <UsersFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
