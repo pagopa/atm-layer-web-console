@@ -29,7 +29,7 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 		acquirerId: "",
 		denomination: "",
 		limit: "",
-		period:"",
+		period:null,
 		burstLimit: "",
 		rateLimit: ""
 	};
