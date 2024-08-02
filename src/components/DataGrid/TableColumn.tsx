@@ -215,35 +215,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		);
 	};
 
-	// const editColumnBank = (param: any) => {
-
-	// 	const actions = () => {
-	// 		setOpen(true);
-	// 		setType(UPDATE_BANK);
-	// 		sessionStorage.setItem("recordParamsBank", JSON.stringify(param.row));
-	// 	};
-
-	// 	return (
-	// 		<Box
-	// 			width="100%"
-	// 			display="flex"
-	// 			justifyContent={"center"}
-	// 			sx={{ cursor: "pointer" }}
-	// 		>
-	// 			<IconButton
-	// 				onClick={actions}
-	// 				sx={{
-
-	// 					"&:hover": { backgroundColor: "transparent !important" },
-	// 				}}
-	// 				data-testid="edit-column-test"
-	// 			>
-	// 				<EditIcon sx={{ color: theme.palette.primary.main, fontSize: "24px" }} />
-	// 			</IconButton>
-	// 		</Box>
-	// 	);
-	// };
-
 	const editColumnUsers = (param: any) => {
 
 		const actions = () => {
@@ -272,27 +243,6 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			</Box>
 		);
 	};
-	
-	// const detailColumnBank = async (param: any) => {
-	// 	const acquirerId = param.row.acquirerId;
-	// 	const path = getNavigationPaths(BANKS, param);
-
-	// 	try {
-	// 		const response = await fetchRequest({
-	// 			urlEndpoint: generatePath(GET_BANK, { acquirerId }),
-	// 			method: "GET",
-	// 		})();
-
-	// 		if (response) {
-	// 			sessionStorage.setItem("recordParamsBank", JSON.stringify(response));
-	// 			navigate(path);
-	// 		} else {
-	// 			console.error("No data found in response");
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("ERROR", error);
-	// 	}
-	// };
 
 	return {
 		buildColumnDefs,
@@ -302,10 +252,8 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		visibleColumns,
 		deleteColumn,
 		deleteColumnBank,
-		// editColumnBank,
 		deleteColumnUsers,
 		editColumnUsers,
-		// detailColumnBank
 	};
 };
 
