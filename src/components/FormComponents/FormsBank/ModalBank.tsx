@@ -78,6 +78,14 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		
 	};
 
+	const validateNumericInput = (e: KeyboardEvent) => {
+		if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+			&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+		&& !(/^[0-9]$/i.test(e.key))) {
+	  e.preventDefault();
+		}
+	};
+
 	useEffect(() => {
 		if (open && type === UPDATE_BANK) {
 			setFormData({
@@ -244,9 +252,13 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			label={"Quota"}
                 			placeholder={"12345"}
                 			size="small"
-                			type="number"
                 			value={ formData.limit }
                 			onChange={handleChange}
+                				onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+									&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+								&& !(/^[0-9]$/i.test(e.key))) {
+							  e.preventDefault();
+                				}}}
                 			error={Boolean(errors.limit)}
                 			helperText={errors.limit}
                 			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-limit-test" }} />
@@ -278,12 +290,16 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			label={"Burst"}
                 			placeholder={"12345"}
                 			size="small"
-                			type="number"
                 			value={ formData.burstLimit }
                 			onChange={handleChange}
+                			onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+								&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+							&& !(/^[0-9]$/i.test(e.key))) {
+						  e.preventDefault();
+                		}}}
                 			error={Boolean(errors.burstLimit)}
                 			helperText={errors.burstLimit}
-                			inputProps={{ max: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
+                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
                 	
                 	<Grid xs={5} item my={1}>
                 		<TextField
@@ -293,12 +309,16 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			label={"Tasso"}
                 			placeholder={"12345"}
                 			size="small"
-                			type="number"
                 			value={formData.rateLimit}
                 			onChange={handleChange}
+                			onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+								&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" && e.key !== "."
+							&& !(/^[0-9]$/i.test(e.key))) {
+						  e.preventDefault();
+                			}}}
                 			error={Boolean(errors.rateLimit)}
                 			helperText={errors.rateLimit}
-                			inputProps={{ max: MAX_LENGTH_NUMERIC, "data-testid": "bank-rate-test" }} />
+                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-rate-test" }} />
                 	</Grid></>
                 
 				}
