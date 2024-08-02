@@ -29,19 +29,23 @@ const BankPage = () => {
 				<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />
 			</Box>
 			<BoxPageLayout shadow={true} px={0} mx={5}>
-				<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
+				{/* <Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
 					<Box width={severity==="error"?"65%":"35%"} >
 						<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 					</Box>
-				</Box>
+				</Box> */}
 				<BankDataGrid 
 					open={open}
 					setType={setType}
 					setOpen={setOpen}
 					type={type}
+					openSnackBar={openSnackBar}
 					setOpenSnackBar={setOpenSnackBar}
+					severity={severity}
 					setSeverity={setSeverity}
+					message={message}
 					setMessage={setMessage}
+					title={title}
 					setTitle={setTitle}
 				/>
 			</BoxPageLayout>

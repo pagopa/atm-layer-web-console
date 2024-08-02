@@ -9,18 +9,23 @@ import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 import ROUTES from "../../../routes";
+import { ActionAlert } from "../../Commons/ActionAlert";
 
 type Props = {
 	type: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	openSnackBar:boolean;
 	setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
+	severity: string;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+	message: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
+	title: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
-const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
+const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
 
 	const { abortController } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsBank");
@@ -127,9 +132,16 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				try {
 					const response = await fetchRequest({ urlEndpoint: BANKS_CREATE, method: "POST", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
-					setOpen(false);
-					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					if (response?.success){
+						handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+						setTimeout(() => {
+							setOpen(false);
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					} else if (!response?.success){
+						handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					}
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -153,13 +165,17 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				try {
 					const response = await fetchRequest({ urlEndpoint: BANKS_UPDATE, method: "PUT", abortController, body: putData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
-					setOpen(false);
-					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					sessionStorage.setItem("recordParamsBank", JSON.stringify(response.valuesObj));
-					setTimeout(() => {
-						setOpenSnackBar(false);
-						window.location.reload();
-					}, 1000);
+					if (response?.success){
+						setOpen(false);
+						handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+						sessionStorage.setItem("recordParamsBank", JSON.stringify(response.valuesObj));
+						setTimeout(() => {
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					} else if (!response?.success){
+						handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					}
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -286,6 +302,14 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
                 	</Grid></>
                 
 				}
+				<ActionAlert
+					setOpenSnackBar={setOpenSnackBar}
+					openSnackBar={openSnackBar}
+					severity={severity}
+					message={message}
+					title={title}
+					// errorCode={errorCode}
+				/>
 			</Grid>
 		</ModalTemplate>
 	);
