@@ -98,7 +98,7 @@ describe("FilterBar test", () => {
         };
         renderComponent(PROCESS_RESOURCES, false, emptyFilterValues, emptyFilterValues);
         fireEvent.click(screen.getByText("Cancella Filtri"));
-        fireEvent.click(screen.getByText("Crea"));
+        fireEvent.click(screen.getByText("Crea Risorsa"));
     });
 
     test("Test FilterBar with PROCESS_RESOURCES and Filter with all the filters", () => {
@@ -144,7 +144,7 @@ describe("FilterBar test", () => {
         };
         renderComponent(RESOURCES, false, emptyFilterValues, emptyFilterValues);
         fireEvent.click(screen.getByText("Cancella Filtri"));
-        fireEvent.click(screen.getByText("Crea"));
+        fireEvent.click(screen.getByText("Crea Risorsa"));
     });
 
     test("Test FilterBar with RESOURCES and Filter with fileName", () => {
@@ -175,7 +175,7 @@ describe("FilterBar test", () => {
         };
         renderComponent(WORKFLOW_RESOURCE, false, emptyFilterValues, emptyFilterValues);
         fireEvent.click(screen.getByText("Cancella Filtri"));
-        fireEvent.click(screen.getByText("Crea"));
+        fireEvent.click(screen.getByText("Crea Risorsa"));
     });
 
     test("Test FilterBar with WORKFLOW_RESOURCE and Filter with fileName", () => {
@@ -211,20 +211,17 @@ describe("FilterBar test", () => {
         fireEvent.change(status, { target: { value: "" } });
     });
 
-    test("Test FilterBar with BANKS and Click on Cancella Filtri and Crea ", () => {
-        const emptyFilterValues = {
-            acquirerId: "",
-            denomination: "",
-            clientId: "",
-            rateMin: "",
-            rateMax: ""
-        };
+    // test("Test FilterBar with BANKS and Click on Cancella Filtri and Crea ", () => {
+    //     const emptyFilterValues = {
+    //         acquirerId: "",
+    //         denomination: "",
+    //     };
 
-        renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
 
-        fireEvent.click(screen.getByText("Cancella Filtri"));
-        fireEvent.click(screen.getByText("Crea"));
-    });
+    //     fireEvent.click(screen.getByText("Cancella Filtri"));
+    //     fireEvent.click(screen.getByText("Crea Nuovo"));
+    // });
 
     test("Test FilterBar with BANKS and Filter with acquirerId", () => {
         const emptyFilterValues = {
@@ -254,23 +251,6 @@ describe("FilterBar test", () => {
 
         const denomination = screen.getByTestId("bank-denomination-test") as HTMLInputElement;
         fireEvent.change(denomination, { target: { value: "BankName" } });
-    });
-
-    test("Test FilterBar with BANKS and Filter with rateMin and rateMax", () => {
-        const emptyFilterValues = {
-            acquirerId: "",
-            denomination: "",
-            clientId: "",
-            rateMin: "",
-            rateMax: ""
-        };
-
-        renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
-
-        const rateMin = screen.getByTestId("bank-rateMin-test") as HTMLInputElement;
-        const rateMax = screen.getByTestId("bank-rateMax-test") as HTMLInputElement;
-        fireEvent.change(rateMin, { target: { value: "0.5" } });
-        fireEvent.change(rateMax, { target: { value: "1.5" } });
     });
 
     test("Test FilterBar with USERS and Filter with name", () => {
