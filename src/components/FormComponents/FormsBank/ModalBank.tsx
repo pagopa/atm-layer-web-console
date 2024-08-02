@@ -133,7 +133,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					acquirerId: formData.acquirerId,
 					denomination: formData.denomination,
 					limit: formData.limit,
-					period: formData.period,
+					period: formData.period !== "" ? formData.period : null,
 					burstLimit: formData.burstLimit,
 					rateLimit: formData.rateLimit,
 				};
@@ -166,7 +166,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					acquirerId: formData.acquirerId,
 					denomination: formData.denomination,
 					limit: formData.limit,
-					period: formData.period,
+					period: formData.period !== "" ? formData.period : null,
 					burstLimit: formData.burstLimit,
 					rateLimit: formData.rateLimit,
 				};
@@ -199,7 +199,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 
 	};
 
-	const quotaPeriodOptions = [{ key: "GIORNO", value: "DAY", }, { key: "SETTIMANA", value: "WEEK" }, { key: "MESE", value: "MONTH" }];
+	const quotaPeriodOptions = [{ key: "GIORNO", value: "DAY", }, { key: "SETTIMANA", value: "WEEK" }, { key: "MESE", value: "MONTH" }, {key: "NULLO", value: ""}];
 
 	return (
 		<ModalTemplate
@@ -277,7 +277,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			helperText={errors.period}
                 			inputProps={{ maxLength: MAX_LENGTH_MEDIUM, "data-testid": "bank-period-test" }}>
                 				{quotaPeriodOptions?.map((el) => (
-                					<MenuItem key={el.key} value={el.value}>{el.value}</MenuItem>
+                					<MenuItem key={el.key} value={el.value}>{el.value !== "" ? el.value : el.key}</MenuItem>
                 				)
                 				)}
                 			</TextField>
