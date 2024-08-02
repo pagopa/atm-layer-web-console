@@ -405,45 +405,8 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 1
 				},
-				{
-					field: "clientId",
-					cellClassName: "justifyContentNormal",
-					headerName: "ID AppClient",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.clientId),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "clientSecret",
-					cellClassName: "justifyContentNormal",
-					headerName: "ID ApiKey",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.apiKeyId),
-					sortable: false,
-					flex: 1
-				},
-				{
-					field: "rateLimit",
-					cellClassName: "justifyContentNormal",
-					headerName: "ID Usage Plan",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.usagePlanId),
-					sortable: false,
-					flex: 1
-				},
+				createdAtColumn,
+				lastUpdatedAtColumn,
 				commonActionColumn(BANKS)
 			];
 		case USERS:
