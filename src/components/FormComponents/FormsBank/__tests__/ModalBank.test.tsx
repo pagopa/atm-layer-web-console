@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { fetchRequest } from "../../../../hook/fetch/fetchRequest";
 import { Ctx } from "../../../../DataContext";
-import { generatePath } from "react-router-dom";
+import { BrowserRouter, generatePath } from "react-router-dom";
 import ModalBank from "../ModalBank";
 import { CREATE_BANK, DELETE_BANK, UPDATE_BANK } from "../../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../../commons/endpoints";
@@ -21,24 +21,33 @@ const mockSetTitle = jest.fn();
 const renderComponent = (type: string) => {
   return render(
     <Ctx.Provider value={{ abortController }}>
+      <BrowserRouter>
       <ModalBank
         type={type}
         open={true}
         setOpen={mockSetOpen}
+        openSnackBar={false}
         setOpenSnackBar={mockSetOpenSnackBar}
+        severity=""
         setSeverity={mockSetSeverity}
+        message=""
         setMessage={mockSetMessage}
+        title=""
         setTitle={mockSetTitle}
       />
+      </BrowserRouter>
     </Ctx.Provider>
   );
 };
 
 const setBankInSessionStorage = () => {
-  sessionStorage.setItem("recordParams", JSON.stringify({
+  sessionStorage.setItem("recordParamsBank", JSON.stringify({
     acquirerId: "testAcquirerId",
     denomination: "testDenomination",
-    rateLimit: "testRateLimit"
+    rateLimit: "456",
+    burstLimit: "456",
+    limit: "456",
+    period: "DAY"
   }));
 };
 
@@ -57,7 +66,9 @@ describe("ModalBank component", () => {
 
     expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
     expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
-    expect(screen.getByLabelText("Rate Limite")).toBeInTheDocument();
+    expect(screen.getByLabelText("Quota")).toBeInTheDocument();
+    expect(screen.getByLabelText("Burst")).toBeInTheDocument();
+    expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
   });
 
   test("renders correctly for UPDATE_BANK", () => {
@@ -66,7 +77,9 @@ describe("ModalBank component", () => {
 
     expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
     expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
-    expect(screen.getByLabelText("Rate Limite")).toBeInTheDocument();
+    expect(screen.getByLabelText("Quota")).toBeInTheDocument();
+    expect(screen.getByLabelText("Burst")).toBeInTheDocument();
+    expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
   });
 
   test("renders correctly for DELETE_BANK", () => {
@@ -99,7 +112,8 @@ describe("ModalBank component", () => {
 
     fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
     fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
-    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "newRateLimit" } });
+    fireEvent.change(screen.getByLabelText("Burst"), { target: { value: "123" } });
+    fireEvent.change(screen.getByLabelText("Tasso"), { target: { value: "123" } });
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
@@ -109,9 +123,15 @@ describe("ModalBank component", () => {
         abortController,
         body: {
           acquirerId: "newAcquirerId",
+          burstLimit: "123",
           denomination: "newDenomination",
-          rateLimit: "newRateLimit"
+          limit: "",
+          period: null,
+          rateLimit: "123"
         },
+        headers: {
+     "Content-Type": "application/json",
+    },
       });
     });
   });
@@ -122,7 +142,7 @@ describe("ModalBank component", () => {
     mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "Bank updated successfully" } });
 
     fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "updatedDenomination" } });
-    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "updatedRateLimit" } });
+    fireEvent.change(screen.getByLabelText("Tasso"), { target: { value: "123" } });
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
@@ -131,9 +151,16 @@ describe("ModalBank component", () => {
         method: "PUT",
         abortController,
         body: {
+          acquirerId: "testAcquirerId",
+          burstLimit: "456",
           denomination: "updatedDenomination",
-          rateLimit: "updatedRateLimit"
+          limit: "456",
+          period: "DAY",
+          rateLimit: "123"
         },
+        headers: {
+               "Content-Type": "application/json",
+             },
       });
     });
   });
@@ -152,7 +179,7 @@ describe("ModalBank component", () => {
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
-      expect(screen.getAllByText("Campo obbligatorio").length).toBe(3);
+      expect(screen.getAllByText("Campo obbligatorio").length).toBe(2);
       expect(mockFetchRequest).not.toHaveBeenCalled();
     });
   });
@@ -163,11 +190,10 @@ describe("ModalBank component", () => {
     renderComponent(UPDATE_BANK);
 
     fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "" } });
-    fireEvent.change(screen.getByLabelText("Rate Limite"), { target: { value: "" } });
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
-      expect(screen.getAllByText("Campo obbligatorio").length).toBe(2);
+      expect(screen.getAllByText("Campo obbligatorio").length).toBe(1);
       expect(mockFetchRequest).not.toHaveBeenCalled();
     });
   });
