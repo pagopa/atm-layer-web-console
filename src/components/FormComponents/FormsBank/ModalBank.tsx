@@ -129,7 +129,10 @@ const ModalBank = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					setLoading(false);
 					setOpen(false);
 					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						window.location.reload();
+					}, 1000);
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
