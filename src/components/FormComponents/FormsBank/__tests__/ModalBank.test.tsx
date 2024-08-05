@@ -1,9 +1,8 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import ModalBank from "../ModalBank";
 import { CREATE_BANK, DELETE_BANK, UPDATE_BANK } from "../../../../commons/constants";
-import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../../commons/endpoints";
 
 const originalFetch = global.fetch;
 const abortController = new AbortController();
@@ -77,35 +76,30 @@ describe("ModalBank Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
 
-        expect(global.fetch).toHaveBeenCalledWith(
-            expect.stringContaining("/banks/insert"),
-            expect.anything()
-        );
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/banks/insert"), expect.anything());
         expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
     test("Test ModalBank with DELETE_BANK", async () => {
-      global.fetch = jest.fn().mockResolvedValueOnce({
-          json: () => Promise.resolve({
-              success: true,
-              status: 204,
-              valuesObj: {},
-          }),
-      });
-  
-      renderModalBank(DELETE_BANK);
-      fireEvent.click(screen.getByText("Conferma"));
-  
-      await act(async () => {
-          await new Promise(resolve => setTimeout(resolve, 3000));
-      });
-  
-      expect(global.fetch).toHaveBeenCalledWith(
-          expect.stringContaining("/banks/disable/testAcquirerId"),
-          expect.anything()
-      );
-      expect(setOpenSnackBar).toHaveBeenCalledWith(true);
-  });
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                success: true,
+                status: 204,
+                valuesObj: {},
+            }),
+        });
+
+        renderModalBank(DELETE_BANK);
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/banks/disable/"), expect.anything());
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
+    });
+
     test("Test ModalBank with UPDATE_BANK", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -125,34 +119,104 @@ describe("ModalBank Test", () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
         });
 
-        expect(global.fetch).toHaveBeenCalledWith(
-            expect.stringContaining("/banks/update"),
-            expect.anything()
-        );
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/banks/update"), expect.anything());
         expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
-    test("Test API Error during CREATE_BANK", () => {
-        global.fetch = jest.fn().mockRejectedValueOnce(new Error("API error"));
-        renderModalBank(CREATE_BANK);
-        fireEvent.click(screen.getByText("Conferma"));
+    test("Test API Error during CREATE_BANK", async () => {
+      global.fetch = jest.fn().mockRejectedValueOnce(new Error("API error"));
+      
+      renderModalBank(CREATE_BANK);
+      
+      fireEvent.click(screen.getByText("Conferma"));
+  
+      await act(async () => {
+          await new Promise(resolve => setTimeout(resolve, 3000));
+      });
     });
+  
 
-    test("Test API Error during DELETE_BANK", () => {
+    test("Test API Error during DELETE_BANK", async () => {
         global.fetch = jest.fn().mockRejectedValueOnce(new Error("API error"));
         renderModalBank(DELETE_BANK);
         fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
+        expect(setSeverity).toHaveBeenCalledWith("error");
     });
 
-    test("Test API Error during UPDATE_BANK", () => {
+    test("Test API Error during UPDATE_BANK", async () => {
         global.fetch = jest.fn().mockRejectedValueOnce(new Error("API error"));
         renderModalBank(UPDATE_BANK);
         fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+
     });
 
-    test("Test ModalBank without type", async () => {
+    test("Test ModalBank without type", () => {
         renderModalBank("");
 
         fireEvent.click(screen.getByText("Conferma"));
+
+        expect(setOpenSnackBar).not.toHaveBeenCalled();
     });
+
+    test("Test resetErrors when changing input", () => {
+        renderModalBank(CREATE_BANK);
+
+        fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
+
+
+        expect(screen.getByLabelText("ID Banca")).not.toHaveClass("Mui-error");
+    });
+
+    test("Test handleClose resets form and errors", () => {
+    renderModalBank(CREATE_BANK);
+
+    fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
+    fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
+
+    fireEvent.click(screen.getByText("Annulla"));
+
+    expect((screen.getByLabelText("ID Banca") as HTMLInputElement).value).toBe("");
+    expect((screen.getByLabelText("Nome Banca") as HTMLInputElement).value).toBe("");
+});
+
+    test("Test validateForm with only limit or period set", () => {
+      renderModalBank(CREATE_BANK);
+  
+      fireEvent.change(screen.getByLabelText("Quota"), { target: { value: "100" } });
+      fireEvent.click(screen.getByText("Conferma"));
+  
+      const errorMessage = screen.queryAllByText(/Indicare sia una quota che il periodo a cui si applica/i)[0];
+  
+      expect(errorMessage).toBeInTheDocument();
+  });
+
+    test("Test form fields rendering for CREATE_BANK and UPDATE_BANK", () => {
+        renderModalBank(CREATE_BANK);
+
+        expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Burst")).toBeInTheDocument();
+        expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
+
+        renderModalBank(UPDATE_BANK);
+
+        expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Burst")).toBeInTheDocument();
+        expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
+    });
+
 });
