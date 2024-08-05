@@ -22,6 +22,10 @@ export default function BpmnDataGrid() {
 		transactionStatus: "",
 		functionType: "",
 		acquirerId: "",
+		branchId: "",
+		terminalId: "",
+		startTime: "",
+		endTime: ""
 	};
 
 	const emptyResponse = {page:0,limit:10,itemsFound:0,totalPages:0,results:[]};

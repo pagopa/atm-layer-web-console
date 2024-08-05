@@ -83,6 +83,8 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 		appendQueryParam("acquirerId", filterValues?.acquirerId);
 		appendQueryParam("branchId", filterValues?.branchId);
 		appendQueryParam("terminalId", filterValues?.terminalId);
+		appendQueryParam("startTime", filterValues?.startTime);
+		appendQueryParam("endTime", filterValues?.endTime);
 		break;
 	default:
 		return "";

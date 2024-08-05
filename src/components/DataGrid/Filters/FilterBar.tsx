@@ -108,6 +108,20 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		filterBpmnWithoutStatus(e);
 	};
 
+	const handleTimeStampChange = (e:Date, key: string) => {
+		// console.log("timestamp selezionato per "+key+" "+e?.toISOString().substr(0, 19).replace("T", " "));
+		const timeStampValue = "Timestamp "+ e?.toISOString().substr(0, 19).replace("T", " ");
+		console.log("setting timeStampValue: "+timeStampValue);
+		const updatedFilterValues = { ...filterValues, [key]: timeStampValue};
+
+		setFilterValues(updatedFilterValues);
+
+		if (submitted) {
+			const newErrors = clearErrorsIfCorrected(key, timeStampValue, updatedFilterValues);
+			setErrors(newErrors);
+		}
+	};
+
 	const handleSubmit = () => {
 		setSubmitted(true);
 		let newErrors = { ...errors };
@@ -138,7 +152,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case TRANSACTIONS:
-			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} handleTimeStampChange={handleTimeStampChange}/>;
 		case BANKS:
 			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
 		case USERS:
