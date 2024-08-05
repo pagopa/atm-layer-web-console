@@ -393,20 +393,6 @@ const useColumns: any = () => {
 					flex: 1
 				},
 				{
-					field: "transactionStatus",
-					cellClassName: "justifyContentNormal",
-					headerName: "Stato",
-					align: "left",
-					headerAlign: "left",
-					editable: false,
-					disableColumnMenu: true,
-					renderHeader: showCustomHeader,
-					renderCell: (params: any) => renderCell(params, params.row.transactionStatus),
-					sortable: false,
-					flex: 1
-				},
-				functionTypeColumn,
-				{
 					field: "acquirerId",
 					cellClassName: "justifyContentNormal",
 					headerName: "ID Banca",
@@ -445,6 +431,22 @@ const useColumns: any = () => {
 					sortable: false,
 					flex: 0.5
 				},
+				functionTypeColumn,
+				{
+					field: "transactionStatus",
+					cellClassName: "justifyContentNormal",
+					headerName: "Stato",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.transactionStatus),
+					sortable: false,
+					flex: 1
+				},
+				createdAtColumn,
+				lastUpdatedAtColumn
 			];
 		case BANKS:
 			return [
