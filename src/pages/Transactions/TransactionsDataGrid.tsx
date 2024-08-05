@@ -1,8 +1,8 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { PROCESS_RESOURCES, TRANSACTIONS } from "../../commons/constants";
-import { GET_ALL_BPMN_FILTER, GET_ALL_TRANSACTIONS } from "../../commons/endpoints";
+import { TRANSACTIONS } from "../../commons/constants";
+import { GET_ALL_TRANSACTIONS } from "../../commons/endpoints";
 import { Ctx } from "../../DataContext";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import TableColumn from "../../components/DataGrid/TableColumn";
@@ -11,7 +11,7 @@ import CustomDataGrid from "../../components/DataGrid/CustomDataGrid";
 import { CustomNoRowsOverlay } from "../../components/DataGrid/CustomNoRowsOverlay";
 import FilterBar from "../../components/DataGrid/Filters/FilterBar";
 
-export default function BpmnDataGrid() {
+export default function TransactionDataGrid() {
 
 	const [loading, setLoading] = useState(true);
 	const [loadingButton, setLoadingButton] = useState(false);
