@@ -5,12 +5,14 @@ import { GridStateColDef } from "@mui/x-data-grid/internals";
 import { BrowserRouter } from "react-router-dom";
 import { themeApp } from "../../../assets/jss/themeApp";
 import { ThemeProvider } from "@mui/material/styles";
-import { BPMN, DELETE_ASSOCIATION, DELETE_USER } from "../../../commons/constants";
+import { BANKS, BPMN, DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER } from "../../../commons/constants";
 import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
+import * as fetchModule from "../../../hook/fetch/fetchRequest";
 
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
     useNavigate: () => jest.fn(),
+    generatePath: () => "/mocked-path"
 }));
 
 jest.mock("@mui/material", () => ({
@@ -19,6 +21,7 @@ jest.mock("@mui/material", () => ({
         palette: {
             primary: {
                 contrastText: "#fff",
+                main: "#1976d2"
             },
             error: {
                 main: "#FE6666"
@@ -28,6 +31,8 @@ jest.mock("@mui/material", () => ({
 }));
 
 describe("TableColumn test", () => {
+    const setOpen = jest.fn();
+    const setType = jest.fn();
 
     const colDefMocked: GridStateColDef<any, any, any> = {
         computedWidth: 0,
@@ -81,7 +86,6 @@ describe("TableColumn test", () => {
     });
 
     test("Test showCustomHeader", () => {
-
         const { buildColumnDefs, showCustomHeader, visibleColumns } = TableColumn();
 
         buildColumnDefs(BPMN);
@@ -104,7 +108,6 @@ describe("TableColumn test", () => {
     });
 
     test("Test renderCell", () => {
-
         const { renderCell } = TableColumn();
 
         const params = { value: bpmnTableMocked.results[0].bpmnId };
@@ -120,28 +123,33 @@ describe("TableColumn test", () => {
         expect(screen.getByText(bpmnTableMocked.results[0].bpmnId)).toBeInTheDocument();
     });
 
-    test("Test actionColumn", () => {
-
+    test("Test actionColumn", async () => {
         const { actionColumn } = TableColumn(jest.fn(), jest.fn());
 
-        const params = { ...bpmnTableMocked.results[0] };
+        const mockFetch = jest.fn().mockResolvedValue({
+            valuesObj: { id: "mocked-acquirer-id" }
+        });
+
+        jest.spyOn(fetchModule, 'fetchRequest').mockImplementation(() => mockFetch);
+
+        const param = {
+            row: { acquirerId: "mocked-acquirer-id" }
+        };
 
         render(
             <BrowserRouter>
                 <ThemeProvider theme={themeApp}>
-                    {actionColumn(params, BPMN)}
+                    {actionColumn(param, BANKS)}
                 </ThemeProvider>
             </BrowserRouter>
         );
 
         fireEvent.click(screen.getByTestId("action-column-test"));
+
+        expect(mockFetch).toHaveBeenCalledTimes(1);
     });
 
     test("Test deleteColumn", () => {
-
-        const setOpen = jest.fn();
-        const setType = jest.fn();
-
         const { deleteColumn } = TableColumn(setOpen, setType);
 
         const param = { ...bpmnTableMocked.results[0] };
@@ -155,15 +163,30 @@ describe("TableColumn test", () => {
         );
 
         fireEvent.click(screen.getByTestId("delete-column-test"));
+        expect(setOpen).toHaveBeenCalled();
+        expect(setType).toHaveBeenCalledWith(DELETE_ASSOCIATION);
+    });
+
+    test("Test deleteColumnBank", () => {
+        const { deleteColumnBank } = TableColumn(setOpen, setType);
+        const param = { row: { bankId: "mocked-bank-id" } };
+
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnBank(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+
+        fireEvent.click(screen.getByTestId("delete-column-test"));
+        expect(setOpen).toHaveBeenCalledWith(true);
+        expect(setType).toHaveBeenCalledWith(DELETE_BANK);
+        expect(sessionStorage.getItem("recordParamsBank")).toBe(JSON.stringify(param.row));
     });
 
     test("Test deleteColumnUsers", () => {
-
-        const setOpen = jest.fn();
-        const setType = jest.fn();
-
         const { deleteColumnUsers } = TableColumn(setOpen, setType);
-
         const param = { ...bpmnTableMocked.results[0] };
 
         render(
@@ -175,5 +198,7 @@ describe("TableColumn test", () => {
         );
 
         fireEvent.click(screen.getByTestId("delete-column-test"));
+        expect(setOpen).toHaveBeenCalled();
+        expect(setType).toHaveBeenCalledWith(DELETE_USER);
     });
 });

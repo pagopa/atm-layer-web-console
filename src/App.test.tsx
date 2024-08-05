@@ -101,4 +101,27 @@ describe("App component", () => {
 
 		expect(sessionStorage.getItem("recordParamsUser")).toBeNull();
 	});
+
+	test("clearStorage function removes specified items from sessionStorage", () => {
+		
+		sessionStorage.setItem("recordParams", "some-value");
+		sessionStorage.setItem("recordParamsAssociated", "some-value");
+		sessionStorage.setItem("recordParamsUser", "some-value");
+		sessionStorage.setItem("recordParamsBank", "some-value");
+
+		render(
+			<Ctx.Provider value={mockContextValue}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</Ctx.Provider>
+		);
+
+		mockContextValue.clearStorage();
+
+		expect(sessionStorage.getItem("recordParams")).toBeNull();
+		expect(sessionStorage.getItem("recordParamsAssociated")).toBeNull();
+		expect(sessionStorage.getItem("recordParamsUser")).toBeNull();
+		expect(sessionStorage.getItem("recordParamsBank")).toBeNull();
+	});
 });

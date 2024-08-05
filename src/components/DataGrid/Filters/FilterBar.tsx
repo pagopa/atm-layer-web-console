@@ -1,11 +1,15 @@
-import React, { SetStateAction } from "react";
-import { PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
+/* eslint-disable functional/immutable-data */
+/* eslint-disable prefer-const */
+/* eslint-disable functional/no-let */
+import React, { SetStateAction, useState } from "react";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
+import BanksFilterComponent from "./BanksFilterComponent";
 import UsersFilterComponent from "./UsersFilterComponent";
 
 type Props = {
@@ -22,7 +26,8 @@ type Props = {
 };
 
 export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton, createIcon, handleClick }: Props) {
-
+	const [errors, setErrors] = useState<any>({});
+	const [submitted, setSubmitted] = useState(false);
 	const { regexTestField } = checks();
 
 	const filterBpmnWithoutStatus = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -32,17 +37,16 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		}
 	};
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleDriverSpecificLogic = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, updatedFilterValues: any) => {
 		const { name, value } = event.target;
-		const updatedFilterValues = { ...filterValues, [name]: value };
-	
+
 		switch (driver) {
 		case PROCESS_RESOURCES:
 			filterBpmnWithoutStatus(event);
 			break;
 		case RESOURCES:
 			if (name === "noDeployableResourceType" && value === "") {
-				const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
+				const filterWithoutResourceType = Object.entries(updatedFilterValues).filter(el => el[0] !== "noDeployableResourceType");
 				if (!(filterWithoutResourceType.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
@@ -50,21 +54,46 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			break;
 		case WORKFLOW_RESOURCE:
 			if ((name === "status" && value === "") || (name === "resourceType" && value === "")) {
-				const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-				const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
-		
+				const filterWfResWithoutStatus = Object.entries(updatedFilterValues).filter(el => el[0] !== "status");
+				const filterWithoutWRResourceType = Object.entries(updatedFilterValues).filter(el => el[0] !== "resourceType");
+
 				if ((name === "status" && value === "") && !(filterWfResWithoutStatus.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
-		
+
 				if ((name === "resourceType" && value === "") && !(filterWithoutWRResourceType.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
 			}
 			break;
+		default:
+			break;
 		}
-	
+	};
+
+	const clearErrorsIfCorrected = (name: string, value: string, updatedFilterValues: any) => {
+		let newErrors = { ...errors };
+		if (name === "rateMin" || name === "rateMax") {
+			if (!updatedFilterValues.rateMin || !updatedFilterValues.rateMax || parseInt(updatedFilterValues.rateMax, 10) >= parseInt(updatedFilterValues.rateMin, 10)) {
+				delete newErrors.rateMin;
+				delete newErrors.rateMax;
+			}
+		}
+		return newErrors;
+	};
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = event.target;
+		const updatedFilterValues = { ...filterValues, [name]: value };
+
+		handleDriverSpecificLogic(event, updatedFilterValues);
+
 		setFilterValues(updatedFilterValues);
+
+		if (submitted) {
+			const newErrors = clearErrorsIfCorrected(name, value, updatedFilterValues);
+			setErrors(newErrors);
+		}
 	};
 
 	const handleChangeNumberOnly = (
@@ -77,15 +106,24 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	const handleSubmit = () => {
-		setLoadingButton(true);
-		if (Object.values(filterValues).some(value => value !== "")) {
-			getAllList(filterValues, 0);
+		setSubmitted(true);
+		let newErrors = { ...errors };
+
+		setErrors(newErrors);
+
+		if (Object.keys(newErrors).length === 0) {
+			setLoadingButton(true);
+			if (Object.values(filterValues).some(value => value !== "")) {
+				getAllList(filterValues, 0);
+			}
 		}
 	};
 
 	const cleanFilter = () => {
 		setFilterValues(newFilterValues);
 		getAllList(undefined, 0);
+		setErrors({});
+		setSubmitted(false);
 	};
 
 	const filterType = () => {
@@ -96,6 +134,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case BANKS:
+			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
 		case USERS:
 			return <UsersFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
@@ -117,7 +157,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={ handleClick }>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={handleClick}>
 			{filterType()}
 		</FilterTemplate>
 	);

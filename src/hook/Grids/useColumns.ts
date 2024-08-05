@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BANKS, BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -377,6 +377,38 @@ const useColumns: any = () => {
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
 			];
+		case BANKS:
+			return [
+				{
+					field: "acquirerId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Banca",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.acquirerId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "denomination",
+					cellClassName: "justifyContentNormal",
+					headerName: "Nome Banca",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.denomination),
+					sortable: false,
+					flex: 1
+				},
+				createdAtColumn,
+				lastUpdatedAtColumn,
+				commonActionColumn(BANKS)
+			];
 		case USERS:
 			return [
 				{
@@ -511,6 +543,8 @@ const useColumns: any = () => {
 		     return generatePath(ROUTES.RESOURCES_DETAILS, { resourceId: param.row.resourceId });
 		case WORKFLOW_RESOURCE:
 			return generatePath(ROUTES.WORKFLOW_RESOURCE_DETAILS, { workflowResourceId: param.row.workflowResourceId });
+		case BANKS:
+			return generatePath(ROUTES.BANK_DETAILS, {acquirerId: param.row.acquirerId });
 		default:
 			return [];
 		}

@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, BANKS, CREATE_BANK, CREATE_USER, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_BANK, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 import { Profile, User } from "../../model/UserModel";
@@ -68,6 +68,13 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 	case DELETE_ASSOCIATION:
 		appendQueryParam("branchId", filterValues?.branchId);
 		appendQueryParam("terminalId", filterValues?.terminalId);
+		break;
+	case BANKS:
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("denomination", filterValues?.denomination);
+		appendQueryParam("clientId", filterValues?.clientId);
+		appendQueryParam("rateMin", filterValues?.rateMin);
+		appendQueryParam("rateMax", filterValues?.rateMax);
 		break;
 	default:
 		return "";
@@ -155,6 +162,18 @@ export const commonBreadRoot = (currentPage:PageDto, isDetail:boolean=false, rec
 
 		});
 	}
+	if(currentPage?.isBank){
+		links.push({
+			rootValue: ROUTES.BANK,
+			rootName: "Gestione banche"
+		});
+	}
+	if(currentPage?.isBank && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.BANK_DETAILS, { acquirerId: recordParams?.acquirerId }),
+			rootName: "Dettaglio banca"
+		});
+	}
 	return links;
 };
 
@@ -196,6 +215,15 @@ export function getTextModal(type:string):any {
 	}
 	case UPDATE_RES: {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
+	}
+	case CREATE_BANK: {
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (quota), il numero di chiamate simultanee (burst) e il numero di chiamate al secondo (tasso)"};
+	}
+	case UPDATE_BANK: {
+		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
+	}
+	case DELETE_BANK: {
+		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questo istituto bancario dal registro degli aderenti?"};
 	}
 	case CREATE_USER: {
 		return {titleModal:"Creazione nuovo utente", contentText:"Indica email e permessi del nuovo utente"};

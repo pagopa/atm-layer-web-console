@@ -26,6 +26,13 @@ export const RESOURCES_DELETE = "/resources/disable/:uuid";
 export const USER_EMAIL = "/info/email";
 export const USER_INFO = "/user/first-access";
 
+export const GET_ALL_BANKS_FILTER="/banks/search";
+export const GET_BANK="/banks/:acquirerId";
+export const BANKS_CREATE = "/banks/insert";
+export const BANKS_UPDATE = "/banks/update";
+export const BANKS_DELETE = "/banks/disable/:acquirerId";
+
+
 export const GET_ALL_USERS = "/user";
 export const CREATE_USERS = "/user/insert-with-profiles";
 export const UPDATE_USERS = "/user/update-with-profiles";

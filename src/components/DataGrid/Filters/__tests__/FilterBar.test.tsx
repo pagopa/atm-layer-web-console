@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import FilterBar from "../FilterBar";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, USERS } from "../../../../commons/constants";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
 
 beforeEach(() => {
@@ -210,6 +210,49 @@ describe("FilterBar test", () => {
         const status = screen.getByTestId("status-test") as HTMLInputElement;
         fireEvent.change(status, { target: { value: "" } });
     });
+
+    // test("Test FilterBar with BANKS and Click on Cancella Filtri and Crea ", () => {
+    //     const emptyFilterValues = {
+    //         acquirerId: "",
+    //         denomination: "",
+    //     };
+
+    //     renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
+
+    //     fireEvent.click(screen.getByText("Cancella Filtri"));
+    //     fireEvent.click(screen.getByText("Crea Nuovo"));
+    // });
+
+    test("Test FilterBar with BANKS and Filter with acquirerId", () => {
+        const emptyFilterValues = {
+            acquirerId: "",
+            denomination: "",
+            clientId: "",
+            rateMin: "",
+            rateMax: ""
+        };
+
+        renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
+
+        const acquirerId = screen.getByTestId("bank-acquirerId-test") as HTMLInputElement;
+        fireEvent.change(acquirerId, { target: { value: "123" } });
+    });
+
+    test("Test FilterBar with BANKS and Filter with denomination", () => {
+        const emptyFilterValues = {
+            acquirerId: "",
+            denomination: "",
+            clientId: "",
+            rateMin: "",
+            rateMax: ""
+        };
+
+        renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
+
+        const denomination = screen.getByTestId("bank-denomination-test") as HTMLInputElement;
+        fireEvent.change(denomination, { target: { value: "BankName" } });
+    });
+
     test("Test FilterBar with USERS and Filter with name", () => {
         const emptyFilterValues = {
             name: "",
@@ -269,4 +312,6 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Cancella Filtri"));
         fireEvent.click(screen.getByText("Filtra"));
     });
+
 });
+

@@ -46,6 +46,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import  LaunchIcon  from "@mui/icons-material/Launch";
+import { AccountBalance } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Icons : { [key: string]: any } ={
@@ -98,6 +99,7 @@ const Icons : { [key: string]: any } ={
 	"FileUpload": FileUploadOutlinedIcon,
 	"Close": CloseIcon,
 	"Launch": LaunchIcon,
+	"AccountBalanceIcon": AccountBalance,
 	"Menu": MenuIcon
 };
 

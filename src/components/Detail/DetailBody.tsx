@@ -1,15 +1,17 @@
 import { useState } from "react";
 import React from "react";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../commons/constants";
 import DetailPageTemplate from "../../pages/Layout/DetailPageTemplate";
 import ModalResources from "../FormComponents/FormsResources/ModalResources";
 import ModalWR from "../FormComponents/FormsWorkflowResource/ModalWR";
 import BpmnAssociatedDataGrid from "../DataGrid/BpmnAssociatedDataGrid";
 import ModalBpmn from "../FormComponents/FormsBpmn/ModalBpmn";
 import TableColumn from "../DataGrid/TableColumn";
+import ModalBank from "../FormComponents/FormsBank/ModalBank";
 import ResourcesDetailButtons from "./ResourcesDetailButtons";
 import WorkflowResourcesDetailButtons from "./WorkflowResourcesDetailButtons";
 import BpmnDetailButtons from "./BpmnDetailButtons";
+import BankDetailButtons from "./BankDetailButtons";
 
 type Props = {
     detail: any;
@@ -108,6 +110,30 @@ const DetailBody = ({
 						setTitle={setTitle}
 					/>
 				</React.Fragment>
+			);
+		case BANKS:
+			return (
+				<>
+					<BankDetailButtons
+						openDialog={() => setOpen(true)}
+						type={type}
+						setType={setType}
+						detail={detail}
+					/>
+					<ModalBank
+						open={open}
+						setOpen={setOpen}
+						type={type}
+						openSnackBar={openSnackBar}
+						setOpenSnackBar={setOpenSnackBar}
+						severity={severity}
+						setSeverity={setSeverity}
+						message={message}
+						setMessage={setMessage}
+						title={title}
+						setTitle={setTitle}
+					/>
+				</>
 			);
 		}
 	};

@@ -36,11 +36,18 @@ export const BPMN_ASSOCIATED = "bpmnAssociated";
 export const USERS = "users";
 
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];
+export const MAX_LENGTH_NUMERIC = 6;
+export const MAX_LENGTH_SMALL = 10;
+export const MAX_LENGTH_MEDIUM = 25;
 export const MAX_LENGHT_LARGE = 50 ;
 export const ACQUIRER_ID_LENGTH = 11;
 export const TERMINAL_BRANCH_LENGTH = 8;
 export const RESOURCE_BASE_STORAGEKEY = "RESOURCE/files/";
 
+export const BANKS="banks";
+export const CREATE_BANK="createBank";
+export const DELETE_BANK="deleteBank";
+export const UPDATE_BANK="updateBank";
 export const ALERT_SUCCESS = "success";
 export const ALERT_ERROR = "error";
 export const ALERT_INFO = "info";
