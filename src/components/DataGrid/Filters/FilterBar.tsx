@@ -110,8 +110,11 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 
 	const handleTimeStampChange = (e:Date, key: string) => {
 		// console.log("timestamp selezionato per "+key+" "+e?.toISOString().substr(0, 19).replace("T", " "));
-		const timeStampValue = "Timestamp "+ e?.toISOString().substr(0, 19).replace("T", " ");
-		console.log("setting timeStampValue: "+timeStampValue);
+		// const timeStampValue = "Timestamp "+ e?.toISOString().substr(0, 19).replace("T", " ");
+		const timeStampValue = e?.toISOString().substr(0, 19).replace("T", " ");
+		const timeStampQuery = `{"Timestamp":"${timeStampValue}"}`;
+		// const timeStampValue = e?.toISOString().substr(0, 19).replace("T", " ");
+		console.log("setting timeStampValue: "+timeStampQuery);
 		const updatedFilterValues = { ...filterValues, [key]: timeStampValue};
 
 		setFilterValues(updatedFilterValues);
