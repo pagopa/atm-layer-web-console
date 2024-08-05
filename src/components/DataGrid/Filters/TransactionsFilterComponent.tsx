@@ -94,6 +94,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					views={["year", "month", "day", "hours", "minutes", "seconds"]}
 					label="A partire da"
 					name="startTime"
+					value={filterValues.startTime? new Date(filterValues.startTime) : null}
 					onChange={(e) => handleTimeStampChange(e, "startTime")}
 				/>
 			</LocalizationProvider>
@@ -103,6 +104,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 				<DateTimePicker
 					views={["year", "month", "day", "hours", "minutes", "seconds"]}
 					label="Fino a"
+					value={filterValues.endTime? new Date(filterValues.endTime) : null}
 					onChange={(e) => handleTimeStampChange(e, "endTime")}
 				/>
 			</LocalizationProvider>
