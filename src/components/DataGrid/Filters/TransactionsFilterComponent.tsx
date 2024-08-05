@@ -14,7 +14,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 	<React.Fragment>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "function-type-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "transaction-id-test" }}
 				id="transactionId"
 				name="transactionId"
 				label="ID Transazione"
@@ -27,7 +27,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}
+				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "transaction-status-test" }}
 				id="transactionStatus"
 				name="transactionStatus"
 				label="Stato"
@@ -39,6 +39,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
+				inputProps={{ "data-testid": "function-type-test" }}
 				id="functionType"
 				name="functionType"
 				label="Funzione"
@@ -64,7 +65,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" }}
+				inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "branch-id-test" }}
 				id="branchId"
 				name="branchId"
 				label="ID Filiale"
@@ -77,7 +78,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 		</Grid>
 		<Grid item xs={4}>
 			<TextField
-				inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "acquirer-id-test" }}
+				inputProps={{ maxLength: ACQUIRER_ID_LENGTH, "data-testid": "terminal-id-test" }}
 				id="terminalId"
 				name="terminalId"
 				label="ID Terminale"
@@ -94,7 +95,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					views={["year", "month", "day", "hours", "minutes", "seconds"]}
 					label="A partire da"
 					name="startTime"
-					onChange={(e) => handleTimeStampChange(e, "startTime")}
+					onChange={(e: any) => handleTimeStampChange(e, "startTime")}
 				/>
 			</LocalizationProvider>
 		</Grid>
@@ -103,7 +104,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 				<DateTimePicker
 					views={["year", "month", "day", "hours", "minutes", "seconds"]}
 					label="Fino a"
-					onChange={(e) => handleTimeStampChange(e, "endTime")}
+					onChange={(e: any) => handleTimeStampChange(e, "endTime")}
 				/>
 			</LocalizationProvider>
 		</Grid>

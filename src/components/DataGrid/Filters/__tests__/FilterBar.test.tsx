@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import FilterBar from "../FilterBar";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS } from "../../../../commons/constants";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS, TRANSACTIONS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
 
 beforeEach(() => {
@@ -312,6 +312,86 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Cancella Filtri"));
         fireEvent.click(screen.getByText("Filtra"));
     });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with transactionId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const transactionId = screen.getByTestId("transaction-id-test") as HTMLInputElement;
+        fireEvent.change(transactionId, { target: { value: "1234567890" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with transactionStatus", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const transactionStatus = screen.getByTestId("transaction-status-test") as HTMLInputElement;
+        fireEvent.change(transactionStatus, { target: { value: "COMPLETED" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with functionType", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const functionType = screen.getByTestId("function-type-test") as HTMLInputElement;
+        fireEvent.change(functionType, { target: { value: "TYPE_A" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with acquirerId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
+        fireEvent.change(acquirerId, { target: { value: "98765" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Click on Cancella Filtri and Filtra", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        fireEvent.click(screen.getByText("Cancella Filtri"));
+        fireEvent.click(screen.getByText("Filtra"));
+    });
+
 
 });
 

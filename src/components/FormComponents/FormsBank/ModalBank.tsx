@@ -78,13 +78,13 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		
 	};
 
-	const validateNumericInput = (e: KeyboardEvent) => {
-		if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
-			&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
-		&& !(/^[0-9]$/i.test(e.key))) {
-	  e.preventDefault();
-		}
-	};
+	// const validateNumericInput = (e: KeyboardEvent) => {
+	// 	if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+	// 		&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+	// 	&& !(/^[0-9]$/i.test(e.key))) {
+	//   e.preventDefault();
+	// 	}
+	// };
 
 	useEffect(() => {
 		if (open && type === UPDATE_BANK) {
