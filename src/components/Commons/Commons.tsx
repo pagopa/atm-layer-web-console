@@ -31,57 +31,54 @@ export const resetErrors = (errors: any, setErrors: any, field: string | number)
 	}
 };
 
-type DriverType = 
-  | typeof PROCESS_RESOURCES
-  | typeof RESOURCES
-  | typeof WORKFLOW_RESOURCE
-  | typeof DELETE_ASSOCIATION
-  | typeof BANKS;
+export const getQueryString = (filterValues: any, driver: string, URL?: string): string => {
+	let queryString = "";
 
-export const getQueryString = (filterValues: any, driver: string, URL?: string) => {
-	let queryString = URL ? URL : "";
-
-	const addQueryParam = (param: string, value: any) => {
-		if (value) {
-			queryString = queryString.concat(`&${param}=${value}`);
-		}
-	};
-
-	const drivers: Record<DriverType, () => void> = {
-		[PROCESS_RESOURCES]: () => {
-			addQueryParam("functionType", filterValues?.functionType?.toUpperCase());
-			addQueryParam("fileName", filterValues?.fileName);
-			addQueryParam("modelVersion", filterValues?.modelVersion);
-			addQueryParam("acquirerId", filterValues?.acquirerId);
-			addQueryParam("status", filterValues?.status);
-		},
-		[RESOURCES]: () => {
-			addQueryParam("fileName", filterValues?.fileName);
-			addQueryParam("noDeployableResourceType", filterValues?.noDeployableResourceType);
-			addQueryParam("storageKey", filterValues?.storageKey);
-		},
-		[WORKFLOW_RESOURCE]: () => {
-			addQueryParam("resourceType", filterValues?.resourceType);
-			addQueryParam("fileName", filterValues?.fileName);
-			addQueryParam("status", filterValues?.status);
-		},
-		[DELETE_ASSOCIATION]: () => {
-			addQueryParam("branchId", filterValues?.branchId);
-			addQueryParam("terminalId", filterValues?.terminalId);
-		},
-		[BANKS]: () => {
-			addQueryParam("acquirerId", filterValues?.acquirerId);
-			addQueryParam("denomination", filterValues?.denomination);
-			addQueryParam("clientId", filterValues?.clientId);
-			addQueryParam("rateMin", filterValues?.rateMin);
-			addQueryParam("rateMax", filterValues?.rateMax);
-		}
-	};
-
-	if (drivers[driver as DriverType]) {
-		drivers[driver as DriverType]();
+	if (URL && URL !== "") {
+		queryString = queryString.concat(URL);
 	}
 
+	const appendQueryParam = (key: string, value: any) => {
+		if (value !== undefined && value !== null && value !== "") {
+			// Usa encodeURIComponent per codificare il valore
+			queryString = queryString.concat(`&${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+		}
+	};
+
+	switch (driver) {
+	case PROCESS_RESOURCES:
+		appendQueryParam("functionType", filterValues?.functionType?.toUpperCase());
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("modelVersion", filterValues?.modelVersion);
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("status", filterValues?.status);
+		break;
+	case RESOURCES:
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("noDeployableResourceType", filterValues?.noDeployableResourceType);
+		if(filterValues?.storageKey){
+			appendQueryParam("storageKey", RESOURCE_BASE_STORAGEKEY + filterValues?.storageKey);
+		}
+		break;
+	case WORKFLOW_RESOURCE:
+		appendQueryParam("resourceType", filterValues?.resourceType);
+		appendQueryParam("fileName", filterValues?.fileName);
+		appendQueryParam("status", filterValues?.status);
+		break;
+	case DELETE_ASSOCIATION:
+		appendQueryParam("branchId", filterValues?.branchId);
+		appendQueryParam("terminalId", filterValues?.terminalId);
+		break;
+	case BANKS:
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("denomination", filterValues?.denomination);
+		appendQueryParam("clientId", filterValues?.clientId);
+		appendQueryParam("rateMin", filterValues?.rateMin);
+		appendQueryParam("rateMax", filterValues?.rateMax);
+		break;
+	default:
+		return "";
+	}
 	return queryString;
 };
 

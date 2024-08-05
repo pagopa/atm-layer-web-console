@@ -4,7 +4,7 @@ import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
-import { ALERT_ERROR, UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { Loading } from "../../Commons/Loading";
 
@@ -117,7 +117,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
 					setLoadingButton(false);
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					if (response?.success) {
 						const updatedResponse = {
 							...response.valuesObj,

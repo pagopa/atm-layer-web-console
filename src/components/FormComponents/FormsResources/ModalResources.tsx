@@ -63,7 +63,7 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 					setOpenSnackBar(false);
 				}, 3000);
 			} else {
-				handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
 			}
 			break;
 		}
