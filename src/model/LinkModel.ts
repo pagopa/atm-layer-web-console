@@ -8,4 +8,5 @@ isBpmn?: boolean;
 isWR?: boolean;
 isStatic?: boolean;
 isTrnsc?: boolean;
+isBank?: boolean;
 };

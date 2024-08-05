@@ -3,6 +3,7 @@ import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMa
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
 import DetailBox from "../../components/Detail/DetailBox";
+import { BANKS } from "../../commons/constants";
 import BoxPageLayout from "./BoxPageLayout";
 
 type Props = {

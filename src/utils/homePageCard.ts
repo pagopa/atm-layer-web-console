@@ -30,10 +30,17 @@ export const homePageCard = [
 		pageLink: routes.WORKFLOW_RESOURCES
 	},
 	{
-		title: "Transazioni",
-		id: "transactions",
-		description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
-		icon:"AssignmentOutlined",
-		pageLink: routes.TRANSACTIONS
+		title: "Banche",
+		id: "banks",
+		description:"Gestione Acquirer e parametri associati",
+		icon:"AccountBalanceIcon",
+		pageLink: routes.BANK
+	},
+	{
+		title: "Utenti e autorizzazioni",
+		id: "users",
+		description:"Gestione utenti e permessi",
+		icon:"PersonOutline",
+		pageLink: routes.USERS
 	}
 ];

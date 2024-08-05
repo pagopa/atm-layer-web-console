@@ -36,9 +36,9 @@ export const ActionAlert = ({ setOpenSnackBar, openSnackBar, severity, message, 
 
 	return (
 
-		<Box my={2} data-testid="action-alert">
+		<Box my={2} >
 			{openSnackBar === true &&
-				<Alert severity={severity} onClose={conditionalReload}>
+				<Alert severity={severity} onClose={conditionalReload} data-testid="action-alert">
 					<AlertTitle>
 						{title}
 					</AlertTitle>

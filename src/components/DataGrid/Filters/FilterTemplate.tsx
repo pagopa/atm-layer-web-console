@@ -1,6 +1,10 @@
 import { Grid, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { Loading } from "../../Commons/Loading";
+import { Ctx } from "../../../DataContext";
+import { getProfileIdsArray } from "../../Commons/Commons";
+import { SCRITTURA } from "../../../commons/constants";
 
 type Props = {
   handleSubmit: () => void;
@@ -9,7 +13,8 @@ type Props = {
   filterRoutes: string;
   children?: any;
   loadingButton?: boolean;
-  showCreateButton: boolean;
+  createIcon?: boolean;
+  handleClick?: any;
 };
 
 const FilterTemplate = ({
@@ -19,9 +24,14 @@ const FilterTemplate = ({
 	filterRoutes,
 	children,
 	loadingButton,
-	showCreateButton
+	createIcon,
+	handleClick,
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
+
+	const {loggedUserInfo} = useContext(Ctx);
+	const loggedUserProfiles = getProfileIdsArray(loggedUserInfo);
+	const canCreate = loggedUserProfiles.includes(SCRITTURA);
 
 	const disabledButtons = () => {
 		if (!Object.values(filterValues).some((value) => value !== "")) {
@@ -42,21 +52,23 @@ const FilterTemplate = ({
 						alignItems={"center"}
 						justifyContent={"space-between"}
 					>
-						 
-						<Box my={1}>
-							{showCreateButton &&
-							<Button variant="contained" onClick={() => navigate(filterRoutes)}>
-			Crea Risorsa
-							</Button>
-							}
-						</Box>
-						
-
+						{createIcon ?
+							 <Box my={1}>
+							 <Button variant="contained" onClick={() => handleClick()} disabled={canCreate ? false : true}>
+				 Crea Nuovo
+							 </Button>
+						 </Box>
+						 :
+							<Box my={1}>
+								<Button variant="contained" onClick={() => navigate(filterRoutes)} disabled={canCreate ? false : true}>
+                Crea Risorsa
+								</Button>
+							</Box>
+						}
 						<Box>
 							<Button
 								sx={{ marginRight: 2 }}
 								variant="outlined"
-								// disabled={disabledButtons()}
 								onClick={() => cleanFilter()}
 							>
                 Cancella Filtri

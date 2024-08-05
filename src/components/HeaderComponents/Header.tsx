@@ -18,7 +18,6 @@ export const Header = () => {
 			loggedUser={logged}
 			rootLink={{
 				element: <LogoPagoPACompany color="default" variant="default" />,
-				// href: "https://www.pagopa.gov.it/",
 				ariaLabel: "PagoPA",
 				title: "PagoPA-logo"
 			

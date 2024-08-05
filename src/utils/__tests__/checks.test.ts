@@ -62,11 +62,6 @@ describe("checks tests", () => {
     expect(checks().isValidDeployableFilename("invalid file name")).toBe(false);
   });
 
-  test("Restituisce il nome del file da un percorso valido con un nome file valido", () => {
-    // expect(checks().deployableFilename("path/to/my_file")).toBe("my_file");
-    // expect(checks().deployableFilename("another/path/to/another_file")).toBe("another_file");
-  });
-
   test("Restituisce undefined per un percorso valido con un nome file non valido", () => {
     expect(checks().deployableFilename("path/to/invalid file name")).toBeUndefined();
   });
