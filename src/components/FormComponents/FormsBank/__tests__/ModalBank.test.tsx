@@ -296,8 +296,6 @@ describe("ModalBank Test", () => {
 
     test("Test onChange only numbers allowed in numeric fields", () => {
         renderModalBank(CREATE_BANK);
-    
-        // fireEvent.change(screen.getByLabelText("Quota"), { target: { value: "abc" } });
         fireEvent.keyDown(screen.getByLabelText("Quota"), {key: 'Z', code: 'KeyZ'});
         fireEvent.keyDown(screen.getByLabelText("Burst"), {key: 'Z', code: 'KeyZ'});
         fireEvent.keyDown(screen.getByLabelText("Tasso"), {key: 'Z', code: 'KeyZ'});
