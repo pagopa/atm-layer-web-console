@@ -19,7 +19,7 @@ const mockValue = ["Profile 1"];
 const mockNames = ["Profile 1", "Profile 2"];
 
 describe("MultiSelect component", () => {
-    beforeEach(() => {
+    const renderMultipleSelect = (isFirstUser:boolean) => {
         render(
             <Ctx.Provider value={mockContextValue}>
                 <MultiSelect
@@ -27,12 +27,15 @@ describe("MultiSelect component", () => {
                     errors={mockErrors}
                     value={mockValue}
                     names={mockNames}
+                    isFirstUser={isFirstUser}
                 />
             </Ctx.Provider>
         );
-    });
+    };
 
     test("renders the checkbox with correct icon", async () => {
+
+        renderMultipleSelect(false);
 
         const dropdownButton = screen.getByRole('button', { name: /Open/i });
         userEvent.click(dropdownButton);
@@ -44,6 +47,7 @@ describe("MultiSelect component", () => {
     });
 
     test("renders selected checkbox with correct icon", async () => {
+        renderMultipleSelect(false);
 
         const dropdownButton = screen.getByRole('button', { name: /Open/i });
         userEvent.click(dropdownButton);
@@ -54,6 +58,7 @@ describe("MultiSelect component", () => {
     });
 
     test("calls handleChange with completeProfiles on change", async () => {
+        renderMultipleSelect(true);
 
         const dropdownButton = screen.getByRole('button', { name: /Open/i });
         userEvent.click(dropdownButton);
