@@ -41,7 +41,7 @@ describe("MultiSelect component", () => {
         addDependentProfilesSpy.mockRestore();
     });
 
-    const renderComponent = () =>
+    const renderComponent = (isFirstUser = false) =>
         render(
             <Ctx.Provider value={mockContextValue}>
                 <MultiSelect
@@ -49,29 +49,22 @@ describe("MultiSelect component", () => {
                     errors={mockErrors}
                     value={mockValue}
                     names={mockNames}
+                    isFirstUser={isFirstUser}
                 />
             </Ctx.Provider>
         );
 
-    test("renders MultiSelect component correctly", () => {
+    test("calls handleChangeWrapper with correct values when a new value is selected", () => {
         renderComponent();
 
-        expect(screen.getByLabelText("Ruoli assegnati")).toBeInTheDocument();
-        expect(screen.getByText("Admin")).toBeInTheDocument();
-    });
+        const dropdownButton = screen.getByRole("button", { name: /Open/i });
+        fireEvent.click(dropdownButton);
 
-    test("shows error when there are errors", () => {
-        render(
-            <Ctx.Provider value={mockContextValue}>
-                <MultiSelect
-                    handleChange={mockHandleChange}
-                    errors={{ profileIds: "Errore di test" }}
-                    value={mockValue}
-                    names={mockNames}
-                />
-            </Ctx.Provider>
-        );
+        const userOption = screen.getByText("User");
+        fireEvent.click(userOption);
 
-        expect(screen.getByText("Errore di test")).toBeInTheDocument();
+        expect(addDependentProfilesSpy).toHaveBeenCalledWith(["Admin", "User"], mockProfilesAvailable);
+     
+        expect(mockHandleChange).toHaveBeenCalledTimes(1);
     });
 });

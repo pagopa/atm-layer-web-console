@@ -188,7 +188,6 @@ describe("TableColumn test", () => {
     test("Test deleteColumnUsers", () => {
         const { deleteColumnUsers } = TableColumn(setOpen, setType);
         const param = { ...bpmnTableMocked.results[0] };
-
         render(
             <BrowserRouter>
                 <ThemeProvider theme={themeApp}>

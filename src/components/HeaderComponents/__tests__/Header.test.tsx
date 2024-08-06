@@ -12,46 +12,14 @@ const onLogoutMocked = jest.fn();
 
 const mockContextValueNotLogged = {
     loggedUserInfo: {
-        userId: 'mario.rossi@pagopa.com',
-        name: 'Mario',
-        surname: 'Rossi',
-        createdAt: '2024-05-27',
-        lastUpdatedAt: '2024-05-27',
-        profiles: [
-            {
-                description: "Gestione flussi in lettura",
-                profileId: 1,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
-            },
-            {
-                description: "Gestione flussi in scrittura",
-                profileId: 2,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
-            },
-            {
-                description: "Rilascio BPMN",
-                profileId: 3,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
-            },
-            {
-                description: "Emulator",
-                profileId: 4,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
-            },
-            {
-                description: "Gestione utenti",
-                profileId: 5,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
-            }
-        ]
+        userId: '',
+        name: '',
+        surname: '',
+        profiles: [],
     },
     abortController: new AbortController(),
-	logged:false,
+	logged: false,
+	clearAll: jest.fn(),
 	userEmail: ""
 };
 
@@ -60,75 +28,62 @@ const mockContextValueLogged = {
         userId: 'mario.rossi@pagopa.com',
         name: 'Mario',
         surname: 'Rossi',
-        createdAt: '2024-05-27',
-        lastUpdatedAt: '2024-05-27',
         profiles: [
             {
                 description: "Gestione flussi in lettura",
                 profileId: 1,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
             },
             {
                 description: "Gestione flussi in scrittura",
                 profileId: 2,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
             },
             {
                 description: "Rilascio BPMN",
                 profileId: 3,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
             },
             {
                 description: "Emulator",
                 profileId: 4,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
             },
             {
                 description: "Gestione utenti",
                 profileId: 5,
-                createdAt: "2024-05-27",
-                lastUpdatedAt: "2024-05-27"
             }
         ]
     },
     abortController: new AbortController(),
-	logged:true,
-	clearAll: () => onLogoutMocked(),
+	logged: true,
+	clearAll: onLogoutMocked,
 	userEmail: "utente@prova.it"
 };
 
 describe("Header test", () => {
-	test("Test render Header component with login false", () => {
+	test("renders Header component with logged out state", () => {
 		render(
-			<Ctx.Provider value={ mockContextValueNotLogged }>
+			<Ctx.Provider value={mockContextValueNotLogged}>
 				<BrowserRouter>
 					<Header />
 				</BrowserRouter>
 			</Ctx.Provider>
 		);
+
+		expect(screen.queryByText("Esci")).not.toBeInTheDocument();
 	});
 
-	test("Test render Header component with login true", () => {
-
-		
-
+	test("renders Header component with logged in state and handles logout", () => {
 		render(
-			<Ctx.Provider value={ mockContextValueLogged }>
+			<Ctx.Provider value={mockContextValueLogged}>
 				<BrowserRouter>
 					<Header />
 				</BrowserRouter>
 			</Ctx.Provider>
 		);
-
-		const exitButton = screen.getByTestId("exit-button-test")
 
 		expect(screen.getByText("Mario Rossi")).toBeInTheDocument();
 
+		const exitButton = screen.getByTestId("exit-button-test");
 		fireEvent.click(exitButton);
+
+		expect(onLogoutMocked).toHaveBeenCalledTimes(1);
 	});
 });
-

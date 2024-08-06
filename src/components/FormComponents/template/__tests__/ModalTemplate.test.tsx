@@ -41,7 +41,6 @@ describe("ModalTemplate test", () => {
         />
       </BrowserRouter>
     );
-
     fireEvent.click(screen.getByText("Annulla"));
     expect(mockSetOpen).toHaveBeenCalledWith(false);
   });
