@@ -2,13 +2,14 @@
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */
 import React, { SetStateAction, useState } from "react";
-import { BANKS, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, TRANSACTIONS, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
+import TransactionsFilterComponent from "./TransactionsFilterComponent";
 import BanksFilterComponent from "./BanksFilterComponent";
 import UsersFilterComponent from "./UsersFilterComponent";
 
@@ -29,6 +30,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	const [errors, setErrors] = useState<any>({});
 	const [submitted, setSubmitted] = useState(false);
 	const { regexTestField } = checks();
+
+	const showCreateButton :boolean = driver !== TRANSACTIONS;
 
 	const filterBpmnWithoutStatus = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const withoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
@@ -105,6 +108,20 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		filterBpmnWithoutStatus(e);
 	};
 
+	const handleTimeStampChange = (e:Date, key: string) => {
+		const timeStampValue = e?.toISOString().substr(0, 19).replace("T", " ");
+		const timeStampQuery = `{"Timestamp":"${timeStampValue}"}`;
+		console.log("setting timeStampValue: "+timeStampQuery);
+		const updatedFilterValues = { ...filterValues, [key]: timeStampValue};
+
+		setFilterValues(updatedFilterValues);
+
+		if (submitted) {
+			const newErrors = clearErrorsIfCorrected(key, timeStampValue, updatedFilterValues);
+			setErrors(newErrors);
+		}
+	};
+
 	const handleSubmit = () => {
 		setSubmitted(true);
 		let newErrors = { ...errors };
@@ -134,6 +151,8 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case TRANSACTIONS:
+			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} handleTimeStampChange={handleTimeStampChange}/>;
 		case BANKS:
 			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
 		case USERS:

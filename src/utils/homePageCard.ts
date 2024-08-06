@@ -37,6 +37,13 @@ export const homePageCard = [
 		pageLink: routes.BANK
 	},
 	{
+		title: "Transazioni",
+		id: "transactions",
+		description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
+		icon:"AssignmentOutlined",
+		pageLink: routes.TRANSACTIONS
+	},
+	{
 		title: "Utenti e autorizzazioni",
 		id: "users",
 		description:"Gestione utenti e permessi",

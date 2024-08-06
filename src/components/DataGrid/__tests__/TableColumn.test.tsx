@@ -5,7 +5,7 @@ import { GridStateColDef } from "@mui/x-data-grid/internals";
 import { BrowserRouter } from "react-router-dom";
 import { themeApp } from "../../../assets/jss/themeApp";
 import { ThemeProvider } from "@mui/material/styles";
-import { BANKS, BPMN, DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER } from "../../../commons/constants";
+import { BANKS, BPMN, DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER, UPDATE_USER } from "../../../commons/constants";
 import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
 import * as fetchModule from "../../../hook/fetch/fetchRequest";
 
@@ -188,7 +188,6 @@ describe("TableColumn test", () => {
     test("Test deleteColumnUsers", () => {
         const { deleteColumnUsers } = TableColumn(setOpen, setType);
         const param = { ...bpmnTableMocked.results[0] };
-
         render(
             <BrowserRouter>
                 <ThemeProvider theme={themeApp}>
@@ -201,4 +200,24 @@ describe("TableColumn test", () => {
         expect(setOpen).toHaveBeenCalled();
         expect(setType).toHaveBeenCalledWith(DELETE_USER);
     });
+    test("editColumnUsers handles setting state and session storage correctly", () => {
+        const { editColumnUsers } = TableColumn(setOpen, setType);
+    
+        const param = { row: { userId: "mocked-user-id" } };
+    
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {editColumnUsers(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+    
+        fireEvent.click(screen.getByTestId("edit-column-test"));
+    
+        expect(setOpen).toHaveBeenCalledWith(true);
+        expect(setType).toHaveBeenCalledWith(UPDATE_USER);
+        expect(sessionStorage.getItem("recordParamsUser")).toBe(JSON.stringify(param.row));
+    });
+    
 });

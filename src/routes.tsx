@@ -18,6 +18,7 @@ const ROUTES = {
 	CREATE_WR: "/workflow_resources/create",
 	LOGIN: "/login",
 	LOGIN_BACK:"/login/callback",
+	TRANSACTIONS: "/transactions",
 	BANK:"/bank",
 	USERS: "/users",
 };

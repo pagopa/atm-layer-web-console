@@ -28,6 +28,7 @@ import UsersPage from "./pages/Users/UsersPage";
 import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
 import { LETTURA, SCRITTURA, UTENTI } from "./commons/constants";
 import { Profile, User } from "./model/UserModel";
+import TransactionsPage from "./pages/Transactions/TransactionsPage";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -51,6 +52,11 @@ const LocalRoutes = () => (
 				<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
 			</Route>
 
+			<Route path={routes.RESOURCES} element={<PageLayout><ResourcesPage /></PageLayout>} />
+			<Route path={routes.RESOURCES_DETAILS} element={<PageLayout><ResourcesDetailPage /></PageLayout>} />
+			<Route path={routes.CREATE_RESOURCE} element={<PageLayout><CreateResourcesPage /></PageLayout>} />
+
+			<Route path={routes.TRANSACTIONS} element={<PageLayout><TransactionsPage /></PageLayout>} />
 			<Route path={routes.BANK} element={<PageLayout><BankPage /></PageLayout>} />
 			<Route path={routes.BANK_DETAILS} element={<PageLayout><BankDetailPage /></PageLayout>} />
 			

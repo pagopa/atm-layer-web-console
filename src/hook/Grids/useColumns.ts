@@ -1,5 +1,5 @@
 import { generatePath } from "react-router-dom";
-import { BANKS, BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { BANKS, BPMN_ASSOCIATED, PROCESS_RESOURCES, RESOURCES, TRANSACTIONS, USERS, WORKFLOW_RESOURCE } from "../../commons/constants";
 import ROUTES from "../../routes";
 import formatValues from "../../utils/formatValues";
 
@@ -376,6 +376,77 @@ const useColumns: any = () => {
 				createdByColumn,
 				lastUpdatedByColumn,
 				commonActionColumn(WORKFLOW_RESOURCE)
+			];
+		case TRANSACTIONS:
+			return [
+				{
+					field: "transactionId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Transazione",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.transactionId),
+					sortable: false,
+					flex: 1
+				},
+				{
+					field: "acquirerId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Banca",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.acquirerId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "branchId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Filiale",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.branchId),
+					sortable: false,
+					flex: 0.5
+				},
+				{
+					field: "terminalId",
+					cellClassName: "justifyContentNormal",
+					headerName: "ID Terminale",
+					align: "center",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.terminalId),
+					sortable: false,
+					flex: 0.5
+				},
+				functionTypeColumn,
+				{
+					field: "transactionStatus",
+					cellClassName: "justifyContentNormal",
+					headerName: "Stato",
+					align: "left",
+					headerAlign: "left",
+					editable: false,
+					disableColumnMenu: true,
+					renderHeader: showCustomHeader,
+					renderCell: (params: any) => renderCell(params, params.row.transactionStatus),
+					sortable: false,
+					flex: 1
+				},
+				createdAtColumn,
+				lastUpdatedAtColumn
 			];
 		case BANKS:
 			return [

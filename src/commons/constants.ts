@@ -33,6 +33,7 @@ export const PROCESS_RESOURCES="processResources";
 export const WORKFLOW_RESOURCE="workFlowResource";
 export const RESOURCES="staticResources";
 export const BPMN_ASSOCIATED = "bpmnAssociated";
+export const TRANSACTIONS = "transactions";
 export const USERS = "users";
 
 export const DEPLOY_VALUES = [DEPLOY_BPMN, DEPLOY_WR];

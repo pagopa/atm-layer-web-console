@@ -143,7 +143,6 @@ describe('HeaderAccountCustom', () => {
         </Ctx.Provider>
       </Router>
     );
-
     fireEvent.click(screen.getByText('Esci'));
     expect(mockOnLogout).toHaveBeenCalled();
   });

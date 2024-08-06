@@ -1,8 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import FilterBar from "../FilterBar";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS } from "../../../../commons/constants";
+import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS, TRANSACTIONS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation(() => { });
@@ -61,17 +63,18 @@ describe("FilterBar test", () => {
         return render(
             <Ctx.Provider value={mockContextValue}>
                 <BrowserRouter>
-                    <FilterBar
-                        filterValues={filterValues}
-                        setFilterValues={() => { }}
-                        getAllList={mockGetAllList}
-                        newFilterValues={newFilterValues}
-                        driver={driver}
-                        loadingButton={loading}
-                        setLoadingButton={mockSetLoading}
-                        setTableList={mockSetTableList}
-                    >
-                    </FilterBar>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <FilterBar
+                            filterValues={filterValues}
+                            setFilterValues={() => { }}
+                            getAllList={mockGetAllList}
+                            newFilterValues={newFilterValues}
+                            driver={driver}
+                            loadingButton={loading}
+                            setLoadingButton={mockSetLoading}
+                            setTableList={mockSetTableList}
+                        />
+                    </LocalizationProvider>
                 </BrowserRouter>
             </Ctx.Provider>
         );
@@ -211,18 +214,6 @@ describe("FilterBar test", () => {
         fireEvent.change(status, { target: { value: "" } });
     });
 
-    // test("Test FilterBar with BANKS and Click on Cancella Filtri and Crea ", () => {
-    //     const emptyFilterValues = {
-    //         acquirerId: "",
-    //         denomination: "",
-    //     };
-
-    //     renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
-
-    //     fireEvent.click(screen.getByText("Cancella Filtri"));
-    //     fireEvent.click(screen.getByText("Crea Nuovo"));
-    // });
-
     test("Test FilterBar with BANKS and Filter with acquirerId", () => {
         const emptyFilterValues = {
             acquirerId: "",
@@ -309,6 +300,157 @@ describe("FilterBar test", () => {
             profileIds: ""
         };
         renderComponent(USERS, false, emptyFilterValues, emptyFilterValues);
+        fireEvent.click(screen.getByText("Cancella Filtri"));
+        fireEvent.click(screen.getByText("Filtra"));
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with transactionId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const transactionId = screen.getByTestId("transaction-id-test") as HTMLInputElement;
+        fireEvent.change(transactionId, { target: { value: "1234567890" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with transactionStatus", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const transactionStatus = screen.getByTestId("transaction-status-test") as HTMLInputElement;
+        fireEvent.change(transactionStatus, { target: { value: "COMPLETED" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with functionType", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const functionType = screen.getByTestId("function-type-test") as HTMLInputElement;
+        fireEvent.change(functionType, { target: { value: "TYPE_A" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with acquirerId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const acquirerId = screen.getByTestId("acquirer-id-test") as HTMLInputElement;
+        fireEvent.change(acquirerId, { target: { value: "98765" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with branchId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const branchId = screen.getByTestId("branch-id-test") as HTMLInputElement;
+        fireEvent.change(branchId, { target: { value: "98765" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with terminalId", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const terminalId = screen.getByTestId("terminal-id-test") as HTMLInputElement;
+        fireEvent.change(terminalId, { target: { value: "98765" } });
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: null,
+            endTime: null
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        fireEvent.change(startTime, { target: { value: new Date() } });
+
+        expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: null,
+            endTime: null
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
+
+        expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Click on Cancella Filtri and Filtra", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: ""
+        };
+
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
         fireEvent.click(screen.getByText("Cancella Filtri"));
         fireEvent.click(screen.getByText("Filtra"));
     });

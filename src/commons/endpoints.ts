@@ -23,6 +23,8 @@ export const RESOURCES_CREATE = "/resources";
 export const RESOURCES_CREATE_MULTIPLE = "/resources/multiple";
 export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
+export const GET_ALL_TRANSACTIONS = "/transactions/search";
+
 export const USER_EMAIL = "/info/email";
 export const USER_INFO = "/user/first-access";
 
