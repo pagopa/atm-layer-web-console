@@ -6,9 +6,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themeApp } from "../../../assets/jss/themeApp"; // Adjust the import path as necessary
 
 // Mocking the useNavigate hook
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom') as any,
+  useNavigate: () => mockedNavigate
 }));
 
 jest.mock("@mui/material", () => ({
@@ -26,9 +28,7 @@ jest.mock("@mui/material", () => ({
 }));
 
 describe("MenuButtons", () => {
-  const mockNavigate = jest.fn();
-  const useNavigateMock = require("react-router-dom").useNavigate;
-  useNavigateMock.mockImplementation(() => mockNavigate);
+  
 
   const renderComponent = (props = {}) => {
     render(
@@ -53,7 +53,7 @@ describe("MenuButtons", () => {
   test("does not call navigate when route prop is not provided", () => {
     renderComponent();
     fireEvent.click(screen.getByText("Test Button"));
-    expect(mockNavigate).not.toHaveBeenCalled();
+    expect(mockedNavigate).not.toHaveBeenCalled();
   });
 
   test("sets anchorEl state when clicked", () => {
@@ -62,4 +62,11 @@ describe("MenuButtons", () => {
     fireEvent.click(button);
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
+
+  test("Testing other ternary branches", () => {
+
+    renderComponent({darkFont:true, route: "/home"});
+    const button = screen.getByText("Test Button");
+    fireEvent.click(button);
+  })
 });
