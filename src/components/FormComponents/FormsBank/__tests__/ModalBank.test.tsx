@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, queryAllByAltText, queryAllByText, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import ModalBank from "../ModalBank";
@@ -25,7 +25,7 @@ describe("ModalBank Test", () => {
         limit: "789",
         period: "DAY"
     };
-    const setOpen = jest.fn();
+    let setOpen = jest.fn();
     const setOpenSnackBar = jest.fn();
     const setSeverity = jest.fn();
     const setMessage = jest.fn();
@@ -54,7 +54,7 @@ describe("ModalBank Test", () => {
         );
     };
 
-    test("Test ModalBank with CREATE_BANK", async () => {
+    test("Test ModalBank with CREATE_BANK fetch success", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 success: true,
@@ -80,6 +80,45 @@ describe("ModalBank Test", () => {
         expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
+
+    test("Test ModalBank with CREATE_BANK fetch not success", async () => {
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                success: false,
+                valuesObj: {
+                    message: "Failed to create bank",
+                },
+            }),
+        });
+
+        renderModalBank(CREATE_BANK);
+
+        fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
+        fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/banks/insert"), expect.anything());
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
+    });
+
+    test("Test ModalBank with CREATE_BANK catch error", async () => {
+        global.fetch = jest.fn(() => {throw new Error()});
+
+        renderModalBank(CREATE_BANK);
+
+        fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
+        fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+    });
+
     test("Test ModalBank with DELETE_BANK", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
@@ -100,7 +139,43 @@ describe("ModalBank Test", () => {
         expect(setOpenSnackBar).toHaveBeenCalledWith(true);
     });
 
-    test("Test ModalBank with UPDATE_BANK", async () => {
+    test("Test ModalBank with UPDATE_BANK fetch not success", async () => {
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                success: false,
+                valuesObj: {
+                    message: "Failed to update Bank",
+                },
+            }),
+        });
+
+        renderModalBank(UPDATE_BANK);
+
+        fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "updatedDenomination" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+
+        expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/banks/update"), expect.anything());
+        expect(setOpenSnackBar).toHaveBeenCalledWith(true);
+    });
+
+    test("Test ModalBank with UPDATE_BANK catch error", async () => {
+        global.fetch = jest.fn(() => {throw new Error()});
+
+        renderModalBank(UPDATE_BANK);
+
+        fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "updatedDenomination" } });
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        });
+    });
+
+    test("Test ModalBank with UPDATE_BANK fetch success", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 success: true,
@@ -217,6 +292,15 @@ describe("ModalBank Test", () => {
         expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
         expect(screen.getByLabelText("Burst")).toBeInTheDocument();
         expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
+    });
+
+    test("Test onChange only numbers allowed in numeric fields", () => {
+        renderModalBank(CREATE_BANK);
+    
+        // fireEvent.change(screen.getByLabelText("Quota"), { target: { value: "abc" } });
+        fireEvent.keyDown(screen.getByLabelText("Quota"), {key: 'Z', code: 'KeyZ'});
+        fireEvent.keyDown(screen.getByLabelText("Burst"), {key: 'Z', code: 'KeyZ'});
+        fireEvent.keyDown(screen.getByLabelText("Tasso"), {key: 'Z', code: 'KeyZ'});
     });
 
 });
