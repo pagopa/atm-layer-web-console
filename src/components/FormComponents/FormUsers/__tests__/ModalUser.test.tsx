@@ -5,6 +5,7 @@ import { fetchRequest } from "../../../../hook/fetch/fetchRequest";
 import { Ctx } from "../../../../DataContext";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../../commons/endpoints";
 import { generatePath } from "react-router-dom";
+import * as commons from "../../../Commons/Commons";
 
 jest.mock("../../../../hook/fetch/fetchRequest", () => ({
   fetchRequest: jest.fn(),
@@ -221,5 +222,120 @@ describe("ModalUsers component", () => {
     expect(mockFetchRequest).not.toHaveBeenCalled();
     expect(mockSetOpen).not.toHaveBeenCalled(); 
     expect(mockSetMessage).not.toHaveBeenCalled(); 
+  });
+
+  // 1. Test for resetErrors (62-64)
+  test("calls resetErrors when handleChange is triggered", () => {
+    const mockResetErrors = jest.spyOn(commons, "resetErrors");
+    renderComponent(CREATE_USER);
+
+    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+
+    expect(mockResetErrors).toHaveBeenCalledWith(expect.any(Object), expect.any(Function), "name");
+  });
+
+  // 2. Test for useEffect (110-113) handling UPDATE_USER/UPDATE_FIRST_USER and CREATE_USER
+  test("sets formData and errors correctly when modal opens for UPDATE_USER", () => {
+    sessionStorage.setItem("recordParamsUser", JSON.stringify({
+      userId: "user@example.com",
+      name: "Mario",
+      surname: "Rossi",
+      profiles: [{ description: "User", profileId: 2 }],
+    }));
+
+    renderComponent(UPDATE_USER);
+
+    expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
+    expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
+    expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
+    expect(screen.getByLabelText("Email utente")).toHaveAttribute("readonly");
+  });
+
+  // 3. Test for validateForm returning false (131-134)
+  test("does not submit form when validation fails for CREATE_USER", async () => {
+    renderComponent(CREATE_USER);
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(mockFetchRequest).not.toHaveBeenCalled();
+    });
+  });
+
+  // 4. Test for UPDATE_FIRST_USER case (141)
+  test("renders correctly for UPDATE_FIRST_USER and calls handleSubmit", async () => {
+    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+
+    sessionStorage.setItem("recordParamsUser", JSON.stringify({
+      userId: "user@example.com",
+      name: "Mario",
+      surname: "Rossi",
+      profiles: [{ description: "User", profileId: 2 }],
+    }));
+
+    renderComponent(UPDATE_FIRST_USER);
+
+    expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
+    expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
+    expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(mockFetchRequest).toHaveBeenCalledWith({
+        urlEndpoint: UPDATE_USERS,
+        method: "PUT",
+        abortController: mockContextValue.abortController,
+        headers: { "Content-Type": "application/json" },
+        body: {
+          userId: "user@example.com",
+          name: "Mario",
+          surname: "Rossi",
+          profileIds: [2],
+        },
+      });
+    });
+  });
+
+  // 5. Test for handleSubmit in UPDATE_USER or UPDATE_FIRST_USER mode (157-164)
+  test("handles form submission for UPDATE_FIRST_USER", async () => {
+    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+
+    sessionStorage.setItem("recordParamsUser", JSON.stringify({
+      userId: "user@example.com",
+      name: "Mario",
+      surname: "Rossi",
+      profiles: [{ description: "User", profileId: 2 }],
+    }));
+
+    renderComponent(UPDATE_FIRST_USER);
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(mockFetchRequest).toHaveBeenCalledWith({
+        urlEndpoint: UPDATE_USERS,
+        method: "PUT",
+        abortController: mockContextValue.abortController,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: {
+          userId: "user@example.com",
+          name: "Mario",
+          surname: "Rossi",
+          profileIds: [2],
+        },
+      });
+    });
+  });
+
+  // 6. Test for default case in handleSubmit (173)
+  test("does nothing when an unknown type is provided", () => {
+    renderComponent("UNKNOWN_TYPE");
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    expect(mockFetchRequest).not.toHaveBeenCalled();
   });
 });
