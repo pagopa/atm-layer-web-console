@@ -3,6 +3,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import FilterBar from "../FilterBar";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS, TRANSACTIONS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation(() => { });
@@ -61,17 +63,18 @@ describe("FilterBar test", () => {
         return render(
             <Ctx.Provider value={mockContextValue}>
                 <BrowserRouter>
-                    <FilterBar
-                        filterValues={filterValues}
-                        setFilterValues={() => { }}
-                        getAllList={mockGetAllList}
-                        newFilterValues={newFilterValues}
-                        driver={driver}
-                        loadingButton={loading}
-                        setLoadingButton={mockSetLoading}
-                        setTableList={mockSetTableList}
-                    >
-                    </FilterBar>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <FilterBar
+                            filterValues={filterValues}
+                            setFilterValues={() => { }}
+                            getAllList={mockGetAllList}
+                            newFilterValues={newFilterValues}
+                            driver={driver}
+                            loadingButton={loading}
+                            setLoadingButton={mockSetLoading}
+                            setTableList={mockSetTableList}
+                        />
+                    </LocalizationProvider>
                 </BrowserRouter>
             </Ctx.Provider>
         );
@@ -210,18 +213,6 @@ describe("FilterBar test", () => {
         const status = screen.getByTestId("status-test") as HTMLInputElement;
         fireEvent.change(status, { target: { value: "" } });
     });
-
-    // test("Test FilterBar with BANKS and Click on Cancella Filtri and Crea ", () => {
-    //     const emptyFilterValues = {
-    //         acquirerId: "",
-    //         denomination: "",
-    //     };
-
-    //     renderComponent(BANKS, false, emptyFilterValues, emptyFilterValues);
-
-    //     fireEvent.click(screen.getByText("Cancella Filtri"));
-    //     fireEvent.click(screen.getByText("Crea Nuovo"));
-    // });
 
     test("Test FilterBar with BANKS and Filter with acquirerId", () => {
         const emptyFilterValues = {
@@ -425,6 +416,8 @@ describe("FilterBar test", () => {
 
         const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
         fireEvent.change(startTime, { target: { value: new Date() } });
+
+        expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
     });
 
     test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
@@ -443,6 +436,8 @@ describe("FilterBar test", () => {
 
         const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
         fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
+
+        expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
     });
 
     test("Test FilterBar with TRANSACTIONS and Click on Cancella Filtri and Filtra", () => {
@@ -459,7 +454,6 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Cancella Filtri"));
         fireEvent.click(screen.getByText("Filtra"));
     });
-
 
 });
 

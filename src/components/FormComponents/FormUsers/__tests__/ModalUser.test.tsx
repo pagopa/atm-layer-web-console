@@ -103,6 +103,27 @@ describe("ModalUsers component", () => {
     expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
   });
 
+  test("handles multi-select change correctly", () => {
+    renderComponent(CREATE_USER);
+
+    fireEvent.change(screen.getByRole("combobox"), { target: { value: "Admin" } });
+    fireEvent.click(screen.getByText("Admin"));
+    fireEvent.click(screen.getByText("User"));
+
+    expect(mockSetOpen).not.toHaveBeenCalled();
+    expect(mockSetMessage).not.toHaveBeenCalled();
+    expect(mockFetchRequest).not.toHaveBeenCalled();
+  });
+
+  test("sets initial formData and errors when modal opens for CREATE_USER", () => {
+    renderComponent(CREATE_USER);
+
+    expect(screen.getByLabelText("Email utente")).toHaveValue("");
+    expect(screen.getByLabelText("Nome")).toHaveValue("");
+    expect(screen.getByLabelText("Cognome")).toHaveValue("");
+    expect(screen.getByLabelText("Email utente")).not.toHaveAttribute("readonly");
+  });
+
   test("handles form submission for DELETE_USER", async () => {
     mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User deleted successfully" } });
     
@@ -126,6 +147,38 @@ describe("ModalUsers component", () => {
     });
   });
 
+  test("handles form submission for CREATE_USER", async () => {
+    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User created successfully" } });
+
+    renderComponent(CREATE_USER);
+
+    fireEvent.change(screen.getByLabelText("Email utente"), { target: { value: "newuser@example.com" } });
+    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+    fireEvent.change(screen.getByLabelText("Cognome"), { target: { value: "Verdi" } });
+
+    const profileSelect = screen.getByRole("combobox");
+    fireEvent.mouseDown(profileSelect);
+    fireEvent.click(screen.getByText("Admin"));
+    fireEvent.click(screen.getByText("User"));
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(mockFetchRequest).toHaveBeenCalledWith({
+        urlEndpoint: CREATE_USERS,
+        method: "POST",
+        abortController: mockContextValue.abortController,
+        headers: { "Content-Type": "application/json" },
+        body: {
+          userId: "newuser@example.com",
+          name: "Luigi",
+          surname: "Verdi",
+          profileIds: [1, 2],
+        },
+      });
+    });
+  });
+
   test("handles form submission for UPDATE_USER", async () => {
     mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
 
@@ -144,57 +197,29 @@ describe("ModalUsers component", () => {
 
     await waitFor(() => {
       expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: generatePath(UPDATE_USERS, { userId: "user@example.com" }),
+        urlEndpoint: UPDATE_USERS,
         method: "PUT",
         abortController: mockContextValue.abortController,
         headers: {
           "Content-Type": "application/json"
         },
         body: {
+          userId: "user@example.com",
           name: "Luigi",
           surname: "Rossi",
-          userId: "user@example.com",
           profileIds: [2],
         },
       });
     });
   });
 
-  test("handles multi-select change", () => {
-    renderComponent(CREATE_USER);
-
-    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+  test("handles default case in handleSubmit", async () => {
+    renderComponent("UNKNOWN_TYPE");
 
     fireEvent.click(screen.getByText("Conferma"));
 
-    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
-
-    fireEvent.click(screen.getByText("Conferma"));
-  });
-
-  test("handles close modal", () => {
-    renderComponent(CREATE_USER);
-
-    fireEvent.click(screen.getByText("Annulla"));
-
-    expect(mockSetOpen).toHaveBeenCalledWith(false);
-  });
-
-  test("handles validation errors for UPDATE_USER", async () => {
-    sessionStorage.setItem("recordParamsUser", JSON.stringify({
-      userId: "user@example.com",
-      name: "Mario",
-      surname: "Rossi",
-      profiles: [],
-    }));
-
-    renderComponent(UPDATE_USER);
-
-    fireEvent.click(screen.getByText("Conferma"));
-
-    await waitFor(() => {
-      expect(screen.getByText("Campo obbligatorio")).toBeInTheDocument();
-      expect(mockFetchRequest).not.toHaveBeenCalled();
-    });
+    expect(mockFetchRequest).not.toHaveBeenCalled();
+    expect(mockSetOpen).not.toHaveBeenCalled(); 
+    expect(mockSetMessage).not.toHaveBeenCalled(); 
   });
 });

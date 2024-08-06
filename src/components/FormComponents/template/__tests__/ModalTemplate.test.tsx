@@ -63,4 +63,26 @@ describe("ModalTemplate test", () => {
     fireEvent.click(screen.getByText("Conferma"));
     expect(mockHandleSubmit).toHaveBeenCalled();
   });
+
+  test("should hide the Annulla button when canOnlyConfirm is true", () => {
+    render(
+      <BrowserRouter>
+        <ModalTemplate
+          titleModal="Test Modal"
+          contentText="This is a test modal"
+          open={true}
+          setOpen={mockSetOpen}
+          handleSubmit={mockHandleSubmit}
+          loading={false}
+          canOnlyConfirm={true}
+        />
+      </BrowserRouter>
+    );
+
+    const annullaButton = screen.getByText("Annulla");
+
+    expect(annullaButton).not.toBeVisible();
+
+    expect(annullaButton).toHaveStyle("display: inline-flex");
+  });
 });
