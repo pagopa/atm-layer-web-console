@@ -97,6 +97,12 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="startTime"
 					value={filterValues.startTime? new Date(filterValues.startTime) : null}
 					onChange={(e) => handleTimeStampChange(e, "startTime")}
+					slotProps={{
+						field: {
+						  readOnly: true
+						},
+						textField: { fullWidth: true }
+					  }}
 				/>
 			</LocalizationProvider>
 		</Grid>
@@ -108,6 +114,12 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					value={filterValues.endTime? new Date(filterValues.endTime) : null}
 					onChange={(e) => handleTimeStampChange(e, "endTime")}
 					minDateTime={filterValues.startTime? new Date(filterValues.startTime) : undefined}
+					slotProps={{
+						field: {
+						  readOnly: true
+						},
+						textField: { fullWidth: true }
+					  }}
 				/>
 			</LocalizationProvider>
 		</Grid>
