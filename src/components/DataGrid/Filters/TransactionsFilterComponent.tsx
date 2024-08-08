@@ -107,6 +107,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					label="Fino a"
 					value={filterValues.endTime? new Date(filterValues.endTime) : null}
 					onChange={(e) => handleTimeStampChange(e, "endTime")}
+					minDateTime={filterValues.startTime? new Date(filterValues.startTime) : undefined}
 				/>
 			</LocalizationProvider>
 		</Grid>

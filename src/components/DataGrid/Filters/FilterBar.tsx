@@ -109,7 +109,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	const handleTimeStampChange = (e:Date, key: string) => {
-		const timeStampValue = e?.toISOString().substr(0, 19).replace("T", " ");
+		const timeStampValue = new Date(e.getTime() - (e.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace("T", " ");
 		const timeStampQuery = `{"Timestamp":"${timeStampValue}"}`;
 		console.log("setting timeStampValue: "+timeStampQuery);
 		const updatedFilterValues = { ...filterValues, [key]: timeStampValue};
