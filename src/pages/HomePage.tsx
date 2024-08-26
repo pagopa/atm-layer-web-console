@@ -4,7 +4,7 @@ import HomeCardComponent from "../components/CardComponents/HomeCardComponent";
 import { homePageCard } from "../utils/homePageCard";
 import { HomePageTitle } from "../components/TitleComponents/HomePageTitle";
 import { getProfileDescriptionFromStorage, getProfileIdsArray, getRoleDescriptionsByUser } from "../components/Commons/Commons";
-import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../commons/constants";
+import { BANCHE, EMULATOR, LETTURA, RILASCIO, SCRITTURA, TRANSAZIONI, UTENTI } from "../commons/constants";
 import { Ctx } from "../DataContext";
 import BoxPageLayout from "./Layout/BoxPageLayout";
 
@@ -18,11 +18,13 @@ export default function HomePage () {
 
 	const isCardVisible = (cardId: string) => {
 		const visibilityRules: { [key: string]: Array<number> } = {
-		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
+		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI, TRANSAZIONI, BANCHE],
 			process: [LETTURA,SCRITTURA,RILASCIO],
 			static: [LETTURA,SCRITTURA],
 			workflow: [LETTURA,SCRITTURA,RILASCIO],
 		 	users: [UTENTI],
+			transactions: [TRANSAZIONI],
+			banks: [BANCHE],
 		};
 
 		if (!visibilityRules[cardId]) {

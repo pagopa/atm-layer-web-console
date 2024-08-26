@@ -58,6 +58,8 @@ export const SCRITTURA = 2;
 export const RILASCIO = 3;
 export const EMULATOR = 4;
 export const UTENTI = 5;
+export const BANCHE = 6;
+export const TRANSAZIONI = 7;
 
 export const PROFILE_IDS = [
 	{

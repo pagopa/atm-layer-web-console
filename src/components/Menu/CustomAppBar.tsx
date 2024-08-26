@@ -6,7 +6,7 @@ import { IconButton, Drawer, Divider } from "@mui/material";
 import React from "react";
 import { homePageCard } from "../../utils/homePageCard";
 import { getProfileIdsArray } from "../Commons/Commons";
-import { EMULATOR, LETTURA, RILASCIO, SCRITTURA, UTENTI } from "../../commons/constants";
+import { BANCHE, EMULATOR, LETTURA, RILASCIO, SCRITTURA, TRANSAZIONI, UTENTI } from "../../commons/constants";
 import { Ctx } from "../../DataContext";
 import getIconBySetType from "../../hook/getIconBySetType";
 import MenuButtons from "./MenuButtons";
@@ -30,11 +30,13 @@ const CustomAppBar = () => {
 
 	const isCardVisible = (cardId: string) => {
 		const visibilityRules: { [key: string]: Array<number> } = {
-		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,UTENTI],
+		  	home: [LETTURA,SCRITTURA,RILASCIO,EMULATOR,TRANSAZIONI,BANCHE],
 			process: [LETTURA,SCRITTURA,RILASCIO],
 			static: [LETTURA,SCRITTURA],
 			workflow: [LETTURA,SCRITTURA,RILASCIO],
 		 	users: [UTENTI],
+			transactions: [TRANSAZIONI],
+			banks: [BANCHE],
 		};
 
 		if (!visibilityRules[cardId]) {
