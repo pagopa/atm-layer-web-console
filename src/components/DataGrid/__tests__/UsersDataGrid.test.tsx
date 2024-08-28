@@ -217,4 +217,213 @@ describe("UsersDataGrid test", () => {
 
         await waitFor(() => expect(screen.queryByText("Qualcosa è andato storto")).toBeInTheDocument());
     });
+
+    test("renders ModalUsers when open is true", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: { ...userTableMocked },
+            }),
+        });
+    
+        const mockSetOpen = jest.fn();
+        const mockSetType = jest.fn();
+        const mockSetOpenSnackBar = jest.fn();
+        const mockSetSeverity = jest.fn();
+        const mockSetMessage = jest.fn();
+        const mockSetTitle = jest.fn();
+    
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type={CREATE_USER} 
+                            setType={mockSetType} 
+                            open={true} 
+                            setOpen={mockSetOpen} 
+                            setOpenSnackBar={mockSetOpenSnackBar} 
+                            setSeverity={mockSetSeverity} 
+                            setMessage={mockSetMessage} 
+                            setTitle={mockSetTitle} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+    
+        expect(screen.getByRole('dialog')).toBeInTheDocument();
+        expect(mockSetOpen).not.toHaveBeenCalled();
+    });
+
+    test("handles loading and error states correctly after API call", async () => {
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            status: 200,
+            success: true,
+            json: () => Promise.resolve({
+                valuesObj: { page: 0, limit: 10, itemsFound: 0, totalPages: 0, results: [] },
+            }),
+        });
+    
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type="" 
+                            setType={jest.fn()} 
+                            open={false} 
+                            setOpen={jest.fn()} 
+                            setOpenSnackBar={jest.fn()} 
+                            setSeverity={jest.fn()} 
+                            setMessage={jest.fn()} 
+                            setTitle={jest.fn()} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+
+        expect(screen.queryByRole('button', { name: /Crea nuovo/i })).toBeEnabled();
+
+        expect(screen.queryByText(/Qualcosa è andato storto/i)).not.toBeInTheDocument();
+    });
+    
+    
+    test("renders CustomNoRowsOverlay with correct message when no users are present", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: { page: 0, limit: 10, itemsFound: 0, totalPages: 0, results: [] },
+            }),
+        });
+    
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type="" 
+                            setType={jest.fn()} 
+                            open={false} 
+                            setOpen={jest.fn()} 
+                            setOpenSnackBar={jest.fn()} 
+                            setSeverity={jest.fn()} 
+                            setMessage={jest.fn()} 
+                            setTitle={jest.fn()} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+    
+        expect(screen.getByText("Utenti non presenti")).toBeInTheDocument();
+    });
+
+    test("sets loadingButton and statusError correctly after API call", async () => {
+        const mockSetLoadingButton = jest.fn();
+        const mockSetStatusError = jest.fn();
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            status: 200,
+            success: true,
+            json: () => Promise.resolve({
+                valuesObj: { page: 0, limit: 10, itemsFound: 0, totalPages: 0, results: [] },
+            }),
+        });
+
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type="" 
+                            setType={jest.fn()} 
+                            open={false} 
+                            setOpen={jest.fn()} 
+                            setOpenSnackBar={jest.fn()} 
+                            setSeverity={jest.fn()} 
+                            setMessage={jest.fn()} 
+                            setTitle={jest.fn()} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+
+        expect(mockSetLoadingButton).toHaveBeenCalledTimes(0);
+    });
+
+    test("renders CustomNoRowsOverlay with correct message when no users are present", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: { page: 0, limit: 10, itemsFound: 0, totalPages: 0, results: [] },
+            }),
+        });
+
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type="" 
+                            setType={jest.fn()} 
+                            open={false} 
+                            setOpen={jest.fn()} 
+                            setOpenSnackBar={jest.fn()} 
+                            setSeverity={jest.fn()} 
+                            setMessage={jest.fn()} 
+                            setTitle={jest.fn()} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+
+        expect(screen.getByText("Utenti non presenti")).toBeInTheDocument();
+    });
+
+    test("renders ModalUsers when open is true", async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve({
+                status: 200,
+                success: true,
+                valuesObj: { ...userTableMocked },
+            }),
+        });
+
+        const mockSetOpen = jest.fn();
+        const mockSetType = jest.fn();
+        const mockSetOpenSnackBar = jest.fn();
+        const mockSetSeverity = jest.fn();
+        const mockSetMessage = jest.fn();
+        const mockSetTitle = jest.fn();
+
+        await act(async () => {
+            render(
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <UsersDataGrid 
+                            type={CREATE_USER} 
+                            setType={mockSetType} 
+                            open={true} 
+                            setOpen={mockSetOpen} 
+                            setOpenSnackBar={mockSetOpenSnackBar} 
+                            setSeverity={mockSetSeverity} 
+                            setMessage={mockSetMessage} 
+                            setTitle={mockSetTitle} 
+                        />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            );
+        });
+
+        expect(screen.getByRole('dialog')).toBeInTheDocument();
+        expect(mockSetOpen).not.toHaveBeenCalled();
+    });
+    
 });

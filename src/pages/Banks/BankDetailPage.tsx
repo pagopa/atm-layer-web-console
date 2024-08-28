@@ -14,7 +14,6 @@ const BankDetailPage = () => {
 		{ label: "Usage Plan Id", value: "usagePlanId" },
 		{ label: "Limite chiamate", value: "limit" },
 		{ label: "Periodo", value: "period" },
-		{ label: "Burst", value: "burstLimit" },
 		{ label: "Chiamate/sec", value: "rateLimit" },
 	];
 
