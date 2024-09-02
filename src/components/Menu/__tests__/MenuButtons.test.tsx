@@ -28,13 +28,15 @@ jest.mock("@mui/material", () => ({
 }));
 
 describe("MenuButtons", () => {
+
+  const setDrawerOpen = jest.fn();
   
 
   const renderComponent = (props = {}) => {
     render(
       <ThemeProvider theme={themeApp}>
         <BrowserRouter>
-          <MenuButtons name="Test Button" {...props} />
+          <MenuButtons name="Test Button" setDrawerOpen={setDrawerOpen} {...props} />
         </BrowserRouter>
       </ThemeProvider>
     );
