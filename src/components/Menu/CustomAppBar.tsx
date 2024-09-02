@@ -60,7 +60,7 @@ const CustomAppBar = () => {
 					{homePageCard
 						.filter(el => el.id && isCardVisible(el.id))
 						.map((e) => (
-							<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon}/>
+							<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon} setDrawerOpen={setDrawerOpen}/>
 						))
 					}
 				</Toolbar>
@@ -96,7 +96,7 @@ const CustomAppBar = () => {
 								.filter(el => el.id && isCardVisible(el.id))
 								.map((e, i) => (
 									<Box key={i} >
-										<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon} darkFont={true}/>
+										<MenuButtons key={e.title} name={e.title} route={e?.pageLink} iconButton={e.icon} darkFont={true} setDrawerOpen={setDrawerOpen}/>
 									</Box>
 								))}
 						</Box>

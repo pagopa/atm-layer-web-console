@@ -8,9 +8,10 @@ type Props = {
 	route?: string;
 	iconButton?: string;
 	darkFont?:boolean;
+	setDrawerOpen: any;
 };
 
-const MenuButtons = ({ name, route, iconButton, darkFont }: Props) => {
+const MenuButtons = ({ name, route, iconButton, darkFont, setDrawerOpen }: Props) => {
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -18,6 +19,7 @@ const MenuButtons = ({ name, route, iconButton, darkFont }: Props) => {
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
+		setDrawerOpen(false);
 		return route ? navigate(route) : null;
 	};
 
