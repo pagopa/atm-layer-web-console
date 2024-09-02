@@ -35,7 +35,7 @@ export const BANKS_UPDATE = "/banks/update";
 export const BANKS_DELETE = "/banks/disable/:acquirerId";
 
 
-export const GET_ALL_USERS = "/user";
+export const GET_ALL_USERS = "/user/filtered";
 export const CREATE_USERS = "/user/insert-with-profiles";
 export const UPDATE_USERS = "/user/update-with-profiles";
 export const DELETE_USERS = "/user/delete/userId/:userId";

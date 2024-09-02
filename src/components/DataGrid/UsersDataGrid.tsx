@@ -48,8 +48,7 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 	const [totalItemsFound, setTotalItemsFound] = useState(0);
 
 	const getAllUsersList = async (filterValues?: any, pageIndex?: number): Promise<void> => {
-		// const URL = `${GET_ALL_USERS}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
-		const URL = GET_ALL_USERS;
+		const URL = `${GET_ALL_USERS}?pageIndex=${pageIndex ?? paginationModel.page}&pageSize=${paginationModel.pageSize}`;
 
 		try {
 			const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, USERS), method: "GET", abortController })();
@@ -57,10 +56,10 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 			setStatusError(response?.status);
 
 			if (response?.success) {
-				// const { page, limit, results, itemsFound } = response.valuesObj;
-				setTableListUsers(response.valuesObj);
-				// setPaginationModel({ page, pageSize: limit });
-				// setTotalItemsFound(itemsFound);
+				const { page, limit, results, itemsFound } = response.valuesObj;
+				setTableListUsers(results);
+				setPaginationModel({ page, pageSize: limit });
+				setTotalItemsFound(itemsFound);
 			} else {
 				setTableListUsers(emptyResponse);
 			}
