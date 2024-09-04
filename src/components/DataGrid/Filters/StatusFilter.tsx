@@ -1,5 +1,6 @@
 
 import { FormControl, TextField, MenuItem } from "@mui/material";
+import { EMPTY_SELECT_VALUE } from "../../../commons/constants";
 
 type Prop = {
 	filterValues: any;
@@ -8,7 +9,7 @@ type Prop = {
 
 const StatusFilter = ({ filterValues, handleChange }: Prop) => {
 	const menuItems = [
-		{ label: "NON DEFINITO", value: "" },
+		{ label: EMPTY_SELECT_VALUE, value: "" },
 		{ label: "CREATED", value: "CREATED" },
 		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
 		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },

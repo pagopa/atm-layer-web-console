@@ -6,7 +6,7 @@ import { getTextModal, handleSnackbar, resetErrors, translatePeriodToBackend, tr
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, quotaPeriodOptions, UPDATE_BANK } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, EMPTY_SELECT_VALUE, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, quotaPeriodOptions, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 import ROUTES from "../../../routes";
 import { ActionAlert } from "../../Commons/ActionAlert";
@@ -65,8 +65,8 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		const newErrors = {
 			acquirerId: formData.acquirerId ? "" : "Campo obbligatorio",
 			denomination: formData.denomination ? "" : "Campo obbligatorio",
-			limit: ((formData.limit && (formData.period && formData.period !== "NON DEFINITO")) || (!formData.limit && !(formData.period && formData.period !== "NON DEFINITO"))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
-			period: ((formData.limit && (formData.period && formData.period !== "NON DEFINITO")) || (!formData.limit && !(formData.period && formData.period !== "NON DEFINITO"))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			limit: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			period: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
 		};
 	
 		setErrors(newErrors);
@@ -266,8 +266,8 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			name="period"
                 			select
                 			size="small"
-                			defaultValue={"NON DEFINITO"}
-                			value={ formData.period }
+                			defaultValue={EMPTY_SELECT_VALUE}
+                			value={ formData.period ? formData.period : EMPTY_SELECT_VALUE }
                 			onChange={handleChange}
                 			error={Boolean(errors.period)}
                 			helperText={errors.period}

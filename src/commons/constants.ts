@@ -84,5 +84,9 @@ export const PROFILE_IDS = [
 	}
 ];
 
-export const quotaPeriodOptions = [{ FEvalue: "GIORNO", BEvalue: "DAY", }, { FEvalue: "SETTIMANA", BEvalue: "WEEK" }, { FEvalue: "MESE", BEvalue: "MONTH" }, {FEvalue: "NON DEFINITO", BEvalue: null}];
+export const EMPTY_SELECT_VALUE = "NON DEFINITO";
+
+export const quotaPeriodOptions = [{ FEvalue: "GIORNO", BEvalue: "DAY", }, { FEvalue: "SETTIMANA", BEvalue: "WEEK" }, { FEvalue: "MESE", BEvalue: "MONTH" }, {FEvalue: EMPTY_SELECT_VALUE, BEvalue: null}];
+
+
 	 
