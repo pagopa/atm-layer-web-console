@@ -48,19 +48,6 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				fullWidth
 			/>
 		</Grid>
-		<Grid item xs={4}>
-			<TextField
-				id="profileIds"
-				name="profileIds"
-				label="Ruolo"
-				variant="outlined"
-				value={filterValues.profileIds}
-				onChange={(e) => handleChange(e, e.target.name)}
-				size="small"
-				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-profile-test" }}
-				fullWidth
-			/>
-		</Grid>
 		<Grid item xs={4} />
 	</React.Fragment>
 );

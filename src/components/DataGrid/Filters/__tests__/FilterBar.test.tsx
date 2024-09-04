@@ -280,18 +280,6 @@ describe("FilterBar test", () => {
         fireEvent.change(userId, { target: { value: "mario.rossi@pagopa.com" } });
     });
 
-    test("Test FilterBar with USERS and Filter with profileIds", () => {
-        const emptyFilterValues = {
-            name: "",
-            surname: "",
-            userId: "",
-            profileIds: ""
-        };
-        renderComponent(USERS, false, emptyFilterValues, emptyFilterValues);
-        const profileIds = screen.getByTestId("user-profile-test") as HTMLInputElement;
-        fireEvent.change(profileIds, { target: { value: "5" } });
-    });
-
     test("Test FilterBar with USERS and Click on Cancella Filtri and Filtra", () => {
         const emptyFilterValues = {
             name: "",
