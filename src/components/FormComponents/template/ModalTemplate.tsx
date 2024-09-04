@@ -8,6 +8,7 @@ import {
 	DialogContentText,
 	DialogTitle,
 	Divider,
+	useTheme,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
@@ -38,6 +39,8 @@ export default function ModalTemplate({
 		e.stopPropagation();
 	};
 
+	const theme = useTheme();
+
 	const defaultHandleClose = () => {
 		setOpen(false);
 	};
@@ -54,7 +57,7 @@ export default function ModalTemplate({
 			maxWidth={"sm"}
 		>
 			<Box onClick={handleDialogClick}>
-				<DialogTitle>{titleModal}</DialogTitle>
+				<DialogTitle sx = {{background : theme.palette.primary.main, color: "white", fontWeight: 600}}>{titleModal}</DialogTitle>
 				<Divider />
 				<Box py={2}>
 					<DialogContent>

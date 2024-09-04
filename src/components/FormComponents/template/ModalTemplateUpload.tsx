@@ -1,5 +1,5 @@
 import React, { useEffect, useState }  from "react";
-import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, useTheme } from "@mui/material";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
@@ -24,6 +24,8 @@ type Props = {
 };
 
 export default function ModalTemplateUpload({ type, titleModal, contentText, open, setOpen, recordParams, handleSnackbar, abortController, setMessage, setSeverity, setTitle, setOpenSnackBar}: Props) {
+
+	const theme = useTheme();
 
 	const [showAlert, setShowAlert] = useState(false);
 
@@ -155,7 +157,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			fullWidth
 			maxWidth={"sm"}
 		>
-			<DialogTitle>
+			<DialogTitle sx = {{background : theme.palette.primary.main, color: "white", fontWeight: 600}}>
 				{titleModal}
 			</DialogTitle>
 			<Divider />
