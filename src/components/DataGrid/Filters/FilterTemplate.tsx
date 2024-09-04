@@ -1,10 +1,11 @@
 import { Grid, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import React from "react";
 import { Loading } from "../../Commons/Loading";
 import { Ctx } from "../../../DataContext";
 import { getProfileIdsArray } from "../../Commons/Commons";
-import { SCRITTURA } from "../../../commons/constants";
+import { SCRITTURA, TRANSACTIONS } from "../../../commons/constants";
 
 type Props = {
   handleSubmit: () => void;
@@ -15,6 +16,7 @@ type Props = {
   loadingButton?: boolean;
   createIcon?: boolean;
   handleClick?: any;
+  driver?: string;
 };
 
 const FilterTemplate = ({
@@ -26,6 +28,7 @@ const FilterTemplate = ({
 	loadingButton,
 	createIcon,
 	handleClick,
+	driver
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
 
@@ -51,20 +54,26 @@ const FilterTemplate = ({
 						flexDirection={"row"}
 						alignItems={"center"}
 						justifyContent={"space-between"}
-					>
-						{createIcon ?
-							 <Box my={1}>
-							 <Button variant="contained" onClick={() => handleClick()} disabled={canCreate ? false : true}>
-				 Crea Nuovo
-							 </Button>
-						 </Box>
-						 :
+					> {driver !== TRANSACTIONS ? (
+							<React.Fragment>
+								{createIcon ? (
+									<Box my={1}>
+										<Button variant="contained" onClick={() => handleClick()} disabled={!canCreate}>
+										Crea Nuovo
+										</Button>
+									</Box>
+								) : (
+									<Box my={1}>
+										<Button variant="contained" onClick={() => navigate(filterRoutes)} disabled={!canCreate}>
+										Crea Risorsa
+										</Button>
+									</Box>
+								)}
+							</React.Fragment>
+						) : (
 							<Box my={1}>
-								<Button variant="contained" onClick={() => navigate(filterRoutes)} disabled={canCreate ? false : true}>
-                Crea Risorsa
-								</Button>
 							</Box>
-						}
+						)}
 						<Box>
 							<Button
 								sx={{ marginRight: 2 }}
