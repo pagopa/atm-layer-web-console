@@ -176,7 +176,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={handleClick}>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={handleClick} driver={driver}>
 			{filterType()}
 		</FilterTemplate>
 	);
