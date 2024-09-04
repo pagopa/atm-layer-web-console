@@ -8,7 +8,7 @@ type Prop = {
 
 const StatusFilter = ({ filterValues, handleChange }: Prop) => {
 	const menuItems = [
-		{ label: "STATO", value: "" },
+		{ label: "NON DEFINITO", value: "" },
 		{ label: "CREATED", value: "CREATED" },
 		{ label: "WAITING_DEPLOY", value: "WAITING_DEPLOY" },
 		{ label: "UPDATED_BUT_NOT_DEPLOYED", value: "UPDATED_BUT_NOT_DEPLOYED" },

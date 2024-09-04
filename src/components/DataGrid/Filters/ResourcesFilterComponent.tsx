@@ -10,7 +10,7 @@ type Props = {
 const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceTypes = [
-		{ label: "Stato", value: "" },
+		{ label: "NON DEFINITO", value: "" },
 		{ label: "HTML", value: "HTML" },
 		{ label: "OTHER", value: "OTHER" }
 	];

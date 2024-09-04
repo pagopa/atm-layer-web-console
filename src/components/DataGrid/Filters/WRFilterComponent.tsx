@@ -11,7 +11,7 @@ type Props = {
 const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceItems = [
-		{ label: "Stato", value: "" },
+		{ label: "NON DEFINITO", value: "" },
 		{ label: "BPMN", value: "BPMN" },
 		{ label: "DMN", value: "DMN" },
 		{ label: "FORM", value: "FORM" }
