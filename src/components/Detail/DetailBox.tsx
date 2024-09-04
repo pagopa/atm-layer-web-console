@@ -1,5 +1,6 @@
 import { Box, Grid, Tooltip, Typography, useTheme } from "@mui/material";
 import BoxPageLayout from "../../pages/Layout/BoxPageLayout";
+import { translatePeriodToFrontend } from "../Commons/Commons";
 
 type Prop = {
 	detail: any;
@@ -8,6 +9,18 @@ type Prop = {
 };
 
 const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
+
+	const getValue = (format: any | undefined, detail: any, value: any) => {
+		if (format) {
+			return format(detail[value]);
+		} else {
+			const extractedValue = detail[value];
+			if (value === "period") {
+				return translatePeriodToFrontend(detail[value]);
+			}
+			return detail[value];
+		}
+	};
 
 	const theme = useTheme();
 
@@ -41,8 +54,8 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 							<Grid item xs={4} key={label}>
 								<Box display={"flex"}>
 									<Typography variant="body2" >{label}: &nbsp;</Typography>
-									<Tooltip title={format ? format(detail[value]) : detail[value]}>
-										<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{format ? format(detail[value]) : detail[value]}</Typography>
+									<Tooltip title= {getValue(format, detail, value)}>
+										<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{getValue(format, detail, value)}</Typography>
 									</Tooltip>
 								</Box>
 							</Grid>

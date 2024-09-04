@@ -2,14 +2,15 @@ import { SetStateAction, useContext, useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { Ctx } from "../../../DataContext";
-import { getTextModal, handleSnackbar, resetErrors } from "../../Commons/Commons";
+import { getTextModal, handleSnackbar, resetErrors, translatePeriodToBackend, translatePeriodToFrontend } from "../../Commons/Commons";
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, UPDATE_BANK } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_BANK, DELETE_BANK, MAX_LENGHT_LARGE, MAX_LENGTH_MEDIUM, MAX_LENGTH_NUMERIC, MAX_LENGTH_SMALL, quotaPeriodOptions, UPDATE_BANK } from "../../../commons/constants";
 import { BANKS_CREATE, BANKS_DELETE, BANKS_UPDATE } from "../../../commons/endpoints";
 import ROUTES from "../../../routes";
 import { ActionAlert } from "../../Commons/ActionAlert";
+import { BankRequest } from "../../../model/BankModel";
 
 type Props = {
 	type: string;
@@ -36,11 +37,11 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		acquirerId: "",
 		denomination: "",
 		limit: "",
-		period:null,
+		period: null,
 		rateLimit: ""
 	};
 
-	const [formData, setFormData] = useState(initialValues);
+	const [formData, setFormData] = useState<BankRequest>(initialValues);
 	const [errors, setErrors] = useState<any>(initialValues);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -64,8 +65,8 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		const newErrors = {
 			acquirerId: formData.acquirerId ? "" : "Campo obbligatorio",
 			denomination: formData.denomination ? "" : "Campo obbligatorio",
-			limit: ((formData.limit && formData.period) || (!formData.limit && !formData.period)) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
-			period: ((formData.limit && formData.period) || (!formData.limit && !formData.period)) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			limit: ((formData.limit && (formData.period && formData.period !== "NON DEFINITO")) || (!formData.limit && !(formData.period && formData.period !== "NON DEFINITO"))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			period: ((formData.limit && (formData.period && formData.period !== "NON DEFINITO")) || (!formData.limit && !(formData.period && formData.period !== "NON DEFINITO"))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
 		};
 	
 		setErrors(newErrors);
@@ -90,7 +91,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 				acquirerId: recordParams.acquirerId,
 				denomination: recordParams.denomination,
 				limit: recordParams.limit,
-				period: recordParams.period,
+				period: translatePeriodToFrontend(recordParams.period),
 				rateLimit: recordParams.rateLimit,
 			});
 			setErrors(initialValues);
@@ -126,11 +127,12 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		}
 		case CREATE_BANK: {
 			if (validateForm(true)) {
+				const translatedPeriod = translatePeriodToBackend(formData.period);
 				const postData = {
 					acquirerId: formData.acquirerId,
 					denomination: formData.denomination,
 					limit: formData.limit,
-					period: formData.period !== "" ? formData.period : null,
+					period: formData.period !== "" ? translatedPeriod : null,
 					rateLimit: formData.rateLimit,
 				};
 				try {
@@ -162,7 +164,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					acquirerId: formData.acquirerId,
 					denomination: formData.denomination,
 					limit: formData.limit,
-					period: formData.period !== "" ? formData.period : null,
+					period: translatePeriodToBackend(formData.period),
 					rateLimit: formData.rateLimit,
 				};
 				try {
@@ -194,7 +196,6 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 
 	};
 
-	const quotaPeriodOptions = [{ key: "GIORNO", value: "DAY", }, { key: "SETTIMANA", value: "WEEK" }, { key: "MESE", value: "MONTH" }, {key: "NULLO", value: ""}];
 
 	return (
 		<ModalTemplate
@@ -265,14 +266,14 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			name="period"
                 			select
                 			size="small"
-                			defaultValue={"MONTH"}
+                			defaultValue={"NON DEFINITO"}
                 			value={ formData.period }
                 			onChange={handleChange}
                 			error={Boolean(errors.period)}
                 			helperText={errors.period}
                 			inputProps={{ maxLength: MAX_LENGTH_MEDIUM, "data-testid": "bank-period-test" }}>
                 				{quotaPeriodOptions?.map((el) => (
-                					<MenuItem key={el.key} value={el.value}>{el.value !== "" ? el.value : el.key}</MenuItem>
+                					<MenuItem key={el.FEvalue} value={el.FEvalue}>{el.FEvalue}</MenuItem>
                 				)
                 				)}
                 			</TextField>
