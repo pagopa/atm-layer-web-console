@@ -524,7 +524,7 @@ const useColumns: any = () => {
 				{
 					field: "profileIds",
 					cellClassName: "justifyContentNormal",
-					headerName: "Ruoli assegnati",
+					headerName: "Autorizzazioni assegnate",
 					align: "left",
 					headerAlign: "left",
 					editable: false,

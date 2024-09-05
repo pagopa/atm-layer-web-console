@@ -59,7 +59,7 @@ export default function MultiSelect({ handleChange, errors, value, names, isFirs
 				<TextField
 					{...params}
 					variant="outlined"
-					label="Ruoli assegnati"
+					label="Autorizzazioni assegnate"
 					error={Boolean(errors.profileIds.length > 0)}
 					helperText={errors.profileIds}
 				/>
