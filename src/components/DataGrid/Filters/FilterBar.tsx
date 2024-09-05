@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable functional/immutable-data */
 /* eslint-disable prefer-const */
 /* eslint-disable functional/no-let */

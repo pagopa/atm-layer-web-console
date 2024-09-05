@@ -1,6 +1,7 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
 import { MAX_LENGHT_LARGE } from "../../../commons/constants";
+import RoleFilter from "./RoleFilter";
 
 type Props = {
 	filterValues: any;
@@ -47,6 +48,9 @@ const UsersFilterComponent = ({ filterValues, handleChange }: Props) => (
 				inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "user-userid-test" }}
 				fullWidth
 			/>
+		</Grid>
+		<Grid item xs={4}>
+			<RoleFilter filterValues={filterValues} handleChange={handleChange}/>
 		</Grid>
 		<Grid item xs={4} />
 	</React.Fragment>

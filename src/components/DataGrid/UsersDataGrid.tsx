@@ -33,6 +33,7 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 		userId: "",
 		name: "",
 		surname: "",
+		profileId: "",
 	};
 
 	const emptyResponse = {page:0,limit:10,itemsFound:0,totalPages:0,results:[]};

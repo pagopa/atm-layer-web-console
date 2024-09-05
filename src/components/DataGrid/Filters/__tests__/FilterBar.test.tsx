@@ -51,7 +51,21 @@ const mockContextValue = {
             }
         ]
     },
-    abortController: new AbortController()
+    abortController: new AbortController(),
+    profilesAvailable: [
+        {
+            description: "uno",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+        {
+            description: "due",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+    ]
 };
 
 describe("FilterBar test", () => {

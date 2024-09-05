@@ -90,6 +90,7 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 		appendQueryParam("name", filterValues?.name);
 		appendQueryParam("surname", filterValues?.surname);
 		appendQueryParam("userId", filterValues?.userId);
+		appendQueryParam("profileId", filterValues?.profileId);
 		break;
 	default:
 		return "";

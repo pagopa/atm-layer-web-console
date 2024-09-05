@@ -47,7 +47,21 @@ const mockContextValueWithValues = {
         ]
     },
     abortController: new AbortController(),
-    clearStorage
+    clearStorage,
+    profilesAvailable: [
+        {
+            description: "uno",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+        {
+            description: "due",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+    ]
 };
 
 const mockContextValueWithoutValues = {
@@ -67,7 +81,21 @@ const mockContextValueWithoutValues = {
         ]
     },
     abortController: new AbortController(),
-    clearStorage
+    clearStorage,
+    profilesAvailable: [
+        {
+            description: "uno",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+        {
+            description: "due",
+            profileId: 1,
+            createdAt: "2024-05-27",
+            lastUpdatedAt: "2024-05-27",
+        },
+    ]
 };
 
 
