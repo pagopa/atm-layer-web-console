@@ -165,6 +165,13 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 			sessionStorage.setItem("recordParamsUser", JSON.stringify(param.row));
 		};
 
+		// eslint-disable-next-line functional/no-let
+		let loggedUserInfo;
+		const recordUser = sessionStorage.getItem("loggedUserInfo");
+		if (recordUser) {
+			loggedUserInfo = JSON.parse(recordUser);
+		}
+
 		return (
 			<Box
 				width="100%"
@@ -172,6 +179,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				justifyContent={"center"}
 				sx={{ cursor: "pointer" }}
 			>
+				{loggedUserInfo && loggedUserInfo?.userId !== param.row.userId && 
 				<IconButton
 					onClick={actions}
 					sx={{
@@ -182,6 +190,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				>
 					<DeleteIcon sx={{ color: theme.palette.error.main, fontSize: "24px" }} />
 				</IconButton>
+				}
 			</Box>
 		);
 	};

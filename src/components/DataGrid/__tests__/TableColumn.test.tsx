@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, queryByTestId, render, screen } from "@testing-library/react";
 import TableColumn from "../TableColumn";
 import { GridColumnHeaderParams } from "@mui/x-data-grid";
 import { GridStateColDef } from "@mui/x-data-grid/internals";
@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { themeApp } from "../../../assets/jss/themeApp";
 import { ThemeProvider } from "@mui/material/styles";
 import { BANKS, BPMN, DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER, UPDATE_USER } from "../../../commons/constants";
-import { bpmnTableMocked } from "../../Mock4Test/BpmnMocks";
+import { bpmnTableMocked, userTableMocked } from "../../Mock4Test/BpmnMocks";
 import * as fetchModule from "../../../hook/fetch/fetchRequest";
 
 jest.mock("react-router-dom", () => ({
@@ -185,9 +185,24 @@ describe("TableColumn test", () => {
         expect(sessionStorage.getItem("recordParamsBank")).toBe(JSON.stringify(param.row));
     });
 
+    test("Test deleteColumnUsers self", () => {
+        const { deleteColumnUsers } = TableColumn(setOpen, setType);
+        const param = { row: { userId: "mario.rossi@pagopa.com" } };
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnUsers(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+
+        expect(screen.queryByTestId("delete-column-test")).not.toBeInTheDocument();
+        
+    });
+
     test("Test deleteColumnUsers", () => {
         const { deleteColumnUsers } = TableColumn(setOpen, setType);
-        const param = { ...bpmnTableMocked.results[0] };
+        const param = { row: { userId: "paolo.rossi@pagopa.com" } };
         render(
             <BrowserRouter>
                 <ThemeProvider theme={themeApp}>
@@ -200,6 +215,7 @@ describe("TableColumn test", () => {
         expect(setOpen).toHaveBeenCalled();
         expect(setType).toHaveBeenCalledWith(DELETE_USER);
     });
+
     test("editColumnUsers handles setting state and session storage correctly", () => {
         const { editColumnUsers } = TableColumn(setOpen, setType);
     
