@@ -21,6 +21,7 @@ const ROUTES = {
 	TRANSACTIONS: "/transactions",
 	BANK:"/bank",
 	USERS: "/users",
+	ERROR_PAGE_USERS_DB: "/errorUser"
 };
 
 export default ROUTES;

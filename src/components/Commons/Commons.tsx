@@ -3,7 +3,7 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { ALERT_ERROR, ALERT_SUCCESS, BANKS, CREATE_BANK, CREATE_USER, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, TRANSACTIONS, UPDATE_BANK, UPDATE_FIRST_USER, UPDATE_RES, UPDATE_USER, UPDATE_WR, USERS, WORKFLOW_RESOURCE, quotaPeriodOptions } from "../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, BANKS, CREATE_BANK, CREATE_USER, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, TRANSACTIONS, UPDATE_BANK, UPDATE_RES, UPDATE_USER, UPDATE_WR, USERS, WORKFLOW_RESOURCE, quotaPeriodOptions } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
 import { Profile, User } from "../../model/UserModel";
@@ -256,9 +256,9 @@ export function getTextModal(type:string):any {
 	case UPDATE_USER: {
 		return {titleModal:"Update utente", contentText:"Modifica le autorizzazioni di questo utente"};
 	}
-	case UPDATE_FIRST_USER: {
-		return {titleModal:"Update primo utente", contentText:"Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi"};
-	}
+	// case UPDATE_FIRST_USER: {
+	// 	return {titleModal:"Update primo utente", contentText:"Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi"};
+	// }
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
 	}

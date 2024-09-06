@@ -89,20 +89,20 @@ describe("ModalUsers component", () => {
     expect(screen.getByText("Sei sicuro di voler cancellare questo utente?")).toBeInTheDocument();
   });
 
-  test("renders correctly for UPDATE_FIRST_USER", () => {
-    sessionStorage.setItem("recordParamsUser", JSON.stringify({
-      userId: "user@example.com",
-      name: "Mario",
-      surname: "Rossi",
-      profiles: [{ description: "User", profileId: 2 }],
-    }));
+  // test("renders correctly for UPDATE_FIRST_USER", () => {
+  //   sessionStorage.setItem("recordParamsUser", JSON.stringify({
+  //     userId: "user@example.com",
+  //     name: "Mario",
+  //     surname: "Rossi",
+  //     profiles: [{ description: "User", profileId: 2 }],
+  //   }));
     
-    renderComponent(UPDATE_FIRST_USER);
+  //   renderComponent(UPDATE_FIRST_USER);
 
-    expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
-    expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
-    expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
-  });
+  //   expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
+  //   expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
+  //   expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
+  // });
 
   test("handles multi-select change correctly", () => {
     renderComponent(CREATE_USER);
@@ -263,72 +263,72 @@ describe("ModalUsers component", () => {
   });
 
   // 4. Test for UPDATE_FIRST_USER case (141)
-  test("renders correctly for UPDATE_FIRST_USER and calls handleSubmit", async () => {
-    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+  // test("renders correctly for UPDATE_FIRST_USER and calls handleSubmit", async () => {
+  //   mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
 
-    sessionStorage.setItem("recordParamsUser", JSON.stringify({
-      userId: "user@example.com",
-      name: "Mario",
-      surname: "Rossi",
-      profiles: [{ description: "User", profileId: 2 }],
-    }));
+  //   sessionStorage.setItem("recordParamsUser", JSON.stringify({
+  //     userId: "user@example.com",
+  //     name: "Mario",
+  //     surname: "Rossi",
+  //     profiles: [{ description: "User", profileId: 2 }],
+  //   }));
 
-    renderComponent(UPDATE_FIRST_USER);
+  //   renderComponent(UPDATE_FIRST_USER);
 
-    expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
-    expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
-    expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
+  //   expect(screen.getByLabelText("Email utente")).toHaveValue("user@example.com");
+  //   expect(screen.getByLabelText("Nome")).toHaveValue("Mario");
+  //   expect(screen.getByLabelText("Cognome")).toHaveValue("Rossi");
 
-    fireEvent.click(screen.getByText("Conferma"));
+  //   fireEvent.click(screen.getByText("Conferma"));
 
-    await waitFor(() => {
-      expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: UPDATE_USERS,
-        method: "PUT",
-        abortController: mockContextValue.abortController,
-        headers: { "Content-Type": "application/json" },
-        body: {
-          userId: "user@example.com",
-          name: "Mario",
-          surname: "Rossi",
-          profileIds: [2],
-        },
-      });
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(mockFetchRequest).toHaveBeenCalledWith({
+  //       urlEndpoint: UPDATE_USERS,
+  //       method: "PUT",
+  //       abortController: mockContextValue.abortController,
+  //       headers: { "Content-Type": "application/json" },
+  //       body: {
+  //         userId: "user@example.com",
+  //         name: "Mario",
+  //         surname: "Rossi",
+  //         profileIds: [2],
+  //       },
+  //     });
+  //   });
+  // });
 
   // 5. Test for handleSubmit in UPDATE_USER or UPDATE_FIRST_USER mode (157-164)
-  test("handles form submission for UPDATE_FIRST_USER", async () => {
-    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+  // test("handles form submission for UPDATE_FIRST_USER", async () => {
+  //   mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
 
-    sessionStorage.setItem("recordParamsUser", JSON.stringify({
-      userId: "user@example.com",
-      name: "Mario",
-      surname: "Rossi",
-      profiles: [{ description: "User", profileId: 2 }],
-    }));
+  //   sessionStorage.setItem("recordParamsUser", JSON.stringify({
+  //     userId: "user@example.com",
+  //     name: "Mario",
+  //     surname: "Rossi",
+  //     profiles: [{ description: "User", profileId: 2 }],
+  //   }));
 
-    renderComponent(UPDATE_FIRST_USER);
+  //   renderComponent(UPDATE_FIRST_USER);
 
-    fireEvent.click(screen.getByText("Conferma"));
+  //   fireEvent.click(screen.getByText("Conferma"));
 
-    await waitFor(() => {
-      expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: UPDATE_USERS,
-        method: "PUT",
-        abortController: mockContextValue.abortController,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: {
-          userId: "user@example.com",
-          name: "Mario",
-          surname: "Rossi",
-          profileIds: [2],
-        },
-      });
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(mockFetchRequest).toHaveBeenCalledWith({
+  //       urlEndpoint: UPDATE_USERS,
+  //       method: "PUT",
+  //       abortController: mockContextValue.abortController,
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: {
+  //         userId: "user@example.com",
+  //         name: "Mario",
+  //         surname: "Rossi",
+  //         profileIds: [2],
+  //       },
+  //     });
+  //   });
+  // });
 
   // 6. Test for default case in handleSubmit (173)
   test("does nothing when an unknown type is provided", () => {

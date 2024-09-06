@@ -10,22 +10,16 @@ type Props = {
     errors: any;
     value: Array<string>;
     names: Array<string>;
-    isFirstUser?: boolean;
 };
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function MultiSelect({ handleChange, errors, value, names, isFirstUser }: Props) {
+export default function MultiSelect({ handleChange, errors, value, names }: Props) {
 	const { profilesAvailable } = useContext(Ctx);
 
 	const handleChangeWrapper = (event: SyntheticEvent<Element, Event>, newValue: Array<string>) => {
-		// eslint-disable-next-line functional/no-let
-		let completeProfiles = addDependentProfiles(newValue, profilesAvailable);
-
-		if (isFirstUser && !completeProfiles.includes("Gestione utenti")) {
-			completeProfiles = [...completeProfiles, "Gestione utenti"];
-		}
+		const completeProfiles = addDependentProfiles(newValue, profilesAvailable);
 
 		handleChange(event, completeProfiles);
 	};
@@ -45,7 +39,6 @@ export default function MultiSelect({ handleChange, errors, value, names, isFirs
 						checkedIcon={checkedIcon}
 						style={{ marginRight: 8 }}
 						checked={selected}
-						disabled={isFirstUser && option === "Gestione utenti"}
 					/>
 					{option}
 				</li>

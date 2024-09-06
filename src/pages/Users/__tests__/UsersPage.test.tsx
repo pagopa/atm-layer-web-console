@@ -116,18 +116,18 @@ describe('UsersPage test', () => {
         expect(screen.queryByText("Update primo utente")).toBeNull();
     });
 
-    test('renders UsersPage and open first user modal', async () => {
-        render(
-            <Ctx.Provider value={ mockContextValueWithoutValues }>
-                <BrowserRouter>
-                    <UsersPage />
-                </BrowserRouter>
-            </Ctx.Provider>
-        );
+    // test('renders UsersPage and open first user modal', async () => {
+    //     render(
+    //         <Ctx.Provider value={ mockContextValueWithoutValues }>
+    //             <BrowserRouter>
+    //                 <UsersPage />
+    //             </BrowserRouter>
+    //         </Ctx.Provider>
+    //     );
 
-        expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
+    //     expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
 
-        expect(screen.getByText("Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi")).toBeInTheDocument();
+    //     expect(screen.getByText("Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi")).toBeInTheDocument();
 
-    });
+    // });
 });

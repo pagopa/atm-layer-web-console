@@ -6,7 +6,7 @@ import { convertStringToProfiles, getProfileDescriptionByProfileArray, getTextMo
 
 import ModalTemplate from "../template/ModalTemplate";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
-import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_FIRST_USER, UPDATE_USER } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE, UPDATE_USER } from "../../../commons/constants";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
@@ -84,7 +84,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 	};
 
 	useEffect(() => {
-		if (open && (type === UPDATE_USER || type === UPDATE_FIRST_USER)) {
+		if (open && (type === UPDATE_USER)) {
 			setFormData({
 				userId: recordParams.userId,
 				name: recordParams.name,
@@ -142,8 +142,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			}
 			break;
 		}
-		case UPDATE_USER:
-		case UPDATE_FIRST_USER: {
+		case UPDATE_USER: {
 			if (validateForm(false)) {
 				const postData = {
 					userId: formData.userId,
@@ -188,7 +187,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 			handleSubmit={handleSubmit}
 			handleClose={handleClose}
 			loading={loading}
-			canOnlyConfirm={type===UPDATE_FIRST_USER ? true : false}
 		>
 			{ type !== DELETE_USER &&
 			<Grid sx={{px: 2}}>
@@ -204,7 +202,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						onChange={handleChange}
 						error={Boolean(errors.userId)}
 						helperText={errors.userId}
-						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER || type === UPDATE_FIRST_USER}}
+						inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "userid-test", readOnly: type === UPDATE_USER}}
 					/>
 				</Grid>
 				<Grid xs={5} item my={1}>
@@ -243,7 +241,6 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						errors={errors}
 						value={formData.profileIds}
 						names={getProfileDescriptionByProfileArray(profilesAvailable)}
-						isFirstUser={type === UPDATE_FIRST_USER ? true : false}
 					/>
 				</Grid>
 			</Grid>

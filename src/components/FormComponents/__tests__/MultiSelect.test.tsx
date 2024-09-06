@@ -27,7 +27,6 @@ describe("MultiSelect component", () => {
                     errors={mockErrors}
                     value={mockValue}
                     names={mockNames}
-                    isFirstUser={isFirstUser}
                 />
             </Ctx.Provider>
         );

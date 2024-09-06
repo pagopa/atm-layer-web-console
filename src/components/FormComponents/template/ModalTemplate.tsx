@@ -21,7 +21,7 @@ type Props = {
   children?: React.ReactNode;
   loading?: boolean;
   handleClose?: any;
-  canOnlyConfirm?: boolean;
+//   canOnlyConfirm?: boolean;
 };
 
 export default function ModalTemplate({
@@ -33,7 +33,7 @@ export default function ModalTemplate({
 	children,
 	loading,
 	handleClose,
-	canOnlyConfirm,
+	// canOnlyConfirm,
 }: Props) {
 	const handleDialogClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -67,7 +67,7 @@ export default function ModalTemplate({
 				{children}
 				<DialogActions>
 					<Box display={"flex"} flexDirection={"row"} p={2}>
-						<Box mr={2} sx={{ display: canOnlyConfirm ? "none" : null }}>
+						<Box mr={2} /* sx={{ display: canOnlyConfirm ? "none" : null }} */>
 							<Button variant={"outlined"} onClick={handleClose || defaultHandleClose}>
                 Annulla
 							</Button>

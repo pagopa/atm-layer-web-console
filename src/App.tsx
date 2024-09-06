@@ -29,6 +29,7 @@ import ProtectedRoute from "./components/NavigationComponents/ProtectedRoute";
 import { BANCHE, LETTURA, SCRITTURA, TRANSAZIONI, UTENTI } from "./commons/constants";
 import { Profile, User } from "./model/UserModel";
 import TransactionsPage from "./pages/Transactions/TransactionsPage";
+import ErrorPageUsersInDb from "./pages/ErrorPageUsersInDb";
 
 const LocalRoutes = () => (
 	<Routes>
@@ -67,6 +68,8 @@ const LocalRoutes = () => (
 			</Route>
 
 			<Route path={routes.UNAUTHORIZED_PAGE} element={<PageLayout><ErrorPage /></PageLayout>} />
+			<Route path={routes.ERROR_PAGE_USERS_DB} element={<PageLayout><ErrorPageUsersInDb /></PageLayout>} />
+			
 		</Route>
 		<Route path={routes.LOGIN} element={<PageLayout><LoginPage /></PageLayout>} />
 		<Route path={routes.LOGIN_BACK} element={<PageLayout><LoginPageCallback /></PageLayout>} />

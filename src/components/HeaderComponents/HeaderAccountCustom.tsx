@@ -37,16 +37,20 @@ export const HeaderAccountCustom = ({
 
 			if (response?.success) {
 				setLoggedUserInfo(response.valuesObj);
-				if (!response.valuesObj.name && !response.valuesObj.surname && getProfilesIds(response.valuesObj).includes(5)) {
-					sessionStorage.setItem("loggedUserInfo", response.valuesObj);
-					navigate(ROUTES.USERS);
-				}
-				else if (response.valuesObj.name && response.valuesObj.surname && response.valuesObj.profiles.length < 1) {
-					navigate(ROUTES.UNAUTHORIZED_PAGE);
-				}
+				// if (!response.valuesObj.name && !response.valuesObj.surname && getProfilesIds(response.valuesObj).includes(5)) {
+				// 	sessionStorage.setItem("loggedUserInfo", response.valuesObj);
+				// 	navigate(ROUTES.USERS);
+				// }
+				// else if (response.valuesObj.name && response.valuesObj.surname && response.valuesObj.profiles.length < 1) {
+				// 	navigate(ROUTES.UNAUTHORIZED_PAGE);
+				// }
+				sessionStorage.setItem("loggedUserInfo", response.valuesObj);
+				navigate(ROUTES.HOME);
+				
 			} else {
-				navigate(ROUTES.LOGIN);
+				navigate(ROUTES.ERROR_PAGE_USERS_DB);
 			}
+			
 		} catch (error) {
 			console.error("ERROR", error);
 		}
