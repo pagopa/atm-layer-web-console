@@ -5,7 +5,7 @@ import React from "react";
 import { Loading } from "../../Commons/Loading";
 import { Ctx } from "../../../DataContext";
 import { getProfileIdsArray } from "../../Commons/Commons";
-import { SCRITTURA, TRANSACTIONS } from "../../../commons/constants";
+import { SCRITTURA, TRANSACTIONS, UTENTI } from "../../../commons/constants";
 
 type Props = {
   handleSubmit: () => void;
@@ -35,6 +35,7 @@ const FilterTemplate = ({
 	const {loggedUserInfo} = useContext(Ctx);
 	const loggedUserProfiles = getProfileIdsArray(loggedUserInfo);
 	const canCreate = loggedUserProfiles.includes(SCRITTURA);
+	const canCreateUsers = loggedUserProfiles.includes(UTENTI);
 
 	const disabledButtons = () => {
 		if (!Object.values(filterValues).some((value) => value !== "")) {
@@ -58,7 +59,7 @@ const FilterTemplate = ({
 							<React.Fragment>
 								{createIcon ? (
 									<Box my={1}>
-										<Button variant="contained" onClick={() => handleClick()} disabled={!canCreate}>
+										<Button variant="contained" onClick={() => handleClick()} disabled={!canCreateUsers}>
 										Crea Nuovo
 										</Button>
 									</Box>
