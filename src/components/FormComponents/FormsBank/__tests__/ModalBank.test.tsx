@@ -281,19 +281,19 @@ describe("ModalBank Test", () => {
 
         expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
         expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
-        expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
+        expect(screen.getByLabelText("Rate")).toBeInTheDocument();
 
         renderModalBank(UPDATE_BANK);
 
         expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
         expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
-        expect(screen.getByLabelText("Tasso")).toBeInTheDocument();
+        expect(screen.getByLabelText("Rate")).toBeInTheDocument();
     });
 
     test("Test onChange only numbers allowed in numeric fields", () => {
         renderModalBank(CREATE_BANK);
         fireEvent.keyDown(screen.getByLabelText("Quota"), {key: 'Z', code: 'KeyZ'});
-        fireEvent.keyDown(screen.getByLabelText("Tasso"), {key: 'Z', code: 'KeyZ'});
+        fireEvent.keyDown(screen.getByLabelText("Rate"), {key: 'Z', code: 'KeyZ'});
     });
 
 });

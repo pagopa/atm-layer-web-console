@@ -9,12 +9,12 @@ const BankDetailPage = () => {
 		{ label: "Nome Banca", value: "denomination" },
 		{ label: "Client Id", value: "clientId" },
 		{ label: "Client Secret", value: "clientSecret" },
-		{ label: "ApiKey Id", value: "apiKeyId" },
-		{ label: "ApiKey Secret", value: "apiKeySecret" },
-		{ label: "Usage Plan Id", value: "usagePlanId" },
+		// { label: "ApiKey Id", value: "apiKeyId" },
+		{ label: "ApiKey", value: "apiKeySecret" },
+		// { label: "Usage Plan Id", value: "usagePlanId" },
 		{ label: "Limite chiamate", value: "limit" },
 		{ label: "Periodo", value: "period" },
-		{ label: "Chiamate/sec", value: "rateLimit" },
+		{ label: "Rate", value: "rateLimit" },
 	];
 
 	return (

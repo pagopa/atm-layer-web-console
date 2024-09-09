@@ -29,20 +29,20 @@ export const homePageCard = [
 		icon:"Widgets",
 		pageLink: routes.WORKFLOW_RESOURCES
 	},
-	// {
-	// 	title: "Banche",
-	// 	id: "banks",
-	// 	description:"Gestione Acquirer e parametri associati",
-	// 	icon:"AccountBalanceIcon",
-	// 	pageLink: routes.BANK
-	// },
-	// {
-	// 	title: "Transazioni",
-	// 	id: "transactions",
-	// 	description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
-	// 	icon:"AssignmentOutlined",
-	// 	pageLink: routes.TRANSACTIONS
-	// },
+	{
+		title: "Banche",
+		id: "banks",
+		description:"Gestione Acquirer e parametri associati",
+		icon:"AccountBalanceIcon",
+		pageLink: routes.BANK
+	},
+	{
+		title: "Transazioni",
+		id: "transactions",
+		description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
+		icon:"AssignmentOutlined",
+		pageLink: routes.TRANSACTIONS
+	},
 	{
 		title: "Utenti e autorizzazioni",
 		id: "users",

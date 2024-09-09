@@ -284,7 +284,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			fullWidth
                 			id="rateLimit"
                 			name="rateLimit"
-                			label={"Tasso"}
+                			label={"Rate"}
                 			placeholder={"12345"}
                 			size="small"
                 			value={formData.rateLimit}
