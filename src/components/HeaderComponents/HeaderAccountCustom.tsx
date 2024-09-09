@@ -45,7 +45,7 @@ export const HeaderAccountCustom = ({
 				// 	navigate(ROUTES.UNAUTHORIZED_PAGE);
 				// }
 				sessionStorage.setItem("loggedUserInfo", response.valuesObj);
-				navigate(ROUTES.HOME);
+				// navigate(ROUTES.HOME);
 				
 			} else {
 				navigate(ROUTES.ERROR_PAGE_USERS_DB);
