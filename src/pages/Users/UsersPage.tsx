@@ -28,19 +28,23 @@ const UsersPage = () => {
 
 	return (
 		<CommonPage breadComponent={breadComponent}>
-			<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
+			{/* <Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
 				<Box width={severity==="error"?"65%":"35%"} >
 					<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
 				</Box>
-			</Box>
+			</Box> */}
 			<UsersDataGrid 
 				open={open}
 				setType={setType}
 				setOpen={setOpen}
 				type={type}
+				openSnackBar={openSnackBar}
 				setOpenSnackBar={setOpenSnackBar}
+				severity={severity}
 				setSeverity={setSeverity}
+				message={message}
 				setMessage={setMessage}
+				title={title}
 				setTitle={setTitle}
 			/>
 		</CommonPage>

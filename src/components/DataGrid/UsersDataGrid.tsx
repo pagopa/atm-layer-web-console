@@ -17,14 +17,18 @@ type Props = {
     setType: React.Dispatch<React.SetStateAction<string>>;
     open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	openSnackBar:boolean;
     setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
+	severity: string;
 	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+	message: string;
 	setMessage: React.Dispatch<SetStateAction<string>>;
+	title: string;
 	setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
 
-export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle } : Props) {
+export default function UsersDataGrid({ type, setType, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle } : Props) {
 
 	const [loading, setLoading] = useState(true);
 	const [loadingButton, setLoadingButton] = useState(false);
@@ -135,9 +139,13 @@ export default function UsersDataGrid({ type, setType, open, setOpen, setOpenSna
 					open={open}
 					setOpen={setOpen}
 					type={type}
+					openSnackBar= {openSnackBar}
 					setOpenSnackBar={setOpenSnackBar}
+					severity={severity}
 					setSeverity={setSeverity}
+					message={message}
 					setMessage={setMessage}
+					title={title}
 					setTitle={setTitle}
 				/>
 			</Box>

@@ -10,18 +10,23 @@ import { ALERT_ERROR, ALERT_SUCCESS, CREATE_USER, DELETE_USER, MAX_LENGHT_LARGE,
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../commons/endpoints";
 import MultiSelect from "../MultiSelect";
 import formatValues from "../../../utils/formatValues";
+import { ActionAlert } from "../../Commons/ActionAlert";
 
 type Props = {
     type: string;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	openSnackBar:boolean;
     setOpenSnackBar: React.Dispatch<SetStateAction<boolean>>;
-    setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
-    setMessage: React.Dispatch<SetStateAction<string>>;
-    setTitle: React.Dispatch<SetStateAction<string>>;
+    severity: string;
+	setSeverity: React.Dispatch<React.SetStateAction<"error" | "success">>;
+	message: string;
+	setMessage: React.Dispatch<SetStateAction<string>>;
+	title: string;
+	setTitle: React.Dispatch<SetStateAction<string>>;
 };
 
-const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage, setTitle }: Props) => {
+const ModalUsers = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severity, setSeverity, message, setMessage, title, setTitle }: Props) => {
 	const { extractDescriptionsAsArray } = formatValues();
 	const { abortController, profilesAvailable, loggedUserInfo } = useContext(Ctx);
 	const recordParamsString = sessionStorage.getItem("recordParamsUser");
@@ -62,6 +67,7 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 		setOpen(false);
 		setErrors(initialValues);
 		setFormData(initialValues);
+		setOpenSnackBar(false);
 	};
 
 	const validateForm = (isCreate: boolean) => {
@@ -129,9 +135,16 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 				try {
 					const response = await fetchRequest({ urlEndpoint: CREATE_USERS, method: "POST", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
-					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
-					window.location.reload();
+					if (response?.success){
+						handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+						setTimeout(() => {
+							setOpen(false);
+							setOpenSnackBar(false);
+							window.location.reload();
+						}, 1000);
+					} else if (!response?.success){
+						handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+					}
 				} catch (error) {
 					setLoading(false);
 					console.error("ERROR", error);
@@ -243,6 +256,14 @@ const ModalUsers = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMess
 						names={getProfileDescriptionByProfileArray(profilesAvailable)}
 					/>
 				</Grid>
+				<ActionAlert
+					setOpenSnackBar={setOpenSnackBar}
+					openSnackBar={openSnackBar}
+					severity={severity}
+					message={message}
+					title={title}
+					// errorCode={errorCode}
+				/>
 			</Grid>
 			}
 				
