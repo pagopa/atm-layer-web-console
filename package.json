@@ -1,6 +1,6 @@
 {
   "name": "web-console",
-  "version": "v1.12.0-dev.26",
+  "version": "v1.12.0-dev.27",
   "private": true,
   "homepage": "/webconsole",
   "jest": {
