@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ModalUsers from "../ModalUsers";
-import { CREATE_USER, DELETE_USER, UPDATE_USER, UPDATE_FIRST_USER } from "../../../../commons/constants";
+import { CREATE_USER, DELETE_USER, UPDATE_USER, UPDATE_FIRST_USER, ALERT_SUCCESS } from "../../../../commons/constants";
 import { fetchRequest } from "../../../../hook/fetch/fetchRequest";
 import { Ctx } from "../../../../DataContext";
 import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../../commons/endpoints";
-import { generatePath } from "react-router-dom";
+import { BrowserRouter, generatePath } from "react-router-dom";
 import * as commons from "../../../Commons/Commons";
 
 jest.mock("../../../../hook/fetch/fetchRequest", () => ({
@@ -30,15 +30,21 @@ const mockSetTitle = jest.fn();
 const renderComponent = (type: string) => {
   return render(
     <Ctx.Provider value={mockContextValue}>
+      <BrowserRouter>
       <ModalUsers
         type={type}
         open={true}
         setOpen={mockSetOpen}
+        openSnackBar={false}
         setOpenSnackBar={mockSetOpenSnackBar}
+        severity={ALERT_SUCCESS}
         setSeverity={mockSetSeverity}
+        message={""}
         setMessage={mockSetMessage}
+        title={""}
         setTitle={mockSetTitle}
       />
+      </BrowserRouter>
     </Ctx.Provider>
   );
 };
