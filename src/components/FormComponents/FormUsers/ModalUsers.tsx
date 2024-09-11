@@ -167,14 +167,13 @@ const ModalUsers = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severi
 				try {
 					const response = await fetchRequest({ urlEndpoint:UPDATE_USERS, method: "PUT", abortController, body: postData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
-					setOpen(false);
 					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 					if (response?.success){
-						window.location.reload();
-					} else {
 						setTimeout(() => {
+							setOpen(false);
+							setOpenSnackBar(false);
 							window.location.reload();
-						}, 3000);
+						}, 1000);
 					}
 				} catch (error) {
 					setLoading(false);

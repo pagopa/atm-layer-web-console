@@ -76,6 +76,11 @@ export const CreateBpmn = () => {
 				const response = await fetchRequest({ urlEndpoint: CREATE_BPMN_API, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				if (response?.success){
+					setTimeout(() => {
+						window.location.reload();
+					}, 1000);
+				}
 
 			} catch (error) {
 				setLoadingButton(false);

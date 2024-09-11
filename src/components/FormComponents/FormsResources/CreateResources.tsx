@@ -139,8 +139,12 @@ export const CreateResources = () => {
 				const createEndpoint = multiple? RESOURCES_CREATE_MULTIPLE : RESOURCES_CREATE;
 				const response = await fetchRequest({ urlEndpoint: createEndpoint, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
-				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				if (response?.success){
+					setTimeout(() => {
+						window.location.reload();
+					}, 1000);
+				}
 			} catch (error) {
 				setLoadingButton(false);
 				console.log("Response negative: ", error);
