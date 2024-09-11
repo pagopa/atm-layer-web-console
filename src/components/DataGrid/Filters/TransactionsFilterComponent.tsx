@@ -1,30 +1,42 @@
-import { Grid, TextField } from "@mui/material";
 import React from "react";
-import { DateTimePicker, DateValidationError, LocalizationProvider } from "@mui/x-date-pickers";
+import { Grid, TextField } from "@mui/material";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { isAfter } from "date-fns";
+import { enGB } from "date-fns/locale";
 import { ACQUIRER_ID_LENGTH, MAX_LENGHT_LARGE } from "../../../commons/constants";
 
 type Props = {
-	filterValues: any;
-	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-	handleTimeStampChange:any;
+  filterValues: any;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleTimeStampChange: any;
 };
 
 const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeStampChange }: Props) => {
-	
-	const [error, setError] = React.useState<any>(null);
+	const [error, setError] = React.useState<string | null>(null);
 
-	const errorMessage = React.useMemo(() => {
-	  switch (error) {
-		case "minDate": {
-		  return "Selezionare una data/ora successiva a quella di partenza";
+	const validateDateRange = (startTime: Date | null, endTime: Date | null) => {
+		if (startTime && endTime && isAfter(new Date(startTime), new Date(endTime))) {
+			setError("minDate");
+		} else {
+			setError(null);
 		}
-		default: {
-		  return "";
-		}
-	  }
-	}, [error]);
-	
+	};
+
+	const handleEndTimeChange = (e: any) => {
+		const newEndTime = e;
+		handleTimeStampChange(newEndTime, "endTime");
+		validateDateRange(filterValues.startTime, newEndTime);
+	};
+
+	const errorMessage = error === "minDate" ? "Selezionare una data/ora successiva a quella di partenza" : "";
+
+	const isSameDay = (date1: Date, date2: Date) => (
+		date1.getFullYear() === date2.getFullYear() &&
+      	date1.getMonth() === date2.getMonth() &&
+      	date1.getDate() === date2.getDate()
+	);
+
 	return (
 		<React.Fragment>
 			<Grid item xs={4}>
@@ -35,7 +47,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					label="ID Transazione"
 					variant="outlined"
 					value={filterValues.transactionId}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					size="small"
 					fullWidth
 				/>
@@ -47,10 +59,11 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="transactionStatus"
 					label="Stato"
 					value={filterValues.transactionStatus}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					variant="outlined"
 					size="small"
-					fullWidth />
+					fullWidth
+				/>
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
@@ -59,7 +72,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="functionType"
 					label="Funzione"
 					value={filterValues.functionType}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					variant="outlined"
 					fullWidth
 					size="small"
@@ -72,7 +85,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="acquirerId"
 					label="ID Banca"
 					value={filterValues.acquirerId}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					variant="outlined"
 					fullWidth
 					size="small"
@@ -85,7 +98,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="branchId"
 					label="ID Filiale"
 					value={filterValues.branchId}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					variant="outlined"
 					fullWidth
 					size="small"
@@ -98,47 +111,58 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					name="terminalId"
 					label="ID Terminale"
 					value={filterValues.terminalId}
-					onChange={(e) => handleChange(e)}
+					onChange={handleChange}
 					variant="outlined"
 					fullWidth
 					size="small"
 				/>
 			</Grid>
 			<Grid item xs={4}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
 					<DateTimePicker
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
 						label="A partire da"
 						name="startTime"
-						value={filterValues.startTime? new Date(filterValues.startTime) : null}
-						onChange={(e) => handleTimeStampChange(e, "startTime")}
+						value={filterValues.startTime ? new Date(filterValues.startTime) : null}
+						onChange={(e) => {
+							handleTimeStampChange(e, "startTime");
+							validateDateRange(e, filterValues.endTime);
+						}}
+						format="dd/MM/yyyy HH:mm:ss"
 						slotProps={{
 							field: {
-						  readOnly: true
+								readOnly: true
 							},
 							textField: { fullWidth: true }
-					  }}
+						}}
 					/>
 				</LocalizationProvider>
 			</Grid>
 			<Grid item xs={4}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
 					<DateTimePicker
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
 						label="Fino a"
-						value={filterValues.endTime? new Date(filterValues.endTime) : null}
-						onChange={(e) => handleTimeStampChange(e, "endTime")}
-						minDateTime={filterValues.startTime? new Date(filterValues.startTime) : undefined}
-						onError={(newError) => setError(newError)}
+						value={filterValues.endTime ? new Date(filterValues.endTime) : null}
+						onChange={handleEndTimeChange}
+						minDateTime={
+							filterValues.startTime && filterValues.endTime && isSameDay(new Date(filterValues.startTime), new Date(filterValues.endTime))
+								? new Date(new Date(filterValues.startTime).getTime() + 5000)
+								: filterValues.startTime
+									? new Date(filterValues.startTime)
+									: undefined
+						}
+						format="dd/MM/yyyy HH:mm:ss"
 						slotProps={{
 							field: {
-						  readOnly: true
+								readOnly: true
 							},
 							textField: {
 								fullWidth: true,
-								helperText: errorMessage
+								helperText: errorMessage,
+								error: !!errorMessage
 							}
-					  }}
+						}}
 					/>
 				</LocalizationProvider>
 			</Grid>

@@ -1,10 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import FilterBar from "../FilterBar";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS, TRANSACTIONS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import TransactionsFilterComponent from "../TransactionsFilterComponent";
+import { act } from "react-dom/test-utils";
+import userEvent from "@testing-library/user-event";
 
 beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation(() => { });
@@ -456,6 +459,142 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Cancella Filtri"));
         fireEvent.click(screen.getByText("Filtra"));
     });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T10:00:05.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    
+        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
+    
+        expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
+    });
+
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-02T10:00:00.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    
+        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-02T10:00:00.000Z") } });
+    
+        expect(screen.getByLabelText("Fino a")).toHaveValue("02/08/2024 12:00:00");
+    });
+    
+    test("Test validateDateRange correctly handles valid dates", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T11:00:00.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
+    
+        expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
+    });
+
+    // test("Test setting error when endTime is before startTime", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: new Date("2024-08-03T10:00:00.000Z"),
+    //         endTime: null
+    //     };
+    
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
+    
+    //     // Verifica che venga mostrato l'errore e quindi il setError è stato chiamato
+    //     expect(screen.getByText("Selezionare una data/ora successiva a quella di partenza")).toBeInTheDocument();
+    // });
+    
+    test("Test validateDateRange correctly handles valid dates", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T11:00:00.000Z") // endTime is after startTime
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
+    
+        // Verifica che non venga mostrato l'errore (validateDateRange non imposta error)
+        expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
+    });
+    
+    // test("Test minDateTime for endTime is set correctly", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
+    //         endTime: null // No endTime set initially
+    //     };
+    
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+    //     const endTimePicker = screen.getByLabelText("Fino a");
+    
+    //     // Verifica che minDateTime sia impostato correttamente a startTime + 5 secondi
+    //     const minDateTime = new Date("2024-08-01T10:00:05.000Z"); // 5 secondi dopo startTime
+    
+    //     fireEvent.click(endTimePicker);
+    
+    //     // Non possiamo direttamente verificare minDateTime nell'interfaccia utente, ma possiamo controllare che il valore di endTime sia corretto.
+    //     fireEvent.change(endTimePicker, { target: { value: minDateTime } });
+    
+    //     expect(endTimePicker).toHaveValue("01/08/2024 10:00:05");
+    // });
+    
 
 });
 

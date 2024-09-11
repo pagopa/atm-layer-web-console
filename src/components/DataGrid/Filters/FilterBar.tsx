@@ -109,16 +109,47 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		filterBpmnWithoutStatus(e);
 	};
 
-	const handleTimeStampChange = (e:Date, key: string) => {
-		const timeStampValue = new Date(e.getTime() - (e.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace("T", " ");
-		const timeStampQuery = `{"Timestamp":"${timeStampValue}"}`;
-		console.log("setting timeStampValue: "+timeStampQuery);
-		const updatedFilterValues = { ...filterValues, [key]: timeStampValue};
-
+	const handleTimeStampChange = (e: Date, key: string) => {
+		const timeStampValue = new Date(e.getTime() - e.getTimezoneOffset() * 60000)
+			.toISOString()
+			.substr(0, 19)
+			.replace("T", " ");
+	
+		if (key === "endTime" && filterValues.startTime) {
+			const startTime = new Date(filterValues.startTime);
+	
+			const isSameDay =
+				startTime.getFullYear() === e.getFullYear() &&
+				startTime.getMonth() === e.getMonth() &&
+				startTime.getDate() === e.getDate();
+	
+			if (isSameDay) {
+				const endTimeWithBuffer = new Date(startTime.getTime() + 5000);
+	
+				if (e <= startTime) {
+					console.log(
+						"endTime uguale o precedente a startTime, impostando endTime 5 secondi dopo startTime"
+					);
+					// eslint-disable-next-line no-param-reassign
+					e = endTimeWithBuffer;
+				}
+			}
+		}
+	
+		const adjustedTimeStampValue = new Date(e.getTime() - e.getTimezoneOffset() * 60000)
+			.toISOString()
+			.substr(0, 19)
+			.replace("T", " ");
+	
+		const timeStampQuery = `{"Timestamp":"${adjustedTimeStampValue}"}`;
+		console.log("setting timeStampValue: " + timeStampQuery);
+	
+		const updatedFilterValues = { ...filterValues, [key]: adjustedTimeStampValue };
+	
 		setFilterValues(updatedFilterValues);
-
+	
 		if (submitted) {
-			const newErrors = clearErrorsIfCorrected(key, timeStampValue, updatedFilterValues);
+			const newErrors = clearErrorsIfCorrected(key, adjustedTimeStampValue, updatedFilterValues);
 			setErrors(newErrors);
 		}
 	};
