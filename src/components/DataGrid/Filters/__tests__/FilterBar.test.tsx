@@ -13,6 +13,8 @@ beforeEach(() => {
 
 afterEach(() => {
     mockContextValue.abortController.abort();
+    jest.clearAllTimers();
+    jest.clearAllMocks();
 });
 
 const mockContextValue = {
