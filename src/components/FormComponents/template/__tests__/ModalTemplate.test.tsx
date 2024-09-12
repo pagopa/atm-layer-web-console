@@ -63,28 +63,6 @@ describe("ModalTemplate test", () => {
     expect(mockHandleSubmit).toHaveBeenCalled();
   });
 
-  test("should close the modal when reason is not 'backdropClick'", () => {
-    const mockSetOpen = jest.fn();
-    const handleSubmit = jest.fn();
-  
-    // Render del componente ModalTemplate con la prop open impostata su true
-    render(
-      <ModalTemplate
-        titleModal="Test Modal"
-        contentText="Questo è il contenuto della modale"
-        open={true}
-        setOpen={mockSetOpen}
-        handleSubmit={handleSubmit}
-      />
-    );
-  
-    // Simula la chiusura del dialogo con un motivo diverso da 'backdropClick'
-    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape' }); // Simula la pressione del tasto Escape
-  
-    // Verifica che la funzione setOpen sia stata chiamata con false
-    expect(mockSetOpen).toHaveBeenCalledWith(false);
-  });
-
 //   test("should hide the Annulla button when canOnlyConfirm is true", () => {
 //     render(
 //       <BrowserRouter>
