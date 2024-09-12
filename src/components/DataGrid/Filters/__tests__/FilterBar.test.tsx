@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import FilterBar from "../FilterBar";
 import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE, BANKS, USERS, TRANSACTIONS } from "../../../../commons/constants";
 import { Ctx } from "../../../../DataContext";
@@ -12,6 +12,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+    cleanup();
     mockContextValue.abortController.abort();
     jest.clearAllTimers();
     jest.clearAllMocks();
