@@ -408,45 +408,45 @@ describe("FilterBar test", () => {
         fireEvent.change(terminalId, { target: { value: "98765" } });
     });
 
-    // test("Test FilterBar with TRANSACTIONS and Filter with startTime", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: null,
-    //         endTime: null
-    //     };
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: null,
+            endTime: null
+        };
 
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
 
-    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-    //     fireEvent.change(startTime, { target: { value: new Date() } });
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        fireEvent.change(startTime, { target: { value: new Date() } });
 
-    //     expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
-    // });
+        // expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
+    });
 
-    // test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: null,
-    //         endTime: null
-    //     };
+    test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: null,
+            endTime: null
+        };
 
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
 
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
 
-    //     expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
-    // });
+        // expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
+    });
 
     test("Test FilterBar with TRANSACTIONS and Click on Cancella Filtri and Filtra", () => {
         const emptyFilterValues = {
@@ -463,7 +463,8 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Filtra"));
     });
 
-        test("TEST JEST WORKERS", () => {
+
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
         const emptyFilterValues = {
             transactionId: "",
             transactionStatus: "",
@@ -486,203 +487,179 @@ describe("FilterBar test", () => {
         // expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
     });
 
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-02T10:00:00.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    
+        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-02T10:00:00.000Z") } });
+    
+        // expect(screen.getByLabelText("Fino a")).toHaveValue("02/08/2024 12:00:00");
+    });
+    
+    test("Test validateDateRange correctly handles valid dates", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T11:00:00.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
+    
+        // expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
+    });
 
-    // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
-    //         endTime: new Date("2024-08-01T10:00:05.000Z")
-    //     };
+    test("Test setting error when endTime is before startTime", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: null,
+            endTime: new Date("2024-08-01T10:00:05.000Z")
+        };
     
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
-    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
     
-    //     fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
-    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
+        const calendarButtons = screen.getAllByTestId('CalendarIcon');
     
-    //     expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
-    // });
+        expect(calendarButtons).toHaveLength(2);
 
-    // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
-    //         endTime: new Date("2024-08-02T10:00:00.000Z")
-    //     };
+        console.log(calendarButtons.length, "calendarButtons");
     
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        // fireEvent.click(calendarButtons[1]);
+        // const dayButtonsEnd = await screen.findAllByRole("gridcell");
+        // fireEvent.click(dayButtonsEnd[10]);
     
-    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.click(calendarButtons[0]);
+        const dayButtonsStart = screen.getAllByRole("gridcell");
+        fireEvent.click(dayButtonsStart[10]);
+        // const okButton = screen.getAllByText("OK");
+        // console.log(okButton.length, "okbuttons");
+        // fireEvent.click(okButton[0]);
     
-    //     fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
-    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-02T10:00:00.000Z") } });
+        // Aggiungi un'attesa per assicurarti che il valore venga aggiornato
     
-    //     expect(screen.getByLabelText("Fino a")).toHaveValue("02/08/2024 12:00:00");
-    // });
-    
-    // test("Test validateDateRange correctly handles valid dates", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
-    //         endTime: new Date("2024-08-01T11:00:00.000Z")
-    //     };
-    
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
-    
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
-    
-    //     expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
-    // });
+        fireEvent.change(startTime, { target: { value: '2024-09-03 00:00:00' } });
 
-    // test("Test setting error when endTime is before startTime", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: null,
-    //         endTime: new Date("2024-08-01T10:00:05.000Z")
-    //     };
+        console.log(endTime.value, "end");
+        console.log(startTime.value, "start");
     
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        const filterButton = screen.getByText("Filtra");
+        fireEvent.click(filterButton);
     
-    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-    
-    //     const calendarButtons = screen.getAllByTestId('CalendarIcon');
-    
-    //     expect(calendarButtons).toHaveLength(2);
+        // await waitFor(() => {
+        //     expect(startTime.value).not.toBe('');
+        //     expect(endTime.value).not.toBe('');
+        // });
 
-    //     console.log(calendarButtons.length, "calendarButtons");
+        // const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
+        // expect(errorMessage).toBeInTheDocument();
+    });
     
-    //     // fireEvent.click(calendarButtons[1]);
-    //     // const dayButtonsEnd = await screen.findAllByRole("gridcell");
-    //     // fireEvent.click(dayButtonsEnd[10]);
+    test("Test validateDateRange correctly handles valid dates", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-09-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T11:00:00.000Z")
+        };
     
-    //     fireEvent.click(calendarButtons[0]);
-    //     const dayButtonsStart = screen.getAllByRole("gridcell");
-    //     fireEvent.click(dayButtonsStart[10]);
-    //     // const okButton = screen.getAllByText("OK");
-    //     // console.log(okButton.length, "okbuttons");
-    //     // fireEvent.click(okButton[0]);
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
-    //     // Aggiungi un'attesa per assicurarti che il valore venga aggiornato
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
     
-    //     fireEvent.change(startTime, { target: { value: '2024-09-03 00:00:00' } });
+        // expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
+    });
+    
+    test("Test minDateTime for endTime is set correctly", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-09-05T00:00:00.000Z"),
+            endTime: null // No endTime set initially
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    
+        const calendarButtons = screen.getAllByTestId('CalendarIcon');
+    
+        expect(calendarButtons).toHaveLength(2);
 
-    //     console.log(endTime.value, "end");
-    //     console.log(startTime.value, "start");
+        console.log(calendarButtons.length, "calendarButtons");
     
-    //     const filterButton = screen.getByText("Filtra");
-    //     fireEvent.click(filterButton);
+        fireEvent.click(calendarButtons[1]);
+        const dayButtonsEnd = screen.getAllByRole("gridcell");
+        fireEvent.click(dayButtonsEnd[10]);
     
-    //     // await waitFor(() => {
-    //     //     expect(startTime.value).not.toBe('');
-    //     //     expect(endTime.value).not.toBe('');
-    //     // });
+        // fireEvent.click(calendarButtons[0]);
+        // const dayButtonsStart = await screen.findAllByRole("gridcell");
+        // fireEvent.click(dayButtonsStart[10]);
+        // const okButton = await screen.findAllByText("OK");
+        // console.log(okButton.length, "okbuttons");
+        // fireEvent.click(okButton[0]);
+    
+        // Aggiungi un'attesa per assicurarti che il valore venga aggiornato
 
-    //     const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
-    //     expect(errorMessage).toBeInTheDocument();
-    // });
+        console.log(endTime.value, "end");
+        console.log(startTime.value, "start");
     
-    // test("Test validateDateRange correctly handles valid dates", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: new Date("2024-09-01T10:00:00.000Z"),
-    //         endTime: new Date("2024-08-01T11:00:00.000Z")
-    //     };
+        const filterButton = screen.getByText("Filtra");
+        fireEvent.click(filterButton);
     
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+        // await waitFor(() => {
+        //     expect(startTime.value).not.toBe('');
+        //     expect(endTime.value).not.toBe('');
+        // });
     
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
-    
-    //     expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
-    // });
-    
-    // test("Test minDateTime for endTime is set correctly", () => {
-    //     const emptyFilterValues = {
-    //         transactionId: "",
-    //         transactionStatus: "",
-    //         functionType: "",
-    //         acquirerId: "",
-    //         branchId: "",
-    //         terminalId: "",
-    //         startTime: new Date("2024-09-05T00:00:00.000Z"),
-    //         endTime: null // No endTime set initially
-    //     };
-    
-    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
-    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-    
-    //     const calendarButtons = screen.getAllByTestId('CalendarIcon');
-    
-    //     expect(calendarButtons).toHaveLength(2);
+        const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
+        // expect(errorMessage).toBeInTheDocument();
 
-    //     console.log(calendarButtons.length, "calendarButtons");
-    
-    //     fireEvent.click(calendarButtons[1]);
-    //     const dayButtonsEnd = screen.getAllByRole("gridcell");
-    //     fireEvent.click(dayButtonsEnd[10]);
-    
-    //     // fireEvent.click(calendarButtons[0]);
-    //     // const dayButtonsStart = await screen.findAllByRole("gridcell");
-    //     // fireEvent.click(dayButtonsStart[10]);
-    //     // const okButton = await screen.findAllByText("OK");
-    //     // console.log(okButton.length, "okbuttons");
-    //     // fireEvent.click(okButton[0]);
-    
-    //     // Aggiungi un'attesa per assicurarti che il valore venga aggiornato
+        fireEvent.click(calendarButtons[1]);
+        const dayButtonsEnd2 = screen.getAllByRole("gridcell");
+        fireEvent.click(dayButtonsEnd2[20]);
 
-    //     console.log(endTime.value, "end");
-    //     console.log(startTime.value, "start");
-    
-    //     const filterButton = screen.getByText("Filtra");
-    //     fireEvent.click(filterButton);
-    
-    //     // await waitFor(() => {
-    //     //     expect(startTime.value).not.toBe('');
-    //     //     expect(endTime.value).not.toBe('');
-    //     // });
-    
-    //     const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
-    //     expect(errorMessage).toBeInTheDocument();
+        fireEvent.click(filterButton);
 
-    //     fireEvent.click(calendarButtons[1]);
-    //     const dayButtonsEnd2 = screen.getAllByRole("gridcell");
-    //     fireEvent.click(dayButtonsEnd2[20]);
-
-    //     fireEvent.click(filterButton);
-
-    //     expect(errorMessage).not.toBeInTheDocument();
-    // });
+        // expect(errorMessage).not.toBeInTheDocument();
+    });
     
 
 });
