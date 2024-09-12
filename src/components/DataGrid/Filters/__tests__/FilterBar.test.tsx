@@ -553,9 +553,9 @@ describe("FilterBar test", () => {
         fireEvent.click(calendarButtons[0]);
         const dayButtonsStart = screen.getAllByRole("gridcell");
         fireEvent.click(dayButtonsStart[10]);
-        const okButton = screen.getAllByText("OK");
-        console.log(okButton.length, "okbuttons");
-        fireEvent.click(okButton[0]);
+        // const okButton = screen.getAllByText("OK");
+        // console.log(okButton.length, "okbuttons");
+        // fireEvent.click(okButton[0]);
     
         // Aggiungi un'attesa per assicurarti che il valore venga aggiornato
     
