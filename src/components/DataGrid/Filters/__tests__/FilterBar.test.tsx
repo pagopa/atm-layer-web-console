@@ -463,7 +463,7 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Filtra"));
     });
 
-    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
+    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", async () => {
         const emptyFilterValues = {
             transactionId: "",
             transactionStatus: "",
@@ -483,7 +483,7 @@ describe("FilterBar test", () => {
         fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
         fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
     
-        expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
+        await waitFor(() => expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05"));
     });
 
     // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
