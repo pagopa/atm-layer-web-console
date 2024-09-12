@@ -3,5 +3,6 @@ export type BankRequest = {
 		denomination: string;
 		limit: string;
 		period: string | null;
+		burstLimit: string;
 		rateLimit: string;
 };

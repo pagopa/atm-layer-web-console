@@ -38,6 +38,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 		denomination: "",
 		limit: "",
 		period: null,
+		burstLimit: "",
 		rateLimit: ""
 	};
 
@@ -61,12 +62,15 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 	};
 
 
+	// eslint-disable-next-line complexity
 	const validateForm = (isCreate: boolean) => {
 		const newErrors = {
 			acquirerId: formData.acquirerId ? "" : "Campo obbligatorio",
 			denomination: formData.denomination ? "" : "Campo obbligatorio",
 			limit: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
 			period: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
+			burstLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate",
+			rateLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
 		};
 	
 		setErrors(newErrors);
@@ -92,6 +96,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 				denomination: recordParams.denomination,
 				limit: recordParams.limit,
 				period: translatePeriodToFrontend(recordParams.period),
+				burstLimit: recordParams.burstLimit,
 				rateLimit: recordParams.rateLimit,
 			});
 			setErrors(initialValues);
@@ -133,6 +138,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					denomination: formData.denomination,
 					limit: formData.limit,
 					period: formData.period !== "" ? translatedPeriod : null,
+					burstLimit: formData.burstLimit,
 					rateLimit: formData.rateLimit,
 				};
 				try {
@@ -165,6 +171,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					denomination: formData.denomination,
 					limit: formData.limit,
 					period: translatePeriodToBackend(formData.period),
+					burstLimit: formData.burstLimit,
 					rateLimit: formData.rateLimit,
 				};
 				try {
@@ -277,8 +284,25 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 				)
                 				)}
                 			</TextField>
+                	</Grid>               	
                 	</Grid>
-                	</Grid>
+                	<TextField
+                			fullWidth
+                			id="burstLimit"
+                			name="burstLimit"
+                			label={"Burst"}
+                			placeholder={"12345"}
+                			size="small"
+                			value={ formData.burstLimit }
+                			onChange={handleChange}
+                			onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+								&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+							&& !(/^[0-9]$/i.test(e.key))) {
+						  e.preventDefault();
+                		}}}
+                			error={Boolean(errors.burstLimit)}
+                			helperText={errors.burstLimit}
+                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
                 	<Grid xs={5} item my={1}>
                 		<TextField
                 			fullWidth

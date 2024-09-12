@@ -68,6 +68,8 @@ describe("ModalBank Test", () => {
 
         fireEvent.change(screen.getByLabelText("ID Banca"), { target: { value: "newAcquirerId" } });
         fireEvent.change(screen.getByLabelText("Nome Banca"), { target: { value: "newDenomination" } });
+        fireEvent.change(screen.getByLabelText("Burst"), { target: { value: "123" } });
+        fireEvent.change(screen.getByLabelText("Rate"), { target: { value: "123" } });
         fireEvent.click(screen.getByText("Conferma"));
 
         await act(async () => {
@@ -281,18 +283,21 @@ describe("ModalBank Test", () => {
 
         expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
         expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Burst")).toBeInTheDocument();
         expect(screen.getByLabelText("Rate")).toBeInTheDocument();
 
         renderModalBank(UPDATE_BANK);
 
         expect(screen.getByLabelText("ID Banca")).toBeInTheDocument();
         expect(screen.getByLabelText("Nome Banca")).toBeInTheDocument();
+        expect(screen.getByLabelText("Burst")).toBeInTheDocument();
         expect(screen.getByLabelText("Rate")).toBeInTheDocument();
     });
 
     test("Test onChange only numbers allowed in numeric fields", () => {
         renderModalBank(CREATE_BANK);
         fireEvent.keyDown(screen.getByLabelText("Quota"), {key: 'Z', code: 'KeyZ'});
+        fireEvent.keyDown(screen.getByLabelText("Burst"), {key: 'Z', code: 'KeyZ'});
         fireEvent.keyDown(screen.getByLabelText("Rate"), {key: 'Z', code: 'KeyZ'});
     });
 
