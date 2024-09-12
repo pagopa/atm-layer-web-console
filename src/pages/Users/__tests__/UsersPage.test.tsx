@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import UsersPage from '../UsersPage';
 import { Ctx } from '../../../DataContext';
@@ -114,6 +114,13 @@ describe('UsersPage test', () => {
         expect(screen.getByText("Utenti e autorizzazioni")).toBeInTheDocument();
 
         expect(screen.queryByText("Update primo utente")).toBeNull();
+
+        fireEvent.click(screen.getByText("Crea Nuovo"));
+        await waitFor(() => {
+            expect(screen.getByText("Creazione nuovo utente")).toBeInTheDocument();
+        });
+
+        fireEvent.click(screen.getByText("Annulla"));
     });
 
     // test('renders UsersPage and open first user modal', async () => {

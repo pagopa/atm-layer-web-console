@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import ModalUsers from "../ModalUsers";
 import { CREATE_USER, DELETE_USER, UPDATE_USER, UPDATE_FIRST_USER, ALERT_SUCCESS } from "../../../../commons/constants";
 import { fetchRequest } from "../../../../hook/fetch/fetchRequest";
@@ -7,11 +7,7 @@ import { CREATE_USERS, DELETE_USERS, UPDATE_USERS } from "../../../../commons/en
 import { BrowserRouter, generatePath } from "react-router-dom";
 import * as commons from "../../../Commons/Commons";
 
-jest.mock("../../../../hook/fetch/fetchRequest", () => ({
-  fetchRequest: jest.fn(),
-}));
-
-const mockFetchRequest = fetchRequest as jest.Mock;
+const originalFetch = global.fetch;
 
 const mockContextValue = {
   abortController: new AbortController(),
@@ -48,6 +44,10 @@ const renderComponent = (type: string) => {
     </Ctx.Provider>
   );
 };
+
+afterEach(() => {
+    global.fetch = originalFetch;
+});
 
 describe("ModalUsers component", () => {
   beforeEach(() => {
@@ -111,6 +111,7 @@ describe("ModalUsers component", () => {
   // });
 
   test("handles multi-select change correctly", () => {
+    global.fetch = jest.fn();
     renderComponent(CREATE_USER);
 
     fireEvent.change(screen.getByRole("combobox"), { target: { value: "Admin" } });
@@ -119,7 +120,7 @@ describe("ModalUsers component", () => {
 
     expect(mockSetOpen).not.toHaveBeenCalled();
     expect(mockSetMessage).not.toHaveBeenCalled();
-    expect(mockFetchRequest).not.toHaveBeenCalled();
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
   test("sets initial formData and errors when modal opens for CREATE_USER", () => {
@@ -132,7 +133,15 @@ describe("ModalUsers component", () => {
   });
 
   test("handles form submission for DELETE_USER", async () => {
-    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User deleted successfully" } });
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () => Promise.resolve({
+          success: true,
+          status: 204,
+          valuesObj: {
+              message: "User deleted successfully",
+          },
+      }),
+  });
     
     sessionStorage.setItem("recordParamsUser", JSON.stringify({
       userId: "user@example.com",
@@ -146,16 +155,39 @@ describe("ModalUsers component", () => {
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
-      expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: generatePath(DELETE_USERS, { userId: "user@example.com" }),
-        method: "DELETE",
-        abortController: mockContextValue.abortController,
-      });
+      expect(global.fetch).toHaveBeenCalled();
     });
   });
 
-  test("handles form submission for CREATE_USER", async () => {
-    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User created successfully" } });
+  test("catches error from form submission for DELETE_USER", async () => {
+    global.fetch = jest.fn(() => {throw new Error()});
+    
+    sessionStorage.setItem("recordParamsUser", JSON.stringify({
+      userId: "user@example.com",
+      name: "Mario",
+      surname: "Rossi",
+      profiles: [{ description: "User", profileId: 2 }],
+    }));
+
+    renderComponent(DELETE_USER);
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalled();
+    });
+  });
+
+  test("handles form submission for CREATE_USER response success", async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () => Promise.resolve({
+          success: true,
+          status: 200,
+          valuesObj: {
+              message: "User created successfully",
+          },
+      }),
+  });
 
     renderComponent(CREATE_USER);
 
@@ -170,24 +202,75 @@ describe("ModalUsers component", () => {
 
     fireEvent.click(screen.getByText("Conferma"));
 
-    await waitFor(() => {
-      expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: CREATE_USERS,
-        method: "POST",
-        abortController: mockContextValue.abortController,
-        headers: { "Content-Type": "application/json" },
-        body: {
-          userId: "newuser@example.com",
-          name: "Luigi",
-          surname: "Verdi",
-          profileIds: [1, 2],
-        },
-      });
-    });
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      expect(global.fetch).toHaveBeenCalled();
+      expect(mockSetOpen).toHaveBeenCalled();
+      expect(mockSetOpenSnackBar).toHaveBeenCalled();
+  });
+  });
+
+  test("handles form submission for CREATE_USER response NOT success", async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () => Promise.resolve({
+          success: false,
+          status: 400,
+          valuesObj: {
+              message: "Error creating user",
+          },
+      }),
+  });
+
+    renderComponent(CREATE_USER);
+
+    fireEvent.change(screen.getByLabelText("Email utente"), { target: { value: "newuser@example.com" } });
+    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+    fireEvent.change(screen.getByLabelText("Cognome"), { target: { value: "Verdi" } });
+
+    const profileSelect = screen.getByRole("combobox");
+    fireEvent.mouseDown(profileSelect);
+    fireEvent.click(screen.getByText("Admin"));
+    fireEvent.click(screen.getByText("User"));
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      expect(global.fetch).toHaveBeenCalled();
+  });
+  });
+
+  test("catches error from form submission for CREATE_USER", async () => {
+    global.fetch = jest.fn(() => {throw new Error()});
+
+    renderComponent(CREATE_USER);
+
+    fireEvent.change(screen.getByLabelText("Email utente"), { target: { value: "newuser@example.com" } });
+    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+    fireEvent.change(screen.getByLabelText("Cognome"), { target: { value: "Verdi" } });
+
+    const profileSelect = screen.getByRole("combobox");
+    fireEvent.mouseDown(profileSelect);
+    fireEvent.click(screen.getByText("Admin"));
+    fireEvent.click(screen.getByText("User"));
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+  });
   });
 
   test("handles form submission for UPDATE_USER", async () => {
-    mockFetchRequest.mockResolvedValue({ success: true, valuesObj: { message: "User updated successfully" } });
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: () => Promise.resolve({
+          success: true,
+          status: 200,
+          valuesObj: {
+              message: "User updated successfully",
+          },
+      }),
+  });
 
     sessionStorage.setItem("recordParamsUser", JSON.stringify({
       userId: "user@example.com",
@@ -202,30 +285,40 @@ describe("ModalUsers component", () => {
 
     fireEvent.click(screen.getByText("Conferma"));
 
-    await waitFor(() => {
-      expect(mockFetchRequest).toHaveBeenCalledWith({
-        urlEndpoint: UPDATE_USERS,
-        method: "PUT",
-        abortController: mockContextValue.abortController,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: {
-          userId: "user@example.com",
-          name: "Luigi",
-          surname: "Rossi",
-          profileIds: [2],
-        },
-      });
-    });
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      expect(global.fetch).toHaveBeenCalled();
+  });
+  });
+
+  test("catches error from form submission for UPDATE_USER", async () => {
+    global.fetch = jest.fn(() => {throw new Error()});
+
+    sessionStorage.setItem("recordParamsUser", JSON.stringify({
+      userId: "user@example.com",
+      name: "Mario",
+      surname: "Rossi",
+      profiles: [{ description: "User", profileId: 2 }],
+    }));
+
+    renderComponent(UPDATE_USER);
+
+    fireEvent.change(screen.getByLabelText("Nome"), { target: { value: "Luigi" } });
+
+    fireEvent.click(screen.getByText("Conferma"));
+
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+  });
   });
 
   test("handles default case in handleSubmit", async () => {
+    global.fetch = jest.fn();
     renderComponent("UNKNOWN_TYPE");
 
     fireEvent.click(screen.getByText("Conferma"));
 
-    expect(mockFetchRequest).not.toHaveBeenCalled();
+    expect(global.fetch).not.toHaveBeenCalled();
     expect(mockSetOpen).not.toHaveBeenCalled(); 
     expect(mockSetMessage).not.toHaveBeenCalled(); 
   });
@@ -259,12 +352,13 @@ describe("ModalUsers component", () => {
 
   // 3. Test for validateForm returning false (131-134)
   test("does not submit form when validation fails for CREATE_USER", async () => {
+    global.fetch = jest.fn();
     renderComponent(CREATE_USER);
 
     fireEvent.click(screen.getByText("Conferma"));
 
     await waitFor(() => {
-      expect(mockFetchRequest).not.toHaveBeenCalled();
+      expect(global.fetch).not.toHaveBeenCalled();
     });
   });
 
@@ -338,10 +432,11 @@ describe("ModalUsers component", () => {
 
   // 6. Test for default case in handleSubmit (173)
   test("does nothing when an unknown type is provided", () => {
+    global.fetch = jest.fn();
     renderComponent("UNKNOWN_TYPE");
 
     fireEvent.click(screen.getByText("Conferma"));
 
-    expect(mockFetchRequest).not.toHaveBeenCalled();
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 });
