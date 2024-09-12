@@ -11,6 +11,10 @@ beforeEach(() => {
     jest.spyOn(console, "warn").mockImplementation(() => { });
 });
 
+afterEach(() => {
+    mockContextValue.abortController.abort();
+});
+
 const mockContextValue = {
     loggedUserInfo: {
         userId: 'mario.rossi@pagopa.com',
