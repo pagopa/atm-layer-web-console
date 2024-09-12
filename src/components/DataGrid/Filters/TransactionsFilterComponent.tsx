@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, TextField } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { isAfter } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { ACQUIRER_ID_LENGTH, MAX_LENGHT_LARGE } from "../../../commons/constants";
 
@@ -10,17 +9,32 @@ type Props = {
   filterValues: any;
   handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleTimeStampChange: any;
+  clearError: boolean;
+  setClearError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeStampChange }: Props) => {
+const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeStampChange, clearError, setClearError }: Props) => {
 	const [error, setError] = React.useState<string | null>(null);
 
 	const validateDateRange = (startTime: Date | null, endTime: Date | null) => {
-		if (startTime && endTime && isAfter(new Date(startTime), new Date(endTime))) {
+		if (!startTime || !endTime) {
+			return;
+		}
+
+		const startTimeInMillis = new Date(startTime).getTime();
+		const endTimeInMillis = new Date(endTime).getTime();
+
+		if (startTimeInMillis - endTimeInMillis > 0) {
 			setError("minDate");
 		} else {
 			setError(null);
 		}
+	};
+
+	const handleStartTimeChange = (e: any) => {
+		const newStartTime = e;
+		handleTimeStampChange(newStartTime, "startTime");
+		validateDateRange(newStartTime, filterValues.endTime);
 	};
 
 	const handleEndTimeChange = (e: any) => {
@@ -29,12 +43,19 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 		validateDateRange(filterValues.startTime, newEndTime);
 	};
 
+	React.useEffect(() => {
+		if (clearError) {
+			setError(null);
+			setClearError(false);
+		}
+	}, [clearError]);
+
 	const errorMessage = error === "minDate" ? "Selezionare una data/ora successiva a quella di partenza" : "";
 
 	const isSameDay = (date1: Date, date2: Date) => (
 		date1.getFullYear() === date2.getFullYear() &&
-      	date1.getMonth() === date2.getMonth() &&
-      	date1.getDate() === date2.getDate()
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
 	);
 
 	return (
@@ -124,10 +145,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 						label="A partire da"
 						name="startTime"
 						value={filterValues.startTime ? new Date(filterValues.startTime) : null}
-						onChange={(e) => {
-							handleTimeStampChange(e, "startTime");
-							validateDateRange(e, filterValues.endTime);
-						}}
+						onChange={handleStartTimeChange}
 						format="dd/MM/yyyy HH:mm:ss"
 						slotProps={{
 							field: {

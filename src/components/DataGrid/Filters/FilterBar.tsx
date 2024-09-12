@@ -31,6 +31,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	const [errors, setErrors] = useState<any>({});
 	const [submitted, setSubmitted] = useState(false);
 	const { regexTestField } = checks();
+	const [clearError, setClearError] = useState<boolean>(false);
 
 	const showCreateButton :boolean = driver !== TRANSACTIONS;
 
@@ -81,6 +82,10 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			if (!updatedFilterValues.rateMin || !updatedFilterValues.rateMax || parseInt(updatedFilterValues.rateMax, 10) >= parseInt(updatedFilterValues.rateMin, 10)) {
 				delete newErrors.rateMin;
 				delete newErrors.rateMax;
+			}
+		} else if ( name === "startTime" || name === "endTime") {
+			if (updatedFilterValues.startTime > updatedFilterValues.endTime) {
+				delete newErrors.endTime;
 			}
 		}
 		return newErrors;
@@ -173,6 +178,13 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		getAllList(undefined, 0);
 		setErrors({});
 		setSubmitted(false);
+		setClearError(!clearError);
+
+		console.error(clearError);
+	};
+
+	const handleResetError = () => {
+		setClearError(false);
 	};
 
 	const filterType = () => {
@@ -184,7 +196,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case TRANSACTIONS:
-			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} handleTimeStampChange={handleTimeStampChange}/>;
+			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} handleTimeStampChange={handleTimeStampChange} clearError={clearError} setClearError={setClearError}/>;
 		case BANKS:
 			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
 		case USERS:
