@@ -138,7 +138,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					size="small"
 				/>
 			</Grid>
-			{/* <Grid item xs={4}>
+			<Grid item xs={4}>
 				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
 					<DateTimePicker
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
@@ -184,7 +184,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 					/>
 				</LocalizationProvider>
 			</Grid>
-			<Grid item xs={4} /> */}
+			<Grid item xs={4} />
 		</React.Fragment>
 	);
 };
