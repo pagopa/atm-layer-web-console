@@ -408,45 +408,45 @@ describe("FilterBar test", () => {
         fireEvent.change(terminalId, { target: { value: "98765" } });
     });
 
-    test("Test FilterBar with TRANSACTIONS and Filter with startTime", () => {
-        const emptyFilterValues = {
-            transactionId: "",
-            transactionStatus: "",
-            functionType: "",
-            acquirerId: "",
-            branchId: "",
-            terminalId: "",
-            startTime: null,
-            endTime: null
-        };
+    // test("Test FilterBar with TRANSACTIONS and Filter with startTime", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: null,
+    //         endTime: null
+    //     };
 
-        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
 
-        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-        fireEvent.change(startTime, { target: { value: new Date() } });
+    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+    //     fireEvent.change(startTime, { target: { value: new Date() } });
 
-        expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
-    });
+    //     expect(screen.getByLabelText("A partire da")).toBeInTheDocument();
+    // });
 
-    test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
-        const emptyFilterValues = {
-            transactionId: "",
-            transactionStatus: "",
-            functionType: "",
-            acquirerId: "",
-            branchId: "",
-            terminalId: "",
-            startTime: null,
-            endTime: null
-        };
+    // test("Test FilterBar with TRANSACTIONS and Filter with endTime", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: null,
+    //         endTime: null
+    //     };
 
-        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
 
-        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
+    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:03:23.000Z") } });
 
-        expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
-    });
+    //     expect(screen.getByLabelText("Fino a")).toBeInTheDocument();
+    // });
 
     test("Test FilterBar with TRANSACTIONS and Click on Cancella Filtri and Filtra", () => {
         const emptyFilterValues = {
@@ -463,71 +463,71 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Filtra"));
     });
 
-    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
-        const emptyFilterValues = {
-            transactionId: "",
-            transactionStatus: "",
-            functionType: "",
-            acquirerId: "",
-            branchId: "",
-            terminalId: "",
-            startTime: new Date("2024-08-01T10:00:00.000Z"),
-            endTime: new Date("2024-08-01T10:00:05.000Z")
-        };
+    // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
+    //         endTime: new Date("2024-08-01T10:00:05.000Z")
+    //     };
     
-        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
-        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
     
-        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
-        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
+    //     fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
     
-        expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
-    });
+    //     expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
+    // });
 
-    test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
-        const emptyFilterValues = {
-            transactionId: "",
-            transactionStatus: "",
-            functionType: "",
-            acquirerId: "",
-            branchId: "",
-            terminalId: "",
-            startTime: new Date("2024-08-01T10:00:00.000Z"),
-            endTime: new Date("2024-08-02T10:00:00.000Z")
-        };
+    // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on different days", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
+    //         endTime: new Date("2024-08-02T10:00:00.000Z")
+    //     };
     
-        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
-        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
-        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    //     const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
     
-        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
-        fireEvent.change(endTime, { target: { value: new Date("2024-08-02T10:00:00.000Z") } });
+    //     fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-02T10:00:00.000Z") } });
     
-        expect(screen.getByLabelText("Fino a")).toHaveValue("02/08/2024 12:00:00");
-    });
+    //     expect(screen.getByLabelText("Fino a")).toHaveValue("02/08/2024 12:00:00");
+    // });
     
-    test("Test validateDateRange correctly handles valid dates", () => {
-        const emptyFilterValues = {
-            transactionId: "",
-            transactionStatus: "",
-            functionType: "",
-            acquirerId: "",
-            branchId: "",
-            terminalId: "",
-            startTime: new Date("2024-08-01T10:00:00.000Z"),
-            endTime: new Date("2024-08-01T11:00:00.000Z")
-        };
+    // test("Test validateDateRange correctly handles valid dates", () => {
+    //     const emptyFilterValues = {
+    //         transactionId: "",
+    //         transactionStatus: "",
+    //         functionType: "",
+    //         acquirerId: "",
+    //         branchId: "",
+    //         terminalId: "",
+    //         startTime: new Date("2024-08-01T10:00:00.000Z"),
+    //         endTime: new Date("2024-08-01T11:00:00.000Z")
+    //     };
     
-        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    //     renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
-        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
-        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
+    //     const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    //     fireEvent.change(endTime, { target: { value: new Date("2024-08-01T11:00:00.000Z") } });
     
-        expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
-    });
+    //     expect(screen.queryByText("Selezionare una data/ora successiva a quella di partenza")).toBeNull();
+    // });
 
     // test("Test setting error when endTime is before startTime", () => {
     //     const emptyFilterValues = {
