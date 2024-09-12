@@ -463,6 +463,24 @@ describe("FilterBar test", () => {
         fireEvent.click(screen.getByText("Filtra"));
     });
 
+        test("TEST JEST WORKERS", () => {
+        const emptyFilterValues = {
+            transactionId: "",
+            transactionStatus: "",
+            functionType: "",
+            acquirerId: "",
+            branchId: "",
+            terminalId: "",
+            startTime: new Date("2024-08-01T10:00:00.000Z"),
+            endTime: new Date("2024-08-01T10:00:05.000Z")
+        };
+    
+        renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
+    
+        // expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
+    });
+
+
     // test("Test FilterBar with TRANSACTIONS and Filter with startTime and endTime on the same day with 5-second rule", () => {
     //     const emptyFilterValues = {
     //         transactionId: "",
