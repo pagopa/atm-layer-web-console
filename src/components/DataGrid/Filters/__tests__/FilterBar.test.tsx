@@ -477,6 +477,12 @@ describe("FilterBar test", () => {
     
         renderComponent(TRANSACTIONS, false, emptyFilterValues, emptyFilterValues);
     
+        const startTime = screen.getByLabelText("A partire da") as HTMLInputElement;
+        const endTime = screen.getByLabelText("Fino a") as HTMLInputElement;
+    
+        fireEvent.change(startTime, { target: { value: new Date("2024-08-01T10:00:00.000Z") } });
+        fireEvent.change(endTime, { target: { value: new Date("2024-08-01T10:00:05.000Z") } });
+    
         // expect(screen.getByLabelText("Fino a")).toHaveValue("01/08/2024 12:00:05");
     });
 
