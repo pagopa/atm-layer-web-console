@@ -54,7 +54,7 @@
     "test": "react-scripts test",
     "test:last-commit-coverage": "react-scripts test -i --coverage --reporters=jest-junit --testResultsProcessor jest-sonar-reporter",
     "test:coverage": "react-scripts test --coverage --reporters=jest-junit --testResultsProcessor jest-sonar-reporter",
-    "test:full-coverage": "react-scripts test --coverage --watchAll=false --reporters=jest-junit --testResultsProcessor jest-sonar-reporter",
+    "test:full-coverage": "react-scripts test --coverage --watchAll=false --reporters=jest-junit --testResultsProcessor jest-sonar-reporter --forceExit",
     "eject": "react-scripts eject",
     "lint-autofix": "eslint /src -c .eslintrc.js --ext .js,.ts,.tsx --fix",
     "lint": "eslint /src -c .eslintrc.js --ext .js,.ts,.tsx ",
