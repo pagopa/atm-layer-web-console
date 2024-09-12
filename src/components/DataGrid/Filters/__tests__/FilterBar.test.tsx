@@ -570,7 +570,7 @@ describe("FilterBar test", () => {
         await waitFor(() => {
             expect(startTime.value).not.toBe('');
             expect(endTime.value).not.toBe('');
-        }, { timeout: 3000 });
+        });
 
         const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
         expect(errorMessage).toBeInTheDocument();
@@ -640,7 +640,7 @@ describe("FilterBar test", () => {
         await waitFor(() => {
             expect(startTime.value).not.toBe('');
             expect(endTime.value).not.toBe('');
-        }, { timeout: 3000 });
+        });
     
         const errorMessage = screen.getByText("Selezionare una data/ora successiva a quella di partenza");
         expect(errorMessage).toBeInTheDocument();
