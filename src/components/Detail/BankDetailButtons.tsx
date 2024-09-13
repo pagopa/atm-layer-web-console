@@ -10,7 +10,7 @@ type Props = {
 
 const BankDetailButtons = ({ type, setType, openDialog, detail }: Props) => {
 	const buttonConfigs = [
-	  { text: "Aggiorna", action: UPDATE_BANK },
+	  { text: "Modifica", action: UPDATE_BANK },
 	  { text: "Cancella", action: DELETE_BANK },
 	];
   

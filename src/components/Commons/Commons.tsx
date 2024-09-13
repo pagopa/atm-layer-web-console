@@ -242,7 +242,7 @@ export function getTextModal(type:string):any {
 		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (limite chiamate), il numero di chiamate al secondo (rate) e il numero di chiamate simultanee (burst)"};
 	}
 	case UPDATE_BANK: {
-		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
+		return {titleModal:"Modifica istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
 	}
 	case DELETE_BANK: {
 		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questo istituto bancario dal registro degli aderenti?"};
