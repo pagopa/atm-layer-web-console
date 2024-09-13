@@ -294,23 +294,6 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			</TextField>
                 	</Grid>               	
                 	</Grid>
-                	<TextField
-                			fullWidth
-                			id="burstLimit"
-                			name="burstLimit"
-                			label={"Burst"}
-                			placeholder={"12345"}
-                			size="small"
-                			value={ formData.burstLimit }
-                			onChange={handleChange}
-                			onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
-								&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
-							&& !(/^[0-9]$/i.test(e.key))) {
-						  e.preventDefault();
-                		}}}
-                			error={Boolean(errors.burstLimit)}
-                			helperText={errors.burstLimit}
-                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
                 	<Grid xs={5} item my={1}>
                 		<TextField
                 			fullWidth
@@ -329,7 +312,27 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			error={Boolean(errors.rateLimit)}
                 			helperText={errors.rateLimit}
                 			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-rate-test" }} />
-                	</Grid></>
+                	</Grid>
+                	<Grid xs={5} item my={1}>
+                	<TextField
+                			fullWidth
+                			id="burstLimit"
+                			name="burstLimit"
+                			label={"Burst"}
+                			placeholder={"12345"}
+                			size="small"
+                			value={ formData.burstLimit }
+                			onChange={handleChange}
+                			onKeyDown={(e) => {if ( !(e.ctrlKey && e.key === "a") && !(e.ctrlKey && e.key === "c") && !(e.ctrlKey && e.key === "v") && !(e.ctrlKey && e.key === "x") && !(e.ctrlKey && e.key === "z") 
+								&& e.key !== "Clear" && e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Enter" 
+							&& !(/^[0-9]$/i.test(e.key))) {
+						  e.preventDefault();
+                		}}}
+                			error={Boolean(errors.burstLimit)}
+                			helperText={errors.burstLimit}
+                			inputProps={{ maxLength: MAX_LENGTH_NUMERIC, "data-testid": "bank-burst-test" }} />
+                	</Grid>
+                	</>
                 
 				}
 				<ActionAlert
