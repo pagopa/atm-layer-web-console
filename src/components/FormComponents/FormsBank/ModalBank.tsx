@@ -121,10 +121,10 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 			try {
 				const response = await fetchRequest({ urlEndpoint: generatePath(BANKS_DELETE, { acquirerId: recordParams.acquirerId}), method: "POST", abortController })();
 				setLoading(false);
-				setOpen(false);
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if(response.status === 204) {
 					setTimeout(() => {
+						setOpen(false);
 						setOpenSnackBar(false);
 						navigate(ROUTES.BANK);
 					}, 1000);
@@ -184,10 +184,10 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 					const response = await fetchRequest({ urlEndpoint: BANKS_UPDATE, method: "PUT", abortController, body: putData, headers: { "Content-Type": "application/json" } })();
 					setLoading(false);
 					if (response?.success){
-						setOpen(false);
 						handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 						sessionStorage.setItem("recordParamsBank", JSON.stringify(response.valuesObj));
 						setTimeout(() => {
+							setOpen(false);
 							setOpenSnackBar(false);
 							window.location.reload();
 						}, 1000);

@@ -3,7 +3,7 @@ import BreadCrumbMapper from "../../components/NavigationComponents/BreadCrumbMa
 import BreadCrumb from "../../components/NavigationComponents/BreadcrumbComponent";
 import { ActionAlert } from "../../components/Commons/ActionAlert";
 import DetailBox from "../../components/Detail/DetailBox";
-import { BANKS } from "../../commons/constants";
+import { BANKS, CREATE_BANK, DELETE_BANK, UPDATE_BANK } from "../../commons/constants";
 import BoxPageLayout from "./BoxPageLayout";
 
 type Props = {
@@ -39,11 +39,15 @@ const DetailPageTemplate = ({
 		<Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
 			{breadComponent&&<BreadCrumb breadcrumb={BreadCrumbMapper(breadComponent)} mb={"4px"} />}
 		</Box>
-		<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
-			<Box width={severity==="error"?"65%":"35%"} >
-				<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
+		{
+			![BANKS, CREATE_BANK, DELETE_BANK, UPDATE_BANK, undefined].includes(type) &&
+			<Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"} width={"100%"}>
+				<Box width={severity==="error"?"65%":"35%"} >
+					<ActionAlert setOpenSnackBar={setOpenSnackBar} openSnackBar={openSnackBar} severity={severity} message={message} title={title} type={type} />
+				</Box>
 			</Box>
-		</Box>
+		}
+		
 		<DetailBox detail={detail} fields={detailFields} detailTitle={detailTitle} />
 		{children}
 	</BoxPageLayout>
