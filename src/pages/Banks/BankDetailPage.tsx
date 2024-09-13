@@ -15,6 +15,7 @@ const BankDetailPage = () => {
 		{ label: "Limite chiamate", value: "limit" },
 		{ label: "Periodo", value: "period" },
 		{ label: "Rate", value: "rateLimit" },
+		{ label: "Burst", value: "burstLimit" },
 	];
 
 	return (

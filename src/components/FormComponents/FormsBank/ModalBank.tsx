@@ -52,6 +52,12 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 			...prevFormData,
 			[name]: value
 		}));
+		if ((name === "burstLimit" || name === "rateLimit" || name === "limit") && value.startsWith("0")){
+			setErrors((prevErrors: any) => ({
+				...prevErrors,
+				[name]: "Inserire un valore positivo"
+			}));
+		}
 	};
 
 	const handleClose = () => {
