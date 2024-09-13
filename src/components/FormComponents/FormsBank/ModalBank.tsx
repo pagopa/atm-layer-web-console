@@ -77,7 +77,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 			rateLimit: (formData.rateLimit !== "" && Number(formData.rateLimit) === 0 ) ? "Il valore deve essere maggiore di 0" 
 				: ((Number(formData.burstLimit) > 0 && Number(formData.rateLimit) > 0) || (!formData.burstLimit && !formData.rateLimit))
 					? "" 
-					: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
+					: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un rate che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
 		};
 	
 		setErrors(newErrors);
