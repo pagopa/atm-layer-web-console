@@ -17,6 +17,8 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 			const extractedValue = detail[value];
 			if (value === "period") {
 				return translatePeriodToFrontend(detail[value]);
+			} else if (value === "limit") {
+				return `${detail.limit} / ${translatePeriodToFrontend(detail.period)}`;
 			}
 			return detail[value];
 		}
@@ -52,7 +54,7 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 					<Grid container spacing={2}>
 						{fields.map(({ label, value, format }) => (
 							<Grid item xs={4} key={label}>
-								<Box display={"flex"}>
+								<Box display={"flex"}  visibility={label?  "visible" : "hidden"}>
 									<Typography variant="body2" >{label}: &nbsp;</Typography>
 									<Tooltip title= {getValue(format, detail, value)}>
 										<Typography variant="body1" ml={1} style={{ overflowWrap: "anywhere" }}>{getValue(format, detail, value)}</Typography>

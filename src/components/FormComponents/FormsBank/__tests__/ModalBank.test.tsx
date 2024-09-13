@@ -270,7 +270,7 @@ describe("ModalBank Test", () => {
     test("Test validateForm with only limit or period set", () => {
       renderModalBank(CREATE_BANK);
   
-      fireEvent.change(screen.getByLabelText("Quota"), { target: { value: "100" } });
+      fireEvent.change(screen.getByLabelText("Limite chiamate"), { target: { value: "100" } });
       fireEvent.click(screen.getByText("Conferma"));
   
       const errorMessage = screen.queryAllByText(/Indicare sia una quota che il periodo a cui si applica/i)[0];
@@ -296,7 +296,7 @@ describe("ModalBank Test", () => {
 
     test("Test onChange only numbers allowed in numeric fields", () => {
         renderModalBank(CREATE_BANK);
-        fireEvent.keyDown(screen.getByLabelText("Quota"), {key: 'Z', code: 'KeyZ'});
+        fireEvent.keyDown(screen.getByLabelText("Limite chiamate"), {key: 'Z', code: 'KeyZ'});
         fireEvent.keyDown(screen.getByLabelText("Burst"), {key: 'Z', code: 'KeyZ'});
         fireEvent.keyDown(screen.getByLabelText("Rate"), {key: 'Z', code: 'KeyZ'});
     });

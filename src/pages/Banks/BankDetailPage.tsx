@@ -7,13 +7,14 @@ const BankDetailPage = () => {
 	const fields = [
 		{ label: "Id Banca", value: "acquirerId" },
 		{ label: "Nome Banca", value: "denomination" },
+		{label:"", value: ""},
 		{ label: "Client Id", value: "clientId" },
 		{ label: "Client Secret", value: "clientSecret" },
 		// { label: "ApiKey Id", value: "apiKeyId" },
 		{ label: "ApiKey", value: "apiKeySecret" },
 		// { label: "Usage Plan Id", value: "usagePlanId" },
 		{ label: "Limite chiamate", value: "limit" },
-		{ label: "Periodo", value: "period" },
+		// { label: "Periodo", value: "period" },
 		{ label: "Rate", value: "rateLimit" },
 		{ label: "Burst", value: "burstLimit" },
 	];

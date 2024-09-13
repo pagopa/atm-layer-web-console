@@ -289,7 +289,7 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
                 			fullWidth
                 			id="limit"
                 			name="limit"
-                			label={"Quota"}
+                			label={"Limite chiamate"}
                 			placeholder={"12345"}
                 			size="small"
                 			value={ formData.limit ?? "" }
