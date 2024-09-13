@@ -52,12 +52,6 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 			...prevFormData,
 			[name]: value
 		}));
-		if ((name === "burstLimit" || name === "rateLimit" || name === "limit") && value.startsWith("0")){
-			setErrors((prevErrors: any) => ({
-				...prevErrors,
-				[name]: "Inserire un valore positivo"
-			}));
-		}
 	};
 
 	const handleClose = () => {
@@ -75,11 +69,19 @@ const ModalBank = ({ type, open, setOpen, openSnackBar, setOpenSnackBar, severit
 			denomination: formData.denomination ? "" : "Campo obbligatorio",
 			limit: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
 			period: ((formData.limit && (formData.period && formData.period !== EMPTY_SELECT_VALUE)) || (!formData.limit && !(formData.period && formData.period !== EMPTY_SELECT_VALUE))) ? "" : "Indicare sia una quota che il periodo a cui si applica, o eliminare entrambi i campi per non limitare il numero di chiamate",
-			burstLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate",
-			rateLimit: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
+			burstLimit: (formData.burstLimit !=="" && Number(formData.burstLimit) === 0 ) ? "Il valore deve essere maggiore di 0" 
+				: ((Number(formData.burstLimit) > 0 && Number(formData.rateLimit) > 0) || (!formData.burstLimit && !formData.rateLimit))
+					? "" 
+					: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un rate che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate",
+
+			rateLimit: (formData.rateLimit !== "" && Number(formData.rateLimit) === 0 ) ? "Il valore deve essere maggiore di 0" 
+				: ((Number(formData.burstLimit) > 0 && Number(formData.rateLimit) > 0) || (!formData.burstLimit && !formData.rateLimit))
+					? "" 
+					: ((formData.burstLimit && formData.rateLimit) || (!formData.burstLimit && !formData.rateLimit)) ? "" : "Indicare sia un tasso che un limite di burst, o eliminare entrambi i campi per non limitare il rate di chiamate"
 		};
 	
 		setErrors(newErrors);
+
 	
 		// Determines whether all the members of the array satisfy the conditions "!error".
 		return Object.values(newErrors).every((error) => !error);
