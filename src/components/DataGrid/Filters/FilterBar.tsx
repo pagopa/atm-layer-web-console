@@ -157,6 +157,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			const newErrors = clearErrorsIfCorrected(key, adjustedTimeStampValue, updatedFilterValues);
 			setErrors(newErrors);
 		}
+		return e;
 	};
 
 	const handleSubmit = () => {

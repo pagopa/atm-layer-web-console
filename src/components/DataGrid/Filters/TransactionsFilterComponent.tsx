@@ -39,8 +39,8 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 
 	const handleEndTimeChange = (e: any) => {
 		const newEndTime = e;
-		handleTimeStampChange(newEndTime, "endTime");
-		validateDateRange(filterValues.startTime, newEndTime);
+		const endTimeWithMargin = handleTimeStampChange(newEndTime, "endTime");
+		validateDateRange(filterValues.startTime, endTimeWithMargin);
 	};
 
 	React.useEffect(() => {
@@ -162,7 +162,6 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
 						label="Fino a"
 						value={filterValues.endTime ? new Date(filterValues.endTime) : null}
-						onChange={handleEndTimeChange}
 						minDateTime={
 							filterValues.startTime && filterValues.endTime && isSameDay(new Date(filterValues.startTime), new Date(filterValues.endTime))
 								? new Date(new Date(filterValues.startTime).getTime() + 5000)
@@ -170,6 +169,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 									? new Date(filterValues.startTime)
 									: undefined
 						}
+						onChange={handleEndTimeChange}
 						format="dd/MM/yyyy HH:mm:ss"
 						slotProps={{
 							field: {
