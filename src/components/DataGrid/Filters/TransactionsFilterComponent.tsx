@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, TextField } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { enGB } from "date-fns/locale";
+import { it } from "date-fns/locale";
 import { ACQUIRER_ID_LENGTH, MAX_LENGHT_LARGE } from "../../../commons/constants";
 
 type Props = {
@@ -139,7 +139,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 				/>
 			</Grid>
 			<Grid item xs={4}>
-				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
+				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={it}>
 					<DateTimePicker
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
 						label="A partire da"
@@ -157,7 +157,7 @@ const TransactionsFilterComponent = ({ filterValues, handleChange, handleTimeSta
 				</LocalizationProvider>
 			</Grid>
 			<Grid item xs={4}>
-				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
+				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={it}>
 					<DateTimePicker
 						views={["year", "month", "day", "hours", "minutes", "seconds"]}
 						label="Fino a"
