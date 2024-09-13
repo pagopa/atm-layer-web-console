@@ -239,7 +239,7 @@ export function getTextModal(type:string):any {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
 	}
 	case CREATE_BANK: {
-		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (quota), il numero di chiamate simultanee (burst) e il numero di chiamate al secondo (tasso)"};
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (quota), il numero di chiamate simultanee (burst) e il numero di chiamate al secondo (rate)"};
 	}
 	case UPDATE_BANK: {
 		return {titleModal:"Update istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
