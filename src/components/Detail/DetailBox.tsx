@@ -14,11 +14,15 @@ const DetailBox = ({ detail, fields, detailTitle }: Prop) => {
 		if (format) {
 			return format(detail[value]);
 		} else {
-			const extractedValue = detail[value];
-			if (value === "period") {
+			switch (value){
+			case "period":
 				return translatePeriodToFrontend(detail[value]);
-			} else if (value === "limit") {
-				return `${detail.limit} / ${translatePeriodToFrontend(detail.period)}`;
+			case "limit":
+				return detail[value] ? `${detail.limit} / ${translatePeriodToFrontend(detail.period)}` : "--";
+			case "rateLimit":
+				return detail[value] ? detail[value] : "--";
+			case "burstLimit":
+				return 	detail[value] ? detail[value] : "--";
 			}
 			return detail[value];
 		}
