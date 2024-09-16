@@ -32,14 +32,14 @@ export const homePageCard = [
 	{
 		title: "Banche",
 		id: "banks",
-		description:"Gestione Acquirer e parametri associati",
+		description:"Gestione Banche aderenti e relativi piani di utilizzo.",
 		icon:"AccountBalanceIcon",
 		pageLink: routes.BANK
 	},
 	{
 		title: "Transazioni",
 		id: "transactions",
-		description:"Elenco aggiornato delle transazioni eseguite ( o tutt'ora in corso) negli ultimi tre mesi.",
+		description:"Elenco aggiornato delle transazioni eseguite (o tutt'ora in corso) negli ultimi tre mesi.",
 		icon:"AssignmentOutlined",
 		pageLink: routes.TRANSACTIONS
 	},
