@@ -1,6 +1,11 @@
 import { Grid, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import React from "react";
 import { Loading } from "../../Commons/Loading";
+import { Ctx } from "../../../DataContext";
+import { getProfileIdsArray } from "../../Commons/Commons";
+import { SCRITTURA, TRANSACTIONS, UTENTI } from "../../../commons/constants";
 
 type Props = {
   handleSubmit: () => void;
@@ -9,6 +14,9 @@ type Props = {
   filterRoutes: string;
   children?: any;
   loadingButton?: boolean;
+  createIcon?: boolean;
+  handleClick?: any;
+  driver?: string;
 };
 
 const FilterTemplate = ({
@@ -17,9 +25,17 @@ const FilterTemplate = ({
 	filterValues,
 	filterRoutes,
 	children,
-	loadingButton
+	loadingButton,
+	createIcon,
+	handleClick,
+	driver
 }: Readonly<Props>) => {
 	const navigate = useNavigate();
+
+	const {loggedUserInfo} = useContext(Ctx);
+	const loggedUserProfiles = getProfileIdsArray(loggedUserInfo);
+	const canCreate = loggedUserProfiles.includes(SCRITTURA);
+	const canCreateUsers = loggedUserProfiles.includes(UTENTI);
 
 	const disabledButtons = () => {
 		if (!Object.values(filterValues).some((value) => value !== "")) {
@@ -39,18 +55,30 @@ const FilterTemplate = ({
 						flexDirection={"row"}
 						alignItems={"center"}
 						justifyContent={"space-between"}
-					>
-						<Box my={1}>
-							<Button variant="contained" onClick={() => navigate(filterRoutes)}>
-                Crea Risorsa
-							</Button>
-						</Box>
-
+					> {driver !== TRANSACTIONS ? (
+							<React.Fragment>
+								{createIcon ? (
+									<Box my={1}>
+										<Button variant="contained" onClick={() => handleClick()} disabled={!canCreateUsers}>
+										Crea Nuovo
+										</Button>
+									</Box>
+								) : (
+									<Box my={1}>
+										<Button variant="contained" onClick={() => navigate(filterRoutes)} disabled={!canCreate}>
+										Crea Risorsa
+										</Button>
+									</Box>
+								)}
+							</React.Fragment>
+						) : (
+							<Box my={1}>
+							</Box>
+						)}
 						<Box>
 							<Button
 								sx={{ marginRight: 2 }}
 								variant="outlined"
-								// disabled={disabledButtons()}
 								onClick={() => cleanFilter()}
 							>
                 Cancella Filtri
@@ -58,6 +86,7 @@ const FilterTemplate = ({
 
 							<Button variant="contained" disabled={disabledButtons()} onClick={handleSubmit}>
 								{loadingButton ? <Loading size={20} thickness={5} marginTop={"0px"} color={"white"} /> : "Filtra"}
+								
 							</Button>
 
 						</Box>

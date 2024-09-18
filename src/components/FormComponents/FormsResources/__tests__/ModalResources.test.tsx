@@ -128,6 +128,22 @@ describe("ModalResources Test", () => {
         fireEvent.click(screen.getByText("Conferma"));
     });
 
+
+    test("Test ModalResources with default driver", () => {
+
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            json: () => Promise.resolve({
+                status: 204,
+                success: true,
+                valuesObj: {},
+            }),
+        });
+
+        renderModalResources("unknown");
+
+        fireEvent.click(screen.getByText("Conferma"));
+    });
+
    
 
    });

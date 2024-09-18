@@ -3,9 +3,10 @@
 /* eslint-disable functional/immutable-data */
 import { Link } from "@mui/material";
 import { generatePath } from "react-router-dom";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, BANKS, CREATE_BANK, CREATE_USER, DELETE_ASSOCIATION, DELETE_BANK, DELETE_BPMN, DELETE_RES, DELETE_USER, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, RESOURCE_BASE_STORAGEKEY, ROLLBACK_WR, TRANSACTIONS, UPDATE_BANK, UPDATE_RES, UPDATE_USER, UPDATE_WR, USERS, WORKFLOW_RESOURCE, quotaPeriodOptions } from "../../commons/constants";
 import ROUTES from "../../routes";
 import { LinkModelDto, PageDto } from "../../model/LinkModel";
+import { Profile, User } from "../../model/UserModel";
 
 
 export const resetErrors = (errors: any, setErrors: any, field: string | number) => {
@@ -68,6 +69,29 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 		appendQueryParam("branchId", filterValues?.branchId);
 		appendQueryParam("terminalId", filterValues?.terminalId);
 		break;
+	case BANKS:
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("denomination", filterValues?.denomination);
+		appendQueryParam("clientId", filterValues?.clientId);
+		appendQueryParam("rateMin", filterValues?.rateMin);
+		appendQueryParam("rateMax", filterValues?.rateMax);
+		break;
+	case TRANSACTIONS:
+		appendQueryParam("transactionId", filterValues?.transactionId);
+		appendQueryParam("transactionStatus", filterValues?.transactionStatus);
+		appendQueryParam("functionType", filterValues?.functionType);
+		appendQueryParam("acquirerId", filterValues?.acquirerId);
+		appendQueryParam("branchId", filterValues?.branchId);
+		appendQueryParam("terminalId", filterValues?.terminalId);
+		appendQueryParam("startTime", filterValues?.startTime);
+		appendQueryParam("endTime", filterValues?.endTime);
+		break;
+	case USERS:
+		appendQueryParam("name", filterValues?.name);
+		appendQueryParam("surname", filterValues?.surname);
+		appendQueryParam("userId", filterValues?.userId);
+		appendQueryParam("profileNumber", filterValues?.profileId);
+		break;
 	default:
 		return "";
 	}
@@ -75,21 +99,20 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 };
 
 export const handleSnackbar = (
-	success: boolean,
+	severity: string,
 	setMessage: React.Dispatch<React.SetStateAction<any>>,
 	setSeverity: React.Dispatch<React.SetStateAction<any>>,
 	setTitle: React.Dispatch<React.SetStateAction<any>>,
 	setOpenSnackBar: React.Dispatch<React.SetStateAction<any>>,
 	valueMessage?: string
 ) => {
-	setSeverity(success ? "success" : "error");
-	setMessage(success ? "" : valueMessage ? valueMessage : "Operazione fallita");
-	setTitle(success ? "Successo" : "Errore");
+	setSeverity(severity);
+	setMessage(severity===ALERT_SUCCESS ? "" : valueMessage ? valueMessage : "Operazione fallita");
+	setTitle(severity===ALERT_SUCCESS? "Successo":severity===ALERT_ERROR?"Errore":"Info");
 	setOpenSnackBar(true);
 };
 
 export const breadCrumbLinkComponent = (arrLinks: Array<LinkModelDto>, message: string) => [
-	// "Home",
 	...arrLinks.map((e, i) =>
 		<Link
 			key={"link"+e.rootName}
@@ -155,6 +178,24 @@ export const commonBreadRoot = (currentPage:PageDto, isDetail:boolean=false, rec
 
 		});
 	}
+	if(currentPage?.isTrnsc){
+		links.push({
+			rootValue: ROUTES.TRANSACTIONS,
+			rootName: "Transazioni"
+		});
+	}
+	if(currentPage?.isBank){
+		links.push({
+			rootValue: ROUTES.BANK,
+			rootName: "Gestione banche"
+		});
+	}
+	if(currentPage?.isBank && isDetail){
+		links.push({
+			rootValue: generatePath(ROUTES.BANK_DETAILS, { acquirerId: recordParams?.acquirerId }),
+			rootName: "Dettaglio banca"
+		});
+	}
 	return links;
 };
 
@@ -197,9 +238,125 @@ export function getTextModal(type:string):any {
 	case UPDATE_RES: {
 		return {titleModal:"Update risorsa statica", contentText:"Carica il file aggiornato"};
 	}
+	case CREATE_BANK: {
+		return {titleModal:"Registrazione istituto bancario", contentText:"Aggiungi un nuovo istituto bancario aderente. Per le chiamate eseguite dai terminali di questa banca puoi limitare: il numero totale di chiamate (limite chiamate), il numero di chiamate al secondo (rate) e il numero di chiamate simultanee (burst)"};
+	}
+	case UPDATE_BANK: {
+		return {titleModal:"Modifica istituto bancario", contentText:"Sei sicuro di voler modificare i dati di questo istituto bancario?"};
+	}
+	case DELETE_BANK: {
+		return {titleModal:"Cancellazione istituto bancario", contentText:"Sei sicuro di voler cancellare questo istituto bancario dal registro degli aderenti?"};
+	}
+	case CREATE_USER: {
+		return {titleModal:"Creazione nuovo utente", contentText:"Indica email e permessi del nuovo utente"};
+	}
+	case DELETE_USER: {
+		return {titleModal:"Cancellazione utente", contentText:"Sei sicuro di voler cancellare questo utente?"};
+	}
+	case UPDATE_USER: {
+		return {titleModal:"Update utente", contentText:"Modifica le autorizzazioni di questo utente"};
+	}
+	// case UPDATE_FIRST_USER: {
+	// 	return {titleModal:"Update primo utente", contentText:"Sei il primo utente che accede alla console: completa il tuo profilo con le informazioni anagrafiche ed eventuali ruoli aggiuntivi"};
+	// }
 	default: {
 		return {titleModal:"Errore", contentText:"Qualcosa è andato storto"};
 	}
 	}
 	
+};
+
+
+export function removeArrayItem(index:number, arr?:Array<any>) {
+	if (arr){
+		// eslint-disable-next-line functional/immutable-data
+		arr.splice(index,1);
+		return arr;
+	}
+}
+
+export function removeArrayItems(indexes:Array<number|undefined>, arr?:Array<any>){
+	if(arr){
+		indexes.filter(x => x || x===0);
+		indexes.sort((a,b)=> (a || a===0) && (b || b===0) ? b-a : 0);
+		indexes.map(index => index || index===0 ? arr.splice(index,1):index);
+		return arr;
+	}
+};
+
+export function getProfilesIds(user: User){
+	return user.profiles.map(profile => profile.profileId);
+}
+
+
+export function getProfileIdsArray(user: User){
+	return user.profiles.map(profile => profile.profileId);
+};
+
+export function getProfileDescriptions (user: User) {
+	if(user.profiles) {
+		return user.profiles.map(profile => profile.description);
+	}
+};
+
+export function getProfileDescriptionByProfileArray (profiles: Array<Profile> = []): Array<string> {
+	return profiles.map(profile => profile.description);
+};
+
+export function getRoleDescriptionsByUser (loggedUserInfo: User):any {
+	return loggedUserInfo.profiles.map((e: { description: any }) => e.description);
+};
+
+export function getFilteredButtonConfig (buttonConfigs: any):any {
+	return buttonConfigs.filter((config: { visibleCondition: () => any }) => config.visibleCondition());
+};
+
+export function addDependentProfiles (selectedProfilesDescriptions : Array<string>, profiles: Array<Profile>) {
+
+	function onlyUnique(value:number, index:number, array:Array<number>) {
+		return array.indexOf(value) === index;
+	}
+
+	const selectedProfileIds = convertStringToProfiles(selectedProfilesDescriptions, profiles);
+
+	// eslint-disable-next-line functional/no-let
+	let selectedAndDefaultProfiles = [...selectedProfileIds];
+	selectedAndDefaultProfiles.map(profile => {
+		const completeProfile = PROFILE_IDS.find((element) => element.id === profile);
+		if (completeProfile) {
+			return selectedAndDefaultProfiles = [
+				...completeProfile.defaultProfiles,
+				...selectedAndDefaultProfiles				
+			];
+		}
+		return selectedAndDefaultProfiles;
+	});
+	return convertProfileToString(selectedAndDefaultProfiles.filter(onlyUnique), profiles);
+};
+
+export function getProfileDescriptionFromStorage (userInfo: any): any {
+	const userInfoObject = JSON.parse(userInfo);
+	return getProfileIdsArray(userInfoObject);
+};
+
+export function convertStringToProfiles(profileDescriptions: Array<string>, profiles: Array<Profile>): Array<number> {
+	return profileDescriptions
+		.map(description => profiles.find(profile => profile.description === description)?.profileId)
+		.filter((id): id is number => id !== undefined);  // Filter out undefined values
+};
+
+export function convertProfileToString(profileIds: Array<number>, profiles: Array<Profile>): Array<string> {
+	return profileIds
+		.map(profileId => profiles.find(profile => profile.profileId === profileId)?.description)
+		.filter((description): description is string => description !== undefined);  // Filter out undefined values
+};
+
+export function translatePeriodToBackend (frontendInput : string | null ) {
+	const extractedPeriod = quotaPeriodOptions.find(element => element.FEvalue === frontendInput);
+	return extractedPeriod? extractedPeriod.BEvalue : null ;
+};
+
+export function translatePeriodToFrontend (backendInput : string | null ) : string {
+	const extractedPeriod = quotaPeriodOptions.find(element => element.BEvalue === backendInput);
+	return extractedPeriod? extractedPeriod?.FEvalue : "NON DEFINITO" ;
 };

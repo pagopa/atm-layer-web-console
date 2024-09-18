@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Ctx } from "../../../../DataContext";
 import CreateBpmn from "../CreateBpmn";
@@ -12,7 +12,7 @@ beforeEach(() => {
 
 afterEach(() => {
     global.fetch = originalFetch;
-})
+});
 
 describe("CreateBpmn Test", () => {
 
@@ -35,8 +35,7 @@ describe("CreateBpmn Test", () => {
         );
     };
 
-    test("Test CreateBpmn", () => {
-
+    test("should close the snackbar when CloseIcon is clicked", async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             json: () => Promise.resolve({
                 status: 200,
@@ -48,28 +47,6 @@ describe("CreateBpmn Test", () => {
                     definitionKey: "Process_1ssgcmw",
                     functionType: "PROVA",
                     status: "CREATED",
-                    sha256: "b092268bd072423d78c30f8c160568b5f6d178fadf623104b35bf3baba76eb15",
-                    enabled: true,
-                    definitionVersionCamunda: null,
-                    camundaDefinitionId: null,
-                    description: null,
-                    resourceFile: {
-                        id: "346311f6-e0fa-40ff-aa8e-6ba506687401",
-                        resourceType: "BPMN",
-                        storageKey: "BPMN/files/UUID/fda9832c-a101-400b-8a04-8fb31c1cb215/VERSION/1/prova_per_test.bpmn",
-                        fileName: "prova_per_test",
-                        extension: "bpmn",
-                        createdAt: "2024-03-01T12:07:46.687+00:00",
-                        lastUpdatedAt: "2024-03-01T12:07:46.687+00:00",
-                        createdBy: null,
-                        lastUpdatedBy: null
-                    },
-                    resource: null,
-                    deploymentId: null,
-                    createdAt: "2024-03-01T12:07:46.684+00:00",
-                    lastUpdatedAt: "2024-03-01T12:07:46.684+00:00",
-                    createdBy: null,
-                    lastUpdatedBy: null
                 },
             }),
         });
@@ -87,11 +64,18 @@ describe("CreateBpmn Test", () => {
 
         fireEvent.click(screen.getByText("Conferma"));
 
-        fireEvent.click(screen.getByTestId("CloseIcon"));
+        const snackbar = await waitFor(() => screen.getByRole("alert"));
+        expect(snackbar).toBeInTheDocument();
 
+        const closeIcon = screen.getAllByTestId("CloseIcon")[1];
+        fireEvent.click(closeIcon);
+
+        await waitFor(() => {
+            expect(snackbar).not.toBeInTheDocument();
+        });
     });
 
-    test("Test CreateBpmn fetch error", () => {
+    test("should handle fetch error and close snackbar", async () => {
 
         global.fetch = jest.fn().mockImplementation(() => {
             throw new Error("errore");
@@ -110,7 +94,14 @@ describe("CreateBpmn Test", () => {
 
         fireEvent.click(screen.getByText("Conferma"));
 
-        fireEvent.click(screen.getByTestId("CloseIcon"));
+        const snackbar = await waitFor(() => screen.getByRole("alert"));
+        expect(snackbar).toBeInTheDocument();
 
+        const closeIcon = screen.getAllByTestId("CloseIcon")[1];
+        fireEvent.click(closeIcon);
+
+        await waitFor(() => {
+            expect(snackbar).not.toBeInTheDocument();
+        });
     });
 });

@@ -1,6 +1,6 @@
 import { FormControl, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
-import { MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { EMPTY_SELECT_VALUE, MAX_LENGHT_LARGE } from "../../../commons/constants";
 
 type Props = {
 	filterValues: any;
@@ -10,7 +10,7 @@ type Props = {
 const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceTypes = [
-		{ label: "Stato", value: "" },
+		{ label: EMPTY_SELECT_VALUE, value: "" },
 		{ label: "HTML", value: "HTML" },
 		{ label: "OTHER", value: "OTHER" }
 	];

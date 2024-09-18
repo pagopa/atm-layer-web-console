@@ -2,7 +2,7 @@ import React, { SetStateAction, useContext, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
 import { BPMN_DELETE, BPMN_DEPLOY_API, BPMN_DOWNLOAD_API, DELETE_ASSOCIATE_BPMN } from "../../../commons/endpoints";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DEPLOY_BPMN, DOWNLOAD_BPMN } from "../../../commons/constants";
 import { getQueryString, getTextModal, handleSnackbar } from "../../Commons/Commons";
 import ModalTemplate from "../template/ModalTemplate";
 import { downloadFile } from "../../../commons/decode";
@@ -39,7 +39,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DELETE, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "POST", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if(response.status === 204) {
 					setTimeout(() => {
 						setOpenSnackBar(false);
@@ -49,7 +49,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -69,11 +69,11 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 					}, 3000);
 				}
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 		}
@@ -87,7 +87,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				const response = await fetchRequest({ urlEndpoint: URL, queryString: getQueryString(filterValues, DELETE_ASSOCIATION), method: "DELETE", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 				if(response?.success){
 					setTimeout(() => {
 						setOpenSnackBar(false);
@@ -104,7 +104,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 				const response = await fetchRequest({ urlEndpoint: generatePath(BPMN_DOWNLOAD_API, { bpmnId: recordParams.bpmnId, modelVersion: recordParams.modelVersion }), method: "GET", abortController })();
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (response?.success) {
 					downloadFile(response.valuesObj.fileContent, "application/xml", recordParams.fileName, "bpmn");
 					setTimeout(() => {
@@ -115,7 +115,7 @@ const ModalBpmn = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessa
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 			break;
 

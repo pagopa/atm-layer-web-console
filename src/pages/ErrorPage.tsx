@@ -8,9 +8,12 @@ const ErrorPage = () => (
 			<Box >
 				<ReportIcon color="error" sx={{ fontSize: 100 }} />
 			</Box>
-			<Box>
+			<Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} >
 				<Typography variant="h6">
-                    404 - Qualcosa è andato storto
+                    Non sei autorizzato ad accedere a questa sezione
+				</Typography>
+				<Typography >
+                    Contatta l&apos;amministratore di utenze e permessi
 				</Typography>
 			</Box>
 		</Box>

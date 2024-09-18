@@ -14,6 +14,6 @@ export const Loading = ({size, thickness,marginTop, color }:Props) => (
 			size={size?size:150}
 			thickness={thickness?thickness:2}
 			sx={{marginTop: marginTop?marginTop:"15%", color: color?color:"white"}}
-		/>
+		/> 
 	</Box>		
 );
