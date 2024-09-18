@@ -309,7 +309,7 @@
     <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage without sessionStorage" duration="47"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/checks.test.ts">
-    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="3"/>
+    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="2"/>
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="1"/>
     <testCase name="checks tests copyObject restituisce una copia profonda dell&apos;oggetto" duration="1"/>
     <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="15"/>
@@ -408,9 +408,13 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/commons/__tests__/decode.test.ts">
     <testCase name="decode file test Test base64_decode function" duration="2"/>
     <testCase name="decode file test Test base64_encode function" duration="1"/>
-    <testCase name="decode file test download a file successfully" duration="5"/>
-    <testCase name="decode file test download file doc null" duration="1"/>
-    <testCase name="decode file test Test downloadStaticFile function" duration="1"/>
+    <testCase name="decode file test download a file successfully" duration="9"/>
+    <testCase name="decode file test download file doc null" duration="0"/>
+    <testCase name="decode file test Test downloadStaticFile function" duration="0"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="269"/>
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="56"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/ProtectedRoute.test.tsx">
     <testCase name="ProtectedRoute renders protected content when user has the required profile" duration="19"/>
@@ -454,7 +458,7 @@
     <testCase name="CreateBpmnPage render" duration="106"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/fetch/__tests__/fetchRequest.test.ts">
-    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="2"/>
+    <testCase name="formOption Test Verifica la presenza dei dati in valueObject" duration="9"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/WorkflowResource/__tests__/CreateWRPage.test.tsx">
     <testCase name="CreateWRPage render" duration="118"/>
@@ -465,8 +469,8 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
     <testCase name="HomePageTitle Check for HomePageTitle" duration="38"/>
   </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/TitleComponent.test.tsx">
-    <testCase name="HomePageTitle Check for HomePageTitle" duration="28"/>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
+    <testCase name="ActionIcon test First render" duration="40"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/IconBox.test.tsx">
     <testCase name="ActionIcon test First render" duration="20"/>

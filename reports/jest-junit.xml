@@ -5,9 +5,9 @@
     </testcase>
     <testcase classname="resetErrors" name="should not reset a specific field error if it does not exist" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.007">
     </testcase>
@@ -23,13 +23,13 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
     </testcase>
@@ -419,7 +419,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0">
     </testcase>
@@ -431,11 +431,11 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.005">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
@@ -563,11 +563,11 @@
     </testcase>
     <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.015">
     </testcase>
-    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.002">
+    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
@@ -715,11 +715,11 @@
     </testcase>
     <testcase classname="decode file test" name="Test base64_encode function" time="0.001">
     </testcase>
-    <testcase classname="decode file test" name="download a file successfully" time="0.005">
+    <testcase classname="decode file test" name="download a file successfully" time="0.009">
     </testcase>
-    <testcase classname="decode file test" name="download file doc null" time="0.001">
+    <testcase classname="decode file test" name="download file doc null" time="0">
     </testcase>
-    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0.001">
+    <testcase classname="decode file test" name="Test downloadStaticFile function" time="0">
     </testcase>
   </testsuite>
   <testsuite name="src/components/NavigationComponents/__tests__/ProtectedRoute.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-16T13:45:43" time="0.826" tests="2">
