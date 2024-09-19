@@ -317,8 +317,8 @@
     <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage without sessionStorage" duration="48"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/checks.test.ts">
-    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="3"/>
-    <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="1"/>
+    <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="2"/>
+    <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="0"/>
     <testCase name="checks tests copyObject restituisce una copia profonda dell&apos;oggetto" duration="1"/>
     <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="1"/>
     <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="1"/>
@@ -326,7 +326,7 @@
     <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="1"/>
     <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="1"/>
+    <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/template/__tests__/FormTemplate.test.tsx">
@@ -476,6 +476,9 @@
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx">
     <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="67"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx">
+    <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="35"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
     <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="27"/>

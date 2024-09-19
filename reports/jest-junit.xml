@@ -203,7 +203,7 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-09-19T12:42:07" time="0.293" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
+    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
     </testcase>
@@ -221,11 +221,11 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
@@ -377,9 +377,9 @@
   <testsuite name="src/components/FormComponents/__tests__/MultiSelect.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-18T08:01:55" time="0.905" tests="3">
     <testcase classname="MultiSelect component" name="renders the checkbox with correct icon" time="0.24">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.006">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.006">
     </testcase>
@@ -475,7 +475,7 @@
     </testcase>
     <testcase classname="DetailButtons" name="does not navigate when navigate property is not provided" time="0.006">
     </testcase>
-    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.009">
+    <testcase classname="DetailButtons" name="does not call setType, openDialog, or navigate when button is clicked and disabledCondition is not provided" time="0.006">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-19T12:42:24" time="2.483" tests="4">
@@ -581,9 +581,9 @@
   <testsuite name="src/utils/__tests__/checks.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-09-19T12:42:41" time="0.214" tests="11">
     <testcase classname="checks tests" name="checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" time="0.003">
     </testcase>
-    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0.001">
+    <testcase classname="checks tests" name="isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" time="0">
     </testcase>
-    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.082">
     </testcase>
     <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.001">
     </testcase>
@@ -597,7 +597,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0">
     </testcase>

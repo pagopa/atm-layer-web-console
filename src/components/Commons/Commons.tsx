@@ -59,6 +59,10 @@ export const getQueryString = (filterValues: any, driver: string, URL?: string):
 		if(filterValues?.storageKey){
 			appendQueryParam("storageKey", RESOURCE_BASE_STORAGEKEY + filterValues?.storageKey);
 		}
+
+		if (filterValues?.storageKey) {
+			queryString = queryString.concat(`&storageKey=${RESOURCE_BASE_STORAGEKEY}${filterValues.storageKey}`);
+		}
 		break;
 	case WORKFLOW_RESOURCE:
 		appendQueryParam("resourceType", filterValues?.resourceType);
