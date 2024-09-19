@@ -5,11 +5,12 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CSSProperties, ReactNode } from "react";
-import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER, BANKS } from "../../commons/constants";
+import { DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER, BANKS } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 import { getProfileDescriptionFromStorage } from "../Commons/Commons";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { GET_BANK } from "../../commons/endpoints";
+import { Profile } from "../../model/UserModel";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
@@ -168,9 +169,26 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		// eslint-disable-next-line functional/no-let
 		let loggedUserInfo;
 		const recordUser = sessionStorage.getItem("loggedUserInfo");
-		if (recordUser) {
-			loggedUserInfo = JSON.parse(recordUser);
+		try {
+			loggedUserInfo = recordUser ? JSON.parse(recordUser) : {
+				userId: "",
+				name:"",
+				surname:"",
+				createdAt: "",
+				lastUpdatedAt: "",
+				profiles: [] as Array<Profile>
+			};
+		} catch (exception) {
+			loggedUserInfo = {
+				userId: "",
+				name:"",
+				surname:"",
+				createdAt: "",
+				lastUpdatedAt: "",
+				profiles: [] as Array<Profile>
+			};
 		}
+
 
 		return (
 			<Box
