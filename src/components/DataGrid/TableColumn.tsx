@@ -10,6 +10,7 @@ import useColumns from "../../hook/Grids/useColumns";
 import { getProfileDescriptionFromStorage } from "../Commons/Commons";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
 import { GET_BANK } from "../../commons/endpoints";
+import { Profile } from "../../model/UserModel";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
@@ -168,9 +169,26 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 		// eslint-disable-next-line functional/no-let
 		let loggedUserInfo;
 		const recordUser = sessionStorage.getItem("loggedUserInfo");
-		if (recordUser) {
-			loggedUserInfo = JSON.parse(recordUser);
+		try {
+			loggedUserInfo = recordUser ? JSON.parse(recordUser) : {
+				userId: "",
+				name:"",
+				surname:"",
+				createdAt: "",
+				lastUpdatedAt: "",
+				profiles: [] as Array<Profile>
+			};
+		} catch (excpetion) {
+			loggedUserInfo = {
+				userId: "",
+				name:"",
+				surname:"",
+				createdAt: "",
+				lastUpdatedAt: "",
+				profiles: [] as Array<Profile>
+			};
 		}
+
 
 		return (
 			<Box
