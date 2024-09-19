@@ -4,8 +4,8 @@ import { generatePath, useNavigate } from "react-router-dom";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { CSSProperties, ReactNode, useContext } from "react";
-import { DELETE_ASSOCIATION, DELETE_BANK, UPDATE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER, BANKS } from "../../commons/constants";
+import { CSSProperties, ReactNode } from "react";
+import { DELETE_ASSOCIATION, DELETE_BANK, DELETE_USER, SCRITTURA, UPDATE_USER, BANKS } from "../../commons/constants";
 import useColumns from "../../hook/Grids/useColumns";
 import { getProfileDescriptionFromStorage } from "../Commons/Commons";
 import { fetchRequest } from "../../hook/fetch/fetchRequest";
@@ -14,7 +14,7 @@ import { Profile } from "../../model/UserModel";
 
 
 const TableColumn = (setOpen?: any, setType?: any) => {
-	
+
 	const { getColumnsGrid, getVisibleColumns, getNavigationPaths } = useColumns();
 	const buildColumnDefs = (driver: string) => {
 		const cols = getColumnsGrid(driver, showCustomHeader, renderCell, actionColumn, deleteColumn, deleteColumnUsers, editColumnUsers);
@@ -178,7 +178,7 @@ const TableColumn = (setOpen?: any, setType?: any) => {
 				lastUpdatedAt: "",
 				profiles: [] as Array<Profile>
 			};
-		} catch (excpetion) {
+		} catch (exception) {
 			loggedUserInfo = {
 				userId: "",
 				name:"",
