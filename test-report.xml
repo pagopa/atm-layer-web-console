@@ -480,7 +480,72 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
     <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="27"/>
   </file>
-  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
-    <testCase name="ErrorPage render" duration="24"/>
+  <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx">
+    <testCase name="ModalResources Test Test ModalResources with DELETE" duration="291"/>
+    <testCase name="ModalResources Test Test ModalResources with DOWNLOAD" duration="3042"/>
+    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="21"/>
+    <testCase name="ModalResources Test Test Error during DOWNLOAD" duration="17"/>
+    <testCase name="ModalResources Test Test ModalResources with default driver" duration="42"/>
+  </file>
+  <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx">
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_WR" duration="3250"/>
+    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_WR" duration="72"/>
+    <testCase name="ModalTemplateUpload Test Test clear button in UPDATE_WR" duration="36"/>
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="15"/>
+    <testCase name="ModalTemplateUpload Test Test dialog close" duration="31"/>
+    <testCase name="ModalTemplateUpload Test Test dialog close" duration="16"/>
+    <testCase name="ModalTemplateUpload Test Test form validation" duration="18"/>
+    <testCase name="ModalTemplateUpload Test Test ModalTemplateUpload case UPDATE_RES" duration="3072"/>
+    <testCase name="ModalTemplateUpload Test Test Check Error when UPDATE_RES" duration="35"/>
+    <testCase name="ModalTemplateUpload Test Update with different file extensions should fail" duration="19"/>
+  </file>
+  <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx">
+    <testCase name="ModalResources Test Test ModalWR with ROLLBACK" duration="221"/>
+    <testCase name="ModalResources Test Test Catch Error during ROLLBACK" duration="66"/>
+    <testCase name="ModalResources Test Test ModalWR with DEPLOY" duration="3096"/>
+    <testCase name="ModalResources Test Test Catch Error during DEPLOY" duration="47"/>
+    <testCase name="ModalResources Test Test ModalWR with DELETE" duration="11"/>
+    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="14"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD DMN" duration="3084"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD BPMN" duration="3047"/>
+    <testCase name="ModalResources Test Test ModalWR with DOWNLOAD FORM" duration="3029"/>
+    <testCase name="ModalResources Test Test Catch Error during DOWNLOAD" duration="10"/>
+  </file>
+  <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormUsers/__tests__/ModalUser.test.tsx">
+    <testCase name="ModalUsers component renders correctly for CREATE_USER" duration="264"/>
+    <testCase name="ModalUsers component renders correctly for UPDATE_USER" duration="208"/>
+    <testCase name="ModalUsers component renders correctly for DELETE_USER" duration="36"/>
+    <testCase name="ModalUsers component handles multi-select change correctly" duration="551"/>
+    <testCase name="ModalUsers component sets initial formData and errors when modal opens for CREATE_USER" duration="35"/>
+    <testCase name="ModalUsers component handles form submission for DELETE_USER" duration="59"/>
+    <testCase name="ModalUsers component catches error from form submission for DELETE_USER" duration="37"/>
+    <testCase name="ModalUsers component handles form submission for CREATE_USER response success" duration="3713"/>
+    <testCase name="ModalUsers component handles form submission for CREATE_USER response NOT success" duration="3719"/>
+    <testCase name="ModalUsers component catches error from form submission for CREATE_USER" duration="3454"/>
+    <testCase name="ModalUsers component handles form submission for UPDATE_USER" duration="3113"/>
+    <testCase name="ModalUsers component catches error from form submission for UPDATE_USER" duration="3102"/>
+    <testCase name="ModalUsers component handles default case in handleSubmit" duration="32"/>
+    <testCase name="ModalUsers component calls resetErrors when handleChange is triggered" duration="28"/>
+    <testCase name="ModalUsers component sets formData and errors correctly when modal opens for UPDATE_USER" duration="26"/>
+    <testCase name="ModalUsers component does not submit form when validation fails for CREATE_USER" duration="20"/>
+    <testCase name="ModalUsers component does nothing when an unknown type is provided" duration="19"/>
+  </file>
+  <file path="/Users/evalenti/Documents/DEV/ATM_LAYER/atm-layer-web-console/src/components/FormComponents/FormsBank/__tests__/ModalBank.test.tsx">
+    <testCase name="ModalBank Test Test ModalBank with CREATE_BANK fetch success" duration="3332"/>
+    <testCase name="ModalBank Test Test ModalBank with CREATE_BANK fetch not success" duration="3194"/>
+    <testCase name="ModalBank Test Test ModalBank with CREATE_BANK catch error" duration="3409"/>
+    <testCase name="ModalBank Test Test ModalBank with DELETE_BANK" duration="3253"/>
+    <testCase name="ModalBank Test Test ModalBank with UPDATE_BANK fetch not success" duration="3226"/>
+    <testCase name="ModalBank Test Test ModalBank with UPDATE_BANK catch error" duration="3096"/>
+    <testCase name="ModalBank Test Test ModalBank with UPDATE_BANK fetch success" duration="3080"/>
+    <testCase name="ModalBank Test Test API Error during CREATE_BANK" duration="3044"/>
+    <testCase name="ModalBank Test Test API Error during DELETE_BANK" duration="3017"/>
+    <testCase name="ModalBank Test Test API Error during UPDATE_BANK" duration="3117"/>
+    <testCase name="ModalBank Test Test ModalBank without type" duration="13"/>
+    <testCase name="ModalBank Test Test resetErrors when changing input" duration="35"/>
+    <testCase name="ModalBank Test Test handleClose resets form and errors" duration="41"/>
+    <testCase name="ModalBank Test Test validateForm with only limit or period set" duration="31"/>
+    <testCase name="ModalBank Test Test form fields rendering for CREATE_BANK and UPDATE_BANK" duration="48"/>
+    <testCase name="ModalBank Test Test onChange only numbers allowed in numeric fields" duration="18"/>
   </file>
 </testExecutions>

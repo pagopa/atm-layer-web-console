@@ -365,15 +365,17 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn on switch of branchId" time="0.113">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.005">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
+    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.018">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0">
+  </testsuite>
+  <testsuite name="src/components/FormComponents/__tests__/MultiSelect.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-18T08:01:55" time="0.905" tests="3">
+    <testcase classname="MultiSelect component" name="renders the checkbox with correct icon" time="0.24">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
     </testcase>
@@ -383,17 +385,23 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
+    <testcase classname="BankDataGrid test" name="BankDataGrid handles fetch error gracefully" time="0.073">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
+    <testcase classname="BankDataGrid test" name="BankDataGrid handles empty response" time="0.055">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
+  </testsuite>
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/UpgradeBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-18T08:01:55" time="2.226" tests="5">
+    <testcase classname="UpgradeBpmn" name="Submit form with valid input" time="0.142">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
+    <testcase classname="UpgradeBpmn" name="Submit form with invalid input" time="0.033">
+    </testcase>
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.036">
+    </testcase>
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.02">
     </testcase>
     <testcase classname="formatValues tests" name="Estrai estensione file" time="0">
     </testcase>
