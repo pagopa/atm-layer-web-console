@@ -1,4 +1,4 @@
-import { createTheme, Theme, alpha } from "@mui/material/styles";
+import { createTheme, Theme, alpha, PaletteColor } from "@mui/material/styles";
 import { indigo } from "@mui/material/colors";
 
 /* Typefaces */
@@ -95,6 +95,7 @@ declare module "@mui/material/styles" {
 	interface PaletteColor {
 		extraLight?: string;
 	}
+
 }
 
 declare module "@mui/material/Button" {
@@ -165,10 +166,9 @@ const foundation: Theme = createTheme({
 		},
 		normal: {
 			main: colorPrimary,
-			contrastText: colorPrimary,
 			light: "#EBFDFF",
 			dark: "#00707B",
-		},
+		} as PaletteColor,
 		text: {
 			primary: colorTextPrimary,
 			secondary: colorPrimary,
@@ -194,28 +194,28 @@ const foundation: Theme = createTheme({
 			main: "#FE6666",
 			dark: "#D85757",
 			light: "#FE7A7A",
-			extraLight: "#FB9EAC",
+			// extraLight: "#FB9EAC",
 			contrastText: colorTextPrimary,
 		},
 		info: {  // TODO: lasciato quello del tema originale
 			main: "#6BCFFB",
 			dark: "#5BB0D5",
 			light: "#7ED5FC", // TODO: qui andrebbe "#caf2f5"
-			extraLight: "#86E1FD",
+			// extraLight: "#86E1FD",
 			contrastText: colorTextPrimary,
 		},
 		success: {  // TODO: lasciato quello del tema originale
 			main: "#6CC66A",
 			dark: "#5CA85A",
 			light: "#7FCD7D",
-			extraLight: "#B5E2B4",
+			// extraLight: "#B5E2B4",
 			contrastText: colorTextPrimary,
 		},
 		warning: { // TODO: lasciato quello del tema originale
 			main: "#FFCB46",
 			dark: "#D9AD3C",
 			light: "#FFD25E",
-			extraLight: "#FFE5A3",
+			// extraLight: "#FFE5A3",
 			contrastText: colorTextPrimary,
 		},
 	},

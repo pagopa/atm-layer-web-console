@@ -1,11 +1,18 @@
-import React, { SetStateAction } from "react";
-import { PROCESS_RESOURCES, RESOURCES, WORKFLOW_RESOURCE } from "../../../commons/constants";
+/* eslint-disable complexity */
+/* eslint-disable functional/immutable-data */
+/* eslint-disable prefer-const */
+/* eslint-disable functional/no-let */
+import React, { SetStateAction, useState } from "react";
+import { BANKS, PROCESS_RESOURCES, RESOURCES, TRANSACTIONS, USERS, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import ROUTES from "../../../routes";
 import checks from "../../../utils/checks";
 import FilterTemplate from "./FilterTemplate";
 import BpmnFilterComponent from "./BpmnFilterComponent";
 import WRFilterComponent from "./WRFilterComponent";
 import ResourcesFilterComponent from "./ResourcesFilterComponent";
+import TransactionsFilterComponent from "./TransactionsFilterComponent";
+import BanksFilterComponent from "./BanksFilterComponent";
+import UsersFilterComponent from "./UsersFilterComponent";
 
 type Props = {
 	filterValues: any;
@@ -16,11 +23,17 @@ type Props = {
 	driver: string;
 	loadingButton?: boolean;
 	setLoadingButton: React.Dispatch<SetStateAction<boolean>>;
+	createIcon?: boolean;
+	handleClick?: any;
 };
 
-export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton }: Props) {
-
+export default function FilterBar({ filterValues, setFilterValues, getAllList, newFilterValues, driver, loadingButton, setLoadingButton, createIcon, handleClick }: Props) {
+	const [errors, setErrors] = useState<any>({});
+	const [submitted, setSubmitted] = useState(false);
 	const { regexTestField } = checks();
+	const [clearError, setClearError] = useState<boolean>(false);
+
+	const showCreateButton :boolean = driver !== TRANSACTIONS;
 
 	const filterBpmnWithoutStatus = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const withoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
@@ -29,17 +42,16 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		}
 	};
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleDriverSpecificLogic = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, updatedFilterValues: any) => {
 		const { name, value } = event.target;
-		const updatedFilterValues = { ...filterValues, [name]: value };
-	
+
 		switch (driver) {
 		case PROCESS_RESOURCES:
 			filterBpmnWithoutStatus(event);
 			break;
 		case RESOURCES:
 			if (name === "noDeployableResourceType" && value === "") {
-				const filterWithoutResourceType = Object.entries(filterValues).filter(el => el[0] !== "noDeployableResourceType");
+				const filterWithoutResourceType = Object.entries(updatedFilterValues).filter(el => el[0] !== "noDeployableResourceType");
 				if (!(filterWithoutResourceType.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
@@ -47,21 +59,50 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			break;
 		case WORKFLOW_RESOURCE:
 			if ((name === "status" && value === "") || (name === "resourceType" && value === "")) {
-				const filterWfResWithoutStatus = Object.entries(filterValues).filter(el => el[0] !== "status");
-				const filterWithoutWRResourceType = Object.entries(filterValues).filter(el => el[0] !== "resourceType");
-		
+				const filterWfResWithoutStatus = Object.entries(updatedFilterValues).filter(el => el[0] !== "status");
+				const filterWithoutWRResourceType = Object.entries(updatedFilterValues).filter(el => el[0] !== "resourceType");
+
 				if ((name === "status" && value === "") && !(filterWfResWithoutStatus.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
-		
+
 				if ((name === "resourceType" && value === "") && !(filterWithoutWRResourceType.some((value => value[1] !== "")))) {
 					getAllList(undefined, 0);
 				}
 			}
 			break;
+		default:
+			break;
 		}
-	
+	};
+
+	const clearErrorsIfCorrected = (name: string, value: string, updatedFilterValues: any) => {
+		let newErrors = { ...errors };
+		if (name === "rateMin" || name === "rateMax") {
+			if (!updatedFilterValues.rateMin || !updatedFilterValues.rateMax || parseInt(updatedFilterValues.rateMax, 10) >= parseInt(updatedFilterValues.rateMin, 10)) {
+				delete newErrors.rateMin;
+				delete newErrors.rateMax;
+			}
+		} else if ( name === "startTime" || name === "endTime") {
+			if (updatedFilterValues.startTime > updatedFilterValues.endTime) {
+				delete newErrors.endTime;
+			}
+		}
+		return newErrors;
+	};
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = event.target;
+		const updatedFilterValues = { ...filterValues, [name]: value };
+
+		handleDriverSpecificLogic(event, updatedFilterValues);
+
 		setFilterValues(updatedFilterValues);
+
+		if (submitted) {
+			const newErrors = clearErrorsIfCorrected(name, value, updatedFilterValues);
+			setErrors(newErrors);
+		}
 	};
 
 	const handleChangeNumberOnly = (
@@ -73,16 +114,78 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 		filterBpmnWithoutStatus(e);
 	};
 
+	const handleTimeStampChange = (e: Date, key: string) => {
+		const timeStampValue = new Date(e.getTime() - e.getTimezoneOffset() * 60000)
+			.toISOString()
+			.substr(0, 19)
+			.replace("T", " ");
+	
+		if (key === "endTime" && filterValues.startTime) {
+			const startTime = new Date(filterValues.startTime);
+	
+			const isSameDay =
+				startTime.getFullYear() === e.getFullYear() &&
+				startTime.getMonth() === e.getMonth() &&
+				startTime.getDate() === e.getDate();
+	
+			if (isSameDay) {
+				const endTimeWithBuffer = new Date(startTime.getTime() + 5000);
+	
+				if (e <= startTime) {
+					console.log(
+						"endTime uguale o precedente a startTime, impostando endTime 5 secondi dopo startTime"
+					);
+					// eslint-disable-next-line no-param-reassign
+					e = endTimeWithBuffer;
+				}
+			}
+		}
+	
+		const adjustedTimeStampValue = new Date(e.getTime() - e.getTimezoneOffset() * 60000)
+			.toISOString()
+			.substr(0, 19)
+			.replace("T", " ");
+	
+		const timeStampQuery = `{"Timestamp":"${adjustedTimeStampValue}"}`;
+		console.log("setting timeStampValue: " + timeStampQuery);
+	
+		const updatedFilterValues = { ...filterValues, [key]: adjustedTimeStampValue };
+	
+		setFilterValues(updatedFilterValues);
+	
+		if (submitted) {
+			const newErrors = clearErrorsIfCorrected(key, adjustedTimeStampValue, updatedFilterValues);
+			setErrors(newErrors);
+		}
+		return e;
+	};
+
 	const handleSubmit = () => {
-		setLoadingButton(true);
-		if (Object.values(filterValues).some(value => value !== "")) {
-			getAllList(filterValues, 0);
+		setSubmitted(true);
+		let newErrors = { ...errors };
+
+		setErrors(newErrors);
+
+		if (Object.keys(newErrors).length === 0) {
+			setLoadingButton(true);
+			if (Object.values(filterValues).some(value => value !== "")) {
+				getAllList(filterValues, 0);
+			}
 		}
 	};
 
 	const cleanFilter = () => {
 		setFilterValues(newFilterValues);
 		getAllList(undefined, 0);
+		setErrors({});
+		setSubmitted(false);
+		setClearError(!clearError);
+
+		console.error(clearError);
+	};
+
+	const handleResetError = () => {
+		setClearError(false);
 	};
 
 	const filterType = () => {
@@ -93,6 +196,12 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 			return <ResourcesFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		case WORKFLOW_RESOURCE:
 			return <WRFilterComponent filterValues={filterValues} handleChange={handleChange} />;
+		case TRANSACTIONS:
+			return <TransactionsFilterComponent filterValues={filterValues} handleChange={handleChange} handleTimeStampChange={handleTimeStampChange} clearError={clearError} setClearError={setClearError}/>;
+		case BANKS:
+			return <BanksFilterComponent filterValues={filterValues} handleChange={handleChange} errors={errors} showErrors={submitted} />;
+		case USERS:
+			return <UsersFilterComponent filterValues={filterValues} handleChange={handleChange} />;
 		default:
 			return <></>;
 		}
@@ -112,7 +221,7 @@ export default function FilterBar({ filterValues, setFilterValues, getAllList, n
 	};
 
 	return (
-		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()}>
+		<FilterTemplate loadingButton={loadingButton} handleSubmit={handleSubmit} cleanFilter={cleanFilter} filterValues={filterValues} filterRoutes={filterRoutes()} createIcon={createIcon} handleClick={handleClick} driver={driver}>
 			{filterType()}
 		</FilterTemplate>
 	);

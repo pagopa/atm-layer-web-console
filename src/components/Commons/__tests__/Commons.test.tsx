@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
-import { breadCrumbLinkComponent, commonBreadRoot, getQueryString, getTextModal, handleSnackbar, resetErrors } from "../Commons";
-import { DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
+import { addDependentProfiles, breadCrumbLinkComponent, commonBreadRoot, convertProfileToString, convertStringToProfiles, getFilteredButtonConfig, getProfileDescriptionByProfileArray, getProfileDescriptionFromStorage, getProfileDescriptions, getProfileIdsArray, getQueryString, getRoleDescriptionsByUser, getTextModal, handleSnackbar, removeArrayItem, removeArrayItems, resetErrors } from "../Commons";
+import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES, DELETE_WR, DEPLOY_BPMN, DEPLOY_WR, DOWNLOAD_BPMN, DOWNLOAD_RES, DOWNLOAD_WR, PROCESS_RESOURCES, PROFILE_IDS, RESOURCES, ROLLBACK_WR, UPDATE_RES, UPDATE_WR, WORKFLOW_RESOURCE } from "../../../commons/constants";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
 import ROUTES from "../../../routes";
@@ -87,7 +87,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(true, setMessage, setSeverity, setTitle, setOpenSnackBar);
+      handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar);
 
       expect(setSeverity).toHaveBeenCalledWith("success");
       expect(setMessage).toHaveBeenCalledWith("");
@@ -101,7 +101,7 @@ describe("getQueryString", () => {
       const setTitle = jest.fn();
       const setOpenSnackBar = jest.fn();
 
-      handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
+      handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Errore specifico");
 
       expect(setSeverity).toHaveBeenCalledWith("error");
       expect(setMessage).toHaveBeenCalledWith("Errore specifico");
@@ -234,3 +234,171 @@ describe("getTextModal", () => {
     expect(getTextModal("TIPO_NON_GESTITO")).toEqual({ titleModal: "Errore", contentText: "Qualcosa è andato storto" });
   });
 });
+
+
+describe("Test removeArrayItems", () => {
+  test("method removes undefined indexes, orders them, removes corresponding items from array", () => {
+    const indexes = [5,undefined,1,0];
+    const arrayToTrim = [0,1,2,3,4,5,6,7,8,9];
+    const expectedArray = [2,3,4,6,7,8,9];
+    const trimmedArray = removeArrayItems(indexes, arrayToTrim);
+    expect(trimmedArray).toEqual(expectedArray);
+  });
+
+});
+
+describe("Test removeArrayItem", () => {
+  test("remove item from array defined", () => {
+    const arrayToTrim = [0,1,2];
+    const trimmedArray = removeArrayItem(1,arrayToTrim);
+    const expectedArray = [0,2];
+    expect(trimmedArray).toEqual(expectedArray);
+    const noResult = removeArrayItem(1, undefined);
+    expect(noResult).toBeUndefined();
+  })
+});
+
+  describe("getProfileIdsArray", () => {
+    test("should return profile ids array", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getProfileIdsArray(user);
+      expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("getProfileDescriptions", () => {
+    test("should return profile descriptions array", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getProfileDescriptions(user);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getProfileDescriptionByProfileArray", () => {
+    test("should return profile descriptions by profile array", () => {
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = getProfileDescriptionByProfileArray(profiles);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getRoleDescriptionsByUser", () => {
+    test("should return role descriptions by user", () => {
+      const user = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      };
+      const result = getRoleDescriptionsByUser(user);
+      expect(result).toEqual(["desc1", "desc2", "desc3"]);
+    });
+  });
+
+  describe("getFilteredButtonConfig", () => {
+    test("should return filtered button configs", () => {
+      const buttonConfigs = [
+        { visibleCondition: () => true },
+        { visibleCondition: () => false },
+        { visibleCondition: () => true }
+      ];
+      const result = getFilteredButtonConfig(buttonConfigs);
+      expect(result).toEqual([buttonConfigs[0], buttonConfigs[2]]);
+    });
+  });
+
+  describe("addDependentProfiles", () => {
+    test("should return dependent profiles", () => {
+      const selectedProfilesDescriptions = ["desc1", "desc2"];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+
+      PROFILE_IDS.push({
+        id: 1,
+        defaultProfiles: [2]
+      });
+
+      const result = addDependentProfiles(selectedProfilesDescriptions, profiles);
+      expect(result).toEqual(["desc1", "desc2"]);
+    });
+  });
+
+  describe("getProfileDescriptionFromStorage", () => {
+    test("should return profile ids array from storage", () => {
+      const userInfo = JSON.stringify({
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: [
+          { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+          { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+        ]
+      });
+      const result = getProfileDescriptionFromStorage(userInfo);
+      expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("convertStringToProfiles", () => {
+    test("should convert profile descriptions to profile ids", () => {
+      const profileDescriptions = ["desc1", "desc2"];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = convertStringToProfiles(profileDescriptions, profiles);
+      expect(result).toEqual([1, 2]);
+    });
+  });
+
+  describe("convertProfileToString", () => {
+    test("should convert profile ids to profile descriptions", () => {
+      const profileIds = [1, 2];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 3, description: 'desc3', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+      const result = convertProfileToString(profileIds, profiles);
+      expect(result).toEqual(["desc1", "desc2"]);
+    });
+  });

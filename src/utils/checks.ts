@@ -57,6 +57,9 @@ const checks = () => {
 	};
 
 	const isValidResourcesFilename = (filename: string) => {
+		if (!filename){
+			return false;
+		}
 		const validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
 		const parts = filename.split(".");
 

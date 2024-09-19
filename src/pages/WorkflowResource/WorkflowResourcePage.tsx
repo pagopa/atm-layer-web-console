@@ -1,4 +1,3 @@
-import React from "react";
 import WorkflowResourceDataGrid from "../../components/DataGrid/WorkflowResourceDataGrid";
 import { breadCrumbLinkComponent, commonBreadRoot } from "../../components/Commons/Commons";
 import CommonPage from "../CommonPage";

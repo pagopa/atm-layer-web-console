@@ -7,7 +7,7 @@ import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
 import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
-import { MAX_LENGHT_LARGE, UPGRADE_BPMN } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, MAX_LENGHT_LARGE, UPGRADE_BPMN } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 
@@ -81,12 +81,12 @@ export const UpgradeBpmn = () => {
 			try {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
 			} catch (error) {
 				setLoadingButton(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 	};
@@ -109,7 +109,8 @@ export const UpgradeBpmn = () => {
 				clearFile={clearFile}
 				error={errors.file}
 				setFormData={setFormData}
-				formData={formData} />
+				formData={formData}
+				setErrors={setErrors} />
 			<Grid xs={12} item my={1}>
 				<TextField
 					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "file-name-test" }}

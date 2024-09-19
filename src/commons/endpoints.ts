@@ -20,6 +20,23 @@ export const WR_DELETE = "/workflow-resource/disable/:workflowResourceId";
 export const GET_ALL_RESOURCES_FILTER = "/resources/filter";
 export const RESOURCES_UPDATE = "/resources/:resourceId";
 export const RESOURCES_CREATE = "/resources";
+export const RESOURCES_CREATE_MULTIPLE = "/resources/multiple";
 export const RESOURCES_DELETE = "/resources/disable/:uuid";
 
+export const GET_ALL_TRANSACTIONS = "/transactions/search";
+
 export const USER_EMAIL = "/info/email";
+export const USER_INFO = "/user/first-access";
+
+export const GET_ALL_BANKS_FILTER="/banks/search";
+export const GET_BANK="/banks/:acquirerId";
+export const BANKS_CREATE = "/banks/insert";
+export const BANKS_UPDATE = "/banks/update";
+export const BANKS_DELETE = "/banks/disable/:acquirerId";
+
+
+export const GET_ALL_USERS = "/user/filtered";
+export const CREATE_USERS = "/user/insert-with-profiles";
+export const UPDATE_USERS = "/user/update-with-profiles";
+export const DELETE_USERS = "/user/delete/userId/:userId";
+export const PROFILE = "/profile";

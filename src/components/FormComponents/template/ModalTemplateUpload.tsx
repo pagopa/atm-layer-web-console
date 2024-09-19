@@ -1,10 +1,10 @@
 import React, { useEffect, useState }  from "react";
-import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, useTheme } from "@mui/material";
 import { generatePath } from "react-router";
 import UploadField from "../UploadField";
 import { RESOURCES_UPDATE, WR_UPDATE } from "../../../commons/endpoints";
 import { WRUpdateDto } from "../../../model/WorkflowResourceModel";
-import { UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_SUCCESS, UPDATE_RES, UPDATE_WR } from "../../../commons/constants";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
 import { Loading } from "../../Commons/Loading";
 
@@ -24,6 +24,8 @@ type Props = {
 };
 
 export default function ModalTemplateUpload({ type, titleModal, contentText, open, setOpen, recordParams, handleSnackbar, abortController, setMessage, setSeverity, setTitle, setOpenSnackBar}: Props) {
+
+	const theme = useTheme();
 
 	const [showAlert, setShowAlert] = useState(false);
 
@@ -94,7 +96,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} finally {
 					setFormData(initialValues);
 				}
@@ -117,7 +119,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 					const response = await fetchRequest({ urlEndpoint: generatePath(RESOURCES_UPDATE, { resourceId: recordParams.resourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
 					setLoadingButton(false);
 					setOpen(false);
-					handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					if (response?.success) {
 						const updatedResponse = {
 							...response.valuesObj,
@@ -133,7 +135,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
-					handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+					handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 				} finally {
 					setFormData(initialValues);
 				}
@@ -155,7 +157,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			fullWidth
 			maxWidth={"sm"}
 		>
-			<DialogTitle>
+			<DialogTitle sx = {{background : theme.palette.primary.main, color: "white", fontWeight: 600}}>
 				{titleModal}
 			</DialogTitle>
 			<Divider />
@@ -173,7 +175,8 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 							clearFile={clearFile}
 							error={errors.file}
 							setFormData={setFormData}
-							formData={formData} 
+							formData={formData}
+							setErrors={setErrors}
 						/>
 						{definitionKeyValue &&
 						<Typography variant="body1" style={{ fontStyle: "italic" }}>{`* il file deve avere id: ${definitionKeyValue}`}</Typography>}

@@ -1,6 +1,6 @@
 import { Grid, TextField, FormControl, MenuItem } from "@mui/material";
 import React from "react";
-import { MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { EMPTY_SELECT_VALUE, MAX_LENGHT_LARGE } from "../../../commons/constants";
 import StatusFilter from "./StatusFilter";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 const WRFilterComponent = ({ filterValues, handleChange }: Props) => {
 
 	const resourceItems = [
-		{ label: "Stato", value: "" },
+		{ label: EMPTY_SELECT_VALUE, value: "" },
 		{ label: "BPMN", value: "BPMN" },
 		{ label: "DMN", value: "DMN" },
 		{ label: "FORM", value: "FORM" }

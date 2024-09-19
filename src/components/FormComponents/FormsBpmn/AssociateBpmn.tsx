@@ -2,7 +2,7 @@ import { Grid, Stack, Switch, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import { generatePath } from "react-router-dom";
 import { Ctx } from "../../../DataContext";
-import { ACQUIRER_ID_LENGTH, ASSOCIATE_BPMN, TERMINAL_BRANCH_LENGTH } from "../../../commons/constants";
+import { ACQUIRER_ID_LENGTH, ALERT_ERROR, ALERT_SUCCESS, ASSOCIATE_BPMN, TERMINAL_BRANCH_LENGTH } from "../../../commons/constants";
 import formOption from "../../../hook/formOption";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import FormTemplate from "../template/FormTemplate";
@@ -66,14 +66,14 @@ const AssociateBpmn = () => {
 					headers: { "Content-Type": "application/json" }
 				})();
 				setLoadingButton(false);
-				handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 				if (!response?.success) {
 					setErrorCode(response.valuesObj.errorCode);
 				} else { setErrorCode(undefined); }
 			} catch (error) {
 				setLoadingButton(false);
 				console.error("ERROR", error);
-				handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 			}
 		}
 	};
@@ -93,10 +93,10 @@ const AssociateBpmn = () => {
 				body: formData,
 				headers: { "Content-Type": "application/json" }
 			})();
-			handleSnackbar(response?.success, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
+			handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response.valuesObj.message);
 		} catch (error) {
 			console.error("ERROR", error);
-			handleSnackbar(false, setMessage, setSeverity, setTitle, setOpenSnackBar);
+			handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
 		}
 	};
 
