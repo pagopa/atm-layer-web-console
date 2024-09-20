@@ -22,7 +22,7 @@
     <testCase name="Test removeArrayItems method removes undefined indexes, orders them, removes corresponding items from array" duration="1"/>
     <testCase name="Test removeArrayItem remove item from array defined" duration="1"/>
     <testCase name="getProfileIdsArray should return profile ids array" duration="0"/>
-    <testCase name="getProfileDescriptions should return profile descriptions array" duration="1"/>
+    <testCase name="getProfileDescriptions should return profile descriptions array" duration="0"/>
     <testCase name="getProfileDescriptionByProfileArray should return profile descriptions by profile array" duration="0"/>
     <testCase name="getRoleDescriptionsByUser should return role descriptions by user" duration="0"/>
     <testCase name="getFilteredButtonConfig should return filtered button configs" duration="0"/>
@@ -119,8 +119,8 @@
     <testCase name="useColumns should return correct visible columns for RESOURCES" duration="0"/>
     <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should generate correct path for invalid driver" duration="0"/>
-    <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="0"/>
-    <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="1"/>
+    <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="1"/>
+    <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="0"/>
     <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/TableColumn.test.tsx">
@@ -332,12 +332,12 @@
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="9"/>
     <testCase name="checks tests copyObject restituisce una copia profonda dell&apos;oggetto" duration="1"/>
     <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="1"/>
-    <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="1"/>
+    <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="2"/>
     <testCase name="checks tests isValidNumber restituisce true se una stringa rappresenta un numero intero valido" duration="1"/>
     <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="1"/>
     <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
+    <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
@@ -445,12 +445,16 @@
     <testCase name="PrivateRoutes should navigate to login if not logged in" duration="12"/>
     <testCase name="PrivateRoutes should not navigate if logged in" duration="2"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/UpgradeBpmnPage.test.tsx">
+    <testCase name="UpgradeBpmnPage Test UpgradeBpmnPage" duration="131"/>
+    <testCase name="UpgradeBpmnPage populates recordParams correctly when recordParamsString is present in sessionStorage" duration="49"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/__tests__/UploadField.test.tsx">
     <testCase name="UploadField Component should render the UploadFileWithButton component and handle file upload" duration="61"/>
     <testCase name="UploadField Component should render without titleField" duration="10"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/__tests__/formOption.test.tsx">
-    <testCase name="formOption Test test get values" duration="2"/>
+    <testCase name="formOption Test test get values" duration="3"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPageUsersInDb.test.tsx">
     <testCase name="ErrorPageUsersInDb renders correctly" duration="103"/>
@@ -490,6 +494,12 @@
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx">
     <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="20"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
+    <testCase name="ActionIcon test First render" duration="46"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
+    <testCase name="ErrorPage render" duration="25"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
     <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="19"/>
