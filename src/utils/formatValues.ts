@@ -142,12 +142,15 @@ const formatValues = () => {
 
 	const extractDescriptions = (profiles: Array<any>): string => profiles.map(profile => profile.description).join(", ");
 
-	const extractDescriptionsAsArray = (profiles:Array<any>) => {
-		const descriptions :Array<string> = [];
+	const extractDescriptionsAsArray = (profiles: Array<any>) => {
+		const descriptions: Array<string> = [];
+		
 		// eslint-disable-next-line functional/immutable-data
-		profiles.map(profile => descriptions.push(profile.description));
+		profiles.forEach(profile => descriptions.push(profile.description));
+		
 		return descriptions;
 	};
+	
 
 	
 	return {

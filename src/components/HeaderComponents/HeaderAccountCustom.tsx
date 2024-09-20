@@ -98,9 +98,11 @@ export const HeaderAccountCustom = ({
 				>
 					<Box pl={3} className="logo" aria-label={rootLink?.ariaLabel} title={rootLink?.title} display={"flex"} flexDirection={"row"} alignItems={"center"}>
 						{rootLink?.element}
-						<Box ml={6}>
-							<EmulatorButton />
-						</Box>
+						{loggedUser && isProd===false && ( 
+							<Box ml={6}>
+								<EmulatorButton data-testid="emulator-button" />
+							</Box>
+						)}
 					</Box>
 
 					<Stack

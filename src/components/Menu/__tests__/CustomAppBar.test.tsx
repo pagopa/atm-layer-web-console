@@ -109,11 +109,35 @@ describe("CustomAppBar", () => {
 
         expect(screen.getByRole('presentation')).toBeInTheDocument();
 
-        const closeButton = screen.getByRole('button', { name: "" });
+        const closeButton = screen.getByRole('button', { name: "close" });
         fireEvent.click(closeButton);
 
         expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
     });
+
+    test("opens and closes the drawer when clicking the menu icon", () => {
+        render(
+            <ThemeProvider theme={mockTheme}> 
+                <Ctx.Provider value={mockContextValue}>
+                    <BrowserRouter>
+                        <CustomAppBar />
+                    </BrowserRouter>
+                </Ctx.Provider>
+            </ThemeProvider>
+        );
+    
+        const menuButton = screen.getByRole('button', { name: /menu/i });
+        fireEvent.click(menuButton);
+    
+        expect(screen.getByRole('presentation')).toBeInTheDocument();
+    
+        const closeButton = screen.getByRole('button', { name: /close/i });
+        fireEvent.click(closeButton);
+    
+        expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+    });
+    
+    
 
     // test("renders dark font buttons in the drawer", () => {
     //     render(
