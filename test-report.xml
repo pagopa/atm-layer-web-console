@@ -449,6 +449,10 @@
     <testCase name="UpgradeBpmnPage Test UpgradeBpmnPage" duration="131"/>
     <testCase name="UpgradeBpmnPage populates recordParams correctly when recordParamsString is present in sessionStorage" duration="49"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/UpgradeBpmnPage.test.tsx">
+    <testCase name="UpgradeBpmnPage Test UpgradeBpmnPage" duration="131"/>
+    <testCase name="UpgradeBpmnPage populates recordParams correctly when recordParamsString is present in sessionStorage" duration="49"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/__tests__/UploadField.test.tsx">
     <testCase name="UploadField Component should render the UploadFileWithButton component and handle file upload" duration="61"/>
     <testCase name="UploadField Component should render without titleField" duration="10"/>
@@ -494,6 +498,12 @@
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/BreadcrumbComponent.test.tsx">
     <testCase name="BreadcrumbComponent Check for breadcrumbs" duration="20"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
+    <testCase name="ActionIcon test First render" duration="46"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
+    <testCase name="ErrorPage render" duration="25"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/ActionIcon.test.tsx">
     <testCase name="ActionIcon test First render" duration="46"/>
