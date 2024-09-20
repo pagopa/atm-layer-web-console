@@ -423,15 +423,47 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0.001">
+    <testcase classname="UpgradeBpmn" name="Submit form with invalid input" time="0.052">
+    </testcase>
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn delete uploaded file" time="0.052">
+    </testcase>
+    <testcase classname="UpgradeBpmn" name="Test UpgradeBpmn fetch error" time="0.057">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/ModalBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-09-19T12:42:19" time="4.158" tests="9">
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE" time="0.098">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DEPLOY" time="3.042">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DELETE ASSOCIATION" time="0.026">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DELETE" time="0.029">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DEPLOY" time="0.028">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DELETE ASSOCIATION" time="0.016">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test Error during DOWNLOAD" time="0.026">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn with DOWNLOAD" time="0.02">
+    </testcase>
+    <testcase classname="ModalBpmn Test" name="Test ModalBpmn without type" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-09-19T12:42:23" time="0.201" tests="20">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.002">
+    </testcase>
+    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
+    </testcase>
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.013">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn on switch of branchId" time="0.113">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.008">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.002">
+    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.018">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.002">
     </testcase>
@@ -441,11 +473,11 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.006">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
+    <testcase classname="BankDataGrid test" name="BankDataGrid handles fetch error gracefully" time="0.073">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0.001">
     </testcase>

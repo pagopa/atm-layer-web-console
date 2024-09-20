@@ -13,7 +13,7 @@
     <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="42"/>
     <testCase name="commonBreadRoot generate link for BPMN" duration="1"/>
     <testCase name="commonBreadRoot generate link for BPMN detail page" duration="1"/>
-    <testCase name="commonBreadRoot generate link for Static Resource" duration="1"/>
+    <testCase name="commonBreadRoot generate link for Static Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="1"/>
@@ -492,6 +492,6 @@
     <testCase name="ErrorPage render" duration="25"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
-    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="22"/>
+    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="27"/>
   </file>
 </testExecutions>
