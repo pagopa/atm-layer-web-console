@@ -5,10 +5,13 @@ import { ASSOCIATE_BPMN, CREATE_BPMN, CREATE_RES, CREATE_WR, DELETE_BPMN, DEPLOY
 describe("formOption Test", () => {
     const { getFormOptions } = formOption();
     
-    test("test get values", () =>{
+    test("test get values", () => {
         let allFormOptions = [];
-        const allOptions = [CREATE_BPMN, DEPLOY_BPMN, DELETE_BPMN, UPGRADE_BPMN, ASSOCIATE_BPMN, CREATE_RES, UPDATE_RES, CREATE_WR, DEPLOY_WR, ROLLBACK_WR, UPDATE_WR,""];
-        allOptions.map(e => allFormOptions.push(getFormOptions(e)));
+        const allOptions = [CREATE_BPMN, DEPLOY_BPMN, DELETE_BPMN, UPGRADE_BPMN, ASSOCIATE_BPMN, CREATE_RES, UPDATE_RES, CREATE_WR, DEPLOY_WR, ROLLBACK_WR, UPDATE_WR, ""];
+    
+        allOptions.forEach(e => allFormOptions.push(getFormOptions(e)));
+    
         expect(allFormOptions.length).toBe(12);
     });
+    
 });
