@@ -87,7 +87,7 @@ const CustomAppBar = () => {
 					onClose={toggleDrawer(false)}
 				>
 					<Box height={1}>
-						<IconButton sx={{ mb: 2 }} onClick={toggleDrawer(false)}>
+						<IconButton sx={{ mb: 2 }} onClick={toggleDrawer(false)} aria-label="close">
 							{React.createElement(getIcon("Close"))}
 						</IconButton>
 						<Divider sx={{ mb: 2 }} />
