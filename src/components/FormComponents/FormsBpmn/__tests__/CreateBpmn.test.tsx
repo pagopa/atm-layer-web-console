@@ -104,4 +104,14 @@ describe("CreateBpmn Test", () => {
             expect(snackbar).not.toBeInTheDocument();
         });
     });
+
+    test("should validate form and display errors when required fields are missing", async () => {
+        renderCreateBpmn();
+
+        fireEvent.click(screen.getByText("Conferma"));
+
+        await waitFor(() => {
+            expect(screen.getAllByText("Campo obbligatorio")).toHaveLength(2);
+        });
+    });
 });

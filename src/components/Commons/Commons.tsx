@@ -279,14 +279,15 @@ export function removeArrayItem(index:number, arr?:Array<any>) {
 	}
 }
 
-export function removeArrayItems(indexes:Array<number|undefined>, arr?:Array<any>){
-	if(arr){
-		indexes.filter(x => x || x===0);
-		indexes.sort((a,b)=> (a || a===0) && (b || b===0) ? b-a : 0);
-		indexes.map(index => index || index===0 ? arr.splice(index,1):index);
+export function removeArrayItems(indexes: Array<number | undefined>, arr?: Array<any>) {
+	if (arr) {
+		const validIndexes = indexes.filter(x => x !== undefined && x !== null);
+		validIndexes.sort((a, b) => b! - a!);
+		validIndexes.forEach(index => arr.splice(index!, 1));
 		return arr;
 	}
-};
+}
+
 
 export function getProfilesIds(user: User){
 	return user.profiles.map(profile => profile.profileId);
@@ -315,9 +316,8 @@ export function getFilteredButtonConfig (buttonConfigs: any):any {
 	return buttonConfigs.filter((config: { visibleCondition: () => any }) => config.visibleCondition());
 };
 
-export function addDependentProfiles (selectedProfilesDescriptions : Array<string>, profiles: Array<Profile>) {
-
-	function onlyUnique(value:number, index:number, array:Array<number>) {
+export function addDependentProfiles(selectedProfilesDescriptions: Array<string>, profiles: Array<Profile>) {
+	function onlyUnique(value: number, index: number, array: Array<number>) {
 		return array.indexOf(value) === index;
 	}
 
@@ -325,18 +325,18 @@ export function addDependentProfiles (selectedProfilesDescriptions : Array<strin
 
 	// eslint-disable-next-line functional/no-let
 	let selectedAndDefaultProfiles = [...selectedProfileIds];
-	selectedAndDefaultProfiles.map(profile => {
+
+	selectedAndDefaultProfiles.forEach(profile => {
 		const completeProfile = PROFILE_IDS.find((element) => element.id === profile);
 		if (completeProfile) {
-			return selectedAndDefaultProfiles = [
-				...completeProfile.defaultProfiles,
-				...selectedAndDefaultProfiles				
-			];
+			selectedAndDefaultProfiles = completeProfile.defaultProfiles.concat(selectedAndDefaultProfiles);
 		}
-		return selectedAndDefaultProfiles;
 	});
+
 	return convertProfileToString(selectedAndDefaultProfiles.filter(onlyUnique), profiles);
-};
+}
+
+
 
 export function getProfileDescriptionFromStorage (userInfo: any): any {
 	const userInfoObject = JSON.parse(userInfo);

@@ -235,5 +235,58 @@ describe("TableColumn test", () => {
         expect(setType).toHaveBeenCalledWith(UPDATE_USER);
         expect(sessionStorage.getItem("recordParamsUser")).toBe(JSON.stringify(param.row));
     });
+
+    test("deleteColumnUsers should not show delete button for the logged-in user", () => {
+        const { deleteColumnUsers } = TableColumn(setOpen, setType);
+        const param = { row: { userId: "mario.rossi@pagopa.com" } }; // same as logged-in user
+    
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnUsers(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+    
+        expect(screen.queryByTestId("delete-column-test")).not.toBeInTheDocument(); // No delete button
+    });
+    
+    test("deleteColumnUsers should show delete button for a different user", () => {
+        const { deleteColumnUsers } = TableColumn(setOpen, setType);
+        const param = { row: { userId: "paolo.rossi@pagopa.com" } }; // different user
+    
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnUsers(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+    
+        fireEvent.click(screen.getByTestId("delete-column-test"));
+        expect(setOpen).toHaveBeenCalled();
+        expect(setType).toHaveBeenCalledWith(DELETE_USER);
+        expect(sessionStorage.getItem("recordParamsUser")).toBe(JSON.stringify(param.row));
+    });
+
+    test("deleteColumnBank handles setting state and session storage correctly", () => {
+        const { deleteColumnBank } = TableColumn(setOpen, setType);
+        const param = { row: { bankId: "mocked-bank-id" } };
+    
+        render(
+            <BrowserRouter>
+                <ThemeProvider theme={themeApp}>
+                    {deleteColumnBank(param)}
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+    
+        fireEvent.click(screen.getByTestId("delete-column-test"));
+    
+        expect(setOpen).toHaveBeenCalledWith(true);
+        expect(setType).toHaveBeenCalledWith(DELETE_BANK);
+        expect(sessionStorage.getItem("recordParamsBank")).toBe(JSON.stringify(param.row));
+    });
+    
     
 });
