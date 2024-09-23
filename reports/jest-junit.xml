@@ -5,7 +5,7 @@
     </testcase>
     <testcase classname="resetErrors" name="should not reset a specific field error if it does not exist" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.002">
+    <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
     </testcase>
@@ -13,7 +13,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
+    <testcase classname="getQueryString" name="querystring driver not present" time="0">
     </testcase>
     <testcase classname="getQueryString &gt; handleSnackbar" name="success" time="0.002">
     </testcase>
@@ -23,7 +23,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0.003">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
@@ -35,11 +35,11 @@
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.002">
     </testcase>
-    <testcase classname="getTextModal" name="check error in default case" time="0">
+    <testcase classname="getTextModal" name="check error in default case" time="0.001">
     </testcase>
     <testcase classname="Test removeArrayItems" name="method removes undefined indexes, orders them, removes corresponding items from array" time="0">
     </testcase>
-    <testcase classname="Test removeArrayItem" name="remove item from array defined" time="0.001">
+    <testcase classname="Test removeArrayItem" name="remove item from array defined" time="0">
     </testcase>
     <testcase classname="getProfileIdsArray" name="should return profile ids array" time="0">
     </testcase>
@@ -49,7 +49,7 @@
     </testcase>
     <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0">
     </testcase>
-    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0.001">
+    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0">
     </testcase>
     <testcase classname="addDependentProfiles" name="should return dependent profiles" time="0">
     </testcase>
@@ -475,7 +475,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.005">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0.001">
     </testcase>
@@ -589,7 +589,7 @@
     </testcase>
     <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with empty table" time="0.092">
     </testcase>
-    <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test without response" time="0.084">
+    <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0">
     </testcase>
     <testcase classname="BpmnAssociatedDataGrid test" name="BpmnAssociatedDataGrid Test with fetch error" time="0.072">
     </testcase>
@@ -643,13 +643,13 @@
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
+    <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0.001">
+    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0.001">
     </testcase>

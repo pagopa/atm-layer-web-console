@@ -352,8 +352,8 @@
     <testCase name="checks tests Restituisce una copia profonda di un array di oggetti" duration="1"/>
     <testCase name="checks tests isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" duration="2"/>
     <testCase name="checks tests isValidNumber restituisce true se una stringa rappresenta un numero intero valido" duration="1"/>
-    <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="1"/>
-    <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="1"/>
+    <testCase name="checks tests isValidResourcesFilename restituisce true se il nome del file per risorse è valido" duration="0"/>
+    <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="0"/>
     <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="1"/>
