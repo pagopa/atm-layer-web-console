@@ -27,7 +27,7 @@ const RoleFilter = ({ filterValues, handleChange }: Prop) => {
 				id="profileId"
 				name="profileId"
 				value={filterValues.profileId}
-				label="Atorizzazione"
+				label="Autorizzazione"
 				select
 				onChange={(e) => handleChange(e, e.target.name, e.target.value)}
 				size="small"

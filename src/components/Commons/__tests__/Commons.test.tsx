@@ -4,6 +4,7 @@ import { ALERT_ERROR, ALERT_SUCCESS, DELETE_ASSOCIATION, DELETE_BPMN, DELETE_RES
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, generatePath } from "react-router-dom";
 import ROUTES from "../../../routes";
+import { Profile, User } from "../../../model/UserModel";
 
 describe("resetErrors", () => {
   test("reset specific error", () => {
@@ -401,4 +402,144 @@ describe("Test removeArrayItem", () => {
       const result = convertProfileToString(profileIds, profiles);
       expect(result).toEqual(["desc1", "desc2"]);
     });
+
+    test("should not change errors if field is not present", () => {
+      const errors = { field1: "Errore 1", field2: "Errore 2" };
+      let mockErrors = { ...errors };
+      const setErrors = (func: any) => {
+        mockErrors = func(mockErrors);
+      };
+    
+      act(() => {
+        resetErrors(errors, setErrors, "nonExistentField");
+      });
+    
+      expect(mockErrors).toEqual(errors);
+    });
+
+    test("should return empty query string when filterValues is empty", () => {
+      const driver = PROCESS_RESOURCES;
+      const result = getQueryString({}, driver, "www.example.com");
+      expect(result).toEqual("www.example.com");
+    });
+    
+    test("should return empty query string when filterValues is null", () => {
+      const driver = PROCESS_RESOURCES;
+      const result = getQueryString(null, driver, "www.example.com");
+      expect(result).toEqual("www.example.com");
+    });
+
+    test("should show default error message if valueMessage is not provided", () => {
+      const setMessage = jest.fn();
+      const setSeverity = jest.fn();
+      const setTitle = jest.fn();
+      const setOpenSnackBar = jest.fn();
+    
+      handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar);
+    
+      expect(setMessage).toHaveBeenCalledWith("Operazione fallita");
+      expect(setTitle).toHaveBeenCalledWith("Errore");
+    });
+
+    test("should return the original array if indexes is empty", () => {
+      const array = [0, 1, 2, 3];
+      const result = removeArrayItems([], array);
+      expect(result).toEqual(array);
+    });
+    
+    test("should return an empty array if user has no profiles", () => {
+      const user: User = {
+        userId: 'user1',
+        name: 'John',
+        surname: 'Doe',
+        createdAt: '2024-05-27',
+        lastUpdatedAt: '2024-05-27',
+        profiles: []
+      };
+      const result = getProfileDescriptions(user);
+      expect(result).toEqual([]);
+    });
+
+    test("should return unique profiles with dependent profiles added", () => {
+      const selectedProfilesDescriptions = ["desc1", "desc2"];
+      const profiles = [
+        { profileId: 1, description: 'desc1', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' },
+        { profileId: 2, description: 'desc2', createdAt: '2024-05-27', lastUpdatedAt: '2024-05-27' }
+      ];
+    
+      // Simula la struttura di PROFILE_IDS
+      const PROFILE_IDS = [
+        { id: 1, defaultProfiles: [2] },  // Il profilo 1 dipende dal profilo 2
+        { id: 2, defaultProfiles: [] }
+      ];
+    
+      const result = addDependentProfiles(selectedProfilesDescriptions, profiles);
+      expect(result).toEqual(["desc1", "desc2"]);
+    });
+    
+    
+    test("should return the same profiles if no dependent profiles", () => {
+      const selectedProfilesDescriptions = ["desc1"];
+      const profiles: Profile[] = [
+        {
+          profileId: 1,
+          description: 'desc1',
+          createdAt: '2024-05-27',
+          lastUpdatedAt: '2024-05-27'
+        }
+      ];
+      
+    
+      const result = addDependentProfiles(selectedProfilesDescriptions, profiles);
+      expect(result).toEqual(["desc1"]);
+    });
+
+    test("should return an empty array if profile descriptions do not match", () => {
+      const profileDescriptions = ["nonExistentDesc"];
+      const profiles: Profile[] = [
+        {
+          profileId: 1,
+          description: 'desc1',
+          createdAt: '2024-05-27',
+          lastUpdatedAt: '2024-05-27'
+        },
+        {
+          profileId: 2,
+          description: 'desc2',
+          createdAt: '2024-05-27',
+          lastUpdatedAt: '2024-05-27'
+        }
+      ];
+      
+    
+      const result = convertStringToProfiles(profileDescriptions, profiles);
+      expect(result).toEqual([]);
+    });
+
+    // test("should return an empty array if user is null or undefined", () => {
+    //   expect(getProfileIdsArray(null)).toEqual([]);
+    //   expect(getProfileIdsArray(undefined)).toEqual([]);
+    // });
+
+    test("should return an empty array if profile ids do not match", () => {
+      const profileIds = [999];
+      const profiles: Profile[] = [
+        {
+          profileId: 1,
+          description: 'desc1',
+          createdAt: '2024-05-27',
+          lastUpdatedAt: '2024-05-27'
+        },
+        {
+          profileId: 2,
+          description: 'desc2',
+          createdAt: '2024-05-27',
+          lastUpdatedAt: '2024-05-27'
+        }
+      ];      
+    
+      const result = convertProfileToString(profileIds, profiles);
+      expect(result).toEqual([]);
+    });
+    
   });
