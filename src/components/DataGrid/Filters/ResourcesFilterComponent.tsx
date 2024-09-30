@@ -1,6 +1,6 @@
 import { FormControl, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
-import { EMPTY_SELECT_VALUE, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { EMPTY_SELECT_VALUE, MAX_LENGHT_LARGE, MAX_LENGTH_PATH } from "../../../commons/constants";
 
 type Props = {
 	filterValues: any;
@@ -52,7 +52,7 @@ const ResourcesFilterComponent = ({ filterValues, handleChange }: Props) => {
 			</Grid>
 			<Grid item xs={4}>
 				<TextField
-					inputProps={{ maxLength: MAX_LENGHT_LARGE, "data-testid": "storageKey-test" }}
+					inputProps={{ maxLength: MAX_LENGTH_PATH, "data-testid": "storageKey-test" }}
 					id="storageKey"
 					name="storageKey"
 					label="Percorso file"

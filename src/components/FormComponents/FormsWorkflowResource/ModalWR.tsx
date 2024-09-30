@@ -73,14 +73,24 @@ const ModalWR = ({ type, open, setOpen, setOpenSnackBar, setSeverity, setMessage
 		}
 		case DELETE_WR: {
 			try {
-				const response = await fetchRequest({ urlEndpoint: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) , method: "POST", abortController })();
+				const response = await fetchRequest({ 
+					urlEndpoint: generatePath(WR_DELETE, {workflowResourceId: recordParams.workflowResourceId }) , 
+					method: "POST", 
+					abortController 
+				})();
+
 				setLoading(false);
 				setOpen(false);
+
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					navigate(ROUTES.WORKFLOW_RESOURCES);
-				}, 1000);				
+				
+				if (response?.success) {
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						navigate(ROUTES.WORKFLOW_RESOURCES);
+					}, 3000);
+				}
+								
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
