@@ -38,6 +38,12 @@ describe('ModalTemplateUpload Test', () => {
   })
   };
 
+  const mockFormDataDmn = {
+    file: new File(["file contents"], "test.dmn", {
+      type: "application/xml",
+  })
+  };
+
   
   const abortController = new AbortController();
   let setOpen = jest.fn();
@@ -115,7 +121,7 @@ describe('ModalTemplateUpload Test', () => {
     fireEvent.click(screen.getByText('Conferma'));
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 3000));
-      expect(setOpenSnackBar).toHaveBeenCalled();
+      expect(setOpenSnackBar).not.toHaveBeenCalled();
   });
   });
 

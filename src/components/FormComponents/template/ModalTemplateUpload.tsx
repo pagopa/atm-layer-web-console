@@ -75,12 +75,31 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 			}
 			setLoadingButton(true);
 			switch (type) {
-			case UPDATE_WR:{
+			case UPDATE_WR: {
+				if (formData.file) {
+					// eslint-disable-next-line functional/immutable-data
+					const uploadedFileExtension = formData.file.name.split(".").pop()?.toLowerCase();
+				
+					const sessionStorageFileExtension = recordParams.extension;
+				
+					if (uploadedFileExtension !== sessionStorageFileExtension) {
+						setShowAlert(true);
+						setLoadingButton(false);
+						return;
+					}
+				}
+				
 				try {
-					const response = await fetchRequest({ urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }), method: "PUT", abortController, body: postData, isFormData:true })();
+					const response = await fetchRequest({
+						urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }),
+						method: "PUT",
+						abortController,
+						body: postData,
+						isFormData: true
+					})();
 					setLoadingButton(false);
 					setOpen(false);
-					handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+					handleSnackbar(response?.success ? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 					setFormData(initialValues);
 					if (response?.success) {
 						const updatedResponse = {
@@ -92,7 +111,7 @@ export default function ModalTemplateUpload({ type, titleModal, contentText, ope
 							setOpenSnackBar(false);
 							window.location.reload();
 						}, 1000);
-					} 
+					}
 				} catch (error) {
 					setLoadingButton(false);
 					console.error("ERROR", error);
