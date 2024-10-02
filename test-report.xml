@@ -20,7 +20,7 @@
     <testCase name="getTextModal check for title and message in cases" duration="1"/>
     <testCase name="getTextModal check error in default case" duration="0"/>
     <testCase name="Test removeArrayItems method removes undefined indexes, orders them, removes corresponding items from array" duration="0"/>
-    <testCase name="Test removeArrayItem remove item from array defined" duration="0"/>
+    <testCase name="Test removeArrayItem remove item from array defined" duration="1"/>
     <testCase name="getProfileIdsArray should return profile ids array" duration="0"/>
     <testCase name="getProfileDescriptions should return profile descriptions array" duration="1"/>
     <testCase name="getProfileDescriptionByProfileArray should return profile descriptions by profile array" duration="0"/>

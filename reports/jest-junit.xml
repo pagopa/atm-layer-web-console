@@ -7,11 +7,11 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
     </testcase>
     <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
+    <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0.001">
     </testcase>
     <testcase classname="getQueryString" name="querystring driver not present" time="0.001">
     </testcase>
@@ -21,7 +21,7 @@
     </testcase>
     <testcase classname="getQueryString &gt; breadCrumbLinkComponent" name="render link and message" time="0.044">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0.003">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
     </testcase>
@@ -29,7 +29,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Workflow Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0.001">
     </testcase>
@@ -57,13 +57,13 @@
     </testcase>
     <testcase classname="convertStringToProfiles" name="should convert profile descriptions to profile ids" time="0">
     </testcase>
-    <testcase classname="convertProfileToString" name="should convert profile ids to profile descriptions" time="0">
+    <testcase classname="convertProfileToString" name="should convert profile ids to profile descriptions" time="0.001">
     </testcase>
     <testcase classname="convertProfileToString" name="should not change errors if field is not present" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is empty" time="0">
+    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is empty" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is null" time="0">
+    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is null" time="0.004">
     </testcase>
     <testcase classname="convertProfileToString" name="should show default error message if valueMessage is not provided" time="0.001">
     </testcase>
@@ -77,7 +77,7 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should return an empty array if profile descriptions do not match" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return an empty array if profile ids do not match" time="0">
+    <testcase classname="convertProfileToString" name="should return an empty array if profile ids do not match" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/UsersDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-02T07:53:41" time="4.823" tests="9">
@@ -191,9 +191,9 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-10-02T07:54:04" time="0.229" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.162">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.141">
     </testcase>
     <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
     </testcase>
@@ -663,7 +663,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-02T07:54:34" time="4.203" tests="2">
