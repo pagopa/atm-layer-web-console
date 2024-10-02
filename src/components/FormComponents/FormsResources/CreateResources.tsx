@@ -6,7 +6,7 @@ import formOption from "../../../hook/formOption";
 import FormTemplate from "../template/FormTemplate";
 import UploadField from "../UploadField";
 import { Ctx } from "../../../DataContext";
-import { ALERT_ERROR, ALERT_INFO, ALERT_SUCCESS, CREATE_RES, MAX_LENGHT_LARGE } from "../../../commons/constants";
+import { ALERT_ERROR, ALERT_INFO, ALERT_SUCCESS, CREATE_RES, MAX_LENGHT_LARGE, MAX_LENGTH_PATH } from "../../../commons/constants";
 import { handleSnackbar, removeArrayItem, resetErrors } from "../../Commons/Commons";
 import checks from "../../../utils/checks";
 import { RESOURCES_CREATE, RESOURCES_CREATE_MULTIPLE } from "../../../commons/endpoints";
@@ -270,7 +270,7 @@ export const CreateResources = () => {
 					onChange={handleChange}
 					error={Boolean(errors.path)}
 					helperText={errors.path}
-					inputProps={{ "data-testid": "path-test" }}
+					inputProps={{ maxLength: MAX_LENGTH_PATH, "data-testid": "path-test" }}
 				>
 				</TextField>
 			</Grid>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grid, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { UpgradeBpmnDto } from "../../../model/BpmnModel";
 import { handleSnackbar, resetErrors } from "../../Commons/Commons";
 import formOption from "../../../hook/formOption";
@@ -10,6 +11,7 @@ import { UPGRADE_BPMN_PATH } from "../../../commons/endpoints";
 import { ALERT_ERROR, ALERT_SUCCESS, MAX_LENGHT_LARGE, UPGRADE_BPMN } from "../../../commons/constants";
 import checks from "../../../utils/checks";
 import { fetchRequest } from "../../../hook/fetch/fetchRequest";
+import ROUTES from "../../../routes";
 
 export const UpgradeBpmn = () => {
 
@@ -18,6 +20,7 @@ export const UpgradeBpmn = () => {
 	const recordParamsString = sessionStorage.getItem("recordParams");
 	const recordParams = recordParamsString ? JSON.parse(recordParamsString) : "";
 	const { isValidDeployableFilename } = checks();
+	const navigate = useNavigate();
 
 	const initialValues: UpgradeBpmnDto = {
 		uuid: recordParams.bpmnId,
@@ -82,6 +85,11 @@ export const UpgradeBpmn = () => {
 				const response = await fetchRequest({ urlEndpoint: UPGRADE_BPMN_PATH, method: "POST", abortController, body: postData, isFormData: true })();
 				setLoadingButton(false);
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
+
+				setTimeout(() => {
+					setOpenSnackBar(false);
+					navigate(ROUTES.BPMN);
+				}, 2000);
 
 			} catch (error) {
 				setLoadingButton(false);

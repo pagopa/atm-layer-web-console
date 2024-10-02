@@ -7,7 +7,7 @@ const WorkflowResourceDetailPage = () => {
 	const breadComponent = breadCrumbLinkComponent(commonBreadRoot({isWR:true}, false), "Dettaglio risorsa aggiuntiva per processo");
 	const { formatDateToString } = formatValues();
 	const fields = [
-		{ label: "Tipo risorsa", value: "resourceS3Type" },
+		{ label: "Tipo risorsa", value: "resourceType" },
 		{ label: "Nome file", value: "fileName" },
 		{ label: "Stato", value: "status" },
 		{ label: "Data creazione", value: "createdAt", format: formatDateToString},

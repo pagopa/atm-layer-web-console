@@ -38,14 +38,30 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 		switch (type) {
 		case DELETE_RES: {
 			try {
-				const response = await fetchRequest({ urlEndpoint:  generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), method: "POST", abortController })();
+				const response = await fetchRequest({ 
+					urlEndpoint: generatePath(RESOURCES_DELETE, { uuid: recordParams.resourceId }), 
+					method: "POST", 
+					abortController 
+				})();
+					
 				setLoading(false);
 				setOpen(false);
-				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					navigate(ROUTES.RESOURCES);
-				}, 1000);				
+	
+				handleSnackbar(
+					response?.success ? ALERT_SUCCESS : ALERT_ERROR, 
+					setMessage, 
+					setSeverity, 
+					setTitle, 
+					setOpenSnackBar, 
+					response?.valuesObj?.message
+				);
+	
+				if (response?.success) {
+					setTimeout(() => {
+						setOpenSnackBar(false);
+						navigate(ROUTES.RESOURCES);
+					}, 3000);
+				}
 			} catch (error) {
 				setLoading(false);
 				console.error("ERROR", error);
@@ -57,19 +73,24 @@ export const ModalResources = ({ type, open, setOpen, setOpenSnackBar, setSeveri
 			const success = downloadStaticFile(detail);
 			setOpen(false);
 			setLoading(false);
+	
 			if (success) {
 				handleSnackbar(ALERT_SUCCESS, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Riuscita");
+			} else {
+				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
+			}
+				
+			if (success) {
 				setTimeout(() => {
 					setOpenSnackBar(false);
 				}, 3000);
-			} else {
-				handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, "Operazione Fallita");
 			}
 			break;
 		}
 		default: return;
 		}
 	};
+	
 
 	return (
 		<React.Fragment>
