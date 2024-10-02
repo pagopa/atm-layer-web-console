@@ -155,7 +155,7 @@ describe("ActionAlert", () => {
     expect(window.location.pathname).toBe('/bpmn');
   });
 
-  test("navigate to WR when type is DELETE_WR", () => {
+  test("should not navigate when type is DELETE_WR and severity is error", () => {
     const { container } = render(
       <BrowserRouter>
         <ActionAlert
@@ -175,10 +175,34 @@ describe("ActionAlert", () => {
     if (buttonElement) {
       fireEvent.click(buttonElement);
     }
+    expect(window.location.pathname).toBe('/bpmn');
+  });
+
+  test("navigate to WR when type is DELETE_WR and severity is success", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <ActionAlert
+          setOpenSnackBar={setOpenSnackBar}
+          openSnackBar={true}
+          severity="success"
+          message="Operazione riuscita"
+          title="Successo"
+          type="deleteWR"
+          handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+        />
+      </BrowserRouter>
+    );
+
+    expect(screen.getAllByText("Operazione riuscita")[0]).toBeInTheDocument();
+    const buttonElement = container.querySelector('button');
+    if (buttonElement) {
+      fireEvent.click(buttonElement);
+    }
     expect(window.location.pathname).toBe('/workflow_resources');
   });
 
-  test("navigate to Resources when type is DELETE_RES", () => {
+
+  test("should not navigate when type is DELETE_RES and severity is error", () => {
     const { container } = render(
       <BrowserRouter>
         <ActionAlert
@@ -198,8 +222,32 @@ describe("ActionAlert", () => {
     if (buttonElement) {
       fireEvent.click(buttonElement);
     }
+    expect(window.location.pathname).toBe('/workflow_resources');
+  });
+
+  test("navigate to Resources when type is DELETE_RES and severity is success", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <ActionAlert
+          setOpenSnackBar={setOpenSnackBar}
+          openSnackBar={true}
+          severity="success"
+          message="Operazione riuscita"
+          title="Successo"
+          type="deleteResources"
+          handleSwitchAssociationFetch={handleSwitchAssociationFetch}
+        />
+      </BrowserRouter>
+    );
+
+    expect(screen.getAllByText("Operazione riuscita")[0]).toBeInTheDocument();
+    const buttonElement = container.querySelector('button');
+    if (buttonElement) {
+      fireEvent.click(buttonElement);
+    }
     expect(window.location.pathname).toBe('/resources');
   });
+
 
   test("setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case", () => {
     const { container } = render(
