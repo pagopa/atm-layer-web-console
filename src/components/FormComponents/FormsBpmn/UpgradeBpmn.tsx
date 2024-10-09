@@ -54,18 +54,35 @@ export const UpgradeBpmn = () => {
 	};
 
 	const validateForm = () => {
+		const fileError = formData.file
+			? formData.file.size > 1 * 1024 * 1024
+				? "I file devono avere dimensione massima di 1MB"
+				: ""
+			: "Campo obbligatorio";
+	
+		if (fileError && fileError.includes("1MB")) {
+			handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, fileError);
+		}
+	
 		const newErrors = {
-			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "filename non valido" : "Campo obbligatorio",
+			file: fileError,
+			filename: formData.filename
+				? isValidDeployableFilename(formData.filename)
+					? ""
+					: "filename non valido"
+				: "Campo obbligatorio",
 		};
-
+	
 		setErrors(newErrors);
-
+	
+		// Verifica se ci sono altri errori oltre a quello del file.
 		return Object.values(newErrors).every((error) => !error);
 	};
+	
 
 	const clearFile = () => {
-		setFormData({ ...formData, file: undefined });
+		setFormData({ ...formData, file: undefined, filename: "" });
+		setErrors((prevErrors: any) => ({ ...prevErrors, file: "" }));
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -86,10 +103,6 @@ export const UpgradeBpmn = () => {
 				setLoadingButton(false);
 				handleSnackbar(response?.success? ALERT_SUCCESS : ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, response?.valuesObj?.message);
 
-				setTimeout(() => {
-					setOpenSnackBar(false);
-					navigate(ROUTES.BPMN);
-				}, 2000);
 
 			} catch (error) {
 				setLoadingButton(false);
