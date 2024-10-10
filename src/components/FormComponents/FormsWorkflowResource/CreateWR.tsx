@@ -39,19 +39,37 @@ export const CreateWR = () => {
 	};
 
 	function validateForm() {
+		const fileError = formData.file
+			? formData.file.size > 10 * 1024 * 1024
+				? "I file devono avere dimensione massima di 10MB"
+				: ""
+			: "Campo obbligatorio";
+	
+		if (fileError && fileError.includes("10MB")) {
+			handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, fileError);
+		}
+	
 		const newErrors = {
-			file: formData.file ? "" : "Campo obbligatorio",
-			filename: formData.filename ? isValidDeployableFilename(formData.filename) ? "" : "Il nome del file deve essere privo di estensione, gli unici caratteri speciali ammessi sono _ e - " : "Campo obbligatorio",
+			file: fileError,
+			filename: formData.filename
+				? isValidDeployableFilename(formData.filename)
+					? ""
+					: "Il nome del file deve essere privo di estensione, gli unici caratteri speciali ammessi sono _ e -"
+				: "Campo obbligatorio",
 			resourceType: formData.resourceType ? "" : "Campo obbligatorio",
 		};
-
+	
 		setErrors(newErrors);
+	
+		// Verifica se ci sono altri errori oltre a quello del file.
 		return Object.values(newErrors).every((error) => !error);
-	};
+	}
+	
 
 
 	const clearFile = () => {
 		setFormData({ ...formData, file: undefined, filename: "" });
+		setErrors((prevErrors: any) => ({ ...prevErrors, file: "" }));
 	};
 
 
