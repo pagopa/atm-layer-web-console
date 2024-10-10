@@ -112,7 +112,7 @@
     <testCase name="useColumns should return correct visible columns for RESOURCES" duration="5"/>
     <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="1"/>
     <testCase name="useColumns should generate correct path for invalid driver" duration="0"/>
-    <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="0"/>
+    <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="1"/>
     <testCase name="useColumns should return empty object for invalid driver in getVisibleColumns" duration="0"/>
     <testCase name="useColumns should return empty object for invalid driver in getRecordBpmnParams" duration="0"/>
   </file>
@@ -335,6 +335,13 @@
     <testCase name="ModalResources Test Test Error during DOWNLOAD" duration="14"/>
     <testCase name="ModalResources Test Test ModalResources with default driver" duration="20"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsResources/__tests__/ModalResources.test.tsx">
+    <testCase name="ModalResources Test Test ModalResources with DELETE" duration="120"/>
+    <testCase name="ModalResources Test Test ModalResources with DOWNLOAD" duration="3030"/>
+    <testCase name="ModalResources Test Test Catch Error during DELETE" duration="36"/>
+    <testCase name="ModalResources Test Test Error during DOWNLOAD" duration="20"/>
+    <testCase name="ModalResources Test Test ModalResources with default driver" duration="35"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsWorkflowResource/__tests__/CreateWR.test.tsx">
     <testCase name="CreateWR Test should successfully submit the form and display snackbar" duration="336"/>
     <testCase name="CreateWR Test should display validation errors when form is incomplete" duration="66"/>
@@ -517,6 +524,9 @@
     <testCase name="ErrorPage render" duration="23"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
-    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="20"/>
+    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="23"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
+    <testCase name="ErrorPage render" duration="24"/>
   </file>
 </testExecutions>

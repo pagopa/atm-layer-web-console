@@ -35,7 +35,7 @@
     </testcase>
     <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
     </testcase>
-    <testcase classname="getTextModal" name="check error in default case" time="0.001">
+    <testcase classname="getTextModal" name="check error in default case" time="0">
     </testcase>
     <testcase classname="Test removeArrayItems" name="method removes undefined indexes, orders them, removes corresponding items from array" time="0">
     </testcase>
@@ -49,11 +49,11 @@
     </testcase>
     <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0.001">
     </testcase>
-    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0">
+    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0.001">
     </testcase>
     <testcase classname="addDependentProfiles" name="should return dependent profiles" time="0.001">
     </testcase>
-    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0">
+    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0.001">
     </testcase>
     <testcase classname="convertStringToProfiles" name="should convert profile descriptions to profile ids" time="0.001">
     </testcase>
@@ -71,7 +71,7 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should return an empty array if user has no profiles" time="0">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return unique profiles with dependent profiles added" time="0">
+    <testcase classname="convertProfileToString" name="should return unique profiles with dependent profiles added" time="0.001">
     </testcase>
     <testcase classname="convertProfileToString" name="should return the same profiles if no dependent profiles" time="0.001">
     </testcase>
@@ -193,7 +193,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.141">
     </testcase>
     <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
     </testcase>
@@ -203,7 +203,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.002">
+    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0">
     </testcase>
@@ -215,7 +215,7 @@
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
     </testcase>
@@ -235,7 +235,7 @@
     </testcase>
     <testcase classname="ModalUsers component" name="handles form submission for DELETE_USER" time="0.039">
     </testcase>
-    <testcase classname="ModalUsers component" name="catches error from form submission for DELETE_USER" time="0.052">
+    <testcase classname="ModalUsers component" name="catches error from form submission for DELETE_USER" time="0.045">
     </testcase>
     <testcase classname="ModalUsers component" name="handles form submission for CREATE_USER response success" time="3.679">
     </testcase>
@@ -261,23 +261,23 @@
   <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-09T14:58:50" time="0.931" tests="11">
     <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.021">
     </testcase>
-    <testcase classname="TableColumn test" name="Test renderCell" time="0.012">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.021">
     </testcase>
-    <testcase classname="TableColumn test" name="Test actionColumn" time="0.015">
+    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.011">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumn" time="0.008">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumnBank" time="0.01">
     </testcase>
-    <testcase classname="TableColumn test" name="Test deleteColumnUsers self" time="0.002">
+    <testcase classname="TableColumn test" name="Test deleteColumnUsers" time="0.007">
     </testcase>
-    <testcase classname="TableColumn test" name="Test deleteColumnUsers" time="0.004">
+    <testcase classname="TableColumn test" name="editColumnUsers handles setting state and session storage correctly" time="0.007">
     </testcase>
-    <testcase classname="TableColumn test" name="editColumnUsers handles setting state and session storage correctly" time="0.005">
+    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.003">
     </testcase>
-    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.002">
+    <testcase classname="TableColumn test" name="deleteColumnUsers should show delete button for a different user" time="0.007">
     </testcase>
-    <testcase classname="TableColumn test" name="deleteColumnUsers should show delete button for a different user" time="0.006">
+    <testcase classname="TableColumn test" name="deleteColumnBank handles setting state and session storage correctly" time="0.005">
     </testcase>
     <testcase classname="TableColumn test" name="deleteColumnBank handles setting state and session storage correctly" time="0.004">
     </testcase>
@@ -471,7 +471,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.002">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
     </testcase>
@@ -479,13 +479,13 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkValue" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0">
+    <testcase classname="formatValues tests" name="Verifica la funzione checkEmpty" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione del percentuale" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
     </testcase>
@@ -579,7 +579,7 @@
     </testcase>
     <testcase classname="ModalTemplate test" name="should call custom handleClose when provided and &apos;Annulla&apos; is clicked" time="0.023">
     </testcase>
-    <testcase classname="ModalTemplate test" name="should use default handleClose if no custom handleClose is provided" time="0.019">
+    <testcase classname="ModalTemplate test" name="should call handleSubmit when Conferma button is clicked" time="0.019">
     </testcase>
     <testcase classname="ModalTemplate test" name="should call handleSubmit when Conferma button is clicked" time="0.021">
     </testcase>
@@ -641,11 +641,11 @@
     </testcase>
     <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.001">
+    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.01">
     </testcase>
     <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.004">
     </testcase>
-    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
+    <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.001">
     </testcase>
@@ -653,7 +653,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0.001">
     </testcase>
@@ -709,7 +709,7 @@
   <testsuite name="src/components/NavigationComponents/__tests__/EmulatorButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-09T14:59:29" time="3.715" tests="4">
     <testcase classname="EmulatorButton" name="renders the button when user has EMULATOR profile" time="0.036">
     </testcase>
-    <testcase classname="EmulatorButton" name="does not render the button when user does not have EMULATOR profile" time="0.002">
+    <testcase classname="EmulatorButton" name="does not render the button when user does not have EMULATOR profile" time="0.003">
     </testcase>
     <testcase classname="EmulatorButton" name="opens the emulator URL in a new tab when clicked" time="0.01">
     </testcase>
@@ -727,7 +727,7 @@
     </testcase>
     <testcase classname="LoginPage" name="Test render and click Accedi no debug" time="0.015">
     </testcase>
-    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.018">
+    <testcase classname="LoginPage" name="Test render and click Accedi with debug" time="0.024">
     </testcase>
   </testsuite>
   <testsuite name="src/components/UploadFileComponents/__tests__/UploadFileWithButton.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-09T14:59:32" time="4.108" tests="4">

@@ -103,15 +103,15 @@ export default function ModalTemplateUpload({
 				if (formData.file) {
 					// eslint-disable-next-line functional/immutable-data
 					const uploadedFileExtension = formData.file.name.split(".").pop()?.toLowerCase();
+          
 					const sessionStorageFileExtension = recordParams.extension;
-
+        
 					if (uploadedFileExtension !== sessionStorageFileExtension) {
 						setShowAlert(true);
 						setLoadingButton(false);
 						return;
 					}
 				}
-
 				try {
 					const response = await fetchRequest({
 						urlEndpoint: generatePath(WR_UPDATE, { workflowResourceId: recordParams.workflowResourceId }),
