@@ -36,9 +36,9 @@
     <testCase name="convertProfileToString should show default error message if valueMessage is not provided" duration="4"/>
     <testCase name="convertProfileToString should return the original array if indexes is empty" duration="0"/>
     <testCase name="convertProfileToString should return an empty array if user has no profiles" duration="0"/>
-    <testCase name="convertProfileToString should return unique profiles with dependent profiles added" duration="1"/>
-    <testCase name="convertProfileToString should return the same profiles if no dependent profiles" duration="0"/>
-    <testCase name="convertProfileToString should return an empty array if profile descriptions do not match" duration="1"/>
+    <testCase name="convertProfileToString should return unique profiles with dependent profiles added" duration="0"/>
+    <testCase name="convertProfileToString should return the same profiles if no dependent profiles" duration="1"/>
+    <testCase name="convertProfileToString should return an empty array if profile descriptions do not match" duration="0"/>
     <testCase name="convertProfileToString should return an empty array if profile ids do not match" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/DataGrid/__tests__/UsersDataGrid.test.tsx">
@@ -434,6 +434,9 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/AssociateBpmnPage.test.tsx">
     <testCase name="AssociateBpmnPage getItem recordParams case" duration="134"/>
     <testCase name="AssociateBpmnPage populates recordParams correctly when recordParamsString is present in sessionStorage" duration="42"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnPage.test.tsx">
+    <testCase name="BpmnPage test First render" duration="306"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Transactions/__tests__/TransactionsPage.test.tsx">
     <testCase name="TransactionsPage test First render" duration="339"/>

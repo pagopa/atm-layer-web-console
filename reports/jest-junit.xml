@@ -7,7 +7,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="getQueryString" name="querystring RESOURCES" time="0.001">
+    <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
     </testcase>
@@ -47,7 +47,7 @@
     </testcase>
     <testcase classname="getProfileDescriptionByProfileArray" name="should return profile descriptions by profile array" time="0.001">
     </testcase>
-    <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0">
+    <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0.001">
     </testcase>
     <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0.002">
     </testcase>
@@ -67,15 +67,15 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should show default error message if valueMessage is not provided" time="0.004">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return the original array if indexes is empty" time="0">
+    <testcase classname="convertProfileToString" name="should return the original array if indexes is empty" time="0.001">
     </testcase>
     <testcase classname="convertProfileToString" name="should return an empty array if user has no profiles" time="0">
     </testcase>
     <testcase classname="convertProfileToString" name="should return unique profiles with dependent profiles added" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return the same profiles if no dependent profiles" time="0">
+    <testcase classname="convertProfileToString" name="should return the same profiles if no dependent profiles" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return an empty array if profile descriptions do not match" time="0.001">
+    <testcase classname="convertProfileToString" name="should return an empty array if profile descriptions do not match" time="0">
     </testcase>
     <testcase classname="convertProfileToString" name="should return an empty array if profile ids do not match" time="0">
     </testcase>
@@ -177,11 +177,11 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.03">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.021">
+    <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD DMN" time="3.03">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.028">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD BPMN" time="3.039">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DOWNLOAD FORM" time="3.027">
     </testcase>
@@ -211,7 +211,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
@@ -335,7 +335,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.016">
     </testcase>
-    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_WR and severity is error" time="0.01">
+    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_WR and severity is error" time="0.007">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR and severity is success" time="0.016">
     </testcase>
@@ -349,7 +349,7 @@
   <testsuite name="src/components/FormComponents/template/__tests__/ModalTemplateUpload.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:53:50" time="11.15" tests="10">
     <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_WR" time="3.132">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_WR" time="0.069">
+    <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_WR" time="0.079">
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test clear button in UPDATE_WR" time="0.052">
     </testcase>
@@ -425,7 +425,7 @@
     </testcase>
     <testcase classname="ModalBank Test" name="should display error message when server returns an error during CREATE_BANK" time="3.111">
     </testcase>
-    <testcase classname="ModalBank Test" name="should render all form fields correctly" time="0.057">
+    <testcase classname="ModalBank Test" name="should render all form fields correctly" time="0.047">
     </testcase>
     <testcase classname="ModalBank Test" name="should validate form when required fields are missing" time="0.067">
     </testcase>
@@ -477,7 +477,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la conversione di una stringa con separatore decimale da , a . in float" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data nel formato &quot;gg-mm-aaaa&quot; in &quot;aaaa-mm-gg&quot;" time="0.002">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.009">
     </testcase>
@@ -577,7 +577,7 @@
     </testcase>
     <testcase classname="ModalTemplate test" name="should call setOpen with false when Annulla button is clicked" time="0.035">
     </testcase>
-    <testcase classname="ModalTemplate test" name="should call custom handleClose when provided and &apos;Annulla&apos; is clicked" time="0.024">
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.187">
     </testcase>
     <testcase classname="ModalTemplate test" name="should use default handleClose if no custom handleClose is provided" time="0.018">
     </testcase>
@@ -601,7 +601,7 @@
   <testsuite name="src/pages/Layout/__tests__/PageLayout.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:12" time="4.114" tests="2">
     <testcase classname="PageLayout test" name="Test render PageLayout component with loading false and no userEmail nor token" time="0.069">
     </testcase>
-    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.007">
+    <testcase classname="PageLayout test" name="Test render PageLayout component with loading true and no userEmail with token" time="0.012">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Users/__tests__/UsersPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:16" time="1.515" tests="1">
@@ -695,7 +695,7 @@
   <testsuite name="src/components/FormComponents/__tests__/MultiSelect.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:27" time="1.75" tests="3">
     <testcase classname="MultiSelect component" name="renders the checkbox with correct icon" time="0.479">
     </testcase>
-    <testcase classname="MultiSelect component" name="renders selected checkbox with correct icon" time="0.26">
+    <testcase classname="App component" name="Test App with jwt in sessionStorage" time="0.046">
     </testcase>
     <testcase classname="MultiSelect component" name="calls handleChange with completeProfiles on change" time="0.213">
     </testcase>
@@ -753,7 +753,7 @@
     </testcase>
     <testcase classname="MenuButtons" name="renders icon when iconButton prop is provided" time="0.012">
     </testcase>
-    <testcase classname="MenuButtons" name="does not call navigate when route prop is not provided" time="0.008">
+    <testcase classname="MenuButtons" name="does not call navigate when route prop is not provided" time="0.013">
     </testcase>
     <testcase classname="MenuButtons" name="sets anchorEl state when clicked" time="0.006">
     </testcase>
@@ -797,7 +797,7 @@
   <testsuite name="src/components/NavigationComponents/__tests__/ProtectedRoute.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:41" time="0.881" tests="2">
     <testcase classname="ProtectedRoute" name="renders protected content when user has the required profile" time="0.036">
     </testcase>
-    <testcase classname="ProtectedRoute" name="redirects to unauthorized page when user does not have the required profile" time="0.003">
+    <testcase classname="ProtectedRoute" name="redirects to unauthorized page when user does not have the required profile" time="0.005">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:41" time="0.849" tests="2">
