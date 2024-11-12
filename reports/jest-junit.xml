@@ -9,7 +9,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
+    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0">
     </testcase>
@@ -33,7 +33,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0.001">
     </testcase>
-    <testcase classname="getTextModal" name="check for title and message in cases" time="0.002">
+    <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
     </testcase>
     <testcase classname="getTextModal" name="check error in default case" time="0">
     </testcase>
@@ -53,7 +53,7 @@
     </testcase>
     <testcase classname="addDependentProfiles" name="should return dependent profiles" time="0.001">
     </testcase>
-    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0">
+    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0.001">
     </testcase>
     <testcase classname="convertStringToProfiles" name="should convert profile descriptions to profile ids" time="0.001">
     </testcase>
@@ -161,7 +161,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test setting error when endTime is before startTime" time="1.474">
     </testcase>
-    <testcase classname="FilterBar test" name="Test validateDateRange correctly handles valid dates" time="0.044">
+    <testcase classname="FilterBar test" name="Test validateDateRange correctly handles valid dates" time="0.043">
     </testcase>
     <testcase classname="FilterBar test" name="Test minDateTime for endTime is set correctly" time="2.427">
     </testcase>
@@ -169,13 +169,13 @@
   <testsuite name="src/components/FormComponents/FormsWorkflowResource/__tests__/ModalWR.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:53:31" time="17.114" tests="10">
     <testcase classname="ModalResources Test" name="Test ModalWR with ROLLBACK" time="0.133">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.024">
+    <testcase classname="ModalResources Test" name="Test Catch Error during ROLLBACK" time="0.03">
     </testcase>
     <testcase classname="ModalResources Test" name="Test ModalWR with DEPLOY" time="3.035">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.037">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.03">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.026">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.024">
     </testcase>
@@ -191,15 +191,15 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:53:48" time="0.24" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid.test Test with empty table" time="0.162">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.141">
     </testcase>
     <testcase classname="useColumns" name="should return correct record BPMN params" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for PROCESS_RESOURCES" time="0.005">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.014">
+    <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.017">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.005">
     </testcase>
@@ -215,7 +215,7 @@
     </testcase>
     <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
+    <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty object for invalid driver in getVisibleColumns" time="0">
     </testcase>
@@ -227,7 +227,7 @@
     </testcase>
     <testcase classname="ModalUsers component" name="renders correctly for UPDATE_USER" time="0.106">
     </testcase>
-    <testcase classname="ModalUsers component" name="renders correctly for DELETE_USER" time="0.023">
+    <testcase classname="ModalUsers component" name="renders correctly for DELETE_USER" time="0.022">
     </testcase>
     <testcase classname="ModalUsers component" name="handles multi-select change correctly" time="0.74">
     </testcase>
@@ -261,21 +261,21 @@
   <testsuite name="src/components/DataGrid/__tests__/TableColumn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:53:49" time="0.893" tests="11">
     <testcase classname="TableColumn test" name="Test showCustomHeader" time="0.028">
     </testcase>
-    <testcase classname="TableColumn test" name="Test renderCell" time="0.012">
+    <testcase classname="TableColumn test" name="Test renderCell" time="0.018">
     </testcase>
-    <testcase classname="TableColumn test" name="Test actionColumn" time="0.015">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.021">
     </testcase>
-    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.007">
+    <testcase classname="TableColumn test" name="Test deleteColumn" time="0.011">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumnBank" time="0.006">
     </testcase>
-    <testcase classname="TableColumn test" name="Test deleteColumnUsers self" time="0.002">
+    <testcase classname="TableColumn test" name="Test deleteColumnUsers self" time="0.003">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumnUsers" time="0.005">
     </testcase>
     <testcase classname="TableColumn test" name="editColumnUsers handles setting state and session storage correctly" time="0.006">
     </testcase>
-    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.002">
+    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.003">
     </testcase>
     <testcase classname="TableColumn test" name="deleteColumnUsers should show delete button for a different user" time="0.007">
     </testcase>
@@ -309,7 +309,7 @@
     </testcase>
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId positive case" time="0.068">
     </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.048">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.053">
     </testcase>
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN catch case" time="0.05">
     </testcase>
@@ -357,7 +357,7 @@
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.039">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test dialog close" time="0.043">
+    <testcase classname="ActionAlert" name="reload page when type is included in DEPLOY_VALUES" time="0.01">
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test form validation" time="0.078">
     </testcase>
@@ -391,7 +391,9 @@
     </testcase>
     <testcase classname="ModalBank Test" name="Test ModalBank with UPDATE_BANK fetch not success" time="3.098">
     </testcase>
-    <testcase classname="ModalBank Test" name="Test ModalBank with UPDATE_BANK catch error" time="3.095">
+  </testsuite>
+  <testsuite name="src/components/FormComponents/FormsBank/__tests__/ModalBank.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-10-02T07:53:38" time="42.094" tests="27">
+    <testcase classname="ModalBank Test" name="Test ModalBank with CREATE_BANK fetch success" time="3.538">
     </testcase>
     <testcase classname="ModalBank Test" name="Test ModalBank with UPDATE_BANK fetch success" time="3.088">
     </testcase>
@@ -427,7 +429,7 @@
     </testcase>
     <testcase classname="ModalBank Test" name="should render all form fields correctly" time="0.047">
     </testcase>
-    <testcase classname="ModalBank Test" name="should validate form when required fields are missing" time="0.067">
+    <testcase classname="ModalBank Test" name="should validate form when required fields are missing" time="0.053">
     </testcase>
     <testcase classname="ModalBank Test" name="should handle error during form submission" time="1.126">
     </testcase>
@@ -481,11 +483,11 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data in una stringa nel formato &quot;hh:mm&quot;" time="0.009">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.004">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
     </testcase>
@@ -503,7 +505,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
     </testcase>
@@ -531,7 +533,7 @@
     </testcase>
     <testcase classname="HeaderAccountCustom" name="logout button works" time="0.015">
     </testcase>
-    <testcase classname="HeaderAccountCustom" name="getUserInfo should log an error when fetchRequest throws an error" time="0.017">
+    <testcase classname="HeaderAccountCustom" name="getUserInfo should log an error when fetchRequest throws an error" time="0.014">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:07" time="2.281" tests="4">
@@ -559,7 +561,7 @@
     </testcase>
     <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test without response" time="0.171">
     </testcase>
-    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test Catch Error" time="0.136">
+    <testcase classname="ResourcesDataGrid test" name="ResourcesDataGrid Test Catch Error" time="0.124">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/BpmnDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2024-11-12T15:54:09" time="2.686" tests="4">
@@ -649,7 +651,7 @@
     </testcase>
     <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.001">
+    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.01">
     </testcase>
     <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.001">
     </testcase>
@@ -661,7 +663,7 @@
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0.001">
     </testcase>
@@ -755,7 +757,7 @@
     </testcase>
     <testcase classname="MenuButtons" name="does not call navigate when route prop is not provided" time="0.013">
     </testcase>
-    <testcase classname="MenuButtons" name="sets anchorEl state when clicked" time="0.006">
+    <testcase classname="MenuButtons" name="sets anchorEl state when clicked" time="0.007">
     </testcase>
     <testcase classname="MenuButtons" name="Testing other ternary branches" time="0.014">
     </testcase>
@@ -783,7 +785,7 @@
     </testcase>
     <testcase classname="decode file test" name="Test base64_encode function" time="0">
     </testcase>
-    <testcase classname="decode file test" name="download a file successfully" time="0.005">
+    <testcase classname="decode file test" name="download a file successfully" time="0.006">
     </testcase>
     <testcase classname="decode file test" name="download file doc null" time="0.001">
     </testcase>

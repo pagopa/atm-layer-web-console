@@ -17,7 +17,7 @@
     <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="1"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="1"/>
-    <testCase name="getTextModal check for title and message in cases" duration="2"/>
+    <testCase name="getTextModal check for title and message in cases" duration="1"/>
     <testCase name="getTextModal check error in default case" duration="0"/>
     <testCase name="Test removeArrayItems method removes undefined indexes, orders them, removes corresponding items from array" duration="0"/>
     <testCase name="Test removeArrayItem remove item from array defined" duration="1"/>
@@ -100,7 +100,7 @@
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/Grids/__tests__/useColumns.test.ts">
     <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="2"/>
-    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="1"/>
+    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="0"/>
     <testCase name="useColumns should return correct navigation paths for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should return correct record BPMN params" duration="1"/>
     <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="5"/>
@@ -413,7 +413,7 @@
     <testCase name="UploadFileWithButton No File Uploaded With Error" duration="6"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/HeaderComponents/__tests__/Logo.test.tsx">
-    <testCase name="HeaderAccountCustom test First render" duration="51"/>
+    <testCase name="HeaderAccountCustom test First render" duration="46"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesPage.test.tsx">
     <testCase name="ResourcesPage test First render" duration="261"/>
@@ -478,7 +478,7 @@
     <testCase name="UploadField Component should render without titleField" duration="13"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/__tests__/formOption.test.tsx">
-    <testCase name="formOption Test test get values" duration="3"/>
+    <testCase name="formOption Test test get values" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPageUsersInDb.test.tsx">
     <testCase name="ErrorPageUsersInDb renders correctly" duration="96"/>
