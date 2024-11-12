@@ -51,28 +51,41 @@ export const CreateResources = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
+	// eslint-disable-next-line complexity
 	const validateForm = () => {
-		// eslint-disable-next-line functional/immutable-data
 		const fileExtension = formData.file?.name.split(".").pop()?.toLowerCase();
 		// eslint-disable-next-line functional/immutable-data
 		const fileExtensions = formData.filenames?.map((name: string) => name.split(".").pop()?.toLowerCase());
+	
+		const fileError = multiple
+			? formData.fileArray.reduce((total: number, file: Blob) => total + file.size, 0) > 10 * 1024 * 1024
+				? "La somma delle dimensioni dei file deve essere inferiore a 10MB"
+				: ""
+			: formData.file && formData.file.size > 10 * 1024 * 1024
+				? "Il file deve avere dimensione massima di 10MB"
+				: formData.file ? "" : "Campo obbligatorio";
+	
+		if (fileError && fileError.includes("10MB")) {
+			handleSnackbar(ALERT_ERROR, setMessage, setSeverity, setTitle, setOpenSnackBar, fileError);
+			return false;
+		}
+	
 		const newErrors = {
-			file: formData.file || multiple ? "" : "Campo obbligatorio",
-			filename: multiple? "" : isValidResourcesFilename(formData.filename) ?
-			// eslint-disable-next-line functional/immutable-data
-				(fileExtension === formData.filename.split(".").pop()?.toLowerCase()) ?
-					"" :
-					"L'estensione del file non corrisponde con quello caricato"
+			file: fileError,
+			filename: multiple ? "" : isValidResourcesFilename(formData.filename)
+				? (fileExtension === formData.filename.split(".").pop()?.toLowerCase())
+					? ""
+					: "L'estensione del file non corrisponde con quello caricato"
 				: "Il nome del file deve essere nel formato nome.estensione; gli unici caratteri speciali ammessi sono _ e -",
-			fileArray: formData.fileArray?.length > 0 ||  !multiple ? "" : "Campo obbligatorio",
-			filenames: !multiple? "" : formData.filenames?.map((name: string) =>
+			fileArray: formData.fileArray?.length > 0 || !multiple ? "" : "Campo obbligatorio",
+			filenames: !multiple ? "" : formData.filenames?.map((name: string) =>
 				isValidResourcesFilename(name)
-				 ? ""
+					? ""
 					: "Il nome del file deve essere nel formato nome.estensione; gli unici caratteri speciali ammessi sono _ e -"),
-			resourceType: formData.resourceType ?
-				(formData.resourceType  === "HTML" && ( fileExtensions?.every((el: string) => el === "html") || fileExtension === "html")) || 
-		(formData.resourceType  === "OTHER" && ((!multiple && fileExtension !== "html") || (multiple && !fileExtensions?.includes("html"))) ) ?
-					""
+			resourceType: formData.resourceType
+				? (formData.resourceType === "HTML" && (fileExtensions?.every((el: string) => el === "html") || fileExtension === "html")) ||
+				  (formData.resourceType === "OTHER" && ((!multiple && fileExtension !== "html") || (multiple && !fileExtensions?.includes("html"))))
+					? ""
 					: "L'estensione del file non corrisponde con quella selezionata"
 				: "Campo obbligatorio",
 			path: formData.path
@@ -81,13 +94,16 @@ export const CreateResources = () => {
 					: "La stringa non deve iniziare, né finire con / e non può contenere caratteri speciali; va indicato solo il percorso e non il nome del file"
 				: ""
 		};
-
+	
 		setErrors(newErrors);
-
+	
+		// Controlla se ci sono errori restanti (escludendo l'errore dei 10MB già gestito)
 		return Object.values(newErrors).every((error) =>
 			Array.isArray(error) ? error.every(e => !e) : !error
 		);
 	};
+	
+	
 
 
 
