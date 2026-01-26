@@ -435,6 +435,9 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnPage.test.tsx">
     <testCase name="BpmnPage test First render" duration="308"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Bpmn/__tests__/BpmnPage.test.tsx">
+    <testCase name="BpmnPage test First render" duration="306"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Transactions/__tests__/TransactionsPage.test.tsx">
     <testCase name="TransactionsPage test First render" duration="273"/>
   </file>
