@@ -12,7 +12,7 @@
     <testCase name="getQueryString handleSnackbar error" duration="1"/>
     <testCase name="getQueryString breadCrumbLinkComponent render link and message" duration="81"/>
     <testCase name="commonBreadRoot generate link for BPMN" duration="1"/>
-    <testCase name="commonBreadRoot generate link for BPMN detail page" duration="1"/>
+    <testCase name="commonBreadRoot generate link for BPMN detail page" duration="2"/>
     <testCase name="commonBreadRoot generate link for Static Resource" duration="0"/>
     <testCase name="commonBreadRoot generate link for Static Resource detail page" duration="0"/>
     <testCase name="commonBreadRoot generate link for Workflow Resource" duration="1"/>

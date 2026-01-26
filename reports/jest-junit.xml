@@ -23,7 +23,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
+    <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.002">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
     </testcase>
@@ -45,7 +45,7 @@
     </testcase>
     <testcase classname="getProfileDescriptions" name="should return profile descriptions array" time="0">
     </testcase>
-    <testcase classname="getProfileDescriptionByProfileArray" name="should return profile descriptions by profile array" time="0">
+    <testcase classname="getProfileDescriptionByProfileArray" name="should return profile descriptions by profile array" time="0.001">
     </testcase>
     <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0.001">
     </testcase>
@@ -65,7 +65,7 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should return empty query string when filterValues is null" time="0.004">
     </testcase>
-    <testcase classname="convertProfileToString" name="should show default error message if valueMessage is not provided" time="0.001">
+    <testcase classname="convertProfileToString" name="should show default error message if valueMessage is not provided" time="0.004">
     </testcase>
     <testcase classname="convertProfileToString" name="should return the original array if indexes is empty" time="0">
     </testcase>
@@ -123,7 +123,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with WORKFLOW_RESOURCE and Filter with status from some value to empty" time="0.042">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with BANKS and Filter with acquirerId" time="0.015">
+    <testcase classname="FilterBar test" name="Test FilterBar with BANKS and Filter with acquirerId" time="0.013">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with BANKS and Filter with denomination" time="0.015">
     </testcase>
@@ -201,19 +201,19 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for BPMN_ASSOCIATED" time="0.012">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.001">
+    <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.005">
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0.001">
     </testcase>
-    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0">
+    <testcase classname="useColumns" name="should return correct visible columns for BPMN_ASSOCIATED" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for RESOURCES" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
     </testcase>
     <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
@@ -339,7 +339,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR and severity is success" time="0.025">
     </testcase>
-    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_RES and severity is error" time="0.007">
+    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_RES and severity is error" time="0.008">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES and severity is success" time="0.009">
     </testcase>
@@ -361,7 +361,7 @@
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test form validation" time="0.05">
     </testcase>
-    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="3.079">
+    <testcase classname="ModalTemplateUpload Test" name="Test ModalTemplateUpload case UPDATE_RES" time="3.078">
     </testcase>
     <testcase classname="ModalTemplateUpload Test" name="Test Check Error when UPDATE_RES" time="0.044">
     </testcase>
@@ -487,7 +487,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione della valuta" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la combinazione di due valori" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
@@ -531,7 +531,9 @@
     </testcase>
     <testcase classname="HeaderAccountCustom" name="logout button works" time="0.021">
     </testcase>
-    <testcase classname="HeaderAccountCustom" name="getUserInfo should log an error when fetchRequest throws an error" time="0.015">
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Test without response" time="0.126">
+    </testcase>
+    <testcase classname="WorkflowResourceDataGrid test" name="WorkflowResourceDataGrid Catch Error" time="0.123">
     </testcase>
   </testsuite>
   <testsuite name="src/components/DataGrid/__tests__/WorkflowResourceDataGrid.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-01-26T11:05:31" time="2.47" tests="4">
@@ -711,7 +713,7 @@
     </testcase>
     <testcase classname="EmulatorButton" name="does not render the button when user does not have EMULATOR profile" time="0.002">
     </testcase>
-    <testcase classname="EmulatorButton" name="opens the emulator URL in a new tab when clicked" time="0.01">
+    <testcase classname="EmulatorButton" name="opens the emulator URL in a new tab when clicked" time="0.022">
     </testcase>
     <testcase classname="EmulatorButton" name="opens the emulator URL without JWT in a new tab when JWT is not available" time="0.008">
     </testcase>
@@ -803,7 +805,7 @@
   <testsuite name="src/pages/__tests__/LoginPageCallback.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-01-26T11:06:04" time="0.893" tests="2">
     <testcase classname="LoginPageCallback" name="should navigate to HOME if token exists" time="0.043">
     </testcase>
-    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.008">
+    <testcase classname="LoginPageCallback" name="should navigate to LOGIN if token does not exist" time="0.009">
     </testcase>
   </testsuite>
   <testsuite name="src/pages/Banks/__tests__/BankPage.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-01-26T11:06:05" time="1.567" tests="1">
