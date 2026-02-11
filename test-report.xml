@@ -467,8 +467,8 @@
     <testCase name="DetailBank component renders DetailBody with correct detail prop" duration="12"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/PrivateRoute.test.tsx">
-    <testCase name="PrivateRoutes should navigate to login if not logged in" duration="18"/>
-    <testCase name="PrivateRoutes should not navigate if logged in" duration="2"/>
+    <testCase name="PrivateRoutes should navigate to login if not logged in" duration="11"/>
+    <testCase name="PrivateRoutes should not navigate if logged in" duration="1"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/__tests__/UploadField.test.tsx">
     <testCase name="UploadField Component should render the UploadFileWithButton component and handle file upload" duration="41"/>
@@ -496,7 +496,7 @@
     <testCase name="CreateWRPage render" duration="149"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/CardComponents/__tests__/HomeCardComponent.test.tsx">
-    <testCase name="HomeCardComponent test First render" duration="80"/>
+    <testCase name="HomeCardComponent test First render" duration="64"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/IconBox.test.tsx">
     <testCase name="ActionIcon test First render" duration="19"/>

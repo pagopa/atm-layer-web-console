@@ -9,7 +9,7 @@
     </testcase>
     <testcase classname="getQueryString" name="querystring RESOURCES" time="0">
     </testcase>
-    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="getQueryString" name="querystring WORKFLOW_RESOURCE" time="0">
     </testcase>
     <testcase classname="getQueryString" name="querystring DELETE_ASSOCIATION" time="0.001">
     </testcase>
@@ -33,11 +33,11 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Workflow Resource detail page" time="0">
     </testcase>
-    <testcase classname="getTextModal" name="check for title and message in cases" time="0.001">
+    <testcase classname="getTextModal" name="check for title and message in cases" time="0.002">
     </testcase>
     <testcase classname="getTextModal" name="check error in default case" time="0">
     </testcase>
-    <testcase classname="Test removeArrayItems" name="method removes undefined indexes, orders them, removes corresponding items from array" time="0">
+    <testcase classname="Test removeArrayItems" name="method removes undefined indexes, orders them, removes corresponding items from array" time="0.001">
     </testcase>
     <testcase classname="Test removeArrayItem" name="remove item from array defined" time="0">
     </testcase>
@@ -69,9 +69,9 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should return the original array if indexes is empty" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return an empty array if user has no profiles" time="0">
+    <testcase classname="convertProfileToString" name="should return an empty array if user has no profiles" time="0.001">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return unique profiles with dependent profiles added" time="0.001">
+    <testcase classname="convertProfileToString" name="should return unique profiles with dependent profiles added" time="0.009">
     </testcase>
     <testcase classname="convertProfileToString" name="should return the same profiles if no dependent profiles" time="0">
     </testcase>
@@ -135,7 +135,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with USERS and Click on Cancella Filtri and Filtra" time="0.046">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with transactionId" time="0.066">
+    <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with transactionId" time="0.061">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with transactionStatus" time="0.042">
     </testcase>
@@ -175,7 +175,7 @@
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DEPLOY" time="0.024">
     </testcase>
-    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.026">
+    <testcase classname="ModalResources Test" name="Test ModalWR with DELETE" time="0.027">
     </testcase>
     <testcase classname="ModalResources Test" name="Test Catch Error during DELETE" time="0.035">
     </testcase>
@@ -275,7 +275,7 @@
     </testcase>
     <testcase classname="TableColumn test" name="editColumnUsers handles setting state and session storage correctly" time="0.005">
     </testcase>
-    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.003">
+    <testcase classname="TableColumn test" name="deleteColumnUsers should not show delete button for the logged-in user" time="0.002">
     </testcase>
     <testcase classname="TableColumn test" name="deleteColumnUsers should show delete button for a different user" time="0.007">
     </testcase>
@@ -307,7 +307,7 @@
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/AssociateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-02-11T15:25:39" time="4.047" tests="7">
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn with invalid form" time="0.105">
     </testcase>
-    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId positive case" time="0.068">
+    <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId positive case" time="0.07">
     </testcase>
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn With only acquirerId negative case with already an association on another BPMN" time="0.067">
     </testcase>
@@ -317,7 +317,7 @@
     </testcase>
     <testcase classname="AssociateBpmn" name="Test AssociateBpmn fetch failed" time="0.05">
     </testcase>
-    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.048">
+    <testcase classname="AssociateBpmn" name="Test handleSwitchAssociationFetch indirectly by simulating button click" time="0.043">
     </testcase>
   </testsuite>
   <testsuite name="src/components/Commons/__tests__/ActionAlert.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-02-11T15:25:43" time="0.915" tests="12">
@@ -335,13 +335,13 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to BPMN when type is DELETE_BPMN with success" time="0.012">
     </testcase>
-    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_WR and severity is error" time="0.007">
+    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_WR and severity is error" time="0.009">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR and severity is success" time="0.01">
     </testcase>
     <testcase classname="ActionAlert" name="should not navigate when type is DELETE_RES and severity is error" time="0.007">
     </testcase>
-    <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES and severity is success" time="0.011">
+    <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES and severity is success" time="0.009">
     </testcase>
     <testcase classname="ActionAlert" name="setOpenSnackBar(false) when type is not in DEPLOY_VALUES and not matching any other case" time="0.007">
     </testcase>
@@ -459,7 +459,7 @@
   <testsuite name="src/utils/__tests__/formatValues.test.ts" errors="0" failures="0" skipped="0" timestamp="2026-02-11T15:25:50" time="0.312" tests="20">
     <testcase classname="formatValues tests" name="Verifica la formattazione di un valore vuoto" time="0.003">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di due valori" time="0.002">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una percentuale e di una valuta" time="0">
     </testcase>
@@ -471,7 +471,7 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data per un picker" time="0.001">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0.007">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.011">
     </testcase>
@@ -491,9 +491,9 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo con valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione in minuscolo senza valore" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0">
+    <testcase classname="formatValues tests" name="Verifica la formattazione della data" time="0.001">
     </testcase>
     <testcase classname="formatValues tests" name="Estrai estensione file" time="0">
     </testcase>
@@ -567,7 +567,7 @@
     </testcase>
     <testcase classname="BpmnDataGrid test" name="BpmnDatgrid Test with empty table" time="0.183">
     </testcase>
-    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.187">
+    <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test without response" time="0.172">
     </testcase>
     <testcase classname="BpmnDataGrid test" name="BpmnDaGrid Test with fetch error" time="0.177">
     </testcase>
@@ -751,7 +751,7 @@
     </testcase>
     <testcase classname="MenuButtons" name="does not call navigate when route prop is not provided" time="0.009">
     </testcase>
-    <testcase classname="MenuButtons" name="sets anchorEl state when clicked" time="0.007">
+    <testcase classname="MenuButtons" name="sets anchorEl state when clicked" time="0.01">
     </testcase>
     <testcase classname="MenuButtons" name="Testing other ternary branches" time="0.02">
     </testcase>
@@ -823,7 +823,7 @@
   <testsuite name="src/components/NavigationComponents/__tests__/PrivateRoute.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-02-11T15:26:29" time="0.37" tests="2">
     <testcase classname="PrivateRoutes" name="should navigate to login if not logged in" time="0.018">
     </testcase>
-    <testcase classname="PrivateRoutes" name="should not navigate if logged in" time="0.002">
+    <testcase classname="PrivateRoutes" name="should not navigate if logged in" time="0.001">
     </testcase>
   </testsuite>
   <testsuite name="src/components/FormComponents/__tests__/UploadField.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-02-11T15:26:28" time="4.112" tests="2">
