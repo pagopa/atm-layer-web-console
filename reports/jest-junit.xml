@@ -25,7 +25,7 @@
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for BPMN detail page" time="0.001">
     </testcase>
-    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0">
+    <testcase classname="commonBreadRoot" name="generate link for Static Resource" time="0.001">
     </testcase>
     <testcase classname="commonBreadRoot" name="generate link for Static Resource detail page" time="0">
     </testcase>
@@ -45,15 +45,15 @@
     </testcase>
     <testcase classname="getProfileDescriptions" name="should return profile descriptions array" time="0">
     </testcase>
-    <testcase classname="getProfileDescriptionByProfileArray" name="should return profile descriptions by profile array" time="0.001">
+    <testcase classname="getProfileDescriptionByProfileArray" name="should return profile descriptions by profile array" time="0">
     </testcase>
-    <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0.001">
+    <testcase classname="getRoleDescriptionsByUser" name="should return role descriptions by user" time="0">
     </testcase>
-    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0">
+    <testcase classname="getFilteredButtonConfig" name="should return filtered button configs" time="0.001">
     </testcase>
-    <testcase classname="addDependentProfiles" name="should return dependent profiles" time="0.001">
+    <testcase classname="addDependentProfiles" name="should return dependent profiles" time="0">
     </testcase>
-    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0.001">
+    <testcase classname="getProfileDescriptionFromStorage" name="should return profile ids array from storage" time="0">
     </testcase>
     <testcase classname="convertStringToProfiles" name="should convert profile descriptions to profile ids" time="0">
     </testcase>
@@ -61,7 +61,7 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should not change errors if field is not present" time="0">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is empty" time="0">
+    <testcase classname="convertProfileToString" name="should return empty query string when filterValues is empty" time="0.001">
     </testcase>
     <testcase classname="convertProfileToString" name="should return empty query string when filterValues is null" time="0">
     </testcase>
@@ -75,7 +75,7 @@
     </testcase>
     <testcase classname="convertProfileToString" name="should return the same profiles if no dependent profiles" time="0">
     </testcase>
-    <testcase classname="convertProfileToString" name="should return an empty array if profile descriptions do not match" time="0">
+    <testcase classname="convertProfileToString" name="should return an empty array if profile descriptions do not match" time="0.001">
     </testcase>
     <testcase classname="convertProfileToString" name="should return an empty array if profile ids do not match" time="0.001">
     </testcase>
@@ -147,7 +147,7 @@
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with terminalId" time="0.049">
     </testcase>
-    <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with startTime" time="0.048">
+    <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with startTime" time="0.054">
     </testcase>
     <testcase classname="FilterBar test" name="Test FilterBar with TRANSACTIONS and Filter with endTime" time="0.048">
     </testcase>
@@ -227,7 +227,7 @@
   <testsuite name="src/hook/Grids/__tests__/useColumns.test.ts" errors="0" failures="0" skipped="0" timestamp="2026-03-04T07:21:25" time="0.256" tests="16">
     <testcase classname="useColumns" name="should return correct navigation paths for PROCESS_RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0.001">
+    <testcase classname="useColumns" name="should return correct navigation paths for RESOURCES" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return correct navigation paths for WORKFLOW_RESOURCE" time="0">
     </testcase>
@@ -239,7 +239,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct columns for RESOURCES" time="0.002">
     </testcase>
-    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.001">
+    <testcase classname="useColumns" name="should return correct columns for WORKFLOW_RESOURCE" time="0.002">
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for PROCESS_RESOURCES" time="0.001">
     </testcase>
@@ -249,7 +249,7 @@
     </testcase>
     <testcase classname="useColumns" name="should return correct visible columns for WORKFLOW_RESOURCE" time="0">
     </testcase>
-    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0.001">
+    <testcase classname="useColumns" name="should generate correct path for invalid driver" time="0">
     </testcase>
     <testcase classname="useColumns" name="should return empty array for invalid driver in getColumnsGrid" time="0">
     </testcase>
@@ -263,7 +263,7 @@
     </testcase>
     <testcase classname="TableColumn test" name="Test renderCell" time="0.012">
     </testcase>
-    <testcase classname="TableColumn test" name="Test actionColumn" time="0.016">
+    <testcase classname="TableColumn test" name="Test actionColumn" time="0.017">
     </testcase>
     <testcase classname="TableColumn test" name="Test deleteColumn" time="0.008">
     </testcase>
@@ -325,7 +325,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="render with warning" time="0.01">
     </testcase>
-    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.003">
+    <testcase classname="ActionAlert" name="render without openSnackBar" time="0.002">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to RESOURCES when type is DELETE_RES" time="0.01">
     </testcase>
@@ -339,7 +339,7 @@
     </testcase>
     <testcase classname="ActionAlert" name="navigate to WR when type is DELETE_WR and severity is success" time="0.012">
     </testcase>
-    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_RES and severity is error" time="0.008">
+    <testcase classname="ActionAlert" name="should not navigate when type is DELETE_RES and severity is error" time="0.007">
     </testcase>
     <testcase classname="ActionAlert" name="navigate to Resources when type is DELETE_RES and severity is success" time="0.009">
     </testcase>
@@ -473,9 +473,9 @@
     </testcase>
     <testcase classname="formatValues tests" name="Verifica estrazione anno da una stringa di data" time="0">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la formattazione di una data da &quot;gg/mm/aaaa&quot; a &quot;mm/gg/aaaa&quot;" time="0.011">
     </testcase>
-    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0.001">
+    <testcase classname="formatValues tests" name="Verifica la creazione della data" time="0">
     </testcase>
     <testcase classname="formatValues tests" name="Verifica la formattazione di una stringa di data" time="0.001">
     </testcase>
@@ -641,21 +641,21 @@
     </testcase>
     <testcase classname="checks tests" name="copyObject restituisce una copia profonda dell&apos;oggetto" time="0.001">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0.001">
+    <testcase classname="checks tests" name="Restituisce una copia profonda di un array di oggetti" time="0">
     </testcase>
-    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.001">
+    <testcase classname="checks tests" name="isInvalidField restituisce true se il campo è undefined, null, una stringa vuota o un numero negativo" time="0.003">
     </testcase>
     <testcase classname="checks tests" name="isValidNumber restituisce true se una stringa rappresenta un numero intero valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="isValidResourcesFilename restituisce true se il nome del file per risorse è valido" time="0.013">
     </testcase>
-    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0.001">
+    <testcase classname="checks tests" name="isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" time="0">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso valido con un nome file non valido" time="0.001">
     </testcase>
     <testcase classname="checks tests" name="Restituisce undefined per un percorso non valido" time="0">
     </testcase>
-    <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0.001">
+    <testcase classname="checks tests" name="Restituisce undefined per un percorso vuoto" time="0">
     </testcase>
   </testsuite>
   <testsuite name="src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx" errors="0" failures="0" skipped="0" timestamp="2026-03-04T07:21:54" time="4.424" tests="3">

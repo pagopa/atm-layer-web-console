@@ -19,7 +19,7 @@
     <testCase name="commonBreadRoot generate link for Workflow Resource detail page" duration="1"/>
     <testCase name="getTextModal check for title and message in cases" duration="1"/>
     <testCase name="getTextModal check error in default case" duration="0"/>
-    <testCase name="Test removeArrayItems method removes undefined indexes, orders them, removes corresponding items from array" duration="1"/>
+    <testCase name="Test removeArrayItems method removes undefined indexes, orders them, removes corresponding items from array" duration="0"/>
     <testCase name="Test removeArrayItem remove item from array defined" duration="0"/>
     <testCase name="getProfileIdsArray should return profile ids array" duration="1"/>
     <testCase name="getProfileDescriptions should return profile descriptions array" duration="0"/>
@@ -118,8 +118,8 @@
     <testCase name="ModalResources Test Test Catch Error during DOWNLOAD" duration="21"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/hook/Grids/__tests__/useColumns.test.ts">
-    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="2"/>
-    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="1"/>
+    <testCase name="useColumns should return correct navigation paths for PROCESS_RESOURCES" duration="3"/>
+    <testCase name="useColumns should return correct navigation paths for RESOURCES" duration="0"/>
     <testCase name="useColumns should return correct navigation paths for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should return correct record BPMN params" duration="1"/>
     <testCase name="useColumns should return correct columns for PROCESS_RESOURCES" duration="6"/>
@@ -128,7 +128,7 @@
     <testCase name="useColumns should return correct columns for WORKFLOW_RESOURCE" duration="1"/>
     <testCase name="useColumns should return correct visible columns for PROCESS_RESOURCES" duration="1"/>
     <testCase name="useColumns should return correct visible columns for BPMN_ASSOCIATED" duration="0"/>
-    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="1"/>
+    <testCase name="useColumns should return correct visible columns for RESOURCES" duration="0"/>
     <testCase name="useColumns should return correct visible columns for WORKFLOW_RESOURCE" duration="0"/>
     <testCase name="useColumns should generate correct path for invalid driver" duration="1"/>
     <testCase name="useColumns should return empty array for invalid driver in getColumnsGrid" duration="0"/>
@@ -347,6 +347,10 @@
     <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage with sessionStorage" duration="181"/>
     <testCase name="Test WorkflowResourceDetailPage Test WorkflowResourceDetailPage without sessionStorage" duration="47"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="159"/>
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="46"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/checks.test.ts">
     <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="2"/>
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="0"/>
@@ -358,7 +362,7 @@
     <testCase name="checks tests isValidDeployableFilename restituisce true se il nome del file per il deploy è valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso valido con un nome file non valido" duration="1"/>
     <testCase name="checks tests Restituisce undefined per un percorso non valido" duration="0"/>
-    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="1"/>
+    <testCase name="checks tests Restituisce undefined per un percorso vuoto" duration="0"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/FormComponents/FormsBpmn/__tests__/CreateBpmn.test.tsx">
     <testCase name="CreateBpmn Test should close the snackbar when CloseIcon is clicked" duration="291"/>
@@ -498,6 +502,9 @@
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/CardComponents/__tests__/HomeCardComponent.test.tsx">
     <testCase name="HomeCardComponent test First render" duration="64"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/Commons/__tests__/IconBox.test.tsx">
+    <testCase name="ActionIcon test First render" duration="19"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/TitleComponents/__tests__/HomePageTitle.test.tsx">
     <testCase name="HomePageTitle Check for HomePageTitle" duration="22"/>
   </file>
@@ -517,6 +524,9 @@
     <testCase name="ActionIcon test First render" duration="28"/>
   </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/components/NavigationComponents/__tests__/Breadcrumb.test.tsx">
-    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="19"/>
+    <testCase name="BreadCrumb Component renders the correct breadcrumbs" duration="22"/>
+  </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/__tests__/ErrorPage.test.tsx">
+    <testCase name="ErrorPage render" duration="25"/>
   </file>
 </testExecutions>
