@@ -351,6 +351,10 @@
     <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="159"/>
     <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="46"/>
   </file>
+  <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/pages/Resources/__tests__/ResourcesDetailPage.test.tsx">
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage with sessionStorage" duration="159"/>
+    <testCase name="ResourcesDetailPage test Test ResourcesDetailPage without sessionStorage" duration="46"/>
+  </file>
   <file path="/home/runner/work/atm-layer-web-console/atm-layer-web-console/src/utils/__tests__/checks.test.ts">
     <testCase name="checks tests checkIsEmptyString restituisce true per stringhe vuote o con solo spazi" duration="2"/>
     <testCase name="checks tests isObjectEmpty restituisce true se l&apos;oggetto è vuoto, altrimenti false" duration="0"/>
