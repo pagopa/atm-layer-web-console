@@ -72,7 +72,9 @@ export const HeaderAccountCustom = ({
 	};
 
 	useEffect(() => {
-		void getAllProfilesList();
+		if(token){
+			void getAllProfilesList();
+		}
 		if(!loggedUserInfo.userId && token){
 			void getUserInfo();
 		}

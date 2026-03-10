@@ -72,6 +72,7 @@ describe('HeaderAccountCustom', () => {
   // });
 
   test('does not show EmulatorButton when in PROD environment', () => {
+    sessionStorage.setItem("jwt_console", "prova");
     process.env.REACT_APP_ENV = 'PROD';
 
     render(
@@ -88,6 +89,7 @@ describe('HeaderAccountCustom', () => {
   });
 
   test('logout button works', () => {
+    sessionStorage.setItem("jwt_console", "prova");
     const mockOnLogout = jest.fn();
 
     render(
@@ -173,6 +175,7 @@ describe('HeaderAccountCustom', () => {
   // });
 
   test('getUserInfo should log an error when fetchRequest throws an error', async () => {
+    sessionStorage.setItem("jwt_console", "prova");
     const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     // Mock fetchRequest per lanciare un errore
